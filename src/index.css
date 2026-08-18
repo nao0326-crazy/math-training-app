@@ -1109,9 +1109,7 @@ input:focus {
   }
 }
 
-/* デスクトップ (キーパッドは非表示) */
-@media (hover: hover) {
-  .touch-keypad {
-    display: none;
-  }
-}
+/* タッチキーパッドはコンポーネント側の条件レンダリングで制御する
+   (isTouchDevice が false の場合は表示しない)
+   @media (hover: hover) で display:none にすると、
+   タッチ対応PCでキーパッドが 0×0 になり入力手段が消滅するため削除 */

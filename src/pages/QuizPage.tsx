@@ -33,7 +33,9 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
   const [questionNumber, setQuestionNumber] = useState(1);
   const [result, setResult] = useState<QuizResult | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  // タッチ操作が可能なデバイスかどうか (タッチキーパッドの表示に使用)
+  // キーボード入力を禁止するためには使用しない
+  const [canTouch, setCanTouch] = useState(false);
 
   const selectorRef = useRef<QuestionSelector | null>(null);
   const startTimeRef = useRef<number>(0);
@@ -41,12 +43,14 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
   const questionHistoryRef = useRef<QuestionHistory[]>([]);
   const resultRef = useRef<QuizResult>({ totalCount: 0, correctCount: 0, totalTimeSec: 0 });
 
-  // タッチデバイスの検出
+  // タッチ操作が可能かどうかの検出
+  // タッチ対応PC (maxTouchPoints > 0) でもキーボード入力は常に許可する
+  // タッチキーパッドは追加の入力手段として提供する
   useEffect(() => {
-    const isTouch =
+    const touch =
       typeof window !== 'undefined' &&
       ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    setIsTouchDevice(isTouch);
+    setCanTouch(touch);
   }, []);
 
   // 初期化
@@ -112,38 +116,46 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
 
   /**
    * 回答を判定する
+   * answerOverride が指定された場合はその値を使用する (Enterキー送信時の最新値)
    */
-  const handleSubmit = useCallback(() => {
-    if (!problem || isAnswered) return;
+  const handleSubmit = useCallback(
+    (answerOverride?: string) => {
+      if (!problem || isAnswered) return;
 
-    const correct = checkUserAnswer(userAnswer, problem.answer);
-    const answerTimeSec = (Date.now() - startTimeRef.current) / 1000;
+      // 空回答は判定しない
+      const answer = (answerOverride ?? userAnswer).trim();
+      if (answer === '') return;
 
-    setIsCorrect(correct);
-    setIsAnswered(true);
+      const correct = checkUserAnswer(answer, problem.answer);
+      const answerTimeSec = (Date.now() - startTimeRef.current) / 1000;
 
-    // 履歴を更新
-    const record: AnswerRecord = {
-      problemId: problem.id,
-      problemType: problem.type,
-      category: problem.category,
-      isCorrect: correct,
-      answerTimeSec,
-      answeredAt: new Date().toISOString(),
-      difficultyLevel: problem.difficulty.level,
-      userAnswer: userAnswer.trim(),
-      correctAnswer: formatAnswer(problem.answer),
-    };
-    historyRef.current.push(record);
-    void saveAnswerRecord(record);
+      setIsCorrect(correct);
+      setIsAnswered(true);
 
-    // 結果を更新
-    resultRef.current = {
-      totalCount: resultRef.current.totalCount + 1,
-      correctCount: resultRef.current.correctCount + (correct ? 1 : 0),
-      totalTimeSec: resultRef.current.totalTimeSec + answerTimeSec,
-    };
-  }, [problem, isAnswered, userAnswer]);
+      // 履歴を更新
+      const record: AnswerRecord = {
+        problemId: problem.id,
+        problemType: problem.type,
+        category: problem.category,
+        isCorrect: correct,
+        answerTimeSec,
+        answeredAt: new Date().toISOString(),
+        difficultyLevel: problem.difficulty.level,
+        userAnswer: answer,
+        correctAnswer: formatAnswer(problem.answer),
+      };
+      historyRef.current.push(record);
+      void saveAnswerRecord(record);
+
+      // 結果を更新
+      resultRef.current = {
+        totalCount: resultRef.current.totalCount + 1,
+        correctCount: resultRef.current.correctCount + (correct ? 1 : 0),
+        totalTimeSec: resultRef.current.totalTimeSec + answerTimeSec,
+      };
+    },
+    [problem, isAnswered, userAnswer],
+  );
 
   /**
    * 次の問題へ進む
@@ -250,28 +262,30 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
           onChange={(e) => setUserAnswer(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter' && !isAnswered) {
-              handleSubmit();
+              handleSubmit(e.currentTarget.value);
             }
           }}
           placeholder="こたえを入力"
           disabled={isAnswered}
-          readOnly={isTouchDevice && !isAnswered}
           autoFocus
-          inputMode={isTouchDevice ? 'none' : 'text'}
+          inputMode="text"
         />
-        {!isAnswered && !isTouchDevice && (
-          <button className="primary-button answer-button" onClick={handleSubmit}>
+        {!isAnswered && (
+          <button
+            className="primary-button answer-button"
+            onClick={() => handleSubmit()}
+          >
             こたえる
           </button>
         )}
       </div>
 
-      {/* タッチデバイス用キーパッド */}
-      {isTouchDevice && !isAnswered && (
+      {/* タッチ操作可能デバイス用キーパッド (追加の入力手段) */}
+      {canTouch && !isAnswered && (
         <TouchKeypad
           value={userAnswer}
           onChange={setUserAnswer}
-          onSubmit={handleSubmit}
+          onSubmit={() => handleSubmit()}
           disabled={isAnswered}
           answer={problem.answer}
           question={problem.question}
