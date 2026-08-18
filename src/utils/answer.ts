@@ -6,6 +6,65 @@
 import type { Answer } from '../types/problem';
 import { formatFraction, reduceFraction } from './fraction';
 
+// ===== 入力正規化 =====
+
+/**
+ * 全角文字を半角に変換する (数字・記号)
+ */
+function toHalfWidth(input: string): string {
+  return input
+    .replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
+    .replace(/．/g, '.')
+    .replace(/，/g, ',')
+    .replace(/／/g, '/')
+    .replace(/－/g, '-')
+    .replace(/（/g, '(')
+    .replace(/）/g, ')');
+}
+
+/**
+ * Unicode上の類似したマイナス記号を半角ハイフンに変換する
+ * 対象: − (U+2212), ‐ (U+2010), ‑ (U+2011), – (U+2013), — (U+2014), ﹣ (U+FE63)
+ */
+const MINUS_SIGN_PATTERN = /[\u2212\u2010\u2011\u2013\u2014\ufe63]/g;
+
+function normalizeMinusSigns(input: string): string {
+  return input.replace(MINUS_SIGN_PATTERN, '-');
+}
+
+/**
+ * 数値中の桁区切りとして妥当なカンマだけを削除する
+ *
+ * 例:
+ * - "1,000" → "1000"
+ * - "12,000" → "12000"
+ * - "1,234,567" → "1234567"
+ * - "1,2" → "1,2" (削除しない)
+ * - "1, 2, 3" → "1, 2, 3" (削除しない)
+ */
+function removeThousandsSeparators(input: string): string {
+  return input.replace(/(\d),(?=(\d{3})+(?!\d))/g, '$1');
+}
+
+/**
+ * ユーザー入力の回答を正規化する
+ *
+ * - 前後の空白を除去
+ * - 全角数字 → 半角数字
+ * - 全角小数点 → 半角 "."
+ * - 全角カンマ → 半角 ","
+ * - 全角マイナス → 半角 "-"
+ * - Unicode上の類似したマイナス記号 → 半角 "-"
+ * - 桁区切りとして妥当なカンマのみ削除
+ */
+export function normalizeAnswerInput(input: string): string {
+  let normalized = input.trim();
+  normalized = toHalfWidth(normalized);
+  normalized = normalizeMinusSigns(normalized);
+  normalized = removeThousandsSeparators(normalized);
+  return normalized;
+}
+
 /**
  * 解答を文字列に変換する
  */
@@ -94,20 +153,23 @@ export function answerToNumber(answer: Answer): number | null {
 /**
  * ユーザー入力文字列を解答に変換して比較する
  * 分数の入力形式: 「3/4」「1と2/3」
+ *
+ * 入力値は正規化 (全角→半角、マイナス記号、桁区切りカンマ、前後空白) 後に判定する。
  */
 export function checkUserAnswer(userInput: string, correctAnswer: Answer): boolean {
-  const trimmed = userInput.trim();
-  if (trimmed === '') {
+  // 入力値を正規化する
+  const normalized = normalizeAnswerInput(userInput);
+  if (normalized === '') {
     return false;
   }
 
-  // 正解が文字列型 (約数リスト「1, 2, 3」など) の場合は、単純な文字列比較を行う
+  // 正解が文字列型 (約数リスト「1, 2, 3」など) の場合は、正規化後の文字列比較を行う
   if (correctAnswer.kind === 'string') {
-    return trimmed === correctAnswer.value;
+    return normalized === normalizeAnswerInput(correctAnswer.value);
   }
 
   // 帯分数形式のパース: 「1と2/3」
-  const mixedMatch = trimmed.match(/^(-?\d+)と(\d+)\/(\d+)$/);
+  const mixedMatch = normalized.match(/^(-?\d+)と(\d+)\/(\d+)$/);
   if (mixedMatch) {
     const whole = parseInt(mixedMatch[1], 10);
     const numerator = parseInt(mixedMatch[2], 10);
@@ -125,7 +187,7 @@ export function checkUserAnswer(userInput: string, correctAnswer: Answer): boole
   }
 
   // 分数形式のパース: 「3/4」
-  const fractionMatch = trimmed.match(/^(-?\d+)\/(\d+)$/);
+  const fractionMatch = normalized.match(/^(-?\d+)\/(\d+)$/);
   if (fractionMatch) {
     const numerator = parseInt(fractionMatch[1], 10);
     const denominator = parseInt(fractionMatch[2], 10);
@@ -141,7 +203,8 @@ export function checkUserAnswer(userInput: string, correctAnswer: Answer): boole
   }
 
   // 小数・整数のパース
-  const numeric = Number(trimmed.replace(/,/g, ''));
+  // 桁区切りカンマは正規化済みのため、そのまま数値に変換する
+  const numeric = Number(normalized);
   if (Number.isNaN(numeric)) {
     return false;
   }

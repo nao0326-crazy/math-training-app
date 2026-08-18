@@ -10,6 +10,7 @@ import {
   answerToNumber,
   checkUserAnswer,
   isReasonableAnswer,
+  normalizeAnswerInput,
 } from './answer';
 import type { Answer } from '../types/problem';
 
@@ -92,11 +93,126 @@ describe('answerToNumber', () => {
   });
 });
 
+describe('normalizeAnswerInput', () => {
+  it('全角数字を半角に変換する', () => {
+    expect(normalizeAnswerInput('３１')).toBe('31');
+    expect(normalizeAnswerInput('１２３４５')).toBe('12345');
+  });
+
+  it('全角小数点を半角に変換する', () => {
+    expect(normalizeAnswerInput('１．５')).toBe('1.5');
+  });
+
+  it('全角カンマを半角に変換してから桁区切りを処理する', () => {
+    expect(normalizeAnswerInput('１，０００')).toBe('1000');
+  });
+
+  it('桁区切りとして妥当なカンマを削除する', () => {
+    expect(normalizeAnswerInput('1,000')).toBe('1000');
+    expect(normalizeAnswerInput('12,000')).toBe('12000');
+    expect(normalizeAnswerInput('1,234,567')).toBe('1234567');
+    expect(normalizeAnswerInput('1000')).toBe('1000');
+  });
+
+  it('桁区切りとして妥当でないカンマは削除しない', () => {
+    // 1,2 は123としては扱わない (削除されない)
+    expect(normalizeAnswerInput('1,2')).toBe('1,2');
+    // リスト「1, 2, 3」も削除されない
+    expect(normalizeAnswerInput('1, 2, 3')).toBe('1, 2, 3');
+  });
+
+  it('全角マイナスを半角に変換する', () => {
+    expect(normalizeAnswerInput('－３')).toBe('-3');
+  });
+
+  it('Unicode上の類似したマイナス記号を半角に変換する', () => {
+    // U+2212 MINUS SIGN
+    expect(normalizeAnswerInput('\u22123')).toBe('-3');
+    // U+2010 HYPHEN
+    expect(normalizeAnswerInput('\u20103')).toBe('-3');
+    // U+2013 EN DASH
+    expect(normalizeAnswerInput('\u20133')).toBe('-3');
+    // U+2014 EM DASH
+    expect(normalizeAnswerInput('\u20143')).toBe('-3');
+  });
+
+  it('前後の空白を除去する', () => {
+    expect(normalizeAnswerInput('31')).toBe('31');
+    expect(normalizeAnswerInput(' 31')).toBe('31');
+    expect(normalizeAnswerInput('31 ')).toBe('31');
+    expect(normalizeAnswerInput(' 31 ')).toBe('31');
+  });
+
+  it('全角スラッシュを半角に変換する', () => {
+    expect(normalizeAnswerInput('３／４')).toBe('3/4');
+  });
+
+  it('不正な入力をそのまま返す', () => {
+    expect(normalizeAnswerInput('31abc')).toBe('31abc');
+    expect(normalizeAnswerInput('abc')).toBe('abc');
+  });
+});
+
 describe('checkUserAnswer', () => {
   it('整数の入力', () => {
     const answer: Answer = { kind: 'integer', value: 42 };
     expect(checkUserAnswer('42', answer)).toBe(true);
     expect(checkUserAnswer('43', answer)).toBe(false);
+  });
+
+  it('全角数字の入力は正解として判定される', () => {
+    const answer: Answer = { kind: 'integer', value: 31 };
+    expect(checkUserAnswer('３１', answer)).toBe(true);
+  });
+
+  it('桁区切りカンマ付きの入力は正解として判定される', () => {
+    const answer: Answer = { kind: 'integer', value: 1000 };
+    expect(checkUserAnswer('1,000', answer)).toBe(true);
+    expect(checkUserAnswer('１,０００', answer)).toBe(true);
+  });
+
+  it('全角小数の入力は正解として判定される', () => {
+    const answer: Answer = { kind: 'decimal', value: 1.5 };
+    expect(checkUserAnswer('１.５', answer)).toBe(true);
+  });
+
+  it('マイナス記号の表記揺れは正解として判定される', () => {
+    const answer: Answer = { kind: 'integer', value: -3 };
+    expect(checkUserAnswer('−３', answer)).toBe(true);
+    expect(checkUserAnswer('－３', answer)).toBe(true);
+    expect(checkUserAnswer('\u22123', answer)).toBe(true);
+  });
+
+  it('前後の空白は無視される', () => {
+    const answer: Answer = { kind: 'integer', value: 31 };
+    expect(checkUserAnswer(' 31 ', answer)).toBe(true);
+    expect(checkUserAnswer('  31', answer)).toBe(true);
+    expect(checkUserAnswer('31  ', answer)).toBe(true);
+  });
+
+  it('明確な誤答は不正解のまま', () => {
+    const answer: Answer = { kind: 'integer', value: 31 };
+    expect(checkUserAnswer('32', answer)).toBe(false);
+  });
+
+  it('正規化で誤答を正答にしない', () => {
+    const answer: Answer = { kind: 'integer', value: 1000 };
+    expect(checkUserAnswer('100', answer)).toBe(false);
+  });
+
+  it('31abc のような入力は不正解のまま', () => {
+    const answer: Answer = { kind: 'integer', value: 31 };
+    expect(checkUserAnswer('31abc', answer)).toBe(false);
+  });
+
+  it('1,2 のような入力は123として扱わない', () => {
+    const answer: Answer = { kind: 'integer', value: 123 };
+    expect(checkUserAnswer('1,2', answer)).toBe(false);
+  });
+
+  it('分数の全角入力も正解として判定される', () => {
+    const answer: Answer = { kind: 'fraction', numerator: 3, denominator: 4 };
+    expect(checkUserAnswer('３／４', answer)).toBe(true);
   });
 
   it('小数の入力', () => {

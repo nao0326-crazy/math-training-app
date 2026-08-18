@@ -519,6 +519,63 @@ input:focus {
   font-weight: bold;
 }
 
+/* 履歴詳細テーブル */
+.history-detail-table {
+  table-layout: fixed;
+}
+
+.history-detail-table th,
+.history-detail-table td {
+  text-align: left;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+.history-detail-table th:nth-child(1),
+.history-detail-table td:nth-child(1) {
+  width: 15%;
+}
+
+.history-detail-table th:nth-child(2),
+.history-detail-table td:nth-child(2) {
+  width: 10%;
+}
+
+.history-detail-table th:nth-child(3),
+.history-detail-table td:nth-child(3) {
+  width: 28%;
+}
+
+.history-detail-table th:nth-child(4),
+.history-detail-table td:nth-child(4) {
+  width: 12%;
+}
+
+.history-detail-table th:nth-child(5),
+.history-detail-table td:nth-child(5) {
+  width: 15%;
+}
+
+.history-detail-table th:nth-child(6),
+.history-detail-table td:nth-child(6) {
+  width: 12%;
+}
+
+.history-detail-table th:nth-child(7),
+.history-detail-table td:nth-child(7) {
+  width: 8%;
+}
+
+.history-question-cell {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.history-answer-cell {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
 .empty-state {
   text-align: center;
   padding: 48px 16px;

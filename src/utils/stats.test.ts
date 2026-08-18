@@ -18,6 +18,7 @@ function createRecord(overrides: Partial<AnswerRecord> = {}): AnswerRecord {
     answerTimeSec: 10,
     answeredAt: new Date().toISOString(),
     difficultyLevel: 2,
+    question: '5 + 3 = □',
     userAnswer: '5',
     correctAnswer: '5',
     ...overrides,

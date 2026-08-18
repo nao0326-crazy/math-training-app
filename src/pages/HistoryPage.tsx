@@ -4,6 +4,22 @@ import type { AnswerRecord } from '../types/history';
 import { calculateStats, categoryLabel, formatPercent, formatTime } from '../utils/stats';
 import { difficultyLabel } from '../engine/difficulty/difficulty';
 
+/**
+ * 履歴レコードのフォールバック付き表示用ヘルパー
+ * 既存履歴には question が存在しない場合があるため安全にフォールバックする
+ */
+function safeQuestion(record: AnswerRecord): string {
+  return record.question && record.question.trim() !== '' ? record.question : '記録なし';
+}
+
+function safeUserAnswer(record: AnswerRecord): string {
+  return record.userAnswer && record.userAnswer.trim() !== '' ? record.userAnswer : '記録なし';
+}
+
+function safeCorrectAnswer(record: AnswerRecord): string {
+  return record.correctAnswer && record.correctAnswer.trim() !== '' ? record.correctAnswer : '記録なし';
+}
+
 export default function HistoryPage() {
   const [records, setRecords] = useState<AnswerRecord[]>([]);
   const [loading, setLoading] = useState(true);
@@ -124,11 +140,14 @@ export default function HistoryPage() {
 
           <section className="stats-section">
             <h3>最近の問題</h3>
-            <table className="stats-table">
+            <table className="stats-table history-detail-table">
               <thead>
                 <tr>
                   <th>日時</th>
                   <th>分野</th>
+                  <th>問題</th>
+                  <th>正解</th>
+                  <th>あなたの入力</th>
                   <th>結果</th>
                   <th>時間</th>
                 </tr>
@@ -138,11 +157,14 @@ export default function HistoryPage() {
                   .reverse()
                   .slice(0, 10)
                   .map((record, index) => (
-                    <tr key={`${record.problemId}-${index}`}>
+                    <tr key={`${record.problemId}-${index}`} className="history-detail-row">
                       <td>{new Date(record.answeredAt).toLocaleString('ja-JP')}</td>
                       <td>{categoryLabel(record.category)}</td>
+                      <td className="history-question-cell">{safeQuestion(record)}</td>
+                      <td className="history-answer-cell">{safeCorrectAnswer(record)}</td>
+                      <td className="history-answer-cell">{safeUserAnswer(record)}</td>
                       <td className={record.isCorrect ? 'correct-text' : 'incorrect-text'}>
-                        {record.isCorrect ? '○' : '×'}
+                        {record.isCorrect ? '○ 正解' : '× 不正解'}
                       </td>
                       <td>{Math.round(record.answerTimeSec)}秒</td>
                     </tr>

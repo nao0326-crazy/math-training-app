@@ -26,6 +26,7 @@ function createRecord(
     answerTimeSec: 10,
     answeredAt,
     difficultyLevel: 2,
+    question: '5 + 3 = □',
     userAnswer: '5',
     correctAnswer: '5',
     ...overrides,

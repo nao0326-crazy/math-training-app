@@ -39,6 +39,7 @@ describe('QuestionSelector', () => {
         answerTimeSec: 10,
         answeredAt: new Date().toISOString(),
         difficultyLevel: 2,
+        question: '2 + 3 = □',
         userAnswer: '5',
         correctAnswer: '5',
       },
@@ -50,6 +51,7 @@ describe('QuestionSelector', () => {
         answerTimeSec: 30,
         answeredAt: new Date().toISOString(),
         difficultyLevel: 2,
+        question: '7 - 3 = □',
         userAnswer: '3',
         correctAnswer: '4',
       },
@@ -83,6 +85,7 @@ describe('QuestionSelector', () => {
       answerTimeSec: 5,
       answeredAt: new Date().toISOString(),
       difficultyLevel: 2,
+      question: '2 + 3 = □',
       userAnswer: '5',
       correctAnswer: '5',
     }));
@@ -110,6 +113,7 @@ describe('QuestionSelector', () => {
       answerTimeSec: 60,
       answeredAt: new Date().toISOString(),
       difficultyLevel: 2,
+      question: '2 + 3 = □',
       userAnswer: '1',
       correctAnswer: '5',
     }));

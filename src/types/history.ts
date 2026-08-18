@@ -16,7 +16,9 @@ export interface AnswerRecord {
   answeredAt: string;
   /** 難易度 */
   difficultyLevel: number;
-  /** ユーザーの解答 */
+  /** 問題文 */
+  question: string;
+  /** ユーザーの解答 (実際に入力された元の値) */
   userAnswer: string;
   /** 正解 */
   correctAnswer: string;

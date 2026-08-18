@@ -124,16 +124,19 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
       if (!problem || isAnswered) return;
 
       // 空回答は判定しない
-      const answer = (answerOverride ?? userAnswer).trim();
-      if (answer === '') return;
+      // 実際に入力された元の値を保存用に保持する
+      const rawAnswer = answerOverride ?? userAnswer;
+      if (rawAnswer.trim() === '') return;
 
-      const correct = checkUserAnswer(answer, problem.answer);
+      // 判定には正規化された値を使用する
+      const correct = checkUserAnswer(rawAnswer, problem.answer);
       const answerTimeSec = (Date.now() - startTimeRef.current) / 1000;
 
       setIsCorrect(correct);
       setIsAnswered(true);
 
       // 履歴を更新
+      // userAnswer にはユーザーが実際に入力した元の値を保存する
       const record: AnswerRecord = {
         problemId: problem.id,
         problemType: problem.type,
@@ -142,7 +145,8 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
         answerTimeSec,
         answeredAt: new Date().toISOString(),
         difficultyLevel: problem.difficulty.level,
-        userAnswer: answer,
+        question: problem.question,
+        userAnswer: rawAnswer,
         correctAnswer: formatAnswer(problem.answer),
       };
       historyRef.current.push(record);
