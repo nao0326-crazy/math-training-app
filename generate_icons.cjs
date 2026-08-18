@@ -15,11 +15,14 @@ const IDAT = 0x49444154;
 const IEND = 0x49454e44;
 
 function pngChunk(type, data) {
-  const buf = Buffer.alloc(4 + data.length + 4);
-  buf.writeUInt32BE(type, 0);
-  data.copy(buf, 4);
-  const crc = zlib.crc32(Buffer.concat([buf.slice(0, 4 + data.length)]));
-  buf.writeUInt32BE(crc >>> 0, 4 + data.length);
+  // PNG chunk format: [4 bytes: length][4 bytes: type][data][4 bytes: CRC]
+  // CRC is calculated over type + data (not including length)
+  const buf = Buffer.alloc(8 + data.length + 4);
+  buf.writeUInt32BE(data.length, 0); // length
+  buf.writeUInt32BE(type, 4); // type
+  data.copy(buf, 8); // data
+  const crc = zlib.crc32(buf.slice(4, 8 + data.length));
+  buf.writeUInt32BE(crc >>> 0, 8 + data.length); // CRC
   return buf;
 }
 

@@ -12,6 +12,7 @@ import {
 } from '../storage/db';
 import type { AnswerRecord, QuestionHistory } from '../types/history';
 import TouchKeypad from '../components/TouchKeypad';
+import { ANSWER_RECORDED_EVENT } from '../utils/dailyCount';
 
 interface QuizPageProps {
   category: Category | null;
@@ -146,6 +147,9 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
       };
       historyRef.current.push(record);
       void saveAnswerRecord(record);
+
+      // 日次カウント更新イベントを発火
+      window.dispatchEvent(new Event(ANSWER_RECORDED_EVENT));
 
       // 結果を更新
       resultRef.current = {

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import HomePage from './pages/HomePage';
 import QuizPage from './pages/QuizPage';
 import HistoryPage from './pages/HistoryPage';
+import DailyProgressNotification from './components/DailyProgressNotification';
 import type { Category } from './types/problem';
 
 type Page = 'home' | 'quiz' | 'history';
@@ -19,6 +20,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <DailyProgressNotification />
       <header className="app-header">
         <h1 className="app-title">小6数学トレーニング</h1>
         <nav className="app-nav">

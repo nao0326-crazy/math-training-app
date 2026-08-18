@@ -66,6 +66,47 @@ input:focus {
   min-height: 100vh;
 }
 
+/* ===== 家庭教師継続条件通知 ===== */
+.daily-progress {
+  background: var(--error-light);
+  border: 2px solid var(--error);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.daily-progress.achieved {
+  background: var(--success-light);
+  border-color: var(--success);
+}
+
+.daily-progress-title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--error);
+  margin-bottom: 4px;
+}
+
+.daily-progress.achieved .daily-progress-title {
+  color: var(--success);
+}
+
+.daily-progress-message {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.daily-progress-stats {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
 .app-header {
   display: flex;
   align-items: center;
