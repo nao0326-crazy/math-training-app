@@ -258,17 +258,46 @@ export function generateProblem(config?: GenerationConfig): Problem {
 
   // 難易度指定があればその難易度に合うものを優先
   if (config?.difficulty) {
+    const requestedDifficulty = config.difficulty;
+    // 各ジェネレータを複数回試行して、指定難易度に一致する問題を生成できるものを探す
     const matching = candidates.filter((g) => {
       try {
-        const p = g.generate({ ...config, difficulty: config.difficulty });
-        // 検証を通過し、かつ生成された問題の総合難易度が要求難易度と一致するものだけを選ぶ
-        return validateProblem(p).valid && p.difficulty.level === config.difficulty;
+        // 複数回試行して、指定難易度に一致する問題が生成できるか確認
+        for (let attempt = 0; attempt < 20; attempt++) {
+          const p = g.generate({ ...config, difficulty: requestedDifficulty });
+          if (validateProblem(p).valid && p.difficulty.level === requestedDifficulty) {
+            return true;
+          }
+        }
+        return false;
       } catch {
         return false;
       }
     });
+
     if (matching.length > 0) {
+      // 指定難易度を生成できるジェネレータからランダムに選ぶ
       candidates = matching;
+    } else {
+      // 指定難易度を生成できるジェネレータがない場合は、
+      // 全ジェネレータからランダムに選び、指定難易度に一致する問題を生成する
+      // (フォールバック: 指定難易度に一致する問題を生成できるジェネレータを探す)
+      const fallback = candidates.filter((g) => {
+        try {
+          for (let attempt = 0; attempt < 20; attempt++) {
+            const p = g.generate({ ...config, difficulty: requestedDifficulty });
+            if (validateProblem(p).valid && p.difficulty.level === requestedDifficulty) {
+              return true;
+            }
+          }
+          return false;
+        } catch {
+          return false;
+        }
+      });
+      if (fallback.length > 0) {
+        candidates = fallback;
+      }
     }
   }
 
@@ -289,6 +318,10 @@ function generateValidatedProblem(
     const problem = generator.generate(config);
     const result = validateProblem(problem);
     if (result.valid) {
+      // 難易度指定がある場合は、指定難易度と一致することを確認
+      if (config?.difficulty && problem.difficulty.level !== config.difficulty) {
+        continue;
+      }
       return problem;
     }
   }

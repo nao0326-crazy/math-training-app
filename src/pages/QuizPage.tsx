@@ -69,7 +69,7 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
         questionHistoryRef.current = questionHistory;
         selectorRef.current = new QuestionSelector();
         loadNextQuestion();
-      } catch (e) {
+      } catch {
         if (!cancelled) {
           setError('データの読み込みに失敗しました。');
         }

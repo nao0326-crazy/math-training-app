@@ -53,8 +53,9 @@ export class DecimalMulDecimalGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const a = lv === 1 ? rng.int(1, 9) / 10 : lv === 2 ? rng.int(1, 99) / 100 : rng.int(1, 99) / 10;
-    const b = lv === 1 ? rng.int(1, 9) / 10 : lv === 2 ? rng.int(1, 99) / 100 : rng.int(1, 99) / 10;
+    // 難易度に応じて小数の桁数と数値範囲を変化させる
+    const a = lv <= 1 ? rng.int(1, 9) / 10 : lv === 2 ? rng.int(1, 99) / 100 : lv === 3 ? rng.int(1, 99) / 10 : lv === 4 ? rng.int(1, 999) / 100 : rng.int(1, 999) / 10;
+    const b = lv <= 1 ? rng.int(1, 9) / 10 : lv === 2 ? rng.int(1, 99) / 100 : lv === 3 ? rng.int(1, 99) / 10 : lv === 4 ? rng.int(1, 999) / 100 : rng.int(1, 999) / 10;
     const answer = a * b;
     const roundedAnswer = Math.round(answer * 1000) / 1000;
 
@@ -92,9 +93,10 @@ export class DecimalDivDecimalGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const b10 = lv === 1 ? rng.int(1, 5) : rng.int(1, 9);
+    // 難易度に応じて除数と商の範囲を変化させる
+    const b10 = lv <= 1 ? rng.int(1, 5) : lv === 2 ? rng.int(1, 9) : lv === 3 ? rng.int(1, 15) : lv === 4 ? rng.int(1, 25) : rng.int(1, 50);
     const divisor = b10 / 10;
-    const quotient = rng.int(1, lv === 1 ? 5 : 9);
+    const quotient = lv <= 1 ? rng.int(1, 5) : lv === 2 ? rng.int(1, 9) : lv === 3 ? rng.int(1, 15) : lv === 4 ? rng.int(1, 25) : rng.int(1, 50);
     const dividend = divisor * quotient;
 
     return {
@@ -139,8 +141,9 @@ export class DecimalMulIntegerGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const a = lv === 1 ? rng.int(1, 9) / 10 : rng.int(1, 99) / 100;
-    const b = rng.int(2, lv === 1 ? 5 : 9);
+    // 難易度に応じて小数の桁数と整数の範囲を変化させる
+    const a = lv <= 1 ? rng.int(1, 9) / 10 : lv === 2 ? rng.int(1, 99) / 100 : lv === 3 ? rng.int(1, 99) / 10 : lv === 4 ? rng.int(1, 999) / 100 : rng.int(1, 999) / 10;
+    const b = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(2, 15) : lv === 4 ? rng.int(3, 25) : rng.int(5, 50);
     const answer = a * b;
     const rounded = Math.round(answer * 1000) / 1000;
 
@@ -178,8 +181,9 @@ export class DecimalDivIntegerGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const divisor = rng.int(2, lv === 1 ? 5 : 9);
-    const quotient = rng.int(1, 9);
+    // 難易度に応じて除数と商の範囲を変化させる
+    const divisor = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(2, 15) : lv === 4 ? rng.int(3, 25) : rng.int(5, 50);
+    const quotient = lv <= 1 ? rng.int(1, 5) : lv === 2 ? rng.int(1, 9) : lv === 3 ? rng.int(1, 15) : lv === 4 ? rng.int(1, 25) : rng.int(1, 50);
     const dividend = (divisor * quotient) / 10;
 
     return {
@@ -222,8 +226,9 @@ export class DecimalRoundGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const value = rng.int(100, 999) / 100;
-    const roundTo = lv === 1 ? 1 : 1;
+    // 難易度に応じて数値の桁数と丸め位置を変化させる
+    const value = lv <= 1 ? rng.int(10, 99) / 10 : lv === 2 ? rng.int(100, 999) / 100 : lv === 3 ? rng.int(100, 999) / 10 : lv === 4 ? rng.int(1000, 9999) / 100 : rng.int(1000, 9999) / 10;
+    const roundTo = lv <= 1 ? 1 : lv === 2 ? 1 : lv === 3 ? 2 : lv === 4 ? 2 : 3;
     const scale = Math.pow(10, roundTo);
     const rounded = Math.round(value * scale) / scale;
 

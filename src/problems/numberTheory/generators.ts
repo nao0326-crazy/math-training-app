@@ -33,8 +33,8 @@ import {
 function createNumberTheoryDifficulty(
   level: DifficultyLevel,
   value: number,
-  reasoningLevel: DifficultyLevel = 1,
-  readingLevel: DifficultyLevel = 1,
+  reasoningLevel: DifficultyLevel = level >= 2 ? 2 : 1,
+  readingLevel: DifficultyLevel = level >= 3 ? 2 : 1,
 ) {
   return createDifficulty({
     calculationComplexity: calculationStepsToComplexity(level),
@@ -91,8 +91,12 @@ export class DivisorsFindingGenerator implements ProblemGenerator {
         return [6, 8, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 27, 28, 30];
       case 2:
         return [24, 30, 36, 40, 42, 48, 54, 56, 60, 66, 70, 72, 78, 80, 84];
-      default:
+      case 3:
         return [60, 72, 84, 90, 96, 108, 120, 132, 144, 168, 180, 192, 216, 240, 360];
+      case 4:
+        return [120, 144, 168, 180, 192, 216, 240, 252, 288, 300, 324, 336, 360, 384, 420];
+      default:
+        return [240, 288, 300, 324, 336, 360, 384, 420, 432, 480, 504, 540, 576, 600, 720];
     }
   }
 
@@ -154,8 +158,12 @@ export class DivisorsCountGenerator implements ProblemGenerator {
         return [6, 8, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 27, 28, 30];
       case 2:
         return [24, 30, 36, 40, 42, 48, 50, 54, 56, 60, 66, 70, 72, 80, 84];
-      default:
+      case 3:
         return [60, 72, 84, 90, 96, 108, 120, 132, 144, 150, 168, 180, 196, 200, 240];
+      case 4:
+        return [120, 144, 168, 180, 192, 216, 240, 252, 288, 300, 324, 336, 360, 384, 420];
+      default:
+        return [240, 288, 300, 324, 336, 360, 384, 420, 432, 480, 504, 540, 576, 600, 720];
     }
   }
 
@@ -316,7 +324,7 @@ export class PrimeRangeGenerator implements ProblemGenerator {
       id: generateProblemId(),
       category: this.category,
       type: this.type,
-      difficulty: createNumberTheoryDifficulty(level, max, 2, 1),
+      difficulty: createNumberTheoryDifficulty(level, max, 1, 1),
       question: `${min}から${max}までの間に素数はいくつあるでしょうか (すべて答えなさい)`,
       answer: { kind: 'string', value: answerText },
       explanation: `${min}から${max}までの素数は、${answerText} です。全部で${primes.length}個あります。`,
@@ -376,7 +384,7 @@ export class CommonDivisorsGenerator implements ProblemGenerator {
       difficulty: createNumberTheoryDifficulty(level, Math.max(a, b), 2, 1),
       question: `${a}と${b}の公約数をすべて答えなさい`,
       answer: { kind: 'string', value: answerText },
-      explanation: `${a}と${b}の公約数は、${answerText} です。最大公約数は ${gcd(a, b)} です。`,
+      explanation: `${a}と${b}の公約数は、${answerText} です（${commonDivs.length}こ）。最大公約数は ${gcd(a, b)} です。`,
       parameters: {
         a,
         b,
@@ -401,10 +409,20 @@ export class CommonDivisorsGenerator implements ProblemGenerator {
           [24, 36], [30, 45], [28, 42], [18, 30], [20, 32], [36, 48],
           [16, 32], [24, 40], [32, 48], [27, 45],
         ];
-      default:
+      case 3:
         return [
           [60, 90], [72, 108], [48, 72], [60, 120], [84, 126], [96, 120],
           [90, 135], [72, 96], [56, 84], [108, 144],
+        ];
+      case 4:
+        return [
+          [120, 180], [144, 216], [96, 144], [120, 240], [168, 252], [192, 240],
+          [180, 270], [144, 192], [112, 168], [216, 288],
+        ];
+      default:
+        return [
+          [240, 360], [288, 432], [192, 288], [240, 480], [336, 504], [384, 480],
+          [360, 540], [288, 384], [224, 336], [432, 576],
         ];
     }
   }

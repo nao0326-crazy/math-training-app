@@ -50,9 +50,11 @@ export class RatioSimplifyGenerator implements ProblemGenerator {
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
     for (let attempt = 0; attempt < 100; attempt++) {
-      const g = rng.int(2, lv === 1 ? 4 : 6);
-      const a = g * rng.int(1, lv === 1 ? 4 : 5);
-      const b = g * rng.int(1, lv === 1 ? 4 : 5);
+      // 難易度に応じて公約数と係数の範囲を変化させる
+      const g = lv <= 1 ? rng.int(2, 4) : lv === 2 ? rng.int(2, 6) : lv === 3 ? rng.int(3, 8) : lv === 4 ? rng.int(4, 10) : rng.int(5, 15);
+      const maxFactor = lv <= 1 ? 4 : lv === 2 ? 5 : lv === 3 ? 7 : lv === 4 ? 10 : 15;
+      const a = g * rng.int(1, maxFactor);
+      const b = g * rng.int(1, maxFactor);
       if (a === b) continue;
 
       const simplifiedA = a / g;
@@ -104,8 +106,10 @@ export class RatioValueGenerator implements ProblemGenerator {
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
     for (let attempt = 0; attempt < 100; attempt++) {
-      const a = rng.int(2, lv === 1 ? 8 : 12);
-      const b = rng.int(2, lv === 1 ? 8 : 12);
+      // 難易度に応じて比の項の範囲を変化させる
+      const maxTerm = lv <= 1 ? 8 : lv === 2 ? 12 : lv === 3 ? 20 : lv === 4 ? 30 : 50;
+      const a = rng.int(2, maxTerm);
+      const b = rng.int(2, maxTerm);
       if (a === b) continue;
 
       const value = a / b;
@@ -147,11 +151,13 @@ export class RatioEqualQuestionGenerator implements ProblemGenerator {
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
     for (let attempt = 0; attempt < 100; attempt++) {
-      const a = rng.int(1, 4);
-      const b = rng.int(1, 4);
+      // 難易度に応じて比の項と倍率を変化させる
+      const maxTerm = lv <= 1 ? 4 : lv === 2 ? 5 : lv === 3 ? 7 : lv === 4 ? 10 : 15;
+      const a = rng.int(1, maxTerm);
+      const b = rng.int(1, maxTerm);
       if (a === b) continue;
 
-      const g = rng.int(2, lv === 1 ? 3 : 4);
+      const g = lv <= 1 ? rng.int(2, 3) : lv === 2 ? rng.int(2, 4) : lv === 3 ? rng.int(3, 6) : lv === 4 ? rng.int(4, 8) : rng.int(5, 12);
       const x = a * g;
       const y = b * g;
 
@@ -194,10 +200,12 @@ export class RatioQuantityGenerator implements ProblemGenerator {
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
     for (let attempt = 0; attempt < 100; attempt++) {
-      const a = rng.int(1, 3);
-      const b = rng.int(1, 3);
+      // 難易度に応じて比の項と1単位の大きさを変化させる
+      const maxTerm = lv <= 1 ? 3 : lv === 2 ? 4 : lv === 3 ? 5 : lv === 4 ? 7 : 10;
+      const a = rng.int(1, maxTerm);
+      const b = rng.int(1, maxTerm);
       if (a === b) continue;
-      const unit = rng.int(2, lv === 1 ? 4 : 8);
+      const unit = lv <= 1 ? rng.int(2, 4) : lv === 2 ? rng.int(2, 8) : lv === 3 ? rng.int(3, 12) : lv === 4 ? rng.int(4, 20) : rng.int(5, 30);
       const partA = a * unit;
       const partB = b * unit;
       const total = partA + partB;
@@ -263,7 +271,8 @@ export class ProportionalExpressionGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const k = rng.int(2, lv === 1 ? 5 : 10);
+    // 難易度に応じて比例定数を変化させる
+    const k = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 10) : lv === 3 ? rng.int(3, 15) : lv === 4 ? rng.int(5, 25) : rng.int(8, 50);
 
     return {
       id: generateProblemId(),
@@ -303,9 +312,10 @@ export class ProportionalWordGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const k = rng.int(2, lv === 1 ? 5 : 8);
-    const x1 = rng.int(2, 4);
-    const x2 = rng.int(x1 + 1, 10);
+    // 難易度に応じて比例定数と個数を変化させる
+    const k = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 8) : lv === 3 ? rng.int(3, 12) : lv === 4 ? rng.int(5, 20) : rng.int(8, 30);
+    const x1 = lv <= 1 ? rng.int(2, 4) : lv === 2 ? rng.int(2, 5) : lv === 3 ? rng.int(3, 6) : lv === 4 ? rng.int(4, 8) : rng.int(5, 10);
+    const x2 = lv <= 1 ? rng.int(x1 + 1, 10) : lv === 2 ? rng.int(x1 + 1, 12) : lv === 3 ? rng.int(x1 + 1, 15) : lv === 4 ? rng.int(x1 + 1, 20) : rng.int(x1 + 1, 30);
     const y1 = k * x1;
     const y2 = k * x2;
 
@@ -354,7 +364,8 @@ export class InverseExpressionGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const k = rng.int(6, lv === 2 ? 12 : 20);
+    // 難易度に応じて反比例定数を変化させる
+    const k = lv <= 1 ? rng.int(6, 10) : lv === 2 ? rng.int(6, 12) : lv === 3 ? rng.int(8, 20) : lv === 4 ? rng.int(12, 30) : rng.int(20, 50);
 
     return {
       id: generateProblemId(),
@@ -396,9 +407,10 @@ export class InverseWordGenerator implements ProblemGenerator {
 
     // 割り切れる組み合わせを反復的に探す
     for (let attempt = 0; attempt < 100; attempt++) {
-      const total = rng.int(12, lv === 2 ? 20 : 36);
-      const people1 = rng.int(2, 4);
-      const people2 = rng.int(people1 + 2, 9);
+      // 難易度に応じて全体量と人数を変化させる
+      const total = lv <= 1 ? rng.int(12, 20) : lv === 2 ? rng.int(12, 20) : lv === 3 ? rng.int(20, 36) : lv === 4 ? rng.int(30, 60) : rng.int(50, 100);
+      const people1 = lv <= 1 ? rng.int(2, 3) : lv === 2 ? rng.int(2, 4) : lv === 3 ? rng.int(2, 5) : lv === 4 ? rng.int(3, 6) : rng.int(4, 8);
+      const people2 = lv <= 1 ? rng.int(people1 + 2, 6) : lv === 2 ? rng.int(people1 + 2, 9) : lv === 3 ? rng.int(people1 + 2, 12) : lv === 4 ? rng.int(people1 + 2, 15) : rng.int(people1 + 2, 20);
       const per1 = total / people1;
       const per2 = total / people2;
       if (!Number.isInteger(per1) || !Number.isInteger(per2)) continue;

@@ -63,6 +63,21 @@ export class MultiStepGenerator implements ProblemGenerator {
       numbers.push(rng.int(1, maxNum));
     }
 
+    // 減算で負にならないように調整する
+    // 左から順に見て、引き算の直後に続く数値が合計以下になるようにする
+    for (let i = 0; i < operators.length; i++) {
+      if (operators[i] === '-') {
+        // 現在の左側の合計を超えないように右側の数を小さくする
+        let sumLeft = numbers[0];
+        for (let j = 0; j < i; j++) {
+          sumLeft += numbers[j + 1];
+        }
+        if (numbers[i + 1] > sumLeft) {
+          numbers[i + 1] = Math.max(1, sumLeft);
+        }
+      }
+    }
+
     // 割り算が割り切れるように数値を調整する
     if (!ensureDivisibility(numbers, operators)) {
       return null;

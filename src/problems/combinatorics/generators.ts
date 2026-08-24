@@ -72,8 +72,9 @@ export class ArrangeSimpleGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const n = rng.int(3, lv === 1 ? 4 : 5);
-    const r = rng.int(2, n);
+    // 難易度に応じて人数と選ぶ人数を変化させる
+    const n = lv <= 1 ? rng.int(3, 4) : lv === 2 ? rng.int(3, 5) : lv === 3 ? rng.int(4, 6) : lv === 4 ? rng.int(5, 7) : rng.int(6, 8);
+    const r = lv <= 1 ? rng.int(2, Math.min(3, n)) : lv === 2 ? rng.int(2, n) : lv === 3 ? rng.int(2, n) : lv === 4 ? rng.int(3, n) : rng.int(3, n);
     const ans = permutation(n, r);
 
     return {
@@ -113,8 +114,9 @@ export class CombineSimpleGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const n = rng.int(3, lv === 1 ? 5 : 7);
-    const r = rng.int(2, lv === 1 ? 2 : 3);
+    // 難易度に応じて人数と選ぶ人数を変化させる
+    const n = lv <= 1 ? rng.int(3, 5) : lv === 2 ? rng.int(3, 7) : lv === 3 ? rng.int(4, 8) : lv === 4 ? rng.int(5, 9) : rng.int(6, 10);
+    const r = lv <= 1 ? rng.int(2, 2) : lv === 2 ? rng.int(2, 3) : lv === 3 ? rng.int(2, 3) : lv === 4 ? rng.int(3, 4) : rng.int(3, 4);
     const ans = combination(n, r);
 
     return {
@@ -153,7 +155,8 @@ export class TreeDiagramGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const n = rng.int(3, 4);
+    // 難易度に応じて文字数を変化させる
+    const n = lv <= 1 ? 3 : lv === 2 ? rng.int(4, 5) : lv === 3 ? rng.int(4, 5) : lv === 4 ? rng.int(5, 6) : rng.int(5, 6);
     const ans = factorial(n);
 
     return {
@@ -192,7 +195,8 @@ export class CombineTableGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const n = rng.int(4, lv === 1 ? 5 : 6);
+    // 難易度に応じてチーム数を変化させる
+    const n = lv <= 1 ? rng.int(4, 5) : lv === 2 ? rng.int(4, 6) : lv === 3 ? rng.int(5, 7) : lv === 4 ? rng.int(6, 8) : rng.int(7, 9);
     const ans = combination(n, 2);
 
     return {

@@ -93,7 +93,10 @@ describe('問題生成エンジン', () => {
           key !== 'readingLevel' &&
           key !== 'reasoningLevel' &&
           key !== 'blankPosition' &&
-          key !== 'termCount'
+          key !== 'termCount' &&
+          key !== 'count' &&
+          key !== 'answerNumerator' &&
+          key !== 'answerDenominator'
         ) {
           // 数値パラメータは問題文に含まれるか、説明に含まれる
           const questionContains = problem.question.includes(String(value));

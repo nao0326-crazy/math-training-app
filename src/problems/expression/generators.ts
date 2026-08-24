@@ -50,7 +50,8 @@ export class ExpressionMakeGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const count = rng.int(2, lv === 1 ? 5 : 8);
+    // 難易度に応じて本数を変化させる
+    const count = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 8) : lv === 3 ? rng.int(3, 12) : lv === 4 ? rng.int(5, 20) : rng.int(8, 30);
 
     return {
       id: generateProblemId(),
@@ -88,9 +89,10 @@ export class ExpressionSubstitutionGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const a = rng.int(1, lv === 1 ? 3 : 5);
-    const b = rng.int(1, lv === 1 ? 5 : 10);
-    const x = rng.int(1, lv === 1 ? 5 : 10);
+    // 難易度に応じて係数・定数・代入値を変化させる
+    const a = lv <= 1 ? rng.int(1, 3) : lv === 2 ? rng.int(1, 5) : lv === 3 ? rng.int(2, 8) : lv === 4 ? rng.int(3, 12) : rng.int(5, 20);
+    const b = lv <= 1 ? rng.int(1, 5) : lv === 2 ? rng.int(1, 10) : lv === 3 ? rng.int(2, 15) : lv === 4 ? rng.int(3, 25) : rng.int(5, 50);
+    const x = lv <= 1 ? rng.int(1, 5) : lv === 2 ? rng.int(1, 10) : lv === 3 ? rng.int(2, 15) : lv === 4 ? rng.int(3, 20) : rng.int(5, 30);
     const answer = a * x + b;
 
     return {
@@ -131,7 +133,8 @@ export class ExpressionWordToExpressionGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const price = rng.int(2, 9);
+    // 難易度に応じて単価を変化させる
+    const price = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(3, 15) : lv === 4 ? rng.int(5, 25) : rng.int(8, 50);
 
     return {
       id: generateProblemId(),
@@ -169,7 +172,8 @@ export class ExpressionMeaningGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const b = rng.int(2, 9);
+    // 難易度に応じて定数項を変化させる
+    const b = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(3, 15) : lv === 4 ? rng.int(5, 25) : rng.int(8, 50);
     const answerText = 'x' + b + '円は、x円の物を1こと' + b + '円の品物を買ったときの代金です';
 
     return {
@@ -208,8 +212,9 @@ export class ExpressionBlankGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const a = rng.int(2, lv === 1 ? 5 : 9);
-    const b = rng.int(2, 8);
+    // 難易度に応じて数値範囲を変化させる
+    const a = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(3, 15) : lv === 4 ? rng.int(5, 25) : rng.int(8, 50);
+    const b = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 8) : lv === 3 ? rng.int(3, 12) : lv === 4 ? rng.int(5, 20) : rng.int(8, 30);
     const result = a * b;
 
     return {
@@ -247,9 +252,10 @@ export class ExpressionComplexGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const a = rng.int(2, 5);
-    const b = rng.int(1, 6);
-    const x = rng.int(1, 5);
+    // 難易度に応じて係数・定数・時間を変化させる
+    const a = lv <= 1 ? rng.int(2, 3) : lv === 2 ? rng.int(2, 5) : lv === 3 ? rng.int(3, 8) : lv === 4 ? rng.int(4, 12) : rng.int(6, 20);
+    const b = lv <= 1 ? rng.int(1, 3) : lv === 2 ? rng.int(1, 6) : lv === 3 ? rng.int(2, 10) : lv === 4 ? rng.int(3, 15) : rng.int(5, 30);
+    const x = lv <= 1 ? rng.int(1, 3) : lv === 2 ? rng.int(1, 5) : lv === 3 ? rng.int(2, 8) : lv === 4 ? rng.int(3, 12) : rng.int(5, 20);
     const answer = a * x + b;
 
     return {

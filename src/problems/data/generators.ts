@@ -49,10 +49,12 @@ export class DataAverageGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const count = lv === 1 ? 3 : lv === 2 ? 4 : 5;
+    // 難易度に応じて個数と数値範囲を変化させる
+    const count = lv <= 1 ? 3 : lv === 2 ? 4 : lv === 3 ? 5 : lv === 4 ? 6 : 7;
+    const maxNum = lv <= 1 ? 9 : lv === 2 ? 20 : lv === 3 ? 30 : lv === 4 ? 50 : 100;
     const nums: number[] = [];
     for (let i = 0; i < count; i++) {
-      nums.push(rng.int(1, lv === 1 ? 9 : 20));
+      nums.push(rng.int(1, maxNum));
     }
     const sum = nums.reduce((a, b) => a + b, 0);
     const avg = sum / count;
@@ -98,8 +100,9 @@ export class DataTotalFromAverageGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const count = rng.int(3, lv === 1 ? 5 : 8);
-    const avg = rng.int(1, lv === 1 ? 5 : 10);
+    // 難易度に応じて個数と平均を変化させる
+    const count = lv <= 1 ? rng.int(3, 5) : lv === 2 ? rng.int(3, 8) : lv === 3 ? rng.int(4, 10) : lv === 4 ? rng.int(5, 12) : rng.int(6, 15);
+    const avg = lv <= 1 ? rng.int(1, 5) : lv === 2 ? rng.int(1, 10) : lv === 3 ? rng.int(2, 15) : lv === 4 ? rng.int(3, 25) : rng.int(5, 50);
     const total = count * avg;
 
     return {
@@ -140,10 +143,12 @@ export class DataMaxMinGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
+    // 難易度に応じて個数と数値範囲を変化させる
+    const count = lv <= 1 ? 5 : lv === 2 ? 5 : lv === 3 ? 6 : lv === 4 ? 7 : 8;
+    const maxNum = lv <= 1 ? 9 : lv === 2 ? 20 : lv === 3 ? 30 : lv === 4 ? 50 : 100;
     const nums: number[] = [];
-    const count = 5;
     for (let i = 0; i < count; i++) {
-      nums.push(rng.int(1, lv === 1 ? 9 : 20));
+      nums.push(rng.int(1, maxNum));
     }
     const max = Math.max(...nums);
     const min = Math.min(...nums);
@@ -187,11 +192,14 @@ export class DataCompareGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
+    // 難易度に応じてデータ数と数値範囲を変化させる
+    const count = lv <= 1 ? 5 : lv === 2 ? 5 : lv === 3 ? 6 : lv === 4 ? 7 : 8;
+    const maxNum = lv <= 1 ? 10 : lv === 2 ? 10 : lv === 3 ? 20 : lv === 4 ? 30 : 50;
     const groupA: number[] = [];
     const groupB: number[] = [];
-    for (let i = 0; i < 5; i++) {
-      groupA.push(rng.int(1, 10));
-      groupB.push(rng.int(1, 10));
+    for (let i = 0; i < count; i++) {
+      groupA.push(rng.int(1, maxNum));
+      groupB.push(rng.int(1, maxNum));
     }
     const sumA = groupA.reduce((a, b) => a + b, 0);
     const sumB = groupB.reduce((a, b) => a + b, 0);

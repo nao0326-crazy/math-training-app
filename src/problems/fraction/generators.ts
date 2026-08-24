@@ -150,12 +150,13 @@ export class FractionMulIntegerGenerator implements ProblemGenerator {
     rng: ReturnType<typeof createRandom>,
     lv: DifficultyLevel,
   ): Problem | null {
+    // 難易度に応じて分母・分子・整数の範囲を変化させる
     const denominator =
-      lv <= 1 ? rng.int(2, 6) : lv === 2 ? rng.int(2, 9) : rng.int(2, 12);
+      lv <= 1 ? rng.int(2, 6) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(2, 12) : lv === 4 ? rng.int(3, 15) : rng.int(4, 20);
     const numerator =
-      lv <= 1 ? rng.int(1, denominator - 1) : rng.int(1, denominator * 2);
+      lv <= 1 ? rng.int(1, denominator - 1) : lv === 2 ? rng.int(1, denominator * 2) : lv === 3 ? rng.int(1, denominator * 3) : lv === 4 ? rng.int(1, denominator * 4) : rng.int(1, denominator * 5);
     const integer =
-      lv <= 1 ? rng.int(2, 6) : lv === 2 ? rng.int(2, 9) : rng.int(2, 12);
+      lv <= 1 ? rng.int(2, 6) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(2, 12) : lv === 4 ? rng.int(3, 15) : rng.int(4, 20);
 
     if (numerator === 0 || denominator === 0) return null;
 
@@ -240,7 +241,8 @@ export class FractionMulFractionGenerator implements ProblemGenerator {
     rng: ReturnType<typeof createRandom>,
     lv: DifficultyLevel,
   ): Problem | null {
-    const maxDen = lv <= 1 ? 6 : lv === 2 ? 9 : 12;
+    // 難易度に応じて分母の範囲を変化させる
+    const maxDen = lv <= 1 ? 6 : lv === 2 ? 9 : lv === 3 ? 12 : lv === 4 ? 15 : 20;
     const d1 = rng.int(2, maxDen);
     const n1 = rng.int(1, d1 - 1);
     const d2 = rng.int(2, maxDen);
@@ -262,9 +264,9 @@ export class FractionMulFractionGenerator implements ProblemGenerator {
       answer,
       explanation:
         fractionJapanese(n1, d1) +
-        '×' +
+        '（分子' + n1 + '、分母' + d1 + '）×' +
         fractionJapanese(n2, d2) +
-        '＝' +
+        '（分子' + n2 + '、分母' + d2 + '）＝' +
         formatFractionJapanese(result.numerator, result.denominator) +
         (result.denominator === 1 ? '' : '＝' + formatAnswerJapanese(answer)) +
         'です。',
@@ -327,11 +329,12 @@ export class FractionDivIntegerGenerator implements ProblemGenerator {
     rng: ReturnType<typeof createRandom>,
     lv: DifficultyLevel,
   ): Problem | null {
+    // 難易度に応じて分母・整数の範囲を変化させる
     const denominator =
-      lv <= 1 ? rng.int(2, 6) : lv === 2 ? rng.int(2, 9) : rng.int(2, 12);
+      lv <= 1 ? rng.int(2, 6) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(2, 12) : lv === 4 ? rng.int(3, 15) : rng.int(4, 20);
     const numerator = rng.int(1, denominator - 1);
     const integer =
-      lv <= 1 ? rng.int(2, 6) : lv === 2 ? rng.int(2, 9) : rng.int(2, 12);
+      lv <= 1 ? rng.int(2, 6) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(2, 12) : lv === 4 ? rng.int(3, 15) : rng.int(4, 20);
 
     const result = divideFractions(numerator, denominator, integer, 1);
     const answer = improperToAnswer(result.numerator, result.denominator);
@@ -343,13 +346,13 @@ export class FractionDivIntegerGenerator implements ProblemGenerator {
       difficulty: createFractionDifficulty(lv, numerator, 1, 1),
       question:
         fractionJapanese(numerator, denominator) +
-        'を' +
+        '（分母' + denominator + '）を' +
         integer +
         'でわると、いくつになりますか',
       answer,
       explanation:
         fractionJapanese(numerator, denominator) +
-        '÷' +
+        '（分子' + numerator + '、分母' + denominator + '）÷' +
         integer +
         '＝' +
         formatFractionJapanese(result.numerator, result.denominator) +
@@ -411,7 +414,8 @@ export class FractionDivFractionGenerator implements ProblemGenerator {
     rng: ReturnType<typeof createRandom>,
     lv: DifficultyLevel,
   ): Problem | null {
-    const maxDen = lv <= 1 ? 6 : lv === 2 ? 9 : 12;
+    // 難易度に応じて分母の範囲を変化させる
+    const maxDen = lv <= 1 ? 6 : lv === 2 ? 9 : lv === 3 ? 12 : lv === 4 ? 15 : 20;
     const d1 = rng.int(2, maxDen);
     const n1 = rng.int(1, d1 - 1);
     const d2 = rng.int(2, maxDen);
@@ -434,11 +438,11 @@ export class FractionDivFractionGenerator implements ProblemGenerator {
       explanation:
         '÷' +
         fractionJapanese(n2, d2) +
-        ' は ×' +
+        '（分子' + n2 + '、分母' + d2 + '） は ×' +
         fractionJapanese(d2, n2) +
         ' と同じです。' +
         fractionJapanese(n1, d1) +
-        '×' +
+        '（分子' + n1 + '、分母' + d1 + '）×' +
         fractionJapanese(d2, n2) +
         '＝' +
         formatFractionJapanese(result.numerator, result.denominator) +
@@ -502,11 +506,12 @@ export class FractionMulMixedGenerator implements ProblemGenerator {
     rng: ReturnType<typeof createRandom>,
     lv: DifficultyLevel,
   ): Problem | null {
-    const whole = rng.int(1, lv >= 3 ? 3 : 2);
-    const numerator = rng.int(1, 4);
-    const denominator = rng.int(numerator + 1, lv >= 3 ? 9 : 6);
+    // 難易度に応じて帯分数の範囲を変化させる
+    const whole = lv <= 1 ? rng.int(1, 2) : lv === 2 ? rng.int(1, 2) : lv === 3 ? rng.int(1, 3) : lv === 4 ? rng.int(1, 4) : rng.int(1, 5);
+    const numerator = lv <= 1 ? rng.int(1, 3) : lv === 2 ? rng.int(1, 4) : lv === 3 ? rng.int(1, 5) : lv === 4 ? rng.int(1, 6) : rng.int(1, 8);
+    const denominator = rng.int(numerator + 1, lv <= 1 ? 6 : lv === 2 ? 6 : lv === 3 ? 9 : lv === 4 ? 12 : 15);
 
-    const d2 = rng.int(2, lv >= 3 ? 9 : 6);
+    const d2 = rng.int(2, lv <= 1 ? 6 : lv === 2 ? 6 : lv === 3 ? 9 : lv === 4 ? 12 : 15);
     const n2 = rng.int(1, d2 - 1);
 
     const mixed = mixedToImproper(whole, numerator, denominator);
@@ -520,7 +525,7 @@ export class FractionMulMixedGenerator implements ProblemGenerator {
       difficulty: createFractionDifficulty(
         lv,
         whole * denominator + numerator,
-        2,
+        lv <= 1 ? 1 : 2,
         1,
       ),
       question:
@@ -531,7 +536,7 @@ export class FractionMulMixedGenerator implements ProblemGenerator {
       answer,
       explanation:
         mixedJapanese(whole, numerator, denominator) +
-        '＝' +
+        '（分子' + numerator + '、分母' + denominator + '）＝' +
         mixed.numerator +
         '/' +
         mixed.denominator +
@@ -539,7 +544,7 @@ export class FractionMulMixedGenerator implements ProblemGenerator {
         fractionJapanese(mixed.numerator, mixed.denominator) +
         '×' +
         fractionJapanese(n2, d2) +
-        '＝' +
+        '（分子' + n2 + '、分母' + d2 + '）＝' +
         formatFractionJapanese(result.numerator, result.denominator) +
         (result.denominator === 1 ? '' : '＝' + formatAnswerJapanese(answer)) +
         'です。',
@@ -610,11 +615,12 @@ export class FractionMixedDivGenerator implements ProblemGenerator {
     rng: ReturnType<typeof createRandom>,
     lv: DifficultyLevel,
   ): Problem | null {
-    const whole = rng.int(1, lv >= 3 ? 2 : 1);
-    const numerator = rng.int(1, 3);
-    const denominator = rng.int(numerator + 1, lv >= 3 ? 6 : 5);
+    // 難易度に応じて帯分数の範囲を変化させる
+    const whole = lv <= 1 ? rng.int(1, 1) : lv === 2 ? rng.int(1, 1) : lv === 3 ? rng.int(1, 2) : lv === 4 ? rng.int(1, 3) : rng.int(1, 4);
+    const numerator = lv <= 1 ? rng.int(1, 2) : lv === 2 ? rng.int(1, 3) : lv === 3 ? rng.int(1, 4) : lv === 4 ? rng.int(1, 5) : rng.int(1, 6);
+    const denominator = rng.int(numerator + 1, lv <= 1 ? 5 : lv === 2 ? 5 : lv === 3 ? 6 : lv === 4 ? 8 : 10);
 
-    const d2 = rng.int(2, 5);
+    const d2 = rng.int(2, lv <= 1 ? 5 : lv === 2 ? 5 : lv === 3 ? 6 : lv === 4 ? 8 : 10);
     const n2 = rng.int(1, d2 - 1);
 
     const mixed = mixedToImproper(whole, numerator, denominator);
@@ -625,7 +631,7 @@ export class FractionMixedDivGenerator implements ProblemGenerator {
       id: generateProblemId(),
       category: this.category,
       type: this.type,
-      difficulty: createFractionDifficulty(lv, whole * denominator, 2, 1),
+      difficulty: createFractionDifficulty(lv, whole * denominator, lv <= 1 ? 1 : 2, 1),
       question:
         mixedJapanese(whole, numerator, denominator) +
         'を' +
@@ -634,7 +640,7 @@ export class FractionMixedDivGenerator implements ProblemGenerator {
       answer,
       explanation:
         mixedJapanese(whole, numerator, denominator) +
-        '＝' +
+        '（分子' + numerator + '、分母' + denominator + '）＝' +
         mixed.numerator +
         '/' +
         mixed.denominator +
@@ -733,8 +739,10 @@ export class FractionReduceGenerator implements ProblemGenerator {
       id: generateProblemId(),
       category: this.category,
       type: this.type,
-      difficulty: createFractionDifficulty(lv, numerator, 1, 1),
-      question: fractionJapanese(numerator, denominator) + 'を約分しなさい',
+      difficulty: createFractionDifficulty(lv, numerator, lv >= 2 ? 2 : 1, 1),
+      question:
+        fractionJapanese(numerator, denominator) +
+        '（分子' + numerator + '、分母' + denominator + '）を約分しなさい',
       answer: ans,
       explanation:
         fractionJapanese(numerator, denominator) +
@@ -823,11 +831,11 @@ export class FractionCommonDenominatorGenerator implements ProblemGenerator {
         common +
         'なので、' +
         fractionJapanese(n1, d1) +
-        '＝' +
+        '（分子' + n1 + '、分母' + d1 + '）＝' +
         fractionJapanese(newN1, common) +
         '（分子' + newN1 + '）、' +
         fractionJapanese(n2, d2) +
-        '＝' +
+        '（分子' + n2 + '、分母' + d2 + '）＝' +
         fractionJapanese(newN2, common) +
         '（分子' + newN2 + '） になります。',
       parameters: {

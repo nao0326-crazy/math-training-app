@@ -107,8 +107,8 @@ export function createIntegerDifficulty(
   level: DifficultyLevel,
   a: number,
   b: number,
-  reasoningLevel: DifficultyLevel = 1,
-  readingLevel: DifficultyLevel = 1,
+  reasoningLevel: DifficultyLevel = level >= 2 ? 2 : 1,
+  readingLevel: DifficultyLevel = level >= 3 ? 2 : 1,
 ) {
   const calcLevel = clampLevel(level);
   const numLevel = clampLevel(Math.max(numberSizeToComplexity(a), numberSizeToComplexity(b)));

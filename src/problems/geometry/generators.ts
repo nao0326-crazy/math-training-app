@@ -27,8 +27,8 @@ const PI = 3.14;
 function createGeometryDifficulty(
   level: DifficultyLevel,
   value: number,
-  reasoningLevel: DifficultyLevel = 1,
-  readingLevel: DifficultyLevel = 1,
+  reasoningLevel: DifficultyLevel = level >= 2 ? 2 : 1,
+  readingLevel: DifficultyLevel = level >= 3 ? 2 : 1,
 ) {
   return createDifficulty({
     calculationComplexity: calculationStepsToComplexity(level),
@@ -51,7 +51,8 @@ export class CircleAreaFromRadiusGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const radius = lv === 1 ? rng.int(2, 5) : lv === 2 ? rng.int(5, 10) : rng.int(10, 15);
+    // 難易度に応じて半径を変化させる
+    const radius = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(5, 10) : lv === 3 ? rng.int(10, 15) : lv === 4 ? rng.int(12, 20) : rng.int(15, 30);
     const area = radius * radius * PI;
 
     return {
@@ -96,7 +97,8 @@ export class CircleAreaFromDiameterGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const diameter = lv === 1 ? rng.int(4, 10) : rng.int(10, 20);
+    // 難易度に応じて直径を変化させる
+    const diameter = lv <= 1 ? rng.int(4, 10) : lv === 2 ? rng.int(10, 20) : lv === 3 ? rng.int(12, 24) : lv === 4 ? rng.int(16, 30) : rng.int(20, 40);
     const radius = diameter / 2;
     const area = radius * radius * PI;
 
@@ -142,7 +144,7 @@ export class CircleRadiusFromAreaGenerator implements ProblemGenerator {
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
     // 半径は整数になるようにする
-    const radius = rng.int(2, lv === 2 ? 8 : 12);
+    const radius = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 8) : lv === 3 ? rng.int(3, 12) : lv === 4 ? rng.int(4, 15) : rng.int(5, 20);
     const area = radius * radius * PI;
 
     return {
@@ -185,16 +187,18 @@ export class VolumeBoxGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const l = rng.int(2, lv === 1 ? 5 : 9);
-    const w = rng.int(2, lv === 1 ? 5 : 9);
-    const h = rng.int(2, lv === 1 ? 5 : 9);
+    // 難易度に応じて辺の長さを変化させる
+    const maxEdge = lv <= 1 ? 5 : lv === 2 ? 9 : lv === 3 ? 12 : lv === 4 ? 15 : 20;
+    const l = rng.int(2, maxEdge);
+    const w = rng.int(2, maxEdge);
+    const h = rng.int(2, maxEdge);
     const vol = l * w * h;
 
     return {
       id: generateProblemId(),
       category: this.category,
       type: this.type,
-      difficulty: createGeometryDifficulty(lv, vol, 1, 1),
+      difficulty: createGeometryDifficulty(lv, maxEdge, 1, 1),
       question:
         '縦' + l + 'cm、横' + w + 'cm、高さ' + h + 'cmの直方体の体積を求めよ。',
       answer: { kind: 'integer', value: vol },
@@ -236,14 +240,15 @@ export class VolumeCubeGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const a = rng.int(2, lv === 1 ? 5 : 9);
+    // 難易度に応じて辺の長さを変化させる
+    const a = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(3, 12) : lv === 4 ? rng.int(4, 15) : rng.int(5, 20);
     const vol = a * a * a;
 
     return {
       id: generateProblemId(),
       category: this.category,
       type: this.type,
-      difficulty: createGeometryDifficulty(lv, vol, 1, 1),
+      difficulty: createGeometryDifficulty(lv, a, 1, 1),
       question: '1辺が' + a + 'cmの立方体の体積を求めよ。',
       answer: { kind: 'integer', value: vol },
       explanation: '体積＝一辺×一辺×一辺 なので、' + a + '×' + a + '×' + a + '＝' + vol + 'cm³です。',
@@ -272,8 +277,9 @@ export class VolumePrismGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const baseArea = rng.int(3, lv === 1 ? 8 : 12);
-    const height = rng.int(2, lv === 1 ? 5 : 8);
+    // 難易度に応じて底面積と高さを変化させる
+    const baseArea = lv <= 1 ? rng.int(3, 8) : lv === 2 ? rng.int(3, 12) : lv === 3 ? rng.int(4, 15) : lv === 4 ? rng.int(5, 20) : rng.int(6, 30);
+    const height = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 8) : lv === 3 ? rng.int(3, 10) : lv === 4 ? rng.int(4, 12) : rng.int(5, 15);
     const vol = baseArea * height;
 
     return {
@@ -311,8 +317,9 @@ export class VolumeCylinderGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const radius = rng.int(2, 5);
-    const height = rng.int(2, lv === 2 ? 6 : 10);
+    // 難易度に応じて半径と高さを変化させる
+    const radius = lv <= 1 ? rng.int(2, 3) : lv === 2 ? rng.int(2, 5) : lv === 3 ? rng.int(3, 6) : lv === 4 ? rng.int(4, 8) : rng.int(5, 10);
+    const height = lv <= 1 ? rng.int(2, 4) : lv === 2 ? rng.int(2, 6) : lv === 3 ? rng.int(3, 8) : lv === 4 ? rng.int(4, 10) : rng.int(5, 12);
     const baseArea = radius * radius * PI;
     const vol = baseArea * height;
 
@@ -365,8 +372,9 @@ export class VolumeFromHeightGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const baseArea = rng.int(3, 8);
-    const height = rng.int(3, lv === 2 ? 8 : 12);
+    // 難易度に応じて底面積と高さを変化させる
+    const baseArea = lv <= 1 ? rng.int(3, 6) : lv === 2 ? rng.int(3, 8) : lv === 3 ? rng.int(4, 10) : lv === 4 ? rng.int(5, 12) : rng.int(6, 15);
+    const height = lv <= 1 ? rng.int(3, 6) : lv === 2 ? rng.int(3, 8) : lv === 3 ? rng.int(4, 10) : lv === 4 ? rng.int(5, 12) : rng.int(6, 15);
     const vol = baseArea * height;
 
     return {
@@ -405,7 +413,8 @@ export class VolumeUnitGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const liters = rng.int(1, lv === 1 ? 3 : 10);
+    // 難易度に応じてリットル数を変化させる
+    const liters = lv <= 1 ? rng.int(1, 3) : lv === 2 ? rng.int(1, 10) : lv === 3 ? rng.int(2, 20) : lv === 4 ? rng.int(3, 50) : rng.int(5, 100);
     const cm3 = liters * 1000;
 
     return {
@@ -545,8 +554,9 @@ export class ScaleLengthGenerator implements ProblemGenerator {
 
     // 図形を拡大する。
     // 実際の長さと縮尺
-    const scale = rng.pick([2, 3, 4, 5, 0.5, 0.25]);
-    const base = rng.int(2, 8);
+    // 難易度に応じて倍率と元の長さを変化させる
+    const scale = lv <= 1 ? rng.pick([2, 3]) : lv === 2 ? rng.pick([2, 3, 4, 0.5]) : lv === 3 ? rng.pick([2, 3, 4, 5, 0.5, 0.25]) : lv === 4 ? rng.pick([3, 4, 5, 6, 0.5, 0.25, 0.2]) : rng.pick([4, 5, 6, 8, 0.5, 0.25, 0.2, 0.1]);
+    const base = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 8) : lv === 3 ? rng.int(3, 10) : lv === 4 ? rng.int(4, 12) : rng.int(5, 15);
     const isEnlarge = scale > 1;
 
     return {
@@ -606,8 +616,10 @@ export class AngleBasicGenerator implements ProblemGenerator {
 
     for (let attempt = 0; attempt < 100; attempt++) {
       // 三角形の角度
-      const a = rng.int(30, 80);
-      const b = rng.int(30, 90 - a);
+      // 難易度に応じて角度の範囲を変化させる
+      const maxAngle = lv <= 1 ? 80 : lv === 2 ? 90 : lv === 3 ? 100 : lv === 4 ? 110 : 120;
+      const a = rng.int(30, maxAngle);
+      const b = rng.int(30, Math.min(maxAngle, 180 - a - 30));
       if (a + b >= 180) continue;
       const c = 180 - a - b;
 

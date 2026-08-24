@@ -4,6 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   plugins: [
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     react() as any,
     VitePWA({
       registerType: 'autoUpdate',
@@ -12,6 +13,7 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
         runtimeCaching: [
           {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             urlPattern: ({ requestDestination }: any) =>
               requestDestination === 'document',
             handler: 'NetworkFirst',
