@@ -108,6 +108,8 @@ import {
   DataCompareGenerator,
 } from '../../problems/data/generators';
 import { validateProblem } from '../validator/validator';
+// 解法表示 (solutionSteps) を全出題経路に添付するため SolutionGenerator を組み込む
+import { attachSolutionSteps } from '../solution/solutionGenerator';
 
 /**
  * 全ジェネレータのリスト
@@ -238,6 +240,13 @@ export function getCategories(): Category[] {
  * 生成後、自動検証を通過した問題のみを返す
  */
 export function generateProblem(config?: GenerationConfig): Problem {
+  // シード未指定のときは試行ごとに違うシードを使い、
+  // 同一ミリ秒に固まる Date.now() 系シードの相関を防ぐ
+  const probe = (attempt: number): GenerationConfig => {
+    if (config?.seed !== undefined) return { ...config };
+    return { ...config, seed: attempt };
+  };
+
   // タイプ指定があればそのジェネレータを使用
   if (config?.type) {
     const generator = getGeneratorByType(config.type);
@@ -264,7 +273,7 @@ export function generateProblem(config?: GenerationConfig): Problem {
       try {
         // 複数回試行して、指定難易度に一致する問題が生成できるか確認
         for (let attempt = 0; attempt < 20; attempt++) {
-          const p = g.generate({ ...config, difficulty: requestedDifficulty });
+          const p = g.generate({ ...probe(attempt), difficulty: requestedDifficulty });
           if (validateProblem(p).valid && p.difficulty.level === requestedDifficulty) {
             return true;
           }
@@ -285,7 +294,7 @@ export function generateProblem(config?: GenerationConfig): Problem {
       const fallback = candidates.filter((g) => {
         try {
           for (let attempt = 0; attempt < 20; attempt++) {
-            const p = g.generate({ ...config, difficulty: requestedDifficulty });
+            const p = g.generate({ ...probe(attempt + 20), difficulty: requestedDifficulty });
             if (validateProblem(p).valid && p.difficulty.level === requestedDifficulty) {
               return true;
             }
@@ -314,18 +323,29 @@ function generateValidatedProblem(
   generator: ProblemGenerator,
   config?: GenerationConfig,
 ): Problem {
-  for (let attempt = 0; attempt < 100; attempt++) {
-    const problem = generator.generate(config);
+  // 指定難易度への一致は確率的な抽選になるため、
+  // めったに出ない難易度でも失敗しないよう十分な回数を試行する。
+  // シード未指定の場合は試行ごとにシードを変え、同じ値ばかりになるのを防ぐ。
+  const maxAttempts = config?.difficulty ? 3000 : 100;
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const problem = generator.generate(probeSeed(config, attempt));
     const result = validateProblem(problem);
     if (result.valid) {
       // 難易度指定がある場合は、指定難易度と一致することを確認
       if (config?.difficulty && problem.difficulty.level !== config.difficulty) {
         continue;
       }
-      return problem;
+      // 正解と同じパラメータから途中式を組み立てて添付する
+      return attachSolutionSteps(problem);
     }
   }
   throw new Error(
-    `問題生成に失敗しました: ${generator.type} が100回試行しても検証を通過できませんでした`,
+    `問題生成に失敗しました: ${generator.type} が${maxAttempts}回試行しても検証を通過できませんでした`,
   );
+}
+
+/** シード未指定の試行には試行番号をシードとして与える (指定時は尊重) */
+function probeSeed(config: GenerationConfig | undefined, attempt: number): GenerationConfig {
+  if (config?.seed !== undefined) return { ...config };
+  return { ...config, seed: attempt };
 }

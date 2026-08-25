@@ -54,6 +54,18 @@ export type Category =
   | 'combinatorics';
 
 /**
+ * 解法の1ステップ (途中式)
+ * expression には計算過程の式、explanation にはそのステップの説明を入れる。
+ * どちらか片方だけでもよい (説明だけのステップも許容する)。
+ */
+export interface SolutionStep {
+  /** 計算式など、途中の式・値 (例: "24 × 3/8 = 9") */
+  expression?: string;
+  /** このステップで何をするかの説明 (例: "使ったりんごの数をもとめます") */
+  explanation?: string;
+}
+
+/**
  * 問題の基本構造
  * 問題文だけでなく、生成条件 (parameters) を保持する
  */
@@ -67,6 +79,11 @@ export interface Problem {
   explanation?: string;
   /** この問題がどのような数学的条件から生成されたか */
   parameters: Record<string, unknown>;
+  /**
+   * 答えに至る途中式 (答えを開示したときに表示する)
+   * 問題生成と同じパラメータから生成されるため、常に正解と一致する
+   */
+  solutionSteps?: SolutionStep[];
 }
 
 /**

@@ -733,6 +733,176 @@ input:focus {
   transform: none;
 }
 
+/* ===== 回答入力UI (AnswerInput) ===== */
+.answer-input-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.answer-section .answer-input-container {
+  max-width: none;
+}
+
+.answer-display-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.answer-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-light);
+  align-self: flex-start;
+}
+
+/* 表示用フィールド共通 (readOnly + inputMode="none" でOSキーボード非表示) */
+.answer-display {
+  width: 200px;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  caret-color: transparent;
+}
+
+.answer-display:focus {
+  outline: none;
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.answer-display.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.numeric-display,
+.string-display,
+.yesno-display {
+  min-width: 220px;
+  max-width: 320px;
+  width: 100%;
+}
+
+.yesno-display {
+  background: var(--card-bg);
+}
+
+/* 分数入力 (分子・分母の縦積み) */
+.fraction-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.frac-bar {
+  width: 140px;
+  height: 4px;
+  background: var(--text);
+  border-radius: 2px;
+}
+
+.frac-num,
+.frac-den {
+  width: 140px;
+  font-size: 1.5rem;
+  padding: 8px 12px;
+}
+
+/* 帯分数入力 (整数部 + 分数) */
+.mixed-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.mixed-whole {
+  width: 90px;
+  font-size: 1.5rem;
+  padding: 8px 12px;
+}
+
+.mixed-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--text-light);
+}
+
+.frac-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.frac-part .frac-bar {
+  width: 110px;
+}
+
+.frac-part .frac-num,
+.frac-part .frac-den {
+  width: 110px;
+  font-size: 1.3rem;
+  padding: 6px 10px;
+}
+
+/* エラーメッセージ */
+.answer-error {
+  text-align: center;
+  padding: 10px 16px;
+  background: var(--error-light);
+  color: var(--error);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* 決定ボタン */
+.submit-btn {
+  width: 100%;
+  min-height: 64px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: var(--primary);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(74, 144, 217, 0.3);
+}
+
+.submit-btn:hover {
+  background: var(--primary-dark);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 選択状態のはい/いいえボタン */
+.yesno-btn.selected {
+  outline: 4px solid var(--text);
+  outline-offset: 2px;
+}
+
+
 /* ===== レスポンシブ ===== */
 
 /* スマートフォン (縦向き) */
@@ -1211,3 +1381,199 @@ input:focus {
    (isTouchDevice が false の場合は表示しない)
    @media (hover: hover) で display:none にすると、
    タッチ対応PCでキーパッドが 0×0 になり入力手段が消滅するため削除 */
+
+/* ===== 回答入力UIのレスポンシブ ===== */
+
+/* スマートフォン (〜600px): 問題 → 入力 → 決定 の縦積みを画面内に収める */
+@media (max-width: 600px) {
+  .answer-input-container {
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .answer-display {
+    font-size: 1.4rem;
+    padding: 10px 14px;
+  }
+
+  .numeric-display,
+  .string-display,
+  .yesno-display {
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  .frac-num,
+  .frac-den {
+    width: 120px;
+    font-size: 1.3rem;
+  }
+
+  .frac-bar {
+    width: 120px;
+  }
+
+  .mixed-whole {
+    width: 70px;
+    font-size: 1.3rem;
+  }
+
+  .frac-part .frac-bar {
+    width: 96px;
+  }
+
+  .frac-part .frac-num,
+  .frac-part .frac-den {
+    width: 96px;
+    font-size: 1.15rem;
+  }
+
+  .submit-btn {
+    min-height: 60px;
+    font-size: 1.2rem;
+  }
+}
+
+/* タブレット縦向き (601px〜1024px): 問題・回答・決定が画面内に収まるように */
+@media (min-width: 601px) and (max-width: 1024px) and (orientation: portrait) {
+  .answer-input-container {
+    max-width: 520px;
+  }
+
+  .answer-section {
+    flex-direction: column;
+  }
+}
+
+/* タブレット横向き (601px〜1366px) */
+@media (min-width: 601px) and (max-width: 1366px) and (orientation: landscape) {
+  .answer-input-container {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .answer-section {
+    justify-content: center;
+  }
+
+  /* 横向きでは縦スペースを節約する */
+  .answer-input-container {
+    gap: 8px;
+  }
+
+  .answer-display {
+    padding: 8px 14px;
+  }
+
+  .keypad-button {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  .submit-btn {
+    min-height: 52px;
+  }
+}
+
+/* ===== 解法 (途中式) 表示 ===== */
+
+.toggle-solution-btn {
+  margin: 4px auto 16px;
+  display: block;
+}
+
+.solution-display {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin: 12px auto 16px;
+  max-width: 480px;
+  text-align: left;
+}
+
+.solution-answer-top {
+  text-align: center;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+
+.solution-answer-top .solution-label {
+  color: var(--text-light);
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+.solution-answer-top .solution-answer-value {
+  font-size: 1.35rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.solution-divider {
+  border-top: 2px solid var(--border);
+  margin: 10px 0;
+}
+
+.solution-heading {
+  text-align: center;
+  font-weight: bold;
+  color: var(--text-light);
+  letter-spacing: 0.3em;
+  margin-left: 0.3em;
+}
+
+.solution-steps {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.solution-step {
+  margin-bottom: 6px;
+}
+
+.solution-explanation {
+  color: var(--text-light);
+  font-size: 0.92rem;
+  margin-bottom: 2px;
+}
+
+.solution-expression {
+  font-size: 1.08rem;
+  font-family: 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 2px 0;
+}
+
+.solution-num {
+  display: inline-block;
+  min-width: 1.7em;
+  color: var(--primary-dark);
+  font-weight: bold;
+}
+
+.solution-arrow {
+  display: block;
+  padding-left: 1.7em;
+  color: var(--text-light);
+}
+
+.solution-final {
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.solution-final strong {
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
+.solution-none {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+

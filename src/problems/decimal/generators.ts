@@ -183,8 +183,10 @@ export class DecimalDivIntegerGenerator implements ProblemGenerator {
 
     // 難易度に応じて除数と商の範囲を変化させる
     const divisor = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(2, 15) : lv === 4 ? rng.int(3, 25) : rng.int(5, 50);
-    const quotient = lv <= 1 ? rng.int(1, 5) : lv === 2 ? rng.int(1, 9) : lv === 3 ? rng.int(1, 15) : lv === 4 ? rng.int(1, 25) : rng.int(1, 50);
-    const dividend = (divisor * quotient) / 10;
+    const rawQuotient = lv <= 1 ? rng.int(1, 5) : lv === 2 ? rng.int(1, 9) : lv === 3 ? rng.int(1, 15) : lv === 4 ? rng.int(1, 25) : rng.int(1, 50);
+    // 小数 ÷ 整数 (被除数は小数第1位)。商は rawQuotient/10 (単一の除算できれいな値になる)
+    const dividend = (divisor * rawQuotient) / 10;
+    const quotient = rawQuotient / 10;
 
     return {
       id: generateProblemId(),

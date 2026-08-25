@@ -11,6 +11,7 @@ import type {
 } from '../../../types/problem';
 import { createRandom, generateProblemId } from '../../../utils/random';
 import { validateProblem } from '../../../engine/validator/validator';
+import { isReasonableAnswer } from '../../../utils/answer';
 import { createMultiStepDifficulty } from './helpers';
 
 /**
@@ -94,6 +95,13 @@ export class MultiStepGenerator implements ProblemGenerator {
 
     // 答えが負にならないようにする
     if (result < 0) {
+      return null;
+    }
+
+    // 検証基準 (isReasonableAnswer) と一致させるため、極端に大きな答えは再試行する
+    // 例: レベル4の「47 × 44 × 44 × 25」のような全乗算では答えが100万を超え、
+    // validateProblem の「解答が不自然な値です」で不合格になるため生成段階ではじく
+    if (!isReasonableAnswer({ kind: 'integer', value: result })) {
       return null;
     }
 

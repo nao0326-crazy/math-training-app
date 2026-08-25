@@ -11,7 +11,8 @@ import {
   getAllQuestionHistory,
 } from '../storage/db';
 import type { AnswerRecord, QuestionHistory } from '../types/history';
-import TouchKeypad from '../components/TouchKeypad';
+import AnswerInput from '../components/AnswerInput';
+import SolutionDisplay from '../components/SolutionDisplay';
 import { ANSWER_RECORDED_EVENT } from '../utils/dailyCount';
 
 interface QuizPageProps {
@@ -28,31 +29,18 @@ interface QuizResult {
 
 export default function QuizPage({ category, difficulty, onExit }: QuizPageProps) {
   const [problem, setProblem] = useState<Problem | null>(null);
-  const [userAnswer, setUserAnswer] = useState('');
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [showSolution, setShowSolution] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [result, setResult] = useState<QuizResult | null>(null);
   const [error, setError] = useState<string | null>(null);
-  // タッチ操作が可能なデバイスかどうか (タッチキーパッドの表示に使用)
-  // キーボード入力を禁止するためには使用しない
-  const [canTouch, setCanTouch] = useState(false);
 
   const selectorRef = useRef<QuestionSelector | null>(null);
   const startTimeRef = useRef<number>(0);
   const historyRef = useRef<AnswerRecord[]>([]);
   const questionHistoryRef = useRef<QuestionHistory[]>([]);
   const resultRef = useRef<QuizResult>({ totalCount: 0, correctCount: 0, totalTimeSec: 0 });
-
-  // タッチ操作が可能かどうかの検出
-  // タッチ対応PC (maxTouchPoints > 0) でもキーボード入力は常に許可する
-  // タッチキーパッドは追加の入力手段として提供する
-  useEffect(() => {
-    const touch =
-      typeof window !== 'undefined' &&
-      ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    setCanTouch(touch);
-  }, []);
 
   // 初期化
   useEffect(() => {
@@ -99,9 +87,9 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
     );
 
     setProblem(nextProblem);
-    setUserAnswer('');
     setIsAnswered(false);
     setIsCorrect(false);
+    setShowSolution(false);
     startTimeRef.current = Date.now();
 
     // 出題履歴に記録
@@ -120,12 +108,10 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
    * answerOverride が指定された場合はその値を使用する (Enterキー送信時の最新値)
    */
   const handleSubmit = useCallback(
-    (answerOverride?: string) => {
+    (rawAnswer: string) => {
       if (!problem || isAnswered) return;
 
-      // 空回答は判定しない
-      // 実際に入力された元の値を保存用に保持する
-      const rawAnswer = answerOverride ?? userAnswer;
+      // 空回答は判定しない (AnswerInput 側でもバリデーション済み)
       if (rawAnswer.trim() === '') return;
 
       // 判定には正規化された値を使用する
@@ -162,7 +148,7 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
         totalTimeSec: resultRef.current.totalTimeSec + answerTimeSec,
       };
     },
-    [problem, isAnswered, userAnswer],
+    [problem, isAnswered],
   );
 
   /**
@@ -262,42 +248,16 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
         <p className="question-text">{problem.question}</p>
       </div>
 
-      <div className="answer-section">
-        <input
-          type="text"
-          className="answer-input"
-          value={userAnswer}
-          onChange={(e) => setUserAnswer(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !isAnswered) {
-              handleSubmit(e.currentTarget.value);
-            }
-          }}
-          placeholder="こたえを入力"
-          disabled={isAnswered}
-          autoFocus
-          inputMode="text"
-        />
-        {!isAnswered && (
-          <button
-            className="primary-button answer-button"
-            onClick={() => handleSubmit()}
-          >
-            こたえる
-          </button>
-        )}
-      </div>
-
-      {/* タッチ操作可能デバイス用キーパッド (追加の入力手段) */}
-      {canTouch && !isAnswered && (
-        <TouchKeypad
-          value={userAnswer}
-          onChange={setUserAnswer}
-          onSubmit={() => handleSubmit()}
-          disabled={isAnswered}
-          answer={problem.answer}
-          question={problem.question}
-        />
+      {/* 問題タイプに応じた専用入力UI (OSキーボードを表示しない) */}
+      {!isAnswered && (
+        <div className="answer-section">
+          <AnswerInput
+            key={problem.id}
+            problem={problem}
+            disabled={isAnswered}
+            onSubmit={(value) => handleSubmit(value)}
+          />
+        </div>
       )}
 
       {isAnswered && (
@@ -313,6 +273,30 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
           {problem.explanation && (
             <div className="feedback-explanation">{problem.explanation}</div>
           )}
+
+          {/* 解き方 (途中式) — 答えを開示したときだけ表示する */}
+          {!isCorrect && (
+            <SolutionDisplay
+              solutionSteps={problem.solutionSteps}
+              answer={problem.answer}
+            />
+          )}
+          {isCorrect && !showSolution && (
+            <button
+              type="button"
+              className="secondary-button toggle-solution-btn"
+              onClick={() => setShowSolution(true)}
+            >
+              答えと解き方をみる
+            </button>
+          )}
+          {isCorrect && showSolution && (
+            <SolutionDisplay
+              solutionSteps={problem.solutionSteps}
+              answer={problem.answer}
+            />
+          )}
+
           <button className="primary-button next-button" onClick={handleNext}>
             {questionNumber >= 10 ? 'けっかをみる' : 'つぎの問題へ'}
           </button>

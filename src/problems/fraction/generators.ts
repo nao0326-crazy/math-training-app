@@ -650,6 +650,7 @@ export class FractionMixedDivGenerator implements ProblemGenerator {
         mixed.denominator +
         '÷' +
         fractionJapanese(n2, d2) +
+        '（' + n2 + '/' + d2 + '）' +
         '＝' +
         formatFractionJapanese(result.numerator, result.denominator) +
         (result.denominator === 1 ? '' : '＝' + formatAnswerJapanese(answer)) +
@@ -1037,10 +1038,16 @@ export class FractionBigSmallGenerator implements ProblemGenerator {
         explanation:
           fractionJapanese(largerNumerator, largerDenominator) +
           ' の方が大きいです。' +
-          ' (分子' + largerNumerator + '、分母' + largerDenominator + ')',
+          ' (分子' + largerNumerator + '、分母' + largerDenominator + ')' +
+          'もう一方は分子' +
+          (numerator1 === largerNumerator ? numerator2 : numerator1) +
+          'です。',
         parameters: {
           numerator: largerNumerator,
           denominator: largerDenominator,
+          // 比較のもう一方 (途中式の表示用。答えには影響しない)
+          smallerNumerator:
+            numerator1 === largerNumerator ? numerator2 : numerator1,
           difficultyLevel: lv,
         },
       };
