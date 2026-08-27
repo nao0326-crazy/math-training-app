@@ -35,7 +35,13 @@ export type Answer =
   | { kind: 'decimal'; value: number }
   | { kind: 'fraction'; numerator: number; denominator: number }
   | { kind: 'string'; value: string }
-  | { kind: 'mixed'; whole: number; numerator: number; denominator: number };
+  | { kind: 'mixed'; whole: number; numerator: number; denominator: number }
+  /**
+   * 複数分数の解答 (通分など)。
+   * 文字列として "15/20 と 8/20" を保存する代わりに、数学的構造を保持する。
+   * values は標準形 (通分後の分子・共通分母) をこの順で格納する。
+   */
+  | { kind: 'fractions'; values: { numerator: number; denominator: number }[] };
 
 /**
  * 問題のカテゴリ

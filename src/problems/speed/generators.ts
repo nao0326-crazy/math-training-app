@@ -50,7 +50,8 @@ export class SpeedCalculationGenerator implements ProblemGenerator {
 
     // 難易度に応じて距離と時間を変化させる
     const time = lv <= 1 ? rng.int(2, 3) : lv === 2 ? rng.int(2, 4) : lv === 3 ? rng.int(3, 5) : lv === 4 ? rng.int(4, 6) : rng.int(5, 8);
-    const dist = lv <= 1 ? rng.int(10, 30) : lv === 2 ? rng.int(30, 100) : lv === 3 ? rng.int(60, 200) : lv === 4 ? rng.int(100, 400) : rng.int(200, 800);
+    // レベル1では距離・時間・速さがすべて1桁に収まる組み合わせにする
+    const dist = lv <= 1 ? time * rng.int(2, 3) : lv === 2 ? rng.int(30, 100) : lv === 3 ? rng.int(60, 200) : lv === 4 ? rng.int(100, 400) : rng.int(200, 800);
     const p = { distUnit: 'km', timeUnit: '時間', time, dist };
     const speed = p.dist / p.time;
 
@@ -58,7 +59,7 @@ export class SpeedCalculationGenerator implements ProblemGenerator {
       id: generateProblemId(),
       category: this.category,
       type: this.type,
-      difficulty: createSpeedDifficulty(lv, p.dist, 1, 2),
+      difficulty: createSpeedDifficulty(lv, p.dist, 1, Math.min(2, lv) as DifficultyLevel),
       question:
         p.dist + p.distUnit + 'を' + p.time + p.timeUnit + 'で進みました。速さは何' +
         (p.distUnit === 'km' ? 'km' : 'm') + 'ですか（1' + p.timeUnit + 'あたり）',

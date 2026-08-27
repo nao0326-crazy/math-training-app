@@ -11,6 +11,8 @@ import {
   checkUserAnswer,
   isReasonableAnswer,
   normalizeAnswerInput,
+  judgeUserAnswer,
+  canonicalizeExpressionString,
 } from './answer';
 import type { Answer } from '../types/problem';
 
@@ -229,6 +231,14 @@ describe('checkUserAnswer', () => {
     expect(checkUserAnswer('1/2', answer)).toBe(false);
   });
 
+  it('同値な分数 (1/2・2/4・3/6) はすべて正解として判定される', () => {
+    const answer: Answer = { kind: 'fraction', numerator: 1, denominator: 2 };
+    expect(checkUserAnswer('1/2', answer)).toBe(true);
+    expect(checkUserAnswer('2/4', answer)).toBe(true);
+    expect(checkUserAnswer('3/6', answer)).toBe(true);
+    expect(checkUserAnswer('2/3', answer)).toBe(false); // 同値でないものは不正解
+  });
+
   it('帯分数の入力', () => {
     const answer: Answer = { kind: 'mixed', whole: 1, numerator: 1, denominator: 2 };
     expect(checkUserAnswer('1と1/2', answer)).toBe(true);
@@ -249,6 +259,65 @@ describe('checkUserAnswer', () => {
   });
 });
 
+describe('canonicalizeExpressionString (式の乗算記号・変数xの正規化)', () => {
+  it('×・＊・**・全角＊はすべて同じ "*" に正規化する', () => {
+    expect(canonicalizeExpressionString('3×4')).toBe('3*4');
+    expect(canonicalizeExpressionString('3＊4')).toBe('3*4');
+    expect(canonicalizeExpressionString('3*4')).toBe('3*4');
+    expect(canonicalizeExpressionString('3・4')).toBe('3*4');
+  });
+
+  it('変数 x の表記揺れ (全角・大文字) を小文字 x に統一する', () => {
+    expect(canonicalizeExpressionString('5x')).toBe('5*x');
+    expect(canonicalizeExpressionString('5ｘ')).toBe('5*x');
+    expect(canonicalizeExpressionString('5X')).toBe('5*x');
+    expect(canonicalizeExpressionString('5Ｘ')).toBe('5*x');
+  });
+
+  it('数字と x の間の乗算省略を補完する', () => {
+    expect(canonicalizeExpressionString('12x')).toBe('12*x');
+    expect(canonicalizeExpressionString('20x+5')).toBe('20*x+5');
+  });
+
+  it('×を使った式と x を使った式が等価になる', () => {
+    expect(canonicalizeExpressionString('5×x')).toBe(canonicalizeExpressionString('5x'));
+    expect(canonicalizeExpressionString('5×x')).toBe(canonicalizeExpressionString('5*x'));
+    expect(canonicalizeExpressionString('１２×Ｘ')).toBe(canonicalizeExpressionString('12x'));
+  });
+});
+
+describe('checkUserAnswer (文字と式・式文字列の正誤判定)', () => {
+  it('正解 "5x" に対し、5x・5×x・5*x・全角 ５ｘ を正解として扱う', () => {
+    const answer: Answer = { kind: 'string', value: '5x' };
+    expect(checkUserAnswer('5x', answer)).toBe(true);
+    expect(checkUserAnswer('5×x', answer)).toBe(true);
+    expect(checkUserAnswer('5＊x', answer)).toBe(true);
+    expect(checkUserAnswer('5*x', answer)).toBe(true);
+    expect(checkUserAnswer('５ｘ', answer)).toBe(true);
+  });
+
+  it('正解 "5×x" に対し、5x や 5×x を正解として扱う', () => {
+    const answer: Answer = { kind: 'string', value: '5×x' };
+    expect(checkUserAnswer('5×x', answer)).toBe(true);
+    expect(checkUserAnswer('5x', answer)).toBe(true);
+    expect(checkUserAnswer('5*x', answer)).toBe(true);
+    expect(checkUserAnswer('6x', answer)).toBe(false); // 係数が違うのは不正解
+  });
+
+  it('係数が異なる式は不正解', () => {
+    const answer: Answer = { kind: 'string', value: '5x' };
+    expect(checkUserAnswer('4x', answer)).toBe(false);
+    expect(checkUserAnswer('x5', answer)).toBe(false);
+  });
+
+  it('誤答 (式が違う) は正解として扱わない', () => {
+    const answer: Answer = { kind: 'string', value: '3×4' };
+    expect(checkUserAnswer('3×5', answer)).toBe(false);
+    expect(checkUserAnswer('4×3', answer)).toBe(false);
+  });
+});
+
+
 describe('isReasonableAnswer', () => {
   it('正常な解答はtrue', () => {
     expect(isReasonableAnswer({ kind: 'integer', value: 42 })).toBe(true);
@@ -262,5 +331,118 @@ describe('isReasonableAnswer', () => {
     expect(isReasonableAnswer({ kind: 'integer', value: Infinity })).toBe(false);
     expect(isReasonableAnswer({ kind: 'integer', value: NaN })).toBe(false);
     expect(isReasonableAnswer({ kind: 'integer', value: 1_000_001 })).toBe(false);
+  });
+});
+
+// ===== 複数分数 (通分) の構造化解答と判定 =====
+
+// ユーザー報告ケース「3/4 と 2/5」の正解 (15/20 と 8/20)
+const tsuuhenAnswer: Answer = {
+  kind: 'fractions',
+  values: [
+    { numerator: 15, denominator: 20 },
+    { numerator: 8, denominator: 20 },
+  ],
+};
+
+describe('formatAnswer / toAnswerKey (複数分数)', () => {
+  it('複数分数を「15/20 と 8/20」形式でフォーマットする (約分しない)', () => {
+    expect(formatAnswer(tsuuhenAnswer)).toBe('15/20 と 8/20');
+  });
+
+  it('4/8 のような通分後の値は約分せず表示する', () => {
+    const answer = {
+      kind: 'fractions' as const,
+      values: [
+        { numerator: 4, denominator: 8 },
+        { numerator: 3, denominator: 8 },
+      ],
+    };
+    expect(formatAnswer(answer)).toBe('4/8 と 3/8');
+  });
+
+  it('toAnswerKey は約分したキーを返す', () => {
+    expect(toAnswerKey(tsuuhenAnswer)).toBe('3/4|2/5');
+  });
+});
+
+describe('answersEqual / answerToNumber (複数分数)', () => {
+  it('位置ごとに数学的等価性で比較する', () => {
+    const equivalent = {
+      kind: 'fractions' as const,
+      values: [
+        { numerator: 30, denominator: 40 },
+        { numerator: 16, denominator: 40 },
+      ],
+    };
+    expect(answersEqual(tsuuhenAnswer, equivalent)).toBe(true);
+    const different = {
+      kind: 'fractions' as const,
+      values: [
+        { numerator: 1, denominator: 2 },
+        { numerator: 2, denominator: 5 },
+      ],
+    };
+    expect(answersEqual(tsuuhenAnswer, different)).toBe(false);
+  });
+
+  it('単一の数値には変換できない (null)', () => {
+    expect(answerToNumber(tsuuhenAnswer)).toBeNull();
+  });
+});
+
+describe('isReasonableAnswer (複数分数)', () => {
+  it('正しい複数分数はtrue', () => {
+    expect(isReasonableAnswer(tsuuhenAnswer)).toBe(true);
+  });
+
+  it('空リスト・分母0はfalse', () => {
+    expect(isReasonableAnswer({ kind: 'fractions', values: [] })).toBe(false);
+    expect(
+      isReasonableAnswer({
+        kind: 'fractions',
+        values: [{ numerator: 1, denominator: 0 }],
+      }),
+    ).toBe(false);
+  });
+});
+
+describe('checkUserAnswer (複数分数・通分)', () => {
+  it('標準形の入力は正解', () => {
+    expect(checkUserAnswer('15/20 と 8/20', tsuuhenAnswer)).toBe(true);
+    // 区切り文字の揺れ (読点・カンマ) も許容する
+    expect(checkUserAnswer('15/20、8/20', tsuuhenAnswer)).toBe(true);
+    expect(checkUserAnswer('15/20, 8/20', tsuuhenAnswer)).toBe(true);
+    // 全角数字・全角スラッシュ
+    expect(checkUserAnswer('１５／２０ と ８／２０', tsuuhenAnswer)).toBe(true);
+  });
+
+  it('最小公倍数以外の共通分母による通分は正解扱いにしないが、数学的には区別する', () => {
+    // ユーザー報告ケース: 30/40 と 16/40 は数学的には等価だが標準形ではない
+    expect(checkUserAnswer('30/40 と 16/40', tsuuhenAnswer)).toBe(false);
+    const judgement = judgeUserAnswer('30/40 と 16/40', tsuuhenAnswer);
+    expect(judgement.status).toBe('equivalent-not-canonical');
+    if (judgement.status === 'equivalent-not-canonical') {
+      expect(judgement.message).toContain('最小公倍数');
+      expect(judgement.message).toContain('15/20 と 8/20');
+    }
+  });
+
+  it('未通分の入力や誤りは不正解 (equivalent-not-canonical にならない)', () => {
+    // 通分していない
+    expect(checkUserAnswer('3/4 と 2/5', tsuuhenAnswer)).toBe(false);
+    expect(judgeUserAnswer('3/4 と 2/5', tsuuhenAnswer).status).toBe('incorrect');
+    // 値そのものが誤り (分母はそろっているが計算ミス)
+    expect(checkUserAnswer('14/20 と 8/20', tsuuhenAnswer)).toBe(false);
+    expect(judgeUserAnswer('14/20 と 8/20', tsuuhenAnswer).status).toBe('incorrect');
+    // 分数の個数が合わない
+    expect(checkUserAnswer('15/20', tsuuhenAnswer)).toBe(false);
+    expect(checkUserAnswer('15/20 と 8/20 と 7/20', tsuuhenAnswer)).toBe(false);
+  });
+
+  it('他の問題タイプの判定は従来どおり (帯分数など影響なし)', () => {
+    const mixed: Answer = { kind: 'mixed', whole: 1, numerator: 2, denominator: 3 };
+    expect(checkUserAnswer('1と2/3', mixed)).toBe(true);
+    expect(checkUserAnswer('5/3', mixed)).toBe(true);
   });
 });

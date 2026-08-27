@@ -14,8 +14,12 @@ import type {
  * 難易度コンポーネントから総合レベルを計算する
  *
  * 計算ステップ数・数値の大きさ・推論量・読解量のうち、
- * いずれかが高ければその問題はそれに応じて難しいと判定する。
- * 最大値が3以上ならその最大値を総合難易度に採用する。
+ * 最も高いものをそのまま総合難易度とする (最大値基準)。
+ *
+ * 各ジェネレータは指定難易度を主成分 (多くの場合 calculationComplexity) に
+ * 反映してパラメータを変化させているため、最大値基準で一貫させることで
+ * 「指定難易度 = 実際の難易度」が全問題タイプで成立する。
+ * (例: calculationComplexity=2 / 他=1 の問題は、2段階計算のレベル2問題)
  */
 export function calculateDifficultyLevel(components: DifficultyComponents): DifficultyLevel {
   const values = [
@@ -24,22 +28,7 @@ export function calculateDifficultyLevel(components: DifficultyComponents): Diff
     components.reasoningComplexity,
     components.readingComplexity,
   ];
-  const max = Math.max(...values);
-
-  // 最大値が3以上なら最大値を総合難易度とする
-  // (計算ステップ数・桁数・推論量・読解量のいずれかが高ければ、その問題はそれに応じて難しい)
-  if (max >= 3) {
-    return max as DifficultyLevel;
-  }
-
-  // 最大値が2の場合: 複数の要素が2以上なら「ふつう」、1つだけなら「かんたん」
-  if (max === 2) {
-    const countHigher = values.filter((v) => v >= 2).length;
-    return (countHigher >= 2 ? 2 : 1) as DifficultyLevel;
-  }
-
-  // すべて1なら「かんたん」
-  return 1 as DifficultyLevel;
+  return Math.max(...values) as DifficultyLevel;
 }
 
 /**

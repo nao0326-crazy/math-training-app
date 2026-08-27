@@ -110,6 +110,8 @@ import {
 import { validateProblem } from '../validator/validator';
 // 解法表示 (solutionSteps) を全出題経路に添付するため SolutionGenerator を組み込む
 import { attachSolutionSteps } from '../solution/solutionGenerator';
+// シード派生・自動シード・選択用乱数 (数値固定問題の根本修正で使用)
+import { createRandom, deriveSeed, nextAutoSeed } from '../../utils/random';
 
 /**
  * 全ジェネレータのリスト
@@ -240,11 +242,20 @@ export function getCategories(): Category[] {
  * 生成後、自動検証を通過した問題のみを返す
  */
 export function generateProblem(config?: GenerationConfig): Problem {
-  // シード未指定のときは試行ごとに違うシードを使い、
-  // 同一ミリ秒に固まる Date.now() 系シードの相関を防ぐ
+  // 試行用シードを作る。
+  // - シード未指定: 試行ごとに独立した自動シード
+  //   (旧実装は attempt=0,1,2... をそのままシードにしており、
+  //    ほぼ全ケースが1回目で検証を通過するため常に seed=0 の問題が返って
+  //    全単元で数値が固定する不具合の原因になっていた)
+  // - シード指定あり: ベースシードから試行番号で派生させる
+  //   (旧実装は全試行で同じシードを再利用していたため、難易度絞り込みの
+  //    「20回試行」が実質1回しか機能せず、まれに該当ジェネレータが
+  //    見つからない状態になっていた)
   const probe = (attempt: number): GenerationConfig => {
-    if (config?.seed !== undefined) return { ...config };
-    return { ...config, seed: attempt };
+    if (config?.seed !== undefined) {
+      return { ...config, seed: deriveSeed(config.seed, attempt) };
+    }
+    return { ...config, seed: nextAutoSeed() };
   };
 
   // タイプ指定があればそのジェネレータを使用
@@ -311,24 +322,38 @@ export function generateProblem(config?: GenerationConfig): Problem {
   }
 
   // ランダムにジェネレータを選んで生成
-  const index = Math.floor(Math.random() * candidates.length);
+  // シード指定時はシードから決定論的に選ぶことで「seedで確定する」再現性を保証する
+  // (シード未指定時は Math.random による非決定的な選択のまま)
+  const index =
+    config?.seed !== undefined
+      ? createRandom(deriveSeed(config.seed, 0x7ea1)).int(0, candidates.length - 1)
+      : Math.floor(Math.random() * candidates.length);
   const generator = candidates[index];
   return generateValidatedProblem(generator, config);
 }
 
-/**
- * ジェネレータから検証済みの問題を生成する
- */
 function generateValidatedProblem(
   generator: ProblemGenerator,
   config?: GenerationConfig,
 ): Problem {
   // 指定難易度への一致は確率的な抽選になるため、
   // めったに出ない難易度でも失敗しないよう十分な回数を試行する。
-  // シード未指定の場合は試行ごとにシードを変え、同じ値ばかりになるのを防ぐ。
-  const maxAttempts = config?.difficulty ? 3000 : 100;
+  // 試行ごとにシードを派生させて異なる数値を試す。
+  // (旧実装は seed 指定時に毎回同じシードを再利用していたため、
+  //  そのシードで検証や難易度一致を外すと結果が不変のまま最大3000回
+  //  ループして必ず失敗しており、候補不足→固定問題フォールバックの一因だった)
+  const maxAttempts = config?.difficulty ? 300 : 100;
   for (let attempt = 0; attempt < maxAttempts; attempt++) {
-    const problem = generator.generate(probeSeed(config, attempt));
+    let problem: Problem;
+    try {
+      problem = generator.generate(probeSeed(config, attempt));
+    } catch {
+      // 一部のジェネレータ (例: 反比例の文章題) は条件を満たす数値が
+      // 見つからない場合に例外を投げる。これは「このシードでは生成不可」
+      // という意味なので、試行を無効として次の子シードで再抽選する。
+      // (旧実装はここで即 throw していたため、まれに出題経路全体が失敗した)
+      continue;
+    }
     const result = validateProblem(problem);
     if (result.valid) {
       // 難易度指定がある場合は、指定難易度と一致することを確認
@@ -344,8 +369,17 @@ function generateValidatedProblem(
   );
 }
 
-/** シード未指定の試行には試行番号をシードとして与える (指定時は尊重) */
+/**
+ * 試行ごとのシードを決める
+ * - シード指定あり: ベースシードから試行番号で決定論的に派生させる
+ *   (同一シードの使い回しによる「実質リトライ無し」を防ぎつつ、
+ *    同じ (seed, attempt) を与えれば常に同じ問題になる再現性は維持する)
+ * - シード未指定: 試行ごとに独立した自動シード
+ *   (旧実装は attempt=0 の固定シードをほぼ常に使用するため全単元で数値が固定していた)
+ */
 function probeSeed(config: GenerationConfig | undefined, attempt: number): GenerationConfig {
-  if (config?.seed !== undefined) return { ...config };
-  return { ...config, seed: attempt };
+  if (config?.seed !== undefined) {
+    return { ...config, seed: deriveSeed(config.seed, attempt) };
+  }
+  return { ...config, seed: nextAutoSeed() };
 }

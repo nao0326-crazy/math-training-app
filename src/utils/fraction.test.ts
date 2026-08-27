@@ -16,6 +16,7 @@ import {
   formatFraction,
   formatFractionJapanese,
   isValidFraction,
+  commonDenominatorForm,
 } from './fraction';
 
 describe('gcd', () => {
@@ -27,6 +28,11 @@ describe('gcd', () => {
     expect(gcd(0, 0)).toBe(0);
     expect(gcd(-12, 18)).toBe(6);
   });
+
+  it('互いに素な数と約数関係にある数の最大公約数 (通分問題の前提)', () => {
+    expect(gcd(4, 5)).toBe(1);
+    expect(gcd(3, 6)).toBe(3);
+  });
 });
 
 describe('lcm', () => {
@@ -35,6 +41,70 @@ describe('lcm', () => {
     expect(lcm(3, 5)).toBe(15);
     expect(lcm(0, 5)).toBe(0);
     expect(lcm(5, 0)).toBe(0);
+  });
+
+  it('通分で使う分母の組の最小公倍数 (分母の積ではなく最小公倍数)', () => {
+    expect(lcm(4, 5)).toBe(20); // gcd=1 のときも積と一致するだけ
+    expect(lcm(3, 6)).toBe(6); // 分母の積 (18) ではなく 6
+    expect(lcm(6, 8)).toBe(24);
+    expect(lcm(2, 3)).toBe(6);
+  });
+});
+
+describe('commonDenominatorForm (通分)', () => {
+  it('共通分母は必ず最小公倍数を使い、分子は倍率を掛けて求める', () => {
+    // ユーザー報告ケース
+    expect(commonDenominatorForm(3, 4, 2, 5)).toEqual({
+      commonDenominator: 20,
+      numerators: [15, 8],
+    });
+  });
+
+  it('ケースA: 1/2 と 1/3 → LCM 6 → 3/6 と 2/6', () => {
+    expect(commonDenominatorForm(1, 2, 1, 3)).toEqual({
+      commonDenominator: 6,
+      numerators: [3, 2],
+    });
+  });
+
+  it('ケースB: 2/3 と 1/6 → LCM 6 → 4/6 と 1/6 (分母の積 18 ではない)', () => {
+    const r = commonDenominatorForm(2, 3, 1, 6);
+    expect(r.commonDenominator).toBe(6);
+    expect(r.commonDenominator).not.toBe(18);
+    expect(r.numerators).toEqual([4, 1]);
+  });
+
+  it('ケースC: 3/4 と 2/5 → LCM 20 → 15/20 と 8/20', () => {
+    expect(commonDenominatorForm(3, 4, 2, 5)).toEqual({
+      commonDenominator: 20,
+      numerators: [15, 8],
+    });
+  });
+
+  it('ケースD: 1/6 と 1/8 → LCM 24 → 4/24 と 3/24', () => {
+    expect(commonDenominatorForm(1, 6, 1, 8)).toEqual({
+      commonDenominator: 24,
+      numerators: [4, 3],
+    });
+  });
+
+  it('ケースE: 2/6 と 3/9 → LCM 18 → 6/18 と 6/18', () => {
+    expect(commonDenominatorForm(2, 6, 3, 9)).toEqual({
+      commonDenominator: 18,
+      numerators: [6, 6],
+    });
+  });
+
+  it('片方の分母がもう片方の倍数: 1/3 と 2/6 → LCM 6 → 2/6 と 2/6', () => {
+    expect(commonDenominatorForm(1, 3, 2, 6)).toEqual({
+      commonDenominator: 6,
+      numerators: [2, 2],
+    });
+  });
+
+  it('分母が0の場合はエラー', () => {
+    expect(() => commonDenominatorForm(1, 0, 1, 2)).toThrow();
+    expect(() => commonDenominatorForm(1, 2, 1, 0)).toThrow();
   });
 });
 

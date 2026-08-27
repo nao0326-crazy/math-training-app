@@ -155,7 +155,19 @@ export class DivisionGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 1 (easy) if not specified
     // 商が1になるケースも含む簡単な割り算を生成する
     const level = config?.difficulty ?? (1 as DifficultyLevel);
-    const { dividend, divisor, quotient } = generateDivision(rng, level);
+
+    // レベル1では九九の範囲 (被除数・除数・商がすべて1桁) に抑え、
+    // 数値の大きさの難易度もレベル1相当を維持する
+    let dividend: number;
+    let divisor: number;
+    let quotient: number;
+    if (level === 1) {
+      divisor = rng.int(2, 9);
+      quotient = rng.int(1, Math.floor(9 / divisor));
+      dividend = divisor * quotient;
+    } else {
+      ({ dividend, divisor, quotient } = generateDivision(rng, level));
+    }
 
     return {
       id: generateProblemId(),

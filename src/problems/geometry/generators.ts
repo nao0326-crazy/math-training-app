@@ -559,6 +559,12 @@ export class ScaleLengthGenerator implements ProblemGenerator {
     const base = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 8) : lv === 3 ? rng.int(3, 10) : lv === 4 ? rng.int(4, 12) : rng.int(5, 15);
     const isEnlarge = scale > 1;
 
+    // 倍率を分数 (num/den) として扱い、整数演算で結果を出す。
+    // (浮動小数点の誤差で「7 × 0.2 = 1.4000000000000001」のようになるのを防ぐ)
+    const { num, den } = toScaleRational(scale);
+    const result = (base * num) / den;
+    const resultRounded = Math.round(result * 10000) / 10000;
+
     return {
       id: generateProblemId(),
       category: this.category,
@@ -569,11 +575,16 @@ export class ScaleLengthGenerator implements ProblemGenerator {
         scale +
         (isEnlarge ? '倍に拡大' : 'に縮小') +
         'しました。もとの図形の長さが' +
-        (isEnlarge ? base : base) +
+        base +
         'cmのとき、' +
         (isEnlarge ? '拡大後の' : '実際の') +
         '長さは何cmですか？',
-      answer: { kind: 'integer', value: isEnlarge ? base * scale : base * scale },
+      // 倍率 0.5 などで小数になる場合は decimal 型にする
+      // (integer のままだと入力UIに小数点が出ず、正解を入力できない)
+      answer: {
+        kind: Number.isInteger(resultRounded) ? 'integer' : 'decimal',
+        value: resultRounded,
+      },
       explanation:
         (isEnlarge ? '拡大後' : '縮小後') +
         'の長さ＝' +
@@ -581,12 +592,12 @@ export class ScaleLengthGenerator implements ProblemGenerator {
         '×' +
         scale +
         '＝' +
-        (base * scale) +
+        resultRounded +
         'cmです。',
       parameters: {
         scale,
         base,
-        result: base * scale,
+        result: resultRounded,
         difficultyLevel: lv,
         isEnlarge,
       },
@@ -595,9 +606,55 @@ export class ScaleLengthGenerator implements ProblemGenerator {
 
   validate(problem: Problem): ValidationResult {
     const errors: string[] = [];
-    const { base, result, scale } = problem.parameters as { base: number; result: number; scale: number };
-    if (base * scale !== result) errors.push('拡大・縮小の結果が誤っています');
+    const { base, result } = problem.parameters as {
+      base: number;
+      result: number;
+      scale?: number;
+    };
+    const scale = (problem.parameters as { scale: number }).scale;
+    // 倍率を分数化して整数演算で再計算する (誤差を排除して比較)
+    const { num, den } = toScaleRational(scale);
+    const expected = (base * num) / den;
+    if (Math.abs(expected - result) > 1e-9) {
+      errors.push('拡大・縮小の結果が誤っています');
+    }
+    // 答えが整数なら integer、小数なら decimal であること
+    const isIntResult = Number.isInteger(result);
+    if (isIntResult && problem.answer.kind !== 'integer') {
+      errors.push('整数の答えなのに解答型がintegerではありません');
+    }
+    if (!isIntResult && problem.answer.kind !== 'decimal') {
+      errors.push('小数の答えなのに解答型がdecimalではありません');
+    }
     return { valid: errors.length === 0, errors };
+  }
+}
+
+/** 倍率を分数表現に変換する (既知の倍率のみ。未知の値は100分率にフォールバック) */
+function toScaleRational(scale: number): { num: number; den: number } {
+  switch (scale) {
+    case 8:
+      return { num: 8, den: 1 };
+    case 6:
+      return { num: 6, den: 1 };
+    case 5:
+      return { num: 5, den: 1 };
+    case 4:
+      return { num: 4, den: 1 };
+    case 3:
+      return { num: 3, den: 1 };
+    case 2:
+      return { num: 2, den: 1 };
+    case 0.5:
+      return { num: 1, den: 2 };
+    case 0.25:
+      return { num: 1, den: 4 };
+    case 0.2:
+      return { num: 1, den: 5 };
+    case 0.1:
+      return { num: 1, den: 10 };
+    default:
+      return { num: Math.round(scale * 100), den: 100 };
   }
 }
 

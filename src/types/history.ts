@@ -25,7 +25,7 @@ export interface AnswerRecord {
 }
 
 /**
- * 出題済みの問題の記録 (重複防止用)
+ * 出題済みの問題の記録 (重複防止・多様性制御用)
  */
 export interface QuestionHistory {
   /** 問題ID */
@@ -36,6 +36,14 @@ export interface QuestionHistory {
   parameters: Record<string, unknown>;
   /** 出題日時 */
   askedAt: string;
+  /**
+   * 問題の構造メタデータ (任意・多様性制御に使用)
+   * 旧レコードでは欠落している可能性があり、その場合は
+   * problemType から復元する
+   */
+  metadata?: import('../engine/diversity/metadata').ProblemMetadata;
+  /** 同一問題検出用フィンガープリント (任意) */
+  fingerprint?: string;
 }
 
 /**

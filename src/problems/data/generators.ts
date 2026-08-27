@@ -214,7 +214,9 @@ export class DataCompareGenerator implements ProblemGenerator {
       type: this.type,
       difficulty: createDataDifficulty(lv, Math.max(sumA, sumB), 2, 2),
       question:
-        'A組とB組のテストの点があります。それぞれ平均を比べると、どちらが高いと言えますか',
+        'A組のテストの点は ' + groupA.join('、') + ' で、B組のテストの点は ' +
+        groupB.join('、') +
+        ' です。それぞれ平均を比べると、どちらが高いと言えますか',
       answer: { kind: 'string', value: largerAvg + '組' },
       explanation:
         'Aの平均は' + avgA + '、Bの平均は' + avgB + '。よって' + largerAvg + '組が高いです。',

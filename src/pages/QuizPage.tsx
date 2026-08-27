@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Category, Problem } from '../types/problem';
 import { QuestionSelector } from '../engine/selector/questionSelector';
-import { checkUserAnswer, formatAnswer } from '../utils/answer';
+import { formatAnswer, judgeUserAnswer, type AnswerJudgement } from '../utils/answer';
 import { difficultyLabel } from '../engine/difficulty/difficulty';
 import { categoryLabel } from '../utils/stats';
 import {
@@ -14,10 +14,13 @@ import type { AnswerRecord, QuestionHistory } from '../types/history';
 import AnswerInput from '../components/AnswerInput';
 import SolutionDisplay from '../components/SolutionDisplay';
 import { ANSWER_RECORDED_EVENT } from '../utils/dailyCount';
+import { deriveMetadata, fingerprintProblem } from '../engine/diversity/metadata';
 
 interface QuizPageProps {
   category: Category | null;
   difficulty: number;
+  /** 出題する問題数 (省略時は10問。苦手分野の復習では5問) */
+  questionCount?: number;
   onExit: () => void;
 }
 
@@ -27,10 +30,17 @@ interface QuizResult {
   totalTimeSec: number;
 }
 
-export default function QuizPage({ category, difficulty, onExit }: QuizPageProps) {
+export default function QuizPage({
+  category,
+  difficulty,
+  questionCount = 10,
+  onExit,
+}: QuizPageProps) {
   const [problem, setProblem] = useState<Problem | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  /** 詳細判定結果 (数学的等価だが標準形でない回答などの区別用) */
+  const [judgement, setJudgement] = useState<AnswerJudgement | null>(null);
   const [showSolution, setShowSolution] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [result, setResult] = useState<QuizResult | null>(null);
@@ -89,15 +99,19 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
     setProblem(nextProblem);
     setIsAnswered(false);
     setIsCorrect(false);
+    setJudgement(null);
     setShowSolution(false);
     startTimeRef.current = Date.now();
 
     // 出題履歴に記録
+    // metadata + fingerprint を添えておくと、次問の多様性制御・重複検出に使える
     const record: QuestionHistory = {
       problemId: nextProblem.id,
       problemType: nextProblem.type,
       parameters: nextProblem.parameters,
       askedAt: new Date().toISOString(),
+      metadata: deriveMetadata(nextProblem),
+      fingerprint: fingerprintProblem(nextProblem),
     };
     questionHistoryRef.current.push(record);
     void saveQuestionHistory(record);
@@ -115,14 +129,18 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
       if (rawAnswer.trim() === '') return;
 
       // 判定には正規化された値を使用する
-      const correct = checkUserAnswer(rawAnswer, problem.answer);
+      // judgeUserAnswer は数学的等価性と教育上の標準形を区別して判定する
+      const result = judgeUserAnswer(rawAnswer, problem.answer);
+      const correct = result.status === 'correct';
       const answerTimeSec = (Date.now() - startTimeRef.current) / 1000;
 
       setIsCorrect(correct);
+      setJudgement(result);
       setIsAnswered(true);
 
       // 履歴を更新
       // userAnswer にはユーザーが実際に入力した元の値を保存する
+      // equivalent-not-canonical (通分は合っているが最小公倍数でない) は不正解として記録する
       const record: AnswerRecord = {
         problemId: problem.id,
         problemType: problem.type,
@@ -234,7 +252,7 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
     <div className="quiz-page">
       <div className="quiz-header">
         <div className="quiz-progress">
-          問題 {questionNumber} / 10
+          問題 {questionNumber} / {questionCount}
         </div>
         <div className="quiz-meta">
           <span className="quiz-category">{categoryLabel(problem.category)}</span>
@@ -263,8 +281,15 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
       {isAnswered && (
         <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
           <div className="feedback-title">
-            {isCorrect ? '🎉 せいかい！' : '❌ ざんねん...'}
+            {isCorrect
+              ? '🎉 せいかい！'
+              : judgement?.status === 'equivalent-not-canonical'
+                ? '⭕ 計算は合っています！'
+                : '❌ ざんねん...'}
           </div>
+          {judgement?.status === 'equivalent-not-canonical' && (
+            <div className="feedback-explanation">{judgement.message}</div>
+          )}
           {!isCorrect && (
             <div className="feedback-answer">
               正解は <strong>{formatAnswer(problem.answer)}</strong> です
@@ -298,7 +323,7 @@ export default function QuizPage({ category, difficulty, onExit }: QuizPageProps
           )}
 
           <button className="primary-button next-button" onClick={handleNext}>
-            {questionNumber >= 10 ? 'けっかをみる' : 'つぎの問題へ'}
+            {questionNumber >= questionCount ? 'けっかをみる' : 'つぎの問題へ'}
           </button>
         </div>
       )}

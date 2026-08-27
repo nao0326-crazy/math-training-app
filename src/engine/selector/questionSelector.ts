@@ -14,6 +14,14 @@
 import type { AnswerRecord, QuestionHistory } from '../../types/history';
 import type { Category, DifficultyLevel, GenerationConfig, Problem } from '../../types/problem';
 import { generateProblem } from './generatorRegistry';
+import { nextAutoSeed } from '../../utils/random';
+import {
+  DEFAULT_DIVERSITY_CONFIG,
+  buildRecentContext,
+  selectBestCandidate,
+  type DiversityConfig,
+} from '../diversity/diversity';
+import { fingerprintProblem } from '../diversity/metadata';
 
 /**
  * 出題選択の設定
@@ -70,6 +78,16 @@ export class QuestionSelector {
 
   /**
    * 次の問題を選択して生成する
+   *
+   * 出題多様化:
+   * 1. カテゴリ/難易度を決定 (既存の苦手分野・正答率・難易度調整ロジックを維持)
+   * 2. 指定難易度の候補を複数生成する (難易度は絶対変えない)
+   * 3. 直近出題履歴を構造化コンテキストに変換
+   * 4. フィンガープリントによる完全重複を除外
+   * 5. 類似度・family連続・出題バランスでペナルティを計算して最良の1問を選択
+   *
+   * 再現性: generateProblem({ seed }) 自体は seed で確定する。
+   * 選択結果は history により変動する (seed + history で選択される)。
    */
   selectNextQuestion(
     history: AnswerRecord[],
@@ -85,32 +103,55 @@ export class QuestionSelector {
     // カテゴリを選択
     const selectedCategory = this.selectCategory(performances, settings.category);
 
-    // 最近出題した問題タイプを取得 (重複回避用)
-    const recentTypes = new Set(
-      questionHistory
-        .slice(-this.config.duplicateAvoidanceCount)
-        .map((q) => q.problemType),
-    );
-
-    // 難易度を調整
+    // 難易度を調整 (既存の適応ロジックを維持)
     const adjustedDifficulty = this.adjustDifficulty(history, settings.difficultyLevel);
 
-    // 問題を生成
+    // 問題を生成 (難易度は変えない)
     const config: GenerationConfig = {
       category: selectedCategory,
       difficulty: adjustedDifficulty,
     };
 
-    // 重複を避けるため、最近出題したタイプを避けて生成を試みる
-    for (let attempt = 0; attempt < 5; attempt++) {
-      const problem = generateProblem(config);
-      if (!recentTypes.has(problem.type)) {
-        return problem;
+    // 直近履歴から構造化コンテキストを構築
+    const diversityConfig: DiversityConfig = {
+      ...DEFAULT_DIVERSITY_CONFIG,
+      duplicateAvoidanceCount: this.config.duplicateAvoidanceCount,
+      recentWindow: this.config.recentHistoryLimit,
+    };
+    const ctx = buildRecentContext(questionHistory, diversityConfig);
+
+    // 候補を複数生成してから最も多様な1問を選ぶ
+    const candidates: Problem[] = [];
+    const seenFingerprints = new Set(ctx.fingerprints);
+    const maxAttempts = diversityConfig.candidateCount * 4;
+    let attempts = 0;
+    // 各候補生成に独立した自動シードを与えることで、異なるジェネレータ/数値の
+    // 問題が発生する確率を高める。
+    // (旧実装は Date.now()+attempts だったため、同一ミリ秒内で候補ループが回ると
+    //  同一シード列になりやすい構造だった。nextAutoSeed() は呼び出しごとに常に変わる)
+    while (candidates.length < diversityConfig.candidateCount && attempts < maxAttempts) {
+      attempts++;
+      let problem: Problem;
+      try {
+        problem = generateProblem({ ...config, seed: nextAutoSeed() });
+      } catch {
+        continue;
       }
+      const fp = fingerprintProblem(problem);
+      if (seenFingerprints.has(fp)) {
+        continue; // 完全重複を除外
+      }
+      seenFingerprints.add(fp);
+      candidates.push(problem);
     }
 
-    // それでも重複する場合は最後に生成した問題を返す
-    return generateProblem(config);
+    if (candidates.length === 0) {
+      // 候補を1問も用意できなかった場合はフォールバック (旧動作)
+      return generateProblem(config);
+    }
+
+    const chosen = selectBestCandidate(candidates, ctx, diversityConfig);
+    return chosen ? chosen.candidate : candidates[0];
   }
 
   /**

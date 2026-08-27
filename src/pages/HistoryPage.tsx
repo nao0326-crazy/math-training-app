@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react';
 import { getAllAnswerRecords } from '../storage/db';
+import type { Category } from '../types/problem';
 import type { AnswerRecord } from '../types/history';
 import { calculateStats, categoryLabel, formatPercent, formatTime } from '../utils/stats';
+import {
+  findWeakAreas,
+  getMostRecentDifficultyLevel,
+  REVIEW_QUESTION_COUNT,
+  type WeakArea,
+} from '../utils/weakAreas';
 import { difficultyLabel } from '../engine/difficulty/difficulty';
 
 /**
@@ -20,9 +27,16 @@ function safeCorrectAnswer(record: AnswerRecord): string {
   return record.correctAnswer && record.correctAnswer.trim() !== '' ? record.correctAnswer : '記録なし';
 }
 
-export default function HistoryPage() {
+interface HistoryPageProps {
+  /** 苦手分野から復習を開始する (カテゴリと直近の難易度を渡す) */
+  onStartReview: (category: Category, difficulty: number) => void;
+}
+
+export default function HistoryPage({ onStartReview }: HistoryPageProps) {
   const [records, setRecords] = useState<AnswerRecord[]>([]);
   const [loading, setLoading] = useState(true);
+  // 復習開始前の確認ダイアログに表示する分野 (null のときは非表示)
+  const [confirmArea, setConfirmArea] = useState<WeakArea | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -56,6 +70,17 @@ export default function HistoryPage() {
 
   const stats = calculateStats(records);
 
+  // 苦手分野の判定 (既存の分野別集計 calculateStats を再利用)
+  const weakAreas = findWeakAreas(records);
+
+  /** 確認ダイアログで「復習をはじめる」を選んだとき */
+  const handleConfirmReview = () => {
+    if (!confirmArea) return;
+    // 直近で使用していた難易度のまま、既存の問題生成システムで復習する
+    onStartReview(confirmArea.category as Category, getMostRecentDifficultyLevel(records));
+    setConfirmArea(null);
+  };
+
   return (
     <div className="history-page">
       <h2>学習履歴</h2>
@@ -80,6 +105,39 @@ export default function HistoryPage() {
               <span className="stat-label">平均解答時間</span>
               <span className="stat-value">{formatTime(stats.averageTimeSec)}</span>
             </div>
+          </section>
+
+          {/* 苦手分野: 回答数5問以上かつ正答率70%未満の分野 (weakAreas.ts の定数) */}
+          <section className="stats-section weak-areas-section">
+            <h3>苦手分野</h3>
+            {weakAreas.length === 0 ? (
+              <p className="no-weak-message">
+                今のところ大きな苦手分野はありません。
+                <br />
+                いろいろな分野に挑戦してみよう！
+              </p>
+            ) : (
+              weakAreas.map((area) => (
+                <div className="weak-area-card" key={area.category}>
+                  <div className="weak-area-info">
+                    <span className="weak-area-name">{categoryLabel(area.category)}</span>
+                    <span className="weak-area-stats">
+                      正答率 {formatPercent(area.accuracyRate)}
+                    </span>
+                    <span className="weak-area-stats">
+                      {area.totalCount}問中 {area.correctCount}問正解
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    className="secondary-button review-button"
+                    onClick={() => setConfirmArea(area)}
+                  >
+                    {categoryLabel(area.category)}を{REVIEW_QUESTION_COUNT}問復習
+                  </button>
+                </div>
+              ))
+            )}
           </section>
 
           <section className="stats-section">
@@ -173,6 +231,35 @@ export default function HistoryPage() {
             </table>
           </section>
         </>
+      )}
+
+      {/* 復習開始前の確認 (操作を重くしないよう最小構成) */}
+      {confirmArea && (
+        <div className="modal-overlay" onClick={() => setConfirmArea(null)}>
+          <div
+            className="modal-card"
+            role="dialog"
+            aria-modal="true"
+            aria-label="復習の確認"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modal-title">
+              {categoryLabel(confirmArea.category)}を{REVIEW_QUESTION_COUNT}問復習します
+            </div>
+            <div className="modal-buttons">
+              <button type="button" className="primary-button" onClick={handleConfirmReview}>
+                復習をはじめる
+              </button>
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={() => setConfirmArea(null)}
+              >
+                やめる
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

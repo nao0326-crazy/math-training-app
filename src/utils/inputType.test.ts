@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 import {
   getAnswerInputType,
   fractionInputToString,
+  fractionListToString,
   mixedInputToString,
   validateAnswerInput,
   isAnswerInputValid,
@@ -98,12 +99,22 @@ describe('validateAnswerInput', () => {
     expect(validateAnswerInput('decimal', { text: '3.14' })).toBeNull();
   });
 
-  it('分数入力: 分子・分母が空の場合はエラー', () => {
+  it('分数入力: 分子・分母とも空の場合はエラー', () => {
     expect(validateAnswerInput('fraction', { fraction: { numerator: '', denominator: '' } })).toBe(
       '分子と分母を入力してください。',
     );
+    expect(validateAnswerInput('fraction', {})).toBe('答えを入力してください。');
+  });
+
+  it('分数入力: 分子だけ未入力の場合は分子を案内する', () => {
+    expect(validateAnswerInput('fraction', { fraction: { numerator: '', denominator: '4' } })).toBe(
+      '分子を入力してください。',
+    );
+  });
+
+  it('分数入力: 分母だけ未入力の場合は分母を案内する', () => {
     expect(validateAnswerInput('fraction', { fraction: { numerator: '1', denominator: '' } })).toBe(
-      '分子と分母を入力してください。',
+      '分母を入力してください。',
     );
   });
 
@@ -133,6 +144,30 @@ describe('validateAnswerInput', () => {
         mixed: { whole: '1', numerator: '1', denominator: '2' },
       }),
     ).toBeNull();
+  });
+
+  it('帯分数入力: 整数部だけ入力した場合は分子と分母を案内する', () => {
+    expect(
+      validateAnswerInput('mixed', {
+        mixed: { whole: '2', numerator: '', denominator: '' },
+      }),
+    ).toBe('分子と分母を入力してください。');
+  });
+
+  it('帯分数入力: 分子だけ未入力の場合は分子を案内する', () => {
+    expect(
+      validateAnswerInput('mixed', {
+        mixed: { whole: '2', numerator: '', denominator: '4' },
+      }),
+    ).toBe('分子を入力してください。');
+  });
+
+  it('帯分数入力: 分母だけ未入力の場合は分母を案内する', () => {
+    expect(
+      validateAnswerInput('mixed', {
+        mixed: { whole: '2', numerator: '1', denominator: '' },
+      }),
+    ).toBe('分母を入力してください。');
   });
 
   it('yesno: 未選択の場合はエラー', () => {
@@ -247,5 +282,97 @@ describe('getNormalizedAnswer', () => {
 
   it('string: テキストをそのまま返す', () => {
     expect(getNormalizedAnswer('string', { text: 'y=3x' })).toBe('y=3x');
+  });
+});
+
+describe('getAnswerInputType (複数分数 / 通分)', () => {
+  it('kind: fractions は fraction-list 入力タイプになる', () => {
+    const answer: Answer = {
+      kind: 'fractions',
+      values: [
+        { numerator: 15, denominator: 20 },
+        { numerator: 8, denominator: 20 },
+      ],
+    };
+    expect(getAnswerInputType(answer, '分母をそろえて表しなさい')).toBe('fraction-list');
+  });
+});
+
+describe('fractionListToString', () => {
+  it('複数分数を "n/d と n/d" 形式に変換する', () => {
+    expect(
+      fractionListToString([
+        { numerator: '15', denominator: '20' },
+        { numerator: '8', denominator: '20' },
+      ]),
+    ).toBe('15/20 と 8/20');
+  });
+
+  it('空の分数があれば空文字を返す', () => {
+    expect(
+      fractionListToString([
+        { numerator: '15', denominator: '20' },
+        { numerator: '', denominator: '20' },
+      ]),
+    ).toBe('');
+  });
+});
+
+describe('validateAnswerInput (fraction-list)', () => {
+  it('全部入力済みで分母0がなければ null', () => {
+    expect(
+      validateAnswerInput('fraction-list', {
+        fractionList: [
+          { numerator: '15', denominator: '20' },
+          { numerator: '8', denominator: '20' },
+        ],
+      }),
+    ).toBeNull();
+  });
+
+  it('1つ目の分数の分子・分母が空なら案内する', () => {
+    expect(
+      validateAnswerInput('fraction-list', {
+        fractionList: [
+          { numerator: '', denominator: '' },
+          { numerator: '8', denominator: '20' },
+        ],
+      }),
+    ).toBe('1つ目の分数の分子と分母を入力してください。');
+  });
+
+  it('2つ目の分母が0ならエラー', () => {
+    expect(
+      validateAnswerInput('fraction-list', {
+        fractionList: [
+          { numerator: '15', denominator: '20' },
+          { numerator: '8', denominator: '0' },
+        ],
+      }),
+    ).toBe('2つ目の分数の分母に0を入力できません。');
+  });
+
+  it('数字以外の文字はエラー', () => {
+    expect(
+      validateAnswerInput('fraction-list', {
+        fractionList: [
+          { numerator: 'a', denominator: '20' },
+          { numerator: '8', denominator: '20' },
+        ],
+      }),
+    ).toBe('1つ目の分数は半角の整数で入力してください。');
+  });
+});
+
+describe('getNormalizedAnswer (fraction-list)', () => {
+  it('複数分数を "n/d と n/d" 形式に変換する', () => {
+    expect(
+      getNormalizedAnswer('fraction-list', {
+        fractionList: [
+          { numerator: '15', denominator: '20' },
+          { numerator: '8', denominator: '20' },
+        ],
+      }),
+    ).toBe('15/20 と 8/20');
   });
 });

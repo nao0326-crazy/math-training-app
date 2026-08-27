@@ -804,7 +804,7 @@ input:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 .frac-bar {
@@ -857,6 +857,75 @@ input:focus {
   width: 110px;
   font-size: 1.3rem;
   padding: 6px 10px;
+}
+
+/* 複数分数 (通分) 入力: 分数ごとに分子・分母を分け、横に並べる */
+.fraction-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fraction-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.fraction-list-connector {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--text-light);
+  padding: 0 4px;
+  align-self: center;
+}
+
+/* 入力欄の常時表示ラベル (①整数部・②分子・③分母など) */
+.labeled-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.field-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  padding: 2px 8px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--text-light);
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* 入力中の欄はラベルでも示す (色 + 背景 + 太字) */
+.field-label.label-active {
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
+.order-badge {
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+}
+
+/* エラーのある入力欄 (未入力・分母0) は枠線 + 背景で示す */
+.answer-display.input-error {
+  border-color: var(--error);
+  background: var(--error-light);
+}
+
+/* 入力例 (答えにはならない汎用の例) */
+.input-example {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-light);
 }
 
 /* エラーメッセージ */
@@ -1575,5 +1644,93 @@ input:focus {
   text-align: center;
   color: var(--text-light);
   font-size: 0.95rem;
+}
+
+/* ===== 苦手分野セクション (学習履歴) ===== */
+.weak-area-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.weak-area-card:last-child {
+  margin-bottom: 0;
+}
+
+.weak-area-name {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+.weak-area-stats {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--text-light);
+}
+
+/* タップ領域を十分に確保した復習ボタン */
+.review-button {
+  min-height: 52px;
+  white-space: nowrap;
+}
+
+.no-weak-message {
+  font-size: 0.98rem;
+  color: var(--text-light);
+}
+
+/* 復習開始前の確認モーダル */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(51, 51, 51, 0.45);
+  padding: 16px;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 360px;
+  padding: 24px;
+  text-align: center;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.modal-title {
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* スマートフォンでは復習カードを縦積みにして押しやすくする */
+@media (max-width: 600px) {
+  .weak-area-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .review-button {
+    width: 100%;
+    white-space: normal;
+  }
 }
 

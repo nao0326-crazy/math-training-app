@@ -93,7 +93,11 @@ describe('全問題タイプでの途中式と正解の整合性', () => {
           ).toBe(true);
 
           // 数値回答の場合、最終ステップ内の値のひとつが正解と一致する
-          if (problem.answer.kind !== 'string') {
+          // (文字列・複数分数は単一の数値にならないため除外し、上の包含確認のみ行う)
+          if (
+            problem.answer.kind !== 'string' &&
+            problem.answer.kind !== 'fractions'
+          ) {
             const candidates = extractAnswerLikeValues(lastText);
             const expectedNum = answerToNumber(problem.answer) as number;
             const matched = candidates.some(
@@ -177,6 +181,30 @@ describe('代表ケース: 途中式の内容検証', () => {
     expect(expressions.some((e) => e.includes('= 3/6'))).toBe(true);
     expect(expressions.some((e) => e.includes('= 2/6'))).toBe(true);
     expect(expressions[expressions.length - 1]).toBe('3/6 と 2/6');
+  });
+
+  it('ケース3b 分数の通分 (構造化解答): 3/4 と 2/5 → 15/20 と 8/20', () => {
+    // 現行ジェネレータが保存する kind: 'fractions' の構造化解答
+    const p = makeProblem(
+      'fraction_common_denominator',
+      'fraction',
+      { n1: 3, d1: 4, n2: 2, d2: 5, common: 20, newN1: 15, newN2: 8 },
+      {
+        kind: 'fractions',
+        values: [
+          { numerator: 15, denominator: 20 },
+          { numerator: 8, denominator: 20 },
+        ],
+      },
+    );
+    const steps = generateSolutionSteps(p);
+    const expressions = steps.map((s) => s.expression ?? '');
+    expect(expressions.some((e) => e.includes('最小公倍数は 20'))).toBe(true);
+    expect(expressions.some((e) => e.includes('3/4 = 15/20'))).toBe(true);
+    expect(expressions.some((e) => e.includes('2/5 = 8/20'))).toBe(true);
+    // 最終ステップは構造化解答の表示形式と一致する
+    expect(expressions[expressions.length - 1]).toBe('15/20 と 8/20');
+    expect(formatAnswer(p.answer)).toBe('15/20 と 8/20');
   });
 
   it('ケース4 分数×整数: 2/3 × 4 = 8/3 = 2と2/3 (帯分数へ)', () => {

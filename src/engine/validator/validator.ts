@@ -79,6 +79,29 @@ export function validateAnswer(problem: Problem): string[] {
       errors.push('帯分数の分子が分母以上です');
     }
   }
+  // 複数分数 (通分など) の検証
+  if (problem.answer.kind === 'fractions') {
+    const values = problem.answer.values;
+    if (!Array.isArray(values) || values.length === 0) {
+      errors.push('複数分数の解答が空です');
+    } else {
+      for (const v of values) {
+        if (
+          !Number.isInteger(v.numerator) ||
+          !Number.isInteger(v.denominator) ||
+          v.denominator === 0
+        ) {
+          errors.push('複数分数に不正な分数があります (分母0または非整数)');
+          break;
+        }
+      }
+      // 通分の標準形ではすべての分母がそろっていること
+      const denominators = values.map((v) => v.denominator);
+      if (denominators.some((d) => d !== denominators[0])) {
+        errors.push('複数分数の分母がそろっていません');
+      }
+    }
+  }
 
   return errors;
 }

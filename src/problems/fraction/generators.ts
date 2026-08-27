@@ -23,7 +23,7 @@ import {
   formatFractionJapanese,
   isValidFraction,
   gcd,
-  lcm,
+  commonDenominatorForm,
 } from '../../utils/fraction';
 import {
   createDifficulty,
@@ -122,6 +122,10 @@ function formatAnswerJapanese(answer: Problem['answer']): string {
       );
     case 'string':
       return answer.value;
+    case 'fractions':
+      return answer.values
+        .map((v) => v.numerator + '/' + v.denominator)
+        .join('と');
   }
 }
 
@@ -791,6 +795,15 @@ export class FractionReduceGenerator implements ProblemGenerator {
 
 /**
  * 通分の問題
+ *
+ * 生成仕様 (教育上の制約):
+ * - 共通分母は必ず分母の最小公倍数 (LCM) を使用する。分母の積は使用しない。
+ * - 正解は最小公倍数を用いた標準形として生成する。
+ * - 問題文の分数は既約分数とする。表示 (fractionJapanese は約分して表示する) と
+ *   計算 (parameters) の不一致が「3/4 と 2/5」に対し「30/40 と 16/40」のような
+ *   誤った標準形を生むため、最初から既約分数だけを採用する。 [根本原因修正]
+ * - 解答は文字列ではなく kind: 'fractions' の構造化データで保持し、
+ *   アプリ側で LCM を再計算して検証する。
  */
 export class FractionCommonDenominatorGenerator implements ProblemGenerator {
   readonly type = 'fraction_common_denominator';
@@ -802,19 +815,42 @@ export class FractionCommonDenominatorGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    const d1 = lv === 1 ? rng.int(2, 5) : rng.int(2, 8);
-    let d2 = rng.int(2, lv === 1 ? 5 : 8);
-    while (d2 === d1) {
-      d2 = rng.int(2, lv === 1 ? 5 : 8);
-    }
-    const n1 = rng.int(1, d1 - 1);
-    const n2 = rng.int(1, d2 - 1);
+    // 既約分数のペアを採用するまで反復する
+    let f1: { numerator: number; denominator: number } | null = null;
+    let f2: { numerator: number; denominator: number } | null = null;
+    for (let attempt = 0; attempt < 100; attempt++) {
+      const d1 = lv === 1 ? rng.int(2, 5) : rng.int(2, 8);
+      let d2 = rng.int(2, lv === 1 ? 5 : 8);
+      while (d2 === d1) {
+        d2 = rng.int(2, lv === 1 ? 5 : 8);
+      }
+      const n1 = rng.int(1, d1 - 1);
+      const n2 = rng.int(1, d2 - 1);
 
-    const common = lcm(d1, d2);
-    const f1 = common / d1;
-    const f2 = common / d2;
-    const newN1 = n1 * f1;
-    const newN2 = n2 * f2;
+      const r1 = reduceFraction(n1, d1);
+      const r2 = reduceFraction(n2, d2);
+      // 約分すると分母が一致したり値が等しくなる組合せは避ける
+      if (r1.denominator === r2.denominator) continue;
+      if (r1.numerator * r2.denominator === r2.numerator * r1.denominator) continue;
+      f1 = r1;
+      f2 = r2;
+      break;
+    }
+    if (!f1 || !f2) {
+      throw new Error('通分の問題を生成できませんでした');
+    }
+
+    const n1 = f1.numerator;
+    const d1 = f1.denominator;
+    const n2 = f2.numerator;
+    const d2 = f2.denominator;
+
+    // 共通分母は最小公倍数。分子は common / 分母 の倍率を掛けて求める
+    const { commonDenominator: common, numerators } = commonDenominatorForm(
+      n1, d1, n2, d2,
+    );
+    const newN1 = numerators[0];
+    const newN2 = numerators[1];
 
     return {
       id: generateProblemId(),
@@ -825,19 +861,27 @@ export class FractionCommonDenominatorGenerator implements ProblemGenerator {
         fractionJapanese(n1, d1) +
         'と' +
         fractionJapanese(n2, d2) +
-        'を、分母をそろえて表しなさい',
-      answer: { kind: 'string', value: newN1 + '/' + common + ' と ' + newN2 + '/' + common },
+        'を、分母を最小公倍数にそろえて表しなさい',
+      answer: {
+        kind: 'fractions',
+        values: [
+          { numerator: newN1, denominator: common },
+          { numerator: newN2, denominator: common },
+        ],
+      },
       explanation:
-        '最小公倍数は' +
+        '分母' +
+        d1 +
+        'と' +
+        d2 +
+        'の最小公倍数は' +
         common +
         'なので、' +
         fractionJapanese(n1, d1) +
-        '（分子' + n1 + '、分母' + d1 + '）＝' +
-        fractionJapanese(newN1, common) +
+        '（分子' + n1 + '、分母' + d1 + '）＝' + newN1 + '/' + common +
         '（分子' + newN1 + '）、' +
         fractionJapanese(n2, d2) +
-        '（分子' + n2 + '、分母' + d2 + '）＝' +
-        fractionJapanese(newN2, common) +
+        '（分子' + n2 + '、分母' + d2 + '）＝' + newN2 + '/' + common +
         '（分子' + newN2 + '） になります。',
       parameters: {
         n1,
@@ -863,19 +907,35 @@ export class FractionCommonDenominatorGenerator implements ProblemGenerator {
       newN1: number;
       newN2: number;
     };
-    const expectedCommon = lcm(d1, d2);
-    if (common !== expectedCommon) {
-      errors.push('通分する分母が誤っています');
+    // 問題に使う分数は既約であること (表示と計算の一致を保証する根本原因対策)
+    if (gcd(n1, d1) !== 1 || gcd(n2, d2) !== 1) {
+      errors.push('問題の分数が約分されていません');
+    }
+    // アプリ側で LCM を再計算して検証する (AI 等の出力を信用しない)
+    const expected = commonDenominatorForm(n1, d1, n2, d2);
+    if (expected.commonDenominator !== common) {
+      errors.push('通分する分母 (最小公倍数) が誤っています');
     }
     if (
-      newN1 !== n1 * (expectedCommon / d1) ||
-      newN2 !== n2 * (expectedCommon / d2)
+      expected.numerators[0] !== newN1 ||
+      expected.numerators[1] !== newN2
     ) {
       errors.push('通分の分子が誤っています');
     }
-    const answerText = newN1 + '/' + common + ' と ' + newN2 + '/' + common;
-    if (problem.answer.kind !== 'string' || problem.answer.value !== answerText) {
-      errors.push('問題の解答がパラメータと一致しません');
+    if (problem.answer.kind !== 'fractions') {
+      errors.push('解答が構造化された分数リストではありません');
+    } else {
+      const [a1, a2] = problem.answer.values;
+      if (
+        !a1 ||
+        !a2 ||
+        a1.numerator !== newN1 ||
+        a1.denominator !== common ||
+        a2.numerator !== newN2 ||
+        a2.denominator !== common
+      ) {
+        errors.push('問題の解答がパラメータ (標準形) と一致しません');
+      }
     }
     return { valid: errors.length === 0, errors };
   }
@@ -1057,8 +1117,13 @@ export class FractionBigSmallGenerator implements ProblemGenerator {
 
   validate(problem: Problem): ValidationResult {
     const errors: string[] = [];
-    const { answer } = problem.parameters as { answer: string };
-    if (problem.answer.kind !== 'string' || problem.answer.value !== answer) {
+    const { numerator, denominator } = problem.parameters as {
+      numerator: number;
+      denominator: number;
+    };
+    // パラメータから期待される答えを再計算して検証する
+    const expected = fractionJapanese(numerator, denominator);
+    if (problem.answer.kind !== 'string' || problem.answer.value !== expected) {
       errors.push('答えが誤っています');
     }
     return { valid: errors.length === 0, errors };

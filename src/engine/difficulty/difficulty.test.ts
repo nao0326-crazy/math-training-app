@@ -23,6 +23,16 @@ describe('calculateDifficultyLevel', () => {
     expect(level).toBe(1);
   });
 
+  it('主成分が2のみの場合は2になる (単一成分による降格なし)', () => {
+    const level = calculateDifficultyLevel({
+      calculationComplexity: 2,
+      numberComplexity: 1,
+      reasoningComplexity: 1,
+      readingComplexity: 1,
+    });
+    expect(level).toBe(2);
+  });
+
   it('全コンポーネントが中程度の場合は2〜3', () => {
     const level = calculateDifficultyLevel({
       calculationComplexity: 2,

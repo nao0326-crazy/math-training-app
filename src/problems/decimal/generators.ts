@@ -34,9 +34,10 @@ function createDecimalDifficulty(
   });
 }
 
-/** 小数を文字列に変換する */
+/** 小数を文字列に変換する (浮動小数点の誤差で「9.799999999999999」のようになるのを防ぐ) */
 function fmt(n: number): string {
-  return String(n);
+  const normalized = Math.round(n * 1e6) / 1e6;
+  return String(normalized);
 }
 
 /**
@@ -95,9 +96,12 @@ export class DecimalDivDecimalGenerator implements ProblemGenerator {
 
     // 難易度に応じて除数と商の範囲を変化させる
     const b10 = lv <= 1 ? rng.int(1, 5) : lv === 2 ? rng.int(1, 9) : lv === 3 ? rng.int(1, 15) : lv === 4 ? rng.int(1, 25) : rng.int(1, 50);
-    const divisor = b10 / 10;
     const quotient = lv <= 1 ? rng.int(1, 5) : lv === 2 ? rng.int(1, 9) : lv === 3 ? rng.int(1, 15) : lv === 4 ? rng.int(1, 25) : rng.int(1, 50);
-    const dividend = divisor * quotient;
+    // 整数どうしを掛けてから 1 回だけ除算することで、
+    // 「1.4 × 7 = 9.799999999999999」のような浮動小数点誤差を防ぐ
+    // (被除数・除数ともに表示値とパラメータが一致する)
+    const dividend = (b10 * quotient) / 10;
+    const divisor = b10 / 10;
 
     return {
       id: generateProblemId(),

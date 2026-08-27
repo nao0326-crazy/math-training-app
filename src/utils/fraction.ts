@@ -26,6 +26,44 @@ export function lcm(a: number, b: number): number {
 }
 
 /**
+ * 通分 (共通分母への変換) の結果
+ */
+export interface CommonDenominatorResult {
+  /** 共通分母 (= lcm(d1, d2)。必ず最小公倍数を使用し、分母の積は使用しない) */
+  commonDenominator: number;
+  /** 通分後の分子 [1つ目の分数, 2つ目の分数] */
+  numerators: [number, number];
+}
+
+/**
+ * 2つの分数を共通分母へ通分する
+ *
+ * 共通分母は分母の最小公倍数 (LCM) を使用する。
+ * 分母の積 (d1 * d2) を共通分母として使用することは禁止。
+ * 分子は common / d の倍率を分子に掛けて求める。
+ *
+ * 例: commonDenominatorForm(3, 4, 2, 5)
+ *   → LCM(4, 5) = 20, { commonDenominator: 20, numerators: [15, 8] }
+ * 例: commonDenominatorForm(2, 3, 1, 6)
+ *   → LCM(3, 6) = 6,  { commonDenominator: 6,  numerators: [4, 1] } (18ではない)
+ */
+export function commonDenominatorForm(
+  n1: number,
+  d1: number,
+  n2: number,
+  d2: number,
+): CommonDenominatorResult {
+  if (d1 === 0 || d2 === 0) {
+    throw new Error('Denominator cannot be zero');
+  }
+  const common = lcm(d1, d2);
+  return {
+    commonDenominator: common,
+    numerators: [n1 * (common / d1), n2 * (common / d2)],
+  };
+}
+
+/**
  * 分数を約分する
  */
 export function reduceFraction(numerator: number, denominator: number): { numerator: number; denominator: number } {
