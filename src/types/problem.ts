@@ -72,6 +72,26 @@ export interface SolutionStep {
 }
 
 /**
+ * 入力UIの種類
+ *
+ * 問題が「どのような構造の回答を要求するか」を answer.kind とは独立に示す。
+ * answer.kind === "string" でも ratio / expression / choice / list など、
+ * 問題タイプに応じた専用UIへ明示的に振り分けるために使う。
+ */
+export type AnswerInputType =
+  | 'integer' // 整数入力 (数字のみ)
+  | 'decimal' // 小数入力 (数字 + 小数点)
+  | 'fraction' // 分数入力 (分子・分母)
+  | 'mixed' // 帯分数入力 (整数部・分子・分母)
+  | 'fraction-list' // 複数分数入力 (通分など: 分数ごとに分子・分母)
+  | 'ratio' // 比入力 (左:右を分離)
+  | 'expression' // 文字式入力 (x・×・÷・= など)
+  | 'choice' // 選択式入力 (choices から選ぶ)
+  | 'list' // 複数値リスト入力 (約数・倍数などカンマ区切り)
+  | 'yesno' // はい/いいえ選択
+  | 'string'; // その他のテキスト入力
+
+/**
  * 問題の基本構造
  * 問題文だけでなく、生成条件 (parameters) を保持する
  */
@@ -90,6 +110,16 @@ export interface Problem {
    * 問題生成と同じパラメータから生成されるため、常に正解と一致する
    */
   solutionSteps?: SolutionStep[];
+  /**
+   * 入力UIの種類 (任意)。省略時は answer.kind と問題タイプから推定される。
+   * 問題タイプ単位で専用UI (比・文字式・選択・リスト) を明示するために使う。
+   */
+  inputType?: AnswerInputType;
+  /**
+   * choice (選択式) 問題の選択肢。fraction_big_small やデータ比較などで
+   * 問題文の文字列検索に頼らずに選択ボタンを出すための明示的な選択肢。
+   */
+  choices?: string[];
 }
 
 /**

@@ -18,6 +18,9 @@ function toHalfWidth(input: string): string {
     .replace(/，/g, ',')
     .replace(/／/g, '/')
     .replace(/－/g, '-')
+    .replace(/：/g, ':')
+    .replace(/＝/g, '=')
+    .replace(/÷/g, '/')
     .replace(/（/g, '(')
     .replace(/）/g, ')');
 }

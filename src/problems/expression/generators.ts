@@ -61,6 +61,8 @@ export class ExpressionMakeGenerator implements ProblemGenerator {
       question:
         '1本x円のえんぴつを' + count + '本買ったときの代金を、xを使った式で表しなさい',
       answer: { kind: 'string', value: count + 'x' },
+      // 文字式専用UI (x・×・÷・= など)
+      inputType: 'expression',
       explanation:
         '1本x円×' + count + '本＝' + count + 'x円 です。',
       parameters: { count, x: 'x', answer: count + 'x', difficultyLevel: lv },
@@ -144,6 +146,8 @@ export class ExpressionWordToExpressionGenerator implements ProblemGenerator {
       question:
         '1こ' + price + '円のチョコレートをxこ買います。代金をxの式で表しなさい',
       answer: { kind: 'string', value: price + '×x' },
+      // 文字式専用UI (x・×・÷・= など)
+      inputType: 'expression',
       explanation:
         '1こ' + price + '円がxこなので、' + price + '×x です。',
       parameters: { price, answer: price + '×x', difficultyLevel: lv },

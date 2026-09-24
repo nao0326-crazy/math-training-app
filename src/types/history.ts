@@ -2,6 +2,10 @@
  * 1回の問題回答の記録
  */
 export interface AnswerRecord {
+  /** IndexedDB の自動採番キー（既存履歴との互換用に任意） */
+  id?: number;
+  /** サーバー同期用の冪等な送信ID（回答確定後に保存） */
+  submissionId?: string;
   /** 問題ID */
   problemId: string;
   /** 問題タイプ */

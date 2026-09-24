@@ -1075,14 +1075,13 @@ export class FractionBigSmallGenerator implements ProblemGenerator {
       const numerator2 = rng.int(1, denominator - 1);
       if (numerator1 === numerator2) continue;
 
-      // Ensure we can compare them
+      // 約分後の値で比較する（約分が必要な場合は約分後の形で表示）
       const frac1 = reduceFraction(numerator1, denominator);
       const frac2 = reduceFraction(numerator2, denominator);
 
       if (frac1.numerator === frac2.numerator) continue;
 
-      const largerNumerator = frac1.numerator > frac2.numerator ? numerator1 : numerator2;
-      const largerDenominator = frac1.numerator > frac2.numerator ? denominator : denominator;
+      const largerFrac = frac1.numerator > frac2.numerator ? frac1 : frac2;
 
       return {
         id: generateProblemId(),
@@ -1094,20 +1093,26 @@ export class FractionBigSmallGenerator implements ProblemGenerator {
           'と' +
           fractionJapanese(numerator2, denominator) +
           ' のどちらが大きいか比べなさい',
-        answer: { kind: 'string', value: fractionJapanese(largerNumerator, largerDenominator) },
+        answer: { kind: 'string', value: fractionJapanese(largerFrac.numerator, largerFrac.denominator) },
         explanation:
-          fractionJapanese(largerNumerator, largerDenominator) +
+          fractionJapanese(largerFrac.numerator, largerFrac.denominator) +
           ' の方が大きいです。' +
-          ' (分子' + largerNumerator + '、分母' + largerDenominator + ')' +
+          ' (分子' + largerFrac.numerator + '、分母' + largerFrac.denominator + ')' +
           'もう一方は分子' +
-          (numerator1 === largerNumerator ? numerator2 : numerator1) +
+          (frac1.numerator > frac2.numerator ? frac2.numerator : frac1.numerator) +
           'です。',
+        // 選択式UI: 2つの分数を選択肢として明示する (文字入力を不要にする)
+        inputType: 'choice',
+        choices: [
+          fractionJapanese(frac1.numerator, frac1.denominator),
+          fractionJapanese(frac2.numerator, frac2.denominator),
+        ],
         parameters: {
-          numerator: largerNumerator,
-          denominator: largerDenominator,
+          numerator: largerFrac.numerator,
+          denominator: largerFrac.denominator,
           // 比較のもう一方 (途中式の表示用。答えには影響しない)
           smallerNumerator:
-            numerator1 === largerNumerator ? numerator2 : numerator1,
+            frac1.numerator > frac2.numerator ? frac2.numerator : frac1.numerator,
           difficultyLevel: lv,
         },
       };
@@ -1121,8 +1126,9 @@ export class FractionBigSmallGenerator implements ProblemGenerator {
       numerator: number;
       denominator: number;
     };
-    // パラメータから期待される答えを再計算して検証する
-    const expected = fractionJapanese(numerator, denominator);
+    // パラメータから期待される答えを再計算して検証する（約分後の形）
+    const r = reduceFraction(numerator, denominator);
+    const expected = fractionJapanese(r.numerator, r.denominator);
     if (problem.answer.kind !== 'string' || problem.answer.value !== expected) {
       errors.push('答えが誤っています');
     }

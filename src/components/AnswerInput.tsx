@@ -17,9 +17,10 @@
  */
 
 import { useState, useCallback, KeyboardEvent } from 'react';
-import type { Problem } from '../types/problem';
+import type { AnswerInputType, Problem } from '../types/problem';
 import {
-  getAnswerInputType,
+  getProblemChoiceOptions,
+  getProblemInputType,
   validateAnswerInput,
   getNormalizedAnswer,
 } from '../utils/inputType';
@@ -70,6 +71,8 @@ function getTextKeypadButtons(): KeypadButton[] {
     { label: '5', value: '5', className: 'number-btn', isNumber: true },
     { label: '6', value: '6', className: 'number-btn', isNumber: true },
     { label: '×', value: '×', className: 'symbol-btn' },
+    { label: '÷', value: '÷', className: 'symbol-btn' },
+    { label: '＝', value: '=', className: 'symbol-btn' },
     { label: '7', value: '7', className: 'number-btn', isNumber: true },
     { label: '8', value: '8', className: 'number-btn', isNumber: true },
     { label: '9', value: '9', className: 'number-btn', isNumber: true },
@@ -162,6 +165,13 @@ function computeFlFieldErrors(
     const dZero = !dEmpty && /^\d+$/.test(d) && parseInt(d, 10) === 0;
     return { numerator: nEmpty, denominator: dEmpty || dZero };
   });
+}
+
+function computeRatioFieldErrors(left: string, right: string): { left: boolean; right: boolean } {
+  return {
+    left: !/^\d+$/.test(left.trim()),
+    right: !/^\d+$/.test(right.trim()),
+  };
 }
 
 /**
@@ -261,8 +271,9 @@ export default function AnswerInput({
   disabled = false,
   onSubmit,
 }: AnswerInputProps) {
-  const inputType = getAnswerInputType(problem.answer, problem.question);
-  const isDecimal = problem.answer.kind === 'decimal';
+  const inputType: AnswerInputType = getProblemInputType(problem);
+  const isDecimal = inputType === 'decimal';
+  const choiceOptions = getProblemChoiceOptions(problem);
 
   // === State ===
   const [textValue, setTextValue] = useState('');
@@ -273,6 +284,9 @@ export default function AnswerInput({
   const [mixedNum, setMixedNum] = useState('');
   const [mixedDen, setMixedDen] = useState('');
   const [mixedActive, setMixedActive] = useState<'whole' | 'numerator' | 'denominator'>('whole');
+  const [ratioLeft, setRatioLeft] = useState('');
+  const [ratioRight, setRatioRight] = useState('');
+  const [ratioActive, setRatioActive] = useState<'left' | 'right'>('left');
   const [error, setError] = useState<string | null>(null);
   // フィールド単位のエラー表示用 (どの欄を直すべきか枠線で示す)
   const [fracFieldError, setFracFieldError] = useState({ numerator: false, denominator: false });
@@ -281,6 +295,7 @@ export default function AnswerInput({
     numerator: false,
     denominator: false,
   });
+  const [ratioFieldError, setRatioFieldError] = useState({ left: false, right: false });
   // 複数分数 (通分) 入力用の state
   const [fracList, setFracList] = useState([
     { numerator: '', denominator: '' },
@@ -295,40 +310,47 @@ export default function AnswerInput({
   );
 
   const clearError = useCallback(() => {
-    if (error) setError(null);
-    setFracFieldError((prev) =>
-      prev.numerator || prev.denominator ? { numerator: false, denominator: false } : prev,
+    setError(null);
+    setFracFieldError({ numerator: false, denominator: false });
+    setMixedFieldError({ whole: false, numerator: false, denominator: false });
+    setRatioFieldError({ left: false, right: false });
+    setFlFieldError((previous) =>
+      previous.map(() => ({ numerator: false, denominator: false })),
     );
-    setMixedFieldError((prev) =>
-      prev.whole || prev.numerator || prev.denominator
-        ? { whole: false, numerator: false, denominator: false }
-        : prev,
-    );
-    setFlFieldError((prev) =>
-      prev.some((f) => f.numerator || f.denominator)
-        ? prev.map(() => ({ numerator: false, denominator: false }))
-        : prev,
-    );
-  }, [error]);
+  }, []);
 
   // === params取得 ===
   const getParams = useCallback(() => {
     switch (inputType) {
-      case 'integer':
-      case 'decimal':
-      case 'string':
-      case 'yesno':
-        return { text: textValue };
       case 'fraction':
         return { fraction: { numerator: fracNum, denominator: fracDen } };
       case 'fraction-list':
         return { fractionList: fracList };
       case 'mixed':
         return { mixed: { whole: mixedWhole, numerator: mixedNum, denominator: mixedDen } };
+      case 'ratio':
+        return { ratio: { left: ratioLeft, right: ratioRight } };
+      case 'integer':
+      case 'decimal':
+      case 'string':
+      case 'list':
+      case 'expression':
+      case 'choice':
+      case 'yesno':
+        return { text: textValue };
     }
-  }, [inputType, textValue, fracNum, fracDen, fracList, mixedWhole, mixedNum, mixedDen]);
-
-    const normalizedValue = getNormalizedAnswer(inputType, getParams());
+  }, [
+    inputType,
+    textValue,
+    fracNum,
+    fracDen,
+    fracList,
+    mixedWhole,
+    mixedNum,
+    mixedDen,
+    ratioLeft,
+    ratioRight,
+  ]);
 
   // === テキスト入力ハンドラ ===
   const handleNumberPress = useCallback(
@@ -373,7 +395,16 @@ export default function AnswerInput({
       clearError();
       setTextValue(val);
     },
-        [disabled, clearError],
+    [disabled, clearError],
+  );
+
+  const handleChoiceSelect = useCallback(
+    (choice: string) => {
+      if (disabled) return;
+      clearError();
+      setTextValue(choice);
+    },
+    [clearError, disabled],
   );
 
   // === 分数入力ハンドラ ===
@@ -445,6 +476,48 @@ export default function AnswerInput({
     setMixedActive('whole');
   }, [disabled, clearError]);
 
+
+  // === 比入力ハンドラ ===
+  const handleRatioNumberPress = useCallback(
+    (digit: string) => {
+      if (disabled) return;
+      clearError();
+      if (ratioActive === 'left') {
+        if (ratioLeft.length < 10) setRatioLeft(ratioLeft + digit);
+      } else if (ratioRight.length < 10) {
+        setRatioRight(ratioRight + digit);
+      }
+    },
+    [clearError, disabled, ratioActive, ratioLeft, ratioRight],
+  );
+
+  const handleRatioDelete = useCallback(() => {
+    if (disabled) return;
+    clearError();
+    if (ratioActive === 'left') setRatioLeft(ratioLeft.slice(0, -1));
+    else setRatioRight(ratioRight.slice(0, -1));
+  }, [clearError, disabled, ratioActive, ratioLeft, ratioRight]);
+
+  const handleRatioClear = useCallback(() => {
+    if (disabled) return;
+    clearError();
+    setRatioLeft('');
+    setRatioRight('');
+    setRatioActive('left');
+  }, [clearError, disabled]);
+
+  const handleRatioPadPress = useCallback(
+    (btn: KeypadButton) => {
+      if (btn.value === 'delete') handleRatioDelete();
+      else if (btn.value === 'clear') handleRatioClear();
+      else handleRatioNumberPress(btn.value);
+    },
+    [handleRatioClear, handleRatioDelete, handleRatioNumberPress],
+  );
+
+
+
+
   // === 決定ボタンハンドラ ===
   const handleSubmit = useCallback(() => {
     if (disabled) return;
@@ -459,16 +532,17 @@ export default function AnswerInput({
         setMixedFieldError(computeFieldErrors(mixedWhole, mixedNum, mixedDen));
       } else if (inputType === 'fraction-list') {
         setFlFieldError(computeFlFieldErrors(fracList));
+      } else if (inputType === 'ratio') {
+        setRatioFieldError(computeRatioFieldErrors(ratioLeft, ratioRight));
       }
       return;
     }
     setError(null);
-    onSubmit(normalizedValue);
+    onSubmit(getNormalizedAnswer(inputType, params));
   }, [
     disabled,
     inputType,
     getParams,
-    normalizedValue,
     onSubmit,
     fracNum,
     fracDen,
@@ -476,12 +550,53 @@ export default function AnswerInput({
     mixedWhole,
     mixedNum,
     mixedDen,
+    ratioLeft,
+    ratioRight,
   ]);
+
+
+  const handleRatioKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>) => {
+      if (disabled) return;
+      if (e.key >= '0' && e.key <= '9') {
+        e.preventDefault();
+        handleRatioNumberPress(e.key);
+      } else if (e.key === 'Backspace') {
+        e.preventDefault();
+        handleRatioDelete();
+      } else if (e.key === 'Delete') {
+        e.preventDefault();
+        handleRatioClear();
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        handleSubmit();
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        setRatioActive(ratioActive === 'left' ? 'right' : 'left');
+      }
+    },
+    [disabled, ratioActive, handleRatioNumberPress, handleRatioDelete, handleRatioClear, handleSubmit],
+  );
+
 
   // === PCキーボードハンドラ ===
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
       if (disabled) return;
+      if (inputType === 'ratio') {
+        handleRatioKeyDown(e);
+        return;
+      }
+      if (inputType === 'expression' || inputType === 'list' || inputType === 'string') {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleSubmit();
+        } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          e.preventDefault();
+          handleTextKey(e.key);
+        }
+        return;
+      }
 
       if (inputType === 'integer' || inputType === 'decimal') {
         if (e.key >= '0' && e.key <= '9') {
@@ -529,6 +644,7 @@ export default function AnswerInput({
       handleNumberPress, handleDecimalPress, handleDelete, handleClear,
       handleFracNumberPress, handleFracDelete, handleFracClear,
       fracActive,
+      handleRatioKeyDown, handleTextKey,
       handleSubmit,
     ],
   );
@@ -590,11 +706,13 @@ export default function AnswerInput({
         handleClear();
       } else if (btn.value === 'decimal') {
         handleDecimalPress();
-      } else {
+      } else if (inputType === 'integer' || inputType === 'decimal') {
         handleNumberPress(btn.value);
+      } else {
+        handleTextKey(btn.value);
       }
     },
-    [handleDelete, handleClear, handleDecimalPress, handleNumberPress],
+    [handleDelete, handleClear, handleDecimalPress, handleNumberPress, handleTextKey, inputType],
   );
 
   // 分数キーパッドのプレス処理
@@ -904,6 +1022,97 @@ export default function AnswerInput({
           </>
         )}
 
+        {/* === ratio: 比入力 (左 : 右) === */}
+        {inputType === 'ratio' && (
+          <>
+            <div className="ratio-display" role="group" aria-label="比の入力">
+              <LabeledAnswerField
+                id="ratio-left"
+                orderBadge="①"
+                label="左"
+                value={ratioLeft}
+                placeholder="左"
+                active={ratioActive === 'left'}
+                hasError={ratioFieldError.left}
+                onFocus={() => setRatioActive('left')}
+                onKeyDown={handleRatioKeyDown}
+                disabled={disabled}
+                className="ratio-field"
+              />
+              <span className="ratio-colon" aria-hidden="true">:</span>
+              <LabeledAnswerField
+                id="ratio-right"
+                orderBadge="②"
+                label="右"
+                value={ratioRight}
+                placeholder="右"
+                active={ratioActive === 'right'}
+                hasError={ratioFieldError.right}
+                onFocus={() => setRatioActive('right')}
+                onKeyDown={handleRatioKeyDown}
+                disabled={disabled}
+                className="ratio-field"
+              />
+            </div>
+            <KeypadGrid
+              buttons={getNumberPadButtons(false)}
+              onPress={handleRatioPadPress}
+              disabled={disabled}
+            />
+          </>
+        )}
+
+        {/* === expression / list / string: テキスト入力 === */}
+        {(inputType === 'expression' || inputType === 'list' || inputType === 'string') && (
+          <>
+            <AnswerField
+              value={textValue}
+              placeholder={inputType === 'list' ? '1, 2, 3' : '答えを入力'}
+              active={true}
+              onKeyDown={handleStringKeyDown}
+              disabled={disabled}
+              className="string-display"
+            />
+            <KeypadGrid
+              buttons={getTextKeypadButtons()}
+              onPress={handlePadPress}
+              disabled={disabled}
+            />
+          </>
+        )}
+
+        {/* === choice: 選択肢 === */}
+        {inputType === 'choice' && choiceOptions.length > 0 && (
+          <div className="choice-buttons" role="group" aria-label="選択肢">
+            {choiceOptions.map((choice) => (
+              <button
+                key={choice}
+                type="button"
+                className={`choice-btn ${textValue === choice ? 'selected' : ''}`}
+                aria-pressed={textValue === choice}
+                onClick={() => handleChoiceSelect(choice)}
+                disabled={disabled}
+              >
+                {choice}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {inputType === 'choice' && choiceOptions.length === 0 && (
+          <>
+            <AnswerField
+              value={textValue}
+              placeholder="答えを入力"
+              active={true}
+              onKeyDown={handleStringKeyDown}
+              disabled={disabled}
+              className="string-display"
+            />
+            <KeypadGrid buttons={getTextKeypadButtons()} onPress={handlePadPress} disabled={disabled} />
+          </>
+        )}
+
         {/* === yesno: はい/いいえボタン === */}
         {inputType === 'yesno' && (
           <>
@@ -936,24 +1145,7 @@ export default function AnswerInput({
           </>
         )}
 
-        {/* === string: テキスト入力 + キーパッド === */}
-        {inputType === 'string' && (
-          <>
-            <AnswerField
-              value={textValue}
-              placeholder="答えを入力"
-              active={true}
-              onKeyDown={handleStringKeyDown}
-              disabled={disabled}
-              className="string-display"
-            />
-            <KeypadGrid
-              buttons={getTextKeypadButtons()}
-              onPress={handlePadPress}
-              disabled={disabled}
-            />
-          </>
-        )}
+        {/* === string / expression / list text input is rendered above === */}
       </div>
 
       {/* エラーメッセージ */}

@@ -14,6 +14,10 @@ import type { AnswerRecord, QuestionHistory } from '../types/history';
 import AnswerInput from '../components/AnswerInput';
 import SolutionDisplay from '../components/SolutionDisplay';
 import { ANSWER_RECORDED_EVENT } from '../utils/dailyCount';
+import {
+  createDailyAnswerSubmissionId,
+  runDailyAnswerSync,
+} from '../services/dailyAnswerSync';
 import { deriveMetadata, fingerprintProblem } from '../engine/diversity/metadata';
 
 interface QuizPageProps {
@@ -48,6 +52,8 @@ export default function QuizPage({
 
   const selectorRef = useRef<QuestionSelector | null>(null);
   const startTimeRef = useRef<number>(0);
+  /** 同一問題の回答確定を同一イベントループ内でも二重実行しない */
+  const answerSubmitLockRef = useRef(false);
   const historyRef = useRef<AnswerRecord[]>([]);
   const questionHistoryRef = useRef<QuestionHistory[]>([]);
   const resultRef = useRef<QuizResult>({ totalCount: 0, correctCount: 0, totalTimeSec: 0 });
@@ -102,6 +108,7 @@ export default function QuizPage({
     setJudgement(null);
     setShowSolution(false);
     startTimeRef.current = Date.now();
+    answerSubmitLockRef.current = false;
 
     // 出題履歴に記録
     // metadata + fingerprint を添えておくと、次問の多様性制御・重複検出に使える
@@ -123,10 +130,13 @@ export default function QuizPage({
    */
   const handleSubmit = useCallback(
     (rawAnswer: string) => {
-      if (!problem || isAnswered) return;
+      if (!problem || isAnswered || answerSubmitLockRef.current) return;
 
       // 空回答は判定しない (AnswerInput 側でもバリデーション済み)
       if (rawAnswer.trim() === '') return;
+
+      // state更新を待たない同一イベント内の二重送信も防ぐ
+      answerSubmitLockRef.current = true;
 
       // 判定には正規化された値を使用する
       // judgeUserAnswer は数学的等価性と教育上の標準形を区別して判定する
@@ -152,9 +162,10 @@ export default function QuizPage({
         question: problem.question,
         userAnswer: rawAnswer,
         correctAnswer: formatAnswer(problem.answer),
+        submissionId: createDailyAnswerSubmissionId(),
       };
       historyRef.current.push(record);
-      void saveAnswerRecord(record);
+      void saveAnswerRecord(record).then(() => runDailyAnswerSync());
 
       // 日次カウント更新イベントを発火
       window.dispatchEvent(new Event(ANSWER_RECORDED_EVENT));

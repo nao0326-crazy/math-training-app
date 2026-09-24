@@ -67,6 +67,8 @@ export class RatioSimplifyGenerator implements ProblemGenerator {
         difficulty: createRatioDifficulty(lv, a, 1, 1),
         question: a + '：' + b + 'を、できるだけ簡単な比になおしなさい',
         answer: { kind: 'string', value: simplifiedA + '：' + simplifiedB },
+        // 比専用UI (左 : 右を分離した入力)
+        inputType: 'ratio',
         explanation:
           a + 'と' + b + 'を最大公約数' + g + 'でわると、' + simplifiedA + '：' + simplifiedB + 'です。',
         parameters: {
@@ -282,6 +284,8 @@ export class ProportionalExpressionGenerator implements ProblemGenerator {
       question:
         '1個' + k + '円のりんごをx個買うときの代金y円です。yをxの式で表しなさい',
       answer: { kind: 'string', value: 'y=' + k + 'x' },
+      // 文字式専用UI (x・×・÷・= など)
+      inputType: 'expression',
       explanation: 'yはxに比例し、比例定数は' + k + 'なので、y=' + k + 'xです。',
       parameters: { k, answer: 'y=' + k + 'x', constant: k, difficultyLevel: lv },
     };
@@ -375,6 +379,8 @@ export class InverseExpressionGenerator implements ProblemGenerator {
       question:
         '面積が' + k + '㎠の長方形があります。縦の長さをxcm、横の長さをycmとすると、yをxで表しなさい',
       answer: { kind: 'string', value: 'y=' + k + '÷x' },
+      // 文字式専用UI (x・×・÷・= など)
+      inputType: 'expression',
       explanation: '縦×横＝面積 なので、x×y＝' + k + '。よって y=' + k + '÷x です。',
       parameters: { k, answer: 'y=' + k + '÷x', difficultyLevel: lv },
     };

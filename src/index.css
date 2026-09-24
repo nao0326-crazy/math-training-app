@@ -883,6 +883,64 @@ input:focus {
   align-self: center;
 }
 
+/* 比入力 (左 : 右) */
+.ratio-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ratio-field {
+  width: 110px;
+  font-size: 1.5rem;
+  padding: 8px 12px;
+}
+
+.ratio-colon {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+/* 選択式 (choice) ボタン */
+.choice-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.choice-btn {
+  flex: 1;
+  min-height: 56px;
+  min-width: 120px;
+  max-width: 200px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 12px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.choice-btn:active {
+  transform: scale(0.96);
+  background: var(--primary-light);
+}
+
+.choice-btn.selected {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.choice-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 /* 入力欄の常時表示ラベル (①整数部・②分子・③分母など) */
 .labeled-field {
   display: flex;

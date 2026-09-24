@@ -5,9 +5,11 @@
 import { describe, expect, it } from 'vitest';
 import {
   getAnswerInputType,
+  getProblemInputType,
   fractionInputToString,
   fractionListToString,
   mixedInputToString,
+  ratioInputToString,
   validateAnswerInput,
   isAnswerInputValid,
   getNormalizedAnswer,
@@ -374,5 +376,129 @@ describe('getNormalizedAnswer (fraction-list)', () => {
         ],
       }),
     ).toBe('15/20 と 8/20');
+  });
+});
+
+describe('getProblemInputType (ratio / expression / choice / list)', () => {
+  it('ratio_simplify は ratio 入力タイプになる', () => {
+    const problem = {
+      id: 'test',
+      category: 'ratio' as const,
+      type: 'ratio_simplify',
+      difficulty: { level: 1 as const, components: { calculationComplexity: 1 as const, numberComplexity: 1 as const, reasoningComplexity: 1 as const, readingComplexity: 1 as const } },
+      question: '6:8を簡単になおしなさい',
+      answer: { kind: 'string' as const, value: '3:4' },
+      parameters: {},
+    };
+    expect(getProblemInputType(problem)).toBe('ratio');
+  });
+
+  it('expression_make は expression 入力タイプになる', () => {
+    const problem = {
+      id: 'test',
+      category: 'expression' as const,
+      type: 'expression_make',
+      difficulty: { level: 1 as const, components: { calculationComplexity: 1 as const, numberComplexity: 1 as const, reasoningComplexity: 1 as const, readingComplexity: 1 as const } },
+      question: 'xを使った式で表しなさい',
+      answer: { kind: 'string' as const, value: '5x' },
+      parameters: {},
+    };
+    expect(getProblemInputType(problem)).toBe('expression');
+  });
+
+  it('fraction_big_small は choice 入力タイプになる', () => {
+    const problem = {
+      id: 'test',
+      category: 'fraction' as const,
+      type: 'fraction_big_small',
+      difficulty: { level: 1 as const, components: { calculationComplexity: 1 as const, numberComplexity: 1 as const, reasoningComplexity: 1 as const, readingComplexity: 1 as const } },
+      question: 'どちらが大きいですか',
+      answer: { kind: 'string' as const, value: '3/5' },
+      parameters: {},
+    };
+    expect(getProblemInputType(problem)).toBe('choice');
+  });
+
+  it('問題定義の inputType が優先される', () => {
+    const problem = {
+      id: 'test',
+      category: 'ratio' as const,
+      type: 'ratio_simplify',
+      difficulty: { level: 1 as const, components: { calculationComplexity: 1 as const, numberComplexity: 1 as const, reasoningComplexity: 1 as const, readingComplexity: 1 as const } },
+      question: 'テスト',
+      answer: { kind: 'string' as const, value: 'test' },
+      parameters: {},
+      inputType: 'expression' as const,
+    };
+    expect(getProblemInputType(problem)).toBe('expression');
+  });
+
+  it.each([
+    ['prime_range', '11から20までの間の素数をすべて答えなさい', '11, 13, 17, 19'],
+    ['common_divisors', '12と18の公約数をすべて答えなさい', '2, 3, 6'],
+    ['common_multiples', '4と6の公倍数を小さい方から3つ答えなさい', '12, 24, 36'],
+  ])('%s は list 入力タイプになる', (type, question, answer) => {
+    const problem = {
+      id: 'test',
+      category: 'numberTheory' as const,
+      type,
+      difficulty: { level: 1 as const, components: { calculationComplexity: 1 as const, numberComplexity: 1 as const, reasoningComplexity: 1 as const, readingComplexity: 1 as const } },
+      question,
+      answer: { kind: 'string' as const, value: answer },
+      parameters: {},
+    };
+    expect(getProblemInputType(problem)).toBe('list');
+  });
+
+});
+
+describe('ratioInputToString', () => {
+  it('左右を "左:右" 形式に変換する', () => {
+    expect(ratioInputToString('3', '4')).toBe('3:4');
+    expect(ratioInputToString('6', '8')).toBe('6:8');
+  });
+
+  it('前後の空白をトリムする', () => {
+    expect(ratioInputToString(' 3 ', ' 4 ')).toBe('3:4');
+  });
+
+  it('左右が空の場合は空文字を返す', () => {
+    expect(ratioInputToString('', '4')).toBe('');
+    expect(ratioInputToString('3', '')).toBe('');
+    expect(ratioInputToString('', '')).toBe('');
+  });
+});
+
+describe('validateAnswerInput (ratio)', () => {
+  it('左右とも入力済みなら null', () => {
+    expect(validateAnswerInput('ratio', { ratio: { left: '3', right: '4' } })).toBeNull();
+  });
+
+  it('左側が空ならエラー', () => {
+    expect(validateAnswerInput('ratio', { ratio: { left: '', right: '4' } })).toBe(
+      '比の左の数を入力してください。',
+    );
+  });
+
+  it('右側が空ならエラー', () => {
+    expect(validateAnswerInput('ratio', { ratio: { left: '3', right: '' } })).toBe(
+      '比の右の数を入力してください。',
+    );
+  });
+
+  it('左右とも空ならエラー', () => {
+    expect(validateAnswerInput('ratio', { ratio: { left: '', right: '' } })).toBe(
+      '比の左と右の両方を入力してください。',
+    );
+  });
+});
+
+describe('getNormalizedAnswer (ratio)', () => {
+  it('左右を "左:右" 形式に変換する', () => {
+    expect(getNormalizedAnswer('ratio', { ratio: { left: '3', right: '4' } })).toBe('3:4');
+  });
+
+  it('空の場合は空文字を返す', () => {
+    expect(getNormalizedAnswer('ratio', { ratio: { left: '', right: '4' } })).toBe('');
   });
 });

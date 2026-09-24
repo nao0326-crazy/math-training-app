@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import HomePage from './pages/HomePage';
 import QuizPage from './pages/QuizPage';
 import HistoryPage from './pages/HistoryPage';
 import DailyProgressNotification from './components/DailyProgressNotification';
 import type { Category } from './types/problem';
 import { REVIEW_QUESTION_COUNT } from './utils/weakAreas';
+import { runDailyAnswerSync } from './services/dailyAnswerSync';
 
 type Page = 'home' | 'quiz' | 'history';
 
@@ -13,6 +14,23 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(2);
   const [questionCount, setQuestionCount] = useState(10);
+
+  // 回答送信直後の同期を、Web の再接続・次回起動時にも補う。
+  // Supabase 未設定時は既存 IndexedDB だけで動作する。
+  useEffect(() => {
+    const sync = () => {
+      void runDailyAnswerSync();
+    };
+
+    sync();
+    window.addEventListener('online', sync);
+    const interval = window.setInterval(sync, 60 * 1000);
+
+    return () => {
+      window.removeEventListener('online', sync);
+      window.clearInterval(interval);
+    };
+  }, []);
 
   const startQuiz = (category: Category | null, difficulty: number) => {
     setSelectedCategory(category);

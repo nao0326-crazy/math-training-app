@@ -3,19 +3,49 @@
  * 問題の解答種類に応じて適切な入力UIを選択し、入力値を正規化する
  */
 
-import type { Answer } from '../types/problem';
+import type { Answer, AnswerInputType, Problem } from '../types/problem';
+
+// ===== 問題タイプ → 入力UIの明示的な分類表 =====
+// answer.kind === "string" でも、問題タイプごとに専用UIへ振り分ける。
+// この表に問題タイプを追加すれば、ジェネレータを変更せずにUIを切り替えられる。
+const TYPE_TO_INPUT_TYPE: Record<string, AnswerInputType> = {
+  // 比: 左:右を分離した入力
+  ratio_simplify: 'ratio',
+  ratio_value: 'decimal', // 比の値は小数
+  // 文字式: x・×・÷・= などを入力
+  expression_make: 'expression',
+  expression_word_make: 'expression',
+  proportional_expression: 'expression',
+  inverse_expression: 'expression',
+  // 通分: 分子・分母を分数ごとに分けた4欄入力
+  fraction_common_denominator: 'fraction-list',
+  // 選択式: 問題文の文字列検索に頼らず、明示的に選択肢から選ぶ
+  fraction_big_small: 'choice',
+  data_compare: 'choice',
+  speed_comparison: 'choice',
+  period_repetition: 'choice',
+  // 複数値リスト (約数・倍数・最大最小などカンマ区切り)
+  divisors_finding: 'list',
+  multiples_finding: 'list',
+  prime_range: 'list',
+  common_divisors: 'list',
+  common_multiples: 'list',
+  data_max_min: 'list',
+};
 
 /**
- * 入力UIの種類
+ * 問題タイプから入力UIの種類を判定する (answer.kind と独立)。
+ *
+ * 1. 問題定義に inputType が明示されていればそれを使う
+ * 2. 明示されていなければ TYPE_TO_INPUT_TYPE の問題タイプ別分類を使う
+ * 3. それ以外は answer.kind から判定 (yes/no は問題文も参照)
  */
-export type AnswerInputType =
-  | 'integer' // 整数入力 (数字のみ)
-  | 'decimal' // 小数入力 (数字 + 小数点)
-  | 'fraction' // 分数入力 (分子・分母)
-  | 'fraction-list' // 複数分数入力 (通分など: 分数ごとに分子・分母)
-  | 'mixed' // 帯分数入力 (整数部・分子・分母)
-  | 'yesno' // はい/いいえ選択
-  | 'string'; // テキスト入力 (式・リスト等)
+export function getProblemInputType(problem: Problem): AnswerInputType {
+  if (problem.inputType) return problem.inputType;
+  const fromType = TYPE_TO_INPUT_TYPE[problem.type];
+  if (fromType) return fromType;
+  return getAnswerInputType(problem.answer, problem.question);
+}
 
 /**
  * 解答の種類から入力UIの種類を判定する
@@ -43,6 +73,27 @@ export function getAnswerInputType(
         return 'yesno';
       }
       return 'string';
+  }
+}
+
+/**
+ * choice (選択式) 問題の選択肢を取得する。
+ * 問題定義に choices があればそれを使う。なければ問題タイプから組み立てる。
+ */
+export function getProblemChoiceOptions(problem: Problem): string[] {
+  if (problem.choices && problem.choices.length > 0) return problem.choices;
+  const params = (problem.parameters ?? {}) as Record<string, unknown>;
+  switch (problem.type) {
+    case 'data_compare':
+      return ['A組', 'B組'];
+    case 'speed_comparison':
+      return ['たろうさん', 'はなこさん'];
+    case 'period_repetition': {
+      const pattern = params.pattern;
+      return Array.isArray(pattern) ? (pattern as string[]) : [];
+    }
+    default:
+      return [];
   }
 }
 
@@ -103,6 +154,19 @@ export function mixedInputToString(
 }
 
 /**
+ * 比入力を文字列に変換
+ * left="3", right="5" → "3:5"
+ *
+ * 左右の順序は保持する ("5:3" は別物として扱う)
+ */
+export function ratioInputToString(left: string, right: string): string {
+  const l = left.trim();
+  const r = right.trim();
+  if (!l || !r) return '';
+  return `${l}:${r}`;
+}
+
+/**
  * 入力値のバリデーション
  * 無効な場合はエラーメッセージを返す、有効な場合は null を返す
  */
@@ -112,6 +176,7 @@ export function validateAnswerInput(
     text?: string;
     fraction?: { numerator: string; denominator: string };
     fractionList?: { numerator: string; denominator: string }[];
+    ratio?: { left: string; right: string };
     mixed?: { whole: string; numerator: string; denominator: string };
   },
 ): string | null {
@@ -119,6 +184,9 @@ export function validateAnswerInput(
     case 'integer':
     case 'decimal':
     case 'string':
+    case 'list':
+    case 'expression':
+    case 'choice':
       if (!params.text || !params.text.trim()) {
         return '答えを入力してください。';
       }
@@ -141,6 +209,24 @@ export function validateAnswerInput(
         return 'はいまたはいいえを選んでください。';
       }
       return null;
+    case 'ratio': {
+      if (!params.ratio) return '答えを入力してください。';
+      const hasLeft = Boolean(params.ratio.left.trim());
+      const hasRight = Boolean(params.ratio.right.trim());
+      if (!hasLeft && !hasRight) {
+        return '比の左と右の両方を入力してください。';
+      }
+      if (!hasLeft) {
+        return '比の左の数を入力してください。';
+      }
+      if (!hasRight) {
+        return '比の右の数を入力してください。';
+      }
+      if (!/^\d+$/.test(params.ratio.left.trim()) || !/^\d+$/.test(params.ratio.right.trim())) {
+        return '比は半角の整数で入力してください。';
+      }
+      return null;
+    }
     case 'fraction': {
       if (!params.fraction) return '答えを入力してください。';
       // どの入力欄が不足しているのか具体的に案内する
@@ -222,6 +308,7 @@ export function isAnswerInputValid(
     text?: string;
     fraction?: { numerator: string; denominator: string };
     fractionList?: { numerator: string; denominator: string }[];
+    ratio?: { left: string; right: string };
     mixed?: { whole: string; numerator: string; denominator: string };
   },
 ): boolean {
@@ -238,6 +325,7 @@ export function getNormalizedAnswer(
     text?: string;
     fraction?: { numerator: string; denominator: string };
     fractionList?: { numerator: string; denominator: string }[];
+    ratio?: { left: string; right: string };
     mixed?: { whole: string; numerator: string; denominator: string };
   },
 ): string {
@@ -245,6 +333,9 @@ export function getNormalizedAnswer(
     case 'integer':
     case 'decimal':
     case 'string':
+    case 'list':
+    case 'expression':
+    case 'choice':
     case 'yesno':
       return params.text ?? '';
     case 'fraction':
@@ -253,6 +344,10 @@ export function getNormalizedAnswer(
         : '';
     case 'fraction-list':
       return params.fractionList ? fractionListToString(params.fractionList) : '';
+    case 'ratio':
+      return params.ratio
+        ? ratioInputToString(params.ratio.left, params.ratio.right)
+        : '';
     case 'mixed':
       return params.mixed
         ? mixedInputToString(params.mixed.whole, params.mixed.numerator, params.mixed.denominator)

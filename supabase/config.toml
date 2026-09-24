@@ -1,0 +1,5 @@
+project_id = "math-training-app"
+
+# pg_cron + pg_net からの呼び出しは x-daily-report-secret で保護する。
+[functions.daily-study-report]
+verify_jwt = false

@@ -178,6 +178,7 @@ const GENERATORS: ProblemGenerator[] = [
   new ProportionalExpressionGenerator(),
   new ProportionalWordGenerator(),
   new InverseExpressionGenerator(),
+  new ExpressionMeaningGenerator(),
   new InverseWordGenerator(),
   // 小数
   new DecimalMulDecimalGenerator(),
@@ -189,7 +190,6 @@ const GENERATORS: ProblemGenerator[] = [
   new ExpressionMakeGenerator(),
   new ExpressionSubstitutionGenerator(),
   new ExpressionWordToExpressionGenerator(),
-  new ExpressionMeaningGenerator(),
   new ExpressionBlankGenerator(),
   new ExpressionComplexGenerator(),
   // 場合の数
