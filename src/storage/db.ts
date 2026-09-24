@@ -143,15 +143,25 @@ export async function prepareLegacyDailyAnswerSyncTasks(): Promise<void> {
   if (candidates.length === 0) return;
 
   const transaction = db.transaction(['answers', 'dailySync'], 'readwrite');
+  const answerStore = transaction.objectStore('answers');
+  const syncStore = transaction.objectStore('dailySync');
+
+  // IndexedDB transactionは await の合間に inactive になる可能性がある。
+  // 移行対象の全 put を transaction が active なうちに予約してから、
+  // request と transaction の完了をまとめて待つ。
+  const writes: Promise<unknown>[] = [];
   for (const record of candidates) {
     const submissionId = `legacy-${record.id}`;
-    await transaction.objectStore('answers').put({ ...record, submissionId });
-    await transaction.objectStore('dailySync').put({
-      submissionId,
-      answeredAt: record.answeredAt,
-    });
+    writes.push(answerStore.put({ ...record, submissionId }));
+    writes.push(
+      syncStore.put({
+        submissionId,
+        answeredAt: record.answeredAt,
+      }),
+    );
   }
-  await transaction.done;
+
+  await Promise.all([...writes, transaction.done]);
 }
 
 /**
