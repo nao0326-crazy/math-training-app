@@ -1,7 +1,7 @@
 /**
  * 回答済み問題のサーバー同期
  *
- * - LINE の秘密情報・Supabase service-role key はここには置かない
+ * - 通知サービスの秘密情報・Supabase service-role key はここには置かない
  * - ブラウザーに置くのは VITE_SUPABASE_URL と公開 anon/publishable key のみ
  * - 同一 submissionId は Supabase 側で一度だけ受け入れる
  */

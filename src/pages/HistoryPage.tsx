@@ -1,8 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getAllAnswerRecords } from '../storage/db';
 import type { Category } from '../types/problem';
 import type { AnswerRecord } from '../types/history';
 import { calculateStats, categoryLabel, formatPercent, formatTime } from '../utils/stats';
+import { getStudyDateKey } from '../utils/dailyCount';
+import {
+  buildCalendarDays,
+  formatStudyDateLabel,
+  formatStudyMonth,
+  getRecordUnitLabel,
+  getStudyMonth,
+  groupRecordsByStudyDate,
+  shiftStudyMonth,
+  summarizeRecordUnits,
+  toStudyDateKey,
+  type StudyMonth,
+} from '../utils/learningCalendar';
 import {
   findWeakAreas,
   getMostRecentDifficultyLevel,
@@ -10,6 +23,8 @@ import {
   type WeakArea,
 } from '../utils/weakAreas';
 import { difficultyLabel } from '../engine/difficulty/difficulty';
+
+const WEEKDAYS = ['月', '火', '水', '木', '金', '土', '日'] as const;
 
 /**
  * 履歴レコードのフォールバック付き表示用ヘルパー
@@ -60,6 +75,26 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
     };
   }, []);
 
+  const todayKey = getStudyDateKey();
+  const [visibleMonth, setVisibleMonth] = useState<StudyMonth>(() => getStudyMonth(todayKey));
+  const [selectedDateKey, setSelectedDateKey] = useState(todayKey);
+  const recordsByDate = useMemo(() => groupRecordsByStudyDate(records), [records]);
+  const calendarDays = useMemo(
+    () => buildCalendarDays(visibleMonth, todayKey),
+    [todayKey, visibleMonth],
+  );
+  const selectedRecords = useMemo(
+    () => recordsByDate.get(selectedDateKey) ?? [],
+    [recordsByDate, selectedDateKey],
+  );
+  const unitSummary = useMemo(() => summarizeRecordUnits(selectedRecords), [selectedRecords]);
+
+  const changeMonth = (delta: number) => {
+    const nextMonth = shiftStudyMonth(visibleMonth, delta);
+    setVisibleMonth(nextMonth);
+    setSelectedDateKey(toStudyDateKey(nextMonth.year, nextMonth.month, 1));
+  };
+
   if (loading) {
     return (
       <div className="history-page">
@@ -84,6 +119,86 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
   return (
     <div className="history-page">
       <h2>学習履歴</h2>
+
+      <section className="stats-section calendar-section" aria-labelledby="calendar-heading">
+        <div className="calendar-header">
+          <button
+            type="button"
+            className="calendar-nav-button"
+            onClick={() => changeMonth(-1)}
+            aria-label="前の月"
+          >
+            ‹
+          </button>
+          <h3 id="calendar-heading">{formatStudyMonth(visibleMonth)}</h3>
+          <button
+            type="button"
+            className="calendar-nav-button"
+            onClick={() => changeMonth(1)}
+            aria-label="次の月"
+          >
+            ›
+          </button>
+        </div>
+        <div className="calendar-weekdays" aria-hidden="true">
+          {WEEKDAYS.map((weekday) => (
+            <span key={weekday}>{weekday}</span>
+          ))}
+        </div>
+        <div className="calendar-grid" role="grid" aria-label={`${formatStudyMonth(visibleMonth)}の学習カレンダー`}>
+          {calendarDays.map((day, index) => {
+            if (!day) return <span key={`empty-${index}`} className="calendar-cell empty" aria-hidden="true" />;
+            const count = recordsByDate.get(day.dateKey)?.length ?? 0;
+            const isSelected = selectedDateKey === day.dateKey;
+            return (
+              <button
+                key={day.dateKey}
+                type="button"
+                className={`calendar-cell day ${isSelected ? 'selected' : ''} ${day.isToday ? 'today' : ''} ${count > 0 ? 'has-records' : ''}`}
+                onClick={() => setSelectedDateKey(day.dateKey)}
+                aria-label={`${day.day}日、${count}問${day.isToday ? '、今日' : ''}`}
+                aria-pressed={isSelected}
+              >
+                <span className="calendar-day-number">{day.day}</span>
+                {count > 0 && <span className="calendar-day-count">{count}問</span>}
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="stats-section selected-day-section" aria-live="polite">
+        <h3>{formatStudyDateLabel(selectedDateKey)}</h3>
+        <div className="selected-day-total">{selectedRecords.length}問</div>
+        {selectedRecords.length === 0 ? (
+          <p className="no-data">この日はまだ学習記録がありません。</p>
+        ) : (
+          <>
+            <div className="day-unit-summary" aria-label="単元別の問題数">
+              {unitSummary.map((unit) => (
+                <div className="day-unit-chip" key={unit.key}>
+                  <span>{unit.label}</span>
+                  <strong>{unit.count}問</strong>
+                </div>
+              ))}
+            </div>
+            <div className="day-record-list">
+              {[...selectedRecords].reverse().map((record, index) => (
+                <article className="day-record-item" key={`${record.submissionId ?? record.problemId}-${index}`}>
+                  <div className="day-record-meta">
+                    <span>{getRecordUnitLabel(record)}</span>
+                    <span className={record.isCorrect ? 'correct-text' : 'incorrect-text'}>
+                      {record.isCorrect ? '正解' : '不正解'}
+                    </span>
+                    <span>{formatTime(record.answerTimeSec)}</span>
+                  </div>
+                  <p className="day-record-question">{safeQuestion(record)}</p>
+                </article>
+              ))}
+            </div>
+          </>
+        )}
+      </section>
 
       {records.length === 0 ? (
         <div className="empty-state">

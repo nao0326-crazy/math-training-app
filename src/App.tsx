@@ -6,10 +6,12 @@ import DailyProgressNotification from './components/DailyProgressNotification';
 import type { Category } from './types/problem';
 import { REVIEW_QUESTION_COUNT } from './utils/weakAreas';
 import { runDailyAnswerSync } from './services/dailyAnswerSync';
+import MaintenancePage from './components/MaintenancePage';
+import { isMaintenanceMode } from './utils/maintenanceMode';
 
 type Page = 'home' | 'quiz' | 'history';
 
-export default function App() {
+function NormalApp() {
   const [page, setPage] = useState<Page>('home');
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(2);
@@ -91,4 +93,13 @@ export default function App() {
       </main>
     </div>
   );
+}
+
+interface AppProps {
+  /** テスト・Storybook等から表示モードを上書きするための公開フラグ */
+  maintenanceMode?: boolean;
+}
+
+export default function App({ maintenanceMode = isMaintenanceMode() }: AppProps) {
+  return maintenanceMode ? <MaintenancePage /> : <NormalApp />;
 }
