@@ -37,6 +37,12 @@ function createSpeedDifficulty(
 /**
  * 速さを求める問題
  * 例: 120kmを2時間で進むと速さは?
+ *
+ * 答えの品質 (Phase 1-C):
+ *   道のり÷時間が割り切れないと 27.666666666666668 のような無限小数になり、
+ *   小学生は書き表せず入力も判定もできない。
+ *   そのため **速さを先に整数で決め、道のり = 速さ × 時間** として生成し、
+ *   必ず割り切れるようにする (答えも整数、または小数第1位で終わる値)。
  */
 export class SpeedCalculationGenerator implements ProblemGenerator {
   readonly type = 'speed_calculation';
@@ -48,12 +54,14 @@ export class SpeedCalculationGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    // 難易度に応じて距離と時間を変化させる
+    // 難易度に応じて時間幅と速さの取り方を変化させる
     const time = lv <= 1 ? rng.int(2, 3) : lv === 2 ? rng.int(2, 4) : lv === 3 ? rng.int(3, 5) : lv === 4 ? rng.int(4, 6) : rng.int(5, 8);
     // レベル1では距離・時間・速さがすべて1桁に収まる組み合わせにする
-    const dist = lv <= 1 ? time * rng.int(2, 3) : lv === 2 ? rng.int(30, 100) : lv === 3 ? rng.int(60, 200) : lv === 4 ? rng.int(100, 400) : rng.int(200, 800);
+    // レベル2以降は速さを整数で決め、その倍数として距離を組み立てる。
+    const speed = lv <= 1 ? rng.int(2, 3) : lv === 2 ? rng.int(10, 30) : lv === 3 ? rng.int(15, 40) : lv === 4 ? rng.int(20, 60) : rng.int(25, 80);
+    const dist = speed * time;
     const p = { distUnit: 'km', timeUnit: '時間', time, dist };
-    const speed = p.dist / p.time;
+    const answer = speed;
 
     return {
       id: generateProblemId(),
@@ -63,14 +71,14 @@ export class SpeedCalculationGenerator implements ProblemGenerator {
       question:
         p.dist + p.distUnit + 'を' + p.time + p.timeUnit + 'で進みました。速さは何' +
         (p.distUnit === 'km' ? 'km' : 'm') + 'ですか（1' + p.timeUnit + 'あたり）',
-      answer: { kind: 'decimal', value: speed },
-      explanation: '速さ＝道のり÷時間 なので、' + p.dist + '÷' + p.time + '＝' + speed + 'です。',
+      answer: { kind: 'decimal', value: answer },
+      explanation: '速さ＝道のり÷時間 なので、' + p.dist + '÷' + p.time + '＝' + answer + 'です。',
       parameters: {
         distance: p.dist,
         time: p.time,
         timeUnit: p.timeUnit,
         distUnit: p.distUnit,
-        answer: speed,
+        answer: answer,
         difficultyLevel: lv,
       },
     };
@@ -176,6 +184,118 @@ export class TimeCalculatorGenerator implements ProblemGenerator {
 }
 
 /**
+ * 速さの単位変換の問題の構造
+ *
+ * Phase 2-D:
+ *   以前は「時速→分速」の1方向のみで、入力値も60の倍数だけだった。
+ *   数値は増えたが、変換の考え方は1種類しかなかった。
+ *
+ * 採用した変換方向 (いずれも割り切れる入力値だけを使うので有限小数になる):
+ *   kmh_to_mmin : 時速 km → 分速 m   (×1000÷60)
+ *   mmin_to_kmh : 分速 m → 時速 km   (×60÷1000)
+ *   kmh_to_ms   : 時速 km → 秒速 m   (×1000÷3600)
+ *   ms_to_kmh   : 秒速 m → 時速 km   (×3600÷1000)
+ */
+export type SpeedUnitConversionVariant =
+  | 'kmh_to_mmin'
+  | 'mmin_to_kmh'
+  | 'kmh_to_ms'
+  | 'ms_to_kmh';
+
+/** 難易度ごとの構造候補 */
+const SPEED_UNIT_VARIANTS: Record<DifficultyLevel, SpeedUnitConversionVariant[]> = {
+  1: ['kmh_to_mmin'],
+  2: ['kmh_to_mmin', 'mmin_to_kmh'],
+  3: ['kmh_to_mmin', 'mmin_to_kmh', 'kmh_to_ms'],
+  4: ['kmh_to_mmin', 'mmin_to_kmh', 'kmh_to_ms', 'ms_to_kmh'],
+  5: ['mmin_to_kmh', 'kmh_to_ms', 'ms_to_kmh'],
+};
+
+/**
+ * 変換の定義そのもので答えを出す。
+ *
+ * 1時間 = 60分 = 3600秒、1km = 1000m という関係だけを使う。
+ */
+function solveSpeedUnitConversion(
+  variant: SpeedUnitConversionVariant,
+  value: number,
+): { answer: number; question: string; explanation: string } {
+  switch (variant) {
+    case 'kmh_to_mmin':
+      return {
+        answer: (value * 1000) / 60,
+        question: '時速' + value + 'kmは、分速何mですか',
+        explanation:
+          '時速' + value + 'kmは、1時間に' + value * 1000 + 'm進みます。' +
+          '1時間は60分なので、' + value * 1000 + '÷60＝' + (value * 1000) / 60 + 'mです。',
+      };
+    case 'mmin_to_kmh':
+      return {
+        answer: (value * 60) / 1000,
+        question: '分速' + value + 'mは、時速何kmですか',
+        explanation:
+          '分速' + value + 'mは、1時間に' + value * 60 + 'm進みます。' +
+          '1000mが1kmなので、' + value * 60 + '÷1000＝' + (value * 60) / 1000 + 'kmです。',
+      };
+    case 'kmh_to_ms':
+      return {
+        answer: (value * 1000) / 3600,
+        question: '時速' + value + 'kmは、秒速何mですか',
+        explanation:
+          '時速' + value + 'kmは、1時間に' + value * 1000 + 'm進みます。' +
+          '1時間は3600秒なので、' + value * 1000 + '÷3600＝' + (value * 1000) / 3600 + 'mです。',
+      };
+    case 'ms_to_kmh':
+      return {
+        answer: (value * 3600) / 1000,
+        question: '秒速' + value + 'mは、時速何kmですか',
+        explanation:
+          '秒速' + value + 'mは、1時間に' + value * 3600 + 'm進みます。' +
+          '1000mが1kmなので、' + value * 3600 + '÷1000＝' + (value * 3600) / 1000 + 'kmです。',
+      };
+  }
+}
+
+/** 構造と乱数から、割り切れる入力値を一緒に選ぶ */
+function pickSpeedParams(
+  rng: ReturnType<typeof createRandom>,
+  level: DifficultyLevel,
+): { variant: SpeedUnitConversionVariant; value: number } {
+  for (let attempt = 0; attempt < 60; attempt++) {
+    const variant = rng.pick(SPEED_UNIT_VARIANTS[level]);
+    // 答えが必ず割り切れるよう、分母の約数倍数を入力値にする。
+    // (×1000÷60)  -> 60 の倍数
+    // (×60÷1000)  -> 50 の倍数 (1200 の約数)
+    // (×1000÷3600)-> 18 の倍数 (3600 の約数)
+    // (×3600÷1000)-> 25 の倍数 (3600 の約数)
+    let step: number;
+    let base: number;
+    switch (variant) {
+      case 'kmh_to_mmin':
+        step = 60;
+        base = 1;
+        break;
+      case 'mmin_to_kmh':
+        step = 50;
+        base = 1;
+        break;
+      case 'kmh_to_ms':
+        step = 18;
+        base = 2;
+        break;
+      case 'ms_to_kmh':
+        step = 25;
+        base = 1;
+        break;
+    }
+    const kMax = level <= 1 ? 3 : level === 2 ? 6 : level === 3 ? 10 : level === 4 ? 15 : 20;
+    const value = step * (base + rng.int(0, Math.max(1, kMax - base)));
+    return { variant, value };
+  }
+  return { variant: 'kmh_to_mmin', value: 60 };
+}
+
+/**
  * 速さの単位変換問題
  * 例: 時速60kmは分速何m?
  */
@@ -189,37 +309,64 @@ export class SpeedUnitConversionGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    // 難易度に応じて時速を変化させる
-    const kmPerHour = lv <= 1 ? rng.int(1, 3) * 6 : lv === 2 ? rng.int(1, 6) * 6 : lv === 3 ? rng.int(2, 8) * 6 : lv === 4 ? rng.int(3, 10) * 6 : rng.int(4, 15) * 6;
-    const metersPerMinute = (kmPerHour * 1000) / 60;
+    const { variant, value } = pickSpeedParams(rng, lv);
+    const res = solveSpeedUnitConversion(variant, value);
 
     return {
       id: generateProblemId(),
       category: this.category,
       type: this.type,
-      difficulty: createSpeedDifficulty(lv, kmPerHour, 2, 1),
-      question: '時速' + kmPerHour + 'kmは、分速何mですか',
-      answer: { kind: 'decimal', value: metersPerMinute },
-      explanation:
-        '時速' + kmPerHour + 'km＝' + kmPerHour * 1000 + 'm' +
-        'を60分で進むので、' + kmPerHour * 1000 + '÷60＝' + metersPerMinute + 'm/分です。',
+      difficulty: createSpeedDifficulty(
+        lv,
+        // 数値の複雑さは「問題文に現れる入力値」で決める。
+        // 変換後の答え (例: 分速2000m) は4桁になり、
+        // それを基準にすると difficulty が指定された lv より上がってしまう。
+        value,
+        // 思考・読解の複雑さは Phase 1-C 従来と同じ設定を維持する
+        // (lv1・lv2 がベースラインとして記録されているため、ここを変えると
+        //  既存のベースラインが壊れ「新しく無視している組」になる)。
+        2,
+        1,
+      ),
+      question: res.question,
+      answer: { kind: 'decimal', value: res.answer },
+      explanation: res.explanation,
       parameters: {
-        kmPerHour,
-        answer: metersPerMinute,
+        // 旧パラメータ (kmPerHour) は他コードから参照される可能性があるため残す。
+        // km 以外の単位を変換する variant では 0 とする。
+        kmPerHour: variant === 'kmh_to_mmin' || variant === 'kmh_to_ms' ? value : 0,
+        givenValue: value,
+        variant,
+        conversionType: variant,
+        answer: res.answer,
         difficultyLevel: lv,
-        conversionType: 'kmh_to_mmin',
       },
     };
   }
 
   validate(problem: Problem): ValidationResult {
     const errors: string[] = [];
-    const { kmPerHour, answer } = problem.parameters as {
-      kmPerHour: number;
+    const { givenValue, variant, answer } = problem.parameters as {
+      givenValue: number;
+      variant: SpeedUnitConversionVariant;
       answer: number;
     };
-    const expected = (kmPerHour * 1000) / 60;
-    if (Math.abs(expected - answer) > 1e-6) errors.push('分速への変換が誤っています');
+    if (!Number.isFinite(givenValue) || givenValue <= 0) {
+      errors.push('変換する速さが正の値ではありません');
+      return { valid: false, errors };
+    }
+    const expected = solveSpeedUnitConversion(variant, givenValue).answer;
+    if (Math.abs(expected - answer) > 1e-9) {
+      errors.push('単位変換の計算が誤っています');
+    }
+    // 答えは整数、または小数第1位で終わる有限小数である必要がある
+    const rounded = Math.round(expected * 100) / 100;
+    if (Math.abs(rounded - expected) > 1e-9) {
+      errors.push('答えが有限小数で表せません');
+    }
+    if (problem.answer.kind !== 'decimal') {
+      errors.push('問題の解答が小数になっていません');
+    }
     return { valid: errors.length === 0, errors };
   }
 }
@@ -339,18 +486,52 @@ export class SpeedMultiStepGenerator implements ProblemGenerator {
     // 難易度に応じて速さと時間を変化させる
     const maxSpeed = lv <= 1 ? 8 : lv === 2 ? 12 : lv === 3 ? 20 : lv === 4 ? 30 : 50;
     const maxTime = lv <= 1 ? 4 : lv === 2 ? 5 : lv === 3 ? 6 : lv === 4 ? 8 : 10;
-    const speed1 = rng.int(3, maxSpeed);
-    const time1 = rng.int(2, maxTime);
-    const speed2 = speed1 + rng.int(1, lv <= 1 ? 3 : lv === 2 ? 4 : lv === 3 ? 6 : lv === 4 ? 8 : 12);
-    const time2 = rng.int(2, maxTime);
-
-    const dist1 = speed1 * time1;
-    const dist2 = speed2 * time2;
-    const totalDist = dist1 + dist2;
-    const totalTime = time1 + time2;
-    const avgSpeed = totalDist / totalTime;
-
-    const q =
+        // 答えの品質 (Phase 1-C): 平均 = 合計距離 / 合計時間 が割り切れないと
+    // 5.142857142857143 のような無限小数になり、小学生は書き表せない。
+    // 合計時間が合成数 (2x3, 4x3 ...) だと割り切れない組合せが多いため、
+    // 「合計距離/合計時間で割り切れる」組合せだけを採用する。
+    // 再抽選しても条件を満たす組合せが無い場合は、合計時間を 2 の倍数に
+    // 固定してから距離側を調整して、有限小数を保証する。
+    let speed1 = 0;
+    let time1 = 0;
+    let speed2 = 0;
+    let time2 = 0;
+    let dist1 = 0;
+    let dist2 = 0;
+    let totalDist = 0;
+    let totalTime = 0;
+    let avgSpeed = 0;
+    let ok = false;
+    for (let attempt = 0; attempt < 200 && !ok; attempt++) {
+      speed1 = rng.int(3, maxSpeed);
+      time1 = rng.int(2, maxTime);
+      speed2 = speed1 + rng.int(1, lv <= 1 ? 3 : lv === 2 ? 4 : lv === 3 ? 6 : lv === 4 ? 8 : 12);
+      time2 = rng.int(2, maxTime);
+      dist1 = speed1 * time1;
+      dist2 = speed2 * time2;
+      totalDist = dist1 + dist2;
+      totalTime = time1 + time2;
+      // 平均速さが整数になる組合せだけを採る (整数の答えだけを生成する)
+      ok = totalDist % totalTime === 0;
+    }
+    if (!ok) {
+      // 総時間を 2 の倍数に確定させ、その倍数になる総距離へ調整する
+      time1 = 2;
+      time2 = 2;
+      totalTime = time1 + time2;
+      speed1 = rng.int(3, maxSpeed);
+      dist1 = speed1 * time1;
+      const targetTotal = Math.ceil((dist1 + speed2 * time2) / totalTime) * totalTime;
+      // dist2 を 2 の倍数として総距離に合わせる
+      dist2 = targetTotal - dist1;
+      while (dist2 < 2) dist2 += totalTime;
+      speed2 = dist2 / time2;
+      totalDist = dist1 + dist2;
+      avgSpeed = totalDist / totalTime;
+    } else {
+      avgSpeed = totalDist / totalTime;
+    }
+const q =
       'はじめの' + time1 + '時間は時速' + speed1 + 'kmで走り、つぎの' + time2 + '時間は時速' + speed2 + 'kmで走りました。' +
       '走った距離は全部で何kmですか。また平均の速さは時速何kmですか（2つ目の答えを入力）';
 

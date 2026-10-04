@@ -164,6 +164,11 @@ export class FractionMulIntegerGenerator implements ProblemGenerator {
 
     if (numerator === 0 || denominator === 0) return null;
 
+    // 分数×整数なのに分数にならない (整数に約分される) 場合を弾く。
+    // 例: 12/4 は問題文が「3に8をかける」となり、
+    // 整数乗算 (integer_multiplication) と同じ問題になってしまう。
+    if (reduceFraction(numerator, denominator).denominator === 1) return null;
+
     const result = reduceFraction(numerator * integer, denominator);
     const answer = improperToAnswer(result.numerator, result.denominator);
     const expStr =
@@ -1043,12 +1048,69 @@ export class FractionMixedConvertGenerator implements ProblemGenerator {
 
   validate(problem: Problem): ValidationResult {
     const errors: string[] = [];
-    const { denominator, answerDenominator } = problem.parameters as {
-      denominator: number;
-      answerDenominator: number;
+    const params = problem.parameters as {
+      numerator?: number;
+      denominator?: number;
+      whole?: number;
+      answerNumerator?: number;
+      answerDenominator?: number;
     };
-    if (answerDenominator !== denominator) {
-      errors.push('分母が一致しません');
+    const { numerator, denominator, answerNumerator, answerDenominator } = params;
+    if (
+      !Number.isInteger(numerator) || !Number.isInteger(denominator) ||
+      !Number.isInteger(answerNumerator) || !Number.isInteger(answerDenominator)
+    ) {
+      errors.push('変換の数値が整数ではありません');
+      return { valid: errors.length === 0, errors };
+    }
+
+    // Number.isInteger のガードでは型が狭まらないため、
+    // 検証済みの値をローカルに確定させてから使う
+    const n = numerator as number;
+    const d = denominator as number;
+    const an = answerNumerator as number;
+    const ad = answerDenominator as number;
+
+    // この型は「仮分数→帯分数」と「帯分数→仮分数」の両方を出すが、
+    // answer.kind でどちらの変換か判別できる。どちらの場合も
+    // 「変換の前後で分数の値が変わらないこと」を数学的に確認する。
+    if (problem.answer.kind === 'mixed') {
+      // 仮分数 → 帯分数: 入力は numerator/denominator
+      // (帯分数の答えは簡約されるため、答えの分母は入力と一致しなくてよい)
+      const expected = toMixedNumber(n, d);
+      // 帯分数 whole と an/ad が元の n/d と同じ値かを交差乗算で比べる
+      const isSameValue =
+        (expected.whole * ad + an) * d === n * ad;
+      if (!isSameValue) {
+        errors.push(`帯分数への変換が誤っています (${n}/${d})`);
+      }
+      if (
+        problem.answer.whole !== expected.whole ||
+        problem.answer.numerator !== an ||
+        problem.answer.denominator !== ad
+      ) {
+        errors.push('問題の解答がパラメータと一致しません');
+      }
+    } else if (problem.answer.kind === 'fraction') {
+      // 帯分数 → 仮分数: 入力は whole と numerator/denominator
+      // (仮分数の答えは簡約されるため、分母は一致しなくてよい)
+      const whole = params.whole;
+      if (typeof whole !== 'number' || !Number.isInteger(whole)) {
+        errors.push('整数部が設定されていません');
+      } else {
+        const improperRaw = whole * d + n;
+        if (an * d !== improperRaw * ad || ad <= 0) {
+          errors.push(`仮分数への変換が誤っています (${whole}と${n}/${d})`);
+        }
+      }
+      if (
+        problem.answer.numerator !== an ||
+        problem.answer.denominator !== ad
+      ) {
+        errors.push('問題の解答がパラメータと一致しません');
+      }
+    } else {
+      errors.push('答えが分数 (fraction / mixed) になっていません');
     }
     return { valid: errors.length === 0, errors };
   }
@@ -1134,4 +1196,340 @@ export class FractionBigSmallGenerator implements ProblemGenerator {
     }
     return { valid: errors.length === 0, errors };
   }
+}
+
+/* ------------------------------------------------------------------------- *
+ * Phase 2-T: 単位分数の導入 (3年 A(6))
+ *
+ * 学習指導要領解説 小学校算数編 (一次資料):
+ *   第3学年 A(6)「分数の意味と表し方」/ 分数の意味と表し方／単位分数の幾つ分／
+ *   簡単な場合の分数の加法，減法
+ *   (解説: 「分数が単位分数の幾つ分かで表せることを指導する」)
+ *
+ * 既存の fraction_* は計算 (乗除・約分・通分・比較) が中心で、
+ * 「全体を等しく分けたうちの1つ」という分数の導入を扱っていなかったため新設する。
+ * 計算には入らないので、通分・約分・四則には進まない。
+ * ------------------------------------------------------------------------- */
+
+export type FractionUnitIntroVariant =
+  /** 分母が表す等分の数と、単位分数の関係 */
+  | 'meaning'
+  /** 分数が単位分数の何個分か */
+  | 'how_many_units'
+  /** 指定した個数の単位分数の和 */
+  | 'count_units'
+  /** 分数を分子・分母の形で表す */
+  | 'read_fraction';
+
+export class FractionUnitIntroGenerator implements ProblemGenerator {
+  readonly type = 'fraction_unit_intro';
+  readonly category = 'fraction' as const;
+  readonly description = '単位分数の導入';
+
+  generate(config?: GenerationConfig): Problem {
+    const rng = createRandom(config?.seed);
+    const lv = config?.difficulty ?? (2 as DifficultyLevel);
+
+    // 3年導入なので分母は小さめに保つ (lvを上げても分母は大きくしすぎない)
+    const maxDen = lv <= 2 ? 6 : 8;
+    const usable: FractionUnitIntroVariant[] =
+      lv <= 2
+        ? ['meaning', 'how_many_units', 'read_fraction']
+        : ['meaning', 'how_many_units', 'count_units', 'read_fraction'];
+
+    for (let attempt = 0; attempt < 60; attempt++) {
+      const variant = rng.pick(usable);
+      // 分母は2以上、分子は分母以下にする (2/n, 3/n のような導入に絞る)
+      const den = rng.int(2, maxDen);
+      const num = rng.int(1, den);
+      const frac = (a: number, b: number): string => a + '/' + b;
+      // lv1 では推論の負荷も1に抑える (既定の2だと要求レベルを外した問題になる)
+      const reasoning = (lv <= 1 ? 1 : 2) as DifficultyLevel;
+
+      if (variant === 'meaning') {
+        // 例: 全体を8等分したときの1つ分は何分の一ですか
+        return {
+          id: generateProblemId(),
+          category: this.category,
+          type: this.type,
+          difficulty: createFractionDifficulty(lv, num, reasoning),
+          question: 'ある量を' + den + '等分したときの1つ分は、何分の一ですか。',
+          answer: { kind: 'string', value: frac(1, den) },
+          explanation:
+            '全体を' + den + '等分すると、1つ分は全体の 1/' + den + ' です。' +
+            '分母の ' + den + ' は「全体を' + den + '等分した」ことを表します。',
+          parameters: { variant, num: 1, den, answer: frac(1, den), difficultyLevel: lv },
+        };
+      }
+
+      if (variant === 'how_many_units') {
+        // 例: 3/8 は 1/8 がいくつあるか
+        return {
+          id: generateProblemId(),
+          category: this.category,
+          type: this.type,
+          difficulty: createFractionDifficulty(lv, num, reasoning),
+          question: frac(num, den) + ' は、1/' + den + ' いくつ分ですか。',
+          answer: { kind: 'integer', value: num },
+          explanation:
+            '分母の ' + den + ' が同じなので、分子の ' + num +
+            ' は 1/' + den + ' が ' + num + ' 個分あることを表します。',
+          parameters: { variant, num, den, answer: num, difficultyLevel: lv },
+        };
+      }
+
+      if (variant === 'count_units') {
+        // 例: 1/6 を4個集めると (k は分母未満に留める。n/n は値が1になり導入の意図と異なる)
+        const k = den > 2 ? rng.int(2, den - 1) : 1;
+        return {
+          id: generateProblemId(),
+          category: this.category,
+          type: this.type,
+          difficulty: createFractionDifficulty(lv, k, reasoning),
+          question: '1/' + den + ' を ' + k + ' 個集めると、何分の一になりますか。',
+          answer: { kind: 'string', value: frac(k, den) },
+          explanation:
+            '1/' + den + ' が ' + k + ' 個あるので、分子が ' + k + ' の ' +
+            frac(k, den) + ' になります。分母は' + den + 'のままです。',
+          parameters: { variant, num: k, den, answer: frac(k, den), difficultyLevel: lv },
+        };
+      }
+
+      // read_fraction: 分子と分母を分けて理解する
+      return {
+        id: generateProblemId(),
+        category: this.category,
+        type: this.type,
+        difficulty: createFractionDifficulty(lv, num, reasoning),
+        question: frac(num, den) + ' の分母は何ですか。',
+        answer: { kind: 'integer', value: den },
+        explanation:
+          frac(num, den) + ' の分母 ' + den + ' は、下の数が表す ' + den +
+          ' です。全体を' + den + '等分していることを表します。',
+        parameters: { variant, num, den, answer: den, difficultyLevel: lv },
+      };
+    }
+
+    throw new Error('単位分数の問題を生成できませんでした');
+  }
+
+  validate(problem: Problem): ValidationResult {
+    const errors: string[] = [];
+    const params = problem.parameters as {
+      variant: FractionUnitIntroVariant;
+      num: number;
+      den: number;
+      answer: number | string;
+    };
+    const { variant, num, den, answer } = params;
+    if (!(den >= 2)) errors.push('分母が2以上ではありません');
+    if (!(num >= 1 && num <= den)) errors.push('分子の範囲が不正です');
+
+    if (variant === 'meaning') {
+      if (answer !== '1/' + den) errors.push('単位分数の表し方が誤っています');
+    } else if (variant === 'how_many_units') {
+      if (Number(answer) !== num) errors.push('単位分数の個数が誤っています');
+    } else if (variant === 'count_units') {
+      if (answer !== num + '/' + den) errors.push('集めた分数の表し方が誤っています');
+    } else if (Number(answer) !== den) {
+      errors.push('分母の読み取りが誤っています');
+    }
+    return { valid: errors.length === 0, errors };
+  }
+}
+
+// ===== 異分母の分数の加法・減法 (第5学年) =====
+
+/** 異分母の分数の加減算の variant */
+type FractionAddSubVariant = 'add' | 'subtract' | 'add_reduces' | 'add_improper' | 'fill_blank';
+
+/** variant ごとに必要になる最低難易度 */
+const FRACTION_ADDSUB_MIN_LEVEL: Record<FractionAddSubVariant, DifficultyLevel> = {
+  add: 1,
+  subtract: 1,
+  add_reduces: 2,
+  add_improper: 3,
+  fill_blank: 4,
+};
+
+/** variant ごとの思考の負荷 (要求難易度を超えない) */
+const FRACTION_ADDSUB_REASONING: Record<FractionAddSubVariant, DifficultyLevel> = {
+  add: 2,
+  subtract: 2,
+  add_reduces: 3,
+  add_improper: 2,
+  fill_blank: 3,
+};
+
+/** 2つの分数の最小公倍数 */
+function lcmOf(a: number, b: number): number {
+  return (a * b) / gcd(a, b);
+}
+
+/**
+ * 異分母の分数の加法・減法
+ *
+ * 第5学年「異分母分数の加法及び減法」に対応する。
+ * 通分してから分子を足し引きし、最後に約分する手順を問題と解説で示す。
+ * 入力は真分数に限り、答えは既約分数で返す (仮分数も可)。
+ */
+export class FractionAddSubGenerator implements ProblemGenerator {
+  readonly type = 'fraction_add_sub';
+  readonly category = 'fraction' as const;
+  readonly description = '異分母の分数の加法・減法';
+
+  generate(config?: GenerationConfig): Problem {
+    const rng = createRandom(config?.seed);
+    const lv = config?.difficulty ?? (2 as DifficultyLevel);
+    const usable = (Object.keys(FRACTION_ADDSUB_MIN_LEVEL) as FractionAddSubVariant[])
+      .filter((v) => FRACTION_ADDSUB_MIN_LEVEL[v] <= lv);
+
+    for (let attempt = 0; attempt < 120; attempt++) {
+      const variant = rng.pick(usable);
+      const built = buildFractionAddSub(variant, rng, lv);
+      if (built) return built;
+    }
+    throw new Error('異分母の分数の加法・減法の問題を生成できませんでした');
+  }
+
+  validate(problem: Problem): ValidationResult {
+    const errors: string[] = [];
+    const params = problem.parameters as {
+      variant: FractionAddSubVariant;
+      operation: 'add' | 'subtract';
+      n1: number;
+      d1: number;
+      n2: number;
+      d2: number;
+      numerator: number;
+      denominator: number;
+      commonDenominator: number;
+      difficultyLevel: DifficultyLevel;
+    };
+    const { operation, n1, d1, n2, d2, numerator, denominator } = params;
+
+    if (!(d1 >= 2) || !(d2 >= 2)) errors.push('分母が2以上ではありません');
+    if (!(n1 >= 1 && n1 < d1)) errors.push('1つめが真分数ではありません: ' + n1 + '/' + d1);
+    if (!(n2 >= 1 && n2 < d2)) errors.push('2つめが真分数ではありません: ' + n2 + '/' + d2);
+
+    // 独立に再計算する
+    const l = lcmOf(d1, d2);
+    if (l !== params.commonDenominator) {
+      errors.push('通分後の分母が不正です: ' + String(params.commonDenominator) + ' (期待値 ' + l + ')');
+    }
+    const a = (n1 * l) / d1;
+    const b = (n2 * l) / d2;
+    const raw = operation === 'add' ? a + b : a - b;
+    if (raw <= 0) errors.push('計算結果が正ではありません: ' + String(raw));
+    const reduced = reduceFraction(raw, l);
+    if (reduced.numerator !== numerator || reduced.denominator !== denominator) {
+      errors.push('答えが一致しません: ' + numerator + '/' + denominator
+        + ' (期待値 ' + reduced.numerator + '/' + reduced.denominator + ')');
+    }
+    if (!isValidFraction(numerator, denominator)) {
+      errors.push('答えが約分されていません: ' + numerator + '/' + denominator);
+    }
+    if (problem.answer.kind !== 'fraction'
+      || problem.answer.numerator !== numerator
+      || problem.answer.denominator !== denominator) {
+      errors.push('problem.answer が parameters と一致しません');
+    }
+    return { valid: errors.length === 0, errors };
+  }
+}
+
+/** 乱数ジェネレータの構造的部分型 (SeededRandom を直接公開せずに使う) */
+type Rng = { int: (min: number, max: number) => number; pick: <T>(array: readonly T[]) => T };
+
+/**
+ * 異分母の分数の加減算の1問を組み立てる。
+ * 条件を満たさない場合は null を返して再試行させる。
+ */
+function buildFractionAddSub(
+  variant: FractionAddSubVariant,
+  rng: Rng,
+  lv: DifficultyLevel,
+): Problem | null {
+  // 分子は小さく保つ。分母は 2〜6 程度まで。
+  const maxDen = lv <= 1 ? 4 : lv === 2 ? 6 : lv === 3 ? 8 : 10;
+  for (let inner = 0; inner < 30; inner++) {
+    const d1 = rng.int(2, maxDen);
+    const d2 = rng.int(2, maxDen);
+    if (d1 === d2) continue;
+    const n1 = rng.int(1, d1 - 1);
+    const n2 = rng.int(1, d2 - 1);
+
+    const l = lcmOf(d1, d2);
+    if (l > 36) continue; // 分母が大きすぎると教材として扱わない
+    const a = (n1 * l) / d1;
+    const b = (n2 * l) / d2;
+
+    let operation: 'add' | 'subtract';
+    if (variant === 'fill_blank') operation = 'add';
+    else if (variant === 'subtract' || variant === 'add_reduces') operation = 'subtract';
+    else operation = 'add';
+
+    // 減法は結果が正になる組合せだけ
+    if (operation === 'subtract' && a <= b) continue;
+
+    const raw = operation === 'add' ? a + b : a - b;
+    if (raw <= 0) continue;
+    const reduced = reduceFraction(raw, l);
+    if (!isValidFraction(reduced.numerator, reduced.denominator)) continue;
+
+    // variant ごとの答えの形を保証する
+    const isProper = reduced.numerator < reduced.denominator;
+    const reducedForm = gcd(raw, l) > 1;
+    if (variant === 'add' && (!isProper || reducedForm)) continue;
+    if (variant === 'add_reduces' && (!reducedForm || !isProper)) continue;
+    if (variant === 'add_improper' && isProper) continue;
+    if (variant === 'subtract' && (!isProper || reducedForm)) continue;
+    if (variant === 'fill_blank' && reducedForm) continue;
+
+    // 数値の複雑度が要求難易度を超えないこと (分母が大きくなりすぎるudia)
+    if (numberSizeToComplexity(Math.max(reduced.numerator, reduced.denominator)) > lv) continue;
+
+    const f1 = n1 + '/' + d1;
+    const f2 = n2 + '/' + d2;
+    const sign = operation === 'add' ? '＋' : '−';
+    const question = variant === 'fill_blank'
+      ? '□ ＋ ' + f2 + ' = ' + f1 + ' のとき、□ に入る分数はいくつですか。'
+      : f1 + ' ' + sign + ' ' + f2 + ' を計算し、約分した答えを書きなさい。';
+
+    const step1 = n1 + '/' + d1 + ' と ' + n2 + '/' + d2
+      + ' の最小公倍数は ' + l + ' です。分母を ' + l + ' にそろえます。';
+    const step2 = (n1 * (l / d1)) + '/' + l + ' ' + sign + ' ' + (n2 * (l / d2)) + '/' + l
+      + ' = ' + raw + '/' + l;
+    const step3 = reducedForm
+      ? '分子と分母を ' + gcd(raw, l) + ' で割ると、'
+        + reduced.numerator + '/' + reduced.denominator + ' になります。'
+      : 'これ以上約分できないので、答えは ' + reduced.numerator + '/' + reduced.denominator + ' です。';
+
+    return {
+      id: generateProblemId(),
+      category: 'fraction' as const,
+      type: 'fraction_add_sub',
+      difficulty: createFractionDifficulty(
+        lv,
+        Math.max(reduced.numerator, reduced.denominator),
+        Math.min(lv, FRACTION_ADDSUB_REASONING[variant]) as DifficultyLevel,
+      ),
+      question,
+      answer: { kind: 'fraction', numerator: reduced.numerator, denominator: reduced.denominator },
+      explanation: step1 + ' ' + step2 + ' ' + step3,
+      parameters: {
+        variant,
+        operation,
+        n1,
+        d1,
+        n2,
+        d2,
+        numerator: reduced.numerator,
+        denominator: reduced.denominator,
+        commonDenominator: l,
+        difficultyLevel: lv,
+      },
+    };
+  }
+  return null;
 }

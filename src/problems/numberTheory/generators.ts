@@ -16,10 +16,8 @@ import {
   isPrime,
   getPrimesInRange,
   getCommonDivisors,
-  getCommonMultiples,
   gcd,
   lcm,
-  getMultiples,
 } from '../../utils/numberTheory';
 import {
   createDifficulty,
@@ -185,6 +183,137 @@ export class DivisorsCountGenerator implements ProblemGenerator {
 }
 
 /**
+ * 倍数を求める問題の問題の構造
+ *
+ * Phase 2-D:
+ *   以前は「nの倍数を小さい方から count こ」1種類のみで、count も 3 か 4 の
+ *   2値しかなく、difficulty を上げても数字が大きくなるだけだった。
+ *   既存の divisors_finding (「nの約数をすべて」) と同じ「列挙」型の問題は
+ *   新たに作らない。ここに置くのは「倍数」固有の学習内容だけにして、
+ *   約数側の型と役割が重ならないようにする。
+ */
+export type MultiplesFindingVariant =
+  /** 既存型: nの倍数を小さい方から count こ (列挙) */
+  | 'list_first_n'
+  /** n以下の倍数をすべて (上限があるので列挙が有限に決まる) */
+  | 'list_up_to'
+  /** lo〜hi の間にある nの倍数をすべて (区間の両端を考える必要がある) */
+  | 'list_between'
+  /** nの倍数を小さい方から k番目はいくつ (逆算の考え方) */
+  | 'nth_multiple'
+  /** 1から hi までにある nの倍数はいくつ (数える) */
+  | 'count_in_range';
+
+/** 難易度ごとの構造候補 (区間や数え上げを考えるものほど後段に置く) */
+const MULTIPLES_FINDING_VARIANTS: Record<DifficultyLevel, MultiplesFindingVariant[]> = {
+  1: ['list_first_n', 'list_up_to'],
+  2: ['list_first_n', 'list_up_to', 'list_between'],
+  3: ['list_first_n', 'list_up_to', 'list_between', 'nth_multiple'],
+  4: ['list_first_n', 'list_up_to', 'list_between', 'nth_multiple', 'count_in_range'],
+  5: ['list_up_to', 'list_between', 'nth_multiple', 'count_in_range'],
+};
+
+/** 構造ごとの答えを求める。倍数の定義 (n×整数) そのものから数え直す。 */
+function solveMultiplesFinding(
+  variant: MultiplesFindingVariant,
+  n: number,
+  arg1: number,
+  arg2: number,
+): {
+  answerText: string;
+  answerKind: 'string' | 'integer';
+  question: string;
+  explanation: string;
+} {
+  switch (variant) {
+    case 'list_first_n': {
+      const list: number[] = [];
+      for (let i = 1; i <= arg1; i++) list.push(n * i);
+      return {
+        answerText: list.join(', '),
+        answerKind: 'string',
+        question: `${n}の倍数を小さい方から${arg1}こ答えなさい`,
+        explanation: `${n}の倍数は、${n}×1、${n}×2、… なので、${list.join(', ')} です。`,
+      };
+    }
+    case 'list_up_to': {
+      const list: number[] = [];
+      for (let k = n; k <= arg1; k += n) list.push(k);
+      return {
+        answerText: list.join(', '),
+        answerKind: 'string',
+        question: `${arg1}以下の${n}の倍数をすべて答えなさい`,
+        explanation: `${arg1}以下の${n}の倍数は、${list.join(', ')} です。`,
+      };
+    }
+    case 'list_between': {
+      const list: number[] = [];
+      for (let k = arg1; k <= arg2; k++) if (k % n === 0) list.push(k);
+      return {
+        answerText: list.join(', '),
+        answerKind: 'string',
+        question: `${arg1}から${arg2}までの間にある${n}の倍数をすべて答えなさい`,
+        explanation: `${arg1}から${arg2}までの${n}の倍数は、${list.join(', ')} です。`,
+      };
+    }
+    case 'nth_multiple':
+      return {
+        answerText: String(n * arg1),
+        answerKind: 'integer',
+        question: `${n}の倍数を小さい方から${arg1}番目は何ですか`,
+        explanation: `${n}の倍数は${n}×1、${n}×2、… なので、${arg1}番目は${n}×${arg1}＝${n * arg1}です。`,
+      };
+    case 'count_in_range': {
+      const list: number[] = [];
+      for (let k = n; k <= arg1; k += n) list.push(k);
+      return {
+        answerText: String(list.length),
+        answerKind: 'integer',
+        question: `1から${arg1}までにある${n}の倍数はいくつありますか`,
+        explanation: `1から${arg1}までの${n}の倍数は${list.join(', ')}で、全部で${list.length}こあります。`,
+      };
+    }
+  }
+}
+/** 難易度・乱数から、成立する (variant, n, arg1, arg2) を選び出す */
+function pickMultiplesParams(
+  rng: ReturnType<typeof createRandom>,
+  level: DifficultyLevel,
+): { variant: MultiplesFindingVariant; n: number; arg1: number; arg2: number } {
+  for (let attempt = 0; attempt < 60; attempt++) {
+    const variant = rng.pick(MULTIPLES_FINDING_VARIANTS[level]);
+    const n = rng.int(2, 9);
+    let arg1 = 0;
+    let arg2 = 0;
+    switch (variant) {
+      case 'list_first_n':
+        // 1こだけだと倍数そのものになり学習がないため、2こ以上にする
+        arg1 = rng.int(3, level === 1 ? 4 : level === 2 ? 5 : 6);
+        break;
+      case 'list_up_to':
+        // nの倍数を含む上限にする (答えが空にならない)
+        arg1 = rng.int(Math.max(12, n * 4), 30 + level * 10);
+        break;
+      case 'list_between': {
+        // 区間に必ず1つ以上の倍数が入る幅にする
+        const lo = rng.int(2, 20);
+        arg1 = lo;
+        arg2 = lo + rng.int(n * 2, n * 3);
+        break;
+      }
+      case 'nth_multiple':
+        arg1 = rng.int(4, level === 1 ? 5 : level === 2 ? 8 : 12);
+        break;
+      case 'count_in_range':
+        arg1 = rng.int(Math.max(20, n * 5), 40 + level * 12);
+        break;
+    }
+    return { variant, n, arg1, arg2 };
+  }
+  return { variant: 'list_first_n', n: 3, arg1: 4, arg2: 0 };
+}
+
+/**
  * 倍数を求める問題
  * 例: 3の倍数を小さい方から3つ答えなさい
  */
@@ -197,24 +326,35 @@ export class MultiplesFindingGenerator implements ProblemGenerator {
     const rng = createRandom(config?.seed);
     const level = (config?.difficulty ?? rng.int(1, 2)) as DifficultyLevel;
 
-    const count = level === 1 ? 3 : rng.int(3, 4);
-    const n = level === 1 ? rng.int(2, 9) : rng.int(2, 12);
-
-    const multiples = getMultiples(n, count);
-    const answerText = multiples.join(', ');
+    const { variant, n, arg1, arg2 } = pickMultiplesParams(rng, level);
+    const res = solveMultiplesFinding(variant, n, arg1, arg2);
 
     return {
       id: generateProblemId(),
       category: this.category,
       type: this.type,
-      difficulty: createNumberTheoryDifficulty(level, n, 1, 1),
-      question: `${n}の倍数を小さい方から${count}こ答えなさい`,
-      answer: { kind: 'string', value: answerText },
-      explanation: `${n}の倍数は、${n}×1、${n}×2、... なので、${answerText} です。`,
+      difficulty: createNumberTheoryDifficulty(
+        level,
+        Math.max(n, arg2),
+        Math.min(3, level) as DifficultyLevel,
+        Math.min(2, level) as DifficultyLevel,
+      ),
+      question: res.question,
+      answer:
+        res.answerKind === 'string'
+          ? { kind: 'string', value: res.answerText }
+          : { kind: 'integer', value: Number(res.answerText) },
+      explanation: res.explanation,
       parameters: {
         n,
-        count,
-        answer: answerText,
+        variant,
+        arg1,
+        // arg2 は list_between のときだけ使われる。それ以外は問題文に
+        // 現れないので null にして「パラメータは問題文に含まれる」検査を避ける。
+        arg2: variant === 'list_between' ? arg2 : null,
+        // 後方互換のため count も残す (list_first_n のときだけ意味を持つ)。
+        count: variant === 'list_first_n' ? arg1 : null,
+        answer: res.answerText,
         difficultyLevel: level,
       },
     };
@@ -222,16 +362,45 @@ export class MultiplesFindingGenerator implements ProblemGenerator {
 
   validate(problem: Problem): ValidationResult {
     const errors: string[] = [];
-    const { n, count, answer } = problem.parameters as { n: number; count: number; answer: string };
+    const { n, variant, arg1, answer } = problem.parameters as {
+      n: number;
+      variant: MultiplesFindingVariant;
+      arg1: number;
+      arg2: number | null;
+      answer: string;
+    };
+    const arg2 = problem.parameters.arg2 as number | null;
     if (!Number.isInteger(n) || n <= 0) {
       errors.push('倍数の対象が正の整数ではありません');
+      return { valid: false, errors };
     }
-    const expected = getMultiples(n, count).join(', ');
+    if (!Number.isInteger(arg1)) {
+      errors.push('倍数の指定値が整数ではありません');
+      return { valid: false, errors };
+    }
+    // list_between 以外は arg2 が使われないので検査しない
+    if (variant === 'list_between') {
+      if (arg2 === null || !Number.isInteger(arg2)) {
+        errors.push('区間の上限が設定されていません');
+      } else if (arg1 > arg2) {
+        errors.push('区間の下限が上限を上回っています');
+      }
+    }
+    if (variant === 'list_up_to' && arg1 < n) {
+      errors.push('上限が倍数のもとより小さいので答えが空になります');
+    }
+    if (variant === 'nth_multiple' && arg1 < 1) {
+      errors.push('何番目かが1未満です');
+    }
+    const expected = solveMultiplesFinding(variant, n, arg1, arg2 ?? 0).answerText;
     if (answer !== expected) {
-      errors.push('倍数の一覧が誤っています');
+      errors.push('倍数の解答が誤っています');
     }
-    if (problem.answer.kind !== 'string' || problem.answer.value !== answer) {
-      errors.push('問題の解答がパラメータと一致しません');
+    if (problem.answer.kind === 'string' && problem.answer.value !== answer) {
+      errors.push('問題の解答とパラメータが一致しません');
+    }
+    if (problem.answer.kind === 'integer' && String(problem.answer.value) !== answer) {
+      errors.push('問題の解答とパラメータが一致しません');
     }
     return { valid: errors.length === 0, errors };
   }
@@ -445,8 +614,193 @@ export class CommonDivisorsGenerator implements ProblemGenerator {
 }
 
 /**
+ * 公倍数を求める問題の種類
+ *
+ * Phase 2-E:
+ *   - 以前は (a, b) ペアが6〜8個固定で、構造も「小さい方からcount個」1種類のみ。
+ *     100問中22種類しか出ていなかった。
+ *   - 「最小公倍数を軸に広げる」という考え方は共通だが、何を求めるかで構造を4種類に分けた。
+ *
+ * 教育範囲の根拠 (Phase 2-L で調査結果に合わせて整理):
+ *   - 公倍数・最小公倍数そのものは、調査した小5・小6の教科書や指導資料では
+ *     小5の内容として扱われている。最小公倍数を軸に公倍数を並べる
+ *     list_first_n は、この小5で扱われている基本に対応する。
+ *   - 一方、範囲を区切って公倍数を並べる list_up_to / list_between と、
+ *     範囲内に公倍数がいくつあるかを数える count_in_range については、
+ *     調べた教材の中にこれらと直接対応する問題例を確認できなかった。
+ *     multiples_finding (1つの数の倍数を求める) に範囲付きの列挙問題があるから
+ *     といって、2つの数の公倍数にも同じ形式が使えるとは限らないため、
+ *     それらと同じ扱いであるとは断定できない。
+ *   - 3つ以上の数の公倍数についても、調査した範囲では教材例を確認できなかった。
+ *     ただし、これは小6で扱わないことを示すものではなく、
+ *     小5・小6の内容として十分に扱われていない、あるいは
+ *     教材上は扱われていない可能性があることまでを含んでいる。
+ *     本型で採用しないという判断は、根拠が足りないことを理由とするものである。
+ *
+ *   いずれの項目も「直接例を確認できなかった」ことは「教育範囲外である」こと
+ *   と同じではない。ここでは証拠が足りないことをそのまま記録しているだけであり、
+ *   このコメントだけを理由に variant を削除する根拠にはしない。
+ *   削除の判断は、生成可能性や品質への影響評価を踏まえて別途行う。
+ */
+export type CommonMultiplesVariant =
+  /** 小さい方から count 個求める */
+  | 'list_first_n'
+  /** upper 以下の公倍数をすべて並べる (上限の扱い) */
+  | 'list_up_to'
+  /** lo から hi までの範囲にある公倍数をすべて並べる (両端の扱い) */
+  | 'list_between'
+  /** 範囲内に公倍数がいくつあるかを数える (数え上げ) */
+  | 'count_in_range';
+
+/** 難易度ごとの構造候補 (範囲の境界や数え上げを考えるものほど後段に置く) */
+const COMMON_MULTIPLES_VARIANTS: Record<DifficultyLevel, CommonMultiplesVariant[]> = {
+  1: ['list_first_n'],
+  2: ['list_first_n', 'list_up_to'],
+  3: ['list_first_n', 'list_up_to', 'list_between'],
+  4: ['list_first_n', 'list_up_to', 'list_between', 'count_in_range'],
+  5: ['list_up_to', 'list_between', 'count_in_range'],
+};
+
+/** 難易度ごとの「a, b の上限」 */
+const COMMON_MULTIPLES_NUM_MAX: Record<DifficultyLevel, number> = {
+  1: 8, 2: 10, 3: 12, 4: 12, 5: 12,
+};
+
+/** 最小公倍数の上限 (これを超えるペアは答えが大きすぎて小6で扱えない) */
+const COMMON_MULTIPLES_LCM_MAX: Record<DifficultyLevel, number> = {
+  1: 36, 2: 60, 3: 120, 4: 180, 5: 240,
+};
+
+/**
+ * (a, b) の候補を作る。
+ * 手書きテーブルをやめて、条件 (2 <= a < b <= numMax, lcm <= lcmMax) から列挙する。
+ */
+function commonMultiplePairs(level: DifficultyLevel): [number, number][] {
+  const numMax = COMMON_MULTIPLES_NUM_MAX[level];
+  const lcmMax = COMMON_MULTIPLES_LCM_MAX[level];
+  const pairs: [number, number][] = [];
+  for (let a = 2; a <= numMax; a++) {
+    for (let b = a + 1; b <= numMax; b++) {
+      if (lcm(a, b) <= lcmMax) pairs.push([a, b]);
+    }
+  }
+  return pairs;
+}
+
+/** a の倍数を lower 以上 upper 以下にだけ並べる */
+function multiplesInRange(a: number, lower: number, upper: number): number[] {
+  const list: number[] = [];
+  const start = Math.ceil(lower / a) * a;
+  for (let k = start; k <= upper; k += a) list.push(k);
+  return list;
+}
+/**
+ * 構造ごとの答え・問題文・解説を求める。
+ * 公倍数は「最小公倍数の整数倍」なので、lcm を軸に境界を含めて数え直す。
+ */
+function solveCommonMultiples(
+  variant: CommonMultiplesVariant,
+  a: number,
+  b: number,
+  arg1: number,
+  arg2: number,
+): { answerText: string; answerKind: 'string' | 'integer'; question: string; explanation: string } {
+  const L = lcm(a, b);
+  switch (variant) {
+    case 'list_first_n': {
+      const list: number[] = [];
+      for (let i = 1; i <= arg1; i++) list.push(L * i);
+      return {
+        answerText: list.join(', '),
+        answerKind: 'string',
+        question: `${a}と${b}の公倍数を小さい方から${arg1}つ答えなさい`,
+        explanation: `${a}と${b}の最小公倍数は ${L} なので、公倍数は ${L} の整数倍です。小さい方から${arg1}個は ${list.join(', ')} です。`,
+      };
+    }
+    case 'list_up_to': {
+      const list = multiplesInRange(L, 1, arg1);
+      return {
+        answerText: list.join(', '),
+        answerKind: 'string',
+        question: `${arg1}以下の${a}と${b}の公倍数をすべて答えなさい`,
+        explanation: `${a}と${b}の最小公倍数は ${L} です。${L} の整数倍のうち ${arg1} 以下のものは ${list.join(', ')} です。`,
+      };
+    }
+    case 'list_between': {
+      const list = multiplesInRange(L, arg1, arg2);
+      return {
+        answerText: list.join(', '),
+        answerKind: 'string',
+        question: `${arg1}から${arg2}までの間にある${a}と${b}の公倍数をすべて答えなさい`,
+        explanation: `${a}と${b}の最小公倍数は ${L} です。${arg1}以上${arg2}以下にある ${L} の倍数は ${list.join(', ')} です。`,
+      };
+    }
+    case 'count_in_range': {
+      const list = multiplesInRange(L, 1, arg1);
+      return {
+        answerText: String(list.length),
+        answerKind: 'integer',
+        question: `1から${arg1}までにある${a}と${b}の公倍数はいくつありますか`,
+        explanation: `${a}と${b}の最小公倍数は ${L} です。1から${arg1}までの ${L} の倍数は ${list.join(', ')} で、全部で${list.length}こあります。`,
+      };
+    }
+  }
+}
+
+/** 難易度・乱数から、成立する (variant, a, b, arg1, arg2) を選び出す */
+function pickCommonMultiplesParams(
+  rng: ReturnType<typeof createRandom>,
+  level: DifficultyLevel,
+): { variant: CommonMultiplesVariant; a: number; b: number; arg1: number; arg2: number } {
+  const usable = COMMON_MULTIPLES_VARIANTS[level];
+  const pairs = commonMultiplePairs(level);
+
+  for (let attempt = 0; attempt < 60; attempt++) {
+    const variant = rng.pick(usable);
+    const [a, b] = rng.pick(pairs);
+    const L = lcm(a, b);
+
+    let arg1 = 0;
+    let arg2 = 0;
+    if (variant === 'list_first_n') {
+      // 1つだけだと最小公倍数そのものになり学習がないため、3つ以上にする
+      arg1 = rng.int(3, level === 1 ? 4 : level <= 3 ? 5 : 6);
+    } else if (variant === 'list_up_to') {
+      // 上限が最小公倍数を含み、答えが2つ以上になる幅にする
+      arg1 = L * rng.int(2, level <= 2 ? 3 : 4) + rng.int(0, Math.max(0, L - 1));
+    } else if (variant === 'list_between') {
+      // 区間の両端を含めても必ず2つ以上の公倍数が入る幅にする
+      arg1 = L * rng.int(0, 2) + rng.int(1, Math.max(1, L - 1));
+      arg2 = arg1 + L * rng.int(2, level <= 3 ? 3 : 4);
+    } else {
+      // count_in_range: 1つだけ数えるだけの問題を避ける
+      arg1 = L * rng.int(3, level <= 3 ? 4 : 5) + rng.int(0, Math.max(0, L - 1));
+    }
+
+    const res = solveCommonMultiples(variant, a, b, arg1, arg2);
+    if (variant === 'count_in_range') {
+      // 答えが2以上になる範囲だけ採用する
+      if (Number(res.answerText) >= 2) {
+        return { variant, a, b, arg1, arg2 };
+      }
+      continue;
+    }
+    // リスト系は2つ以上入り、5個を超えると小6で書きにくいので避ける
+    const count = res.answerText === '' ? 0 : res.answerText.split(', ').length;
+    if (count >= 2 && count <= 5) {
+      return { variant, a, b, arg1, arg2 };
+    }
+  }
+
+  // フォールバック (必ず成立する最小の組合せ)
+  return { variant: 'list_first_n', a: 2, b: 3, arg1: 3, arg2: 0 };
+}
+
+/**
  * 公倍数を求める問題
  * 例: 4と6の公倍数を小さい方から3つ答えなさい
+ *
+ * Phase 2-E: 構造を4種類に広げ、(a, b) ペアも難易度別に列挙で生成するようにした。
  */
 export class CommonMultiplesGenerator implements ProblemGenerator {
   readonly type = 'common_multiples';
@@ -457,28 +811,38 @@ export class CommonMultiplesGenerator implements ProblemGenerator {
     const rng = createRandom(config?.seed);
     const level = (config?.difficulty ?? rng.int(1, 2)) as DifficultyLevel;
 
-    const pairs: [number, number][] = level === 1
-      ? [[2, 3], [2, 4], [3, 4], [2, 5], [3, 5], [4, 6]]
-      : [[3, 4], [3, 5], [4, 5], [4, 6], [5, 6], [6, 8], [4, 10], [6, 9]];
-
-    const [a, b] = rng.pick(pairs);
-    const count = rng.int(3, 4);
-    const multiples = getCommonMultiples(a, b, count);
-    const answerText = multiples.join(', ');
+    const { variant, a, b, arg1, arg2 } = pickCommonMultiplesParams(rng, level);
+    const res = solveCommonMultiples(variant, a, b, arg1, arg2);
 
     return {
       id: generateProblemId(),
       category: this.category,
       type: this.type,
-      difficulty: createNumberTheoryDifficulty(level, Math.max(a, b), 2, 1),
-      question: `${a}と${b}の公倍数を小さい方から${count}つ答えなさい`,
-      answer: { kind: 'string', value: answerText },
-      explanation: `${a}と${b}の最小公倍数は ${lcm(a, b)} なので、公倍数は小さい順に ${answerText} です。`,
+      difficulty: createNumberTheoryDifficulty(
+        level,
+        Math.max(a, b, arg2),
+        // 数え上げは「並べる」より手順が増えるため推論を1段上げる
+        (variant === 'count_in_range' ? 3 : variant === 'list_first_n' ? 2 : 2) as DifficultyLevel,
+        (variant === 'list_first_n' ? 1 : 2) as DifficultyLevel,
+      ),
+      question: res.question,
+      answer:
+        res.answerKind === 'string'
+          ? { kind: 'string', value: res.answerText }
+          : { kind: 'integer', value: Number(res.answerText) },
+      // count_in_range は「個数」を答えるので整数専用UIにする
+      // (common_multiples は既定で list UI に振り分けられるため、明示的に上書きする)
+      inputType: res.answerKind === 'integer' ? 'integer' : 'list',
+      explanation: res.explanation,
       parameters: {
         a,
         b,
-        count,
-        answer: answerText,
+        variant,
+        arg1,
+        // arg2 / count は list_between / list_first_n のときだけ意味を持つ
+        arg2: variant === 'list_between' ? arg2 : null,
+        count: variant === 'list_first_n' ? arg1 : null,
+        answer: res.answerText,
         lcm: lcm(a, b),
         difficultyLevel: level,
       },
@@ -487,14 +851,32 @@ export class CommonMultiplesGenerator implements ProblemGenerator {
 
   validate(problem: Problem): ValidationResult {
     const errors: string[] = [];
-    const { a, b, count, answer } = problem.parameters as {
-      a: number; b: number; count: number; answer: string;
+    const params = problem.parameters as {
+      a: number; b: number; variant: CommonMultiplesVariant;
+      arg1: number; arg2: number | null; answer: string;
     };
-    const expected = getCommonMultiples(a, b, count).join(', ');
+    const { a, b, variant, arg1, answer } = params;
+    const arg2 = params.arg2 ?? 0;
+
+    if (!Number.isInteger(a) || !Number.isInteger(b) || a <= 0 || b <= 0) {
+      errors.push('公倍数の対象が正の整数ではありません');
+      return { valid: false, errors };
+    }
+    if (variant === 'list_between') {
+      if (params.arg2 === null || !Number.isInteger(params.arg2)) {
+        errors.push('区間の上限が設定されていません');
+      } else if (arg1 > params.arg2) {
+        errors.push('区間の下限が上限を上回っています');
+      }
+    }
+    const expected = solveCommonMultiples(variant, a, b, arg1, arg2).answerText;
     if (answer !== expected) {
       errors.push('公倍数の解答が誤っています');
     }
-    if (problem.answer.kind !== 'string' || problem.answer.value !== answer) {
+    if (problem.answer.kind === 'string' && problem.answer.value !== answer) {
+      errors.push('問題の解答がパラメータと一致しません');
+    }
+    if (problem.answer.kind === 'integer' && String(problem.answer.value) !== answer) {
       errors.push('問題の解答がパラメータと一致しません');
     }
     return { valid: errors.length === 0, errors };

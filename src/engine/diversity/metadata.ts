@@ -6,7 +6,7 @@
  * 出題の多様性制御・類似度判定・重複検出に使う。
  */
 
-import type { Problem } from '../../types/problem';
+import type { DifficultyLevel, Problem } from '../../types/problem';
 
 /** 問題の構造メタデータ */
 export interface ProblemMetadata {
@@ -37,6 +37,16 @@ interface TypeClassification {
   operation?: string;
   steps?: number;
   context?: string;
+  /**
+   * このタイプが対応する難易度レベル (1〜5)。
+   * 省略時は lv1〜lv5 すべてが対応とみなされ、従来どおり全レベルを検証する
+   * (宣言を省略しても検証は緩くならない)。
+   * 見積りのように精度を1桁以上落とす内容は lv1 の難易度契約と両立しないため、
+   * そのようなタイプだけ明示的に限定できる。
+   * 宣言だけでは不整合を隠せない。検証側はこの一覧で実際に生成し、
+   * 対応レベル内では従来と同じ失敗率基準を課す。
+   */
+  supportedLevels?: DifficultyLevel[];
 }
 
 /**
@@ -50,6 +60,13 @@ const TYPE_METADATA: Record<string, TypeClassification> = {
   integer_multiplication: { family: 'multiplication', operation: 'mul', steps: 1 },
   integer_division: { family: 'division', operation: 'div', steps: 1 },
   integer_multi_step: { family: 'multi_step', subtype: 'multi_operation', steps: 3 },
+  // Phase 2-Z5B
+  estimate_product: {
+    family: 'approximation', subtype: 'product_estimate', steps: 3,
+    // 見積り問題は精度を1桁以上落とす必要があるため lv1 の難易度契約と両立しない。
+    // lv2〜5 は実際に生成できる (SUPPORTED レベル) ので宣言する。
+    supportedLevels: [2, 3, 4, 5],
+  },
   integer_fill_blank: { family: 'multi_step', subtype: 'missing_value', steps: 2 },
   integer_word_problem: { family: 'word_problem', subtype: 'application', steps: 2, context: 'word_problem' },
   divisors_finding: { family: 'divisors', subtype: 'enumeration' },
@@ -83,6 +100,37 @@ const TYPE_METADATA: Record<string, TypeClassification> = {
   circle_area_radius: { family: 'circle_area', subtype: 'from_radius' },
   circle_area_diameter: { family: 'circle_area', subtype: 'from_diameter', steps: 2 },
   circle_radius_from_area: { family: 'circle_area', subtype: 'reverse', operation: 'div', steps: 2 },
+  // Phase 2-S
+  circle_circumference: { family: 'circle_circumference', operation: 'mul', steps: 2 },
+  trapezoid_area: { family: 'area', subtype: 'trapezoid', steps: 2 },
+  unit_conversion_basic: { family: 'unit_conversion', operation: 'convert' },
+  // Phase 2-T
+  decimal_place_value: { family: 'decimal_place', subtype: 'reading', operation: 'convert' },
+  fraction_unit_intro: { family: 'fraction', subtype: 'introduction', operation: 'convert' },
+  triangle_classify: { family: 'triangle', subtype: 'classification' },
+  // Phase 2-U
+  parallel_perpendicular: { family: 'line_relation', subtype: 'parallel_perpendicular', operation: 'classify', context: 'choice' },
+  // Phase 2-V
+  area_unit_conversion: { family: 'unit_conversion', subtype: 'area', operation: 'convert', steps: 1 },
+  // Phase 2-Z
+  rectangle_area: { family: 'area', subtype: 'rectangle', steps: 1 },
+  // Phase 2-Z1
+  triangle_area: { family: 'triangle_area', subtype: 'triangle', steps: 2 },
+  parallelogram_area: { family: 'parallelogram_area', subtype: 'parallelogram', steps: 2 },
+  // 6年 図形の合同 (三角形のみ・合同である場合の判定)
+  judge_same: { family: 'congruence', subtype: 'triangle', operation: 'judge', steps: 3 },
+  judge_differs: {
+    family: 'congruence', subtype: 'triangle_not_congruent', operation: 'judge', steps: 3,
+    // 「合同でない」を判定するには、図形を対応付けて辺長の一致を確認する必要があり、
+    // 「合同である」を確認するより一段の思考を要する。lv1 は最も簡単な確認に
+    // 割り当てる契約なので、judge_differs は lv2〜5 に限定する (SUPPORTED レベル)。
+    // supportedLevels を宣言しない場合 lv1〜5 すべてが検証対象になるため、
+    // 実際の生成能力と宣言を一致させるには明示が必要。
+    supportedLevels: [2, 3, 4, 5],
+  },
+  // Phase 2-Y
+  fraction_add_sub: { family: 'addition', subtype: 'fraction_different_denominator', operation: 'add', steps: 3 },
+  percentage: { family: 'ratio_value', subtype: 'percentage', operation: 'divide', steps: 2 },
   volume_box: { family: 'volume', subtype: 'box' },
   volume_cube: { family: 'volume', subtype: 'cube' },
   volume_prism: { family: 'volume', subtype: 'prism' },
@@ -263,4 +311,23 @@ function fnv1a(input: string): string {
 export function fingerprintProblem(problem: Problem): string {
   const payload = `t=${problem.type};p=${stableStringify(problem.parameters ?? {})};a=${stableStringify(problem.answer)}`;
   return `${problem.type}:${fnv1a(payload)}`;
+}
+
+/** すべての難易度レベル (宣言がない場合の既定値) */
+const ALL_LEVELS: DifficultyLevel[] = [1, 2, 3, 4, 5];
+
+/**
+ * 指定した problem type が対応する難易度レベルを返す。
+ * supportedLevels の宣言がない場合は lv1〜lv5 すべてを返す (従来どおり)。
+ *
+ * 検証側はこれを「検証対象レベル」として使い、宣言したレベル内では
+ * 従来と同じ生成失敗率基準を課す。未対応レベルは対象から外れるが、
+ * 宣言していない場合は何的外さず全レベルが検証対象になる。
+ */
+export function getTypeSupportedLevels(problemType: string): DifficultyLevel[] {
+  const entry = TYPE_METADATA[problemType];
+  if (!entry || !entry.supportedLevels || entry.supportedLevels.length === 0) {
+    return [...ALL_LEVELS];
+  }
+  return [...entry.supportedLevels].sort((x, y) => x - y);
 }

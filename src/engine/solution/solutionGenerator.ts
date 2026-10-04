@@ -14,6 +14,51 @@ import type { Problem, SolutionStep } from '../../types/problem';
 import { formatAnswer } from '../../utils/answer';
 import { formatFraction, gcd, lcm, reduceFraction } from '../../utils/fraction';
 import { getDivisors, getPrimesInRange } from '../../utils/numberTheory';
+// Phase 2-A: 並べ方 / 表の組み合わせは種類 (variant) ごとに途中式が変わるため型を参照する
+// Phase 2-B: arrange_simple も variant ごとに途中式が変わるため型を参照する
+// Phase 2-D: multiples_finding / speed_unit_conversion も variant ごとに途中式が変わる
+import type {
+  ArrangeTreeVariant,
+  ArrangeSimpleVariant,
+  CombineSimpleVariant,
+  CombineTableVariant,
+} from '../../problems/combinatorics/generators';
+import type {
+  CommonMultiplesVariant,
+  MultiplesFindingVariant,
+} from '../../problems/numberTheory/generators';
+import type { SpeedUnitConversionVariant } from '../../problems/speed/generators';
+
+/** 階乗 (r < 2 は1) */
+function factorial(r: number): number {
+  let result = 1;
+  for (let i = 2; i <= r; i++) result *= i;
+  return result;
+}
+
+/** n個から r個を選ぶ (並べない) 通り数。組み合せは掛け算とわり算で表す */
+function comboValue(n: number, r: number): number {
+  if (r === 0) return 1;
+  if (r > n) return 0;
+  const mirror = Math.min(r, n - r);
+  let acc = 1;
+  for (let i = 1; i <= mirror; i++) acc = (acc * (n - mirror + i)) / i;
+  return acc;
+}
+
+/** r! を「2 × 3 × … × r」の文字列にする (r<2 は1) */
+function factorialExpr(r: number): string {
+  if (r < 2) return '1';
+  const parts: string[] = [];
+  for (let i = 2; i <= r; i++) parts.push(String(i));
+  return parts.join(' × ');
+}
+
+/** 「a × b × c = d」形式の式から右辺 (計算結果) を取り出す */
+function accOf(expression: string): string {
+  const m = expression.match(/=\s*(-?\d+)\s*$/);
+  return m ? m[1] : expression;
+}
 
 // ===== 表示ヘルパー =====
 
@@ -176,9 +221,64 @@ function divisorsCount(p: Problem): SolutionStep[] {
 }
 
 function multiplesFinding(p: Problem): SolutionStep[] {
-  const { n, count } = P<{ n: number; count: number }>(p);
-  const list = Array.from({ length: count }, (_, i) => n * (i + 1));
-  return [S(list.join(', '), `${n} の倍数は ${n} ずつふえていきます`)];
+  const { n, variant, arg1, arg2 } = P<{
+    n: number;
+    variant: MultiplesFindingVariant;
+    arg1: number;
+    arg2: number;
+  }>(p);
+  const ans = formatAnswer(p.answer);
+  // すべての構造で「n の倍数は n ずつ増える」を出発点にする
+  const opening = S(undefined, `${n} の倍数は、${n} ずつふえていきます`);
+
+  switch (variant) {
+    case 'list_first_n': {
+      // 1こずつ掛けて並べる
+      const steps: SolutionStep[] = [opening];
+      let acc = '';
+      for (let i = 1; i <= arg1; i++) {
+        acc = acc === '' ? String(n * i) : `${acc}, ${n * i}`;
+        steps.push(S(`${n} × ${i} = ${n * i}`));
+      }
+      steps.push(S(`${ans} です。`, `${arg1} こなので ${arg1} 個答えました`));
+      return steps;
+    }
+    case 'list_up_to': {
+      // 上限に達するまで足していく
+      const list: number[] = [];
+      for (let k = n; k <= arg1; k += n) list.push(k);
+      return [
+        opening,
+        S(`${n}, ${n + n}, ${n + n * 2}, … と ${arg1} まで書きます`, `次は ${arg1} を超えるのでここで止まります`),
+        S(ans, `${list.length} こになりました`),
+      ];
+    }
+    case 'list_between': {
+      const list: number[] = [];
+      for (let k = arg1; k <= arg2; k++) if (k % n === 0) list.push(k);
+      return [
+        opening,
+        S(`${arg1} から ${arg2} までの ${n} の倍数は、${list.join(', ')} です。`, `${arg2} を超えるものはないので、${list.length} こです`),
+      ];
+    }
+    case 'nth_multiple':
+      return [
+        opening,
+        S(`${n} の ${arg1} 番目は、${n} × ${arg1}`, `${arg1} 個目の倍数は ${n} を ${arg1} 個並べた値です`),
+        S(`${ans} です。`),
+      ];
+    case 'count_in_range': {
+      const list: number[] = [];
+      for (let k = n; k <= arg1; k += n) list.push(k);
+      return [
+        opening,
+        S(`${list.join(', ')}`, `1 から ${arg1} までの ${n} の倍数です`),
+        S(`${list.length} こ`, '並べた個数が答えになります'),
+      ];
+    }
+    default:
+      return [S(ans)];
+  }
 }
 
 function primeJudgment(p: Problem): SolutionStep[] {
@@ -226,11 +326,53 @@ function commonDivisors(p: Problem): SolutionStep[] {
 }
 
 function commonMultiples(p: Problem): SolutionStep[] {
-  const { a, b, count } = P<{ a: number; b: number; count: number }>(p);
+  const params = P<{
+    a: number;
+    b: number;
+    variant?: CommonMultiplesVariant;
+    arg1?: number;
+    arg2?: number | null;
+  }>(p);
+  const { a, b } = params;
+  // variant を持たない旧形式 (list_first_n) も読み取れるようにしておく
+  const variant = params.variant ?? 'list_first_n';
   const l = lcm(a, b);
+  const lcmStep = S(String(l), `${a} と ${b} の最小公倍数をもとめます`);
+
+  if (variant === 'count_in_range') {
+    const upper = params.arg1 ?? 0;
+    const list = Array.from({ length: Math.floor(upper / l) }, (_, i) => l * (i + 1));
+    return [
+      lcmStep,
+      S(list.join(', '), `1 から ${upper} までの ${a} と ${b} の公倍数です`),
+      S(`よって全部で ${list.length} こあります`, '並べた数の個数を数えます'),
+    ];
+  }
+
+  if (variant === 'list_up_to') {
+    const upper = params.arg1 ?? 0;
+    const list = multiplesUpTo(l, upper);
+    return [
+      lcmStep,
+      S(list.join(', '), `${upper} 以下にある公倍数です`),
+    ];
+  }
+
+  if (variant === 'list_between') {
+    const lo = params.arg1 ?? 0;
+    const hi = params.arg2 ?? 0;
+    const list = multiplesUpTo(l, hi).filter((m) => m >= lo);
+    return [
+      lcmStep,
+      S(list.join(', '), `${lo} から ${hi} までの間にある公倍数です。両端も含むことに注意します`),
+    ];
+  }
+
+  // list_first_n (従来の構造)
+  const count = params.arg1 ?? 3;
   const list = Array.from({ length: count }, (_, i) => l * (i + 1));
   return [
-    S(String(l), `${a} と ${b} の最小公倍数をもとめます`),
+    lcmStep,
     S(list.join(', '), '最小公倍数ずつふえた数が、公倍数です'),
   ];
 }
@@ -539,6 +681,7 @@ function ratioSimplify(p: Problem): SolutionStep[] {
 
 function ratioValue(p: Problem): SolutionStep[] {
   const { a, b } = P<{ a: number; b: number }>(p);
+  // 答えは小数第2位に丸めた値なので、途中式も同じ値で表す
   const ans = formatAnswer(p.answer);
   return [S(`${a} ÷ ${b} = ${ans}`, '比の値は「前の数 ÷ 後の数」でもとめます')];
 }
@@ -643,12 +786,38 @@ function timeCalculation(p: Problem): SolutionStep[] {
 }
 
 function speedUnitConversion(p: Problem): SolutionStep[] {
-  const { kmPerHour, answer } = P<{ kmPerHour: number; answer: number }>(p);
-  const meters = kmPerHour * 1000;
-  return [
-    S(`${kmPerHour}km = ${meters}m`, '1時間に進む距離をmになおします'),
-    S(`${meters} ÷ 60 = ${pv(answer)}`, '1時間は60分なので、60でわると1分あたりの速さになります'),
-  ];
+  const { givenValue, variant, answer } = P<{
+    givenValue: number;
+    variant: SpeedUnitConversionVariant;
+    answer: number;
+  }>(p);
+  const ans = pv(answer);
+  const v = givenValue;
+
+  switch (variant) {
+    case 'kmh_to_mmin':
+      return [
+        S(`${v}km = ${v * 1000}m`, '1時間に進む距離をmになおします'),
+        S(`${v * 1000} ÷ 60 = ${ans}`, '1時間は60分なので、60でわると1分あたりの速さになります'),
+      ];
+    case 'mmin_to_kmh':
+      return [
+        S(`${v}m × 60 = ${v * 60}m`, '1時間に進む距離をmになおします'),
+        S(`${v * 60} ÷ 1000 = ${ans}`, '1000mが1kmなので、1000でわると時速になります'),
+      ];
+    case 'kmh_to_ms':
+      return [
+        S(`${v}km = ${v * 1000}m`, '1時間に進む距離をmになおします'),
+        S(`${v * 1000} ÷ 3600 = ${ans}`, '1時間は3600秒なので、3600でわると1秒あたりの速さになります'),
+      ];
+    case 'ms_to_kmh':
+      return [
+        S(`${v}m × 3600 = ${v * 3600}m`, '1時間に進む距離をmになおします'),
+        S(`${v * 3600} ÷ 1000 = ${ans}`, '1000mが1kmなので、1000でわると時速になります'),
+      ];
+    default:
+      return [S(ans)];
+  }
 }
 
 function speedComparison(p: Problem): SolutionStep[] {
@@ -779,6 +948,39 @@ function symmetryPoint(p: Problem): SolutionStep[] {
   ];
 }
 
+/**
+ * judge_differs (図形の合同・三角形のみ・合同でない場合)
+ *
+ * 合同な図形は辺の長さと角の大きさがすべて対応して等しくなければならない。
+ * 図Aと図Bを見比べたときに、辺の長さが一致しないことを確認する。
+ */
+function judgeDiffers(p: Problem): SolutionStep[] {
+  const ans = formatAnswer(p.answer);
+  return [
+    S(undefined, '2つの図形を重ね合わせたときに、ぴったり重なるかを考えます'),
+    S('辺の長さを対応させて比較します', '辺の長さがすべて等しくありません'),
+    S(undefined, `図Aと図Bは合同ではないので ${ans}`),
+  ];
+}
+
+/**
+ * judge_same (図形の合同・三角形のみ)
+ *
+ * 合同変換 (回転・平行移動) は辺の長さと角の大きさを変えない。
+ * 図Bは図Aを合同変換した図形なので、両者は合同である。
+ */
+function judgeSame(p: Problem): SolutionStep[] {
+  const { rotationDeg } = P<{ rotationDeg: number }>(p);
+  const ans = formatAnswer(p.answer);
+  return [
+    S(undefined, '図形を動かせば重なるか、辺の長さと角の大きさを比べます'),
+    S(
+      `回転(${rotationDeg}°)と平行移動では辺の長さが変わらない`,
+      `図Aと図Bは合同なので ${ans}`,
+    ),
+  ];
+}
+
 function scaleLength(p: Problem): SolutionStep[] {
   const { scale, base, result, isEnlarge } = P<{
     scale: number;
@@ -799,6 +1001,507 @@ function angleBasic(p: Problem): SolutionStep[] {
     S(undefined, '三角形の3つの角をあわせると、必ず180°になります'),
     S(`180 - ${angleA} = ${180 - angleA}`),
     S(`${180 - angleA} - ${angleB} = ${pv(angleC)}°`, '残りの角をもとめます'),
+  ];
+}
+
+/* ------------------------------------------------------------------------- *
+ * Phase 2-S: 円周 / 台形の面積 / 基本単位換算
+ * ------------------------------------------------------------------------- */
+
+function circleCircumference(p: Problem): SolutionStep[] {
+  const { variant, diameter, circumference, unit } = P<{
+    variant: string;
+    diameter: number;
+    circumference: number;
+    unit: string;
+  }>(p);
+  const unitLabel = unit === 'm' ? 'm' : 'cm';
+  if (variant === 'from_diameter') {
+    const steps: SolutionStep[] = [
+      S(`${diameter} × 3.14 = ${pv(circumference)}`, '円周 ＝ 直径 × 円周率'),
+    ];
+    if (unit === 'm') {
+      steps.push(
+        S(`100cm = 1m`, '長さの単位を m にそろえます'),
+        S(`${pv(circumference)}cm ÷ 100 = ${formatAnswer(p.answer)}m`),
+      );
+    }
+    steps.push(S(`円周は ${formatAnswer(p.answer)}${unitLabel} です`, '求める答えをまとめます'));
+    return steps;
+  }
+  return [
+    S(`${pv(circumference)} ÷ 3.14 = ${diameter}`, '円周 ÷ 円周率 で直径になります'),
+    S(`直径は ${diameter}${unitLabel} です`, '求める答えをまとめます'),
+  ];
+}
+
+function trapezoidArea(p: Problem): SolutionStep[] {
+  const { variant, a, b, h, area } = P<{
+    variant: string;
+    a: number;
+    b: number;
+    h: number;
+    area: number;
+  }>(p);
+  if (variant === 'basic') {
+    return [
+      S(`(${a} + ${b}) × ${h} ÷ 2 = ${pv(area)}cm²`, '台形の面積 ＝（上底＋下底）×高さ÷2'),
+    ];
+  }
+  if (variant === 'reverse_height') {
+    return [
+      S(`${pv(area)} × 2 ÷ (${a} + ${b}) = ${h}cm`, '面積×2÷（上底＋下底）で高さをもとめます'),
+    ];
+  }
+  return [
+    S(`${pv(area)} × 2 ÷ ${h} = ${a + b}`, '面積×2÷高さ で「上底＋下底」がわかります'),
+    S(`${a + b} - ${b} = ${a}cm`, '下底を引くと上底になります'),
+  ];
+}
+
+function unitConversionBasic(p: Problem): SolutionStep[] {
+  const { variant, from, to, value, answer } = P<{
+    variant: string;
+    from: string;
+    to: string;
+    value: number;
+    answer: number;
+  }>(p);
+  if (variant === 'area') {
+    const shrinks = value > answer;
+    return [
+      S(`1m = 100cm なので、1m² = 10000cm²`, '面積は長さの2乗なので、単位の倍率も2乗になります'),
+      S(
+        shrinks
+          ? `${value}cm² ÷ 10000 = ${answer}m²`
+          : `${value}m² × 10000 = ${answer}cm²`,
+        `${from}を${to}に直します`,
+      ),
+    ];
+  }
+  // 大きな単位へ直すときは割り、小さな単位へ直すときは掛ける
+  const shrinks = value > answer;
+  const factor = shrinks ? value / answer : answer / value;
+  return [
+    S(
+      shrinks
+        ? `1${to} = ${factor}${from}`
+        : `1${from} = ${factor}${to}`,
+      `${from}と${to}の関係を確かめます`,
+    ),
+    S(
+      shrinks
+        ? `${value}${from} ÷ ${factor} = ${answer}${to}`
+        : `${value}${from} × ${factor} = ${answer}${to}`,
+      `${value}${from}を${to}に直します`,
+    ),
+  ];
+}
+
+// ============================================================================
+  // Phase 2-T: 小数の位取り / 単位分数の導入 / 三角形の分類
+  // ============================================================================
+
+/** 溶液側で使う位名称 (generator 側の PLACE_LABEL と同値) */
+const PLACE_LABELS: Record<number, string> = {
+  1: '10分の1の位',
+  2: '100分の1の位',
+  3: '1000分の1の位',
+};
+
+function decimalPlaceValue(p: Problem): SolutionStep[] {
+  const { variant, place, digits, digit } = P<{
+    variant: string;
+    place: number;
+    digits?: number[];
+    digit?: number;
+    answer: number | string;
+  }>(p);
+  const unitText = '0.' + '0'.repeat(place - 1) + '1';
+  if (variant === 'read_digit' && digits) {
+    return [
+      S(`0.${digits.join('')} の小数点は ${place} けた目まであります`, '小数点向右に数えます'),
+      S(`${place} けた目の数字は ${digits[place - 1]}`, 'その位の数字を読み取ります'),
+    ];
+  }
+  if (variant === 'place_value' && digit !== undefined) {
+    return [
+      S(`1 の ${Math.pow(10, place)} 分の1 は ${unitText}`, 'その位の1つ分の大きさです'),
+      S(`${digit} × ${unitText} = ${formatAnswer(p.answer)}`, '桁の数字ぶん、1つ分を足します'),
+    ];
+  }
+  if (variant === 'decompose') {
+    const { bigPart, smallPart } = P<{ bigPart: number; smallPart: number }>(p);
+    return [
+      S(`${pv(bigPart)} は${PLACE_LABELS[place]}の値`, '大きい位の値を取り出します'),
+      S(`${pv(bigPart)} + ${pv(smallPart)} = ${formatAnswer(p.answer)}`, '隣り合う位の値を足します'),
+    ];
+  }
+  if (digits) {
+    const parts: string[] = [];
+    for (let i = 1; i <= place; i++) {
+      if (digits[i - 1] !== 0) {
+        parts.push(`${digits[i - 1]} × ${pv(Math.pow(10, -i))}`);
+      }
+    }
+    return [S(parts.join(' + ') + ` = ${formatAnswer(p.answer)}`, '各位の数字をその位の重みにかけます')];
+  }
+  return [S(formatAnswer(p.answer), '答えをまとめます')];
+}
+
+function fractionUnitIntro(p: Problem): SolutionStep[] {
+  const { variant, num, den } = P<{ variant: string; num: number; den: number }>(p);
+  if (variant === 'meaning') {
+    return [
+      S(`全体を ${den} 等分する`, '何等分したかを考えます'),
+      S(`1/${den}`, '1つ分は全体の 1/' + den + ' です'),
+    ];
+  }
+  if (variant === 'how_many_units') {
+    return [
+      S(`分母が ${den} で同じなので 1/${den} を単位に数えます`, '分母が等分する数を示します'),
+      S(`分子の ${num} は ${num} 個分 → ${num}`, '分子の数字が個数になります'),
+    ];
+  }
+  if (variant === 'count_units') {
+    return [
+      S(`1/${den} が ${num} 個ある`, '集めた個数を分子に置き換えます'),
+      S(`${num}/${den}`, '分母は変わりません'),
+    ];
+  }
+  return [
+    S(`分数の下の数は分母 → ${den}`, '下の数が分母です'),
+    S(`分母は ${den}`, '全体を' + den + '等分があることを表します'),
+  ];
+}
+
+function triangleClassify(p: Problem): SolutionStep[] {
+  const { a, b, c, kind, variant } = P<{
+    a: number;
+    b: number;
+    c: number;
+    kind: string;
+    variant?: string;
+  }>(p);
+  const sorted = [a, b, c].sort((x, y) => x - y);
+  const steps: SolutionStep[] = [
+    S(`${sorted[0]} + ${sorted[1]} = ${sorted[0] + sorted[1]} > ${sorted[2]}`, '三角形ができる条件を確認します'),
+  ];
+  if (a === b && b === c) steps.push(S(`3辺がすべて等しい → ${kind}`, '3辺を比べます'));
+  else if (a === b || b === c || a === c) steps.push(S(`2辺が等しい → ${kind}`, '3辺を比べます'));
+  else steps.push(S(`等しい辺がない → ${kind}`, '3辺を比べます'));
+  if (variant === 'which_sides_equal') {
+    steps.push(
+      S(`等しい辺は ${a === b && b === c ? 3 : 2} 本`, '正三角形なら3本、二等辺三角形なら2本'),
+    );
+  }
+  return steps;
+}
+
+// ===== 平行と垂直 (Phase 2-U) =====
+
+function parallelPerpendicular(p: Problem): SolutionStep[] {
+  const { variant, answerKind } = P<{ variant: string; answerKind: string }>(p);
+  if (variant === 'definition_parallel') {
+    return [
+      S('2本の直線が互いに交わらない', '平行の定義を確認する'),
+      S(`答え: ${formatAnswer(p.answer)}`, 'この関係を平行といいます'),
+    ];
+  }
+  if (variant === 'definition_perpendicular') {
+    return [
+      S('2本の直線が交わり、できる角が直角', '垂直の定義を確認する'),
+      S(`答え: ${formatAnswer(p.answer)}`, 'この関係を垂直といいます'),
+    ];
+  }
+  if (variant === 'angle_judgment') {
+    const { angle } = P<{ angle: number }>(p);
+    if (answerKind === 'perpendicular') {
+      return [
+        S(`できる角の一つが ${angle}°`, '直角かどうかを確認する'),
+        S('直角ができるので垂直', '交わる2直線が垂直になるのは直角のとき'),
+      ];
+    }
+    return [
+      S(`できる角の一つが ${angle}°`, '直角かどうかを確認する'),
+      S(`${angle}° は直角 90° ではない`, '直角ではないので垂直ではない'),
+      S('答え: 垂直ではありません', '交わる2直線が垂直になるのは直角のときだけ'),
+    ];
+  }
+  if (variant === 'intersection_judgment') {
+    const { intersects } = P<{ intersects: boolean }>(p);
+    if (intersects) {
+      return [
+        S('2本の直線が交わっている', '交わるかどうかを確認する'),
+        S('平行な直線は交わらないので平行ではない', '定義用到する条件を逆にたどる'),
+      ];
+    }
+    return [
+      S('同じ平面上にある2本の直線が交わらない', '交わるかどうかを確認する'),
+      S('平行の定義に合う', '定義用到する条件をそのまま使う'),
+    ];
+  }
+  if (variant === 'equal_distance') {
+    const { constantDistance } = P<{ constantDistance: number }>(p);
+    return [
+      S(`2直線の間の距離はどこでも ${constantDistance}cm で一定`, '平行の性質を確認する'),
+      S('距離が一定なら平行', '平行なら直線間の距離は変わらない'),
+    ];
+  }
+  const { relation, pair } = P<{ relation: string; pair: { a: number; b: number } }>(p);
+  const names = ['直線あ', '直線い', '直線う'];
+  const given = [
+    `${names[0]}と${names[1]}は平行`,
+    `${names[0]}と${names[2]}は垂直`,
+  ].join('、');
+  return [
+    S(given, '与えられた関係を整理する'),
+    S(`求めるのは${relation === 'parallel' ? '平行' : '垂直'}な組`, '条件に合う組を絞る'),
+    S(`答え: ${names[pair.a]}と${names[pair.b]}`, '条件に合う2本を選ぶ'),
+  ];
+}
+
+// ===== 三角形・平行四辺形の面積 (Phase 2-Z1) =====
+
+function triangleArea(p: Problem): SolutionStep[] {
+  const { variant, base, height, area, answer, rectangleArea } = P<{
+    variant: string;
+    base: number;
+    height: number;
+    area: number;
+    answer: number;
+    rectangleArea?: number;
+  }>(p);
+  const product = base * height;
+  if (variant === 'find_height') {
+    return [
+      S(`面積は 底辺 × 高さ ÷ 2 です`, '三角形の面積の公式を確認する'),
+      S(`面積の2倍は ${area} × 2 = ${product}`, '高さの2倍を先に求める'),
+      S(`次は ${product} ÷ ${base} = ${answer} cm`, '底辺で割ると高さが出る'),
+    ];
+  }
+  if (variant === 'find_base') {
+    return [
+      S(`面積は 底辺 × 高さ ÷ 2 です`, '三角形の面積の公式を確認する'),
+      S(`面積の2倍は ${area} × 2 = ${product}`, '底辺の2倍を先に求める'),
+      S(`次は ${product} ÷ ${height} = ${answer} cm`, '高さで割ると底辺が出る'),
+    ];
+  }
+  if (variant === 'compare_with_rectangle') {
+    return [
+      S(`長方形の面積は ${base} × ${height} = ${rectangleArea} cm2`, '同じ底辺と高さの長方形を考える'),
+      S(`三角形の面積はその半分なので ${area} ÷ 2 = ${area} cm2`, '長方形の半分が三角形になる'),
+      S(`答えは ${rectangleArea} − ${area} = ${answer} cm2`, '2つの面積の差を求める'),
+    ];
+  }
+  const steps: SolutionStep[] = [];
+  if (variant === 'find_area_with_slant') {
+    steps.push(S('使うのは底辺と高さであり、斜辺は使いません', '斜辺と高さを区別する'));
+  }
+  steps.push(S(`${base} × ${height} = ${product}`, '底辺と高さを掛ける'));
+  steps.push(S(`${product} ÷ 2 = ${area} cm2`, 'その半分が三角形の面積になる'));
+  steps.push(S(`答え: ${formatAnswer(p.answer)}`, '答えを書く'));
+  return steps;
+}
+
+function parallelogramArea(p: Problem): SolutionStep[] {
+  const { variant, base, height, area, answer, triangleArea: tri } = P<{
+    variant: string;
+    base: number;
+    height: number;
+    area: number;
+    answer: number;
+    triangleArea?: number;
+  }>(p);
+  if (variant === 'find_height') {
+    return [
+      S(`面積は 底辺 × 高さ です`, '平行四辺形の面積の公式を確認する'),
+      S(`${area} ÷ ${base} = ${answer} cm`, '面積を底辺で割ると高さが出る'),
+    ];
+  }
+  if (variant === 'find_base') {
+    return [
+      S(`面積は 底辺 × 高さ です`, '平行四辺形の面積の公式を確認する'),
+      S(`${area} ÷ ${height} = ${answer} cm`, '面積を高さで割ると底辺が出る'),
+    ];
+  }
+  if (variant === 'two_triangles') {
+    return [
+      S(`平行四辺形の面積は ${base} × ${height} = ${area} cm2`, 'まず平行四辺形の面積を求める'),
+      S(`対角線で分けた三角形はその半分なので ${area} ÷ 2 = ${tri} cm2`, '2つの三角形は等分される'),
+      S(`答え: ${formatAnswer(p.answer)}`, '答えを書く'),
+    ];
+  }
+  const steps: SolutionStep[] = [];
+  if (variant === 'find_area_with_slant') {
+    steps.push(S('使うのは底辺と高さであり、斜辺は使いません', '斜辺と高さを区別する'));
+  }
+  steps.push(S(`${base} × ${height} = ${area} cm2`, '平行四辺形の面積は底辺×高さ (三角形のように ÷2 しない)'));
+  steps.push(S(`答え: ${formatAnswer(p.answer)}`, '答えを書く'));
+  return steps;
+}
+
+// ===== 正方形・長方形の面積 (Phase 2-Z) =====
+
+function rectangleArea(p: Problem): SolutionStep[] {
+  const { variant, width, height, area, answer } = P<{
+    variant: string;
+    width: number;
+    height: number;
+    area: number;
+    answer: number;
+  }>(p);
+  if (variant === 'unit_convert') {
+    return [
+      S('1 m = 100 cm なので長さを cm に直す', '面積の単位は長さの2乗であることに注意'),
+      S(`1辺は ${width} cm`, 'm から cm へ変換する'),
+      S(`正方形なので ${width} × ${width} = ${answer} cm2`, '正方形の面積は 1辺 × 1辺'),
+    ];
+  }
+  if (variant === 'find_side') {
+    const known = answer === width ? height : width;
+    return [
+      S(`面積は 縦 × 横 = ${area} cm2`, '面積を先に求める'),
+      S(`次は ${area} ÷ ${known} で他方の辺を求める`, '面積を一方の辺で割る'),
+      S(`答え: ${formatAnswer(p.answer)}`, '答えを書く'),
+    ];
+  }
+  const steps: SolutionStep[] = [
+    S(`${width} × ${height} = ${area} cm2`, '面積は 縦 × 横 で求める'),
+  ];
+  steps.push(S(`答え: ${formatAnswer(p.answer)}`, '答えを書く'));
+  return steps;
+}
+
+// ===== 面積の単位変換 (Phase 2-V) =====
+
+/**
+ * 変換先の単位のほうが大きい (つまり「割る」) 変換の variant 名。
+ * 単位の大きさは ㎠ < ㎡ < a < ha < ㎢ の順で、変換先が変換元より大きい組合せだけを列挙する。
+ */
+const AREA_DIVIDE_VARIANTS = new Set([
+  'sqm_to_aresu',
+  'sqm_to_hektaru',
+  'hektaru_to_sqkm',
+]);
+
+function areaUnitConversion(p: Problem): SolutionStep[] {
+  const { variant, from, to, givenValue, answer, multiplier } = P<{
+    variant: string;
+    from: string;
+    to: string;
+    givenValue: number;
+    answer: number;
+    multiplier: number;
+  }>(p);
+  const given = String(givenValue);
+  // variant 名から方向を判定する (係数 factor は parameters に保存していないため)
+  if (AREA_DIVIDE_VARIANTS.has(variant)) {
+    // 変換先の単位のほうが大きいので割る
+    return [
+      S(`1${to} は 1${from} の ${multiplier} 倍です`, '単位の関係を確認する'),
+      S(`${given}${from} ÷ ${multiplier} = ${answer}${to}`, '答えを求める'),
+    ];
+  }
+  return [
+    S(`1${to} は 1${from} の 1/${multiplier} です`, '単位の関係を確認する'),
+    S(`${given}${from} × ${multiplier} = ${answer}${to}`, '答えを求める'),
+  ];
+}
+
+// ===== 異分母の分数の加法・減法 (Phase 2-Y) =====
+
+function fractionAddSub(p: Problem): SolutionStep[] {
+  const { operation, n1, d1, n2, d2, numerator, denominator, commonDenominator } = P<{
+    operation: string;
+    n1: number;
+    d1: number;
+    n2: number;
+    d2: number;
+    numerator: number;
+    denominator: number;
+    commonDenominator: number;
+  }>(p);
+  const sign = operation === 'add' ? '＋' : '−';
+  const l = commonDenominator;
+  const rawNumerator = operation === 'add'
+    ? n1 * (l / d1) + n2 * (l / d2)
+    : n1 * (l / d1) - n2 * (l / d2);
+  const steps: SolutionStep[] = [
+    S(`分母の最小公倍数は ${l} です`, '分母をそろえます (通分)'),
+    S(`${n1 * (l / d1)}/${l} ${sign} ${n2 * (l / d2)}/${l} = ${rawNumerator}/${l}`, '分子を足し引きします'),
+  ];
+  if (gcdOf(rawNumerator, l) > 1) {
+    steps.push(S(`${rawNumerator}/${l} を約分すると ${numerator}/${denominator}`, '分子と分母の共通の約数で割ります'));
+  } else {
+    steps.push(S('これ以上約分できません', '分子と分母に共通の約数はありません'));
+  }
+  // 最後のステップには必ず答え (formatAnswer の結果) を含める
+  steps.push(S(`答え: ${formatAnswer(p.answer)}`, '約分した答えを書きましょう'));
+  return steps;
+}
+
+// ===== 百分率 (Phase 2-Y) =====
+
+function percentage(p: Problem): SolutionStep[] {
+  const { variant, percent, whole, part, answer } = P<{
+    variant: string;
+    percent: number;
+    whole: number;
+    part: number;
+    answer: number;
+  }>(p);
+  const common: SolutionStep[] = [
+    S(`割合 = ${part} ÷ ${whole}`, '部分量を全体で割って割合を求めます'),
+    S(`割合 × 100 = ${round1((part / whole) * 100)}パーセント`, '100倍して百分率で表します'),
+  ];
+  if (variant === 'percent_of') {
+    return [
+      S(`${whole} の ${percent} パーセントを求めます`, '求める百分率を確認します'),
+      S(`${whole} × ${percent} ÷ 100 = ${answer}`, '全体を100で割って掛けます'),
+    ];
+  }
+  return [...common, S(`答え: ${answer}パーセント`, '求める百分率に単位を付けます')];
+}
+
+/** 小数第1位に丸める (溶液側で独立に使う) */
+function round1(v: number): number {
+  return Math.round(v * 10) / 10;
+}
+
+/** 最大公約数 (溶液側で独立に使う) */
+function gcdOf(a: number, b: number): number {
+  let x = Math.abs(a);
+  let y = Math.abs(b);
+  while (y !== 0) {
+    const t = x % y;
+    x = y;
+    y = t;
+  }
+  return x;
+}
+
+// ===== 積の見積もり (Phase 2-Z5B) =====
+
+function estimateProduct(p: Problem): SolutionStep[] {
+  const { a, b, placeA, placeB, roundedA, roundedB, exactProduct } = P<{
+    a: number;
+    b: number;
+    placeA: number;
+    placeB: number;
+    roundedA: number;
+    roundedB: number;
+    estimate: number;
+    exactProduct: number;
+  }>(p);
+  const label = (place: number): string =>
+    place === 1 ? 'そのまま（1の倍数）' : (place === 100 ? '百の位' : '十の位') + '（' + place + 'の倍数）';
+  return [
+    S(`求めるのは正確な積ではなく、およその大きさです`, '概算値の練習であることを確認する'),
+    S(`${a} → ${roundedA}、${b} → ${roundedB}`, `${label(placeA)}と${label(placeB)}にそろえる`),
+    S(`正確な積は ${exactProduct} で、概算値とは一致しません`, '概算値と正確な積を区別する'),
+    // 最後のステップには必ず答え (formatAnswer の結果) を含める
+    S(`${roundedA} × ${roundedB} = ${formatAnswer(p.answer)}`, '答えを書く'),
   ];
 }
 
@@ -872,69 +1575,230 @@ function factorialChainSteps(k: number, explanation: string): { steps: SolutionS
   return { steps, product };
 }
 
+/**
+ * 並べ方 (n個から一部を選んで並べる) の途中式
+ *
+ * Phase 2-B: variant ごとに「何を選ぶか / どう並べるか」が変わるため、
+ * 積の作り方を種類ごとに分ける。どの種類も最後の積が正解と一致する。
+ */
 function arrangeSimple(p: Problem): SolutionStep[] {
-  const { n, r } = P<{ n: number; r: number }>(p);
+  const { n, r, variant } = P<{ n: number; r: number; variant: ArrangeSimpleVariant }>(p);
   const ans = formatAnswer(p.answer);
-  // n × (n-1) × ... (r個) を左から順に
-  const steps: SolutionStep[] = [];
-  let acc = 1;
-  let expr = '';
-  for (let i = 0; i < r; i++) {
-    const term = n - i;
-    expr = expr === '' ? String(term) : `${expr} × ${term}`;
-    acc *= term;
-    if (i > 0 || r === 1) {
+
+  /**
+   * from 個から count 個を選ぶ積を、段階ごとに示す。
+   * count が2以上なら「n = n」という無意味な1段目を出さず、積だけで示す。
+   */
+  const chainSteps = (from: number, count: number, firstNote: string): SolutionStep[] => {
+    const steps: SolutionStep[] = [];
+    let acc = 1;
+    let expr = '';
+    for (let i = 0; i < count; i++) {
+      const term = from - i;
+      acc *= term;
+      // 選ぶ人が1人だけのときは「n = n」だと無意味なので「n 通り」と書く
+      if (count === 1) {
+        if (i === 0) steps.push(S(`${from} 通り`, firstNote));
+        continue;
+      }
+      expr = expr === '' ? String(term) : `${expr} × ${term}`;
+      // 2個以上選ぶときでも、最初の1段だけの「n = n」は意味がないので
+      // 「n 通り」と説明し、2段目から積で示す
+      if (i === 0 && count >= 2) {
+        steps.push(S(`${term} 通り`, firstNote));
+        continue;
+      }
       steps.push(S(`${expr} = ${acc}`));
     }
+    return steps;
+  };
+
+  switch (variant) {
+    case 'pick_only':
+      return [
+        S(undefined, '1人めの選び方 × 2人めの選び方 × … の順で数えます'),
+        ...chainSteps(n, r, `1番めに並べるのは${n}人のうち誰か、${r}通りです`),
+        S(`全部で ${ans} 通り`),
+      ];
+
+    case 'pick_special': {
+      // 特別の1人: n-1個から r-1個を選ぶ通り (並べない)
+      const inner = comboValue(n - 1, r - 1);
+      const fExpr = factorialExpr(r - 1);
+      // かけ算とわり算を1行に書くと演算の順番が曖昧になるため、2段に分ける
+      const terms = Array.from({ length: r - 1 }, (_, i) => n - 1 - i);
+      const fallingTerms = terms.join(' × ');
+      const falling = terms.reduce((a, b) => a * b, 1);
+      if (r - 1 <= 1) {
+        return [
+          S(`${fallingTerms} = ${inner}`, '残りは1人だけなので、選ぶ人が決まれば1通りです'),
+          S(`${n} × ${inner} = ${ans}`, `特別の1人の選び方が${n}通りあるのでかけます`),
+        ];
+      }
+      return [
+        S(`${fallingTerms} = ${falling}`, `${n - 1}人の中から${r - 1}人を順番つきで選ぶ数を、まず数えます`),
+        S(`${falling} ÷ ${fExpr} = ${inner}`, '選ぶ順番が違うと同じ選び方になるので、重複したぶんをわります'),
+        S(`${n} × ${inner} = ${ans}`, `特別の1人の選び方が${n}通りあるのでかけます`),
+      ];
+    }
+
+    case 'pick_include_one':
+      return [
+        S(undefined, `Aさんは必ず選ぶので、残りはAさん以外の${n - 1}人の中から選びます`),
+        ...(r - 1 <= 1
+          ? [S(`${n - 1} 通り`, `選ぶ人が1人だけなので、残り${n - 1}人の中から1人を選びます`)]
+          : chainSteps(n - 1, r - 1, `残りの${n - 1}通りは、Aさん以外の${n - 1}人から選びます`)),
+        S(`全部で ${ans} 通り`),
+      ];
+
+    case 'pick_first_fixed':
+      return [
+        S(undefined, '1番めはAさんに決まっているので、残りから選びます'),
+        ...(r - 1 <= 1
+          ? [S(`${n - 1} 通り`, `選ぶ人が1人だけなので、残り${n - 1}人の中から1人を選びます`)]
+          : chainSteps(n - 1, r - 1, `2番めに並べるのは残り${n - 1}人のうち誰か、${n - 1}通りです`)),
+        S(`全部で ${ans} 通り`),
+      ];
+
+    case 'pick_both_ends': {
+      if (r - 2 <= 0) {
+        return [
+          S(undefined, '左右のはしに入るBさんとCさんは、左右を入れかえた2通りあります'),
+          S(`2 × 1 = ${ans}`, '残りの人は並べないので、並びかたはこの2通りだけです'),
+        ];
+      }
+      const inner = chainSteps(n - 2, r - 2, '');
+      const last = inner[inner.length - 1];
+      return [
+        S(undefined, '左右のはしに入るBさんとCさんは、左右を入れかえた2通りあります'),
+        S(last.expression!, '残りの人は左のはしから順に並べます'),
+        S(`2 × ${accOf(last.expression!)} = ${ans}`, '左右の2通りをそろえて2倍します'),
+      ];
+    }
+
+    default:
+      return [S(`全部で ${ans} 通り`)];
   }
-  if (steps.length === 0) steps.push(S(`${n} = ${ans}`));
-  else steps[0] = { ...steps[0], explanation: '1人めの選び方 × 2人めの選び方 × … の順で数えます' };
-  return [
-    S(undefined, 'ならべる順番がちがうと、別のならべ方として数えます'),
-    ...steps,
-    S(`全部で ${ans} 通り`),
-  ];
 }
 
 function combineSimple(p: Problem): SolutionStep[] {
-  const { n, r } = P<{ n: number; r: number }>(p);
+  const params = P<{
+    n: number;
+    r: number;
+    variant?: CombineSimpleVariant;
+  }>(p);
+  // variant を持たない旧形式 (pick_only) も読み取れるようにしておく
+  const variant = params.variant ?? 'pick_only';
+  const { n, r } = params;
   const ans = formatAnswer(p.answer);
-  if (r <= 1) {
-    return [S(`${n}通り`, `${n}人の中から1人を選ぶだけです`)];
+
+  /**
+   * from 個から count 個を選ぶ途中式 (n×n-1×… を count! でわる)
+   */
+  const chooseSteps = (from: number, count: number, note: string): SolutionStep[] => {
+    if (count <= 0) return [S(`1 通り`, note)];
+    if (count === 1) return [S(`${from} 通り`, note)];
+    const terms: string[] = [];
+    let falling = 1;
+    for (let i = 0; i < count; i++) {
+      terms.push(String(from - i));
+      falling *= from - i;
+    }
+    const dTerms: string[] = [];
+    for (let i = count; i >= 2; i--) dTerms.push(String(i));
+    return [
+      S(`${terms.join(' × ')} = ${falling}`, 'まず「誰が選ばれたか + 順番」まですべて数えます'),
+      S(`${falling} ÷ ${dTerms.join(' × ')} = ${falling / factorial(count)}`, `同じ${count}人の並べかえ (${dTerms.join(' × ')} 通り) は同じ選び方なのでわります`),
+    ];
+  };
+
+  switch (variant) {
+    case 'include_one':
+      return [
+        S(undefined, `Aさんは必ず選ぶので、残りはAさん以外の${n - 1}人から選びます`),
+        ...chooseSteps(n - 1, r - 1, ''),
+        S(`全部で ${ans} 通り`),
+      ];
+    case 'exclude_one':
+      return [
+        S(undefined, `Aさんは選ばないので、Aさん以外の${n - 1}人から選びます`),
+        ...chooseSteps(n - 1, r, ''),
+        S(`全部で ${ans} 通り`),
+      ];
+    default:
+      return chooseSteps(n, r, '1人めの選び方 × 2人めの選び方 × … の順で数えます');
   }
-  // 順番をつけた選び方 n×(n-1)×… を、重複ぶん r! でわる
-  let falling = 1;
-  const terms: string[] = [];
-  for (let i = 0; i < r; i++) {
-    terms.push(String(n - i));
-    falling *= n - i;
-  }
-  const dTerms: string[] = [];
-  for (let i = r; i >= 2; i--) {
-    dTerms.push(String(i));
-  }
-  return [
-    S(`${terms.join(' × ')} = ${falling}`, 'まず「誰が選ばれたか + 順番」まですべて数えます'),
-    S(`${falling} ÷ ${dTerms.join(' × ')} = ${ans}`, `同じメンバーの並べかえ (${dTerms.join(' × ')} 通り) は同じ選び方なのでわります`),
-  ];
 }
 
 function arrangeTree(p: Problem): SolutionStep[] {
-  const { n } = P<{ n: number }>(p);
-  const chain = factorialChainSteps(n, '1枚め、2枚め、… の選び方をかけ合わせます');
-  return [
-    S(undefined, chain.steps[0]?.explanation),
-    ...chain.steps,
-    S(`全部で ${formatAnswer(p.answer)} 通り`),
-  ];
+  const { n, variant } = P<{ n: number; variant: ArrangeTreeVariant }>(p);
+  const ans = formatAnswer(p.answer);
+
+  // Phase 2-A: 並べ方の種類ごとに、途中式もその種類に合ったものにする。
+  switch (variant) {
+    case 'all': {
+      const chain = factorialChainSteps(n, '1番め、2番め、… の選び方をかけ合わせます');
+      return [S(undefined, chain.steps[0]?.explanation), ...chain.steps, S(`全部で ${ans} 通り`)];
+    }
+    case 'fixed_first': {
+      // 1文字の位置が決まっているので、残り n-1 個の並び方になる
+      const chain = factorialChainSteps(n - 1, '位置が決まった1文字を残りの n-1 個の並びとして数えます');
+      return [S(undefined, chain.steps[0]?.explanation), ...chain.steps, S(`全部で ${ans} 通り`)];
+    }
+    case 'both_ends': {
+      const chain = factorialChainSteps(n - 2, '両端を埋める2文字を除いた残りの並び方を数えます');
+      return [
+        S(undefined, chain.steps[0]?.explanation),
+        ...chain.steps,
+        S(`2 × ${chain.product} = ${ans} 通り`, '両端の2文字の左右は入れかわるので2倍します'),
+      ];
+    }
+    case 'adjacent': {
+      // 隣り合う2文字を「1つのまとまり」にして数える
+      const chain = factorialChainSteps(n - 1, '隣り合う2文字を1つのまとまりとして数えます');
+      return [
+        S(undefined, chain.steps[0]?.explanation),
+        ...chain.steps,
+        S(`2 × ${chain.product} = ${ans} 通り`, '2文字の左右は入れかわるので2倍します'),
+      ];
+    }
+    case 'circle': {
+      const chain = factorialChainSteps(n - 1, '回転して重なる並びは同じなので、1文字を1つの目印に固定して数えます');
+      return [S(undefined, chain.steps[0]?.explanation), ...chain.steps, S(`全部で ${ans} 通り`)];
+    }
+    default: {
+      const chain = factorialChainSteps(n, '選び方をかけ合わせます');
+      return [...chain.steps, S(`全部で ${ans} 通り`)];
+    }
+  }
 }
 
 function combineTable(p: Problem): SolutionStep[] {
-  const { n } = P<{ n: number }>(p);
+  const { n, variant } = P<{ n: number; variant: CombineTableVariant }>(p);
   const ans = formatAnswer(p.answer);
-  return [
-    S(`${n} × ${n - 1} ÷ 2 = ${ans}`, 'どの2チームの組合せか数えます (同じ組合わせは1回だけ)'),
-  ];
+  const doubleCount = `${n} × ${n - 1}`;
+  const half = `${n} × ${n - 1} ÷ 2`;
+
+  // Phase 2-A: 試合の条件ごとに、途中式もその条件に合ったものにする。
+  switch (variant) {
+    case 'two_rounds':
+      return [
+        S(`${half} × 2 = ${ans}`, 'まず1回分の試合数を数えてから、2回分にします'),
+      ];
+    case 'one_team_games':
+      return [
+        S(`1 × ${n - 1} = ${ans} 試合`, 'ある1チームの対戦相手は残りのチームだけです'),
+      ];
+    case 'one_game_pairs':
+      return [
+        S(`${half} = ${ans} 通り`, '1試合の組合せは、表の中の1つのマスに対応します'),
+      ];
+    case 'round_robin':
+    default:
+      return [
+        S(`${doubleCount} ÷ 2 = ${ans}`, 'どの2チームの組合せか数えます (同じ組合せは1回だけ)'),
+      ];
+  }
 }
 
 function duplicateRemoval(p: Problem): SolutionStep[] {
@@ -1015,6 +1879,8 @@ const BUILDERS: Record<string, StepBuilder> = {
   integer_multiplication: integerFourOperations,
   integer_division: integerDivision,
   integer_multi_step: multiStep,
+  // Phase 2-Z5B
+  estimate_product: estimateProduct,
   integer_fill_blank: fillBlank,
   integer_word_problem: wordProblem,
   // 数の性質
@@ -1067,6 +1933,26 @@ const BUILDERS: Record<string, StepBuilder> = {
   circle_area_radius: circleAreaRadius,
   circle_area_diameter: circleAreaDiameter,
   circle_radius_from_area: circleRadiusFromArea,
+  // Phase 2-S
+  circle_circumference: circleCircumference,
+  trapezoid_area: trapezoidArea,
+  unit_conversion_basic: unitConversionBasic,
+  // Phase 2-T
+  decimal_place_value: decimalPlaceValue,
+  fraction_unit_intro: fractionUnitIntro,
+  triangle_classify: triangleClassify,
+  // Phase 2-U
+  parallel_perpendicular: parallelPerpendicular,
+  // Phase 2-V
+  area_unit_conversion: areaUnitConversion,
+  // Phase 2-Z
+  rectangle_area: rectangleArea,
+  // Phase 2-Z1
+  triangle_area: triangleArea,
+  parallelogram_area: parallelogramArea,
+  // Phase 2-Y
+  fraction_add_sub: fractionAddSub,
+  percentage: percentage,
   volume_box: volumeBox,
   volume_cube: volumeCube,
   volume_prism: volumePrism,
@@ -1075,6 +1961,8 @@ const BUILDERS: Record<string, StepBuilder> = {
   volume_unit: volumeUnit,
   symmetry_fold: symmetryFold,
   symmetry_point: symmetryPoint,
+  judge_same: judgeSame,
+  judge_differs: judgeDiffers,
   scale_length: scaleLength,
   angle_basic: angleBasic,
   // 式
@@ -1123,7 +2011,6 @@ export function attachSolutionSteps(problem: Problem): Problem {
   if (steps.length === 0) return problem;
   return { ...problem, solutionSteps: steps };
 }
-
 
 
 

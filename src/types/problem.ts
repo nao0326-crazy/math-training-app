@@ -92,6 +92,82 @@ export type AnswerInputType =
   | 'string'; // その他のテキスト入力
 
 /**
+ * 図形の表示仕様 (FigureSpec)
+ *
+ * generator 側は「数学的な座標」で図形を保持し、画面上の px は持たない。
+ * 表示座標への変換は FigureRenderer の責務とすることで、
+ * 将来の回転・反転・平行移動・拡大縮小にも同じ仕組みが使える。
+ *
+ * 座標系は通常の数学の座標系 (右が +x、上が +y) とし、
+ * レンダラ側で画面座標 (下方向が +y) に変換する。
+ */
+
+/** 図形上の点 (数学座標系) */
+export interface FigurePoint {
+  x: number;
+  y: number;
+}
+
+/** 図形の種別 */
+export type FigureKind = 'triangle' | 'rectangle' | 'parallelogram' | 'polygon';
+
+/** 点を丸く描き、名前を表示する指定 */
+export interface FigurePointMark {
+  /** 点の位置 */
+  at: FigurePoint;
+  /** 点の名前 (A, B, C など) */
+  label?: string;
+}
+
+/** 線分と、その寸法表示 */
+export interface FigureSegment {
+  from: FigurePoint;
+  to: FigurePoint;
+  /** 線分の中点に表示する寸法 (例: '6cm') */
+  label?: string;
+}
+
+/** ラベル (角度・注記など) */
+export interface FigureLabel {
+  at: FigurePoint;
+  text: string;
+  /** テキストの揃え */
+  anchor?: 'start' | 'middle' | 'end';
+}
+
+/** 図形 1 つぶんの表示仕様 */
+export interface Figure {
+  /**
+   * 頂点列。三角形・四角形・平行四辺形は 3点 / 4点、
+   * polygon は任意の点数 (3点以上) を頂点順に並べる。
+   */
+  vertices: FigurePoint[];
+  /** 図形の種別 (描画の補助情報。判定には vertices を使う) */
+  kind: FigureKind;
+  /** 図の見出し (例: '図A') */
+  caption?: string;
+  /** 塗り色 (未指定なら塗りなし) */
+  fill?: string;
+  /** 頂点の点と名前 */
+  points?: FigurePointMark[];
+  /** 追加の線分と寸法表示 */
+  segments?: FigureSegment[];
+  /** 追加のラベル (角度・注記など) */
+  labels?: FigureLabel[];
+}
+
+/**
+ * 問題に表示する図形の仕様。
+ * 1つの問題に複数の図 (例: 合同判定の図Aと図B) を持てるよう figures を配列にする。
+ */
+export interface FigureSpec {
+  /** 表示する図 (左から順に並べる) */
+  figures: Figure[];
+  /** 図形の注記 (例: '図は概略です') */
+  note?: string;
+}
+
+/**
  * 問題の基本構造
  * 問題文だけでなく、生成条件 (parameters) を保持する
  */
@@ -120,6 +196,12 @@ export interface Problem {
    * 問題文の文字列検索に頼らずに選択ボタンを出すための明示的な選択肢。
    */
   choices?: string[];
+  /**
+   * この問題に付随する図形 (任意)。
+   * 未設定のときは図形を表示せず、従来どおり問題文と解答UIのみを表示する。
+   * (既存の生成器は figure を設定しないため、挙動は変わらない)
+   */
+  figure?: FigureSpec;
 }
 
 /**

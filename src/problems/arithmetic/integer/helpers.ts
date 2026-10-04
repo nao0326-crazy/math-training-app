@@ -30,6 +30,37 @@ export function getNumberRange(level: DifficultyLevel): { min: number; max: numb
 }
 
 /**
+ * 見積り問題専用の難易度を作成する
+ *
+ * 見積り問題では、**絶対的な計算結果の大きさではなく「丸める位（精度の粗さ）」が
+ * 学習上の負荷になる**。そこで numberComplexity には numberSizeToComplexity に
+ * 「丸める位」を渡した値を入れる（十の位 -> 2、百の位 -> 3、千の位 -> 4）。
+ *
+ * numberSizeToComplexity 自体は変更していない。通常の生成器は従来どおり絶対値で
+ * 評価し、このヘルパーは見積り問題からのみ呼び出す。
+ */
+export function createEstimateDifficulty(options: {
+  /** 要求された難易度レベル */
+  level: DifficultyLevel;
+  /** 丸める位 (10 = 十の位, 100 = 百の位)。複数ある場合は最も粗いものを渡す。 */
+  roundPlace: number;
+  /** 思考の負荷 (丸める手順数・判断の要否など) */
+  reasoningLevel?: DifficultyLevel;
+  /** 文章読解の負荷 */
+  readingLevel?: DifficultyLevel;
+}) {
+  return createDifficulty({
+    // 要求レベルを calculation に対応させる (既存の area generator と同じ方針)
+    calculationComplexity: calculationStepsToComplexity(options.level),
+    // 絶対値ではなく丸める位数 (精度の粗さ) で評価する
+    numberComplexity: numberSizeToComplexity(options.roundPlace),
+    // 他は要求レベルを超えないようにする
+    reasoningComplexity: Math.min(options.level, options.reasoningLevel ?? 1) as DifficultyLevel,
+    readingComplexity: Math.min(options.level, options.readingLevel ?? 1) as DifficultyLevel,
+  });
+}
+
+/**
  * 難易度レベルに応じた加算の数値範囲
  * 答えが大きくなりすぎないように制御する
  */

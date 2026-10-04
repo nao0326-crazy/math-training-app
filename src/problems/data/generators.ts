@@ -38,6 +38,11 @@ function createDataDifficulty(
 /**
  * 平均を求める問題
  * 例: 3つの数の平均
+ *
+ * 答えの品質 (Phase 1-C): 合計 / 個数が割り切れないと 5.333333333333333 の
+ * ような無限小数になり、小学生は書き表せない。
+ * 小6では「平均は小数第一位まで求める」と学ぶため、
+ * 合計が個数で割り切れる (整数) か、小数第1位で終わる組合せだけを採用する。
  */
 export class DataAverageGenerator implements ProblemGenerator {
   readonly type = 'data_average';
@@ -52,25 +57,32 @@ export class DataAverageGenerator implements ProblemGenerator {
     // 難易度に応じて個数と数値範囲を変化させる
     const count = lv <= 1 ? 3 : lv === 2 ? 4 : lv === 3 ? 5 : lv === 4 ? 6 : 7;
     const maxNum = lv <= 1 ? 9 : lv === 2 ? 20 : lv === 3 ? 30 : lv === 4 ? 50 : 100;
-    const nums: number[] = [];
-    for (let i = 0; i < count; i++) {
-      nums.push(rng.int(1, maxNum));
-    }
-    const sum = nums.reduce((a, b) => a + b, 0);
-    const avg = sum / count;
 
-    return {
-      id: generateProblemId(),
-      category: this.category,
-      type: this.type,
-      difficulty: createDataDifficulty(lv, avg, 1, 2),
-      question:
-        nums.join('、') + ' の平均を求めなさい',
-      answer: { kind: 'decimal', value: avg },
-      explanation:
-        '合計は' + sum + '。' + sum + '÷' + count + '＝' + avg + 'が平均です。',
-      parameters: { numbers: nums, sum, count, average: avg, answer: avg, difficultyLevel: lv },
-    };
+    // 答えが小数第1位で終わる組合せを探す (無限小数を出さないため)
+    for (let attempt = 0; attempt < 200; attempt++) {
+      const nums: number[] = [];
+      for (let i = 0; i < count; i++) {
+        nums.push(rng.int(1, maxNum));
+      }
+      const sum = nums.reduce((a, b) => a + b, 0);
+      // 合計 x 10 が個数で割り切れる ⟺ 平均が小数第1位で終わる
+      if ((sum * 10) % count !== 0) continue;
+
+      const avg = Math.round((sum / count) * 100) / 100;
+
+      return {
+        id: generateProblemId(),
+        category: this.category,
+        type: this.type,
+        difficulty: createDataDifficulty(lv, avg, 1, 2),
+        question: nums.join('、') + ' の平均を求めなさい',
+        answer: { kind: 'decimal', value: avg },
+        explanation:
+          '合計は' + sum + '。' + sum + '÷' + count + '＝' + avg + 'が平均です。',
+        parameters: { numbers: nums, sum, count, average: avg, answer: avg, difficultyLevel: lv },
+      };
+    }
+    throw new Error('平均の問題を生成できませんでした');
   }
 
   validate(problem: Problem): ValidationResult {
@@ -82,7 +94,7 @@ export class DataAverageGenerator implements ProblemGenerator {
     };
     const sum = numbers.reduce((a, b) => a + b, 0);
     if (count !== numbers.length) errors.push('個数が誤っています');
-    if (Math.abs(sum / count - average) > 1e-9) errors.push('平均の計算が誤っています');
+    if (Math.abs(Math.round((sum / count) * 100) / 100 - average) > 1e-9) errors.push('平均の計算が誤っています');
     return { valid: errors.length === 0, errors };
   }
 }
@@ -195,40 +207,47 @@ export class DataCompareGenerator implements ProblemGenerator {
     // 難易度に応じてデータ数と数値範囲を変化させる
     const count = lv <= 1 ? 5 : lv === 2 ? 5 : lv === 3 ? 6 : lv === 4 ? 7 : 8;
     const maxNum = lv <= 1 ? 10 : lv === 2 ? 10 : lv === 3 ? 20 : lv === 4 ? 30 : 50;
-    const groupA: number[] = [];
-    const groupB: number[] = [];
-    for (let i = 0; i < count; i++) {
-      groupA.push(rng.int(1, maxNum));
-      groupB.push(rng.int(1, maxNum));
+
+    // 選択肢が「A組 / B組」の2つしかなく、平均が等しいと答えられないため、
+    // 平均が異なる組み合わせを作るまで再試行する (validate の既存条件と対応)。
+    for (let attempt = 0; attempt < 100; attempt++) {
+      const groupA: number[] = [];
+      const groupB: number[] = [];
+      for (let i = 0; i < count; i++) {
+        groupA.push(rng.int(1, maxNum));
+        groupB.push(rng.int(1, maxNum));
+      }
+      const sumA = groupA.reduce((a, b) => a + b, 0);
+      const sumB = groupB.reduce((a, b) => a + b, 0);
+      const avgA = sumA / groupA.length;
+      const avgB = sumB / groupB.length;
+      if (avgA === avgB) continue;
+
+      const largerAvg = avgA > avgB ? 'A' : 'B';
+
+      return {
+        id: generateProblemId(),
+        category: this.category,
+        type: this.type,
+        difficulty: createDataDifficulty(lv, Math.max(sumA, sumB), 2, 2),
+        question:
+          'A組のテストの点は ' + groupA.join('、') + ' で、B組のテストの点は ' +
+          groupB.join('、') +
+          ' です。それぞれ平均を比べると、どちらが高いと言えますか',
+        answer: { kind: 'string', value: largerAvg + '組' },
+        explanation:
+          'Aの平均は' + avgA + '、Bの平均は' + avgB + '。よって' + largerAvg + '組が高いです。',
+        parameters: {
+          groupA,
+          groupB,
+          avgA,
+          avgB,
+          answer: largerAvg + '組',
+          difficultyLevel: lv,
+        },
+      };
     }
-    const sumA = groupA.reduce((a, b) => a + b, 0);
-    const sumB = groupB.reduce((a, b) => a + b, 0);
-    const avgA = sumA / groupA.length;
-    const avgB = sumB / groupB.length;
-
-    const largerAvg = avgA > avgB ? 'A' : 'B';
-
-    return {
-      id: generateProblemId(),
-      category: this.category,
-      type: this.type,
-      difficulty: createDataDifficulty(lv, Math.max(sumA, sumB), 2, 2),
-      question:
-        'A組のテストの点は ' + groupA.join('、') + ' で、B組のテストの点は ' +
-        groupB.join('、') +
-        ' です。それぞれ平均を比べると、どちらが高いと言えますか',
-      answer: { kind: 'string', value: largerAvg + '組' },
-      explanation:
-        'Aの平均は' + avgA + '、Bの平均は' + avgB + '。よって' + largerAvg + '組が高いです。',
-      parameters: {
-        groupA,
-        groupB,
-        avgA,
-        avgB,
-        answer: largerAvg + '組',
-        difficultyLevel: lv,
-      },
-    };
+    throw new Error('データの比較の問題を生成できませんでした');
   }
 
   public validate(problem: Problem): ValidationResult {

@@ -364,6 +364,85 @@ input:focus {
   color: var(--text);
 }
 
+/* ============================================================
+   図形 (FigureRenderer)
+   数学座標の SVG を (question-card 内で) 教材として見やすく表示する。
+   ============================================================ */
+.problem-figure {
+  margin: 20px auto 0;
+  padding: 0;
+}
+
+.problem-figure-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.problem-figure-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  /* 1図あたりの上限幅。複数図が横に並んでも画面をはみ出さない */
+  max-width: 100%;
+  flex: 0 1 260px;
+}
+
+/* 見出し (図A / 図B) は SVG 外の HTML に置くため、常に同じ文字サイズ */
+.figure-caption {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.2;
+}
+
+.figure-svg {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  /* はみ出し防止。viewBox は正方形なので height:auto で比率が保たれる */
+  overflow: visible;
+  color: var(--text);
+}
+
+/* 辺: 黒に近い本文色で 教材らしく。
+   fill は generator 側の属性 (未指定なら none) に任せる。
+   ここで fill を指定すると属性を上書きして塗りが消えるため、触らない。 */
+.figure-polygon {
+  stroke: var(--text);
+}
+
+.figure-polygon[fill]:not([fill='none']) {
+  fill-opacity: 0.35;
+}
+
+/* 補助線は主線より細く・淡く */
+.figure-segment line {
+  stroke: var(--text-light);
+}
+
+/* 頂点の丸と名前 */
+.figure-point circle {
+  fill: var(--text);
+}
+
+/* SVG 内テキストは currentColor を継承 */
+.figure-point-label,
+.figure-segment-label,
+.figure-label {
+  fill: var(--text);
+  font-family: inherit;
+}
+
+.figure-note {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
 .answer-section {
   display: flex;
   gap: 12px;
@@ -1367,6 +1446,23 @@ button.calendar-cell.day.selected {
 
   .question-card {
     padding: 24px 16px;
+  }
+
+  /* 狭い画面では図形を詰めて、回答UIを押し下げすぎないようにする */
+  .problem-figure {
+    margin-top: 14px;
+  }
+
+  .problem-figure-row {
+    gap: 10px;
+  }
+
+  .problem-figure-item {
+    flex: 0 1 160px;
+  }
+
+  .figure-svg {
+    max-width: 160px;
   }
 
   .quiz-header {

@@ -63,6 +63,8 @@ export default defineConfig({
   ],
   test: {
     environment: 'node',
-    include: ['src/**/*.test.ts'],
+    // JSX を含むテスト (.tsx) も収集する。
+    // 既存の .test.ts の扱いは変えず、対象を広げるのみ（品質基準は緩めない）。
+    include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
   },
 });

@@ -78,9 +78,46 @@ describe('倍数を求める', () => {
   it('正しい倍数を返す', () => {
     for (let i = 0; i < 100; i++) {
       const problem = generator.generate();
-      const { n, count, answer } = problem.parameters as { n: number; count: number; answer: string };
-      const expected = Array.from({ length: count }, (_, idx) => n * (idx + 1)).join(', ');
-      expect(answer).toBe(expected);
+      const { n, variant, arg1, arg2, answer } = problem.parameters as {
+        n: number;
+        variant: string;
+        arg1: number;
+        arg2: number | null;
+        answer: string;
+      };
+      // Phase 2-D で構造 (variant) ごとに答えの求め方が変わったため、
+      // 生成器の内部関数ではなく「倍数の定義」から期待値を作り直す。
+      let expected: string;
+      switch (variant) {
+        case 'list_first_n': {
+          expected = Array.from({ length: arg1 }, (_, idx) => n * (idx + 1)).join(', ');
+          break;
+        }
+        case 'list_up_to': {
+          const list: number[] = [];
+          for (let k = n; k <= arg1; k++) if (k % n === 0) list.push(k);
+          expected = list.join(', ');
+          break;
+        }
+        case 'list_between': {
+          const hi = arg2 as number;
+          const list: number[] = [];
+          for (let k = arg1; k <= hi; k++) if (k % n === 0) list.push(k);
+          expected = list.join(', ');
+          break;
+        }
+        case 'nth_multiple':
+          expected = String(n * arg1);
+          break;
+        default: {
+          // count_in_range は答えが個数なので、別の数え方で検証する
+          let count = 0;
+          for (let k = 1; k <= arg1; k++) if (k % n === 0) count++;
+          expected = String(count);
+          break;
+        }
+      }
+      expect(answer, `${problem.question} (${variant})`).toBe(expected);
       if (problem.answer.kind === 'string') {
         expect(problem.answer.value).toBe(answer);
       }
@@ -176,11 +213,42 @@ describe('公倍数', () => {
   const generator = new CommonMultiplesGenerator();
 
   it('公倍数を正しく列挙する', () => {
+    // Phase 2-E で構造 (variant) ごとに答えの求め方が変わったため、
+    // 生成器の内部関数ではなく「公倍数の定義」から期待値を作り直す。
     for (let i = 0; i < 100; i++) {
       const problem = generator.generate();
-      const { a, b, count, answer } = problem.parameters as { a: number; b: number; count: number; answer: string };
-      const l = lcm(a, b);
-      const expected = Array.from({ length: count }, (_, idx) => l * (idx + 1)).join(', ');
+      const { a, b, variant, arg1, arg2, answer } = problem.parameters as {
+        a: number;
+        b: number;
+        variant: string;
+        arg1: number;
+        arg2: number | null;
+        answer: string;
+      };
+      // 公倍数 = a でも b でも割り切れる正の整数
+      const collect = (limit: number): number[] => {
+        const out: number[] = [];
+        for (let m = 1; m <= limit; m++) if (m % a === 0 && m % b === 0) out.push(m);
+        return out;
+      };
+      let expected: string;
+      switch (variant) {
+        case 'list_first_n': {
+          const found: number[] = [];
+          for (let m = 1; found.length < arg1; m++) if (m % a === 0 && m % b === 0) found.push(m);
+          expected = found.join(', ');
+          break;
+        }
+        case 'list_up_to':
+          expected = collect(arg1).join(', ');
+          break;
+        case 'list_between':
+          expected = collect(arg2 ?? 0).filter((m) => m >= arg1).join(', ');
+          break;
+        default:
+          expected = String(collect(arg1).length);
+          break;
+      }
       expect(answer).toBe(expected);
     }
   });

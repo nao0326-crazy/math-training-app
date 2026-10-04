@@ -21,7 +21,7 @@ import {
   generateProblem,
 } from './generatorRegistry';
 import { validateProblem } from '../validator/validator';
-import { fingerprintProblem } from '../diversity/metadata';
+import { fingerprintProblem, getTypeSupportedLevels } from '../diversity/metadata';
 import { resetAutoSeedCounterForTest } from '../../utils/random';
 import type { DifficultyLevel } from '../../types/problem';
 
@@ -48,7 +48,8 @@ describe('数値ランダム化 (ジェネレータ単位・決定論)', () => {
       let sampled = 0;
       let thrown = 0;
 
-      for (let lv = 1 as DifficultyLevel; lv <= 5; lv++) {
+      // 宣言のない generator は lv1〜5 すべて、宣言のある generator は対応レベルのみ検証する。
+      for (const lv of getTypeSupportedLevels(g.type)) {
         for (let s = 0; s < SEEDS_PER_LEVEL; s++) {
           sampled++;
           let problem;
@@ -87,7 +88,7 @@ describe('数値ランダム化 (ジェネレータ単位・決定論)', () => {
 
   it('全ジェネレータで、ある難易度内だけ見ても数値パターンが複数ある', () => {
     for (const g of getAllGenerators()) {
-      for (let lv = 1 as DifficultyLevel; lv <= 5; lv++) {
+      for (const lv of getTypeSupportedLevels(g.type)) {
         const uniqueQuestions = new Set<string>();
         for (let s = 0; s < SEEDS_PER_LEVEL; s++) {
           try {

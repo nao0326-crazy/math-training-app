@@ -62,7 +62,18 @@ export class AdditionGenerator implements ProblemGenerator {
 
 /**
  * 引き算ジェネレータ
- * 答えが負にならないように a >= b を保証する
+ *
+ * 答えが負にならないように a >= b を保証する。
+ *
+ * さらに `a = b` (答え0) を**除外する**。理由:
+ *   - 「n から n をひく」 は減算の練習として成立しない (何も引かない計算になる)
+ *   - 小学の減算は「もとの数より小さい数をひいて残りを求める」概念であり、
+ *     答え0は「繰り下がりがない」ことを検証しない
+ * ただし「0 の学習を意図する」問題が必要になった場合は、
+ * 別の問題タイプとして明示的に追加する (既存の減算練習とは目的が異なるため)。
+ *
+ * 境界値: range.min が1のとき a が range.min に取られると a - 1 = 0 になるため、
+ * b の上限を `a - 1` にして b >= range.min を満たす a のみを選ぶ。
  */
 export class SubtractionGenerator implements ProblemGenerator {
   readonly type = 'integer_subtraction';
@@ -74,8 +85,9 @@ export class SubtractionGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const level = config?.difficulty ?? (2 as DifficultyLevel);
     const range = getAdditionRange(level);
-    const a = rng.int(range.min, range.max);
-    const b = rng.int(range.min, a); // b <= a を保証
+    // b <= a - 1 を保証するため、a は range.min + 1 以上でなければならない
+    const a = rng.int(range.min + 1, range.max);
+    const b = rng.int(range.min, a - 1); // b <= a - 1 を保証 (答え0にならない)
     const answer = a - b;
 
     return {

@@ -57,8 +57,12 @@ export class RatioSimplifyGenerator implements ProblemGenerator {
       const b = g * rng.int(1, maxFactor);
       if (a === b) continue;
 
-      const simplifiedA = a / g;
-      const simplifiedB = b / g;
+      // ここで決めた g は「両方を割り切れる数」であり、最大公約数とは限らない。
+      // (例: g=2 から a=4, b=8 が引かれると、g でわった 2:4 は約分されていない)
+      // よって答えは必ず実際の最大公約数でわる。
+      const realGcd = gcd(a, b);
+      const simplifiedA = a / realGcd;
+      const simplifiedB = b / realGcd;
 
       return {
         id: generateProblemId(),
@@ -70,11 +74,11 @@ export class RatioSimplifyGenerator implements ProblemGenerator {
         // 比専用UI (左 : 右を分離した入力)
         inputType: 'ratio',
         explanation:
-          a + 'と' + b + 'を最大公約数' + g + 'でわると、' + simplifiedA + '：' + simplifiedB + 'です。',
+          a + 'と' + b + 'を最大公約数' + realGcd + 'でわると、' + simplifiedA + '：' + simplifiedB + 'です。',
         parameters: {
           a,
           b,
-          gcd: g,
+          gcd: realGcd,
           answer: simplifiedA + '：' + simplifiedB,
           difficultyLevel: lv,
         },
@@ -86,16 +90,54 @@ export class RatioSimplifyGenerator implements ProblemGenerator {
   validate(problem: Problem): ValidationResult {
     const errors: string[] = [];
     const { a, b, answer } = problem.parameters as { a: number; b: number; answer: string };
+    // 生成側の gcd パラメータは「両方を割り切れる数」であって
+    // 必ず最大公約数とは限らない (例: a=4, b=8 なら g=2 を選びうる)。
+    // 検証は question / parameters から独立に最大公約数を求めて行う。
     const g = gcd(a, b);
     const expected = (a / g) + '：' + (b / g);
-    if (answer !== expected) errors.push('比の簡単化が誤っています');
+    if (answer !== expected) {
+      errors.push(`比の簡単化が誤っています (期待値 ${expected}, 実際 ${answer})`);
+    }
+    if (problem.answer.kind !== 'string' || problem.answer.value !== answer) {
+      errors.push('問題の解答がパラメータと一致しません');
+    }
     return { valid: errors.length === 0, errors };
   }
 }
 
 /**
+ * 小数の答えを小数第2位に丸める (Phase 1-C)。
+ * 0.1 + 0.2 のような浮動小数点の誤差 (0.30000000000000004) を画面に出すのを防ぐ。
+ */
+function round2(n: number): number {
+  return Math.round(n * 100) / 100;
+}
+
+/**
+ * 割り切れる (有限小数になる) かを判定する。
+ * 約分したときの分母が 2 と 5 の因数だけなら有限小数になる。
+ */
+function isTerminating(a: number, b: number): boolean {
+  let x = a;
+  let y = b;
+  while (x % 2 === 0) x /= 2;
+  while (x % 5 === 0) x /= 5;
+  let d = y;
+  while (d % 2 === 0) d /= 2;
+  while (d % 5 === 0) d /= 5;
+  return d === 1;
+}
+
+/**
  * 比の値
  * 例: 3：4 の比の値 = 0.75
+ *
+ * 答えの品質 (Phase 1-C): a / b が割り切れないと 0.6666666666666666 のような
+ * 無限小数になり、小学生は書き表せない。
+ * 割り切れる (分母が 2 と 5 の因数だけ) 組合せだけを採用する。
+ * 小6の教科書では比の値を割り切れる小数 (0.75 など) で扱ったあと、
+ * 小数第3位までの丸めに入るため、この型を採る。
+ * 小6では割り切れる比を扱った方が学習目標が明確なのでこちらを採る。
  */
 export class RatioValueGenerator implements ProblemGenerator {
   readonly type = 'ratio_value';
@@ -107,14 +149,17 @@ export class RatioValueGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    for (let attempt = 0; attempt < 100; attempt++) {
+    for (let attempt = 0; attempt < 200; attempt++) {
       // 難易度に応じて比の項の範囲を変化させる
       const maxTerm = lv <= 1 ? 8 : lv === 2 ? 12 : lv === 3 ? 20 : lv === 4 ? 30 : 50;
       const a = rng.int(2, maxTerm);
       const b = rng.int(2, maxTerm);
       if (a === b) continue;
+      // 割り切れる比だけを採用する (無限小数を出さないため)
+      if (!isTerminating(a, b)) continue;
 
-      const value = a / b;
+      // 丸めは 2 桁まで (割り切れることが保証されているので精度損失はない)
+      const value = round2(a / b);
 
       return {
         id: generateProblemId(),
@@ -134,7 +179,7 @@ export class RatioValueGenerator implements ProblemGenerator {
     const errors: string[] = [];
     const { a, b, answer } = problem.parameters as { a: number; b: number; answer: number };
     if (b === 0) errors.push('比の後項が0です');
-    if (Math.abs(a / b - answer) > 1e-9) errors.push('比の値が誤っています');
+    if (Math.abs(round2(a / b) - answer) > 1e-9) errors.push('比の値が誤っています');
     return { valid: errors.length === 0, errors };
   }
 }
@@ -411,8 +456,11 @@ export class InverseWordGenerator implements ProblemGenerator {
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
-    // 割り切れる組み合わせを反復的に探す
-    for (let attempt = 0; attempt < 100; attempt++) {
+    // 割り切れる組み合わせを反復的に探す。
+    // 条件 (total が people1 でも people2 でも割り切れる) の成立確率は
+    // lv5 では約17% (44/255) にすぎず、100回では生成失敗しうるため
+    // 試行回数を増やす。difficulty の数値条件自体は変更しない。
+    for (let attempt = 0; attempt < 3000; attempt++) {
       // 難易度に応じて全体量と人数を変化させる
       const total = lv <= 1 ? rng.int(12, 20) : lv === 2 ? rng.int(12, 20) : lv === 3 ? rng.int(20, 36) : lv === 4 ? rng.int(30, 60) : rng.int(50, 100);
       const people1 = lv <= 1 ? rng.int(2, 3) : lv === 2 ? rng.int(2, 4) : lv === 3 ? rng.int(2, 5) : lv === 4 ? rng.int(3, 6) : rng.int(4, 8);
@@ -459,4 +507,175 @@ export class InverseWordGenerator implements ProblemGenerator {
     if (!Number.isInteger(per2)) errors.push('整数でない反比例の問題です');
     return { valid: errors.length === 0, errors };
   }
+}
+
+// ===== 百分率 (パーセント) =====
+
+/** 百分率の variant */
+type PercentageVariant = 'find_percent' | 'percent_of' | 'what_percent';
+
+/** variant ごとの最低難易度 */
+const PERCENTAGE_MIN_LEVEL: Record<PercentageVariant, DifficultyLevel> = {
+  find_percent: 1,
+  percent_of: 2,
+  what_percent: 3,
+};
+
+/** variant ごとの思考の負荷 */
+const PERCENTAGE_REASONING: Record<PercentageVariant, DifficultyLevel> = {
+  find_percent: 2,
+  percent_of: 2,
+  what_percent: 3,
+};
+
+/** 小数第1位までに丸める (百分率の答えに小数が出るため) */
+function roundPercent(v: number): number {
+  return Math.round(v * 10) / 10;
+}
+
+/**
+ * 百分率（パーセント）
+ *
+ * 第5学年「割合，百分率」に対応する。
+ * 「いくつがいくつパーセントか」「〜の何パーセントか」「〜の何パーセントが何分か」を問う。
+ * 割合を 100 分の率として表す考え方をそのまま計算する。
+ */
+export class PercentageGenerator implements ProblemGenerator {
+  readonly type = 'percentage';
+  readonly category = 'ratio' as const;
+  readonly description = '百分率';
+
+  generate(config?: GenerationConfig): Problem {
+    const rng = createRandom(config?.seed);
+    const lv = config?.difficulty ?? (2 as DifficultyLevel);
+    const usable = (Object.keys(PERCENTAGE_MIN_LEVEL) as PercentageVariant[])
+      .filter((v) => PERCENTAGE_MIN_LEVEL[v] <= lv);
+
+    for (let attempt = 0; attempt < 120; attempt++) {
+      const variant = rng.pick(usable);
+      const built = buildPercentage(variant, rng, lv);
+      if (built) return built;
+    }
+    throw new Error('百分率の問題を生成できませんでした');
+  }
+
+  validate(problem: Problem): ValidationResult {
+    const errors: string[] = [];
+    const params = problem.parameters as {
+      variant: PercentageVariant;
+      percent: number;
+      whole: number;
+      part: number;
+      answer: number;
+      difficultyLevel: DifficultyLevel;
+    };
+    const { variant, percent, whole, part, answer } = params;
+
+    if (!(percent > 0 && percent <= 100)) errors.push('百分率が不正です: ' + String(percent));
+    if (!(whole > 0)) errors.push('全体量が正ではありません: ' + String(whole));
+    if (!(part > 0 && part <= whole)) errors.push('部分量が範囲外です: ' + String(part));
+    if (!Number.isFinite(answer)) errors.push('答えが有限ではありません');
+    if (answer < 0) errors.push('答えが負です: ' + String(answer));
+
+    // 独立に再計算する: 部分量 = 全体量 × 百分率 / 100
+    const expectPart = (whole * percent) / 100;
+    if (Math.abs(expectPart - part) > 1e-9) {
+      errors.push('数値が互相に一致しません: 期待値は ' + expectPart);
+    }
+    if (variant === 'find_percent' && Math.abs(answer - percent) > 1e-9) {
+      errors.push('答えが百分率と一致しません: ' + String(answer));
+    }
+    if (variant === 'what_percent' && Math.abs(answer - percent) > 1e-9) {
+      errors.push('答えが百分率と一致しません: ' + String(answer));
+    }
+    if (variant === 'percent_of' && Math.abs(answer - expectPart) > 1e-9) {
+      errors.push('答えが一致しません: 期待値は ' + expectPart);
+    }
+    if (problem.answer.kind !== 'integer' && problem.answer.kind !== 'decimal') {
+      errors.push('解答型が不正です: ' + problem.answer.kind);
+    } else if (Number(problem.answer.value) !== answer) {
+      errors.push('problem.answer が parameters と一致しません');
+    }
+    return { valid: errors.length === 0, errors };
+  }
+}
+
+/** 乱数ジェネレータの構造的部分型 (SeededRandom を直接公開せずに使う) */
+type Rng = { int: (min: number, max: number) => number; pick: <T>(array: readonly T[]) => T };
+
+/** 百分率の問題文の言い回しまとめ ($W=全体量 $P=部分量 $R=百分率) */
+const PERCENT_FIND_PHRASES: readonly string[] = [
+  '全体を $W と見たとき、$P は何パーセントですか。',
+  '全体 $W のうち $P は、何パーセントですか。',
+  '$W に注目して、$P が占める割合をパーセントで表すと何パーセントですか。',
+];
+const PERCENT_OF_PHRASES: readonly string[] = [
+  'ある量が $W です。その $R パーセントは何ですか。',
+  '全体の量が $W あります。$R パーセントに相当する量を求めなさい。',
+  '$W を100として考えたとき、$R パーセントはいくつですか。',
+];
+const PERCENT_WHAT_PHRASES: readonly string[] = [
+  'ある量が $W で、そのうち $P が占めています。何パーセントですか。',
+  '全体 $W に対して $P です。$P が占める割合をパーセントで表してください。',
+  '$P ものは、全体 $W に対して何パーセントですか。',
+];
+
+/** 百分率の1問を組み立てる (条件を満たさない場合は null) */
+function buildPercentage(
+  variant: PercentageVariant,
+  rng: Rng,
+  lv: DifficultyLevel,
+): Problem | null {
+  // 百分率は整数_percent×整数_whole の/%100 で整数になる組合せを選ぶ
+  for (let inner = 0; inner < 40; inner++) {
+    const percentList = [10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90];
+    const percent = rng.pick(percentList);
+    const maxWhole = lv <= 1 ? 40 : lv === 2 ? 100 : lv === 3 ? 200 : 400;
+    const whole = rng.int(2, maxWhole);
+    const exact = (whole * percent) / 100;
+    if (!Number.isInteger(exact) || exact <= 0) continue;
+    const part = exact;
+
+    // 大きさの複雑度が難易度を超えないこと
+    if (numberSizeToComplexity(whole) > lv) continue;
+    if (numberSizeToComplexity(part) > lv) continue;
+
+    let question: string;
+    let answer: number;
+    let answerKind: 'integer' | 'decimal';
+    if (variant === 'find_percent') {
+      question = rng.pick(PERCENT_FIND_PHRASES).replace('$W', String(whole)).replace('$P', String(part));
+      answer = percent;
+      answerKind = 'integer';
+    } else if (variant === 'percent_of') {
+      question = rng.pick(PERCENT_OF_PHRASES).replace('$W', String(whole)).replace('$R', String(percent));
+      answer = part;
+      answerKind = 'integer';
+    } else {
+      question = rng.pick(PERCENT_WHAT_PHRASES).replace('$W', String(whole)).replace('$P', String(part));
+      answer = percent;
+      answerKind = 'integer';
+    }
+
+    const explanation =
+      '割合は「全体を100としたときの割合の値」です。'
+      + 'この問題の答えは、' + part + ' ÷ ' + whole + ' × 100 = ' + roundPercent(percent)
+      + ' パーセントと求められます。';
+
+    return {
+      id: generateProblemId(),
+      category: 'ratio' as const,
+      type: 'percentage',
+      difficulty: createRatioDifficulty(
+        lv,
+        Math.max(whole, part),
+        Math.min(lv, PERCENTAGE_REASONING[variant]) as DifficultyLevel,
+      ),
+      question,
+      answer: { kind: answerKind, value: answer },
+      explanation,
+      parameters: { variant, percent, whole, part, answer, difficultyLevel: lv },
+    };
+  }
+  return null;
 }

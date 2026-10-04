@@ -24,6 +24,8 @@ const TYPE_TO_INPUT_TYPE: Record<string, AnswerInputType> = {
   data_compare: 'choice',
   speed_comparison: 'choice',
   period_repetition: 'choice',
+  // 平行・垂直: 定義や関係を選ぶ選択式 (Phase 2-U)
+  parallel_perpendicular: 'choice',
   // 複数値リスト (約数・倍数・最大最小などカンマ区切り)
   divisors_finding: 'list',
   multiples_finding: 'list',

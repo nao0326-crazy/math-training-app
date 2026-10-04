@@ -9,6 +9,7 @@ import type {
   Problem,
   ProblemGenerator,
 } from '../../types/problem';
+import { getTypeSupportedLevels } from '../diversity/metadata';
 import {
   AdditionGenerator,
   SubtractionGenerator,
@@ -18,6 +19,7 @@ import {
 import {
   MultiStepGenerator,
   FillBlankGenerator,
+  EstimateProductGenerator,
 } from '../../problems/arithmetic/integer/multiStep';
 import { IntegerWordProblemGenerator } from '../../problems/arithmetic/integer/wordProblems';
 import {
@@ -44,6 +46,8 @@ import {
   FractionCommonDenominatorGenerator,
   FractionMixedConvertGenerator,
   FractionBigSmallGenerator,
+  FractionUnitIntroGenerator,
+  FractionAddSubGenerator,
 } from '../../problems/fraction/generators';
 import {
   SpeedCalculationGenerator,
@@ -68,6 +72,17 @@ import {
   SymmetryPointGenerator,
   ScaleLengthGenerator,
   AngleBasicGenerator,
+  CircleCircumferenceGenerator,
+  TrapezoidAreaGenerator,
+  UnitConversionBasicGenerator,
+TriangleClassifyGenerator,
+  ParallelPerpendicularGenerator,
+  AreaUnitConversionGenerator,
+  RectangleAreaGenerator,
+  TriangleAreaGenerator,
+  ParallelogramAreaGenerator,
+  CongruentJudgeSameGenerator,
+  CongruentJudgeDiffersGenerator,
 } from '../../problems/geometry/generators';
 import {
   RatioSimplifyGenerator,
@@ -78,6 +93,7 @@ import {
   ProportionalWordGenerator,
   InverseExpressionGenerator,
   InverseWordGenerator,
+  PercentageGenerator,
 } from '../../problems/ratio/generators';
 import {
   DecimalMulDecimalGenerator,
@@ -85,6 +101,7 @@ import {
   DecimalMulIntegerGenerator,
   DecimalDivIntegerGenerator,
   DecimalRoundGenerator,
+  DecimalPlaceValueGenerator,
 } from '../../problems/decimal/generators';
 import {
   ExpressionMakeGenerator,
@@ -124,6 +141,8 @@ const GENERATORS: ProblemGenerator[] = [
   new DivisionGenerator(),
   new MultiStepGenerator(),
   new FillBlankGenerator(),
+  // Phase 2-Z5B: 4年 四則計算の結果の見積り (積の見積もり)
+  new EstimateProductGenerator(),
   new IntegerWordProblemGenerator(),
   // 数の性質
   new DivisorsFindingGenerator(),
@@ -170,6 +189,29 @@ const GENERATORS: ProblemGenerator[] = [
   new SymmetryPointGenerator(),
   new ScaleLengthGenerator(),
   new AngleBasicGenerator(),
+  // Phase 2-S: 5年B(1) 円周 / 5年B(3) 台形の面積 / 2〜4年C(1) 基本単位換算
+  new CircleCircumferenceGenerator(),
+  new TrapezoidAreaGenerator(),
+  new UnitConversionBasicGenerator(),
+  // Phase 2-T: 3年A(5)/4年A(4) 小数の位取り、3年A(6) 単位分数の導入、3年B(1) 三角形の分類
+  new DecimalPlaceValueGenerator(),
+  new FractionUnitIntroGenerator(),
+  // Phase 2-Y: 5年A 異分母の分数の加法及び減法
+  new FractionAddSubGenerator(),
+  new TriangleClassifyGenerator(),
+  // Phase 2-U: 4年B(1) 角と直線 (平行と垂直)
+  new ParallelPerpendicularGenerator(),
+  // Phase 2-V: 4年B 平面図形の面積 (面積の単位 ㎠・㎡・a・ha・㎢ の関係)
+  new AreaUnitConversionGenerator(),
+  // Phase 2-Z: 4年 平面図形の面積 (正方形・長方形)
+  new RectangleAreaGenerator(),
+  // Phase 2-Z1: 5年 三角形・平行四辺形の求積
+  new TriangleAreaGenerator(),
+  new ParallelogramAreaGenerator(),
+  // 6年 図形の合同 (三角形・合同である場合の判定)
+  new CongruentJudgeSameGenerator(),
+  // 6年 図形の合同 (三角形・合同でない場合の判定)
+  new CongruentJudgeDiffersGenerator(),
   // 比・比例
   new RatioSimplifyGenerator(),
   new RatioValueGenerator(),
@@ -180,6 +222,8 @@ const GENERATORS: ProblemGenerator[] = [
   new InverseExpressionGenerator(),
   new ExpressionMeaningGenerator(),
   new InverseWordGenerator(),
+  // Phase 2-Y: 5年C 割合・百分率
+  new PercentageGenerator(),
   // 小数
   new DecimalMulDecimalGenerator(),
   new DecimalDivDecimalGenerator(),
@@ -263,6 +307,19 @@ export function generateProblem(config?: GenerationConfig): Problem {
     const generator = getGeneratorByType(config.type);
     if (!generator) {
       throw new Error(`不明な問題タイプです: ${config.type}`);
+    }
+    // 未対応の難易度は、大量再試行に入る前に検出する。
+    // (見積り問題のように、その難易度では生成できないタイプがある。)
+    // 宣言のないタイプ・未登録のタイプは getTypeSupportedLevels が lv1〜5 を返すため、
+    // 従来どおり再試行へ進む。
+    if (config.difficulty !== undefined) {
+      const supported = getTypeSupportedLevels(config.type);
+      if (!supported.includes(config.difficulty)) {
+        throw new Error(
+          `この問題タイプはこの難易度に対応していません: ${config.type} `
+          + `(difficulty=${config.difficulty} 対応レベル: ${supported.join(', ')})`,
+        );
+      }
     }
     return generateValidatedProblem(generator, config);
   }

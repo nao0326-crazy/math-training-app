@@ -12,6 +12,7 @@ import {
 } from '../storage/db';
 import type { AnswerRecord, QuestionHistory } from '../types/history';
 import AnswerInput from '../components/AnswerInput';
+import FigureRenderer from '../components/FigureRenderer';
 import SolutionDisplay from '../components/SolutionDisplay';
 import { ANSWER_RECORDED_EVENT } from '../utils/dailyCount';
 import {
@@ -275,6 +276,8 @@ export default function QuizPage({
 
       <div className="question-card">
         <p className="question-text">{problem.question}</p>
+        {/* 図形は figure を持つ問題でのみ描画される (未設定なら何も描かない) */}
+        <FigureRenderer spec={problem.figure} />
       </div>
 
       {/* 問題タイプに応じた専用入力UI (OSキーボードを表示しない) */}
