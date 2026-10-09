@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import type { DifficultyLevel } from '../types/problem';
+import { useEffect, useState } from 'react';
+import type { DifficultyLevel, DifficultyRange } from '../types/problem';
 import { difficultyLabel } from '../engine/difficulty/difficulty';
 
 interface HomePageProps {
@@ -10,6 +10,7 @@ interface HomePageProps {
   onCloseAdminSettings: () => void;
   isAdminAuthenticated: boolean;
   savedProblemTypeCount: number | null;
+  savedDifficultyRange: DifficultyRange | null;
   scopeLoadError: string | null;
   startError: string | null;
   isStarting: boolean;
@@ -25,11 +26,25 @@ export default function HomePage({
   onCloseAdminSettings,
   isAdminAuthenticated,
   savedProblemTypeCount,
+  savedDifficultyRange,
   scopeLoadError,
   startError,
   isStarting,
 }: HomePageProps) {
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>(2);
+
+  useEffect(() => {
+    if (!savedDifficultyRange) return;
+    if (selectedDifficulty < savedDifficultyRange.min || selectedDifficulty > savedDifficultyRange.max) {
+      setSelectedDifficulty(savedDifficultyRange.min);
+    }
+  }, [savedDifficultyRange, selectedDifficulty]);
+
+  const selectableDifficulties = savedDifficultyRange
+    ? DIFFICULTIES.filter(
+        (level) => level >= savedDifficultyRange.min && level <= savedDifficultyRange.max,
+      )
+    : DIFFICULTIES;
 
   return (
     <div className="home-page">
@@ -41,7 +56,7 @@ export default function HomePage({
       <section className="settings-section">
         <h3>問題のむずかしさ</h3>
         <div className="difficulty-buttons">
-          {DIFFICULTIES.map((level) => (
+          {selectableDifficulties.map((level) => (
             <button
               key={level}
               type="button"
@@ -57,6 +72,11 @@ export default function HomePage({
             ? '保存済みの出題範囲を確認しています...'
             : `出題範囲：${savedProblemTypeCount}種類`}
         </p>
+        {savedDifficultyRange && (
+          <p aria-live="polite">
+            出題難易度：Lv{savedDifficultyRange.min}〜Lv{savedDifficultyRange.max}
+          </p>
+        )}
         {(savedProblemTypeCount === 0 || scopeLoadError) && (
           <p className="error-message" role="status">
             {scopeLoadError ?? '出題範囲が空です。管理者タブで範囲を設定してください。'}

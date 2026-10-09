@@ -2221,6 +2221,29 @@ button.calendar-cell.day.selected {
   color: var(--text);
 }
 
+.difficulty-range-controls {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.difficulty-range-controls label {
+  display: grid;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.difficulty-range-controls select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+}
+
 .admin-gate-input {
   width: 100%;
   padding: 10px 12px;

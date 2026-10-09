@@ -9,14 +9,25 @@ import type {
   QuestionHistory,
   StudySettings,
 } from '../types/history';
+import type { DifficultyLevel, DifficultyRange } from '../types/problem';
 import { getAllGenerators } from '../engine/selector/generatorRegistry';
 import { getTypeSupportedLevels } from '../engine/diversity/metadata';
 
 const ADMIN_PRACTICE_SETTINGS_KEY = 'admin-practice-scope-v1';
+export const DEFAULT_ADMIN_PRACTICE_DIFFICULTY_RANGE: DifficultyRange = {
+  min: 1,
+  max: 5,
+};
 
 interface AdminPracticeSettings {
   key: typeof ADMIN_PRACTICE_SETTINGS_KEY;
   problemTypes: string[];
+  difficultyRange?: DifficultyRange;
+}
+
+export interface AdminPracticeConfiguration {
+  problemTypes: string[];
+  difficultyRange: DifficultyRange;
 }
 
 /**
@@ -233,6 +244,23 @@ export async function getSettings(): Promise<StudySettings | null> {
 
 /** Save the app-wide practice range independently from learner study settings. */
 export async function saveAdminPracticeTypes(problemTypes: string[]): Promise<void> {
+  const current = await getAdminPracticeConfiguration();
+  await saveAdminPracticeConfiguration(problemTypes, current.difficultyRange);
+}
+
+/** Save the type scope and difficulty bounds together in the dedicated settings record. */
+export async function saveAdminPracticeConfiguration(
+  problemTypes: string[],
+  difficultyRange: DifficultyRange,
+): Promise<void> {
+  if (
+    !isDifficultyLevel(difficultyRange.min) ||
+    !isDifficultyLevel(difficultyRange.max) ||
+    difficultyRange.min > difficultyRange.max
+  ) {
+    throw new Error('難易度の範囲が正しくありません。');
+  }
+
   const registeredTypes = new Set(
     getAllGenerators()
       .filter((generator) => getTypeSupportedLevels(generator.type).length > 0)
@@ -243,25 +271,52 @@ export async function saveAdminPracticeTypes(problemTypes: string[]): Promise<vo
   await db.put('settings', {
     key: ADMIN_PRACTICE_SETTINGS_KEY,
     problemTypes: validTypes,
+    difficultyRange,
   });
 }
 
-/** Return only problem types with a registered, usable generator. */
-export async function getAdminPracticeTypes(): Promise<string[]> {
+/** Load the app-wide scope; legacy settings without difficulty bounds allow Lv1-5. */
+export async function getAdminPracticeConfiguration(): Promise<AdminPracticeConfiguration> {
   const db = await getDB();
   const record = await db.get('settings', ADMIN_PRACTICE_SETTINGS_KEY);
-  if (!record || !('problemTypes' in record) || !Array.isArray(record.problemTypes)) {
-    return [];
+  if (!record || !('problemTypes' in record)) {
+    return {
+      problemTypes: [],
+      difficultyRange: DEFAULT_ADMIN_PRACTICE_DIFFICULTY_RANGE,
+    };
   }
 
+  const difficultyRange = 'difficultyRange' in record && record.difficultyRange !== undefined
+    ? record.difficultyRange
+    : DEFAULT_ADMIN_PRACTICE_DIFFICULTY_RANGE;
+  if (
+    !difficultyRange ||
+    !isDifficultyLevel(difficultyRange.min) ||
+    !isDifficultyLevel(difficultyRange.max) ||
+    difficultyRange.min > difficultyRange.max
+  ) {
+    throw new Error('保存された難易度の範囲を読み込めませんでした。');
+  }
   const registeredTypes = new Set(
     getAllGenerators()
       .filter((generator) => getTypeSupportedLevels(generator.type).length > 0)
       .map((generator) => generator.type),
   );
-  return [...new Set(record.problemTypes)].filter(
-    (type): type is string => typeof type === 'string' && registeredTypes.has(type),
-  );
+  const problemTypes = Array.isArray(record.problemTypes)
+    ? [...new Set(record.problemTypes)].filter(
+        (type): type is string => typeof type === 'string' && registeredTypes.has(type),
+      )
+    : [];
+  return { problemTypes, difficultyRange };
+}
+
+/** Return only problem types with a registered, usable generator. */
+export async function getAdminPracticeTypes(): Promise<string[]> {
+  return (await getAdminPracticeConfiguration()).problemTypes;
+}
+
+function isDifficultyLevel(value: unknown): value is DifficultyLevel {
+  return value === 1 || value === 2 || value === 3 || value === 4 || value === 5;
 }
 
 /**

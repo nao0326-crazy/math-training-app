@@ -139,6 +139,45 @@ describe('QuestionSelector', () => {
     ).toThrow('現在の難易度で出題できる問題がありません');
   });
 
+  it('生成された難易度を保存済みの範囲内に制限する', () => {
+    const history = Array.from({ length: 10 }, () => createAnswer('integer', true));
+    const problem = selector.selectNextQuestion(history, [], {
+      difficultyLevel: 4,
+      category: null,
+      problemTypes: ['integer_addition'],
+      difficultyRange: { min: 3, max: 3 },
+    });
+
+    expect(problem.type).toBe('integer_addition');
+    expect(problem.difficulty.level).toBe(3);
+  });
+
+  it('低い適応難易度を管理者の下限より下にしない', () => {
+    const history = Array.from({ length: 10 }, () => createAnswer('integer', false));
+    const problem = selector.selectNextQuestion(history, [], {
+      difficultyLevel: 3,
+      category: null,
+      problemTypes: ['integer_addition'],
+      difficultyRange: { min: 3, max: 4 },
+    });
+
+    expect(problem.difficulty.level).toBe(3);
+  });
+
+  it('範囲内に生成可能な難易度がない場合は範囲外の生成器を呼ばず拒否する', () => {
+    const generateProblem = vi.spyOn(generatorRegistry, 'generateProblem');
+
+    expect(() =>
+      selector.selectNextQuestion([], [], {
+        difficultyLevel: 2,
+        category: null,
+        problemTypes: ['estimate_product'],
+        difficultyRange: { min: 1, max: 1 },
+      }),
+    ).toThrow('Lv1〜Lv1');
+    expect(generateProblem).not.toHaveBeenCalled();
+  });
+
   it('直近タイプ回避で唯一の範囲内タイプを除外しない', () => {
     const recentHistory: QuestionHistory[] = Array.from({ length: 10 }, (_, index) => ({
       problemId: `recent-${index}`,
@@ -370,6 +409,18 @@ describe('QuestionSelector', () => {
       category: 'integer',
     });
     expect(problem.difficulty.level).toBe(2);
+  });
+
+  it('回答履歴が5件未満なら1問の結果で難易度を変えない', () => {
+    const history = [createAnswer('integer', false, 60)];
+    const problem = selector.selectNextQuestion(history, [], {
+      difficultyLevel: 4,
+      category: 'integer',
+      problemTypes: ['integer_addition'],
+      difficultyRange: { min: 1, max: 5 },
+    });
+
+    expect(problem.difficulty.level).toBe(4);
   });
 
   it('最近出題した問題タイプを可能な範囲で避ける', () => {

@@ -3,14 +3,18 @@ import HomePage from './pages/HomePage';
 import QuizPage from './pages/QuizPage';
 import HistoryPage from './pages/HistoryPage';
 import DailyProgressNotification from './components/DailyProgressNotification';
-import type { Category } from './types/problem';
+import type { Category, DifficultyRange } from './types/problem';
 import { REVIEW_QUESTION_COUNT } from './utils/weakAreas';
 import { runDailyAnswerSync } from './services/dailyAnswerSync';
 import MaintenancePage from './components/MaintenancePage';
 import { isMaintenanceMode } from './utils/maintenanceMode';
 import VerificationCodePage from './pages/VerificationCodePage';
 import PracticeSetupPage from './pages/PracticeSetupPage';
-import { getAdminPracticeTypes } from './storage/db';
+import {
+  DEFAULT_ADMIN_PRACTICE_DIFFICULTY_RANGE,
+  getAdminPracticeConfiguration,
+} from './storage/db';
+import { getAvailableDifficultyLevels } from './engine/selector/questionSelector';
 
 type Page = 'home' | 'quiz' | 'history' | 'verification' | 'practiceSetup';
 
@@ -21,6 +25,7 @@ function NormalApp() {
   const [questionCount, setQuestionCount] = useState(10);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
   const [savedProblemTypes, setSavedProblemTypes] = useState<string[] | null>(null);
+  const [savedDifficultyRange, setSavedDifficultyRange] = useState<DifficultyRange | null>(null);
   const [scopeLoadError, setScopeLoadError] = useState<string | null>(null);
   const [startError, setStartError] = useState<string | null>(null);
   const [isStarting, setIsStarting] = useState(false);
@@ -37,13 +42,17 @@ function NormalApp() {
     if (page !== 'home') return;
     let cancelled = false;
     setScopeLoadError(null);
-    void getAdminPracticeTypes()
-      .then((problemTypes) => {
-        if (!cancelled) setSavedProblemTypes(problemTypes);
+    void getAdminPracticeConfiguration()
+      .then((configuration) => {
+        if (!cancelled) {
+          setSavedProblemTypes(configuration.problemTypes);
+          setSavedDifficultyRange(configuration.difficultyRange);
+        }
       })
       .catch(() => {
         if (!cancelled) {
           setSavedProblemTypes(null);
+          setSavedDifficultyRange(null);
           setScopeLoadError('保存済みの出題設定を読み込めませんでした。');
         }
       });
@@ -79,11 +88,20 @@ function NormalApp() {
     setIsStarting(true);
     setStartError(null);
     try {
-      const problemTypes = await getAdminPracticeTypes();
+      const configuration = await getAdminPracticeConfiguration();
+      const { problemTypes, difficultyRange } = configuration;
       setSavedProblemTypes(problemTypes);
+      setSavedDifficultyRange(difficultyRange);
       setScopeLoadError(null);
       if (problemTypes.length === 0) {
         setStartError('出題範囲が空です。管理者タブで出題範囲を設定してください。');
+        setPage('home');
+        return;
+      }
+      if (getAvailableDifficultyLevels(problemTypes, difficultyRange, category).length === 0) {
+        setStartError(
+          `設定範囲（Lv${difficultyRange.min}〜Lv${difficultyRange.max}）で出題できる問題がありません。管理者タブで難易度範囲を見直してください。`,
+        );
         setPage('home');
         return;
       }
@@ -94,6 +112,7 @@ function NormalApp() {
       setPage('quiz');
     } catch {
       setSavedProblemTypes(null);
+      setSavedDifficultyRange(null);
       setStartError('保存済みの出題設定を読み込めないため、学習を開始できません。');
       setPage('home');
     } finally {
@@ -142,6 +161,7 @@ function NormalApp() {
             }}
             isAdminAuthenticated={isAdminAuthenticated}
             savedProblemTypeCount={savedProblemTypes?.length ?? null}
+            savedDifficultyRange={savedDifficultyRange}
             scopeLoadError={scopeLoadError}
             startError={startError}
             isStarting={isStarting}
@@ -153,6 +173,7 @@ function NormalApp() {
             difficulty={selectedDifficulty}
             questionCount={questionCount}
             problemTypes={savedProblemTypes ?? []}
+            difficultyRange={savedDifficultyRange ?? DEFAULT_ADMIN_PRACTICE_DIFFICULTY_RANGE}
             canStartDailySync={canStartDailySync}
             onExit={() => setPage('home')}
           />
@@ -169,8 +190,9 @@ function NormalApp() {
         )}
         {page === 'practiceSetup' && (
           <PracticeSetupPage
-            onSaved={(problemTypes) => {
+            onSaved={(problemTypes, difficultyRange) => {
               setSavedProblemTypes(problemTypes);
+              setSavedDifficultyRange(difficultyRange);
               setStartError(null);
               setPage('home');
             }}

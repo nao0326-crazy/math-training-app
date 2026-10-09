@@ -18,9 +18,11 @@ vi.mock('idb', () => ({
 }));
 
 import {
+  getAdminPracticeConfiguration,
   getAdminPracticeTypes,
   getSettings,
   prepareLegacyDailyAnswerSyncTasks,
+  saveAdminPracticeConfiguration,
   saveAdminPracticeTypes,
   saveSettings,
 } from './db';
@@ -60,6 +62,49 @@ describe('admin practice settings persistence', () => {
 
   it('returns an empty range when no administrator range is saved', async () => {
     expect(await getAdminPracticeTypes()).toEqual([]);
+    await expect(getAdminPracticeConfiguration()).resolves.toEqual({
+      problemTypes: [],
+      difficultyRange: { min: 1, max: 5 },
+    });
+  });
+
+  it('persists difficulty bounds with the selected types and restores them on read', async () => {
+    await saveAdminPracticeConfiguration(
+      ['integer_addition', 'unknown_generator'],
+      { min: 3, max: 4 },
+    );
+
+    await expect(getAdminPracticeConfiguration()).resolves.toEqual({
+      problemTypes: ['integer_addition'],
+      difficultyRange: { min: 3, max: 4 },
+    });
+    expect(records.get('settings:admin-practice-scope-v1')).toEqual({
+      key: 'admin-practice-scope-v1',
+      problemTypes: ['integer_addition'],
+      difficultyRange: { min: 3, max: 4 },
+    });
+  });
+
+  it('preserves saved difficulty bounds when the problem type range is updated', async () => {
+    await saveAdminPracticeConfiguration(['fraction_add_sub'], { min: 2, max: 3 });
+    await saveAdminPracticeTypes(['integer_addition']);
+
+    await expect(getAdminPracticeConfiguration()).resolves.toEqual({
+      problemTypes: ['integer_addition'],
+      difficultyRange: { min: 2, max: 3 },
+    });
+  });
+
+  it('rejects an invalid saved difficulty range instead of silently allowing every level', async () => {
+    records.set('settings:admin-practice-scope-v1', {
+      key: 'admin-practice-scope-v1',
+      problemTypes: ['integer_addition'],
+      difficultyRange: { min: 4, max: 2 },
+    });
+
+    await expect(getAdminPracticeConfiguration()).rejects.toThrow(
+      '保存された難易度の範囲を読み込めませんでした',
+    );
   });
 
   it('does not start legacy migration if the mode gate closes during the DB read', async () => {
