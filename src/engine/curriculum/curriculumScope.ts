@@ -270,6 +270,10 @@ export const CURRICULUM_SCOPE: Record<string, TypeCurriculumScope> = {
     '全体を何等分したか、1つ分やいくつかのまとめ方を扱う導入段階。真分数のみを扱う。'),
 
   // ===== 小数 =====
+  decimal_addition: s('required', 3, '数と計算', '第3学年 B(1) 小数の加算 減算', 'partial',
+    '小数の加算・減算。第3学年で導入し、第4〜5学年で位をそろえた計算を扱う。'),
+  decimal_subtraction: s('required', 3, '数と計算', '第3学年 B(1) 小数の加算 減算', 'partial',
+    '小数の加算・減算。第3学年で導入し、第4〜5学年で位をそろえた計算を扱う。'),
   decimal_mul_integer: s('required', 5, '数と計算', '第5学年 B(1) 小数×整数', 'partial'),
   decimal_div_integer: s('required', 5, '数と計算', '第5学年 B(1) 小数÷整数', 'partial'),
   decimal_mul_decimal: s('required', 6, '数と計算', '第6学年 B(1) 小数×小数', 'partial'),
@@ -366,8 +370,10 @@ export const CURRICULUM_SCOPE: Record<string, TypeCurriculumScope> = {
   volume_cylinder: s('required', 6, '図形', '第6学年 B(3) 円柱の体積', 'partial',
     '円柱の体積は6学年で扱う。'),
   volume_from_height: s('required', 6, '図形', '第6学年 B(3) 立体 高さから体積', 'partial'),
+  // 実装が扱うのは「L (リットル) と cm3 (立方センチメートル)」の換算であり、
+  // ㎥↔㎤ ではない。記録の整合性を保つために注記を実装に合わせて更新した。
   volume_unit: s('required', 6, '量と単位', '第6学年 D 単位の換算 立体', 'partial',
-    '立方センチメートルと立方メートルの換算。'),
+    'リットル (L) と立方センチメートル (cm3) の換算。'),
   unit_conversion_basic: k('required', 3, '量と単位', '第3学年 D 単位の換算', 'confirmed',
     '長さ 面積 重さ 時間の基本単位への換算。第3学年で導入する。'),
 

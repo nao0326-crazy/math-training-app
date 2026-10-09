@@ -119,13 +119,45 @@ function round2(n: number): number {
  */
 function isTerminating(a: number, b: number): boolean {
   let x = a;
-  let y = b;
   while (x % 2 === 0) x /= 2;
   while (x % 5 === 0) x /= 5;
-  let d = y;
+  let d = b;
   while (d % 2 === 0) d /= 2;
   while (d % 5 === 0) d /= 5;
   return d === 1;
+}
+
+/**
+ * 有限小数を「小数第 maxDigits 位で正確に」表せるかを判定する。
+ *
+ * 旧実装は「割り切れる比 = 有限小数」という理由だけで round2() (小数第2位まで)
+ * を適用していた。しかし有限小数でも小数第3位が必要なもの
+ * (5:8 = 0.625 / 7:8 = 0.875 / 9:8 = 1.125) は、2桁丸めすると
+ * **数学的に別の値** になってしまう (0.63 / 0.88 / 1.13)。
+ * 独立検算 (scripts/verify-answers.ts) で 1000 問中 160 問が
+ * この状態だと判明したため、答えの桁数を保証する判定に置き換える。
+ *
+ * 判定方法: 約分後の分母が 2^x * 5^y と書けるとき、必要な小数桁数は max(x, y)。
+ * 小数第2位で正確に表せるのは max(x, y) <= 2 の場合だけ。
+ */
+const MAX_RATIO_DECIMALS = 2;
+
+/** 有限小数で、必要な小数桁数が maxDigits 以下かを判定する */
+function isTerminatingWithin(a: number, b: number, maxDigits: number): boolean {
+  if (!isTerminating(a, b)) return false;
+  // 約分後の分母を取り出し、2 と 5 の指数を数える
+  let den = b / gcd(a, b);
+  let exp2 = 0;
+  let exp5 = 0;
+  while (den % 2 === 0) {
+    den /= 2;
+    exp2++;
+  }
+  while (den % 5 === 0) {
+    den /= 5;
+    exp5++;
+  }
+  return Math.max(exp2, exp5) <= maxDigits;
 }
 
 /**
@@ -155,10 +187,13 @@ export class RatioValueGenerator implements ProblemGenerator {
       const a = rng.int(2, maxTerm);
       const b = rng.int(2, maxTerm);
       if (a === b) continue;
-      // 割り切れる比だけを採用する (無限小数を出さないため)
-      if (!isTerminating(a, b)) continue;
+      // 「小数第2位で正確に表せる」比だけを採用する。
+      // 有限小数であっても 0.625 のように3桁必要なものは、2桁で丸めると
+      // 数学的に別の値になってしまうため採らない。
+      if (!isTerminatingWithin(a, b, MAX_RATIO_DECIMALS)) continue;
 
-      // 丸めは 2 桁まで (割り切れることが保証されているので精度損失はない)
+      // 桁数保証されているので、この丸めは「精度損失」ではなく
+      // 浮動小数点表現の誤差 (0.1+0.2) を潰すための丸めになる。
       const value = round2(a / b);
 
       return {
@@ -180,6 +215,11 @@ export class RatioValueGenerator implements ProblemGenerator {
     const { a, b, answer } = problem.parameters as { a: number; b: number; answer: number };
     if (b === 0) errors.push('比の後項が0です');
     if (Math.abs(round2(a / b) - answer) > 1e-9) errors.push('比の値が誤っています');
+    // 丸めによって厳密値が変わる (= 数学的に別の値を提示している) 場合は不合格。
+    // 検出しないと「5:8 の比の値は 0.63」と誤った答えを出題してしまう。
+    if (Math.abs(a / b - answer) > 1e-12) {
+      errors.push(`比の値が丸められています (厳密値 ${a / b}, 提示値 ${answer})`);
+    }
     return { valid: errors.length === 0, errors };
   }
 }

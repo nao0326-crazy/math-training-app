@@ -12,9 +12,11 @@ import { describe, expect, it } from 'vitest';
 import {
   generateProblem,
   getAllGenerators,
+  getCategories,
   getGeneratorByType,
 } from '../engine/selector/generatorRegistry';
 import { formatAnswer, checkUserAnswer } from '../utils/answer';
+import { getTypeSupportedLevels } from '../engine/diversity/metadata';
 import type { DifficultyLevel, Problem } from '../types/problem';
 import { decimalDigits, isDegenerateZeroAnswer, varietyRatio } from './quality-rules';
 
@@ -48,6 +50,10 @@ const DECIMAL_QUALITY_TARGETS = [
   'decimal_mul_decimal',
   'decimal_mul_integer',
   'data_average',
+  // 位取り (0.1 の位 = 0.3 など) は 1 の分数乗算なので、
+  // 素の浮動小数点演算だと 0.30000000000000004 のような残渣が答えに入る。
+  // 学習者が書き写せる小数第2位までの値であることを保証する。
+  'decimal_place_value',
 ];
 
 /**
@@ -279,9 +285,9 @@ describe('requested difficulty is honoured', () => {
     // The registry filters candidates on this contract, so a generator that cannot
     // honour a level must not silently emit a different one.
     //
-    // Phase 1 does NOT restructure the difficulty model (out of scope), so pairs
-    // measured to ignore the request are baselined. This guards against NEW
-    // (generator, difficulty) pairs appearing after the Phase 1-B/1-C changes.
+    // Every pair below is explicitly excluded by supportedLevels in metadata.ts, so
+    // generateProblem({type, difficulty}) refuses it up-front instead of retrying
+    // 300 times. Keeping the set here makes the known list greppable: a NEW pair
     const BASELINE_MISMATCH = new Set<string>([
       'angle_basic:1', 'angle_basic:2',
       'circle_area_diameter:1', 'circle_area_radius:1',
@@ -336,5 +342,118 @@ describe('requested difficulty is honoured', () => {
       unexpected.join('\n'),
       `${unexpected.length} NEW (generator, difficulty) pairs ignore the requested level`,
     ).toBe('');
+  });
+});
+
+describe('supportedLevels matches real generation capability', () => {
+  // Regression for the H-2 audit finding.
+  //
+  // getTypeSupportedLevels returns lv1..lv5 when a type declares nothing, so a
+  // type that structurally cannot build an lv1 problem used to be treated as
+  // lv1-capable: generateProblem({type, difficulty: 1}) then burned 300 retries
+  // and threw, and the quality gate only ever sampled the DECLARED levels, so
+  // the mismatch stayed invisible.
+  //
+  // The contract asserted here: every level declared in supportedLevels must
+  // actually be producible. Levels that are NOT declared are allowed to fail
+  // (that is exactly what the declaration means), so this never requires a type
+  // to support a level it opted out of.
+  // 一部の (型, lv) は生成確率が低い。
+  // speed_word の lv2 は実測 600 seed 中 22 件 (約3.7%) しか出ないが、
+  // registry は該当 lv で最大300回再試行するので実運用では必ず成立する。
+  // よって「宣言レベルは生成可能である」ことの判定は、
+  // registry と同じ再試行回数 (300) を基準に行わなければならない。
+  // 少ない試行回数で判定すると正常な型を誤って失敗させてしまう。
+  const SLOW_SEEDS = 300;
+
+  it('every declared level is actually producible for its own type', () => {
+    const violations: string[] = [];
+
+    for (const g of getAllGenerators()) {
+      for (const lv of getTypeSupportedLevels(g.type)) {
+        let matched = 0;
+        for (let s = 0; s < SLOW_SEEDS; s++) {
+          const problem = tryGenerate(g.type, lv, s * 15485863 + lv);
+          if (problem && problem.difficulty.level === lv) matched++;
+        }
+        if (matched === 0) {
+          violations.push(
+            `${g.type} declares lv${lv} in supportedLevels but never produced it ` +
+              `in ${SEEDS} seeds`,
+          );
+        }
+      }
+    }
+
+    expect(
+      violations.join('\n'),
+      `${violations.length} types declare a difficulty they cannot build`,
+    ).toBe('');
+  });
+
+  it('a level excluded by supportedLevels fails fast instead of retrying', () => {
+    // The registry must refuse an unsupported (type, difficulty) up-front.
+    // Without the declaration it would retry 300 times and then throw anyway.
+    const probes: [string, DifficultyLevel][] = [
+      ['prime_judgment', 1],
+      ['divisors_finding', 1],
+      ['data_average', 1],
+      ['speed_multi_step', 1],
+      ['integer_fill_blank', 1],
+    ];
+
+    for (const [type, lv] of probes) {
+      expect(getTypeSupportedLevels(type), `${type} lv${lv}`).not.toContain(lv);
+      const started = Date.now();
+      expect(
+        () => generateProblem({ type, difficulty: lv, seed: 42 }),
+        `${type} lv${lv} must be rejected by the declaration`,
+      ).toThrow(`この問題タイプはこの難易度に対応していません: ${type}`);
+      // Early rejection, not the 300-retry path.
+      expect(Date.now() - started, `${type} lv${lv} rejected slowly`).toBeLessThan(1000);
+    }
+  });
+
+  it('every declared level still returns the requested level through generateProblem', () => {
+    const mismatches: string[] = [];
+
+    for (const g of getAllGenerators()) {
+      for (const lv of getTypeSupportedLevels(g.type)) {
+        for (let s = 0; s < 3; s++) {
+          const problem = generateProblem({ type: g.type, difficulty: lv, seed: s * 7919 + lv });
+          if (problem.difficulty.level !== lv) {
+            mismatches.push(`${g.type} declared lv${lv} but got lv${problem.difficulty.level}`);
+          }
+        }
+      }
+    }
+
+    expect(
+      mismatches.slice(0, 10).join('\n'),
+      `${mismatches.length} declared levels did not come back at that level`,
+    ).toBe('');
+  });
+
+  it('the UI path (category + difficulty) still works for every level', () => {
+    // Declaring supportedLevels must not starve the category-based path that
+    // the quiz actually uses: enough generators must remain to cover each level.
+    const failures: string[] = [];
+
+    for (const category of getCategories()) {
+      for (const difficulty of DIFFICULTIES) {
+        let ok = 0;
+        for (let s = 0; s < 5; s++) {
+          try {
+            const problem = generateProblem({ category, difficulty, seed: s * 977 + difficulty });
+            if (problem.difficulty.level === difficulty) ok++;
+          } catch {
+            // counted as a failure below
+          }
+        }
+        if (ok < 5) failures.push(`${category} lv${difficulty}: only ${ok}/5`);
+      }
+    }
+
+    expect(failures.join('\n'), `${failures.length} category/level pairs degraded`).toBe('');
   });
 });

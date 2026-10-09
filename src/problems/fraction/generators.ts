@@ -59,6 +59,18 @@ function fractionJapanese(n: number, d: number): string {
 }
 
 /**
+ * 約分する前の分数をそのまま日本語表記する。
+ *
+ * fractionJapanese は約分した結果を表示するため、「約分しなさい」問題では
+ * 答えを問題文に出してしまう (例: 4/8 → 「2分の1（分子4、分母8）を約分しなさい」)。
+ * 約分問題では必ずこちらを使う。
+ */
+function rawFractionJapanese(n: number, d: number): string {
+  if (d === 1) return String(n);
+  return d + '分の' + n;
+}
+
+/**
  * 帯分数の日本語表記
  * 例: 1と2/3 → 1と3分の2
  */
@@ -341,9 +353,21 @@ export class FractionDivIntegerGenerator implements ProblemGenerator {
     // 難易度に応じて分母・整数の範囲を変化させる
     const denominator =
       lv <= 1 ? rng.int(2, 6) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(2, 12) : lv === 4 ? rng.int(3, 15) : rng.int(4, 20);
-    const numerator = rng.int(1, denominator - 1);
     const integer =
       lv <= 1 ? rng.int(2, 6) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(2, 12) : lv === 4 ? rng.int(3, 15) : rng.int(4, 20);
+
+    // 約分できる分数 (例 4/8) を問題文に出すと、答えの計算过程中でも
+    // 「最初から約分しておくべき」混乱が起きるため、
+    // 問題文に出す分数は必ず最簡分数にする。
+    let numerator = 1;
+    for (let attempt = 0; attempt < 40; attempt++) {
+      const candidate = rng.int(1, denominator - 1);
+      if (gcd(candidate, denominator) === 1) {
+        numerator = candidate;
+        break;
+      }
+      numerator = candidate;
+    }
 
     const result = divideFractions(numerator, denominator, integer, 1);
     const answer = improperToAnswer(result.numerator, result.denominator);
@@ -353,15 +377,18 @@ export class FractionDivIntegerGenerator implements ProblemGenerator {
       category: this.category,
       type: this.type,
       difficulty: createFractionDifficulty(lv, numerator, 1, 1),
+      // 分数÷整数の問題文に「（分母○）」を付けると、
+      // 「3分の1（分母3）」のように同じ情報を二重に示すだけになって
+      // 小学生には不自然な書き方になるため、括弧は付けない。
       question:
         fractionJapanese(numerator, denominator) +
-        '（分母' + denominator + '）を' +
+        'を' +
         integer +
         'でわると、いくつになりますか',
       answer,
       explanation:
         fractionJapanese(numerator, denominator) +
-        '（分子' + numerator + '、分母' + denominator + '）÷' +
+        '÷' +
         integer +
         '＝' +
         formatFractionJapanese(result.numerator, result.denominator) +
@@ -728,7 +755,13 @@ export class FractionReduceGenerator implements ProblemGenerator {
     for (let attempt = 0; attempt < 100; attempt++) {
       denominator = lv === 1 ? rng.int(4, 10) : rng.int(6, 20);
       divisor = rng.int(2, lv === 1 ? 4 : 6);
-      numerator = rng.int(1, Math.floor(denominator / divisor)) * divisor;
+      // 分子は分母未満かつ divisor の倍数にする。
+      // divisor*k < denominator を満たす最大の k を使うので、
+      // 「4分の4」「10分の10」のような「1を1に直すだけ」の
+      // 約分問題は生成されない。
+      const maxK = Math.floor((denominator - 1) / divisor);
+      if (maxK < 1) continue;
+      numerator = rng.int(1, maxK) * divisor;
       if (gcd(numerator, denominator) > 1) break;
     }
     if (gcd(numerator, denominator) <= 1) {
@@ -751,11 +784,11 @@ export class FractionReduceGenerator implements ProblemGenerator {
       type: this.type,
       difficulty: createFractionDifficulty(lv, numerator, lv >= 2 ? 2 : 1, 1),
       question:
-        fractionJapanese(numerator, denominator) +
-        '（分子' + numerator + '、分母' + denominator + '）を約分しなさい',
+        rawFractionJapanese(numerator, denominator) +
+        'を約分しなさい',
       answer: ans,
       explanation:
-        fractionJapanese(numerator, denominator) +
+        rawFractionJapanese(numerator, denominator) +
         ' は、分子と分母を' +
         gcd(numerator, denominator) +
         'でわると ' +

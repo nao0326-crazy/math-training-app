@@ -231,11 +231,43 @@ input:focus {
   color: var(--text);
 }
 
+.area-buttons,
 .category-buttons,
-.difficulty-buttons {
+.difficulty-buttons,
+.study-kind-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+/* 通常モードの分野 (area) ボタン */
+.area-buttons {
+  margin-top: 12px;
+}
+
+.area-button {
+  min-width: 150px;
+  padding: 14px 22px;
+  font-size: 1.05rem;
+}
+
+/* 適応難易度セッション中の分野表示 (問題ヘッダ) */
+.quiz-area {
+  font-weight: bold;
+  color: var(--primary);
+}
+
+/* 学習方法 (すべての問題 / 苦手復習) のボタン。
+   既存の .category-button を再利用し、
+   カテゴリ選択と同じ見た目と選択状態を保つ。 */
+.study-kind-buttons {
+  gap: 16px;
+}
+
+.study-hint {
+  margin: 0;
+  color: var(--text-muted, #666);
+  line-height: 1.7;
 }
 
 .category-button {
@@ -1395,6 +1427,7 @@ button.calendar-cell.day.selected {
     font-size: 1.2rem;
   }
 
+  .area-buttons,
   .category-buttons,
   .difficulty-buttons {
     justify-content: center;
@@ -1613,6 +1646,7 @@ button.calendar-cell.day.selected {
     font-size: 1rem;
   }
 
+  .area-buttons,
   .category-buttons,
   .difficulty-buttons {
     gap: 10px;
@@ -2112,6 +2146,72 @@ button.calendar-cell.day.selected {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+/* 管理者モード (パスワード式ゲート) とその指定パネル */
+
+/* 通常画面には目立たせない入口。ログイン導線に見せないための小さめ表現 */
+.link-button {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.admin-entry {
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.admin-panel {
+  text-align: left;
+}
+
+.admin-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.admin-group label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.admin-group select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+}
+
+.admin-gate-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.admin-gate-error {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  color: #c0392b;
+}
+
+.admin-gate-message {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  color: var(--text-light);
 }
 
 /* スマートフォンでは復習カードを縦積みにして押しやすくする */

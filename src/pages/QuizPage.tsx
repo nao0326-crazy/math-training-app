@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Category, Problem } from '../types/problem';
-import { QuestionSelector } from '../engine/selector/questionSelector';
+import { NoWeakTargetError } from '../engine/selector/weakSelector';
+import type { StudyMode } from '../engine/selector/types';
+import type { QuestionFilter } from '../engine/selector/questionPool';
+import { createQuizSelector, toDifficultyLevel } from './quizSelection';
 import { formatAnswer, judgeUserAnswer, type AnswerJudgement } from '../utils/answer';
 import { difficultyLabel } from '../engine/difficulty/difficulty';
 import { categoryLabel } from '../utils/stats';
@@ -22,10 +25,26 @@ import {
 import { deriveMetadata, fingerprintProblem } from '../engine/diversity/metadata';
 
 interface QuizPageProps {
+  /**
+   * 旧セレクター互換のカテゴリ指定。
+   * 通常モードでは常に null (分野選択は管理者モードにのみ存在する)。
+   */
   category: Category | null;
+  /** 難易度。full-random / adaptive では選出条件に使われない ( adaptive は履歴から決まる。値は表示用ダミー) */
   difficulty: number;
   /** 出題する問題数 (省略時は10問。苦手分野の復習では5問) */
   questionCount?: number;
+  /**
+   * 学習モード。
+   * - full-random : 通常モードの標準。全出題可能母集団からランダム
+   * - filtered    : 管理者モード。filter で母集団を絞る
+   * - weak        : WeakSelector (回答履歴から苦手 problemType x difficulty を抽出)
+   * - random      : RandomSelector (指定難易度の全カテゴリ横断)
+   * - category    : 旧 QuestionSelector
+   */
+  studyMode?: StudyMode;
+  /** 管理者モード用の絞り込み条件 (通常モードでは null) */
+  filter?: QuestionFilter | null;
   onExit: () => void;
 }
 
@@ -39,6 +58,8 @@ export default function QuizPage({
   category,
   difficulty,
   questionCount = 10,
+  studyMode,
+  filter = null,
   onExit,
 }: QuizPageProps) {
   const [problem, setProblem] = useState<Problem | null>(null);
@@ -51,7 +72,7 @@ export default function QuizPage({
   const [result, setResult] = useState<QuizResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const selectorRef = useRef<QuestionSelector | null>(null);
+  const selectorRef = useRef<ReturnType<typeof createQuizSelector> | null>(null);
   const startTimeRef = useRef<number>(0);
   /** 同一問題の回答確定を同一イベントループ内でも二重実行しない */
   const answerSubmitLockRef = useRef(false);
@@ -72,7 +93,7 @@ export default function QuizPage({
         if (cancelled) return;
         historyRef.current = history;
         questionHistoryRef.current = questionHistory;
-        selectorRef.current = new QuestionSelector();
+        selectorRef.current = createQuizSelector({ studyMode, category, difficulty, filter });
         loadNextQuestion();
       } catch {
         if (!cancelled) {
@@ -94,14 +115,28 @@ export default function QuizPage({
   const loadNextQuestion = useCallback(() => {
     if (!selectorRef.current) return;
 
-    const nextProblem = selectorRef.current.selectNextQuestion(
-      historyRef.current,
-      questionHistoryRef.current,
-      {
-        difficultyLevel: difficulty,
-        category,
-      },
-    );
+    const selector = selectorRef.current;
+    const level = toDifficultyLevel(difficulty);
+    let nextProblem: Problem;
+    try {
+      nextProblem = selector.selectNextQuestion(
+        historyRef.current,
+        questionHistoryRef.current,
+        {
+          mode: studyMode ?? { kind: 'full-random' },
+          difficulty: level,
+        },
+      );
+    } catch (e) {
+      // 復習対象が0件 (履歴がない / 全問正解) の場合は画面を壊さず、
+      // エラーメッセージを表示して安全に終了できるようにする。
+      if (e instanceof NoWeakTargetError) {
+        setError(e.message);
+        return;
+      }
+      setError('問題の生成に失敗しました。');
+      return;
+    }
 
     setProblem(nextProblem);
     setIsAnswered(false);
@@ -123,7 +158,9 @@ export default function QuizPage({
     };
     questionHistoryRef.current.push(record);
     void saveQuestionHistory(record);
-  }, [category, difficulty]);
+    // 絞り込み (filter / category) はセレクター生成時 (初期化) に確定するため、
+    // 毎問変わるのは difficulty と studyMode だけ。
+  }, [difficulty, studyMode]);
 
   /**
    * 回答を判定する
@@ -185,13 +222,15 @@ export default function QuizPage({
    * 次の問題へ進む
    */
   const handleNext = useCallback(() => {
-    if (questionNumber >= 10) {
+    // 終了判定は questionCount に従う (復習は5問・通常は10問)。
+    // ハードコードの10だと復習モードで問題数が画面表示とずれる。
+    if (questionNumber >= questionCount) {
       setResult(resultRef.current);
     } else {
       setQuestionNumber((n) => n + 1);
       loadNextQuestion();
     }
-  }, [questionNumber, loadNextQuestion]);
+  }, [questionNumber, questionCount, loadNextQuestion]);
 
   /**
    * もう一度挑戦する
@@ -267,6 +306,9 @@ export default function QuizPage({
           問題 {questionNumber} / {questionCount}
         </div>
         <div className="quiz-meta">
+          {studyMode?.kind === 'adaptive' && (
+            <span className="quiz-area">分野: {studyMode.area}</span>
+          )}
           <span className="quiz-category">{categoryLabel(problem.category)}</span>
           <span className="quiz-difficulty">
             {difficultyLabel(problem.difficulty.level)}

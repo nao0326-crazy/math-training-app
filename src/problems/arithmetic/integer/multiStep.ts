@@ -112,6 +112,13 @@ export class MultiStepGenerator implements ProblemGenerator {
       return null;
     }
 
+    // この型の練習対象は「乗除優先で計算の順序を考えること」であり、
+    // 答えが5桁以上になると暗算の範囲を超えて順序の学習が成立しなくなる。
+    // (例: 47 × 46 × 45 + 44 = 97194 は計算順序が正しいかどうかが検証できない)
+    if (Math.abs(result) > 10000) {
+      return null;
+    }
+
     // 式を組み立てる
     const expression = buildExpression(numbers, operators);
 

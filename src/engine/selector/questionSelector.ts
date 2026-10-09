@@ -88,6 +88,13 @@ export class QuestionSelector {
    *
    * 再現性: generateProblem({ seed }) 自体は seed で確定する。
    * 選択結果は history により変動する (seed + history で選択される)。
+   *
+   * このクラスはカテゴリ指定学習 (`category` 指定) を担当する。
+   * 全カテゴリ横断の通常ランダム学習は RandomSelector が担当する。
+   *
+   * @param category null の場合は回答履歴からカテゴリを自動選択する。
+   *   履歴が空のときは integer に固定される (既存挙動・変更しない)。
+   *   全カテゴリを対象にした通常ランダム学習には RandomSelector を使うこと。
    */
   selectNextQuestion(
     history: AnswerRecord[],

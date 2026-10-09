@@ -1,0 +1,108 @@
+{
+  "results": [
+    {
+      "name": "1 ホーム画面表示",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "2 学習開始→問題画面",
+      "status": "PASS",
+      "detail": "家庭教師継続条件\n今日1000問以上解かないと家庭教師をやめます。\n現在：0 / 1000問\n残り：1000問\n小6数学トレーニング\nホーム\n学習履歴\n問題 1"
+    },
+    {
+      "name": "Q1 入力欄が無い",
+      "status": "FAIL",
+      "detail": ""
+    },
+    {
+      "name": "3 回答送信できる",
+      "status": "FAIL",
+      "detail": "0問送信"
+    },
+    {
+      "name": "4 正解判定が表示される",
+      "status": "NOT TESTED",
+      "detail": ""
+    },
+    {
+      "name": "5 不正解判定が表示される",
+      "status": "NOT TESTED",
+      "detail": ""
+    },
+    {
+      "name": "6 解説・途中式が表示される",
+      "status": "FAIL",
+      "detail": "0問中 0問に途中式"
+    },
+    {
+      "name": "6b 正解が開示される",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "7 次の問題へ進める",
+      "status": "FAIL",
+      "detail": "0問連続"
+    },
+    {
+      "name": "8 複数問連続プレイ",
+      "status": "FAIL",
+      "detail": "0問"
+    },
+    {
+      "name": "9 結果画面（正答率）表示",
+      "status": "NOT TESTED",
+      "detail": "結果画面未到達"
+    },
+    {
+      "name": "10 問題タイプが変化する",
+      "status": "FAIL",
+      "detail": "0問 play"
+    },
+    {
+      "name": "11 履歴画面が表示される",
+      "status": "PASS",
+      "detail": "家庭教師継続条件 | 今日1000問以上解かないと家庭教師をやめます。 | 現在：0 / 1000問 | 残り：1000問 | 小6数学トレーニング | ホーム | 学習履歴 | 学習履歴 | ‹ | 2026年10月 | › | 月 | 火 | 水 | 木 | 金 | 土 | 日 | 1 | "
+    },
+    {
+      "name": "12 IndexedDB が存在する",
+      "status": "PASS",
+      "detail": "grade6-math-app"
+    },
+    {
+      "name": "13 リロード後も履歴が残る",
+      "status": "PASS",
+      "detail": "家庭教師継続条件 | 今日1000問以上解かないと家庭教師をやめます。 | 現在：0 / 1000問 | 残り：1000問 | 小6数学トレーニング | ホーム | 学習履歴 | ようこそ！ |  | 分野ごとに、そ"
+    },
+    {
+      "name": "14 通常画面リロードでクラッシュしない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "15 学習中リロードで復旧する",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "16 console error なし",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "17 uncaught exception なし",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "18 module 読み込み失敗なし",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "played": []
+}

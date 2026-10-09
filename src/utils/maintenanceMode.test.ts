@@ -19,7 +19,7 @@ describe('App maintenance mode', () => {
     const markup = renderToStaticMarkup(createElement(App, { maintenanceMode: false }));
 
     expect(markup).toContain('学習履歴');
-    expect(markup).toContain('学習をはじめる');
+    expect(markup).toContain('どの分野を勉強しますか？');
     expect(markup).not.toContain('一時的に公開を停止しています');
   });
 

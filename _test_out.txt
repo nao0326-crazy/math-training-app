@@ -1,0 +1,361 @@
+
+> grade6-math-generator@1.0.0 test
+> vitest run
+
+
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mC:/Users/monty/OneDrive/繝・せ繧ｯ繝医ャ繝・蝠城｡・[39m
+
+ [32m笨・[39m src/utils/inputType.test.ts [2m([22m[2m69 tests[22m[2m)[22m[90m 7[2mms[22m[39m
+ [32m笨・[39m src/utils/answer.test.ts [2m([22m[2m61 tests[22m[2m)[22m[90m 10[2mms[22m[39m
+ [32m笨・[39m src/problems/combinatorics/variety-phase2b.test.ts [2m([22m[2m14 tests[22m[2m)[22m[90m 51[2mms[22m[39m
+ [32m笨・[39m src/problems/decimal/decimalArithmeticGenerators.test.ts [2m([22m[2m39 tests[22m[2m)[22m[90m 137[2mms[22m[39m
+[90mstdout[2m | src/problems/arithmetic/integer/estimate-product.test.ts[2m > [22m[2mestimate_product: 480蝠上・迢ｬ遶区､懃ｮ・(lv2-5 x 120)[2m > [22m[2m蜈ｨ480蝠上′荳ｸ繧√・隕狗ｩ阪ｊ繝ｻ髮｣譏灘ｺｦ繝ｻ隗｣隱ｬ縺ｧ迢ｬ遶区､懃ｮ励ｒ騾夐℃縺吶ｋ
+[22m[39m480蝠冗峡遶区､懃ｮ・ {"perLevel":{"2":{"gen":120,"ok":120,"fail":0},"3":{"gen":120,"ok":120,"fail":0},"4":{"gen":120,"ok":120,"fail":0},"5":{"gen":120,"ok":120,"fail":0}},"perVariant":{"estimate_to_tens":{"gen":153,"ok":153,"fail":0},"estimate_one_exact":{"gen":133,"ok":133,"fail":0},"estimate_to_hundreds":{"gen":88,"ok":88,"fail":0},"estimate_mixed_places":{"gen":82,"ok":82,"fail":0},"estimate_shopping":{"gen":24,"ok":24,"fail":0}}}
+
+ [32m笨・[39m src/problems/arithmetic/integer/estimate-product.test.ts [2m([22m[2m22 tests[22m[2m)[22m[90m 80[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/geometry-phase2s.test.ts [2m([22m[2m21 tests[22m[2m)[22m[90m 241[2mms[22m[39m
+ [32m笨・[39m src/problems/problems-phase2t.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 356[2mms[22m[39m
+ [32m笨・[39m src/problems/quality-phase2.test.ts [2m([22m[2m28 tests[22m[2m)[22m[33m 308[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/weakTargets.test.ts [2m([22m[2m28 tests[22m[2m)[22m[90m 276[2mms[22m[39m
+ [32m笨・[39m src/problems/combinatorics/variety-phase2e.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 565[2mms[22m[39m
+   [33m[2m笨・[22m[39m combine_simple: 譌｢蟄伜梛縺ｨ縺ｮ驥崎､・′縺ｪ縺・[2m > [22mcombinatorics 縺ｮ莉門梛縺ｨ蝠城｡梧枚縺御ｸ閾ｴ縺励↑縺・[33m309[2mms[22m[39m
+ [32m笨・[39m src/problems/arithmetic/integer/subtraction-structure.test.ts [2m([22m[2m28 tests[22m[2m)[22m[90m 101[2mms[22m[39m
+ [32m笨・[39m src/quality/learning-quality.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 119[2mms[22m[39m
+ [32m笨・[39m src/quality/phase2f-validate.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 82[2mms[22m[39m
+ [32m笨・[39m src/engine/curriculum/curriculumScope.test.ts [2m([22m[2m27 tests[22m[2m)[22m[90m 136[2mms[22m[39m
+ [32m笨・[39m src/problems/numberTheory/generators.test.ts [2m([22m[2m24 tests[22m[2m)[22m[90m 90[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/geometry-phase2u.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 199[2mms[22m[39m
+ [32m笨・[39m src/problems/phase2z1.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 374[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/symmetry-validate.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 20[2mms[22m[39m
+[90mstdout[2m | src/engine/diversity/diversity.test.ts[2m > [22m[2mQuestionSelector 螟壽ｧ俶ｧ邨ｱ蜷医ユ繧ｹ繝・[2m > [22m[2m20蝠冗函謌舌〒 family 蛛上ｊ繝ｻ驥崎､・・騾｣邯壹ｒ謚大宛縺吶ｋ
+[22m[39mFamily distribution (20 questions): {
+  multiplication: [33m2[39m,
+  word_problem: [33m2[39m,
+  multi_step: [33m4[39m,
+  approximation: [33m3[39m,
+  division: [33m2[39m,
+  subtraction: [33m4[39m,
+  addition: [33m3[39m
+}
+
+ [32m笨・[39m src/engine/diversity/diversity.test.ts [2m([22m[2m12 tests[22m[2m)[22m[90m 113[2mms[22m[39m
+ [32m笨・[39m src/problems/combinatorics/variety-phase2d.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 1266[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/congruent-judge-differs.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 82[2mms[22m[39m
+ [32m笨・[39m src/engine/solution/solutionGenerator.test.ts [2m([22m[2m13 tests[22m[2m)[22m[90m 288[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/geometry-phase2v.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 407[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/congruent-judge-same.test.ts [2m([22m[2m11 tests[22m[2m)[22m[90m 84[2mms[22m[39m
+ [32m笨・[39m src/problems/phase2y.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 360[2mms[22m[39m
+ [32m笨・[39m src/utils/adaptiveDifficulty.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 17[2mms[22m[39m
+ [32m笨・[39m src/components/figure.test.tsx [2m([22m[2m12 tests[22m[2m)[22m[90m 21[2mms[22m[39m
+ [32m笨・[39m src/utils/fraction.test.ts [2m([22m[2m25 tests[22m[2m)[22m[90m 14[2mms[22m[39m
+ [32m笨・[39m src/problems/fraction/fraction-explanation.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 23[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/adaptiveSelector.test.ts [2m([22m[2m11 tests[22m[2m)[22m[90m 38[2mms[22m[39m
+ [32m笨・[39m src/problems/arithmetic/integer/basicOperations.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 47[2mms[22m[39m
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m驥咲せ逶｣譟ｻ[2m > [22m[2mSpeedWordGenerator[2m > [22m[2m繝ｬ繝吶Ν5縺ｮ蝠城｡後ｒ逕滓・縺励※遒ｺ隱・[22m[39m
+===== SpeedWordGenerator 繝ｬ繝吶Ν5 =====
+
+--- 蝠城｡・---
+蝠城｡・ 閾ｪ蜍戊ｻ翫〒譎る・90km縺ｧ8譎る俣襍ｰ繧九→菴斌m騾ｲ縺ｿ縺ｾ縺吶°縲・豁｣隗｣: {"kind":"integer","value":1520}
+隗｣隱ｬ: 驕薙・繧奇ｼ晞溘＆ﾃ玲凾髢・縺ｪ縺ｮ縺ｧ縲・90ﾃ・・・520縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 閾ｪ蜍戊ｻ翫〒譎る・23km縺ｧ7譎る俣襍ｰ繧九→菴斌m騾ｲ縺ｿ縺ｾ縺吶°縲・豁｣隗｣: {"kind":"integer","value":861}
+隗｣隱ｬ: 驕薙・繧奇ｼ晞溘＆ﾃ玲凾髢・縺ｪ縺ｮ縺ｧ縲・23ﾃ・・・61縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 閾ｪ蜍戊ｻ翫〒譎る・23km縺ｧ8譎る俣襍ｰ繧九→菴斌m騾ｲ縺ｿ縺ｾ縺吶°縲・豁｣隗｣: {"kind":"integer","value":984}
+隗｣隱ｬ: 驕薙・繧奇ｼ晞溘＆ﾃ玲凾髢・縺ｪ縺ｮ縺ｧ縲・23ﾃ・・・84縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 閾ｪ蜍戊ｻ翫〒譎る・23km縺ｧ9譎る俣襍ｰ繧九→菴斌m騾ｲ縺ｿ縺ｾ縺吶°縲・豁｣隗｣: {"kind":"integer","value":1107}
+隗｣隱ｬ: 驕薙・繧奇ｼ晞溘＆ﾃ玲凾髢・縺ｪ縺ｮ縺ｧ縲・23ﾃ・・・107縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 閾ｪ蜍戊ｻ翫〒譎る・23km縺ｧ10譎る俣襍ｰ繧九→菴斌m騾ｲ縺ｿ縺ｾ縺吶°縲・豁｣隗｣: {"kind":"integer","value":1230}
+隗｣隱ｬ: 驕薙・繧奇ｼ晞溘＆ﾃ玲凾髢・縺ｪ縺ｮ縺ｧ縲・23ﾃ・0・・230縺ｧ縺吶・
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m驥咲せ逶｣譟ｻ[2m > [22m[2mDecimalDivDecimalGenerator[2m > [22m[2m蝠城｡後ｒ逕滓・縺励※荳ｸ繧∵欠遉ｺ繧堤｢ｺ隱・[22m[39m
+===== DecimalDivDecimalGenerator =====
+
+--- 蝠城｡・---
+蝠城｡・ 1.5繧・.5縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":3}
+隗｣隱ｬ: 1.5ﾃｷ0.5・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 4.5繧・.9縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":5}
+隗｣隱ｬ: 4.5ﾃｷ0.9・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 9.8繧・.4縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":7}
+隗｣隱ｬ: 9.8ﾃｷ1.4・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 27.6繧・.3縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":12}
+隗｣隱ｬ: 27.6ﾃｷ2.3・・2縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 103.5繧・.5縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":23}
+隗｣隱ｬ: 103.5ﾃｷ4.5・・3縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 0.4繧・.2縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":2}
+隗｣隱ｬ: 0.4ﾃｷ0.2・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 1.2繧・.3縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":4}
+隗｣隱ｬ: 1.2ﾃｷ0.3・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 2.4繧・.4縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":6}
+隗｣隱ｬ: 2.4ﾃｷ0.4・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 6繧・.6縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":10}
+隗｣隱ｬ: 6ﾃｷ0.6・・0縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 22.8繧・.2縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":19}
+隗｣隱ｬ: 22.8ﾃｷ1.2・・9縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m驥咲せ逶｣譟ｻ[2m > [22m[2mFractionBigSmallGenerator[2m > [22m[2m蝠城｡後ｒ逕滓・縺励※邏・・縺ｮ荳雋ｫ諤ｧ繧堤｢ｺ隱・[22m[39m
+===== FractionBigSmallGenerator =====
+
+--- 蝠城｡・---
+蝠城｡・ 2蛻・・1縺ｨ5蛻・・4 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"5蛻・・4"}
+隗｣隱ｬ: 5蛻・・4 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 7蛻・・3縺ｨ14蛻・・11 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"14蛻・・11"}
+隗｣隱ｬ: 14蛻・・11 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・1縲∝・豈・4)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 19蛻・・9縺ｨ19蛻・・15 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"19蛻・・15"}
+隗｣隱ｬ: 19蛻・・15 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・5縲∝・豈・9)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 19蛻・・9縺ｨ19蛻・・15 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"19蛻・・15"}
+隗｣隱ｬ: 19蛻・・15 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・5縲∝・豈・9)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 19蛻・・9縺ｨ19蛻・・15 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"19蛻・・15"}
+隗｣隱ｬ: 19蛻・・15 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・5縲∝・豈・9)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 5蛻・・2縺ｨ5蛻・・3 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"5蛻・・3"}
+隗｣隱ｬ: 5蛻・・3 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 12蛻・・1縺ｨ12蛻・・5 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"12蛻・・5"}
+隗｣隱ｬ: 12蛻・・5 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・2)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 8蛻・・3縺ｨ2蛻・・1 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"8蛻・・3"}
+隗｣隱ｬ: 8蛻・・3 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 8蛻・・3縺ｨ2蛻・・1 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"8蛻・・3"}
+隗｣隱ｬ: 8蛻・・3 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 8蛻・・3縺ｨ2蛻・・1 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"8蛻・・3"}
+隗｣隱ｬ: 8蛻・・3 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m驥咲せ逶｣譟ｻ[2m > [22m[2mRatioSimplifyGenerator[2m > [22m[2m蝠城｡後ｒ逕滓・縺励※譌｢邏・ｯ斐〒縺ｪ縺・％縺ｨ繧堤｢ｺ隱・[22m[39m
+===== RatioSimplifyGenerator =====
+
+--- 蝠城｡・---
+蝠城｡・ 8・・6繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"1・・"}
+隗｣隱ｬ: 8縺ｨ16繧呈怙螟ｧ蜈ｬ邏・焚8縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 18・・0繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"3・・"}
+隗｣隱ｬ: 18縺ｨ30繧呈怙螟ｧ蜈ｬ邏・焚6縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 32・・8繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"2・・"}
+隗｣隱ｬ: 32縺ｨ48繧呈怙螟ｧ蜈ｬ邏・焚16縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 50・・0繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"5・・"}
+隗｣隱ｬ: 50縺ｨ90繧呈怙螟ｧ蜈ｬ邏・焚10縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 98・・82繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"7・・3"}
+隗｣隱ｬ: 98縺ｨ182繧呈怙螟ｧ蜈ｬ邏・焚14縺ｧ繧上ｋ縺ｨ縲・・・3縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 4・・繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"2・・"}
+隗｣隱ｬ: 4縺ｨ6繧呈怙螟ｧ蜈ｬ邏・焚2縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 6・・繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"2・・"}
+隗｣隱ｬ: 6縺ｨ9繧呈怙螟ｧ蜈ｬ邏・焚3縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 12・・6繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"3・・"}
+隗｣隱ｬ: 12縺ｨ16繧呈怙螟ｧ蜈ｬ邏・焚4縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 20・・0繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"2・・"}
+隗｣隱ｬ: 20縺ｨ30繧呈怙螟ｧ蜈ｬ邏・焚10縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 42・・6繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"3・・"}
+隗｣隱ｬ: 42縺ｨ56繧呈怙螟ｧ蜈ｬ邏・焚14縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+縺吶∋縺ｦ縺ｮ蝠城｡後′邁｡蜊伜喧縺ｧ縺阪ｋ: true
+逕滓・縺輔ｌ縺溷撫鬘梧焚: 500
+
+ [32m笨・[39m src/quality/deep-audit.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 21[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/randomSelector.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 1774[2mms[22m[39m
+   [33m[2m笨・[22m[39m RandomSelector: 螻･豁ｴ0莉ｶ縺ｧ繧ょ・繧ｫ繝・ざ繝ｪ縺九ｉ蜃ｺ鬘後〒縺阪ｋ[2m > [22m蜈ｨ髮｣譏灘ｺｦ縺ｧ蟆代↑縺上→繧・蝠上・蜃ｺ鬘後〒縺阪ｋ [33m658[2mms[22m[39m
+   [33m[2m笨・[22m[39m RandomSelector: 繧ｫ繝・ざ繝ｪ謚ｽ驕ｸ縺ｯ Generator 謨ｰ縺ｫ豈比ｾ九＠縺ｪ縺・[2m > [22mgeometry 縺ｯ Generator 縺梧怙螟・(24蛟・ 縺縺碁℃蠎ｦ縺ｫ蛛上ｉ縺ｪ縺・[33m301[2mms[22m[39m
+ [32m笨・[39m src/problems/decimal/decimal-place-value.test.ts [2m([22m[2m5 tests[22m[2m)[22m[90m 13[2mms[22m[39m
+ [32m笨・[39m src/pages/studyMode.test.ts [2m([22m[2m13 tests[22m[2m)[22m[90m 53[2mms[22m[39m
+ [32m笨・[39m src/problems/phase2z.test.ts [2m([22m[2m6 tests[22m[2m)[22m[90m 144[2mms[22m[39m
+ [32m笨・[39m src/problems/arithmetic/integer/subtraction-zero.test.ts [2m([22m[2m8 tests[22m[2m)[22m[90m 176[2mms[22m[39m
+ [32m笨・[39m src/engine/validator/validator.test.ts [2m([22m[2m17 tests[22m[2m)[22m[90m 9[2mms[22m[39m
+ [32m笨・[39m src/problems/expression/generators.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 9[2mms[22m[39m
+ [32m笨・[39m src/problems/fraction/generators.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 123[2mms[22m[39m
+ [32m笨・[39m src/engine/difficulty/difficulty.test.ts [2m([22m[2m14 tests[22m[2m)[22m[90m 6[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/questionSelector.test.ts [2m([22m[2m6 tests[22m[2m)[22m[90m 29[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/questionPool.test.ts [2m([22m[2m12 tests[22m[2m)[22m[90m 21[2mms[22m[39m
+ [32m笨・[39m src/utils/stats.test.ts [2m([22m[2m9 tests[22m[2m)[22m[90m 11[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/fullRandomSelector.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 110[2mms[22m[39m
+ [32m笨・[39m src/utils/adminMode.test.ts [2m([22m[2m9 tests[22m[2m)[22m[90m 8[2mms[22m[39m
+ [32m笨・[39m src/pages/quizSelection.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 5[2mms[22m[39m
+ [32m笨・[39m src/utils/weakAreas.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 12[2mms[22m[39m
+ [32m笨・[39m src/problems/combinatorics/variety-phase2a.test.ts [2m([22m[2m27 tests[22m[2m)[22m[33m 2779[2mms[22m[39m
+   [33m[2m笨・[22m[39m arrange_tree: 螳溯ｳｪ逧・↑螟壽ｧ俶ｧ[2m > [22m譚｡莉ｶ (n, variant) 縺ｮ邨・∩蜷医ｏ縺帙′蜊∝・縺ｫ螟壹＞ [33m517[2mms[22m[39m
+   [33m[2m笨・[22m[39m arrange_tree: 螳溯ｳｪ逧・↑螟壽ｧ俶ｧ[2m > [22m隍・焚縺ｮ譚｡莉ｶ遞ｮ鬘槭′蜃ｺ迴ｾ縺吶ｋ (1遞ｮ鬘槭↓蝗ｺ螳壹＆繧後↑縺・ [33m448[2mms[22m[39m
+   [33m[2m笨・[22m[39m arrange_tree: 譚｡莉ｶ縺ｨ遲斐∴縺ｮ豁｣縺励＆[2m > [22m蜈ｨ髮｣譏灘ｺｦ繝ｻ蜈ｨ繧ｷ繝ｼ繝峨〒 validate 繧帝壹ｊ縲∫ｭ斐∴縺梧ｭ｣縺ｮ謨ｴ謨ｰ縺ｫ縺ｪ繧・[33m429[2mms[22m[39m
+   [33m[2m笨・[22m[39m arrange_tree: 譚｡莉ｶ縺ｨ遲斐∴縺ｮ豁｣縺励＆[2m > [22m蠅・阜: n 縺ｯ3莉･荳翫〒縲∫ｭ斐∴繧・莉･荳翫↓縺ｪ繧・[33m330[2mms[22m[39m
+ [32m笨・[39m src/problems/arithmetic/integer/multiStep.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 26[2mms[22m[39m
+ [32m笨・[39m src/utils/dailyCount.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 36[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/generationVariety.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 1631[2mms[22m[39m
+   [33m[2m笨・[22m[39m 謨ｰ蛟､繝ｩ繝ｳ繝繝蛹・(繧ｸ繧ｧ繝阪Ξ繝ｼ繧ｿ蜊倅ｽ阪・豎ｺ螳夊ｫ・[2m > [22m蜈ｨ繧ｸ繧ｧ繝阪Ξ繝ｼ繧ｿ縺ｧ縲・屮譏灘ｺｦ1縲・ﾃ苓､・焚繧ｷ繝ｼ繝峨°繧芽､・焚縺ｮ謨ｰ蛟､繝代ち繝ｼ繝ｳ縺檎函謌舌＆繧後∝・蝠上′讀懆ｨｼ繧帝夐℃縺吶ｋ [33m361[2mms[22m[39m
+   [33m[2m笨・[22m[39m 謨ｰ蛟､繝ｩ繝ｳ繝繝蛹・(繝ｬ繧ｸ繧ｹ繝医Μ邨瑚ｷｯ)[2m > [22m蜷・き繝・ざ繝ｪﾃ鈴屮譏灘ｺｦ縺ｧ seed 繧貞､峨∴繧九→逡ｰ縺ｪ繧句撫鬘後′逕滓・縺輔ｌ繧・[33m870[2mms[22m[39m
+ [32m笨・[39m src/quality/quality-gate.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 2769[2mms[22m[39m
+   [33m[2m笨・[22m[39m requested difficulty is honoured[2m > [22mgenerateProblem({difficulty}) always returns exactly that difficulty level [33m387[2mms[22m[39m
+   [33m[2m笨・[22m[39m supportedLevels matches real generation capability[2m > [22mevery declared level is actually producible for its own type [33m1579[2mms[22m[39m
+[90mstdout[2m | src/quality/quality.audit.test.ts[2m > [22m[2m蝠城｡檎函謌仙刀雉ｪ逶｣譟ｻ[2m > [22m[2m蜈ｨGenerator縺九ｉ蝠城｡後ｒ逕滓・縺励※蜩∬ｳｪ繧呈､懈渊縺吶ｋ
+[22m[39m
+讀懷・縺輔ｌ縺溷撫鬘梧焚: 95
+蝠城｡後・蜀・ｨｳ:
+  蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ: 95
+
+蝠城｡後し繝ｳ繝励Ν・域怙蛻昴・20莉ｶ・・
+
+[unit_conversion_basic]
+  蝠城｡・ 7譎ゅ・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":25200}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 6蛻・・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":360}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 7蛻・・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":420}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 7譎ゅ・菴募・縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":420}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 8m縺ｯ菴瀕m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":8000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 9蛻・・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":540}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 9km縺ｯ菴瀕縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":9000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 8譎ゅ・菴募・縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":480}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 2譎ゅ・菴募・縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":120}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 2m縺ｯ菴瀕m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":2000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 3蛻・・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":180}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 2m縺ｯ菴苗m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":200}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 3m縺ｯ菴瀕m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":3000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 5km縺ｯ菴瀕縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":5000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 2譎ゅ・菴募・縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":120}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 6km縺ｯ菴瀕縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":6000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 5譎ゅ・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":18000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 9m縺ｯ菴瀕m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":9000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 1譎ゅ・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":3600}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 1m縺ｯ菴瀕m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":1000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+ [32m笨・[39m src/quality/quality.audit.test.ts [2m([22m[2m3 tests[22m[2m)[22m[90m 292[2mms[22m[39m
+ [32m笨・[39m src/utils/random.test.ts [2m([22m[2m14 tests[22m[2m)[22m[90m 82[2mms[22m[39m
+ [32m笨・[39m src/utils/learningCalendar.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 6[2mms[22m[39m
+ [32m笨・[39m src/pages/homePage.test.tsx [2m([22m[2m9 tests[22m[2m)[22m[90m 6[2mms[22m[39m
+ [32m笨・[39m src/problems/arithmetic/integer/wordProblems.test.ts [2m([22m[2m5 tests[22m[2m)[22m[90m 15[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/filteredSelector.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 67[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/randomSession.test.ts [2m([22m[2m2 tests[22m[2m)[22m[90m 28[2mms[22m[39m
+ [32m笨・[39m src/utils/sha256.test.ts [2m([22m[2m3 tests[22m[2m)[22m[90m 6[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/generatorRegistry.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 697[2mms[22m[39m
+   [33m[2m笨・[22m[39m 蝠城｡檎函謌舌お繝ｳ繧ｸ繝ｳ[2m > [22m10000蝠冗函謌舌＠縺ｦ蜈ｨ蝠城｡後′讀懆ｨｼ繧帝夐℃縺吶ｋ [33m548[2mms[22m[39m
+ [32m笨・[39m src/utils/maintenanceMode.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 7[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/difficultyDiagnostic.test.ts [2m([22m[2m6 tests[22m[2m)[22m[90m 287[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m64 passed[39m[22m[90m (64)[39m
+[2m      Tests [22m [1m[32m910 passed[39m[22m[90m (910)[39m
+[2m   Start at [22m 11:41:02
+[2m   Duration [22m 4.21s[2m (transform 4.23s, setup 0ms, collect 13.54s, tests 17.17s, environment 16ms, prepare 8.16s)[22m
+

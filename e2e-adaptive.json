@@ -1,0 +1,204 @@
+{
+  "baseURL": "http://localhost:5173",
+  "targetArea": "図形",
+  "results": [
+    {
+      "name": "1 ホーム画面表示",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "2 通常画面にgenerator選択UIが無い",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "3 旧「学習をはじめる」ボタンが無い",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "4 分野ボタンが表示される",
+      "status": "PASS",
+      "detail": "数と計算 / 数量と関係の法則 / 数と性質 / 図形 / 量と単位 / 数量の関係 / データの活用"
+    },
+    {
+      "name": "5 対象分野のボタンがある",
+      "status": "PASS",
+      "detail": "図形"
+    },
+    {
+      "name": "6 分野クリックで問題画面が始まる",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "7 問題画面に分野が表示される",
+      "status": "PASS",
+      "detail": "分野: 図形"
+    },
+    {
+      "name": "8 10問回答できる",
+      "status": "PASS",
+      "detail": "10問 不正解=10/10 levels=2,2,2,2,2,1,1,1,1,1"
+    },
+    {
+      "name": "9 結果画面に到達",
+      "status": "PASS",
+      "detail": "けっか 0 / 10 問 せいかい 正答率 0% 平均解答時間 1秒 もういちど ホームに戻る"
+    },
+    {
+      "name": "10 10問の回答が履歴 (IndexedDB) に保存される",
+      "status": "PASS",
+      "detail": "count=10"
+    },
+    {
+      "name": "11 10問すべてが指定分野の問題である",
+      "status": "PASS",
+      "detail": "分野=図形 型数=7"
+    },
+    {
+      "name": "12 出題難易度が1〜5の範囲内",
+      "status": "PASS",
+      "detail": "levels=2,2,2,2,2,1,1,1,1,1"
+    },
+    {
+      "name": "13 初回 (履歴なし) の難易度は初期値",
+      "status": "PASS",
+      "detail": "lv=2 expected=2 available=1,2,3,4,5"
+    },
+    {
+      "name": "13b 画面表示の難易度と保存履歴の難易度が一致 (回答→保存→次問の経路)",
+      "status": "PASS",
+      "detail": "画面=2,2,2,2,2,1,1,1,1,1 保存=2,2,2,2,2,1,1,1,1,1"
+    },
+    {
+      "name": "13f 各問の難易度が「不正解履歴から決まる値」と一致 (回答→次問適応の直接検証)",
+      "status": "PASS",
+      "detail": "再現=2,2,2,2,2,1,1,1,1,1 保存=2,2,2,2,2,1,1,1,1,1"
+    },
+    {
+      "name": "13c 少数サンプルでは難易度が急変しない",
+      "status": "PASS",
+      "detail": "先頭4問=2,2,2,2 初期=2"
+    },
+    {
+      "name": "13d 不正解後の降格 (後半にLv低下が現れる)",
+      "status": "PASS",
+      "detail": "不正解=10/10 levels=2,2,2,2,2,1,1,1,1,1 期待=1"
+    },
+    {
+      "name": "13e 難易度が履歴から決まる (固定難易度指定ではない)",
+      "status": "PASS",
+      "detail": "初問=2 (履歴なし→初期値の経路)"
+    },
+    {
+      "name": "14 履歴画面に行ける",
+      "status": "PASS",
+      "detail": "家庭教師継続条件 | 今日1000問以上解かないと家庭教師をやめます。 | 現在：10 / 1000問 | 残り：990問 | 小6数学トレーニング | ホーム | 学習履歴 | 学習履歴"
+    },
+    {
+      "name": "15 履歴に回答行が表示される",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "16 console error なし",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "17 uncaught exception なし",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "18 module 読み込み失敗なし",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "homeAreas": [
+    "数と計算",
+    "数量と関係の法則",
+    "数と性質",
+    "図形",
+    "量と単位",
+    "数量の関係",
+    "データの活用"
+  ],
+  "dbReport": {
+    "count": 10,
+    "areas": [
+      "図形",
+      "図形",
+      "図形",
+      "図形",
+      "図形",
+      "図形",
+      "図形",
+      "図形",
+      "図形",
+      "図形"
+    ],
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "types": [
+      "circle_radius_from_area",
+      "circle_area_diameter",
+      "triangle_classify",
+      "rectangle_area",
+      "volume_cube",
+      "area_unit_conversion",
+      "parallelogram_area"
+    ]
+  },
+  "questionLevels": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "correctnessFlags": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "expectedFirst": {
+    "available": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "expected": 2,
+    "expectedLower": 1
+  }
+}

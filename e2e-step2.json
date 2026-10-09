@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "name": "ホーム表示",
+      "status": "PASS",
+      "detail": "title=小6数学トレーニング"
+    },
+    {
+      "name": "分野選択ボタンの存在",
+      "status": "PASS",
+      "detail": "count=7"
+    },
+    {
+      "name": "旧スタートボタンが無い",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "通常画面にgenerator選択UIが無い",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "管理者入口の存在",
+      "status": "PASS",
+      "detail": "count=1"
+    },
+    {
+      "name": "管理者パスワード入力画面が開く",
+      "status": "FAIL",
+      "detail": "家庭教師継続条件\n今日1000問以上解かないと家庭教師をやめます。\n現在：0 / 1000問\n残り：1000問\n小6数学トレーニング\nホーム\n学習履歴\nようこそ！\n\n分野ごとに、その分野の成績に合った難易度で問題を出題します。\n\nどの分野を勉強しますか？\n\n分野を押すと、その分野の問題を10問出題します。\n\n数と計算\n数量と関係の法則\n数と性質\n図形\n量と単位\n数量の関係\nデータの活用\n学習履歴を"
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "failedRequests": []
+}

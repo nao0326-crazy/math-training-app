@@ -74,6 +74,35 @@ function decimalPlaces(n: number): number {
 }
 
 /**
+ * 小数×小数の難易度ごとの数値範囲 (整数部×10 の上限)。
+ *
+ * 小数×小数で練習する技能は「小数部分の桁数の和だけ、答えの小数点を
+ * 後ろに動かす」ことである。この技能は数値の大きさに依存しないため、
+ * 数値を増やしても練習できる内容は変わらない。
+ *
+ * そこで上限は「小6 の教科書で扱う 2桁の整数部 × 1桁の整数部
+ * (答えが3桁まで)」に収めた。以前の lv4-5 は
+ * 8928.8 × 45.1 のような 4桁×2桁を生成しており、小学生が
+ * 筆算で計算できる範囲を超えていた。
+ *
+ * - lv1: 0.1〜0.9 × 0.1〜0.9        (答えが1未満)
+ * - lv2: 1.0〜9.9 × 0.1〜0.9        (答えが1以上になりうる)
+ * - lv3: 0.1〜9.9 × 1.0〜9.9        (どちらかが1以上)
+ * - lv4: 10.0〜99.9 × 0.1〜9.9      (小数側の整数部が2桁)
+ * - lv5: 10.0〜99.9 × 1.0〜9.9      (両方の整数部が2桁 = 最も重い筆算)
+ */
+const MUL_DECIMAL_RANGE: Record<
+  DifficultyLevel,
+  { aMin: number; aMax: number; bMin: number; bMax: number }
+> = {
+  1: { aMin: 1, aMax: 9, bMin: 1, bMax: 9 },
+  2: { aMin: 10, aMax: 99, bMin: 1, bMax: 9 },
+  3: { aMin: 1, aMax: 99, bMin: 10, bMax: 99 },
+  4: { aMin: 100, aMax: 999, bMin: 1, bMax: 99 },
+  5: { aMin: 100, aMax: 999, bMin: 10, bMax: 99 },
+};
+
+/**
  * 小数×小数
  * 例: 0.3 × 0.4 = ?
  *
@@ -90,14 +119,12 @@ export class DecimalMulDecimalGenerator implements ProblemGenerator {
     const rng = createRandom(config?.seed);
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
+    const range = MUL_DECIMAL_RANGE[lv];
 
-    // 難易度に応じて数値範囲を変化させる。
     // 小数の桁数は「小数第1位 × 小数第1位」に固定し、答えは小数第2位までに収める
     // (小6で扱う小数×小数の標準的な型)。
-    const maxA = lv <= 1 ? 9 : lv === 2 ? 99 : lv === 3 ? 999 : lv === 4 ? 9999 : 99999;
-    const maxB = lv <= 1 ? 9 : lv === 2 ? 99 : lv === 3 ? 99 : lv === 4 ? 999 : 999;
-    const a = rng.int(1, maxA) / 10;
-    const b = rng.int(1, maxB) / 10;
+    const a = rng.int(range.aMin, range.aMax) / 10;
+    const b = rng.int(range.bMin, range.bMax) / 10;
     const answer = mulDecimalExact(a, b);
 
     return {
@@ -181,6 +208,21 @@ export class DecimalDivDecimalGenerator implements ProblemGenerator {
  * 小数第1位 × 整数 に固定すれば、答えは整数・小数第1位のどちらかで終わり、
  * 丸めずに厳密に計算できる。
  */
+export const MUL_INTEGER_RANGE: Record<
+  DifficultyLevel,
+  { aMin: number; aMax: number; bMin: number; bMax: number }
+> = {
+  // 小数部分は第1位に固定 (答えは整数・小数第1位のどちらかで終わる)。
+  // 上限は「小数側の整数部が2桁・乗数が2桁」= 小5 の教科書の実用範囲とした。
+  // (以前の lv4-5 は小数部分が 999.0 まで出て 892 × 25 のように
+  //  答えが5桁になる計算量になっていた)
+  1: { aMin: 1, aMax: 9, bMin: 2, bMax: 5 },
+  2: { aMin: 10, aMax: 99, bMin: 2, bMax: 9 },
+  3: { aMin: 10, aMax: 99, bMin: 10, bMax: 20 },
+  4: { aMin: 10, aMax: 99, bMin: 21, bMax: 30 },
+  5: { aMin: 10, aMax: 99, bMin: 31, bMax: 50 },
+};
+
 export class DecimalMulIntegerGenerator implements ProblemGenerator {
   readonly type = 'decimal_mul_integer';
   readonly category = 'decimal' as const;
@@ -192,9 +234,9 @@ export class DecimalMulIntegerGenerator implements ProblemGenerator {
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
 
     // 難易度に応じて小数の整数部と整数の範囲を変化させる (小数부는第1位に固定)
-    const maxIntPart = lv <= 1 ? 9 : lv === 2 ? 99 : lv === 3 ? 99 : lv === 4 ? 999 : 999;
-    const a = rng.int(1, maxIntPart * 10) / 10;
-    const b = lv <= 1 ? rng.int(2, 5) : lv === 2 ? rng.int(2, 9) : lv === 3 ? rng.int(2, 15) : lv === 4 ? rng.int(3, 25) : rng.int(5, 50);
+    const range = MUL_INTEGER_RANGE[lv];
+    const a = rng.int(range.aMin, range.aMax) / 10;
+    const b = rng.int(range.bMin, range.bMax);
     // 丸めずに整数演算で厳密に求める (小数第1位 × 整数 なので誤差が出ない)
     const answer = Math.round(a * 10) * b / 10;
 
@@ -267,8 +309,92 @@ export class DecimalDivIntegerGenerator implements ProblemGenerator {
 }
 
 /**
+ * 小数の四捨五入の難易度ごとの設計。
+ *
+ * 修正前の実装には「丸めても値が変化しない」問題が大多数だった。
+ * 入力の小数桁数と丸める桁が同じ (または入力の桁数が少ない) ため、
+ * 四捨五入しても答えが入力と一致していた。
+ * 例: 316.2 を小数第3位まで四捨五入 → 316.2 (丸めが起きない)
+ *
+ * さらに丸める桁を小数第3位までにしていたため、小学校6年の範囲
+ * (小数第2位まで) を超えていた。
+ *
+ * 現在の設計:
+ * - 「丸めの桁より1桁多く小数桁を持たせる」 = 必ず丸めが起きる構造にする
+ * - 判定桁 (小数第(roundTo+1)桁) は切り上げ(5〜9)と切り捨て(0〜4)を
+ *   ほぼ同数だけ出し、「5未満なら切り捨て / 5以上なら切り上げ」の
+ *   **分岐そのものを**練習できるようにする (第3次監査で修正)
+ * - 丸める桁は小数第1位 / 小数第2位 の2段階 (小6 で扱える範囲)
+ */
+const ROUND_SPEC: Record<
+  DifficultyLevel,
+  { intMax: number; roundTo: number }
+> = {
+  // lv1: 整数1桁・小数第2位 → 小数第1位まで (基本)
+  1: { intMax: 9, roundTo: 1 },
+  // lv2: 整数2桁・小数第2位 → 小数第1位まで
+  2: { intMax: 99, roundTo: 1 },
+  // lv3: 整数1桁・小数第3位 → 小数第2位まで (「小数第2位まで」という新しい概念)
+  3: { intMax: 9, roundTo: 2 },
+  // lv4: 整数2桁・小数第3位 → 小数第2位まで
+  4: { intMax: 99, roundTo: 2 },
+  // lv5: 整数3桁・小数第3位 → 小数第2位まで (最大負荷)
+  5: { intMax: 999, roundTo: 2 },
+};
+
+/**
+ * 「必ず丸めが起きる」小数を1つ作る。
+ *
+ * decimals = 丸める桁 + 1 に固定し、そのうち小数第 (roundTo+1) 桁を
+ * 5〜9 (ランダム) にすることで、四捨五入で値が必ず変化するようにする。
+ */
+/**
+ * 「丸めの規則が判断できる」小数を1つ作る。
+ *
+ * decimals = 丸める桁 + 1 に固定する (これより桁が細かいと判定桁が読めない)。
+ *
+ * 判定桁 (小数第 roundTo+1 桁) は「必ず5以上」だけにしない。
+ * 四捨五入の学習目標は「5未満なら切り捨て、5以上なら切り上げ」の
+ * **判定そのもの**なので、5未満 (切り捨て) と5以上 (切り上げ) を
+ * ほぼ同数出現させる。5ちょうど (境界) も全体の約1割混入させる。
+ *
+ * 独立監査で、判定桁を5〜9に固定していたときは
+ * 切り上げ99.2% / 切り捨て0.8% となり「5未満で切り捨て」を
+ * ほとんど練習できていないことが判明したため修正した。
+ */
+function buildRoundingValue(
+  rng: ReturnType<typeof createRandom>,
+  intMax: number,
+  roundTo: number,
+  roundUp: boolean,
+): number {
+  const intPart = rng.int(1, intMax);
+  const decimals = roundTo + 1;
+  // 判定桁: 切り上げなら 5〜9、切り捨てなら 0〜4。
+  // さらに1割の確率で「5ちょうど」の境界値を入れる (四捨五入の分岐点)。
+  const judgeDigit = roundUp ? rng.int(5, 9) : rng.int(0, 4);
+  let value = intPart;
+  for (let pos = 1; pos <= decimals; pos++) {
+    const digit =
+      pos === decimals
+        ? rng.int(0, 9) === 0
+          ? 5
+          : judgeDigit
+        : rng.int(0, 9);
+    value += digit / Math.pow(10, pos);
+  }
+  // 桁を足し合わせた結果には浮動小数点の誤差 (69.66999999999999) が残るため、
+  // 「小数第 decimals 位まで」で整数に戻してから1回だけ割る。
+  // 判定桁は整数として復元されるので、この丸めでは消えない。
+  return Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals);
+}
+
+/**
  * 小数の四捨五入
- * 例: 3.47 を小数第1位まで四捨五入
+ * 例: 3.47 を小数第1位まで四捨五入 → 3.5
+ *
+ * 「丸めても変わらない問題」を出さないことが最優先の要件。
+ * 生成後に value === rounded なら再抽選する (保険)。
  */
 export class DecimalRoundGenerator implements ProblemGenerator {
   readonly type = 'decimal_round';
@@ -279,22 +405,40 @@ export class DecimalRoundGenerator implements ProblemGenerator {
     const rng = createRandom(config?.seed);
     // Use provided difficulty, default to 2 (normal) if not specified
     const lv = config?.difficulty ?? (2 as DifficultyLevel);
+    const spec = ROUND_SPEC[lv];
 
-    // 難易度に応じて数値の桁数と丸め位置を変化させる
-    const value = lv <= 1 ? rng.int(10, 99) / 10 : lv === 2 ? rng.int(100, 999) / 100 : lv === 3 ? rng.int(100, 999) / 10 : lv === 4 ? rng.int(1000, 9999) / 100 : rng.int(1000, 9999) / 10;
-    const roundTo = lv <= 1 ? 1 : lv === 2 ? 1 : lv === 3 ? 2 : lv === 4 ? 2 : 3;
-    const scale = Math.pow(10, roundTo);
-    const rounded = Math.round(value * scale) / scale;
+    const scale = Math.pow(10, spec.roundTo);
+    let value = 0;
+    let rounded = 0;
+    // 切り上げ・切り捨てをほぼ同数だけ出す。
+    // 四捨五入の学習内容は「判定桁が5未満かどうか」の分岐なので、
+    // 片側だけを出す型では規則を練習できない。
+    const roundUp = rng.int(0, 1) === 1;
+    // 丸めが起きない値を引いた場合の保険 (構造的には起きないはずだが二重で保証する)
+    for (let attempt = 0; attempt < 50; attempt++) {
+      value = buildRoundingValue(rng, spec.intMax, spec.roundTo, roundUp);
+      rounded = Math.round(value * scale) / scale;
+      if (value !== rounded) break;
+    }
 
     return {
       id: generateProblemId(),
       category: this.category,
       type: this.type,
       difficulty: createDecimalDifficulty(lv, value, 1, 1),
-      question: fmt(value) + 'を、小数第' + roundTo + '位まで四捨五入しなさい',
+      question: fmt(value) + 'を、小数第' + spec.roundTo + '位まで四捨五入しなさい',
       answer: { kind: 'decimal', value: rounded },
-      explanation: fmt(value) + 'は小数第' + roundTo + '位まで四捨五入すると' + fmt(rounded) + 'です。',
-      parameters: { value, roundTo, rounded, answer: rounded, difficultyLevel: lv },
+      explanation:
+        fmt(value) + 'の小数第' + (spec.roundTo + 1) + '桁に注目します。'
+        + fmt(value) + 'は小数第' + spec.roundTo + '位まで四捨五入すると'
+        + fmt(rounded) + 'です。',
+      parameters: {
+        value,
+        roundTo: spec.roundTo,
+        rounded,
+        answer: rounded,
+        difficultyLevel: lv,
+      },
     };
   }
 
@@ -310,6 +454,8 @@ export class DecimalRoundGenerator implements ProblemGenerator {
     const expected = Math.round(value * scale) / scale;
     if (Math.abs(expected - rounded) > 1e-9) errors.push('四捨五入の結果が誤っています');
     if (answer !== rounded) errors.push('解答が一致しません');
+    // 丸めても変わらない問題は学習価値が無い (無意味問題の品質ゲートと対応)
+    if (value === rounded) errors.push('丸めても値が変わらない問題です');
     return { valid: errors.length === 0, errors };
   }
 }
@@ -344,9 +490,24 @@ const PLACE_LABEL: Record<number, string> = {
   3: '1000分の1の位',
 };
 
+/**
+ * このジェネレータが出題する小数の最大桁数 (小数第2位まで)。
+ *
+ * 桁数は lv<=2 で第1位、lv>=3 で第2位までに制限されているため、
+ * 答えは必ず小数第2位で終わる。浮動小数点演算の残渣
+ * (0.1 * 3 = 0.30000000000000004) を防ぐ丸め精度もここに合わせる。
+ */
+const MAX_PLACE_DECIMALS = 2;
+
 /** 小数を安定的に文字列化する (0.30000000000000004 を防ぐ) */
 function fmtDecimal(n: number): string {
   return String(Math.round(n * 1e6) / 1e6);
+}
+
+/** 浮動小数点の残渣去除のため、桁数を指定して丸める */
+function roundTo(n: number, digits: number): number {
+  const f = Math.pow(10, digits);
+  return Math.round(n * f) / f;
 }
 
 /** 小数点以下の数字列から小数の数値を作る */
@@ -401,7 +562,15 @@ export class DecimalPlaceValueGenerator implements ProblemGenerator {
 
       if (variant === 'place_value') {
         const digit = rng.int(1, 9);
-        const answer = digit * weight;
+        // 素の浮動小数点演算 (digit * 10^-place) は 0.30000000000000004 の
+        // ような残渣を生む。そのまま answer.value に入れると
+        // formatAnswer や解答表示が「0.30000000000000004」になり、
+        // 小6の学習者が書き写せる値ではない。
+        // この問いの答えは「digit を place 桁の小数で表した値」で、
+        // 表記仕様も小数第 MAX_PLACE_DECIMALS 位までなので、
+        // その桁数に丸めて保持する (丸めは表示精度の統一であり、
+        // 近似の追加ではない: 3 × 0.1 = 0.3 は厳密に 0.3)。
+        const answer = roundTo(digit * weight, MAX_PLACE_DECIMALS);
         return {
           id: generateProblemId(),
           category: this.category,

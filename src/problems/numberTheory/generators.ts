@@ -494,7 +494,12 @@ export class PrimeRangeGenerator implements ProblemGenerator {
       category: this.category,
       type: this.type,
       difficulty: createNumberTheoryDifficulty(level, max, 1, 1),
-      question: `${min}から${max}までの間に素数はいくつあるでしょうか (すべて答えなさい)`,
+      // 指示と回答形式を一致させる。
+      // 以前は「いくつあるでしょうか (すべて答えなさい)」で、
+      // 「個数を答えるのか、リスト答えるのか」が矛盾していた。
+      // 正解はリスト (prime_range は inputType 'list') なので、
+      // 「すべて答えなさい」に統一している。
+      question: `${min}から${max}までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)`,
       answer: { kind: 'string', value: answerText },
       explanation: `${min}から${max}までの素数は、${answerText} です。全部で${primes.length}個あります。`,
       parameters: {

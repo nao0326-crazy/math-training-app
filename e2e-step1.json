@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "name": "ホーム表示",
+      "status": "PASS",
+      "detail": "title=小6数学トレーニング"
+    },
+    {
+      "name": "分野選択ボタンの存在",
+      "status": "PASS",
+      "detail": "count=7"
+    },
+    {
+      "name": "旧スタートボタンが無い",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "通常画面にgenerator選択UIが無い",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "管理者入口の存在",
+      "status": "PASS",
+      "detail": "count=1"
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "failedRequests": []
+}

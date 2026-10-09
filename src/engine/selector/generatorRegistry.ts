@@ -104,6 +104,10 @@ import {
   DecimalPlaceValueGenerator,
 } from '../../problems/decimal/generators';
 import {
+  DecimalAdditionGenerator,
+  DecimalSubtractionGenerator,
+} from '../../problems/decimal/decimalArithmeticGenerators';
+import {
   ExpressionMakeGenerator,
   ExpressionSubstitutionGenerator,
   ExpressionWordToExpressionGenerator,
@@ -226,6 +230,8 @@ const GENERATORS: ProblemGenerator[] = [
   new PercentageGenerator(),
   // 小数
   new DecimalMulDecimalGenerator(),
+  new DecimalAdditionGenerator(),
+  new DecimalSubtractionGenerator(),
   new DecimalDivDecimalGenerator(),
   new DecimalMulIntegerGenerator(),
   new DecimalDivIntegerGenerator(),

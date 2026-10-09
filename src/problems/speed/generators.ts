@@ -256,6 +256,21 @@ function solveSpeedUnitConversion(
   }
 }
 
+/**
+ * variant ごとの「現実的な入力値の上限」。
+ *
+ * 以前は上限が無く、時速1260km (=分速 1,260,000 m) のような
+ * 音速を超える速度の換算問題が出ていた。
+ * 小6 の速さの単位変換が扱うのは「人の移動速度〜乗り物の速度」なので、
+ * その範囲に収める。
+ */
+const SPEED_UNIT_MAX_VALUE: Record<SpeedUnitConversionVariant, number> = {
+  kmh_to_mmin: 360, // 時速360km (高速道路の目安)
+  mmin_to_kmh: 1200, // 分速1200m (時速72km相当)
+  kmh_to_ms: 360, // 時速360km = 秒速100m
+  ms_to_kmh: 99, // 秒速99m = 時速356km (音速の半分程度)
+};
+
 /** 構造と乱数から、割り切れる入力値を一緒に選ぶ */
 function pickSpeedParams(
   rng: ReturnType<typeof createRandom>,
@@ -288,7 +303,12 @@ function pickSpeedParams(
         base = 1;
         break;
     }
-    const kMax = level <= 1 ? 3 : level === 2 ? 6 : level === 3 ? 10 : level === 4 ? 15 : 20;
+    const levelMax = level <= 1 ? 3 : level === 2 ? 6 : level === 3 ? 10 : level === 4 ? 15 : 20;
+    // 難易度の上限と「現実的な速さの上限」の小さい方を採用する
+    const kMax = Math.min(
+      levelMax,
+      Math.floor(SPEED_UNIT_MAX_VALUE[variant] / step),
+    );
     const value = step * (base + rng.int(0, Math.max(1, kMax - base)));
     return { variant, value };
   }

@@ -661,6 +661,45 @@ function decimalDivInteger(p: Problem): SolutionStep[] {
   return [S(`${pv(dividend)} ÷ ${pv(divisor)} = ${pv(quotient)}`, '小数を整数でわります')];
 }
 
+/**
+ * 小数の加算
+ *
+ * 例: 1.2 + 0.3 = 1.5
+ * 繰り上がりがあった場合は、その位置も説明に含める。
+ */
+function decimalAddSub(p: Problem, operator: '+' | '-'): SolutionStep[] {
+  const { a, b, answer, carryPositions, borrowPositions } = P<{
+    a: number;
+    b: number;
+    answer: number;
+    carryPositions?: number[];
+    borrowPositions?: number[];
+  }>(p);
+  const positions = operator === '+' ? carryPositions : borrowPositions;
+  const steps: SolutionStep[] = [
+    S(`${pv(a)} ${operator} ${pv(b)} = ${pv(answer)}`, '小数点の位置をそろえて計算します'),
+  ];
+  if (positions && positions.length > 0) {
+    steps.push(
+      S(
+        `${positions.join(', ')} の位で${operator === '+' ? '繰り上がり' : '繰り下がり'}がありました`,
+        '筆算で計算したときの注意する桁です',
+      ),
+    );
+  }
+  // 最終ステップは必ず答えを含める (途中式と正解の整合性の保証)
+  steps.push(S(`答えは ${formatAnswer(p.answer)} です`));
+  return steps;
+}
+
+function decimalAddition(p: Problem): SolutionStep[] {
+  return decimalAddSub(p, '+');
+}
+
+function decimalSubtraction(p: Problem): SolutionStep[] {
+  return decimalAddSub(p, '-');
+}
+
 function decimalRound(p: Problem): SolutionStep[] {
   const { value, roundTo, rounded } = P<{ value: number; roundTo: number; rounded: number }>(p);
   return [
@@ -1911,6 +1950,8 @@ const BUILDERS: Record<string, StepBuilder> = {
   decimal_div_decimal: decimalDivDecimal,
   decimal_mul_integer: decimalMulInteger,
   decimal_div_integer: decimalDivInteger,
+  decimal_addition: decimalAddition,
+  decimal_subtraction: decimalSubtraction,
   decimal_round: decimalRound,
   // 比・比例・反比例
   ratio_simplify: ratioSimplify,

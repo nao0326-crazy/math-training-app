@@ -230,11 +230,18 @@ function arrangeSimpleText(
  *   - 条件を「選ぶ段階」と「並べる段階」に分けて5種類を用意した。
  *     (人名や記号を替えるだけの変更はしていない)
  *   - r < n を保証し、arrange_tree と重複する問題を出さないようにしている。
+ *
+ * description について:
+ *   この型は「並べ方」だけではない。pick_special variant は
+ *   「n人の中からr人を選び、そのうち1人を特別の1人とする (並べない)」
+ *   という「選び方 (組み合わせ)」の問題を問う。
+ *   問題文は variant ごとに「並べ方は何通りですか」/「選び方は何通りですか」
+ *   と正しく出し分けているため、説明文も実態に合わせておく。
  */
 export class ArrangeSimpleGenerator implements ProblemGenerator {
   readonly type = 'arrange_simple';
   readonly category = 'combinatorics' as const;
-  readonly description = '並べ方 (一部を選んで並べる)';
+  readonly description = '並べ方・選び方 (一部を選んで並べる・選ぶ)';
 
   generate(config?: GenerationConfig): Problem {
     const rng = createRandom(config?.seed);

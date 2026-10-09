@@ -954,10 +954,14 @@ export class TrapezoidAreaGenerator implements ProblemGenerator {
     for (let attempt = 0; attempt < 400; attempt++) {
       const variant = rng.pick(usable);
 
-      // 数値の上限は difficulty の数値複雑度が lv を超えないように決める
-      const maxA = lv <= 1 ? 9 : lv <= 3 ? 40 : lv === 4 ? 200 : 500;
-      const maxB = lv <= 1 ? 9 : lv <= 3 ? 40 : lv === 4 ? 200 : 500;
-      const maxH = lv <= 1 ? 9 : lv <= 3 ? 30 : lv === 4 ? 90 : 120;
+      // 数値の上限は「練習したい技能 = 面積公式 (上底+下底) × 高さ ÷ 2」に対して
+      // 意味のある範囲に止める。台形の面積は3項目の乗除算なので、
+      // 入力が3桁になると最後の割り算が暗算になり、公式の理解を検証できなくなる。
+      // 以前の lv4-5 は上底391cm・下底437cm のような値を出していた。
+      // 答えが4桁以内 (面積 1000 以下) に収まる範囲で止める。
+      const maxA = lv <= 1 ? 9 : lv <= 3 ? 20 : lv === 4 ? 30 : 40;
+      const maxB = lv <= 1 ? 9 : lv <= 3 ? 20 : lv === 4 ? 30 : 40;
+      const maxH = lv <= 1 ? 9 : lv <= 3 ? 15 : lv === 4 ? 20 : 25;
 
       // 同じ偶奇にそろえることで (a+b) を偶数にし、答えを整数にする
       const parity = rng.int(0, 1);
@@ -1806,6 +1810,16 @@ interface AreaConversion {
   to: AreaUnit;
   /** これより低い難易度では出さない */
   minLevel: DifficultyLevel;
+  /**
+   * 与えてよい値の上限 (与えられた単位のまま)。
+   *
+   * 単位ごとに「現実的な面積」の上限を設ける。ha (1ha = 1万m2) や
+   * ㎢ のような大きな単位に無制限な値を渡すと「7790 ha は何 aですか」の
+   * ような、非現実的で答えが6桁になる問題ができる。
+   * 教科書の面積の単位の問題が扱うのは、校庭・畑・田んぼあたりの
+   * オーダーに限られるため、上限はそのオーダーに合わせている。
+   */
+  maxGivenValue: number;
 }
 
 /**
@@ -1813,16 +1827,22 @@ interface AreaConversion {
  * 1 a = 100 m2 / 1 ha = 100 a / 1 km2 = 100 ha / 1 m2 = 10000 cm2 より、
  * 隣り合う単位 (100 倍) と 1段飛ばし (10000 倍) の組み合わせだけを採る。
  * これより大きい倍率 (10万倍など) は数値が大きすぎて教材に適さないため採らない。
+ *
+ * minLevel は「その variant が練習として成立し始める難易度」を表す。
+ * curriculumScope では ㎠↔㎡ だけが required (第4学年で確認済み)、a・ha・㎢ を
+ * 用いる variant は extension に分類されている。extension を無理に除外はしないが、
+ * 低難度では extension variant ばかりが出る状態 (ha系が約70%) になっていたため、
+ * 必須範囲の variant を低い難易度から出し、extension は段階的に現れるようにした。
  */
 const AREA_CONVERSIONS: readonly AreaConversion[] = [
-  { name: 'aresu_to_sqm', from: 'a', to: '㎡', minLevel: 1 },
-  { name: 'hektaru_to_aresu', from: 'ha', to: 'a', minLevel: 1 },
-  { name: 'sqkm_to_hektaru', from: '㎢', to: 'ha', minLevel: 1 },
-  { name: 'sqm_to_sqcm', from: '㎡', to: '㎠', minLevel: 2 },
-  { name: 'sqm_to_aresu', from: '㎡', to: 'a', minLevel: 3 },
-  { name: 'hektaru_to_sqkm', from: 'ha', to: '㎢', minLevel: 4 },
-  { name: 'hektaru_to_sqm', from: 'ha', to: '㎡', minLevel: 5 },
-  { name: 'sqm_to_hektaru', from: '㎡', to: 'ha', minLevel: 5 },
+  { name: 'sqm_to_sqcm', from: '㎡', to: '㎠', minLevel: 1, maxGivenValue: 9 },
+  { name: 'aresu_to_sqm', from: 'a', to: '㎡', minLevel: 1, maxGivenValue: 30 },
+  { name: 'hektaru_to_aresu', from: 'ha', to: 'a', minLevel: 1, maxGivenValue: 9 },
+  { name: 'sqm_to_aresu', from: '㎡', to: 'a', minLevel: 2, maxGivenValue: 900 },
+  { name: 'sqkm_to_hektaru', from: '㎢', to: 'ha', minLevel: 3, maxGivenValue: 3 },
+  { name: 'sqm_to_hektaru', from: '㎡', to: 'ha', minLevel: 4, maxGivenValue: 90000 },
+  { name: 'hektaru_to_sqkm', from: 'ha', to: '㎢', minLevel: 4, maxGivenValue: 300 },
+  { name: 'hektaru_to_sqm', from: 'ha', to: '㎡', minLevel: 5, maxGivenValue: 2 },
 ];
 
 /**
@@ -1964,7 +1984,8 @@ function buildAreaUnitConversion(
   // multiplier は実際に掛ける・割る整数 (常に 100 以上) で、計算にはこちらを使う。
   const factor = AREA_SQM_FACTOR[conv.to] / AREA_SQM_FACTOR[conv.from];
   const multiplier = factor >= 1 ? factor : 1 / factor;
-  const maxGiven = areaMaxGiven(lv);
+  // 難易度の数値上限と、単位ごとの現実的な上限の小さい方を採用する
+  const maxGiven = Math.min(areaMaxGiven(lv), conv.maxGivenValue);
   const toIsBigger = factor > 1;
 
   let givenValue = 0;
@@ -2134,9 +2155,11 @@ function buildRectangleArea(
   rng: Rng,
   lv: DifficultyLevel,
 ): Problem | null {
-  // lv1 では積が10未満になるよう辺を小さく保つ (数値の複雑度が难度を超えないため)
-  const maxSide = lv <= 1 ? 3 : lv === 2 ? 9 : lv === 3 ? 31 : 99;
-  const maxArea = lv <= 1 ? 9 : lv <= 2 ? 81 : 9801;
+  // 数値の上限は「練習したい技能 = 面積 = 縦 × 横」に対して意味のある範囲に止める。
+  // 以前の lv4-5 は 87 cm × 56 cm (答え4桁) が出ていたが、
+  // 小4 の面積計算は 2桁 × 1桁 が実用上限なので、答えが3桁以内に収める。
+  const maxSide = lv <= 1 ? 3 : lv === 2 ? 9 : lv === 3 ? 15 : lv === 4 ? 20 : 31;
+  const maxArea = lv <= 1 ? 9 : lv <= 2 ? 81 : lv === 3 ? 225 : lv === 4 ? 400 : 961;
 
   if (variant === 'square') {
     const side = rng.int(2, maxSide);
@@ -2197,7 +2220,10 @@ function buildRectangleArea(
 
   if (variant === 'unit_convert') {
     // 1 m = 100 cm なので、1 m2 = 10000 cm2 を使う (第4学年 面積の単位)
-    const sideM = rng.int(2, 9);
+    // 1辺は2〜5mに留める。6m以上 (360000 cm2 以上) だと書き写す数字が
+    // 大きくなり、この variant の練習対象である「単位の変換」よりも
+    // 「大きな数を書き写すだけの作業」が主目的になってしまうため。
+    const sideM = rng.int(2, 5);
     const sideCm = sideM * 100;
     const sqcm = sideCm * sideCm;
     return makeAreaProblem({
