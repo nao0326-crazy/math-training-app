@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { Category, Problem } from '../types/problem';
+import type { Category, DifficultyRange, Problem } from '../types/problem';
 import { QuestionSelector } from '../engine/selector/questionSelector';
 import { formatAnswer, judgeUserAnswer, type AnswerJudgement } from '../utils/answer';
 import { difficultyLabel } from '../engine/difficulty/difficulty';
@@ -20,6 +20,7 @@ interface QuizPageProps {
   category: Category | null;
   difficulty: number;
   problemTypes: string[];
+  difficultyRange: DifficultyRange;
   canStartDailySync: () => boolean;
   questionCount?: number;
   onExit: () => void;
@@ -35,6 +36,7 @@ export default function QuizPage({
   category,
   difficulty,
   problemTypes,
+  difficultyRange,
   questionCount = 10,
   canStartDailySync,
   onExit,
@@ -98,6 +100,7 @@ export default function QuizPage({
           difficultyLevel: difficulty,
           category,
           problemTypes,
+          difficultyRange,
         },
       );
     } catch (e) {
@@ -125,7 +128,7 @@ export default function QuizPage({
     };
     questionHistoryRef.current.push(record);
     persistQuestionHistory(record);
-  }, [category, difficulty, problemTypes]);
+  }, [category, difficulty, difficultyRange, problemTypes]);
 
   /**
    * 回答を判定する

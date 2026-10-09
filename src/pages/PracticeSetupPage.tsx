@@ -3,10 +3,16 @@ import type { Category } from '../types/problem';
 import { getAllGenerators } from '../engine/selector/generatorRegistry';
 import { getTypeSupportedLevels } from '../engine/diversity/metadata';
 import { categoryLabel } from '../utils/stats';
-import { getAdminPracticeTypes, saveAdminPracticeTypes } from '../storage/db';
+import { difficultyLabel } from '../engine/difficulty/difficulty';
+import {
+  DEFAULT_ADMIN_PRACTICE_DIFFICULTY_RANGE,
+  getAdminPracticeConfiguration,
+  saveAdminPracticeConfiguration,
+} from '../storage/db';
+import type { DifficultyLevel, DifficultyRange } from '../types/problem';
 
 interface PracticeSetupPageProps {
-  onSaved: (problemTypes: string[]) => void;
+  onSaved: (problemTypes: string[], difficultyRange: DifficultyRange) => void;
   onClose: () => void;
 }
 
@@ -17,6 +23,9 @@ const CATEGORIES = [...new Set(GENERATORS.map((generator) => generator.category)
 
 export default function PracticeSetupPage({ onSaved, onClose }: PracticeSetupPageProps) {
   const [problemTypes, setProblemTypes] = useState<string[]>([]);
+  const [difficultyRange, setDifficultyRange] = useState<DifficultyRange>(
+    DEFAULT_ADMIN_PRACTICE_DIFFICULTY_RANGE,
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [loadFailed, setLoadFailed] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -26,14 +35,17 @@ export default function PracticeSetupPage({ onSaved, onClose }: PracticeSetupPag
 
   useEffect(() => {
     let cancelled = false;
-    void getAdminPracticeTypes()
-      .then((savedTypes) => {
-        if (!cancelled) setProblemTypes(savedTypes);
+    void getAdminPracticeConfiguration()
+      .then((configuration) => {
+        if (!cancelled) {
+          setProblemTypes(configuration.problemTypes);
+          setDifficultyRange(configuration.difficultyRange);
+        }
       })
       .catch(() => {
         if (!cancelled) {
           setLoadFailed(true);
-          setError('保存済みの出題範囲を読み込めませんでした。設定を変更せず、画面を閉じてください。');
+          setError('保存済みの出題設定を読み込めませんでした。設定を変更せず、画面を閉じてください。');
         }
       })
       .finally(() => {
@@ -67,10 +79,10 @@ export default function PracticeSetupPage({ onSaved, onClose }: PracticeSetupPag
     setIsSaving(true);
     setError(null);
     try {
-      await saveAdminPracticeTypes(problemTypes);
-      onSaved(problemTypes);
+      await saveAdminPracticeConfiguration(problemTypes, difficultyRange);
+      onSaved(problemTypes, difficultyRange);
     } catch {
-      setError('出題範囲を保存できませんでした。');
+      setError('出題設定を保存できませんでした。');
     } finally {
       setIsSaving(false);
     }
@@ -82,6 +94,49 @@ export default function PracticeSetupPage({ onSaved, onClose }: PracticeSetupPag
         <h2>管理者タブ：出題設定</h2>
         <p>出題範囲にする問題の種類をえらんでください。</p>
         <p aria-live="polite">選択中：{problemTypes.length}種類</p>
+        <div className="difficulty-range-controls">
+          <label>
+            出題難易度の下限
+            <select
+              value={difficultyRange.min}
+              disabled={isLoading || loadFailed}
+              onChange={(event) => {
+                const min = Number(event.target.value) as DifficultyLevel;
+                setDifficultyRange((current) => ({
+                  min,
+                  max: Math.max(min, current.max) as DifficultyLevel,
+                }));
+                setError(null);
+              }}
+            >
+              {[1, 2, 3, 4, 5].map((level) => (
+                <option key={level} value={level}>{`Lv${level} - ${difficultyLabel(level as DifficultyLevel)}`}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            出題難易度の上限
+            <select
+              value={difficultyRange.max}
+              disabled={isLoading || loadFailed}
+              onChange={(event) => {
+                const max = Number(event.target.value) as DifficultyLevel;
+                setDifficultyRange((current) => ({
+                  min: Math.min(current.min, max) as DifficultyLevel,
+                  max,
+                }));
+                setError(null);
+              }}
+            >
+              {[1, 2, 3, 4, 5].map((level) => (
+                <option key={level} value={level}>{`Lv${level} - ${difficultyLabel(level as DifficultyLevel)}`}</option>
+              ))}
+            </select>
+          </label>
+          <p aria-live="polite">
+            設定範囲：Lv{difficultyRange.min}〜Lv{difficultyRange.max}
+          </p>
+        </div>
       </section>
       {isLoading ? (
         <p className="loading-message">保存済みの範囲を読み込んでいます...</p>

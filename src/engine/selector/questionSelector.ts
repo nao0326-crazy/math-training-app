@@ -4,9 +4,16 @@
  */
 
 import type { AnswerRecord, QuestionHistory } from '../../types/history';
-import type { Category, DifficultyLevel, GenerationConfig, Problem } from '../../types/problem';
+import type {
+  Category,
+  DifficultyLevel,
+  DifficultyRange,
+  GenerationConfig,
+  Problem,
+} from '../../types/problem';
 import { generateProblem, getAllGenerators } from './generatorRegistry';
 import { getTypeSupportedLevels } from '../diversity/metadata';
+import { snapToAvailableLevel } from '../../utils/adaptiveDifficulty';
 import { nextAutoSeed } from '../../utils/random';
 import {
   DEFAULT_DIVERSITY_CONFIG,
@@ -34,12 +41,44 @@ export const DEFAULT_SELECTOR_CONFIG: QuestionSelectorConfig = {
   timeWeight: 0.5,
 };
 
+const DEFAULT_DIFFICULTY_RANGE: DifficultyRange = { min: 1, max: 5 };
+
 interface CategoryPerformance {
   category: Category;
   priorityScore: number;
 }
 
 const NEUTRAL_CATEGORY_PRIORITY = 1;
+
+/** Available generator levels after applying the saved type and difficulty constraints. */
+export function getAvailableDifficultyLevels(
+  problemTypes: readonly string[] | undefined,
+  difficultyRange: DifficultyRange = DEFAULT_DIFFICULTY_RANGE,
+  category: Category | null = null,
+): DifficultyLevel[] {
+  if (
+    !isDifficultyLevel(difficultyRange.min) ||
+    !isDifficultyLevel(difficultyRange.max) ||
+    difficultyRange.min > difficultyRange.max
+  ) {
+    return [];
+  }
+
+  const configuredTypes = problemTypes === undefined ? null : new Set(problemTypes);
+  const levels = new Set<DifficultyLevel>();
+  for (const generator of getAllGenerators()) {
+    if (
+      (configuredTypes !== null && !configuredTypes.has(generator.type)) ||
+      (category !== null && generator.category !== category)
+    ) {
+      continue;
+    }
+    for (const level of getTypeSupportedLevels(generator.type)) {
+      if (level >= difficultyRange.min && level <= difficultyRange.max) levels.add(level);
+    }
+  }
+  return [...levels].sort((a, b) => a - b);
+}
 
 export class QuestionSelector {
   private config: QuestionSelectorConfig;
@@ -56,9 +95,29 @@ export class QuestionSelector {
       category: Category | null;
       /** Saved app-wide range. Omitted only for callers that intentionally use the full pool. */
       problemTypes?: readonly string[];
+      difficultyRange?: DifficultyRange;
     },
   ): Problem {
-    const adjustedDifficulty = this.adjustDifficulty(history, settings.difficultyLevel);
+    const difficultyRange = settings.difficultyRange ?? DEFAULT_DIFFICULTY_RANGE;
+    const availableLevels = getAvailableDifficultyLevels(
+      settings.problemTypes,
+      difficultyRange,
+      settings.category,
+    );
+    if (settings.problemTypes?.length === 0) {
+      throw new Error('出題範囲が設定されていません。管理者タブで範囲を設定してください。');
+    }
+    if (availableLevels.length === 0) {
+      throw new Error(
+        `現在の難易度で出題できる問題がありません（設定範囲：Lv${difficultyRange.min}〜Lv${difficultyRange.max}）。`,
+      );
+    }
+    const requestedDifficulty = this.adjustDifficulty(history, settings.difficultyLevel);
+    const boundedDifficulty = Math.min(
+      difficultyRange.max,
+      Math.max(difficultyRange.min, requestedDifficulty),
+    ) as DifficultyLevel;
+    const adjustedDifficulty = snapToAvailableLevel(boundedDifficulty, availableLevels);
     const configuredTypes =
       settings.problemTypes === undefined ? null : new Set(settings.problemTypes);
     const availableGenerators = getAllGenerators().filter(
@@ -68,11 +127,7 @@ export class QuestionSelector {
         getTypeSupportedLevels(generator.type).includes(adjustedDifficulty),
     );
     if (availableGenerators.length === 0) {
-      throw new Error(
-        settings.problemTypes?.length === 0
-          ? '出題範囲が設定されていません。管理者タブで範囲を設定してください。'
-          : '設定された出題範囲に、現在の難易度で出題できる問題がありません。',
-      );
+      throw new Error('設定された出題範囲から問題を生成できるタイプがありません。');
     }
 
     const typesByCategory = new Map<Category, string[]>();
@@ -247,4 +302,8 @@ export class QuestionSelector {
 
     return adjusted as DifficultyLevel;
   }
+}
+
+function isDifficultyLevel(value: number): value is DifficultyLevel {
+  return value === 1 || value === 2 || value === 3 || value === 4 || value === 5;
 }
