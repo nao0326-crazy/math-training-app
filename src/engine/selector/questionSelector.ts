@@ -1,19 +1,12 @@
 /**
- * 出題アルゴリズム
- * 以下の要素を考慮して次の問題を選択する
- * - 苦手な分野
- * - 最近の正答率
- * - 解答時間
- * - 現在の難易度
- * - 最近出題した問題
- *
- * 最初のバージョンではシンプルな重み付け方式で実装し、
- * 拡張可能な構造にする
+ * Selects a problem within the saved app-wide type range, using recent category
+ * performance and adaptive difficulty while preserving problem diversity.
  */
 
 import type { AnswerRecord, QuestionHistory } from '../../types/history';
 import type { Category, DifficultyLevel, GenerationConfig, Problem } from '../../types/problem';
-import { generateProblem } from './generatorRegistry';
+import { generateProblem, getAllGenerators } from './generatorRegistry';
+import { getTypeSupportedLevels } from '../diversity/metadata';
 import { nextAutoSeed } from '../../utils/random';
 import {
   DEFAULT_DIVERSITY_CONFIG,
@@ -23,52 +16,31 @@ import {
 } from '../diversity/diversity';
 import { fingerprintProblem } from '../diversity/metadata';
 
-/**
- * 出題選択の設定
- */
 export interface QuestionSelectorConfig {
-  /** 最近の履歴を何件まで考慮するか */
+  /** Number of recent answers used for priority and difficulty. */
   recentHistoryLimit: number;
-  /** 重複を避けるために考慮する最近の問題数 */
+  /** Number of recent questions considered for duplicate avoidance. */
   duplicateAvoidanceCount: number;
-  /** 苦手分野の優先度の重み */
-  weakCategoryWeight: number;
-  /** 正答率の重み */
+  /** Accuracy contribution to category priority. */
   accuracyWeight: number;
-  /** 解答時間の重み */
+  /** Response-time contribution to category priority. */
   timeWeight: number;
-  /** 難易度の重み */
-  difficultyWeight: number;
 }
 
-/**
- * デフォルト設定
- */
 export const DEFAULT_SELECTOR_CONFIG: QuestionSelectorConfig = {
   recentHistoryLimit: 20,
   duplicateAvoidanceCount: 10,
-  weakCategoryWeight: 2.0,
   accuracyWeight: 1.5,
   timeWeight: 0.5,
-  difficultyWeight: 1.0,
 };
 
-/**
- * カテゴリ別の成績
- */
 interface CategoryPerformance {
   category: Category;
-  totalCount: number;
-  correctCount: number;
-  accuracyRate: number;
-  averageTimeSec: number;
-  /** スコアが低いほど優先して出題する */
   priorityScore: number;
 }
 
-/**
- * 出題アルゴリズム
- */
+const NEUTRAL_CATEGORY_PRIORITY = 1;
+
 export class QuestionSelector {
   private config: QuestionSelectorConfig;
 
@@ -76,181 +48,194 @@ export class QuestionSelector {
     this.config = { ...DEFAULT_SELECTOR_CONFIG, ...config };
   }
 
-  /**
-   * 次の問題を選択して生成する
-   *
-   * 出題多様化:
-   * 1. カテゴリ/難易度を決定 (既存の苦手分野・正答率・難易度調整ロジックを維持)
-   * 2. 指定難易度の候補を複数生成する (難易度は絶対変えない)
-   * 3. 直近出題履歴を構造化コンテキストに変換
-   * 4. フィンガープリントによる完全重複を除外
-   * 5. 類似度・family連続・出題バランスでペナルティを計算して最良の1問を選択
-   *
-   * 再現性: generateProblem({ seed }) 自体は seed で確定する。
-   * 選択結果は history により変動する (seed + history で選択される)。
-   *
-   * このクラスはカテゴリ指定学習 (`category` 指定) を担当する。
-   * 全カテゴリ横断の通常ランダム学習は RandomSelector が担当する。
-   *
-   * @param category null の場合は回答履歴からカテゴリを自動選択する。
-   *   履歴が空のときは integer に固定される (既存挙動・変更しない)。
-   *   全カテゴリを対象にした通常ランダム学習には RandomSelector を使うこと。
-   */
   selectNextQuestion(
     history: AnswerRecord[],
     questionHistory: QuestionHistory[],
     settings: {
       difficultyLevel: number;
       category: Category | null;
+      /** Saved app-wide range. Omitted only for callers that intentionally use the full pool. */
+      problemTypes?: readonly string[];
     },
   ): Problem {
-    // カテゴリ別の成績を計算
-    const performances = this.calculateCategoryPerformance(history);
-
-    // カテゴリを選択
-    const selectedCategory = this.selectCategory(performances, settings.category);
-
-    // 難易度を調整 (既存の適応ロジックを維持)
     const adjustedDifficulty = this.adjustDifficulty(history, settings.difficultyLevel);
+    const configuredTypes =
+      settings.problemTypes === undefined ? null : new Set(settings.problemTypes);
+    const availableGenerators = getAllGenerators().filter(
+      (generator) =>
+        (configuredTypes === null || configuredTypes.has(generator.type)) &&
+        (settings.category === null || generator.category === settings.category) &&
+        getTypeSupportedLevels(generator.type).includes(adjustedDifficulty),
+    );
+    if (availableGenerators.length === 0) {
+      throw new Error(
+        settings.problemTypes?.length === 0
+          ? '出題範囲が設定されていません。管理者タブで範囲を設定してください。'
+          : '設定された出題範囲に、現在の難易度で出題できる問題がありません。',
+      );
+    }
 
-    // 問題を生成 (難易度は変えない)
-    const config: GenerationConfig = {
-      category: selectedCategory,
-      difficulty: adjustedDifficulty,
-    };
+    const typesByCategory = new Map<Category, string[]>();
+    for (const generator of availableGenerators) {
+      const types = typesByCategory.get(generator.category) ?? [];
+      types.push(generator.type);
+      typesByCategory.set(generator.category, types);
+    }
 
-    // 直近履歴から構造化コンテキストを構築
+    const eligibleCategories = [...typesByCategory.keys()];
+    const performances = this.calculateCategoryPerformance(history, eligibleCategories);
+    const categoryOrder =
+      settings.category === null
+        ? this.orderCategoriesByPriority(performances)
+        : [settings.category];
+
     const diversityConfig: DiversityConfig = {
       ...DEFAULT_DIVERSITY_CONFIG,
       duplicateAvoidanceCount: this.config.duplicateAvoidanceCount,
       recentWindow: this.config.recentHistoryLimit,
     };
-    const ctx = buildRecentContext(questionHistory, diversityConfig);
+    const context = buildRecentContext(questionHistory, diversityConfig);
+    const recentTypes = new Set(
+      questionHistory
+        .slice(-this.config.duplicateAvoidanceCount)
+        .map((record) => record.problemType),
+    );
 
-    // 候補を複数生成してから最も多様な1問を選ぶ
+    for (const category of categoryOrder) {
+      const categoryTypes = typesByCategory.get(category);
+      if (!categoryTypes?.length) continue;
+
+      const preferredTypes = categoryTypes.filter((type) => !recentTypes.has(type));
+      let candidates = this.generateCandidates(
+        preferredTypes.length > 0 ? preferredTypes : categoryTypes,
+        adjustedDifficulty,
+        context.fingerprints,
+        diversityConfig,
+      );
+
+      if (candidates.length === 0 && preferredTypes.length > 0) {
+        candidates = this.generateCandidates(
+          categoryTypes,
+          adjustedDifficulty,
+          context.fingerprints,
+          diversityConfig,
+        );
+      }
+
+      if (candidates.length > 0) {
+        const chosen = selectBestCandidate(candidates, context, diversityConfig);
+        return chosen ? chosen.candidate : candidates[0];
+      }
+    }
+
+    throw new Error('設定された出題範囲から問題を生成できませんでした。');
+  }
+
+  private calculateCategoryPerformance(
+    history: AnswerRecord[],
+    availableCategories: Category[],
+  ): CategoryPerformance[] {
+    const eligibleCategories = new Set(availableCategories);
+    const byCategory = new Map<Category, AnswerRecord[]>();
+    for (const record of history.slice(-this.config.recentHistoryLimit)) {
+      const category = record.category as Category;
+      if (!eligibleCategories.has(category)) continue;
+      const records = byCategory.get(category) ?? [];
+      records.push(record);
+      byCategory.set(category, records);
+    }
+
+    return availableCategories.map((category) => {
+      const records = byCategory.get(category) ?? [];
+      if (records.length === 0) {
+        return { category, priorityScore: NEUTRAL_CATEGORY_PRIORITY };
+      }
+
+      const correctCount = records.filter((record) => record.isCorrect).length;
+      const accuracyRate = correctCount / records.length;
+      const averageTimeSec =
+        records.reduce((sum, record) => sum + record.answerTimeSec, 0) / records.length;
+      return {
+        category,
+        priorityScore:
+          (1 - accuracyRate) * this.config.accuracyWeight +
+          (averageTimeSec / 60) * this.config.timeWeight,
+      };
+    });
+  }
+
+  /** Weighted sampling without replacement provides a category-priority retry order. */
+  private orderCategoriesByPriority(performances: CategoryPerformance[]): Category[] {
+    const remaining = [...performances];
+    const ordered: Category[] = [];
+
+    while (remaining.length > 0) {
+      const totalWeight = remaining.reduce(
+        (sum, performance) => sum + Math.max(0, performance.priorityScore),
+        0,
+      );
+      let selectedIndex: number;
+      if (totalWeight === 0) {
+        selectedIndex = Math.floor(Math.random() * remaining.length);
+      } else {
+        let threshold = Math.random() * totalWeight;
+        selectedIndex = remaining.findIndex((performance) => {
+          threshold -= Math.max(0, performance.priorityScore);
+          return threshold < 0;
+        });
+        if (selectedIndex < 0) selectedIndex = remaining.length - 1;
+      }
+
+      ordered.push(remaining[selectedIndex].category);
+      remaining.splice(selectedIndex, 1);
+    }
+
+    return ordered;
+  }
+
+  private generateCandidates(
+    types: string[],
+    difficulty: DifficultyLevel,
+    recentFingerprints: Set<string>,
+    diversityConfig: DiversityConfig,
+  ): Problem[] {
+    if (types.length === 0) return [];
+
     const candidates: Problem[] = [];
-    const seenFingerprints = new Set(ctx.fingerprints);
+    const seenFingerprints = new Set(recentFingerprints);
     const maxAttempts = diversityConfig.candidateCount * 4;
-    let attempts = 0;
-    // 各候補生成に独立した自動シードを与えることで、異なるジェネレータ/数値の
-    // 問題が発生する確率を高める。
-    // (旧実装は Date.now()+attempts だったため、同一ミリ秒内で候補ループが回ると
-    //  同一シード列になりやすい構造だった。nextAutoSeed() は呼び出しごとに常に変わる)
-    while (candidates.length < diversityConfig.candidateCount && attempts < maxAttempts) {
-      attempts++;
+    const startIndex = Math.floor(Math.random() * types.length);
+
+    for (let attempts = 0; attempts < maxAttempts; attempts++) {
+      if (candidates.length >= diversityConfig.candidateCount) break;
+      const type = types[(startIndex + attempts) % types.length];
       let problem: Problem;
       try {
-        problem = generateProblem({ ...config, seed: nextAutoSeed() });
+        const config: GenerationConfig = {
+          type,
+          difficulty,
+          seed: nextAutoSeed(),
+        };
+        problem = generateProblem(config);
       } catch {
         continue;
       }
-      const fp = fingerprintProblem(problem);
-      if (seenFingerprints.has(fp)) {
-        continue; // 完全重複を除外
-      }
-      seenFingerprints.add(fp);
+      const fingerprint = fingerprintProblem(problem);
+      if (seenFingerprints.has(fingerprint)) continue;
+      seenFingerprints.add(fingerprint);
       candidates.push(problem);
     }
 
-    if (candidates.length === 0) {
-      // 候補を1問も用意できなかった場合はフォールバック (旧動作)
-      return generateProblem(config);
-    }
-
-    const chosen = selectBestCandidate(candidates, ctx, diversityConfig);
-    return chosen ? chosen.candidate : candidates[0];
+    return candidates;
   }
 
-  /**
-   * カテゴリ別の成績を計算する
-   */
-  private calculateCategoryPerformance(history: AnswerRecord[]): CategoryPerformance[] {
-    const recent = history.slice(-this.config.recentHistoryLimit);
-    const byCategory = new Map<Category, AnswerRecord[]>();
-
-    for (const record of recent) {
-      const category = record.category as Category;
-      const list = byCategory.get(category) ?? [];
-      list.push(record);
-      byCategory.set(category, list);
-    }
-
-    const performances: CategoryPerformance[] = [];
-    for (const [category, records] of byCategory) {
-      const correctCount = records.filter((r) => r.isCorrect).length;
-      const totalCount = records.length;
-      const accuracyRate = totalCount > 0 ? correctCount / totalCount : 0;
-      const averageTimeSec =
-        totalCount > 0
-          ? records.reduce((sum, r) => sum + r.answerTimeSec, 0) / totalCount
-          : 0;
-
-      // 優先度スコア (低いほど優先)
-      // 正答率が低いほど、解答時間が長いほど優先度が高くなる
-      const priorityScore =
-        (1 - accuracyRate) * this.config.accuracyWeight +
-        (averageTimeSec / 60) * this.config.timeWeight;
-
-      performances.push({
-        category,
-        totalCount,
-        correctCount,
-        accuracyRate,
-        averageTimeSec,
-        priorityScore,
-      });
-    }
-
-    return performances;
-  }
-
-  /**
-   * 出題するカテゴリを選択する
-   */
-  private selectCategory(
-    performances: CategoryPerformance[],
-    preferredCategory: Category | null,
-  ): Category {
-    // 指定カテゴリがあればそれを使う
-    if (preferredCategory) {
-      return preferredCategory;
-    }
-
-    // 履歴がない場合はランダム
-    if (performances.length === 0) {
-      const categories: Category[] = ['integer'];
-      return categories[Math.floor(Math.random() * categories.length)];
-    }
-
-    // 苦手なカテゴリを優先 (優先度スコアが高いほど選ばれやすい)
-    const totalScore = performances.reduce((sum, p) => sum + p.priorityScore, 0);
-    if (totalScore <= 0) {
-      // 全カテゴリが得意な場合はランダム
-      const random = performances[Math.floor(Math.random() * performances.length)];
-      return random.category;
-    }
-
-    let randomValue = Math.random() * totalScore;
-    for (const p of performances) {
-      randomValue -= p.priorityScore;
-      if (randomValue <= 0) {
-        return p.category;
-      }
-    }
-    return performances[performances.length - 1].category;
-  }
-
-  /**
-   * 難易度を調整する
-   * 正答率が高い場合は難易度を上げ、低い場合は下げる
-   */
   private adjustDifficulty(history: AnswerRecord[], baseLevel: number): DifficultyLevel {
     const recent = history.slice(-this.config.recentHistoryLimit);
     if (recent.length < 5) {
       return baseLevel as DifficultyLevel;
     }
 
-    const correctCount = recent.filter((r) => r.isCorrect).length;
+    const correctCount = recent.filter((record) => record.isCorrect).length;
     const accuracyRate = correctCount / recent.length;
 
     let adjusted = baseLevel;
