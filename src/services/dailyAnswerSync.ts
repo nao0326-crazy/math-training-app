@@ -56,7 +56,8 @@ async function postAnswerEvent(
  * 回答1件の再送を試行する。
  * ネットワーク障害時は outbox を残し、次回起動・オンライン復帰・定期同期で再試行する。
  */
-export function runDailyAnswerSync(): Promise<void> {
+export function runDailyAnswerSync(canContinue: () => boolean = () => true): Promise<void> {
+  if (!canContinue()) return Promise.resolve();
   if (syncPromise) return syncPromise;
 
   const config = getPublicSupabaseConfig();
@@ -65,15 +66,20 @@ export function runDailyAnswerSync(): Promise<void> {
   syncPromise = (async () => {
     try {
       if (!legacyPreparationFinished) {
-        await prepareLegacyDailyAnswerSyncTasks();
+        const prepared = await prepareLegacyDailyAnswerSyncTasks(canContinue);
+        if (!prepared || !canContinue()) return;
         legacyPreparationFinished = true;
       }
 
+      if (!canContinue()) return;
       const tasks = await getPendingDailyAnswerSyncTasks();
+      if (!canContinue()) return;
       for (const task of tasks) {
+        if (!canContinue()) return;
         try {
           await postAnswerEvent(config, task);
           await removeDailyAnswerSyncTask(task.submissionId);
+          if (!canContinue()) return;
         } catch {
           // 先頭の未送信 task から再試行する。UIの学習操作は止めない。
           return;

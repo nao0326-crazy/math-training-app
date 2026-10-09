@@ -1,50 +1,27 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Category, Problem } from '../types/problem';
-import { NoWeakTargetError } from '../engine/selector/weakSelector';
-import type { StudyMode } from '../engine/selector/types';
-import type { QuestionFilter } from '../engine/selector/questionPool';
-import { createQuizSelector, toDifficultyLevel } from './quizSelection';
+import { QuestionSelector } from '../engine/selector/questionSelector';
 import { formatAnswer, judgeUserAnswer, type AnswerJudgement } from '../utils/answer';
 import { difficultyLabel } from '../engine/difficulty/difficulty';
 import { categoryLabel } from '../utils/stats';
-import {
-  saveAnswerRecord,
-  saveQuestionHistory,
-  getAllAnswerRecords,
-  getAllQuestionHistory,
-} from '../storage/db';
 import type { AnswerRecord, QuestionHistory } from '../types/history';
 import AnswerInput from '../components/AnswerInput';
 import FigureRenderer from '../components/FigureRenderer';
 import SolutionDisplay from '../components/SolutionDisplay';
-import { ANSWER_RECORDED_EVENT } from '../utils/dailyCount';
-import {
-  createDailyAnswerSubmissionId,
-  runDailyAnswerSync,
-} from '../services/dailyAnswerSync';
+import { createDailyAnswerSubmissionId } from '../services/dailyAnswerSync';
 import { deriveMetadata, fingerprintProblem } from '../engine/diversity/metadata';
+import {
+  loadQuizHistory,
+  persistAnswerRecord,
+  persistQuestionHistory,
+} from '../services/quizPersistence';
 
 interface QuizPageProps {
-  /**
-   * 旧セレクター互換のカテゴリ指定。
-   * 通常モードでは常に null (分野選択は管理者モードにのみ存在する)。
-   */
   category: Category | null;
-  /** 難易度。full-random / adaptive では選出条件に使われない ( adaptive は履歴から決まる。値は表示用ダミー) */
   difficulty: number;
-  /** 出題する問題数 (省略時は10問。苦手分野の復習では5問) */
+  problemTypes: string[];
+  canStartDailySync: () => boolean;
   questionCount?: number;
-  /**
-   * 学習モード。
-   * - full-random : 通常モードの標準。全出題可能母集団からランダム
-   * - filtered    : 管理者モード。filter で母集団を絞る
-   * - weak        : WeakSelector (回答履歴から苦手 problemType x difficulty を抽出)
-   * - random      : RandomSelector (指定難易度の全カテゴリ横断)
-   * - category    : 旧 QuestionSelector
-   */
-  studyMode?: StudyMode;
-  /** 管理者モード用の絞り込み条件 (通常モードでは null) */
-  filter?: QuestionFilter | null;
   onExit: () => void;
 }
 
@@ -57,9 +34,9 @@ interface QuizResult {
 export default function QuizPage({
   category,
   difficulty,
+  problemTypes,
   questionCount = 10,
-  studyMode,
-  filter = null,
+  canStartDailySync,
   onExit,
 }: QuizPageProps) {
   const [problem, setProblem] = useState<Problem | null>(null);
@@ -72,7 +49,7 @@ export default function QuizPage({
   const [result, setResult] = useState<QuizResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const selectorRef = useRef<ReturnType<typeof createQuizSelector> | null>(null);
+  const selectorRef = useRef<QuestionSelector | null>(null);
   const startTimeRef = useRef<number>(0);
   /** 同一問題の回答確定を同一イベントループ内でも二重実行しない */
   const answerSubmitLockRef = useRef(false);
@@ -86,14 +63,11 @@ export default function QuizPage({
 
     async function init() {
       try {
-        const [history, questionHistory] = await Promise.all([
-          getAllAnswerRecords(),
-          getAllQuestionHistory(),
-        ]);
+        const { history, questionHistory } = await loadQuizHistory();
         if (cancelled) return;
         historyRef.current = history;
         questionHistoryRef.current = questionHistory;
-        selectorRef.current = createQuizSelector({ studyMode, category, difficulty, filter });
+        selectorRef.current = new QuestionSelector();
         loadNextQuestion();
       } catch {
         if (!cancelled) {
@@ -115,26 +89,19 @@ export default function QuizPage({
   const loadNextQuestion = useCallback(() => {
     if (!selectorRef.current) return;
 
-    const selector = selectorRef.current;
-    const level = toDifficultyLevel(difficulty);
     let nextProblem: Problem;
     try {
-      nextProblem = selector.selectNextQuestion(
+      nextProblem = selectorRef.current.selectNextQuestion(
         historyRef.current,
         questionHistoryRef.current,
         {
-          mode: studyMode ?? { kind: 'full-random' },
-          difficulty: level,
+          difficultyLevel: difficulty,
+          category,
+          problemTypes,
         },
       );
     } catch (e) {
-      // 復習対象が0件 (履歴がない / 全問正解) の場合は画面を壊さず、
-      // エラーメッセージを表示して安全に終了できるようにする。
-      if (e instanceof NoWeakTargetError) {
-        setError(e.message);
-        return;
-      }
-      setError('問題の生成に失敗しました。');
+      setError(e instanceof Error ? e.message : '問題の生成に失敗しました。');
       return;
     }
 
@@ -157,10 +124,8 @@ export default function QuizPage({
       fingerprint: fingerprintProblem(nextProblem),
     };
     questionHistoryRef.current.push(record);
-    void saveQuestionHistory(record);
-    // 絞り込み (filter / category) はセレクター生成時 (初期化) に確定するため、
-    // 毎問変わるのは difficulty と studyMode だけ。
-  }, [difficulty, studyMode]);
+    persistQuestionHistory(record);
+  }, [category, difficulty, problemTypes]);
 
   /**
    * 回答を判定する
@@ -203,10 +168,7 @@ export default function QuizPage({
         submissionId: createDailyAnswerSubmissionId(),
       };
       historyRef.current.push(record);
-      void saveAnswerRecord(record).then(() => runDailyAnswerSync());
-
-      // 日次カウント更新イベントを発火
-      window.dispatchEvent(new Event(ANSWER_RECORDED_EVENT));
+      persistAnswerRecord(record, canStartDailySync);
 
       // 結果を更新
       resultRef.current = {
@@ -215,7 +177,7 @@ export default function QuizPage({
         totalTimeSec: resultRef.current.totalTimeSec + answerTimeSec,
       };
     },
-    [problem, isAnswered],
+    [canStartDailySync, problem, isAnswered],
   );
 
   /**
@@ -306,9 +268,6 @@ export default function QuizPage({
           問題 {questionNumber} / {questionCount}
         </div>
         <div className="quiz-meta">
-          {studyMode?.kind === 'adaptive' && (
-            <span className="quiz-area">分野: {studyMode.area}</span>
-          )}
           <span className="quiz-category">{categoryLabel(problem.category)}</span>
           <span className="quiz-difficulty">
             {difficultyLabel(problem.difficulty.level)}

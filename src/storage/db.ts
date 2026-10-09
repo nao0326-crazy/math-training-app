@@ -9,6 +9,15 @@ import type {
   QuestionHistory,
   StudySettings,
 } from '../types/history';
+import { getAllGenerators } from '../engine/selector/generatorRegistry';
+import { getTypeSupportedLevels } from '../engine/diversity/metadata';
+
+const ADMIN_PRACTICE_SETTINGS_KEY = 'admin-practice-scope-v1';
+
+interface AdminPracticeSettings {
+  key: typeof ADMIN_PRACTICE_SETTINGS_KEY;
+  problemTypes: string[];
+}
 
 /**
  * IndexedDB のスキーマ定義
@@ -32,7 +41,7 @@ interface MathAppDB extends DBSchema {
   };
   settings: {
     key: string;
-    value: StudySettings;
+    value: StudySettings | AdminPracticeSettings;
   };
   dailySync: {
     key: string;
@@ -130,9 +139,13 @@ export async function removeDailyAnswerSyncTask(submissionId: string): Promise<v
  * 機能導入前の直近2日分の回答を、冪等IDつきのoutboxへ移行する。
  * 古い回答まで一括送信せず、通知対象になっている前日・当日だけを移行する。
  */
-export async function prepareLegacyDailyAnswerSyncTasks(): Promise<void> {
+export async function prepareLegacyDailyAnswerSyncTasks(
+  canContinue: () => boolean = () => true,
+): Promise<boolean> {
+  if (!canContinue()) return false;
   const db = await getDB();
   const records = await db.getAll('answers');
+  if (!canContinue()) return false;
   const cutoff = Date.now() - 2 * 24 * 60 * 60 * 1000;
   const candidates = records.filter((record) => {
     if (record.submissionId || typeof record.id !== 'number') return false;
@@ -140,7 +153,8 @@ export async function prepareLegacyDailyAnswerSyncTasks(): Promise<void> {
     return Number.isFinite(answeredAt) && answeredAt >= cutoff;
   });
 
-  if (candidates.length === 0) return;
+  if (candidates.length === 0) return true;
+  if (!canContinue()) return false;
 
   const transaction = db.transaction(['answers', 'dailySync'], 'readwrite');
   const answerStore = transaction.objectStore('answers');
@@ -162,6 +176,7 @@ export async function prepareLegacyDailyAnswerSyncTasks(): Promise<void> {
   }
 
   await Promise.all([...writes, transaction.done]);
+  return true;
 }
 
 /**
@@ -212,7 +227,41 @@ export async function saveSettings(settings: Omit<StudySettings, 'key'>): Promis
 export async function getSettings(): Promise<StudySettings | null> {
   const db = await getDB();
   const record = await db.get('settings', 'study');
+  if (!record || !('difficultyLevel' in record)) return null;
   return record ?? null;
+}
+
+/** Save the app-wide practice range independently from learner study settings. */
+export async function saveAdminPracticeTypes(problemTypes: string[]): Promise<void> {
+  const registeredTypes = new Set(
+    getAllGenerators()
+      .filter((generator) => getTypeSupportedLevels(generator.type).length > 0)
+      .map((generator) => generator.type),
+  );
+  const validTypes = [...new Set(problemTypes)].filter((type) => registeredTypes.has(type));
+  const db = await getDB();
+  await db.put('settings', {
+    key: ADMIN_PRACTICE_SETTINGS_KEY,
+    problemTypes: validTypes,
+  });
+}
+
+/** Return only problem types with a registered, usable generator. */
+export async function getAdminPracticeTypes(): Promise<string[]> {
+  const db = await getDB();
+  const record = await db.get('settings', ADMIN_PRACTICE_SETTINGS_KEY);
+  if (!record || !('problemTypes' in record) || !Array.isArray(record.problemTypes)) {
+    return [];
+  }
+
+  const registeredTypes = new Set(
+    getAllGenerators()
+      .filter((generator) => getTypeSupportedLevels(generator.type).length > 0)
+      .map((generator) => generator.type),
+  );
+  return [...new Set(record.problemTypes)].filter(
+    (type): type is string => typeof type === 'string' && registeredTypes.has(type),
+  );
 }
 
 /**
