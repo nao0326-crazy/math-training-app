@@ -171,6 +171,7 @@ function NormalApp() {
           <PracticeSetupPage
             onSaved={(problemTypes) => {
               setSavedProblemTypes(problemTypes);
+              setStartError(null);
               setPage('home');
             }}
             onClose={() => {
