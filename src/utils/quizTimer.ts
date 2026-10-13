@@ -49,6 +49,28 @@ export const TIME_LIMIT_CONFIG = {
 };
 
 /**
+ * 適応型制限時間の設定 (本人の解答履歴から算出するときの範囲・条件)。
+ *
+ * TIME_LIMIT_CONFIG (初期値ポリシー) とは別枠で、初期値そのものは一切変更しない。
+ * 記録が足りないとき・計算に失敗したときは初期値 (getTimeLimitSeconds) に戻る。
+ * 計算本体は adaptiveTimeLimit.ts にある (このファイルは制限時間ポリシーの一元管理)。
+ */
+export const ADAPTIVE_TIME_LIMIT_CONFIG = {
+  /** 集計単位 (problemType × difficultyLevel) ごとに採用する直近の有効記録数 */
+  evaluationWindow: 20,
+  /** 適応計算に必要な有効正答記録の最低件数 (未満なら初期値を使う) */
+  minSamples: 8,
+  /** 外れ値除外後に平均を取る最低件数 (未満なら除外前の記録で平均する) */
+  minKeptSamples: 3,
+  /** 平均解答時間に乗じる係数 */
+  factor: 0.9,
+  /** 適応型制限時間の下限 (秒) */
+  minSeconds: 20,
+  /** 適応型制限時間の上限 (秒)。初期値の上限と同値 */
+  maxSeconds: 300,
+} as const;
+
+/**
  * 文章読解を要するカテゴリ (単純な計算入力より多めの時間を与える)。
  * ここに無い integer / decimal / fraction / numberTheory / expression は
  * 計算主体のため基準秒数のみを適用する。

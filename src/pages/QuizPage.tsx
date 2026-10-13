@@ -3,6 +3,7 @@ import type { Category, DifficultyRange, Problem } from '../types/problem';
 import { QuestionSelector } from '../engine/selector/questionSelector';
 import { formatAnswer, judgeUserAnswer, type AnswerJudgement } from '../utils/answer';
 import { getTimeLimitSeconds, TIME_OUT_USER_ANSWER } from '../utils/quizTimer';
+import { resolveTimeLimitSeconds } from '../utils/adaptiveTimeLimit';
 import {
   applyOutcome,
   createSessionTally,
@@ -37,6 +38,9 @@ interface QuizPageProps {
 }
 
 
+/** 問題未表示時・初期化前に使う既定の制限時間 (現行ポリシーの既定値) */
+const DEFAULT_LIMIT_SEC = getTimeLimitSeconds(null);
+
 export default function QuizPage({
   category,
   difficulty,
@@ -47,6 +51,13 @@ export default function QuizPage({
   onExit,
 }: QuizPageProps) {
   const [problem, setProblem] = useState<Problem | null>(null);
+  /**
+   * 現在の問題の制限時間 (秒)。
+   * 1 問ごとに loadNextQuestion 内で一度だけ決定し、
+   * タイマー表示・時間切れ判定・履歴保存 (timeLimitSec) がすべて同じ値を使う。
+   * 表示中に再レンダリングで再計算・変化させない。
+   */
+  const [limitSec, setLimitSec] = useState<number>(DEFAULT_LIMIT_SEC);
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   /** 詳細判定結果 (数学的等価だが標準形でない回答などの区別用) */
@@ -60,6 +71,8 @@ export default function QuizPage({
 
   const selectorRef = useRef<QuestionSelector | null>(null);
   const startTimeRef = useRef<number>(0);
+  /** 確定した制限時間の ref 値 (回答確定時の保存に使う。表示と同じ値) */
+  const limitSecRef = useRef<number>(DEFAULT_LIMIT_SEC);
   /** 同一問題の回答確定を同一イベントループ内でも二重実行しない */
   const answerSubmitLockRef = useRef(false);
   const historyRef = useRef<AnswerRecord[]>([]);
@@ -115,6 +128,14 @@ export default function QuizPage({
       return;
     }
 
+    // 1 問ごとの制限時間をここで一度だけ決定する (適応型。記録不足時は現行の初期時間)。
+    // タイマー表示・時間切れ判定・履歴保存はすべてこの値を使う。
+    // setProblem より先に設定し、問題が表示される最初のレンダリングで確定させることで
+    // 表示中に制限時間が変わったり、期限が作り直されたりしない。
+    const nextLimitSec = resolveTimeLimitSeconds(nextProblem, historyRef.current);
+    limitSecRef.current = nextLimitSec;
+    setLimitSec(nextLimitSec);
+
     setProblem(nextProblem);
     setIsAnswered(false);
     setIsCorrect(false);
@@ -169,7 +190,9 @@ export default function QuizPage({
         nextJudgement = result;
       }
       const answerTimeSec = (Date.now() - startTimeRef.current) / 1000;
-      const limitSec = getTimeLimitSeconds(problem);
+      // 制限時間は問題表示時に一度だけ決定した値をそのまま保存する (画面表示と必ず一致)。
+      // 描画中の getTimeLimitSeconds など別の再計算は使わない。
+      const limitSec = limitSecRef.current;
 
       setIsCorrect(correct);
       setJudgement(nextJudgement);
@@ -328,7 +351,7 @@ export default function QuizPage({
       {!isAnswered && (
         <QuizTimer
           problemId={problem.id}
-          limitSec={getTimeLimitSeconds(problem)}
+          limitSec={limitSec}
           onExpire={handleTimeout}
         />
       )}
