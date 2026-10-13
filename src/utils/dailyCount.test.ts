@@ -129,3 +129,33 @@ describe('countTodayAnswers', () => {
     expect(countTodayAnswers(records) >= DAILY_GOAL).toBe(true);
   });
 });
+
+describe('時間切れは「解いた問題数」にカウントしない', () => {
+  it('countAnswersOnDate: 時間切れを除外する', () => {
+    const today = new Date('2026-09-23T12:00:00.000Z');
+    const records = [
+      createRecord(today.toISOString(), { isCorrect: true }),
+      createRecord(today.toISOString(), { isTimedOut: true }),
+      createRecord(today.toISOString(), { isTimedOut: true }),
+    ];
+    expect(countAnswersOnDate(records, today)).toBe(1);
+  });
+
+  it('countTodayAnswers: 時間切れを除外する', () => {
+    const now = new Date();
+    const records = [
+      createRecord(now.toISOString(), { isCorrect: true }),
+      createRecord(now.toISOString(), { isCorrect: false, isTimedOut: true }),
+    ];
+    expect(countTodayAnswers(records)).toBe(1);
+  });
+
+  it('すべて時間切れなら0', () => {
+    const now = new Date();
+    const records = [
+      createRecord(now.toISOString(), { isTimedOut: true }),
+      createRecord(now.toISOString(), { isTimedOut: true }),
+    ];
+    expect(countTodayAnswers(records)).toBe(0);
+  });
+});

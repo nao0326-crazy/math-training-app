@@ -26,6 +26,18 @@ export interface AnswerRecord {
   userAnswer: string;
   /** 正解 */
   correctAnswer: string;
+  /**
+   * 時間切れで解答受付を打ち切ったか (任意フィールド)。
+   * true のときは必ず isCorrect=false (ユーザー入力を正答として扱わない)。
+   * 旧レコードには無いため undefined (= 通常どおり時間内で解答)。
+   * 通常の誤答との区別にのみ使い、既存の正答率・統計 (isCorrect 集計) は変えない。
+   */
+  isTimedOut?: boolean;
+  /**
+   * その問題に与えられた制限時間 (秒) (任意フィールド)。
+   * 旧レコードには無いため undefined。時間切れ・所要時間の解釈に使う。
+   */
+  timeLimitSec?: number;
 }
 
 /**
@@ -56,6 +68,8 @@ export interface QuestionHistory {
 export interface CategoryStats {
   category: string;
   totalCount: number;
+  /** 解いた問題数 (時間切れを除く) */
+  solvedCount: number;
   correctCount: number;
   averageTimeSec: number;
 }
@@ -66,6 +80,8 @@ export interface CategoryStats {
 export interface DifficultyStats {
   level: number;
   totalCount: number;
+  /** 解いた問題数 (時間切れを除く) */
+  solvedCount: number;
   correctCount: number;
   averageTimeSec: number;
 }
@@ -75,7 +91,10 @@ export interface DifficultyStats {
  */
 export interface LearningStats {
   totalCount: number;
+  /** 解いた問題数 (時間切れを除く)。画面表示の「問題数」はこちらを使う。 */
+  solvedCount: number;
   correctCount: number;
+  /** 正答率 (分母 totalCount。時間切れを誤答として含める既存仕様を維持) */
   accuracyRate: number;
   averageTimeSec: number;
   byCategory: CategoryStats[];

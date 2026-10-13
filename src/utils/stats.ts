@@ -8,13 +8,16 @@ import type {
   DifficultyStats,
   LearningStats,
 } from '../types/history';
+import { countSolvedRecords } from './solvedCount';
 
 /**
  * 学習履歴から統計を集計する
  */
 export function calculateStats(records: AnswerRecord[]): LearningStats {
   const totalCount = records.length;
+  const solvedCount = countSolvedRecords(records);
   const correctCount = records.filter((r) => r.isCorrect).length;
+  // 正答率は既存仕様どおり時間切れ (誤答) を分母 (totalCount) に含める
   const accuracyRate = totalCount > 0 ? correctCount / totalCount : 0;
   const averageTimeSec =
     totalCount > 0
@@ -32,6 +35,7 @@ export function calculateStats(records: AnswerRecord[]): LearningStats {
     ([category, list]) => ({
       category,
       totalCount: list.length,
+      solvedCount: countSolvedRecords(list),
       correctCount: list.filter((r) => r.isCorrect).length,
       averageTimeSec:
         list.length > 0
@@ -52,6 +56,7 @@ export function calculateStats(records: AnswerRecord[]): LearningStats {
     .map(([level, list]) => ({
       level,
       totalCount: list.length,
+      solvedCount: countSolvedRecords(list),
       correctCount: list.filter((r) => r.isCorrect).length,
       averageTimeSec:
         list.length > 0
@@ -61,6 +66,7 @@ export function calculateStats(records: AnswerRecord[]): LearningStats {
 
   return {
     totalCount,
+    solvedCount,
     correctCount,
     accuracyRate,
     averageTimeSec,

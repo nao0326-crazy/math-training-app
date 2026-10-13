@@ -1,6 +1,7 @@
 import type { AnswerRecord } from '../types/history';
 import { getStudyDateKey } from './dailyCount';
 import { CATEGORY_LABELS, categoryLabel } from './stats';
+import { isSolvedRecord } from './solvedCount';
 
 export interface StudyMonth {
   year: number;
@@ -103,10 +104,13 @@ export function getRecordUnitLabel(record: AnswerRecord): string {
 /**
  * 通常の回答はcategoryで集約する。旧履歴などcategoryがない場合は
  * problemTypeへフォールバックし、問題数が大きい順に並べる。
+ * 時間切れは「解いた問題数」ではないため集計に含めない。
  */
 export function summarizeRecordUnits(records: AnswerRecord[]): UnitSummary[] {
   const summary = new Map<string, UnitSummary>();
   for (const record of records) {
+    // 時間切れは「解いた問題数」に含めない
+    if (!isSolvedRecord(record)) continue;
     const category = record.category.trim();
     const problemType = record.problemType.trim();
     const key = isKnownCategory(category)

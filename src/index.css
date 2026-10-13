@@ -411,6 +411,57 @@ input:focus {
   font-weight: bold;
 }
 
+/* ===== 制限時間タイマー ===== */
+.quiz-timer {
+  align-self: center;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 6px 16px;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: 20px;
+  font-weight: bold;
+  line-height: 1;
+  /* 秒数が桁変動してもレイアウトが揺れないようにする */
+  font-variant-numeric: tabular-nums;
+  transition: color 0.2s, background 0.2s;
+}
+
+.quiz-timer-label,
+.quiz-timer-unit {
+  font-size: 0.85rem;
+}
+
+.quiz-timer-value {
+  min-width: 2ch;
+  text-align: right;
+  font-size: 1.4rem;
+}
+
+/* 残り時間が少ないときの警告色 */
+.quiz-timer-urgent {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+/* あとわずかのときの強い警告 (脈打ち) */
+.quiz-timer-critical {
+  background: var(--error-light);
+  color: var(--error);
+  animation: quiz-timer-pulse 1s ease-in-out infinite;
+}
+
+@keyframes quiz-timer-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
 .question-card {
   background: var(--card-bg);
   border-radius: var(--radius);
@@ -539,6 +590,12 @@ input:focus {
 .feedback.incorrect {
   border-left-color: var(--error);
   background: var(--error-light);
+}
+
+/* 時間切れ (通常の誤答とは別の色で区別) */
+.feedback.timed-out {
+  border-left-color: #ef6c00;
+  background: #fff3e0;
 }
 
 .feedback-title {
@@ -854,6 +911,12 @@ button.calendar-cell.day.selected {
 
 .incorrect-text {
   color: var(--error);
+  font-weight: bold;
+}
+
+/* 時間切れ (誤答・時間切れを区別して表示) */
+.timeout-text {
+  color: #b45309;
   font-weight: bold;
 }
 

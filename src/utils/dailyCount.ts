@@ -3,6 +3,7 @@
  */
 
 import type { AnswerRecord } from '../types/history';
+import { isSolvedRecord } from './solvedCount';
 
 /** 1日の目標問題数 */
 export const DAILY_GOAL = 1000;
@@ -40,8 +41,9 @@ export function getStudyDateKey(date: Date = new Date()): string {
 }
 
 /**
- * 指定日の回答数をカウントする
- * 空回答は履歴に保存されないため、履歴に存在する回答のみがカウントされる
+ * 指定日の「解いた問題数」をカウントする (時間切れは除く)
+ * 空回答は履歴に保存されないため、履歴に存在する回答のみが対象。
+ * 時間切れは履歴には残るが「解いた問題数」ではないためカウントしない。
  */
 export function countAnswersOnDate(
   records: AnswerRecord[],
@@ -49,13 +51,15 @@ export function countAnswersOnDate(
 ): number {
   const targetKey = getStudyDateKey(date);
   return records.filter((record) => {
+    // 時間切れは「解いた問題数」にカウントしない
+    if (!isSolvedRecord(record)) return false;
     const recordDate = new Date(record.answeredAt);
     return getStudyDateKey(recordDate) === targetKey;
   }).length;
 }
 
 /**
- * 今日の回答数をカウントする
+ * 今日の「解いた問題数」をカウントする (時間切れは除く)
  */
 export function countTodayAnswers(records: AnswerRecord[]): number {
   return countAnswersOnDate(records, new Date());
