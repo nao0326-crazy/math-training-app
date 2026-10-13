@@ -28,6 +28,9 @@ import type {
   MultiplesFindingVariant,
 } from '../../problems/numberTheory/generators';
 import type { SpeedUnitConversionVariant } from '../../problems/speed/generators';
+// 現実連動 (realworld_shopping): 途中式で商品名を表示するため、値札の定義を参照する。
+// これは React に依存しない純粋な定数データなので、engine の純粋性は保たれる。
+import { SUPERMARKET_PRODUCTS } from '../../problems/realWorld/generators';
 
 /** 階乗 (r < 2 は1) */
 function factorial(r: number): number {
@@ -1907,6 +1910,181 @@ function dataCompare(p: Problem): SolutionStep[] {
   ];
 }
 
+// ===== 現実連動: スーパーの買い物 (realworld_shopping) =====
+// 写真の値札 (SUPERMARKET_PRODUCTS) から価格を読み取り、整数の四則演算で解く。
+// 途中式は generator と同じ計算過程を parameters から組み立てる (最終ステップに正解を含む)。
+
+/** parameters から安全に数値を取り出す */
+function rn(params: Record<string, unknown>, key: string): number {
+  const v = params[key];
+  return typeof v === 'number' ? v : 0;
+}
+
+function realWorldShopping(p: Problem): SolutionStep[] {
+  const params = p.parameters as Record<string, unknown>;
+  const variant = params.variant as string;
+  const name = (i: number) => SUPERMARKET_PRODUCTS[i]?.name ?? '';
+  const unit = (i: number) => SUPERMARKET_PRODUCTS[i]?.unit ?? '';
+  const ans = formatAnswer(p.answer);
+
+  switch (variant) {
+    case 'two_sum': {
+      const a = rn(params, 'a');
+      const b = rn(params, 'b');
+      const pa = rn(params, 'priceA');
+      const pb = rn(params, 'priceB');
+      return [
+        S(`${name(a)}は${pa}円、${name(b)}は${pb}円`, '写真の値札から代金を読み取ります'),
+        S(`${pa}＋${pb}＝${ans}`, '2つの代金を合わせます'),
+        S(`答え ${ans}円`, '代金の合計を求めます'),
+      ];
+    }
+    case 'three_sum': {
+      const a = rn(params, 'a');
+      const b = rn(params, 'b');
+      const c = rn(params, 'c');
+      const pa = rn(params, 'priceA');
+      const pb = rn(params, 'priceB');
+      const pc = rn(params, 'priceC');
+      const partial = pa + pb;
+      return [
+        S(`${name(a)}は${pa}円、${name(b)}は${pb}円、${name(c)}は${pc}円`, '写真の値札から代金を読み取ります'),
+        S(`${pa}＋${pb}＝${partial}`, 'まず2つの代金を合わせます'),
+        S(`${partial}＋${pc}＝${ans}`, '残りの代金を合わせます'),
+        S(`答え ${ans}円`, '代金の合計を求めます'),
+      ];
+    }
+    case 'same_item_multiple': {
+      const idx = rn(params, 'idx');
+      const count = rn(params, 'count');
+      const price = rn(params, 'price');
+      return [
+        S(`${name(idx)}は1${unit(idx)}${price}円`, '写真の値札から代金を読み取ります'),
+        S(`${price}×${count}＝${ans}`, '1こ分の代金にこ数をかけます'),
+        S(`答え ${ans}円`, '代金を求めます'),
+      ];
+    }
+    case 'change': {
+      const a = rn(params, 'a');
+      const b = rn(params, 'b');
+      const budget = rn(params, 'budget');
+      const pa = rn(params, 'priceA');
+      const pb = rn(params, 'priceB');
+      const spent = pa + pb;
+      return [
+        S(`${name(a)}は${pa}円、${name(b)}は${pb}円`, '写真の値札から代金を読み取ります'),
+        S(`${pa}＋${pb}＝${spent}`, '買った商品の代金を合わせます'),
+        S(`${budget}−${spent}＝${ans}`, `${budget}円から引いておつりを求めます`),
+        S(`答え ${ans}円`, 'おつりを求めます'),
+      ];
+    }
+    case 'multi_and_sum': {
+      const a = rn(params, 'a');
+      const b = rn(params, 'b');
+      const count = rn(params, 'count');
+      const pa = rn(params, 'priceA');
+      const pb = rn(params, 'priceB');
+      const sub = pa * count;
+      return [
+        S(`${name(a)}は1${unit(a)}${pa}円`, '写真の値札から代金を読み取ります'),
+        S(`${pa}×${count}＝${sub}`, `${count}${unit(a)}分の代金を求めます`),
+        S(`${name(b)}は1${unit(b)}${pb}円`, 'もう1つの商品の代金を読み取ります'),
+        S(`${sub}＋${pb}＝${ans}`, '代金を合わせます'),
+        S(`答え ${ans}円`, '代金の合計を求めます'),
+      ];
+    }
+    case 'max_count': {
+      const idx = rn(params, 'idx');
+      const budget = rn(params, 'budget');
+      const price = rn(params, 'price');
+      return [
+        S(`${name(idx)}は1${unit(idx)}${price}円`, '写真の値札から代金を読み取ります'),
+        S(`${budget}÷${price}＝${ans}`, '持ち金を1こ分の代金でわります'),
+        S(`答え ${ans}${unit(idx)}`, '買えるこ数を求めます'),
+      ];
+    }
+    case 'split_bill': {
+      const a = rn(params, 'a');
+      const b = rn(params, 'b');
+      const people = rn(params, 'people');
+      const pa = rn(params, 'priceA');
+      const pb = rn(params, 'priceB');
+      const total = pa + pb;
+      return [
+        S(`${name(a)}は${pa}円、${name(b)}は${pb}円`, '写真の値札から代金を読み取ります'),
+        S(`${pa}＋${pb}＝${total}`, '代金の合計を求めます'),
+        S(`${total}÷${people}＝${ans}`, '人数で等分します'),
+        S(`答え ${ans}円`, '1人分を求めます'),
+      ];
+    }
+    default:
+      return [S(ans, '答えをまとめます')];
+  }
+}
+
+// ===== 現実連動: 卵の数を読み取って計算 (realworld_eggs) =====
+// 写真 (eggs-brown-white.jpg) に写る卵は合わせて2個 (茶色1・白1)。
+// この2個を読み取り、整数の四則演算で解く。途中式は parameters から組み立てる。
+
+function realWorldEggs(p: Problem): SolutionStep[] {
+  const params = p.parameters as Record<string, unknown>;
+  const variant = params.variant as string;
+  const ans = formatAnswer(p.answer);
+
+  switch (variant) {
+    case 'fill_carton': {
+      const carton = rn(params, 'carton');
+      const totalEggs = rn(params, 'totalEggs');
+      return [
+        S(`写真には茶色い卵1個と白い卵1個、合わせて${totalEggs}個が写っています`, '写真から卵の数を読み取ります'),
+        S(`${carton}−${totalEggs}＝${ans}`, 'カートンの数から今ある卵の数を引きます'),
+        S(`答え ${ans}個`, 'あと必要な卵の数を求めます'),
+      ];
+    }
+    case 'pair_price': {
+      const pb = rn(params, 'priceA');
+      const pw = rn(params, 'priceB');
+      return [
+        S(`茶色い卵は1個${pb}円、白い卵は1個${pw}円`, '問題で設定した値段を確認します'),
+        S(`${pb}＋${pw}＝${ans}`, '茶色い卵と白い卵の代金を合わせます'),
+        S(`答え ${ans}円`, '代金の合計を求めます'),
+      ];
+    }
+    case 'pairs_total': {
+      const pairs = rn(params, 'pairs');
+      const eggsPerPair = rn(params, 'eggsPerPair');
+      return [
+        S(`1組は茶色い卵1個と白い卵1個の合わせて${eggsPerPair}個`, '写真から1組の卵の数を読み取ります'),
+        S(`${eggsPerPair}×${pairs}＝${ans}`, '1組の個数に組数をかけます'),
+        S(`答え ${ans}個`, '卵の合計を求めます'),
+      ];
+    }
+    case 'pairs_in_carton': {
+      const carton = rn(params, 'carton');
+      const eggsPerPair = rn(params, 'eggsPerPair');
+      return [
+        S(`1組は茶色い卵1個と白い卵1個の合わせて${eggsPerPair}個`, '写真から1組の卵の数を読み取ります'),
+        S(`${carton}÷${eggsPerPair}＝${ans}`, 'カートンの数を1組の個数でわります'),
+        S(`答え ${ans}組`, 'できる組の数を求めます'),
+      ];
+    }
+    case 'pairs_cost': {
+      const pairs = rn(params, 'pairs');
+      const pb = rn(params, 'priceA');
+      const pw = rn(params, 'priceB');
+      const pairCost = rn(params, 'pairCost');
+      return [
+        S(`茶色い卵は1個${pb}円、白い卵は1個${pw}円`, '問題で設定した値段を確認します'),
+        S(`${pb}＋${pw}＝${pairCost}`, '1組の代金を求めます'),
+        S(`${pairCost}×${pairs}＝${ans}`, '1組の代金に組数をかけます'),
+        S(`答え ${ans}円`, '代金の合計を求めます'),
+      ];
+    }
+    default:
+      return [];
+  }
+}
+
 // ===== タイプ → ビルダー対応表 =====
 
 type StepBuilder = (problem: Problem) => SolutionStep[];
@@ -2024,6 +2202,9 @@ const BUILDERS: Record<string, StepBuilder> = {
   data_total_from_average: dataTotalFromAverage,
   data_max_min: dataMaxMin,
   data_compare: dataCompare,
+  // 現実連動 (写真から情報を読み取って計算する)
+  realworld_shopping: realWorldShopping,
+  realworld_eggs: realWorldEggs,
 };
 
 /**

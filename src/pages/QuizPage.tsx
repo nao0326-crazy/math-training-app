@@ -15,6 +15,7 @@ import { categoryLabel } from '../utils/stats';
 import type { AnswerRecord, QuestionHistory } from '../types/history';
 import AnswerInput from '../components/AnswerInput';
 import FigureRenderer from '../components/FigureRenderer';
+import ImageRenderer from '../components/ImageRenderer';
 import SolutionDisplay from '../components/SolutionDisplay';
 import QuizTimer from '../components/QuizTimer';
 import { createDailyAnswerSubmissionId } from '../services/dailyAnswerSync';
@@ -336,6 +337,9 @@ export default function QuizPage({
         <p className="question-text">{problem.question}</p>
         {/* 図形は figure を持つ問題でのみ描画される (未設定なら何も描かない) */}
         <FigureRenderer spec={problem.figure} />
+        {/* 現実連動の写真は image を持つ問題でのみ描画される (未設定なら何も描かない)。
+            読み込み失敗時は ImageRenderer 内で代替テキストを表示する。 */}
+        <ImageRenderer spec={problem.image} />
       </div>
 
       {/* 問題タイプに応じた専用入力UI (OSキーボードを表示しない) */}

@@ -10,7 +10,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
+        // jpg もプリキャッシュ対象に含める (現実連動教材の写真をオフラインでも表示するため)
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,webmanifest}'],
         runtimeCaching: [
           {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any

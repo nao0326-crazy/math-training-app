@@ -128,6 +128,8 @@ import {
   DataMaxMinGenerator,
   DataCompareGenerator,
 } from '../../problems/data/generators';
+// 現実連動 (写真から情報を読み取って計算する教材)
+import { SupermarketShoppingGenerator, EggCountingGenerator } from '../../problems/realWorld/generators';
 import { validateProblem } from '../validator/validator';
 // 解法表示 (solutionSteps) を全出題経路に添付するため SolutionGenerator を組み込む
 import { attachSolutionSteps } from '../solution/solutionGenerator';
@@ -253,6 +255,9 @@ const GENERATORS: ProblemGenerator[] = [
   new DataTotalFromAverageGenerator(),
   new DataMaxMinGenerator(),
   new DataCompareGenerator(),
+  // 現実連動 (写真から情報を読み取って計算する)
+  new SupermarketShoppingGenerator(),
+  new EggCountingGenerator(),
 ];
 
 /**

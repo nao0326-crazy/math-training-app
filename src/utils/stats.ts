@@ -89,6 +89,7 @@ export const CATEGORY_LABELS: Record<string, string> = {
   numberTheory: '数の性質',
   expression: '文字と式',
   combinatorics: '場合の数',
+  realWorld: 'くらしの中の算数',
 };
 
 /**

@@ -62,7 +62,12 @@ export type Category =
   | 'data'
   | 'numberTheory'
   | 'expression'
-  | 'combinatorics';
+  | 'combinatorics'
+  /**
+   * 現実連動 (写真・画像から情報を読み取って解く教材)。
+   * 学習履歴の category は文字列なので、この追加は既存レコードと互換。
+   */
+  | 'realWorld';
 
 /**
  * 解法の1ステップ (途中式)
@@ -173,6 +178,35 @@ export interface FigureSpec {
 }
 
 /**
+ * 現実連動教材の「写真」表示仕様 (ImageSpec)
+ *
+ * 写真を単なる装飾ではなく、「情報を読み取る教材」として扱うための構造。
+ * - src は配布環境でも確実に表示できるよう、public/ からのルート相対パス
+ *   (例: '/images/supermarket-shelf.svg') を用いる (外部サイトへの直リンクはしない)。
+ * - altText は写真が表示できない環境でも解答に必要な情報 (商品名・価格など) を
+ *   読み取れるように、内容を含めた代替テキストとする (後方互換・破綻防止)。
+ * - photoFacts / supplementalText で「写真に写っている情報」と
+ *   「問題文で補足する情報」を区別して保持する。
+ *
+ * 未設定 (image === undefined) のときは写真を表示せず、従来どおり
+ * 問題文と解答UIのみを表示する (既存の全問題は image を持たないため挙動は変わらない)。
+ */
+export interface ImageSpec {
+  /** 画像の参照先 (public/ からのルート相対パス。外部直リンクはしない) */
+  src: string;
+  /** 写真が表示できない環境でも解答できる代替テキスト (価格等の情報を含む) */
+  altText: string;
+  /** 写真の見出し (例: 'スーパーのお菓子コーナー') */
+  caption?: string;
+  /** 写真の出典・利用条件 (例: '本プロジェクト作成のオリジナル画像') */
+  credit?: string;
+  /** 写真に実際に写っている情報 (読み取りの対象。問題文に書かない) */
+  photoFacts?: string[];
+  /** 問題文で補足する情報 (写真には写っていない条件) */
+  supplementalText?: string[];
+}
+
+/**
  * 問題の基本構造
  * 問題文だけでなく、生成条件 (parameters) を保持する
  */
@@ -207,6 +241,13 @@ export interface Problem {
    * (既存の生成器は figure を設定しないため、挙動は変わらない)
    */
   figure?: FigureSpec;
+  /**
+   * この問題に付随する現実連動の写真 (任意)。
+   * 未設定のときは写真を表示せず、従来どおり問題文と解答UIのみを表示する。
+   * 画像の読み込みに失敗しても解答・学習記録は破綻しない (altText に必要情報を含める)。
+   * (既存の生成器は image を設定しないため、挙動は変わらない)
+   */
+  image?: ImageSpec;
 }
 
 /**
