@@ -19,7 +19,9 @@ import { setTimeout as sleep } from 'node:timers/promises';
 import { writeFileSync } from 'node:fs';
 
 const PORT = 5399;
-const BASE = `http://localhost:${PORT}`;
+// 引数でURLを渡すと本番など外部環境を検証する (省略時はローカル preview を起動)
+const EXTERNAL = process.argv[2] || null;
+const BASE = EXTERNAL || `http://localhost:${PORT}`;
 const CHROME = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/(.:)/, '$1');
 
@@ -32,20 +34,24 @@ function check(name, ok, detail = '') {
   console.log(l);
 }
 
-// ---- preview server ----
-const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--port', String(PORT), '--strictPort'], {
-  cwd: ROOT,
-  stdio: ['ignore', 'pipe', 'pipe'],
-});
-server.stdout.on('data', () => {});
-server.stderr.on('data', (d) => lines.push('SERVER ' + String(d).slice(0, 200)));
+// ---- preview server (外部URL指定時は起動しない) ----
+let server = null;
+if (!EXTERNAL) {
+  server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--port', String(PORT), '--strictPort'], {
+    cwd: ROOT,
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
+  server.stdout.on('data', () => {});
+  server.stderr.on('data', (d) => lines.push('SERVER ' + String(d).slice(0, 200)));
 
-let up = false;
-for (let i = 0; i < 60 && !up; i++) {
-  await sleep(500);
-  up = await fetch(BASE).then((r) => r.ok).catch(() => false);
+  let up = false;
+  for (let i = 0; i < 60 && !up; i++) {
+    await sleep(500);
+    up = await fetch(BASE).then((r) => r.ok).catch(() => false);
+  }
+  if (!up) { console.log('FAIL preview server did not start'); server.kill(); process.exit(1); }
 }
-if (!up) { console.log('FAIL preview server did not start'); server.kill(); process.exit(1); }
+console.log(`VERIFY BASE=${BASE}`);
 
 const browser = await chromium.launch({ executablePath: CHROME, headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage'] });
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 1000 } });
@@ -107,11 +113,25 @@ for (let i = 0; i < maxQ; i++) {
     break;
   }
   await img.waitFor({ state: 'visible', timeout: 8000 });
+  // 画像のロード完了を待つ (本番はCDN越しで natural=0 の状態で測定されるため)
+  await img.evaluate(async (el) => {
+    if (!(el.complete && el.naturalWidth > 0)) {
+      await Promise.race([
+        new Promise((res) => {
+          el.addEventListener('load', res, { once: true });
+          el.addEventListener('error', res, { once: true });
+        }),
+        new Promise((res) => setTimeout(res, 5000)),
+      ]);
+    }
+    if (typeof el.decode === 'function') await el.decode().catch(() => {});
+  }).catch(() => {});
   const d = await img.evaluate((el) => ({
     src: el.getAttribute('src'),
     alt: el.getAttribute('alt') ?? '',
     nw: el.naturalWidth, nh: el.naturalHeight,
     w: el.clientWidth, h: el.clientHeight,
+    complete: el.complete,
   }));
   const question = (await page.locator('.question-text').first().innerText()).trim();
 
@@ -189,7 +209,7 @@ check('404 / 失敗レスポンスが無い', badResponses.length === 0, [...new
 check('ページエラーが無い', pageErrors.length === 0, pageErrors.slice(0, 3).join(' | '));
 
 await browser.close();
-server.kill();
+if (server) server.kill();
 
 writeFileSync(new URL('./e2e-app-realworld-result.json', import.meta.url), JSON.stringify({ lines, failures }, null, 2));
 console.log(`\nSUMMARY pass=${lines.filter((l) => l.startsWith('PASS')).length} fail=${failures.length}`);
