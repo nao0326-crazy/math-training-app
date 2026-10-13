@@ -4,6 +4,7 @@ import type { Category } from '../types/problem';
 import type { AnswerRecord } from '../types/history';
 import { calculateStats, categoryLabel, formatPercent, formatTime } from '../utils/stats';
 import { getStudyDateKey } from '../utils/dailyCount';
+import { countSolvedRecords } from '../utils/solvedCount';
 import {
   buildCalendarDays,
   formatStudyDateLabel,
@@ -148,7 +149,8 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
         <div className="calendar-grid" role="grid" aria-label={`${formatStudyMonth(visibleMonth)}の学習カレンダー`}>
           {calendarDays.map((day, index) => {
             if (!day) return <span key={`empty-${index}`} className="calendar-cell empty" aria-hidden="true" />;
-            const count = recordsByDate.get(day.dateKey)?.length ?? 0;
+            // 「解いた問題数」(時間切れを除く) をカレンダーに表示する
+            const count = countSolvedRecords(recordsByDate.get(day.dateKey) ?? []);
             const isSelected = selectedDateKey === day.dateKey;
             return (
               <button
@@ -169,7 +171,7 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
 
       <section className="stats-section selected-day-section" aria-live="polite">
         <h3>{formatStudyDateLabel(selectedDateKey)}</h3>
-        <div className="selected-day-total">{selectedRecords.length}問</div>
+        <div className="selected-day-total">{countSolvedRecords(selectedRecords)}問</div>
         {selectedRecords.length === 0 ? (
           <p className="no-data">この日はまだ学習記録がありません。</p>
         ) : (
@@ -187,8 +189,16 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
                 <article className="day-record-item" key={`${record.submissionId ?? record.problemId}-${index}`}>
                   <div className="day-record-meta">
                     <span>{getRecordUnitLabel(record)}</span>
-                    <span className={record.isCorrect ? 'correct-text' : 'incorrect-text'}>
-                      {record.isCorrect ? '正解' : '不正解'}
+                    <span
+                      className={
+                        record.isTimedOut
+                          ? 'timeout-text'
+                          : record.isCorrect
+                            ? 'correct-text'
+                            : 'incorrect-text'
+                      }
+                    >
+                      {record.isTimedOut ? '時間切れ' : record.isCorrect ? '正解' : '不正解'}
                     </span>
                     <span>{formatTime(record.answerTimeSec)}</span>
                   </div>
@@ -210,7 +220,7 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
           <section className="stats-overview">
             <div className="stat-card">
               <span className="stat-label">問題数</span>
-              <span className="stat-value">{stats.totalCount}問</span>
+              <span className="stat-value">{stats.solvedCount}問</span>
             </div>
             <div className="stat-card">
               <span className="stat-label">正答率</span>
@@ -273,7 +283,7 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
                   {stats.byCategory.map((cat) => (
                     <tr key={cat.category}>
                       <td>{categoryLabel(cat.category)}</td>
-                      <td>{cat.totalCount}問</td>
+                      <td>{cat.solvedCount}問</td>
                       <td>{formatPercent(cat.correctCount / cat.totalCount)}</td>
                       <td>{formatTime(cat.averageTimeSec)}</td>
                     </tr>
@@ -301,7 +311,7 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
                   {stats.byDifficulty.map((diff) => (
                     <tr key={diff.level}>
                       <td>{difficultyLabel(diff.level as 1 | 2 | 3 | 4 | 5)}</td>
-                      <td>{diff.totalCount}問</td>
+                      <td>{diff.solvedCount}問</td>
                       <td>{formatPercent(diff.correctCount / diff.totalCount)}</td>
                       <td>{formatTime(diff.averageTimeSec)}</td>
                     </tr>
