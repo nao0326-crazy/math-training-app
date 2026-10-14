@@ -8,7 +8,26 @@ import type {
   DifficultyStats,
   LearningStats,
 } from '../types/history';
-import { countSolvedRecords } from './solvedCount';
+import { countSolvedRecords, isSolvedRecord } from './solvedCount';
+
+/**
+ * 解答速度の平均 (秒)。時間切れの記録は除外する。
+ *
+ * 時間切れは「制限時間を使い切り解答できなかった」記録で、answerTimeSec が
+ * 制限時間 (最大300秒) に張り付く。これを平均に含めると、時間切れが1件あるだけで
+ * 実際の解答速度より数倍〜十数倍に膨らんだ「平均解答時間」になり、
+ * 学習状況の把握 (どの分野が速い/遅い) を歪めてしまう。
+ * 解答速度は「時間内に解答した問題」の実態を表すべきなので、solvedCount と同じ
+ * 「時間切れは解いた問題ではない」原則を平均にも適用する。
+ * (正答率・出題数の分母に時間切れを含める既存仕様は変えない。)
+ *
+ * 時間切れしか無い場合は 0 を返す (分母を割らない)。
+ */
+function averageSolvedTimeSec(records: AnswerRecord[]): number {
+  const solved = records.filter(isSolvedRecord);
+  if (solved.length === 0) return 0;
+  return solved.reduce((sum, r) => sum + r.answerTimeSec, 0) / solved.length;
+}
 
 /**
  * 学習履歴から統計を集計する
@@ -19,10 +38,8 @@ export function calculateStats(records: AnswerRecord[]): LearningStats {
   const correctCount = records.filter((r) => r.isCorrect).length;
   // 正答率は既存仕様どおり時間切れ (誤答) を分母 (totalCount) に含める
   const accuracyRate = totalCount > 0 ? correctCount / totalCount : 0;
-  const averageTimeSec =
-    totalCount > 0
-      ? records.reduce((sum, r) => sum + r.answerTimeSec, 0) / totalCount
-      : 0;
+  // 平均解答時間は時間切れを除外する (解答速度の実態を表すため)
+  const averageTimeSec = averageSolvedTimeSec(records);
 
   // カテゴリ別
   const byCategoryMap = new Map<string, AnswerRecord[]>();
@@ -37,10 +54,7 @@ export function calculateStats(records: AnswerRecord[]): LearningStats {
       totalCount: list.length,
       solvedCount: countSolvedRecords(list),
       correctCount: list.filter((r) => r.isCorrect).length,
-      averageTimeSec:
-        list.length > 0
-          ? list.reduce((sum, r) => sum + r.answerTimeSec, 0) / list.length
-          : 0,
+      averageTimeSec: averageSolvedTimeSec(list),
     }),
   );
 
@@ -58,10 +72,7 @@ export function calculateStats(records: AnswerRecord[]): LearningStats {
       totalCount: list.length,
       solvedCount: countSolvedRecords(list),
       correctCount: list.filter((r) => r.isCorrect).length,
-      averageTimeSec:
-        list.length > 0
-          ? list.reduce((sum, r) => sum + r.answerTimeSec, 0) / list.length
-          : 0,
+      averageTimeSec: averageSolvedTimeSec(list),
     }));
 
   return {

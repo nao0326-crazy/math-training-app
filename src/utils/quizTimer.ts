@@ -68,6 +68,33 @@ export const ADAPTIVE_TIME_LIMIT_CONFIG = {
   minSeconds: 20,
   /** 適応型制限時間の上限 (秒)。初期値の上限と同値 */
   maxSeconds: 300,
+  /**
+   * 時間切れが続いたときの制限時間の緩和 (timeout relief)。
+   *
+   * 適応制限時間の標本は「正答・非時間切れ・有限の正数」の記録だけ。
+   * しかし、ある (problemType × difficulty) で正答がまだ少ないうちに
+   * 時間切れが続くと、有効標本が 8 件 (minSamples) に届かず、
+   * 適応計算が働かないまま初期時間の問い直しが繰り返され、
+   * いつまでも時間切れになる「行き詰まり」が起きうる。
+   *
+   * 時間切れは「制限時間に対して解くのに時間が足りない」という最も強い
+   * 適応シグナルなので、次の条件を満たすときだけ初期値を緩和する:
+   *   - 対象グループの直近 timeoutRelief.window 件の中に
+   *     時間切れ (isTimedOut === true) が timeoutRelief.minTimeouts 件以上ある
+   *   - 緩和後の値は初期値 × timeoutRelief.factor とし、絶対上限 maxSeconds を超えない
+   *     (無限に伸びる悪循環を作らない)
+   *
+   * 正答標本が十分 (8 件以上) にあるときは、通常の適応値を優先し、
+   * この緩和は使わない (既存の適応挙動を変えない)。
+   */
+  timeoutRelief: {
+    /** 時間切れを数える直近の履歴件数 */
+    window: 10,
+    /** 緩和を発動する時間切れの件数 (この値以上) */
+    minTimeouts: 3,
+    /** 初期値に乗じる緩和倍率 */
+    factor: 1.5,
+  },
 } as const;
 
 /**

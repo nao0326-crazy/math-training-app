@@ -79,6 +79,53 @@ describe('fingerprintProblem', () => {
     const b = { ...base, parameters: { n1: 2, d1: 3, n2: 3, d2: 7 } };
     expect(fingerprintProblem(a as Problem)).not.toBe(fingerprintProblem(b as Problem));
   });
+
+  it('図形 (figure) が違えば異なるフィンガープリント (同じ数値・同じ答えでも)', () => {
+    // judge_same のような「合同か」判定問題では答え・数値が一定で、
+    // 個別性は図の頂点座標のみにある。従来は figure を無視していたため
+    // 異なる図形が「完全な重複」と誤判定され、重複抑制に出題を潰されていた。
+    const figureA: Problem['figure'] = {
+      figures: [
+        { kind: 'triangle', vertices: [{ x: 0, y: 0 }, { x: 4, y: 0 }, { x: 0, y: 3 }] },
+        { kind: 'triangle', vertices: [{ x: 10, y: 0 }, { x: 10, y: 4 }, { x: 13, y: 0 }] },
+      ],
+    };
+    const figureB: Problem['figure'] = {
+      figures: [
+        { kind: 'triangle', vertices: [{ x: 1, y: 1 }, { x: 5, y: 1 }, { x: 1, y: 4 }] },
+        { kind: 'triangle', vertices: [{ x: 12, y: 1 }, { x: 12, y: -2 }, { x: 14, y: 0 }] },
+      ],
+    };
+    const a = { ...base, figure: figureA };
+    const b = { ...base, figure: figureB };
+    expect(fingerprintProblem(a as Problem)).not.toBe(fingerprintProblem(b as Problem));
+  });
+
+  it('図形 (figure) が同じなら同一フィンガープリント (描画ラベルの違いは無視)', () => {
+    const withLabel: Problem['figure'] = {
+      figures: [
+        {
+          kind: 'triangle',
+          vertices: [{ x: 0, y: 0 }, { x: 4, y: 0 }, { x: 0, y: 3 }],
+          caption: '図A',
+          points: [{ at: { x: 0, y: 0 }, label: 'A' }],
+        },
+      ],
+    };
+    const withoutLabel: Problem['figure'] = {
+      figures: [{ kind: 'triangle', vertices: [{ x: 0, y: 0 }, { x: 4, y: 0 }, { x: 0, y: 3 }] }],
+    };
+    const a = { ...base, figure: withLabel };
+    const b = { ...base, figure: withoutLabel };
+    // 頂点座標が同じなら、見出し・点ラベルなど描画表現が違っても「同じ図」とみなす
+    expect(fingerprintProblem(a as Problem)).toBe(fingerprintProblem(b as Problem));
+  });
+
+  it('figure が無い問題のフィンガープリントは従来と変わらない (数値だけで決まる)', () => {
+    const a = { ...base, parameters: { n1: 3, d1: 4, n2: 2, d2: 5 } };
+    const b = { ...base, parameters: { n1: 3, d1: 4, n2: 2, d2: 5 } };
+    expect(fingerprintProblem(a as Problem)).toBe(fingerprintProblem(b as Problem));
+  });
 });
 
 describe('buildRecentContext', () => {

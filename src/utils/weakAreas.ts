@@ -9,6 +9,7 @@
 
 import type { AnswerRecord } from '../types/history';
 import { calculateStats } from './stats';
+import { isSolvedRecord } from './solvedCount';
 
 /** 苦手判定の対象となる最低回答数 (これ未満の分野は判定しない) */
 export const MIN_ATTEMPTS_FOR_WEAKNESS = 5;
@@ -36,22 +37,42 @@ export interface WeakArea {
 /**
  * 学習履歴から苦手分野を抽出する
  *
- * 条件: 回答数が MIN_ATTEMPTS_FOR_WEAKNESS 以上 かつ
- *       正答率が WEAKNESS_ACCURACY_THRESHOLD 未満
+ * 条件: 制限時間内に解答できた数 (時間切れを除く) が MIN_ATTEMPTS_FOR_WEAKNESS 以上 かつ
+ *       その正答率が WEAKNESS_ACCURACY_THRESHOLD 未満
+ *
+ * 【時間切れの扱い】時間切れ (isTimedOut) は「解けなかった」のではなく
+ * 「時間が足りなかった」だけで理解度とは別問題。正答率の母集団から除外し
+ * (solvedCount と同じ解釈)、制限時間内に実際に解答した問題だけで判定する。
+ * これにより「時間に余裕がなくても正しく解ける」分野が誤って苦手とされるのを防ぐ。
  *
  * 並び順: 正答率が低い順 (同率の場合は回答数が多い順)
- * ※既存の分野別集計処理 (calculateStats) を再利用している
+ * ※回答数の集計には calculateStats を使うが、正答率と苦手判定の母集団は
+ *   時間切れを除いた制限時間内の解答に限定する。
  */
 export function findWeakAreas(records: AnswerRecord[]): WeakArea[] {
   const byCategory = calculateStats(records).byCategory;
 
+  // 分野ごとに「時間切れを除いた制限時間内の解答」だけで正答率を再計算する。
+  const solvedByCategory = new Map<string, AnswerRecord[]>();
+  for (const record of records) {
+    if (!isSolvedRecord(record)) continue;
+    const list = solvedByCategory.get(record.category) ?? [];
+    list.push(record);
+    solvedByCategory.set(record.category, list);
+  }
+
   return byCategory
-    .map((cat) => ({
-      category: cat.category,
-      totalCount: cat.totalCount,
-      correctCount: cat.correctCount,
-      accuracyRate: cat.totalCount > 0 ? cat.correctCount / cat.totalCount : 0,
-    }))
+    .map((cat) => {
+      const solved = solvedByCategory.get(cat.category) ?? [];
+      const totalCount = solved.length;
+      const correctCount = solved.filter((r) => r.isCorrect).length;
+      return {
+        category: cat.category,
+        totalCount,
+        correctCount,
+        accuracyRate: totalCount > 0 ? correctCount / totalCount : 0,
+      };
+    })
     .filter(
       (area) =>
         area.totalCount >= MIN_ATTEMPTS_FOR_WEAKNESS &&

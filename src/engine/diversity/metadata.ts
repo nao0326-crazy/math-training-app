@@ -315,14 +315,38 @@ function fnv1a(input: string): string {
 }
 
 /**
- * 問題のフィンガープリントを作る
+ * 図形 (figure) の幾何情報だけを、フィンガープリント用の安定した文字列にする。
  *
- * 「同じ問題タイプ + 同じ数学的条件 + 同じ数値」なら同一値になる。
+ * 「合同かどうか」を判定する図形問題 (judge_same / judge_differs など) は、
+ * 答えや parameters が図に依存せず一定になる一方、個別性は図の頂点座標にある。
+ * これを取り込まないと、異なる図形でも「完全な重複」と誤判定され、
+ * セッション内の重複抑制が図が違う問題まで出題できなくしてしまう。
+ *
+ * 座標 (x, y) のみを使い、色・ラベル・寸法表示など描画表現の差異は含めない
+ * (描画だけ変えた同一図形を重複として扱うため)。
+ * figure が無い既存の問題では空文字列を返し、従来の挙動と変わらない。
+ */
+function figureGeometry(problem: Problem): string {
+  const figure = problem.figure;
+  if (!figure || !Array.isArray(figure.figures)) return '';
+  return JSON.stringify(
+    figure.figures.map((shape) =>
+      Array.isArray(shape.vertices) ? shape.vertices.map((v) => [v.x, v.y]) : [],
+    ),
+  );
+}
+
+/**
+ * 問題のフィンガープリントを作る
+ * 「同じ問題タイプ + 同じ数学的条件 + 同じ数値 + 同じ図形」なら同一値になる。
  * 問題IDや難易度ラベル・出題日時など表現上の差異は含めないため、
  * 問題文の言い回しだけ変わった同内容も重複として検出できる。
+ *
+ * 図形の頂点座標も含めることで、答え・数値が同じでも図が異なる問題は
+ * 別問題として区別される (図形問題の多様性が正しく保たれる)。
  */
 export function fingerprintProblem(problem: Problem): string {
-  const payload = `t=${problem.type};p=${stableStringify(problem.parameters ?? {})};a=${stableStringify(problem.answer)}`;
+  const payload = `t=${problem.type};p=${stableStringify(problem.parameters ?? {})};a=${stableStringify(problem.answer)};f=${figureGeometry(problem)}`;
   return `${problem.type}:${fnv1a(payload)}`;
 }
 
