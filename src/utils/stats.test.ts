@@ -151,3 +151,44 @@ describe('解いた問題数 (solvedCount)', () => {
     expect(diff?.totalCount).toBe(2);
   });
 });
+
+describe('平均解答時間 (averageTimeSec) と時間切れ', () => {
+  it('時間切れを除外して平均解答時間を計算する', () => {
+    // 実態は 10/12/8 秒で速く解けているが、時間切れ (300秒=制限時間) が1件ある。
+    // 時間切れを平均に含めると 82.5秒 (実態の約8倍) に歪むため除外する。
+    const records = [
+      createRecord({ answerTimeSec: 10 }),
+      createRecord({ answerTimeSec: 12 }),
+      createRecord({ answerTimeSec: 8 }),
+      createRecord({ isCorrect: false, isTimedOut: true, answerTimeSec: 300, timeLimitSec: 300 }),
+    ];
+    const stats = calculateStats(records);
+    // 解答速度の実態 (時間内の3問) の平均 10 秒を返す
+    expect(stats.averageTimeSec).toBe(10);
+    // 出題数・正答率は時間切れを含む既存仕様を維持 (歪めない)
+    expect(stats.totalCount).toBe(4);
+    expect(stats.accuracyRate).toBeCloseTo(3 / 4);
+  });
+
+  it('時間切れしか無い場合の平均解答時間は 0 (分母を割らない)', () => {
+    const records = [
+      createRecord({ isCorrect: false, isTimedOut: true, answerTimeSec: 120, timeLimitSec: 120 }),
+      createRecord({ isCorrect: false, isTimedOut: true, answerTimeSec: 90, timeLimitSec: 90 }),
+    ];
+    const stats = calculateStats(records);
+    expect(stats.averageTimeSec).toBe(0);
+  });
+
+  it('分野別・難易度別の平均解答時間も時間切れを除外する', () => {
+    const records = [
+      createRecord({ category: 'integer', difficultyLevel: 2, answerTimeSec: 10 }),
+      createRecord({ category: 'integer', difficultyLevel: 2, isCorrect: false, isTimedOut: true, answerTimeSec: 300, timeLimitSec: 300 }),
+    ];
+    const stats = calculateStats(records);
+    const cat = stats.byCategory.find((c) => c.category === 'integer');
+    const diff = stats.byDifficulty.find((d) => d.level === 2);
+    // 時間内の1問 (10秒) のみで平均を取る
+    expect(cat?.averageTimeSec).toBe(10);
+    expect(diff?.averageTimeSec).toBe(10);
+  });
+});

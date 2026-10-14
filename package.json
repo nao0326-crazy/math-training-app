@@ -10,7 +10,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc -b",
     "admin:hash": "node scripts/admin-hash.mjs",
     "audit:generators": "vite-node scripts/audit-generators.ts"
   },

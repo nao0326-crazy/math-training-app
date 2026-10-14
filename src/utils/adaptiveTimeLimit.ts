@@ -21,7 +21,11 @@
  */
 import type { AnswerRecord } from '../types/history';
 import type { Problem } from '../types/problem';
-import { ADAPTIVE_TIME_LIMIT_CONFIG, getTimeLimitSeconds } from './quizTimer';
+import {
+  ADAPTIVE_TIME_LIMIT_CONFIG,
+  getTimeLimitSeconds,
+  TIME_LIMIT_CONFIG,
+} from './quizTimer';
 
 /**
  * 解答時間が「有限の正数」か (0・負数・NaN・Infinity・欠損を除外する)。
@@ -171,6 +175,74 @@ export function computeAdaptiveLimitSeconds(
     Math.max(ADAPTIVE_TIME_LIMIT_CONFIG.minSeconds, scaled),
   );
 }
+/**
+ * 対象グループ (problemType × difficultyLevel) の「直近の時間切れ」を数える。
+ *
+ * - 直近 timeoutRelief.window 件のうち、isTimedOut === true の件数を返す。
+ * - 時間切れは「制限時間に対して解くのに時間が足りない」という適応シグナル。
+ *   正答標本 (正答・非時間切れ) が十分でないときの行き詰まりを緩和するために使う。
+ * - answeredAt 昇順 (同一 id は id 昇順、それ以外は配列順) で並べてから
+ *   末尾の window 件に絞る (他の集計と同じ時系列順の規約に合わせる)。
+ */
+export function countRecentTimeouts(
+  records: readonly AnswerRecord[],
+  problemType: string,
+  difficultyLevel: number,
+): number {
+  const ordered = records
+    .map((record, index) => ({ record, index }))
+    .filter(
+      ({ record }) =>
+        record.problemType === problemType &&
+        record.difficultyLevel === difficultyLevel &&
+        record.isTimedOut === true,
+    )
+    .sort((a, b) => {
+      if (a.record.answeredAt !== b.record.answeredAt) {
+        return a.record.answeredAt < b.record.answeredAt ? -1 : 1;
+      }
+      if (a.record.id != null && b.record.id != null && a.record.id !== b.record.id) {
+        return a.record.id - b.record.id;
+      }
+      return a.index - b.index;
+    });
+
+  return ordered.slice(-ADAPTIVE_TIME_LIMIT_CONFIG.timeoutRelief.window).length;
+}
+
+/**
+ * 時間切れが続いているときの制限時間の緩和値を計算する。
+ *
+ * - 直近 window 件の中の時間切れが minTimeouts 件以上あるときだけ、
+ *   初期値 (getTimeLimitSeconds) × factor を返す。
+ * - 絶対上限 (TIME_LIMIT_CONFIG.maxSeconds = 300) と下限 (minSeconds = 30) に
+ *   必ず収める (悪循環で無限に伸びない)。
+ * - 時間切れがしきい値未満・履歴が無効・対象外のときは null を返し、
+ *   呼び出し側が通常の適応値または初期値を使う。
+ *
+ * 純関数。履歴は読み取り専用。
+ */
+export function computeTimeoutReliefSeconds(
+  problem: Problem,
+  records: readonly AnswerRecord[] | null | undefined,
+): number | null {
+  const level = problem?.difficulty?.level;
+  if (level == null || !Array.isArray(records) || records.length === 0) {
+    return null;
+  }
+  const timeouts = countRecentTimeouts(records, problem.type, level);
+  if (timeouts < ADAPTIVE_TIME_LIMIT_CONFIG.timeoutRelief.minTimeouts) {
+    return null;
+  }
+  const base = getTimeLimitSeconds(problem);
+  const relieved = Math.ceil(base * ADAPTIVE_TIME_LIMIT_CONFIG.timeoutRelief.factor);
+  return Math.min(
+    TIME_LIMIT_CONFIG.maxSeconds,
+    Math.max(TIME_LIMIT_CONFIG.minSeconds, relieved),
+  );
+}
+
+
 
 /**
  * タイマー表示・時間切れ判定・履歴保存で使う制限時間 (秒) を決定する純関数。
@@ -179,6 +251,13 @@ export function computeAdaptiveLimitSeconds(
  *   (getTimeLimitSeconds。難易度別初期値 + 文章題/図の加算 + [30,300]) を返す。
  * - 状態を持たず、同じ入力なら常に同じ値を返す
  *   (1 問ごとに一度だけ呼び、表示と保存を同じ値で共有するため)。
+ *
+ * 優先順位 (高い方が採用):
+ *   1. 正答標本による適応値 (computeAdaptiveLimitSeconds)。8 件以上の
+ *      正答・非時間切れ記録があれば発動 (既存挙動をそのまま維持)。
+ *   2. 時間切れ緩和 (computeTimeoutReliefSeconds)。正答標本が不十分でも、
+ *      直近で時間切れが続いていれば初期値を緩和して行き詰まりを防ぐ。
+ *   3. 初期値 (getTimeLimitSeconds)。
  */
 export function resolveTimeLimitSeconds(
   problem: Problem,
@@ -190,7 +269,9 @@ export function resolveTimeLimitSeconds(
       return getTimeLimitSeconds(problem);
     }
     const adaptive = computeAdaptiveLimitSeconds(records, problem.type, level);
-    return adaptive ?? getTimeLimitSeconds(problem);
+    if (adaptive != null) return adaptive;
+    const relief = computeTimeoutReliefSeconds(problem, records);
+    return relief ?? getTimeLimitSeconds(problem);
   } catch {
     return getTimeLimitSeconds(problem);
   }

@@ -2742,27 +2742,43 @@ export class CongruentJudgeSameGenerator implements ProblemGenerator {
 
     const triA = buildTriangleA();
 
-    // --- 図B = 図A を合同変換 (回転 + 平行移動) ---
+    // --- 図B = 図A を合同変換 (回転 / 線対称(鏡映) + 平行移動) ---
     // 拡大縮小は行わない。
     //
-    // 回転角は 90° の倍数 (90/180/270) に限定する。
-    // cos/sin が厳密に 0/±1 になるため、浮動小数点の丸め誤差がゼロに収まり、
-    // 「辺長・面積・距離行列が完全に一致する」ことが保証される。
-    // (45° 系は √2 が出て端数が発生し、丸めにより合同性が壊れるため使わない)
+    // 回転は 90° の倍数 (90/180/270) に限定する。cos/sin が厳密に 0/±1 に
+    // なるため浮動小数点丸め誤差がゼロに収まり、「辺長・面積・距離行列が
+    // 完全に一致する」ことが保証される (45° 系は √2 が出て合同性が壊れる)。
+    //
+    // 線対称 (鏡映) は「頂点Aを通る鉛直線 x = A.x で折り返す」。反射も等長
+    // 変換なので辺長・面積は完全に保存される (整数格子なので厳密)。
+    // 回転だけでなく鏡映も「合同」の具体例として提示することで、児童が
+    // 「向きが違うのに合同」という線対称の見方を学べる (小6 図形の対称に直結)。
+    // 鏡映後は図Aと同じx帯に映るため、分離のために回転より大きい tx を使う
+    // (tx >= 15 なら図Aと図BのBoundingBoxは必ず分離する。実測で確認済み)。
+    const transform = rng.pick(['rotate', 'reflect'] as const);
     const angles = [90, 180, 270] as const;
-    const angle = rng.pick([...angles]);
-    const rad = (angle * Math.PI) / 180;
-    const cos = Math.round(Math.cos(rad)); // 0 / 1 / -1 のいずれか (厳密)
-    const sin = Math.round(Math.sin(rad));
-    // 平行移動量 (図Aと図Bが重ならないよう離す)
-    const tx = rng.int(10, 13);
-    const ty = rng.int(0, 2);
 
-    const rot = (p: FigurePoint): FigurePoint => ({
-      x: p.x * cos - p.y * sin + tx,
-      y: p.x * sin + p.y * cos + ty,
-    });
-    const triB: FigurePoint[] = triA.map(rot);
+    let triB: FigurePoint[];
+    let angle: number;
+    if (transform === 'reflect') {
+      const axisX = triA[0].x; // 頂点Aを通る鉛直な反射軸
+      const tx = rng.int(15, 18);
+      const ty = rng.int(0, 2);
+      triB = triA.map((p) => ({ x: 2 * axisX - p.x + tx, y: p.y + ty }));
+      angle = 0; // 反射なので回転角は無し (解説で線対称として説明する)
+    } else {
+      angle = rng.pick([...angles]);
+      const rad = (angle * Math.PI) / 180;
+      const cos = Math.round(Math.cos(rad)); // 0 / 1 / -1 のいずれか (厳密)
+      const sin = Math.round(Math.sin(rad));
+      // 平行移動量 (図Aと図Bが重ならないよう離す)
+      const tx = rng.int(10, 13);
+      const ty = rng.int(0, 2);
+      triB = triA.map((p) => ({
+        x: p.x * cos - p.y * sin + tx,
+        y: p.x * sin + p.y * cos + ty,
+      }));
+    }
 
     // 図A / 図B の FigureSpec
     const labelTriangle = (pts: FigurePoint[], caption: string): Figure => ({

@@ -8,6 +8,8 @@ import {
 } from './quizTimer';
 import {
   computeAdaptiveLimitSeconds,
+  computeTimeoutReliefSeconds,
+  countRecentTimeouts,
   filterOutliersIqr,
   isValidAnswerTime,
   isValidSampleRecord,
@@ -102,6 +104,11 @@ describe('設定値 (既存ポリシーの維持)', () => {
       factor: 0.9,
       minSeconds: 20,
       maxSeconds: 300,
+      timeoutRelief: {
+        window: 10,
+        minTimeouts: 3,
+        factor: 1.5,
+      },
     });
   });
 });
@@ -463,6 +470,99 @@ describe('resolveTimeLimitSeconds (表示・保存で使う決定)', () => {
     const snapshot = JSON.stringify(records);
     resolveTimeLimitSeconds(problem(), records);
     expect(JSON.stringify(records)).toBe(snapshot);
+  });
+});
+
+describe('countRecentTimeouts (直近の時間切れを数える)', () => {
+  it('同一 (problemType, difficultyLevel) の時間切れだけを数える', () => {
+    const records = [
+      record({ isTimedOut: true }),
+      record({ isTimedOut: true }),
+      record({ isCorrect: false }), // 通常の誤答は数えない
+      record({ problemType: 'other-type', isTimedOut: true }), // 型が違う
+      record({ difficultyLevel: 2, isTimedOut: true }), // 難易度が違う
+    ];
+    expect(countRecentTimeouts(records, TYPE, LEVEL)).toBe(2);
+  });
+
+  it('時系列順で直近 window (10件) に絞って数える', () => {
+    // window より多い 12 件の時間切れを作るが、直近10件だけが対象
+    const records = Array.from({ length: 12 }, () => record({ isTimedOut: true }));
+    expect(countRecentTimeouts(records, TYPE, LEVEL)).toBe(
+      ADAPTIVE_TIME_LIMIT_CONFIG.timeoutRelief.window,
+    );
+  });
+
+  it('時間切れが無ければ 0', () => {
+    expect(countRecentTimeouts(correctRecords([10, 20, 30]), TYPE, LEVEL)).toBe(0);
+  });
+
+  it('入力配列を書き換えない (読み取り専用)', () => {
+    const records = [record({ isTimedOut: true }), record({ isTimedOut: true })];
+    const snapshot = JSON.stringify(records);
+    countRecentTimeouts(records, TYPE, LEVEL);
+    expect(JSON.stringify(records)).toBe(snapshot);
+  });
+});
+
+describe('computeTimeoutReliefSeconds (時間切れ続時の緩和)', () => {
+  it('時間切れが minTimeouts 未満なら null (緩和しない)', () => {
+    const two = [record({ isTimedOut: true }), record({ isTimedOut: true })];
+    expect(computeTimeoutReliefSeconds(problem(), two)).toBeNull();
+    expect(computeTimeoutReliefSeconds(problem(), [])).toBeNull();
+  });
+
+  it('時間切れが minTimeouts 以上なら初期値 × factor を返す', () => {
+    const three = [
+      record({ isTimedOut: true }),
+      record({ isTimedOut: true }),
+      record({ isTimedOut: true }),
+    ];
+    const base = getTimeLimitSeconds(problem()); // lv3 integer = 60
+    expect(computeTimeoutReliefSeconds(problem(), three)).toBe(
+      Math.ceil(base * ADAPTIVE_TIME_LIMIT_CONFIG.timeoutRelief.factor),
+    );
+  });
+
+  it('他の型・難易度の時間切れは数えず null', () => {
+    const otherType = Array.from({ length: 4 }, () =>
+      record({ problemType: 'other-type', isTimedOut: true }),
+    );
+    expect(computeTimeoutReliefSeconds(problem(), otherType)).toBeNull();
+  });
+
+  it('履歴が null・undefined・空なら null', () => {
+    expect(computeTimeoutReliefSeconds(problem(), null)).toBeNull();
+    expect(computeTimeoutReliefSeconds(problem(), undefined)).toBeNull();
+    expect(computeTimeoutReliefSeconds(problem(), [])).toBeNull();
+  });
+});
+
+describe('resolveTimeLimitSeconds (時間切れ緩和の統合)', () => {
+  it('正答標本が不足でも時間切れが続けば初期値を緩和する', () => {
+    // 3件だけの時間切れ (適応計算は発動せず、緩和だけが効く)
+    const timeouts = [
+      record({ isTimedOut: true }),
+      record({ isTimedOut: true }),
+      record({ isTimedOut: true }),
+    ];
+    const resolved = resolveTimeLimitSeconds(problem(), timeouts);
+    const base = getTimeLimitSeconds(problem());
+    expect(resolved).toBe(Math.ceil(base * ADAPTIVE_TIME_LIMIT_CONFIG.timeoutRelief.factor));
+    // 初期値そのものではない (緩和されている)
+    expect(resolved).not.toBe(base);
+  });
+
+  it('正答標本が十分 (8件以上) なら適応値を優先し緩和を使わない', () => {
+    // 十分な正答標本 + その上での時間切れ → 通常の適応値 (90) が使われる
+    const eight = correctRecords([100, 100, 100, 100, 100, 100, 100, 100]);
+    const withTimeouts = [...eight, ...Array.from({ length: 5 }, () => record({ isTimedOut: true }))];
+    expect(resolveTimeLimitSeconds(problem(), withTimeouts)).toBe(90);
+  });
+
+  it('時間切れが少なければ初期値に戻る', () => {
+    const one = [record({ isTimedOut: true })];
+    expect(resolveTimeLimitSeconds(problem(), one)).toBe(getTimeLimitSeconds(problem()));
   });
 });
 
