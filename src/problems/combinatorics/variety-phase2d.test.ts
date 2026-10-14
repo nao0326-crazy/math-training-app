@@ -23,7 +23,7 @@ import { MultiplesFindingGenerator, type MultiplesFindingVariant } from '../numb
 import { SpeedUnitConversionGenerator, type SpeedUnitConversionVariant } from '../speed/generators';
 import { formatAnswer, checkUserAnswer } from '../../utils/answer';
 import { attachSolutionSteps } from '../../engine/solution/solutionGenerator';
-import type { DifficultyLevel, Problem } from '../../types/problem';
+import type { DifficultyLevel, GenerationConfig, Problem } from '../../types/problem';
 
 const LEVELS: DifficultyLevel[] = [1, 2, 3, 4, 5];
 const dup = new DuplicateRemovalGenerator();
@@ -34,7 +34,7 @@ function conditionKey(p: Problem): string {
   return Object.keys(p.parameters)
     .filter((k) => k !== 'difficultyLevel' && k !== 'answer')
     .sort()
-    .map((k) => k + '=' + JSON.stringify((p.parameters as any)[k]))
+    .map((k) => k + '=' + JSON.stringify(p.parameters[k]))
     .join(',');
 }
 
@@ -43,7 +43,7 @@ function answerOf(p: Problem): string {
 }
 
 /** 十分な数の問題を生成する (lv1-5 x シード) */
-function generateMany(gen: { generate: (c?: any) => Problem }, perLevel: number): Problem[] {
+function generateMany(gen: { generate: (c?: GenerationConfig) => Problem }, perLevel: number): Problem[] {
   const all: Problem[] = [];
   for (const lv of LEVELS) {
     for (let s = 0; s < perLevel; s++) {

@@ -39,7 +39,7 @@ describe('問題生成品質監査', () => {
                 problem,
               });
             }
-          } catch (e) {
+          } catch {
             // 生成失敗はスキップ
           }
         }

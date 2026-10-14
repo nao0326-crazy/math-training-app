@@ -582,7 +582,9 @@ export function getCurriculumScope(
   if (!variant) return typeScope;
   const variantScope = variants?.[variant];
   if (!variantScope) return typeScope;
-  const { variants: _ignored, ...rest } = variantScope as TypeCurriculumScope;
+  // variant 側に variants が紛れ込んでいた場合も、返り値 (CurriculumScope) には含めない。
+  const rest: CurriculumScope = { ...variantScope };
+  delete (rest as { variants?: unknown }).variants;
   return { ...typeScope, ...rest };
 }
 
