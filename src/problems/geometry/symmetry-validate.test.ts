@@ -114,7 +114,7 @@ describe('symmetry_fold: validate が生成された問題の正答を受理す�
       // parameters 側の判定だけを反転させた場合も拒否される
       const flipped = {
         ...p,
-        parameters: { ...(p.parameters as object), isFold: !(p.parameters as any).isFold },
+        parameters: { ...p.parameters, isFold: !p.parameters.isFold },
       };
       expect(fold.validate(flipped).valid, 'isFold を反転したものが受理された').toBe(false);
     }
@@ -161,7 +161,7 @@ describe('symmetry_point: validate が生成された問題の正答を受理す
 
       const flipped = {
         ...p,
-        parameters: { ...(p.parameters as object), isPoint: !(p.parameters as any).isPoint },
+        parameters: { ...p.parameters, isPoint: !p.parameters.isPoint },
       };
       expect(point.validate(flipped).valid, 'isPoint を反転したものが受理された').toBe(false);
     }
