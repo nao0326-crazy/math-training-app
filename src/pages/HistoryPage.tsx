@@ -24,6 +24,9 @@ import {
   type WeakArea,
 } from '../utils/weakAreas';
 import { difficultyLabel } from '../engine/difficulty/difficulty';
+import ScratchNoteView from '../components/ScratchNoteView';
+import { loadAllScratchNotes } from '../services/scratchNote';
+import type { ScratchNote } from '../types/scratch';
 
 const WEEKDAYS = ['月', '火', '水', '木', '金', '土', '日'] as const;
 
@@ -50,6 +53,8 @@ interface HistoryPageProps {
 
 export default function HistoryPage({ onStartReview }: HistoryPageProps) {
   const [records, setRecords] = useState<AnswerRecord[]>([]);
+  /** 保存済みの手書き途中式 (復習カードで表示。無くても履歴表示は動作する) */
+  const [scratchNotes, setScratchNotes] = useState<ScratchNote[]>([]);
   const [loading, setLoading] = useState(true);
   // 復習開始前の確認ダイアログに表示する分野 (null のときは非表示)
   const [confirmArea, setConfirmArea] = useState<WeakArea | null>(null);
@@ -60,8 +65,16 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
     async function load() {
       try {
         const all = await getAllAnswerRecords();
+        // 途中式ノートも併せて読み込む (失敗しても履歴表示は継続する)
+        let notes: ScratchNote[] = [];
+        try {
+          notes = await loadAllScratchNotes();
+        } catch {
+          notes = [];
+        }
         if (!cancelled) {
           setRecords(all);
+          setScratchNotes(notes);
         }
       } finally {
         if (!cancelled) {
@@ -318,6 +331,67 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
                   ))}
                 </tbody>
               </table>
+            )}
+          </section>
+
+          <section className="stats-section scratch-review-section">
+            <h3>最近の解答と途中式</h3>
+            {records.length === 0 ? (
+              <p className="no-data">データがありません</p>
+            ) : (
+              <div className="scratch-review-list">
+                {[...records].reverse().slice(0, 20).map((record, index) => {
+                  const note = record.scratchAttemptId
+                    ? scratchNotes.find((n) => n.attemptId === record.scratchAttemptId)
+                    : undefined;
+                  return (
+                    <article
+                      className="scratch-review-card"
+                      key={`${record.problemId}-${record.answeredAt}-${index}`}
+                    >
+                      <header className="scratch-review-head">
+                        <span className="scratch-review-date">
+                          {new Date(record.answeredAt).toLocaleString('ja-JP')}
+                        </span>
+                        <span
+                          className={`scratch-review-result ${record.isCorrect ? 'correct-text' : 'incorrect-text'}`}
+                        >
+                          {record.isCorrect
+                            ? '○ 正解'
+                            : record.isTimedOut
+                              ? '⏰ 時間切れ'
+                              : '× 不正解'}
+                        </span>
+                      </header>
+                      <p className="scratch-review-question">{safeQuestion(record)}</p>
+                      <dl className="scratch-review-answers">
+                        <div>
+                          <dt>あなたの入力</dt>
+                          <dd>{safeUserAnswer(record)}</dd>
+                        </div>
+                        <div>
+                          <dt>正解</dt>
+                          <dd>{safeCorrectAnswer(record)}</dd>
+                        </div>
+                        <div>
+                          <dt>時間</dt>
+                          <dd>{Math.round(record.answerTimeSec)}秒</dd>
+                        </div>
+                      </dl>
+                      {note ? (
+                        <div className="scratch-review-note">
+                          <ScratchNoteView
+                            strokes={note.strokes}
+                            ariaLabel={`途中式 (${new Date(note.updatedAt).toLocaleString('ja-JP')})`}
+                          />
+                        </div>
+                      ) : (
+                        <p className="scratch-review-no-note">途中式の記録はありません</p>
+                      )}
+                    </article>
+                  );
+                })}
+              </div>
             )}
           </section>
 

@@ -6,10 +6,9 @@
  *   開発者・管理者・テスト時だけ、その選択機能を使えるようにする。
  *
  * セキュリティ上の位置づけ:
- *   「突破不能な認証」ではなく「通常ユーザーから選択機能を隠すゲート」。
- *   Vite の VITE_ 値はビルド成果物に公開されるため、ここに秘密情報は置かない。
- *   そのため、平文パスワードではなく **SHA-256 ハッシュ** を環境変数で渡す。
- *   平文パスワードがソースコードやビルド成果物に現れないことが要件。
+ *   クライアント側の簡易ゲートであり、サーバー側の認証・アクセス制御ではない。
+ *   既定コードのハッシュはビルド成果物に含まれ、短いコードは推測可能。
+ *   VITE_ADMIN_PASSWORD_HASH を設定すると既存の追加コードも利用できる。
  *
  * 環境変数:
  *   VITE_ADMIN_PASSWORD_HASH : sha256(ソルト + ':' + パスワード) の小文字hex
@@ -21,8 +20,20 @@
 
 import { sha256Hex } from './sha256';
 
-/** セッション内で解除状態を保持するためのキー */
-export const ADMIN_SESSION_KEY = 'math-admin-mode';
+const DEFAULT_ADMIN_SALT = 'math-admin-mode-v1';
+const DEFAULT_ADMIN_PASSWORD_HASH =
+  'd5a8fa9d99505cce71f1f95a2f73cdb7150ed2aa3cfd1a3991f0ef0876eb3317';
+
+function defaultCredentials(): { hash: string; salt: string } {
+  const configuredHash = import.meta.env.VITE_ADMIN_PASSWORD_HASH?.trim();
+  if (configuredHash) {
+    return {
+      hash: configuredHash,
+      salt: import.meta.env.VITE_ADMIN_SALT ?? '',
+    };
+  }
+  return { hash: DEFAULT_ADMIN_PASSWORD_HASH, salt: DEFAULT_ADMIN_SALT };
+}
 
 /** 平文ハッシュを timed 比較するための遅延抵消つき比較 */
 export function safeEqual(a: string, b: string): boolean {
@@ -35,57 +46,32 @@ export function safeEqual(a: string, b: string): boolean {
 }
 
 /**
- * 入力されたパスワードが環境変数のハッシュと一致するか判定する
- *
- * ハッシュが未設定 (ゲートが無効) の場合は必ず false を返す。
+ * 入力されたパスワードが設定済みハッシュと一致するか判定する。
+ * 環境変数が未設定の場合は既定の簡易ゲートコードを使う。
  */
 export function verifyAdminPassword(
   input: string,
-  hash: string | undefined = import.meta.env.VITE_ADMIN_PASSWORD_HASH,
-  salt: string | undefined = import.meta.env.VITE_ADMIN_SALT,
+  hash?: string,
+  salt?: string,
 ): boolean {
-  if (!hash) return false;
+  if (
+    safeEqual(
+      sha256Hex(`${DEFAULT_ADMIN_SALT}:${input}`),
+      DEFAULT_ADMIN_PASSWORD_HASH,
+    )
+  ) {
+    return true;
+  }
+
+  const defaults = defaultCredentials();
+  const expectedHash = hash ?? defaults.hash;
+  const effectiveSalt =
+    salt ??
+    (hash === undefined ? defaults.salt : import.meta.env.VITE_ADMIN_SALT ?? '');
+  if (!expectedHash.trim()) return false;
   if (input === '') return false;
-  const normalizedSalt = (salt ?? '').trim();
-  return safeEqual(sha256Hex(`${normalizedSalt}:${input}`), hash.trim().toLowerCase());
-}
-
-/** ゲートが有効かどうか (ハッシュが設定されているか) */
-export function isAdminGateConfigured(
-  hash: string | undefined = import.meta.env.VITE_ADMIN_PASSWORD_HASH,
-): boolean {
-  return typeof hash === 'string' && hash.trim() !== '';
-}
-
-/** sessionStorage を読む (テストやSSRでも壊れないように包む) */
-function storage(): Storage | null {
-  try {
-    return typeof sessionStorage === 'undefined' ? null : sessionStorage;
-  } catch {
-    return null;
-  }
-}
-
-/** 解除済みかどうかを読む (既定は未解除) */
-export function isAdminUnlocked(): boolean {
-  try {
-    return storage()?.getItem(ADMIN_SESSION_KEY) === '1';
-  } catch {
-    return false;
-  }
-}
-
-/** 解除状態を保存する */
-export function setAdminUnlocked(unlocked = true): void {
-  try {
-    if (unlocked) storage()?.setItem(ADMIN_SESSION_KEY, '1');
-    else storage()?.removeItem(ADMIN_SESSION_KEY);
-  } catch {
-    // 保存できなくても判定自体は成立させる (ゲートは表示制御が主目的)
-  }
-}
-
-/** 解除状態を破棄する (管理者モードを閉じる) */
-export function clearAdminUnlocked(): void {
-  setAdminUnlocked(false);
+  return safeEqual(
+    sha256Hex(`${effectiveSalt.trim()}:${input}`),
+    expectedHash.trim().toLowerCase(),
+  );
 }

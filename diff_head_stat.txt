@@ -1,0 +1,52 @@
+warning: in the working copy of 'e2e-answered-dump.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'e2e-learning.json', LF will be replaced by CRLF the next time Git touches it
+ .env.example                                       |   5 +-
+ e2e-adaptive-history.png                           | Bin 49283 -> 0 bytes
+ e2e-adaptive-home.png                              | Bin 60428 -> 0 bytes
+ e2e-adaptive-result.png                            | Bin 36875 -> 0 bytes
+ e2e-admin-dialog.png                               | Bin 65812 -> 0 bytes
+ e2e-answered-dump.json                             |   2 +-
+ e2e-answered.png                                   | Bin 46274 -> 48810 bytes
+ e2e-history-reload.png                             | Bin 60428 -> 57057 bytes
+ e2e-history.png                                    | Bin 49849 -> 46222 bytes
+ e2e-learning.json                                  | 210 ++++++-
+ e2e-q1.png                                         | Bin 45462 -> 46967 bytes
+ e2e-result.png                                     | Bin 37120 -> 30727 bytes
+ package-lock.json                                  | 646 +++++++++++++++++++++
+ package.json                                       |   3 +
+ scripts/e2e-learning.mjs                           | 168 +++++-
+ src/App.tsx                                        |  66 ++-
+ src/components/AdminGateDialog.tsx                 |  44 +-
+ src/components/DailyProgressNotification.tsx       |  40 +-
+ src/engine/curriculum/curriculumScope.ts           |  21 +-
+ src/engine/diversity/metadata.ts                   |  16 +
+ src/engine/selector/generatorRegistry.test.ts      |   8 +-
+ src/engine/selector/generatorRegistry.ts           |   5 +
+ src/engine/solution/solutionGenerator.ts           | 181 ++++++
+ src/index.css                                      | 388 ++++++++++++-
+ src/pages/HistoryPage.tsx                          |  74 +++
+ src/pages/HomePage.tsx                             |  10 +-
+ src/pages/QuizPage.tsx                             |  25 +
+ src/pages/homePage.test.tsx                        |  10 +
+ src/problems/combinatorics/variety-phase2d.test.ts |   6 +-
+ src/problems/combinatorics/variety-phase2e.test.ts |   4 +-
+ src/problems/geometry/symmetry-validate.test.ts    |   4 +-
+ src/quality/deep-audit.test.ts                     |   8 +-
+ src/quality/quality.audit.test.ts                  |   2 +-
+ src/services/dailyAnswerSync.ts                    |  11 +-
+ src/storage/db.ts                                  |  53 +-
+ src/types/history.ts                               |  27 +
+ src/types/problem.ts                               |  43 +-
+ src/utils/adminMode.test.ts                        |  60 +-
+ src/utils/adminMode.ts                             |  92 ++-
+ src/utils/dailyCount.test.ts                       |  54 ++
+ src/utils/dailyCount.ts                            |  22 +-
+ src/utils/learningCalendar.test.ts                 |  10 +
+ src/utils/learningCalendar.ts                      |   4 +
+ src/utils/stats.test.ts                            |  30 +
+ src/utils/stats.ts                                 |   7 +
+ src/vite-env.d.ts                                  |   2 +
+ tsconfig.app.json                                  |   1 +
+ tsconfig.node.json                                 |   1 +
+ vite.config.ts                                     |   6 +-
+ 49 files changed, 2135 insertions(+), 234 deletions(-)

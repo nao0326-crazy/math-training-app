@@ -1,0 +1,3 @@
+0164fe1 Add time-out aggregation: exclude timed-out sessions from solved counts
+399f584 Separate random learning and subject selection modes
+d82bbd8 図形描画基盤と合同図形問題 (judge_same / judge_differs) を追加

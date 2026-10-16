@@ -1,0 +1,8 @@
+ca01506 Add adaptive time limit derived from personal answer history
+a8d8c1e Add production/maintenance verification scripts for realWorld images
+8169ddf Add photo-based real-world problems (realWorld) with image rendering
+1883a1b Add per-question time limit and exclude timed-out from solved counts
+6594b1a Add administrator difficulty range settings
+e307c19 Merge pull request #1 from nao0326-crazy/saved-practice-scope-integration
+18d5061 Clear stale scope error after saving
+178123b Add saved practice scope settings

@@ -1,11 +1,12 @@
-/**
- * 家庭教師継続条件の通知コンポーネント
- * 今日の回答数を常時表示する
- */
+/** 今日の回答数・目標・残りを表示する日次学習メーター */
 
 import { useCallback, useEffect, useState } from 'react';
 import { getAllAnswerRecords } from '../storage/db';
-import { countTodayAnswers, DAILY_GOAL, ANSWER_RECORDED_EVENT } from '../utils/dailyCount';
+import {
+  countTodayAnswers,
+  getDailyProgress,
+  ANSWER_RECORDED_EVENT,
+} from '../utils/dailyCount';
 
 export default function DailyProgressNotification() {
   const [todayCount, setTodayCount] = useState(0);
@@ -49,24 +50,21 @@ export default function DailyProgressNotification() {
     return null;
   }
 
-  const remaining = Math.max(0, DAILY_GOAL - todayCount);
-  const achieved = todayCount >= DAILY_GOAL;
+  const { goal, remaining, achieved } = getDailyProgress(todayCount);
 
   return (
-    <div className={`daily-progress ${achieved ? 'achieved' : ''}`}>
-      <div className="daily-progress-title">家庭教師継続条件</div>
-      {achieved ? (
-        <div className="daily-progress-message">本日の1000問を達成しました。</div>
-      ) : (
-        <>
-          <div className="daily-progress-message">
-            今日1000問以上解かないと家庭教師をやめます。
-          </div>
-          <div className="daily-progress-stats">
-            <span>現在：{todayCount} / {DAILY_GOAL}問</span>
-            <span>残り：{remaining}問</span>
-          </div>
-        </>
+    <div
+      className={`daily-progress ${achieved ? 'achieved' : ''}`}
+      role="status"
+      aria-label="今日の学習進捗"
+    >
+      <div className="daily-progress-title">今日の学習目標</div>
+      <div className="daily-progress-stats">
+        <span>回答数：{todayCount} / {goal}問</span>
+        <span>残り：{remaining}問</span>
+      </div>
+      {achieved && (
+        <div className="daily-progress-message">今日の目標を達成しました。</div>
       )}
     </div>
   );

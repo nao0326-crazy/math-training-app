@@ -115,10 +115,10 @@ input:focus {
   font-size: 1rem;
 }
 
-/* ===== 家庭教師継続条件通知 ===== */
+/* ===== 日次学習メーター ===== */
 .daily-progress {
-  background: var(--error-light);
-  border: 2px solid var(--error);
+  background: var(--primary-light);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 12px 16px;
   margin-bottom: 16px;
@@ -133,7 +133,7 @@ input:focus {
 .daily-progress-title {
   font-size: 0.9rem;
   font-weight: bold;
-  color: var(--error);
+  color: var(--primary);
   margin-bottom: 4px;
 }
 
@@ -168,6 +168,14 @@ input:focus {
 .app-title {
   font-size: 1.4rem;
   color: var(--primary);
+}
+
+.app-version {
+  margin-left: 0.4rem;
+  color: var(--text-light);
+  font-size: 0.75rem;
+  font-weight: normal;
+  vertical-align: middle;
 }
 
 .app-nav {
@@ -382,6 +390,57 @@ input:focus {
   font-weight: bold;
 }
 
+/* ===== 制限時間タイマー ===== */
+.quiz-timer {
+  align-self: center;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 6px 16px;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: 20px;
+  font-weight: bold;
+  line-height: 1;
+  /* 秒数が桁変動してもレイアウトが揺れないようにする */
+  font-variant-numeric: tabular-nums;
+  transition: color 0.2s, background 0.2s;
+}
+
+.quiz-timer-label,
+.quiz-timer-unit {
+  font-size: 0.85rem;
+}
+
+.quiz-timer-value {
+  min-width: 2ch;
+  text-align: right;
+  font-size: 1.4rem;
+}
+
+/* 残り時間が少ないときの警告色 */
+.quiz-timer-urgent {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+/* あとわずかのときの強い警告 (脈打ち) */
+.quiz-timer-critical {
+  background: var(--error-light);
+  color: var(--error);
+  animation: quiz-timer-pulse 1s ease-in-out infinite;
+}
+
+@keyframes quiz-timer-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
 .question-card {
   background: var(--card-bg);
   border-radius: var(--radius);
@@ -475,6 +534,66 @@ input:focus {
   color: var(--text-light);
 }
 
+/* ============================================================
+   現実連動の写真 (ImageRenderer)
+   値札などを読み取らせる教材画像。読み込み失敗時は代替テキストを表示する。
+   ============================================================ */
+.problem-image {
+  margin: 20px auto 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+.problem-image-img {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border, #d0d7de);
+}
+
+/* 画像が読み込めない環境向けのフォールバック (価格などを読める形で表示) */
+.problem-image-fallback {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  padding: 16px;
+  margin: 0 auto;
+  max-width: 520px;
+  background: var(--card-bg);
+  border: 1px dashed var(--border, #d0d7de);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.problem-image-fallback-label {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.problem-image-fallback-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.image-caption {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.2;
+}
+
+.image-credit {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+
 .answer-section {
   display: flex;
   gap: 12px;
@@ -510,6 +629,12 @@ input:focus {
 .feedback.incorrect {
   border-left-color: var(--error);
   background: var(--error-light);
+}
+
+/* 時間切れ (通常の誤答とは別の色で区別) */
+.feedback.timed-out {
+  border-left-color: #ef6c00;
+  background: #fff3e0;
 }
 
 .feedback-title {
@@ -738,6 +863,12 @@ button.calendar-cell.day.selected {
   font-weight: bold;
 }
 
+.quiz-admin-mode {
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
 .calendar-day-count {
   font-size: 0.72rem;
   white-space: nowrap;
@@ -825,6 +956,12 @@ button.calendar-cell.day.selected {
 
 .incorrect-text {
   color: var(--error);
+  font-weight: bold;
+}
+
+/* 時間切れ (誤答・時間切れを区別して表示) */
+.timeout-text {
+  color: var(--warning, #b45309);
   font-weight: bold;
 }
 
@@ -2224,6 +2361,249 @@ button.calendar-cell.day.selected {
   .review-button {
     width: 100%;
     white-space: normal;
+  }
+}
+
+/* ===== 手書き途中式ノート ===== */
+.scratch-section {
+  margin: 16px 0;
+}
+
+.scratch-pad {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 12px;
+}
+
+.scratch-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.scratch-title {
+  font-weight: bold;
+  color: var(--primary);
+  font-size: 0.95rem;
+  margin-right: 4px;
+}
+
+.scratch-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.scratch-tool-btn {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.scratch-tool-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.scratch-colors {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 4px;
+}
+
+.scratch-color {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  padding: 0;
+}
+
+.scratch-color.active {
+  border-color: var(--text);
+  transform: scale(1.1);
+}
+
+.scratch-save-state {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.scratch-save-state.saved {
+  color: var(--success);
+}
+
+.scratch-save-state.saving {
+  color: var(--text-light);
+}
+
+.scratch-save-state.error {
+  color: var(--error);
+}
+
+.scratch-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background-color: #fff;
+  /* 控えめな方眼 (キャンバスは透明なので下地が透ける) */
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  overflow: hidden;
+}
+
+.scratch-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* 描画中のページスクロール・ブラウザジェスチャーとの競合を防ぐ */
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.scratch-confirm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: var(--error-light);
+  border: 1px solid var(--error);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.scratch-confirm-text {
+  flex: 1;
+}
+
+.scratch-confirm-yes {
+  background: var(--error);
+  color: #fff;
+  padding: 6px 12px;
+}
+
+.scratch-confirm-no {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+}
+
+.scratch-save-error {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: var(--error-light);
+  color: var(--error);
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+/* ===== 途中式の復習カード (学習履歴) ===== */
+.scratch-review-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.scratch-review-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  background: var(--card-bg);
+}
+
+.scratch-review-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.scratch-review-result {
+  font-weight: bold;
+}
+
+.scratch-review-question {
+  font-weight: bold;
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+
+.scratch-review-answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 10px;
+}
+
+.scratch-review-answers dt {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.scratch-review-answers dd {
+  margin: 0;
+  font-weight: bold;
+}
+
+.scratch-review-note {
+  margin-top: 8px;
+}
+
+.scratch-review-no-note {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+.scratch-note-view {
+  width: 100%;
+  height: 160px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.scratch-note-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* 狭い画面: ツールバーを折り返し、キャンバスが回答欄を押し潰さないようにする */
+@media (max-width: 480px) {
+  .scratch-toolbar {
+    gap: 6px;
+  }
+
+  .scratch-save-state {
+    margin-left: 0;
+    width: 100%;
+    text-align: right;
+  }
+
+  .scratch-canvas-wrap {
+    height: 200px;
   }
 }
 

@@ -96,7 +96,13 @@ describe('問題生成エンジン', () => {
           key !== 'termCount' &&
           key !== 'count' &&
           key !== 'answerNumerator' &&
-          key !== 'answerDenominator'
+          key !== 'answerDenominator' &&
+          // 現実連動 (realworld_shopping): 商品を指す内部インデックス。
+          // 解説には商品名と価格を出すため、インデックス数値自体は問題文に含めない。
+          key !== 'a' &&
+          key !== 'b' &&
+          key !== 'c' &&
+          key !== 'idx'
         ) {
           // 数値パラメータは問題文に含まれるか、説明に含まれる
           const questionContains = problem.question.includes(String(value));

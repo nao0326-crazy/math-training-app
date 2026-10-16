@@ -28,6 +28,8 @@ import {
   persistQuizQuestion,
 } from '../services/quizPersistence';
 import { deriveMetadata, fingerprintProblem } from '../engine/diversity/metadata';
+import ScratchPad from '../components/ScratchPad';
+import { createScratchAttemptId } from '../types/scratch';
 
 interface QuizPageProps {
   /**
@@ -78,6 +80,11 @@ export default function QuizPage({
   const [questionNumber, setQuestionNumber] = useState(1);
   const [result, setResult] = useState<SessionCounts | null>(null);
   const [error, setError] = useState<string | null>(null);
+  /**
+   * 現在の出題インスタンスを識別するID (途中式ノートの保存単位)。
+   * 出題のたびに新しく生成し、同じ問題を再解答しても過去の途中式と上書きし合わない。
+   */
+  const [attemptId, setAttemptId] = useState<string>(() => createScratchAttemptId());
 
   const selectorRef = useRef<ReturnType<typeof createQuizSelector> | null>(null);
   const startTimeRef = useRef<number>(0);
@@ -148,6 +155,8 @@ export default function QuizPage({
     setJudgement(null);
     setTimedOut(false);
     setShowSolution(false);
+    // 次の出題ごとに途中式の保存単位 (attemptId) を新しくする
+    setAttemptId(createScratchAttemptId());
     startTimeRef.current = Date.now();
     answerSubmitLockRef.current = false;
 
@@ -224,6 +233,8 @@ export default function QuizPage({
           // 時間切れの区別用 (任意フィールド。通常回答では undefined のまま)
           isTimedOut: timedOutSubmit || undefined,
           timeLimitSec: limitSec,
+          // 復習画面で途中式ノートと解答記録を紐付ける (任意・既存集計は変えない)
+          scratchAttemptId: attemptId,
         };
         historyRef.current.push(record);
         void persistQuizAnswer(isAdminMode, record, canStartNormalSync);
@@ -375,6 +386,20 @@ export default function QuizPage({
         {/* 現実連動の写真は image を持つ問題でのみ描画される (未設定なら何も描かない)。
             読み込み失敗時は ImageRenderer 内で代替テキストを表示する。 */}
         <ImageRenderer spec={problem.image} />
+      </div>
+
+      {/* 手書き途中式ノート (解答の必須条件にはしない。出題ごとに attemptId で保存) */}
+      <div className="scratch-section">
+        <ScratchPad
+          key={attemptId}
+          meta={{
+            attemptId,
+            problemId: problem.id,
+            problemType: problem.type,
+            category: problem.category,
+            question: problem.question,
+          }}
+        />
       </div>
 
       {/* 問題タイプに応じた専用入力UI (OSキーボードを表示しない) */}

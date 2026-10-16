@@ -121,3 +121,33 @@ describe('formatTime', () => {
     expect(formatTime(120)).toBe('2分');
   });
 });
+
+describe('解いた問題数 (solvedCount)', () => {
+  it('時間内の解答のみ数え、時間切れは含めない', () => {
+    const records = [
+      createRecord({ isCorrect: true }),
+      createRecord({ isCorrect: false }),
+      createRecord({ isCorrect: false, isTimedOut: true }),
+    ];
+    const stats = calculateStats(records);
+    expect(stats.solvedCount).toBe(2);
+    // 出題数・正答率の分母は時間切れを含む (既存仕様を維持)
+    expect(stats.totalCount).toBe(3);
+    expect(stats.correctCount).toBe(1);
+    expect(stats.accuracyRate).toBeCloseTo(1 / 3);
+  });
+
+  it('分野別・難易度別にも solvedCount を集計する', () => {
+    const records = [
+      createRecord({ category: 'integer', difficultyLevel: 1, isCorrect: true }),
+      createRecord({ category: 'integer', difficultyLevel: 1, isCorrect: false, isTimedOut: true }),
+    ];
+    const stats = calculateStats(records);
+    const cat = stats.byCategory.find((c) => c.category === 'integer');
+    const diff = stats.byDifficulty.find((d) => d.level === 1);
+    expect(cat?.solvedCount).toBe(1);
+    expect(cat?.totalCount).toBe(2);
+    expect(diff?.solvedCount).toBe(1);
+    expect(diff?.totalCount).toBe(2);
+  });
+});

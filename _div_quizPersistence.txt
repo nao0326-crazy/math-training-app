@@ -1,0 +1,64 @@
+diff --git a/_blob_quizPersistence.ts b/src/services/quizPersistence.ts
+index 6a4fe05..c08bf8e 100644
+--- a/_blob_quizPersistence.ts
++++ b/src/services/quizPersistence.ts
+@@ -8,27 +8,44 @@ import {
+ import { ANSWER_RECORDED_EVENT } from '../utils/dailyCount';
+ import { runDailyAnswerSync } from './dailyAnswerSync';
+ 
+-export async function loadQuizHistory(): Promise<{
+-  history: AnswerRecord[];
+-  questionHistory: QuestionHistory[];
+-}> {
+-  const [history, questionHistory] = await Promise.all([
++export interface QuizHistory {
++  answers: AnswerRecord[];
++  questions: QuestionHistory[];
++}
++
++/**
++ * 管理者演習には通常学習の既存履歴も渡さず、永続ストレージを読まない。
++ */
++export async function loadQuizHistory(isAdminMode: boolean): Promise<QuizHistory> {
++  if (isAdminMode) return { answers: [], questions: [] };
++
++  const [answers, questions] = await Promise.all([
+     getAllAnswerRecords(),
+     getAllQuestionHistory(),
+   ]);
+-  return { history, questionHistory };
++  return { answers, questions };
+ }
+ 
+-export function persistQuestionHistory(record: QuestionHistory): void {
+-  void saveQuestionHistory(record);
++export async function persistQuizQuestion(
++  isAdminMode: boolean,
++  record: QuestionHistory,
++): Promise<void> {
++  if (isAdminMode) return;
++  await saveQuestionHistory(record);
+ }
+ 
+-export function persistAnswerRecord(
++export async function persistQuizAnswer(
++  isAdminMode: boolean,
+   record: AnswerRecord,
+-  canStartDailySync: () => boolean = () => true,
+-): void {
+-  void saveAnswerRecord(record).then(() => {
+-    if (canStartDailySync()) void runDailyAnswerSync(canStartDailySync);
+-  });
+-  window.dispatchEvent(new Event(ANSWER_RECORDED_EVENT));
++  canStartSync: () => boolean = () => true,
++): Promise<void> {
++  if (isAdminMode) return;
++
++  // 受理済みの通常回答は完了させる。管理者モードへ切り替わった後は
++  // 保存完了後に新しい同期を始めない。
++  await saveAnswerRecord(record);
++  if (typeof window !== 'undefined') {
++    window.dispatchEvent(new Event(ANSWER_RECORDED_EVENT));
++  }
++  if (canStartSync()) await runDailyAnswerSync(canStartSync);
+ }

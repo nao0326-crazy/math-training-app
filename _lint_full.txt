@@ -1,0 +1,13 @@
+
+> grade6-math-generator@1.0.0 lint
+> eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0
+
+
+C:\Users\monty\OneDrive\デスクトップ\問題\src\engine\curriculum\curriculumScope.ts
+  585:21  error  '_ignored' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\monty\OneDrive\デスクトップ\問題\src\quality\quality.audit.test.ts
+  42:20  error  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 2 problems (2 errors, 0 warnings)
+

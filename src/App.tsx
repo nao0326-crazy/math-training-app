@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import HomePage from './pages/HomePage';
 import QuizPage from './pages/QuizPage';
 import HistoryPage from './pages/HistoryPage';
@@ -8,7 +8,6 @@ import { REVIEW_QUESTION_COUNT } from './utils/weakAreas';
 import { runDailyAnswerSync } from './services/dailyAnswerSync';
 import MaintenancePage from './components/MaintenancePage';
 import { isMaintenanceMode } from './utils/maintenanceMode';
-import { isAdminUnlocked } from './utils/adminMode';
 import type { QuizSelection } from './pages/quizSelection';
 
 type Page = 'home' | 'quiz' | 'history';
@@ -24,13 +23,36 @@ function NormalApp() {
     filter: null,
   });
   const [questionCount, setQuestionCount] = useState(10);
-  const [adminUnlocked, setAdminUnlocked] = useState(() => isAdminUnlocked());
+  const [adminUnlocked, setAdminUnlocked] = useState(false);
+  const [isAdminQuiz, setIsAdminQuiz] = useState(false);
+  const isAdminQuizRef = useRef(false);
+  const canStartNormalSync = useCallback(() => !isAdminQuizRef.current, []);
 
-  // 回答送信直後の同期を、Web の再接続・次回起動時にも補う。
-  // Supabase 未設定時は既存 IndexedDB だけで動作する。
+  const setAdminQuizMode = (enabled: boolean) => {
+    isAdminQuizRef.current = enabled;
+    setIsAdminQuiz(enabled);
+  };
+
+  const clearAdminMode = () => {
+    setAdminQuizMode(false);
+    setAdminUnlocked(false);
+    setSelection({
+      studyMode: { kind: 'full-random' },
+      category: null,
+      difficulty: 2,
+      filter: null,
+    });
+    setQuestionCount(10);
+  };
+
+  // 管理者演習では通常学習の同期キューに触れない。
   useEffect(() => {
+    if (!canStartNormalSync()) return;
+
+    // 回答送信直後の同期を、Web の再接続・次回起動時にも補う。
+    // Supabase 未設定時は既存 IndexedDB だけで動作する。
     const sync = () => {
-      void runDailyAnswerSync();
+      if (canStartNormalSync()) void runDailyAnswerSync(canStartNormalSync);
     };
 
     sync();
@@ -41,7 +63,12 @@ function NormalApp() {
       window.removeEventListener('online', sync);
       window.clearInterval(interval);
     };
-  }, []);
+  }, [canStartNormalSync, isAdminQuiz]);
+
+  const returnToNormalMode = () => {
+    clearAdminMode();
+    setPage('home');
+  };
 
   /**
    * 通常モードで学習を始める (分野指定つきの適応難易度)
@@ -51,6 +78,8 @@ function NormalApp() {
    * (管理者の絞り込みが残り続けない)。
    */
   const startAreaQuiz = (area: string) => {
+    setAdminQuizMode(false);
+    setAdminUnlocked(false);
     setSelection({
       studyMode: { kind: 'adaptive', area },
       category: null,
@@ -65,6 +94,7 @@ function NormalApp() {
   const startAdminQuiz = (next: QuizSelection) => {
     setSelection(next);
     setQuestionCount(10);
+    setAdminQuizMode(true);
     setPage('quiz');
   };
 
@@ -76,6 +106,8 @@ function NormalApp() {
    * QuestionSelector に Fallback しない。
    */
   const startReview = (_category: Category, difficulty: number) => {
+    setAdminQuizMode(false);
+    setAdminUnlocked(false);
     setSelection({ studyMode: { kind: 'weak', types: [] }, category: null, difficulty, filter: null });
     setQuestionCount(REVIEW_QUESTION_COUNT);
     setPage('quiz');
@@ -85,17 +117,22 @@ function NormalApp() {
     <div className="app">
       <DailyProgressNotification />
       <header className="app-header">
-        <h1 className="app-title">小6数学トレーニング</h1>
+        <h1 className="app-title">
+          小6数学トレーニング <span className="app-version">v{__APP_VERSION__}</span>
+        </h1>
         <nav className="app-nav">
           <button
             className={`nav-button ${page === 'home' ? 'active' : ''}`}
-            onClick={() => setPage('home')}
+            onClick={returnToNormalMode}
           >
             ホーム
           </button>
           <button
             className={`nav-button ${page === 'history' ? 'active' : ''}`}
-            onClick={() => setPage('history')}
+            onClick={() => {
+              clearAdminMode();
+              setPage('history');
+            }}
           >
             学習履歴
           </button>
@@ -106,7 +143,10 @@ function NormalApp() {
         {page === 'home' && (
           <HomePage
             onStartArea={startAreaQuiz}
-            onShowHistory={() => setPage('history')}
+            onShowHistory={() => {
+              clearAdminMode();
+              setPage('history');
+            }}
             adminUnlocked={adminUnlocked}
             onAdminUnlockedChange={setAdminUnlocked}
             onStartAdminQuiz={startAdminQuiz}
@@ -119,7 +159,9 @@ function NormalApp() {
             questionCount={questionCount}
             studyMode={selection.studyMode}
             filter={selection.filter}
-            onExit={() => setPage('home')}
+            isAdminMode={isAdminQuiz}
+            canStartNormalSync={canStartNormalSync}
+            onExit={returnToNormalMode}
           />
         )}
         {page === 'history' && <HistoryPage onStartReview={startReview} />}

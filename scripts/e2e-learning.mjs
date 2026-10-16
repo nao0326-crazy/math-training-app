@@ -106,22 +106,90 @@ function gcd(a, b) {
   }
   return x;
 }
-let qIndex = 0; // 現在の問題番号（yes/no 選択の交互化に使用）
+let qIndex = 0; // 現在の問題番号（yes/no・選択式の交互化に使用）
+/**
+ * AnswerInput.tsx の実際の入力UIに応じて入力タイプを判別する。
+ * - choice: button.choice-btn が1件以上ある（choiceOptions.length > 0 のときのみ描画）
+ * - yesno: button.yesno-btn がある
+ * - input: input.answer-display がある（数値・分数・選択肢なしchoiceのフォールバック等）
+ * - none: いずれも無い（結果画面・採点済み・タイムアウト遷移中など）
+ */
+async function detectInputUI(page) {
+  const choiceCount = await page.locator('button.choice-btn').count().catch(() => 0);
+  const yesCount = await page.locator('button.yesno-btn').count().catch(() => 0);
+  const inputCount = await page.locator('input.answer-display').count().catch(() => 0);
+  const numberPadCount = await page.locator('button.keypad-button.number-btn').count().catch(() => 0);
+  const hasFeedback = (await page.locator('.feedback').count().catch(() => 0)) > 0;
+  const isResult = (await page.locator('.result-page').count().catch(() => 0)) > 0;
+  let type = 'none';
+  if (choiceCount > 0) type = 'choice';
+  else if (yesCount > 0) type = 'yesno';
+  else if (inputCount > 0) type = 'input';
+  return { type, choiceCount, yesCount, inputCount, numberPadCount, hasFeedback, isResult };
+}
 async function typeAnswer(page, answer, fields = 1) {
+  const ui = await detectInputUI(page);
+  // 選択式: 実際に表示された .choice-btn から有効な選択肢を選び送信まで実行する。
+  // 正誤両方の表示確認ができるよう偶奇で先頭/末尾を交互に選ぶ（1件しかなければそれ）。
+  if (ui.type === 'choice') {
+    const btns = page.locator('button.choice-btn');
+    const total = await btns.count().catch(() => 0);
+    if (total === 0) return { type: 'choice', ok: false, detail: 'choice-btnが無い' };
+    // 無効（disabled）なボタンは避け、有効なものだけから選ぶ
+    const enabledIndexes = [];
+    for (let k = 0; k < total; k++) {
+      const dis = await btns.nth(k).isDisabled().catch(() => true);
+      const vis = await btns.nth(k).isVisible().catch(() => false);
+      if (!dis && vis) enabledIndexes.push(k);
+    }
+    if (enabledIndexes.length === 0) return { type: 'choice', ok: false, detail: '有効な選択肢が無い' };
+    const pickPos = (qIndex % 2 === 0) ? 0 : enabledIndexes.length - 1;
+    const pickIdx = enabledIndexes[pickPos];
+    const pickedText = (await btns.nth(pickIdx).innerText().catch(() => '')).trim();
+    await btns.nth(pickIdx).click().catch(() => {});
+    await page.waitForTimeout(250);
+    // 選択が反映されたか（selected クラス or 送信可）を確認する
+    const selectedCount = await page.locator('button.choice-btn.selected').count().catch(() => 0);
+    // 送信ボタンが有効になるまで待つ（選択式は即時送信可とは限らない）
+    let submit = page.locator('button.submit-btn');
+    const submitAvailable = await submit
+      .first()
+      .waitFor({ state: 'enabled', timeout: 6000 })
+      .then(() => true)
+      .catch(() => false);
+    if (!submitAvailable) {
+      // 選択直後は未送信でも送信可能になる読み込み中/タイムアウト遷移を許容する
+      await page.waitForTimeout(500);
+      const fbNow = (await page.locator('.feedback').count().catch(() => 0)) > 0;
+      if (fbNow) return { type: 'choice', ok: true, picked: pickedText || `#${pickIdx}`, selectedCount, submitDisabled: true };
+      return { type: 'choice', ok: false, detail: '送信ボタンが有効にならない', picked: pickedText || `#${pickIdx}`, selectedCount };
+    }
+    await submit.first().click().catch(() => {});
+    await page.waitForTimeout(300);
+    return { type: 'choice', ok: true, picked: pickedText || `#${pickIdx}`, selectedCount, submitDisabled: false };
+  }
   // 判定（はい/いいえ）問題は数字キーパッドが無い
   const yesBtn = page.locator('button.yesno-btn.yes-btn');
   const noBtn = page.locator('button.yesno-btn.no-btn');
-  if ((await page.locator('button.keypad-button.number-btn').count()) === 0 &&
-      ((await yesBtn.count()) > 0 || (await noBtn.count()) > 0)) {
+  if (ui.type === 'yesno') {
     // ランダムに1つ選ぶ（正誤判定の表示確認が目的）
     const pick = (qIndex % 2 === 0) ? yesBtn : noBtn;
     const target = (await pick.count()) > 0 ? pick : (await yesBtn.count()) > 0 ? yesBtn : noBtn;
     await target.first().click().catch(() => {});
     await page.waitForTimeout(200);
-    return;
+    return { type: 'yesno', ok: true };
   }
-  // 数字キーパッドも yes/no も無い画面では何もしない
-  if ((await page.locator('button.keypad-button.number-btn').count()) === 0) return;
+  // 入力式：数字キーパッドも yes/no も無い画面では何もしない（choiceフォールバックの文字盤のみ等）
+  if (ui.type !== 'input') return { type: ui.type, ok: false, detail: '入力UIなし' };
+  if (ui.numberPadCount === 0) {
+    // 選択肢なしchoiceフォールバック（文字列盤）など：最初の有効なキーパッドを1押しして送信可にする
+    const anyPad = page.locator('.number-pad button.keypad-button').first();
+    if ((await anyPad.count().catch(() => 0)) === 0) return { type: 'input', ok: false, detail: 'キーパッドなし' };
+    // テキスト盤の先頭ボタンは「あ」等のため、そのまま押す（正誤は問わず送信まで進める）
+    await anyPad.click().catch(() => {});
+    await page.waitForTimeout(200);
+    return { type: 'input', ok: true, detail: 'text-pad-first' };
+  }
   const clear = page.locator('button.keypad-button.action-btn', { hasText: /^C$/ }).first();
   if ((await clear.count()) > 0) await clear.click().catch(() => {});
   await page.waitForTimeout(120);
@@ -148,6 +216,7 @@ async function typeAnswer(page, answer, fields = 1) {
     }
     await page.waitForTimeout(200);
   }
+  return { type: 'input', ok: true };
 }
 
 let answered = 0;
@@ -155,12 +224,22 @@ let sawCorrect = false;
 let sawWrong = false;
 let sawSolution = false;
 let sawNext = false;
+let sawChoice = false;
+let sawYesNo = false;
+let sawInput = false;
 let correctCount = 0;
 for (let i = 0; i < QUESTIONS; i++) {
-  const inputCount = await page.locator('input.answer-display').count();
-  if (inputCount === 0) {
-    const isResult = (await page.locator('.result-page').count()) > 0;
-    rec(`Q${i + 1} 入力欄が無い`, isResult ? 'INFO' : 'FAIL', isResult ? '結果画面に到達' : '');
+  const ui0 = await detectInputUI(page);
+  if (ui0.type === 'none') {
+    const isResult = ui0.isResult;
+    rec(`Q${i + 1} 入力欄が無い`, isResult ? 'INFO' : 'FAIL', isResult ? '結果画面に到達' : `feedback=${ui0.hasFeedback}`);
+    if (isResult) break;
+    // タイムアウト等で採点済み表示（.feedback）に遷移済みの場合は次へ進む
+    if (ui0.hasFeedback && (await page.locator('button.next-button').count()) > 0) {
+      await page.locator('button.next-button').first().click();
+      await page.waitForTimeout(800);
+      continue;
+    }
     break;
   }
   if (await page.locator('button.next-button').count() > 0) {
@@ -171,27 +250,64 @@ for (let i = 0; i < QUESTIONS; i++) {
   const solved = solveQuestion(qText);
   const answerToType = solved ? solved.answer : String((i + 7) % 10);
   qIndex = i;
-  await typeAnswer(page, answerToType, inputCount);
+  const inputRes = await typeAnswer(page, answerToType, ui0.inputCount > 0 ? ui0.inputCount : 1);
+  if (inputRes?.type === 'choice') sawChoice = true;
+  if (inputRes?.type === 'yesno') sawYesNo = true;
+  if (inputRes?.type === 'input') sawInput = true;
+  if (inputRes && inputRes.ok === false) {
+    // 選択肢のない問題（choiceOptions.length === 0 のフォールバックは input 扱いで対応済み）。
+    // ここは有効な選択肢が無い等の異常系：送信せず記録して次問へ
+    rec(`Q${i + 1} 入力UIに対応できない (${inputRes.type})`, 'FAIL', inputRes.detail ?? '');
+    break;
+  }
   await page.waitForTimeout(400);
 
   const submit = page.locator('button.submit-btn');
-  if ((await submit.count()) === 0) {
+  // タイムアウト競合：入力中に時間切れ→採点済み表示へ遷移済みなら送信を試みない
+  let preFeedback = (await page.locator('.feedback').count().catch(() => 0)) > 0;
+  let timedOutTransition = false;
+  if (preFeedback) {
+    timedOutTransition = true;
+  } else if ((await submit.count()) === 0) {
     const snap = await page.evaluate(() => ({
       result: !!document.querySelector('.result-page'),
       choices: document.querySelectorAll('.choice-btn, .choice-option, [class*="choice"]').length,
+      feedback: !!document.querySelector('.feedback'),
+      next: !!document.querySelector('.next-button'),
       body: document.body.innerText.slice(0, 400),
     }));
-    rec(`Q${i + 1} 送信ボタンが無い`, 'FAIL',
-      `q="${qText.slice(0, 40)}" result=${snap.result} choices=${snap.choices} body=${snap.body.replace(/\n/g, ' | ').slice(0, 200)}`);
-    break;
+    // 回答直後に時間切れ→feedback表示へ遷移し submit が消える競合は異常ではない
+    if (snap.feedback || snap.next) {
+      timedOutTransition = true;
+      preFeedback = true;
+    } else {
+      rec(`Q${i + 1} 送信ボタンが無い`, 'FAIL',
+        `q="${qText.slice(0, 40)}" result=${snap.result} choices=${snap.choices} body=${snap.body.replace(/\n/g, ' | ').slice(0, 200)}`);
+      break;
+    }
   }
-  if (await submit.first().isDisabled()) {
-    rec(`Q${i + 1} 送信ボタンが disabled`, 'FAIL', '入力が反映されていない可能性');
-    break;
+  let submitDisabledDetail = '';
+  if (!timedOutTransition) {
+    if (await submit.first().isDisabled()) {
+      // 時間切れで無効化→feedbackへ遷移した直後の競合か確認する
+      await page.waitForTimeout(500);
+      const fbNow = (await page.locator('.feedback').count().catch(() => 0)) > 0;
+      if (fbNow) {
+        timedOutTransition = true;
+        preFeedback = true;
+      } else {
+        const errText = (await page.locator('.answer-error').first().innerText().catch(() => '')).slice(0, 120);
+        rec(`Q${i + 1} 送信ボタンが disabled`, 'FAIL', `入力が反映されていない可能性 err="${errText}" type=${inputRes?.type ?? '?'}`);
+        break;
+      }
+    } else {
+      await submit.first().click();
+    }
+  } else {
+    submitDisabledDetail = 'timeout-transition';
   }
-  await submit.first().click();
   // 採点結果（.feedback）が表示されるまで待つ
-  const gotFeedback = await page
+  const gotFeedback = preFeedback || await page
     .locator('.feedback')
     .first()
     .waitFor({ state: 'visible', timeout: 8000 })
@@ -221,6 +337,7 @@ for (let i = 0; i < QUESTIONS; i++) {
   // ※絵文字は文字コード環境によって壊れるため、判定は文字列で行う
   const hasCorrect = after.includes('せいかい！') || after.includes('計算は合っています');
   const hasWrong = after.includes('ざんねん');
+  const hasTimedOut = after.includes('時間切れ');
   const hasAnswerShown = /正解は\s*\S/.test(after);
   const hasSteps = after.includes('途中式');
   if (hasCorrect) sawCorrect = true;
@@ -246,10 +363,15 @@ for (let i = 0; i < QUESTIONS; i++) {
   out.played.push({
     q: i + 1,
     qText: qText.slice(0, 50),
+    inputType: inputRes?.type ?? ui0.type,
+    picked: inputRes?.picked ?? '',
+    timedOutTransition,
+    submitDisabledDetail,
     typed: answerToType,
     inputVal: await page.locator('input.answer-display').first().inputValue().catch(() => '?'),
     hasCorrect,
     hasWrong,
+    hasTimedOut,
     hasSteps,
     hasAnswerShown,
     fb: fbText.slice(0, 120).replace(/\n/g, ' | '),
@@ -276,6 +398,12 @@ if ((await page.locator('.result-page').count()) > 0) {
 }
 
 rec('10 問題タイプが変化する', answered >= 5 ? 'PASS' : 'FAIL', `${answered}問 play`);
+rec('10b 選択式・はい/いいえ式・入力式の判別に対応する',
+  sawChoice || sawYesNo || sawInput ? 'PASS' : 'NOT TESTED',
+  `choice=${sawChoice} yesno=${sawYesNo} input=${sawInput}`);
+rec('10c 選択式問題で選択肢を選んで送信できる',
+  sawChoice ? 'PASS' : 'NOT TESTED',
+  sawChoice ? `${out.played.filter((p) => p.inputType === 'choice').length}問で選択肢を選択` : '選択式に未遭遇');
 
 await page.goto(BASE + '/', { waitUntil: 'networkidle' });
 const histBtn = page.getByRole('button', { name: /学習履歴/ }).first();

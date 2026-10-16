@@ -33,7 +33,7 @@ import {
 import { formatAnswer, checkUserAnswer } from '../../utils/answer';
 import { fingerprintProblem } from '../../engine/diversity/metadata';
 import { attachSolutionSteps } from '../../engine/solution/solutionGenerator';
-import type { DifficultyLevel, Problem } from '../../types/problem';
+import type { DifficultyLevel, GenerationConfig, Problem } from '../../types/problem';
 
 const LEVELS: DifficultyLevel[] = [1, 2, 3, 4, 5];
 const comb = new CombineSimpleGenerator();
@@ -45,7 +45,7 @@ const duplicateRemoval = new DuplicateRemovalGenerator();
 
 /** lv1-5 × 十分なシード数で生成する */
 function generateMany(
-  gen: { generate: (c?: any) => Problem },
+  gen: { generate: (c?: GenerationConfig) => Problem },
   perLevel: number,
   seedBase: number,
 ): Problem[] {

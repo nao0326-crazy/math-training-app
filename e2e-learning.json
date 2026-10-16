@@ -8,17 +8,12 @@
     {
       "name": "2 学習開始→問題画面",
       "status": "PASS",
-      "detail": "家庭教師継続条件\n今日1000問以上解かないと家庭教師をやめます。\n現在：0 / 1000問\n残り：1000問\n小6数学トレーニング\nホーム\n学習履歴\n問題 1"
-    },
-    {
-      "name": "Q1 入力欄が無い",
-      "status": "FAIL",
-      "detail": ""
+      "detail": "今日の学習目標\n回答数：0 / 1000問\n残り：1000問\n小6数学トレーニング v1.0.0\nホーム\n学習履歴\n問題 1 / 10\n分野: 数と計算\n小数\n"
     },
     {
       "name": "3 回答送信できる",
-      "status": "FAIL",
-      "detail": "0問送信"
+      "status": "PASS",
+      "detail": "10問送信"
     },
     {
       "name": "4 正解判定が表示される",
@@ -27,13 +22,13 @@
     },
     {
       "name": "5 不正解判定が表示される",
-      "status": "NOT TESTED",
+      "status": "PASS",
       "detail": ""
     },
     {
       "name": "6 解説・途中式が表示される",
-      "status": "FAIL",
-      "detail": "0問中 0問に途中式"
+      "status": "PASS",
+      "detail": "10問中 10問に途中式"
     },
     {
       "name": "6b 正解が開示される",
@@ -42,28 +37,38 @@
     },
     {
       "name": "7 次の問題へ進める",
-      "status": "FAIL",
-      "detail": "0問連続"
+      "status": "PASS",
+      "detail": "10問連続"
     },
     {
       "name": "8 複数問連続プレイ",
-      "status": "FAIL",
-      "detail": "0問"
+      "status": "PASS",
+      "detail": "10問"
     },
     {
       "name": "9 結果画面（正答率）表示",
-      "status": "NOT TESTED",
-      "detail": "結果画面未到達"
+      "status": "PASS",
+      "detail": "けっか 0 / 10 問 せいかい 正答率 0% 平均解答時間 2秒 時間切れ 0問 もういちど ホームに戻る"
     },
     {
       "name": "10 問題タイプが変化する",
-      "status": "FAIL",
-      "detail": "0問 play"
+      "status": "PASS",
+      "detail": "10問 play"
+    },
+    {
+      "name": "10b 選択式・はい/いいえ式・入力式の判別に対応する",
+      "status": "PASS",
+      "detail": "choice=false yesno=false input=true"
+    },
+    {
+      "name": "10c 選択式問題で選択肢を選んで送信できる",
+      "status": "NOT TESTED",
+      "detail": "選択式に未遭遇"
     },
     {
       "name": "11 履歴画面が表示される",
       "status": "PASS",
-      "detail": "家庭教師継続条件 | 今日1000問以上解かないと家庭教師をやめます。 | 現在：0 / 1000問 | 残り：1000問 | 小6数学トレーニング | ホーム | 学習履歴 | 学習履歴 | ‹ | 2026年10月 | › | 月 | 火 | 水 | 木 | 金 | 土 | 日 | 1 | "
+      "detail": "今日の学習目標 | 回答数：10 / 1000問 | 残り：990問 | 小6数学トレーニング v1.0.0 | ホーム | 学習履歴 | 学習履歴 | ‹ | 2026年10月 | › | 月 | 火 | 水 | 木 | 金 | 土 | 日 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10"
     },
     {
       "name": "12 IndexedDB が存在する",
@@ -73,7 +78,7 @@
     {
       "name": "13 リロード後も履歴が残る",
       "status": "PASS",
-      "detail": "家庭教師継続条件 | 今日1000問以上解かないと家庭教師をやめます。 | 現在：0 / 1000問 | 残り：1000問 | 小6数学トレーニング | ホーム | 学習履歴 | ようこそ！ |  | 分野ごとに、そ"
+      "detail": "今日の学習目標 | 回答数：10 / 1000問 | 残り：990問 | 小6数学トレーニング v1.0.0 | ホーム | 学習履歴 | ようこそ！ |  | 分野ごとに、その分野の成績に合った難易度で問題を出"
     },
     {
       "name": "14 通常画面リロードでクラッシュしない",
@@ -104,5 +109,166 @@
   "consoleErrors": [],
   "pageErrors": [],
   "failedRequests": [],
-  "played": []
+  "played": [
+    {
+      "q": 1,
+      "qText": "5.2から1.8をひくといくつになりますか",
+      "inputType": "input",
+      "picked": "",
+      "timedOutTransition": false,
+      "submitDisabledDetail": "",
+      "typed": "7",
+      "inputVal": "",
+      "hasCorrect": false,
+      "hasWrong": true,
+      "hasTimedOut": false,
+      "hasSteps": true,
+      "hasAnswerShown": true,
+      "fb": "❌ ざんねん... | 正解は 3.4 です | 小数点の位置をそろえて 5.2−1.8 を計算します。1の位で繰り下げました。答えは 3.4 です。 | 答え3.4 | 途中式 |  | 小数点の位置をそろえて計算します |  | ①5.2 - 1.8 = 3.4 |  | 筆"
+    },
+    {
+      "q": 2,
+      "qText": "1と4分の3を4分の1でわると、いくつになりますか",
+      "inputType": "input",
+      "picked": "",
+      "timedOutTransition": false,
+      "submitDisabledDetail": "",
+      "typed": "8",
+      "inputVal": "",
+      "hasCorrect": false,
+      "hasWrong": true,
+      "hasTimedOut": false,
+      "hasSteps": true,
+      "hasAnswerShown": true,
+      "fb": "❌ ざんねん... | 正解は 7 です | 1と4分の3（分子3、分母4）＝7/4 として計算します。7/4÷4分の1（1/4）＝7です。 | 答え7 | 途中式 |  | ①1と3/4 ÷ 1/4 の計算をします |  | 帯分数を仮分数になおし、わり算をかけ算に変え"
+    },
+    {
+      "q": 3,
+      "qText": "7に6をかけるといくつになりますか",
+      "inputType": "input",
+      "picked": "",
+      "timedOutTransition": false,
+      "submitDisabledDetail": "",
+      "typed": "9",
+      "inputVal": "",
+      "hasCorrect": false,
+      "hasWrong": true,
+      "hasTimedOut": false,
+      "hasSteps": true,
+      "hasAnswerShown": true,
+      "fb": "❌ ざんねん... | 正解は 42 です | 7×6＝42 です。 | 答え42 | 途中式 |  | ①7 × 6 = 42 |  | 答え：42 | つぎの問題へ"
+    },
+    {
+      "q": 4,
+      "qText": "10に3をたすといくつになりますか",
+      "inputType": "input",
+      "picked": "",
+      "timedOutTransition": false,
+      "submitDisabledDetail": "",
+      "typed": "0",
+      "inputVal": "",
+      "hasCorrect": false,
+      "hasWrong": true,
+      "hasTimedOut": false,
+      "hasSteps": true,
+      "hasAnswerShown": true,
+      "fb": "❌ ざんねん... | 正解は 13 です | 10＋3＝13 です。 | 答え13 | 途中式 |  | ①10 + 3 = 13 |  | 答え：13 | つぎの問題へ"
+    },
+    {
+      "q": 5,
+      "qText": "5分の4と7分の6を、分母を最小公倍数にそろえて表しなさい",
+      "inputType": "input",
+      "picked": "",
+      "timedOutTransition": false,
+      "submitDisabledDetail": "",
+      "typed": "1",
+      "inputVal": "",
+      "hasCorrect": false,
+      "hasWrong": true,
+      "hasTimedOut": false,
+      "hasSteps": true,
+      "hasAnswerShown": true,
+      "fb": "❌ ざんねん... | 正解は 28/35 と 30/35 です | 分母5と7の最小公倍数は35なので、5分の4（分子4、分母5）＝28/35（分子28）、7分の6（分子6、分母7）＝30/35（分子30） になります。 | 答え28/35 と 30"
+    },
+    {
+      "q": 6,
+      "qText": "4から1をひくといくつになりますか",
+      "inputType": "input",
+      "picked": "",
+      "timedOutTransition": false,
+      "submitDisabledDetail": "",
+      "typed": "2",
+      "inputVal": "",
+      "hasCorrect": false,
+      "hasWrong": true,
+      "hasTimedOut": false,
+      "hasSteps": true,
+      "hasAnswerShown": true,
+      "fb": "❌ ざんねん... | 正解は 3 です | 4−1＝3 です。 | 答え3 | 途中式 |  | ①4 - 1 = 3 |  | 答え：3 | つぎの問題へ"
+    },
+    {
+      "q": 7,
+      "qText": "1と5分の2を4分の1でわると、いくつになりますか",
+      "inputType": "input",
+      "picked": "",
+      "timedOutTransition": false,
+      "submitDisabledDetail": "",
+      "typed": "3",
+      "inputVal": "",
+      "hasCorrect": false,
+      "hasWrong": true,
+      "hasTimedOut": false,
+      "hasSteps": true,
+      "hasAnswerShown": true,
+      "fb": "❌ ざんねん... | 正解は 5と3/5 です | 1と5分の2（分子2、分母5）＝7/5 として計算します。7/5÷4分の1（1/4）＝5分の28＝5と5分の3です。 | 答え5と3/5 | 途中式 |  | ①1と2/5 ÷ 1/4 の計算をします |  | 帯分数"
+    },
+    {
+      "q": 8,
+      "qText": "8から3をひくといくつになりますか",
+      "inputType": "input",
+      "picked": "",
+      "timedOutTransition": false,
+      "submitDisabledDetail": "",
+      "typed": "4",
+      "inputVal": "",
+      "hasCorrect": false,
+      "hasWrong": true,
+      "hasTimedOut": false,
+      "hasSteps": true,
+      "hasAnswerShown": true,
+      "fb": "❌ ざんねん... | 正解は 5 です | 8−3＝5 です。 | 答え5 | 途中式 |  | ①8 - 3 = 5 |  | 答え：5 | つぎの問題へ"
+    },
+    {
+      "q": 9,
+      "qText": "1.6を4でわると、いくつになりますか",
+      "inputType": "input",
+      "picked": "",
+      "timedOutTransition": false,
+      "submitDisabledDetail": "",
+      "typed": "5",
+      "inputVal": "",
+      "hasCorrect": false,
+      "hasWrong": true,
+      "hasTimedOut": false,
+      "hasSteps": true,
+      "hasAnswerShown": true,
+      "fb": "❌ ざんねん... | 正解は 0.4 です | 1.6÷4＝0.4です。 | 答え0.4 | 途中式 |  | 小数を整数でわります |  | ①1.6 ÷ 4 = 0.4 |  | 答え：0.4 | つぎの問題へ"
+    },
+    {
+      "q": 10,
+      "qText": "2に9をかけるといくつになりますか",
+      "inputType": "input",
+      "picked": "",
+      "timedOutTransition": false,
+      "submitDisabledDetail": "",
+      "typed": "6",
+      "inputVal": "?",
+      "hasCorrect": false,
+      "hasWrong": true,
+      "hasTimedOut": false,
+      "hasSteps": true,
+      "hasAnswerShown": true,
+      "fb": "❌ ざんねん... | 正解は 18 です | 2×9＝18 です。 | 答え18 | 途中式 |  | ①2 × 9 = 18 |  | 答え：18 | けっかをみる"
+    }
+  ]
 }

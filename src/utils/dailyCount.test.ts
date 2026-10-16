@@ -8,6 +8,7 @@ import {
   DAILY_GOAL,
   countAnswersOnDate,
   countTodayAnswers,
+  getDailyProgress,
   getStudyDateKey,
 } from './dailyCount';
 import type { AnswerRecord } from '../types/history';
@@ -88,6 +89,29 @@ describe('countTodayAnswers', () => {
     expect(countTodayAnswers(records)).toBe(2);
   });
 
+  describe('getDailyProgress', () => {
+    it('回答数・目標数・残りの問題数を未達時も表示できる値で返す', () => {
+      expect(getDailyProgress(999)).toEqual({
+        goal: DAILY_GOAL,
+        remaining: 1,
+        achieved: false,
+      });
+    });
+
+    it('目標達成後も回答数表示と残り0を維持する', () => {
+      expect(getDailyProgress(DAILY_GOAL)).toEqual({
+        goal: DAILY_GOAL,
+        remaining: 0,
+        achieved: true,
+      });
+      expect(getDailyProgress(DAILY_GOAL + 1)).toEqual({
+        goal: DAILY_GOAL,
+        remaining: 0,
+        achieved: true,
+      });
+    });
+  });
+
   it('過去日の回答は今日に加算しない', () => {
     const now = new Date();
     const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
@@ -127,5 +151,35 @@ describe('countTodayAnswers', () => {
 
     expect(countTodayAnswers(records)).toBe(DAILY_GOAL + 1);
     expect(countTodayAnswers(records) >= DAILY_GOAL).toBe(true);
+  });
+});
+
+describe('時間切れは「解いた問題数」にカウントしない', () => {
+  it('countAnswersOnDate: 時間切れを除外する', () => {
+    const today = new Date('2026-09-23T12:00:00.000Z');
+    const records = [
+      createRecord(today.toISOString(), { isCorrect: true }),
+      createRecord(today.toISOString(), { isTimedOut: true }),
+      createRecord(today.toISOString(), { isTimedOut: true }),
+    ];
+    expect(countAnswersOnDate(records, today)).toBe(1);
+  });
+
+  it('countTodayAnswers: 時間切れを除外する', () => {
+    const now = new Date();
+    const records = [
+      createRecord(now.toISOString(), { isCorrect: true }),
+      createRecord(now.toISOString(), { isCorrect: false, isTimedOut: true }),
+    ];
+    expect(countTodayAnswers(records)).toBe(1);
+  });
+
+  it('すべて時間切れなら0', () => {
+    const now = new Date();
+    const records = [
+      createRecord(now.toISOString(), { isTimedOut: true }),
+      createRecord(now.toISOString(), { isTimedOut: true }),
+    ];
+    expect(countTodayAnswers(records)).toBe(0);
   });
 });

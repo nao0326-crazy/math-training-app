@@ -182,6 +182,22 @@ const TYPE_METADATA: Record<string, TypeClassification> = {
   data_total_from_average: { family: 'average', subtype: 'reverse', operation: 'mul', steps: 2 },
   data_max_min: { family: 'range', subtype: 'max_min' },
   data_compare: { family: 'range', subtype: 'compare', operation: 'compare', supportedLevels: [2, 3, 4, 5] },
+  // 現実連動: スーパーの買い物 (写真から価格を読み取って計算)。
+  // 文章題として数量を読解し、整数の四則演算で解く。文章題ベースのため context を word_problem とする。
+  realworld_shopping: {
+    family: 'word_problem',
+    subtype: 'photo_reading',
+    steps: 2,
+    context: 'word_problem',
+  },
+  // 現実連動: 卵の数を読み取って計算。写真に写る卵の個数 (2個) を読み取り、
+  // 整数の四則演算で解く文章題。文章題ベースのため context を word_problem とする。
+  realworld_eggs: {
+    family: 'word_problem',
+    subtype: 'photo_counting',
+    steps: 2,
+    context: 'word_problem',
+  },
 };
 
 /** 分母の組から数値パターンを推論する */

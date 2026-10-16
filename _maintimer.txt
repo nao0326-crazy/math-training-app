@@ -1,0 +1,12 @@
+
+src/components/QuizTimer.tsx
+src/utils/adaptiveTimeLimit.test.ts
+src/utils/adaptiveTimeLimit.ts
+src/utils/quizTimer.test.ts
+src/utils/quizTimer.ts
+
+--- main quizTimer.ts: does it mention image? ---
+*       figure / image) 縺九ｉ讖滓｢ｰ逧・↓邂怜・縺吶ｋ縲・ *
+* TIME_LIMIT_CONFIG (蛻晄悄蛟､繝昴Μ繧ｷ繝ｼ) 縺ｨ縺ｯ蛻･譫縺ｧ縲∝・譛溷､縺昴・繧ゅ・縺ｯ荳蛻・､画峩縺励↑縺・・ * 險倬鹸縺瑚ｶｳ繧翫↑縺・→縺阪・險育ｮ励↓螟ｱ謨励＠縺溘→縺阪・蛻晄悄蛟､ (getTimeLimitSeconds) 縺ｫ謌ｻ繧九・ * 險育ｮ玲悽菴薙・ adaptiveTimeLimit.ts 縺ｫ縺ゅｋ (縺薙・繝輔ぃ繧､繝ｫ縺ｯ蛻ｶ髯先凾髢薙・繝ｪ繧ｷ繝ｼ縺ｮ荳蜈・ｮ｡逅・縲・ */
+export const ADAPTIVE_TIME_LIMIT_CONFIG = {
+--- does adaptiveTimeLimit file exist in main & mention image? ---

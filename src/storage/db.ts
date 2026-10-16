@@ -9,6 +9,7 @@ import type {
   QuestionHistory,
   StudySettings,
 } from '../types/history';
+import type { ScratchNote } from '../types/scratch';
 
 /**
  * IndexedDB のスキーマ定義
@@ -41,10 +42,16 @@ interface MathAppDB extends DBSchema {
       answeredAt: string;
     };
   };
+  /** 手書き途中式ノート (出題インスタンスごと。attemptId を主キーとする) */
+  scratchNotes: {
+    key: string;
+    value: ScratchNote;
+  };
 }
 
 const DB_NAME = 'grade6-math-app';
-const DB_VERSION = 2;
+// v3: 途中式ノート用ストア scratchNotes を追加 (既存ストアは変更しない安全移行)
+const DB_VERSION = 3;
 
 let dbPromise: Promise<IDBPDatabase<MathAppDB>> | null = null;
 
@@ -80,10 +87,48 @@ function getDB(): Promise<IDBPDatabase<MathAppDB>> {
         if (oldVersion < 2) {
           db.createObjectStore('dailySync', { keyPath: 'submissionId' });
         }
+
+        // 手書き途中式ノート (v3)。既存ストアには一切触れず、
+        // 新しいストアを追加するだけなので既存データは保持される。
+        if (oldVersion < 3) {
+          db.createObjectStore('scratchNotes', { keyPath: 'attemptId' });
+        }
       },
     });
   }
   return dbPromise;
+}
+
+/**
+ * 途中式ノートを保存する (attemptId を主キーに put で上書き可)
+ */
+export async function saveScratchNote(note: ScratchNote): Promise<void> {
+  const db = await getDB();
+  await db.put('scratchNotes', note);
+}
+
+/**
+ * 出題インスタンスの途中式を取得する (無ければ undefined)
+ */
+export async function getScratchNote(attemptId: string): Promise<ScratchNote | undefined> {
+  const db = await getDB();
+  return db.get('scratchNotes', attemptId);
+}
+
+/**
+ * 保存済みの途中式をすべて取得する (復習画面用)
+ */
+export async function getAllScratchNotes(): Promise<ScratchNote[]> {
+  const db = await getDB();
+  return db.getAll('scratchNotes');
+}
+
+/**
+ * 途中式を削除する
+ */
+export async function deleteScratchNote(attemptId: string): Promise<void> {
+  const db = await getDB();
+  await db.delete('scratchNotes', attemptId);
 }
 
 /**
@@ -130,9 +175,12 @@ export async function removeDailyAnswerSyncTask(submissionId: string): Promise<v
  * 機能導入前の直近2日分の回答を、冪等IDつきのoutboxへ移行する。
  * 古い回答まで一括送信せず、通知対象になっている前日・当日だけを移行する。
  */
-export async function prepareLegacyDailyAnswerSyncTasks(): Promise<void> {
+export async function prepareLegacyDailyAnswerSyncTasks(
+  canContinue: () => boolean = () => true,
+): Promise<void> {
   const db = await getDB();
   const records = await db.getAll('answers');
+  if (!canContinue()) return;
   const cutoff = Date.now() - 2 * 24 * 60 * 60 * 1000;
   const candidates = records.filter((record) => {
     if (record.submissionId || typeof record.id !== 'number') return false;
@@ -224,4 +272,5 @@ export async function clearAllData(): Promise<void> {
   await db.clear('questions');
   await db.clear('settings');
   await db.clear('dailySync');
+  await db.clear('scratchNotes');
 }

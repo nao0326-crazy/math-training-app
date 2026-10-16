@@ -1,0 +1,64 @@
+diff --git a/_blob_quizTimer.ts b/src/utils/quizTimer.ts
+index e532540..3697025 100644
+--- a/_blob_quizTimer.ts
++++ b/src/utils/quizTimer.ts
+@@ -42,34 +42,14 @@ export const TIME_LIMIT_CONFIG = {
+   wordProblemBonusSeconds: 20,
+   /** 図 (figure) を読む問題に加算する秒。図形の観察・読み取り用。 */
+   figureBonusSeconds: 20,
++  /** 写真・画像 (image) を読む問題に加算する秒。写真から情報を拾う時間を確保する。 */
++  imageBonusSeconds: 30,
+   /** 下限 (秒)。単純計算でも極端に短くしない。 */
+   minSeconds: 30,
+   /** 上限 (秒)。極端に長くしない。 */
+   maxSeconds: 300,
+ };
+ 
+-/**
+- * 適応型制限時間の設定 (本人の解答履歴から算出するときの範囲・条件)。
+- *
+- * TIME_LIMIT_CONFIG (初期値ポリシー) とは別枠で、初期値そのものは一切変更しない。
+- * 記録が足りないとき・計算に失敗したときは初期値 (getTimeLimitSeconds) に戻る。
+- * 計算本体は adaptiveTimeLimit.ts にある (このファイルは制限時間ポリシーの一元管理)。
+- */
+-export const ADAPTIVE_TIME_LIMIT_CONFIG = {
+-  /** 集計単位 (problemType × difficultyLevel) ごとに採用する直近の有効記録数 */
+-  evaluationWindow: 20,
+-  /** 適応計算に必要な有効正答記録の最低件数 (未満なら初期値を使う) */
+-  minSamples: 8,
+-  /** 外れ値除外後に平均を取る最低件数 (未満なら除外前の記録で平均する) */
+-  minKeptSamples: 3,
+-  /** 平均解答時間に乗じる係数 */
+-  factor: 0.9,
+-  /** 適応型制限時間の下限 (秒) */
+-  minSeconds: 20,
+-  /** 適応型制限時間の上限 (秒)。初期値の上限と同値 */
+-  maxSeconds: 300,
+-} as const;
+-
+ /**
+  * 文章読解を要するカテゴリ (単純な計算入力より多めの時間を与える)。
+  * ここに無い integer / decimal / fraction / numberTheory / expression は
+@@ -91,12 +71,12 @@ const WORD_PROBLEM_CATEGORIES: ReadonlySet<string> = new Set([
+ export const TIME_OUT_USER_ANSWER = '（時間切れ）';
+ 
+ /** 判定に必要な問題メタデータの最小集合 (既存メタデータを優先して再利用) */
+-type TimeLimitProblem = Pick<Problem, 'difficulty' | 'category' | 'figure'>;
++type TimeLimitProblem = Pick<Problem, 'difficulty' | 'category' | 'figure' | 'image'>;
+ 
+ /**
+  * 問題の制限時間 (秒) を算出する。
+  * - 難易度が主体 (基準秒数)。
+- * - 問題形式 (文章題 / 図) で加算し、読解問題に単純計算と同じ短い秒を与えない。
++ * - 問題形式 (文章題 / 図 / 写真) で加算し、読解問題に単純計算と同じ短い秒を与えない。
+  * - difficulty が取得できない場合は安全な既定値を使う。
+  * - 常に [minSeconds, maxSeconds] に収める。
+  */
+@@ -112,6 +92,7 @@ export function getTimeLimitSeconds(
+     total += cfg.wordProblemBonusSeconds;
+   }
+   if (problem?.figure) total += cfg.figureBonusSeconds;
++  if (problem?.image) total += cfg.imageBonusSeconds;
+ 
+   return Math.min(cfg.maxSeconds, Math.max(cfg.minSeconds, total));
+ }

@@ -1,0 +1,20 @@
+=== feature commit origin in main(ca01506) ===
+-- realWorld/generators.ts --
+8169ddf Add photo-based real-world problems (realWorld) with image rendering
+-- public/images --
+8169ddf Add photo-based real-world problems (realWorld) with image rendering
+-- src/utils/quizTimer.ts --
+ca01506 Add adaptive time limit derived from personal answer history
+1883a1b Add per-question time limit and exclude timed-out from solved counts
+-- src/components/QuizTimer.tsx --
+1883a1b Add per-question time limit and exclude timed-out from solved counts
+=== tracked-modified: WT hash vs ca01506 hash ===
+DIFF-from-MAIN  src/App.tsx
+DIFF-from-MAIN  src/pages/HomePage.tsx
+DIFF-from-MAIN  src/services/dailyAnswerSync.ts
+DIFF-from-MAIN  src/storage/db.ts
+DIFF-from-MAIN  src/types/problem.ts
+DIFF-from-MAIN  src/engine/selector/generatorRegistry.ts
+DIFF-from-MAIN  src/engine/curriculum/curriculumScope.ts
+DIFF-from-MAIN  src/utils/quizTimer.ts
+DIFF-from-MAIN  src/services/quizPersistence.ts

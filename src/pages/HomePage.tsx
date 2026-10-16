@@ -14,7 +14,6 @@ import { buildQuestionPool } from '../engine/selector/questionPool';
 import { categoryLabel } from '../utils/stats';
 import { listLearningAreas } from '../utils/adaptiveDifficulty';
 import AdminGateDialog from '../components/AdminGateDialog';
-import { isAdminUnlocked, setAdminUnlocked } from '../utils/adminMode';
 import type { QuizSelection } from './quizSelection';
 
 interface HomePageProps {
@@ -56,7 +55,7 @@ export default function HomePage({
   onAdminUnlockedChange,
   onStartAdminQuiz,
 }: HomePageProps) {
-  const [unlocked, setUnlocked] = useState(() => adminUnlocked ?? isAdminUnlocked());
+  const [unlocked, setUnlocked] = useState(false);
   const [showGate, setShowGate] = useState(false);
 
   // 管理者モードの指定内容 (すべて null = 絞り込みなし)
@@ -78,7 +77,12 @@ export default function HomePage({
   const handleUnlock = (value: boolean) => {
     setUnlocked(value);
     setShowGate(false);
-    setAdminUnlocked(value);
+    if (!value) {
+      setCategory(null);
+      setGrade(null);
+      setType(null);
+      setDifficulty(null);
+    }
     onAdminUnlockedChange?.(value);
   };
 

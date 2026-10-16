@@ -69,6 +69,16 @@ describe('HomePage: 通常モード', () => {
   it('隠れた管理者モードの入口だけはある', () => {
     expect(markup).toContain('管理者モード');
   });
+
+  it('認証状態を渡さない初期表示では管理者設定を表示しない', () => {
+    const initialMarkup = render({
+      onStartArea: noop,
+      onShowHistory: noop,
+      onStartAdminQuiz: noop,
+    });
+    expect(initialMarkup).not.toContain('admin-category');
+    expect(initialMarkup).toContain('admin-entry');
+  });
 });
 
 describe('HomePage: 管理者モード (解除済み)', () => {

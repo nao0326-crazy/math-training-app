@@ -77,6 +77,16 @@ describe('summarizeRecordUnits', () => {
     ]);
     expect(summary).toEqual([{ key: 'type:fraction_reduce', label: 'fraction_reduce', count: 1 }]);
   });
+
+  it('時間切れは解いた問題数に含めない', () => {
+    const summary = summarizeRecordUnits([
+      record({ category: 'fraction' }),
+      record({ problemId: 'problem-2', category: 'fraction', isTimedOut: true }),
+      record({ problemId: 'problem-3', category: 'integer', isTimedOut: true }),
+    ]);
+    // fraction の時間内1問のみ (時間切れ2問は除外)
+    expect(summary).toEqual([{ key: 'category:fraction', label: '分数', count: 1 }]);
+  });
 });
 
 describe('toStudyDateKey', () => {

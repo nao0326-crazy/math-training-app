@@ -1,0 +1,75 @@
+ M .env.example
+ D e2e-adaptive-history.png
+ D e2e-adaptive-home.png
+ D e2e-adaptive-result.png
+ D e2e-admin-dialog.png
+ M e2e-answered-dump.json
+ M e2e-answered.png
+ M e2e-history-reload.png
+ M e2e-history.png
+ M e2e-learning.json
+ M e2e-q1.png
+ M e2e-result.png
+ M scripts/e2e-learning.mjs
+ M src/App.tsx
+ M src/components/AdminGateDialog.tsx
+ M src/components/DailyProgressNotification.tsx
+ M src/engine/curriculum/curriculumScope.ts
+ M src/engine/diversity/metadata.ts
+ M src/engine/selector/generatorRegistry.test.ts
+ M src/engine/selector/generatorRegistry.ts
+ M src/engine/solution/solutionGenerator.ts
+ M src/index.css
+ M src/pages/HomePage.tsx
+ M src/pages/homePage.test.tsx
+ M src/problems/combinatorics/variety-phase2d.test.ts
+ M src/problems/combinatorics/variety-phase2e.test.ts
+ M src/problems/geometry/symmetry-validate.test.ts
+ M src/quality/deep-audit.test.ts
+ M src/quality/quality.audit.test.ts
+ M src/services/dailyAnswerSync.ts
+ M src/storage/db.ts
+ M src/types/history.ts
+ M src/types/problem.ts
+ M src/utils/adminMode.test.ts
+ M src/utils/adminMode.ts
+ M src/utils/dailyCount.test.ts
+ M src/utils/dailyCount.ts
+ M src/utils/learningCalendar.test.ts
+ M src/utils/learningCalendar.ts
+ M src/utils/stats.test.ts
+ M src/utils/stats.ts
+ M src/vite-env.d.ts
+ M tsconfig.app.json
+ M tsconfig.node.json
+ M vite.config.ts
+?? _build_check2.txt
+?? _dev_head.txt
+?? _dev_status.txt
+?? _diff_app.txt
+?? _diff_e2e.txt
+?? _lint_focus.txt
+?? _lint_full.txt
+?? _lint_full2.txt
+?? _prestate_status.txt
+?? _test_out2.txt
+?? _typecheck2.txt
+?? e2e-eggs-shots/
+?? e2e-timer-shots/
+?? public/images/
+?? scripts/e2e-eggs-verify.mjs
+?? scripts/e2e-timer-verify.mjs
+?? src/App.test.tsx
+?? src/components/AdminGateDialog.test.tsx
+?? src/components/ImageRenderer.test.tsx
+?? src/components/ImageRenderer.tsx
+?? src/components/QuizTimer.tsx
+?? src/problems/realWorld/
+?? src/services/dailyAnswerSync.test.ts
+?? src/services/quizPersistence.test.ts
+?? src/services/quizPersistence.ts
+?? src/utils/appVersion.test.ts
+?? src/utils/quizTimer.test.ts
+?? src/utils/quizTimer.ts
+?? src/utils/sessionTally.test.ts
+?? "\343\202\242\343\203\227\343\203\252\345\206\205\351\203\250\346\247\213\351\200\240\343\203\273\345\213\225\344\275\234\344\273\225\346\247\230\346\233\270.md"

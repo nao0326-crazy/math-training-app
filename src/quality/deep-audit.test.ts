@@ -20,7 +20,7 @@ describe('重点監査', () => {
         try {
           const problem = generator.generate({ difficulty: 5, seed });
           problems.push(problem);
-        } catch (e) {
+        } catch {
           // 生成失敗はスキップ
         }
       }
@@ -52,7 +52,7 @@ describe('重点監査', () => {
           try {
             const problem = generator.generate({ difficulty: lv as 1 | 2 | 3 | 4 | 5, seed });
             problems.push(problem);
-          } catch (e) {
+          } catch {
             // 生成失敗はスキップ
           }
         }
@@ -98,7 +98,7 @@ describe('重点監査', () => {
           try {
             const problem = generator.generate({ difficulty: lv as 1 | 2 | 3 | 4 | 5, seed });
             problems.push(problem);
-          } catch (e) {
+          } catch {
             // 生成失敗はスキップ
           }
         }
@@ -152,7 +152,7 @@ describe('重点監査', () => {
           try {
             const problem = generator.generate({ difficulty: lv as 1 | 2 | 3 | 4 | 5, seed });
             problems.push(problem);
-          } catch (e) {
+          } catch {
             // 生成失敗はスキップ
           }
         }

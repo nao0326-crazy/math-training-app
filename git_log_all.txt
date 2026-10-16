@@ -1,0 +1,56 @@
+*-.   a116487 cline checkpoint session=1792057374681_8cl8k run=5
+|\ \  
+| | * e9a392c untracked files on cline checkpoint
+| * b82a854 index on main: 0164fe1 Add time-out aggregation: exclude timed-out sessions from solved counts
+|/  
+| *   6d0e733 cline checkpoint session=1792057374681_8cl8k run=4
+|/|\  
+| | * 5d3ba8c untracked files on cline checkpoint
+| * 62c7650 index on main: 0164fe1 Add time-out aggregation: exclude timed-out sessions from solved counts
+|/  
+| *   e09a773 cline checkpoint session=1792057374681_8cl8k run=3
+|/|\  
+| | * 5c92681 untracked files on cline checkpoint
+| * 930196f index on main: 0164fe1 Add time-out aggregation: exclude timed-out sessions from solved counts
+|/  
+| *   4ac6931 cline checkpoint session=1792057374681_8cl8k run=1
+|/|\  
+| | * 90dff1d untracked files on cline checkpoint
+| * ad2270b index on main: 0164fe1 Add time-out aggregation: exclude timed-out sessions from solved counts
+|/  
+| * c15dd8d Agent host session 003069ce-461c-44b5-905e-e176735e377a - baseline checkpoint
+| * 2c51df9 feat(timer): difficulty x field x format time limit
+| * e88f2ea Improve learning quality: exclude timeouts from weakness stats, add timeout relief, fix dedup (#3)
+| | *   666e4d4 cline checkpoint session=1791966606220_frama run=5
+| |/|\  
+|/| | | 
+| | | * 10805da untracked files on cline checkpoint
+| | * 9c900a8 index on main: 0164fe1 Add time-out aggregation: exclude timed-out sessions from solved counts
+| |/  
+|/|   
+| | * e28fd8a Improve learning quality: exclude timeouts from weakness stats, add timeout relief, fix dedup
+| |/  
+| * e2a0db0 Fix lint errors: remove explicit any and unused catch bindings
+| | *   6fb34d5 cline checkpoint session=1791966606220_frama run=4
+| |/|\  
+|/| | | 
+| | | * 4daf9ca untracked files on cline checkpoint
+| | * adeba1b index on main: 0164fe1 Add time-out aggregation: exclude timed-out sessions from solved counts
+| |/  
+|/|   
+| | *   5551287 cline checkpoint session=1791966606220_frama run=3
+| |/|\  
+|/| | | 
+| | | * 22bfe8e untracked files on cline checkpoint
+| | * 160f46d index on main: 0164fe1 Add time-out aggregation: exclude timed-out sessions from solved counts
+| |/  
+|/|   
+| | *   f52a93d cline checkpoint session=1791966606220_frama run=2
+| |/|\  
+|/| | | 
+| | | * d085cc0 untracked files on cline checkpoint
+| | * 223627e index on main: 0164fe1 Add time-out aggregation: exclude timed-out sessions from solved counts
+| |/  
+|/|   
+| | * 87244b5 Fix lint errors: remove explicit any and unused catch bindings
+| |/  
