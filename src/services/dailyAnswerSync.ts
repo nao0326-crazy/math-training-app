@@ -66,14 +66,14 @@ export function runDailyAnswerSync(canContinue: () => boolean = () => true): Pro
   syncPromise = (async () => {
     try {
       if (!legacyPreparationFinished) {
-        if (!canContinue()) return;
-        await prepareLegacyDailyAnswerSyncTasks(canContinue);
-        if (!canContinue()) return;
+        const prepared = await prepareLegacyDailyAnswerSyncTasks(canContinue);
+        if (!prepared || !canContinue()) return;
         legacyPreparationFinished = true;
       }
 
       if (!canContinue()) return;
       const tasks = await getPendingDailyAnswerSyncTasks();
+      if (!canContinue()) return;
       for (const task of tasks) {
         if (!canContinue()) return;
         try {
@@ -81,6 +81,7 @@ export function runDailyAnswerSync(canContinue: () => boolean = () => true): Pro
           // A started request cannot be reliably cancelled. Finish its queue
           // acknowledgement, then the next iteration observes a mode change.
           await removeDailyAnswerSyncTask(task.submissionId);
+          if (!canContinue()) return;
         } catch {
           // 先頭の未送信 task から再試行する。UIの学習操作は止めない。
           return;

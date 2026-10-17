@@ -4,6 +4,11 @@
  */
 export type DifficultyLevel = 1 | 2 | 3 | 4 | 5;
 
+export interface DifficultyRange {
+  min: DifficultyLevel;
+  max: DifficultyLevel;
+}
+
 /**
  * 難易度を構成する独立した要素
  */

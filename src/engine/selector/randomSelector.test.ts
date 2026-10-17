@@ -6,7 +6,7 @@
  * chooseCandidate は random 関数を注入できるため、抽選ロジック自体は決定的に検証する。
  */
 
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import {
   RandomSelector,
   NoViableGeneratorError,
@@ -278,15 +278,18 @@ describe('RandomSelector: 既存機能との整合', () => {
     }
   });
 
-  it('既存 QuestionSelector の履歴なし時の挙動は変わっていない (integer 固定)', () => {
-    // RandomSelector を導入した固然、既存セレクターの挙動は変えない。
+  it('全カテゴリ指定時は履歴がなくても integer に固定されない', () => {
     const categorySelector = new QuestionSelector();
-    for (const i of range(30)) {
+    vi.spyOn(Math, 'random').mockReturnValue(0.99);
+    try {
       const problem = categorySelector.selectNextQuestion([], [], {
         difficultyLevel: 2,
         category: null,
       });
-      expect(problem.category, `attempt ${i}`).toBe('integer');
+      expect(problem.category).not.toBe('integer');
+      expect(getCategories()).toContain(problem.category);
+    } finally {
+      vi.restoreAllMocks();
     }
   });
 });

@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { Category, Problem } from '../types/problem';
+import type { Category, DifficultyRange, Problem } from '../types/problem';
+import { QuestionSelector } from '../engine/selector/questionSelector';
 import { NoWeakTargetError } from '../engine/selector/weakSelector';
 import type { StudyMode } from '../engine/selector/types';
 import type { QuestionFilter } from '../engine/selector/questionPool';
 import { createQuizSelector, toDifficultyLevel } from './quizSelection';
 import { formatAnswer, judgeUserAnswer, type AnswerJudgement } from '../utils/answer';
 import { getTimeLimitSeconds, TIME_OUT_USER_ANSWER } from '../utils/quizTimer';
+import { resolveTimeLimitSeconds } from '../utils/adaptiveTimeLimit';
 import {
   applyOutcome,
   createSessionTally,
@@ -32,14 +34,14 @@ import ScratchPad from '../components/ScratchPad';
 import { createScratchAttemptId } from '../types/scratch';
 
 interface QuizPageProps {
-  /**
-   * 旧セレクター互換のカテゴリ指定。
-   * 通常モードでは常に null (分野選択は管理者モードにのみ存在する)。
-   */
+  /** 旧セレクター互換のカテゴリ指定 (共有出題では選出条件に使われる) */
   category: Category | null;
-  /** 難易度。full-random / adaptive では選出条件に使われない ( adaptive は履歴から決まる。値は表示用ダミー) */
+  /** 難易度 */
   difficulty: number;
-  /** 出題する問題数 (省略時は10問。苦手分野の復習では5問) */
+  /** 共有出題で使う保存済みの問題タイプ範囲 (管理者タブで設定) */
+  problemTypes: string[];
+  /** 共有出題で使う保存済みの難易度範囲 (管理者タブで設定) */
+  difficultyRange: DifficultyRange;
   questionCount?: number;
   /**
    * 学習モード。
@@ -48,6 +50,8 @@ interface QuizPageProps {
    * - weak        : WeakSelector (回答履歴から苦手 problemType x difficulty を抽出)
    * - random      : RandomSelector (指定難易度の全カテゴリ横断)
    * - category    : 旧 QuestionSelector
+   * 指定がない共有出題 (問題を解く) では problemTypes / difficultyRange で
+   * QuestionSelector を使って保存済みの出題範囲から選ぶ。
    */
   studyMode?: StudyMode;
   /** 管理者モード用の絞り込み条件 (通常モードでは null) */
@@ -59,9 +63,13 @@ interface QuizPageProps {
   onExit: () => void;
 }
 
+/** 問題未表示時・初期化前に使う既定の制限時間 (現行ポリシーの既定値) */
+const DEFAULT_LIMIT_SEC = getTimeLimitSeconds(null);
 export default function QuizPage({
   category,
   difficulty,
+  problemTypes,
+  difficultyRange,
   questionCount = 10,
   studyMode,
   filter = null,
@@ -70,6 +78,13 @@ export default function QuizPage({
   onExit,
 }: QuizPageProps) {
   const [problem, setProblem] = useState<Problem | null>(null);
+  /**
+   * 現在の問題の制限時間 (秒)。
+   * 1 問ごとに loadNextQuestion 内で一度だけ決定し、
+   * タイマー表示・時間切れ判定・履歴保存 (timeLimitSec) がすべて同じ値を使う。
+   * 表示中に再レンダリングで再計算・変化させない。
+   */
+  const [limitSec, setLimitSec] = useState<number>(DEFAULT_LIMIT_SEC);
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   /** 詳細判定結果 (数学的等価だが標準形でない回答などの区別用) */
@@ -86,8 +101,13 @@ export default function QuizPage({
    */
   const [attemptId, setAttemptId] = useState<string>(() => createScratchAttemptId());
 
+  /** 学習設定 (分野別・復習・管理者絞込) のセレクター (初期化時に1回だけ組み立てる) */
   const selectorRef = useRef<ReturnType<typeof createQuizSelector> | null>(null);
+  /** 共有出題 (問題を解く) 用: 保存済み出題範囲で選ぶ QuestionSelector */
+  const questionSelectorRef = useRef<QuestionSelector | null>(null);
   const startTimeRef = useRef<number>(0);
+  /** 確定した制限時間の ref 値 (回答確定時の保存に使う。表示と同じ値) */
+  const limitSecRef = useRef<number>(DEFAULT_LIMIT_SEC);
   /** 同一問題の回答確定を同一イベントループ内でも二重実行しない */
   const answerSubmitLockRef = useRef(false);
   const historyRef = useRef<AnswerRecord[]>([]);
@@ -104,7 +124,13 @@ export default function QuizPage({
         if (cancelled) return;
         historyRef.current = history;
         questionHistoryRef.current = questionHistory;
-        selectorRef.current = createQuizSelector({ studyMode, category, difficulty, filter });
+        // 学習設定 (分野別・復習・管理者絞込) があるときは設定ベースのセレクターを使い、
+        // 共有出題 (問題を解く) では保存済みの出題範囲で QuestionSelector を使う。
+        if (studyMode || filter) {
+          selectorRef.current = createQuizSelector({ studyMode, category, difficulty, filter });
+        } else {
+          questionSelectorRef.current = new QuestionSelector();
+        }
         loadNextQuestion();
       } catch {
         if (!cancelled) {
@@ -124,20 +150,33 @@ export default function QuizPage({
    * 次の問題を読み込む
    */
   const loadNextQuestion = useCallback(() => {
-    if (!selectorRef.current) return;
-
-    const selector = selectorRef.current;
-    const level = toDifficultyLevel(difficulty);
     let nextProblem: Problem;
     try {
-      nextProblem = selector.selectNextQuestion(
-        historyRef.current,
-        questionHistoryRef.current,
-        {
-          mode: studyMode ?? { kind: 'full-random' },
-          difficulty: level,
-        },
-      );
+      if (selectorRef.current) {
+        // 学習設定ベース (分野別 adaptive / 復習 weak / 管理者 filteredなど)
+        nextProblem = selectorRef.current.selectNextQuestion(
+          historyRef.current,
+          questionHistoryRef.current,
+          {
+            mode: studyMode ?? { kind: 'full-random' },
+            difficulty: toDifficultyLevel(difficulty),
+          },
+        );
+      } else if (questionSelectorRef.current) {
+        // 共有出題: 管理者タブで保存された出題範囲に従って選ぶ
+        nextProblem = questionSelectorRef.current.selectNextQuestion(
+          historyRef.current,
+          questionHistoryRef.current,
+          {
+            difficultyLevel: difficulty,
+            category,
+            problemTypes,
+            difficultyRange,
+          },
+        );
+      } else {
+        return;
+      }
     } catch (e) {
       // 復習対象が0件 (履歴がない / 全問正解) の場合は画面を壊さず、
       // エラーメッセージを表示して安全に終了できるようにする。
@@ -145,9 +184,23 @@ export default function QuizPage({
         setError(e.message);
         return;
       }
+      // 共有出題では出題範囲の不備などのメッセージをそのまま表示する。
+      // 学習設定セレクターの内部エラーは露出しない。
+      if (e instanceof Error && !selectorRef.current) {
+        setError(e.message);
+        return;
+      }
       setError('問題の生成に失敗しました。');
       return;
     }
+
+    // 1 問ごとの制限時間をここで一度だけ決定する (適応型。記録不足時は現行の初期時間)。
+    // タイマー表示・時間切れ判定・履歴保存はすべてこの値を使う。
+    // setProblem より先に設定し、問題が表示される最初のレンダリングで確定させることで
+    // 表示中に制限時間が変わったり、期限が作り直されたりしない。
+    const nextLimitSec = resolveTimeLimitSeconds(nextProblem, historyRef.current);
+    limitSecRef.current = nextLimitSec;
+    setLimitSec(nextLimitSec);
 
     setProblem(nextProblem);
     setIsAnswered(false);
@@ -174,7 +227,7 @@ export default function QuizPage({
     void persistQuizQuestion(isAdminMode, record);
     // 絞り込み (filter / category) はセレクター生成時 (初期化) に確定するため、
     // 毎問変わるのは difficulty と studyMode だけ。
-  }, [difficulty, isAdminMode, studyMode]);
+  }, [category, difficulty, difficultyRange, isAdminMode, problemTypes, studyMode]);
 
   /**
    * 回答を判定する
@@ -207,7 +260,9 @@ export default function QuizPage({
         nextJudgement = result;
       }
       const answerTimeSec = (Date.now() - startTimeRef.current) / 1000;
-      const limitSec = getTimeLimitSeconds(problem);
+      // 制限時間は問題表示時に一度だけ決定した値をそのまま保存する (画面表示と必ず一致)。
+      // 描画中の getTimeLimitSeconds など別の再計算は使わない。
+      const limitSec = limitSecRef.current;
 
       setIsCorrect(correct);
       setJudgement(nextJudgement);
@@ -359,9 +414,6 @@ export default function QuizPage({
           問題 {questionNumber} / {questionCount}
         </div>
         <div className="quiz-meta">
-          {studyMode?.kind === 'adaptive' && (
-            <span className="quiz-area">分野: {studyMode.area}</span>
-          )}
           <span className="quiz-category">{categoryLabel(problem.category)}</span>
           <span className="quiz-difficulty">
             {difficultyLabel(problem.difficulty.level)}
@@ -374,7 +426,7 @@ export default function QuizPage({
       {!isAnswered && (
         <QuizTimer
           problemId={problem.id}
-          limitSec={getTimeLimitSeconds(problem)}
+          limitSec={limitSec}
           onExpire={handleTimeout}
         />
       )}
@@ -415,9 +467,7 @@ export default function QuizPage({
       )}
 
       {isAnswered && (
-        <div
-          className={`feedback ${isCorrect ? 'correct' : timedOut ? 'timed-out' : 'incorrect'}`}
-        >
+        <div className={`feedback ${isCorrect ? 'correct' : timedOut ? 'timed-out' : 'incorrect'}`}>
           <div className="feedback-title">
             {isCorrect
               ? '🎉 せいかい！'

@@ -51,6 +51,55 @@ export const TIME_LIMIT_CONFIG = {
 };
 
 /**
+ * 適応型制限時間の設定 (本人の解答履歴から算出するときの範囲・条件)。
+ *
+ * TIME_LIMIT_CONFIG (初期値ポリシー) とは別枠で、初期値そのものは一切変更しない。
+ * 記録が足りないとき・計算に失敗したときは初期値 (getTimeLimitSeconds) に戻る。
+ * 計算本体は adaptiveTimeLimit.ts にある (このファイルは制限時間ポリシーの一元管理)。
+ */
+export const ADAPTIVE_TIME_LIMIT_CONFIG = {
+  /** 集計単位 (problemType × difficultyLevel) ごとに採用する直近の有効記録数 */
+  evaluationWindow: 20,
+  /** 適応計算に必要な有効正答記録の最低件数 (未満なら初期値を使う) */
+  minSamples: 8,
+  /** 外れ値除外後に平均を取る最低件数 (未満なら除外前の記録で平均する) */
+  minKeptSamples: 3,
+  /** 平均解答時間に乗じる係数 */
+  factor: 0.9,
+  /** 適応型制限時間の下限 (秒) */
+  minSeconds: 20,
+  /** 適応型制限時間の上限 (秒)。初期値の上限と同値 */
+  maxSeconds: 300,
+  /**
+   * 時間切れが続いたときの制限時間の緩和 (timeout relief)。
+   *
+   * 適応制限時間の標本は「正答・非時間切れ・有限の正数」の記録だけ。
+   * しかし、ある (problemType × difficulty) で正答がまだ少ないうちに
+   * 時間切れが続くと、有効標本が 8 件 (minSamples) に届かず、
+   * 適応計算が働かないまま初期時間の問い直しが繰り返され、
+   * いつまでも時間切れになる「行き詰まり」が起きうる。
+   *
+   * 時間切れは「制限時間に対して解くのに時間が足りない」という最も強い
+   * 適応シグナルなので、次の条件を満たすときだけ初期値を緩和する:
+   *   - 対象グループの直近 timeoutRelief.window 件の中に
+   *     時間切れ (isTimedOut === true) が timeoutRelief.minTimeouts 件以上ある
+   *   - 緩和後の値は初期値 × timeoutRelief.factor とし、絶対上限 maxSeconds を超えない
+   *     (無限に伸びる悪循環を作らない)
+   *
+   * 正答標本が十分 (8 件以上) にあるときは、通常の適応値を優先し、
+   * この緩和は使わない (既存の適応挙動を変えない)。
+   */
+  timeoutRelief: {
+    /** 時間切れを数える直近の履歴件数 */
+    window: 10,
+    /** 緩和を発動する時間切れの件数 (この値以上) */
+    minTimeouts: 3,
+    /** 初期値に乗じる緩和倍率 */
+    factor: 1.5,
+  },
+} as const;
+
+/**
  * 文章読解を要するカテゴリ (単純な計算入力より多めの時間を与える)。
  * ここに無い integer / decimal / fraction / numberTheory / expression は
  * 計算主体のため基準秒数のみを適用する。

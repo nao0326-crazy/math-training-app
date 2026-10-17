@@ -26,3 +26,17 @@ describe('App mode boundary', () => {
     expect(markup).not.toContain('admin-category');
   });
 });
+
+describe('app entry flow', () => {
+  it('starts at the shared home quiz entry and keeps maintenance mode as the top-level gate', () => {
+    const markup = render(false);
+    expect(markup).toContain('問題を解く');
+    expect(markup).toContain('管理者タブ');
+    expect(markup).not.toContain('管理者パスワードを入力してください。');
+    expect(markup).not.toContain('ぶんやをえらぶ');
+
+    const maintenanceMarkup = render(true);
+    expect(maintenanceMarkup).toContain('maintenance-page');
+    expect(maintenanceMarkup).not.toContain('問題を解く');
+  });
+});

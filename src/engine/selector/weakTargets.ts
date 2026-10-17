@@ -16,13 +16,14 @@ import {
   MIN_ATTEMPTS_FOR_WEAKNESS,
   WEAKNESS_ACCURACY_THRESHOLD,
 } from '../../utils/weakAreas';
+import { isSolvedRecord } from '../../utils/solvedCount';
 
 /**
  * 復習対象の (problemType, difficulty) 組
  *
- * `accuracyRate` は判定に用いた正答率。
+ * `accuracyRate` は判定に用いた正答率。時間切れを除いた制限時間内の解答での値。
  * `lastWrongAt` は直近の不正解日時 (ミリ秒)。直近に間違えているほど大きい。
- * `totalCount` は判定に用いた回答数 (直近のみを数える)。
+ * `totalCount` は判定に用いた制限時間内の解答数 (時間切れを除く)。
  */
 export interface WeakTarget {
   problemType: string;
@@ -43,12 +44,18 @@ function keyOf(problemType: string, difficulty: number): string {
  * 回答履歴から復習対象の (problemType, difficulty) を抽出する
  *
  * 判定基準は既存と同じ 2 つだけを使う:
- *   - 回答数が MIN_ATTEMPTS_FOR_WEAKNESS 以上
- *   - 正答率が WEAKNESS_ACCURACY_THRESHOLD 未満
+ *   - 制限時間内に解答できた数 (時間切れを除く) が MIN_ATTEMPTS_FOR_WEAKNESS 以上
+ *   - その上での正答率が WEAKNESS_ACCURACY_THRESHOLD 未満
  *
- * これにより
- *   - 回答数が少ない組は判定しない (少ない回答で「苦手」と断定しない)
- *   - 1問間違えただけでは入らない (閾値未満にならない)
+ * 【時間切れの扱い】時間切れ (isTimedOut) は「解けなかった」のではなく
+ * 「時間が足りなかった」だけで、理解度とは別問題。そのため正答率の母集団から
+ * 除外し (solvedCount と同じ解釈)、制限時間内に実際に解答した問題だけを数える。
+ * これにより「時間に余裕がなくても正しく解ける」分野が誤って苦手判定されるのを防ぐ。
+ * 時間切れしか無い分野は母集団が 0 件となり、回答数不足として対象外になる。
+ *
+ * 既存の性質:
+ *   - 制限時間内の解答が少ない組は判定しない (少ない回答で「苦手」と断定しない)
+ *   - 時間内で1問間違えただけでは入らない (閾値未満にならない)
  *   - 正答が増えると外れる (同じ式で再計算される)
  * という既存.category 判定の性質をそのまま保てる。
  *
@@ -74,15 +81,17 @@ export function findWeakTargets(records: AnswerRecord[]): WeakTarget[] {
 
   const targets: WeakTarget[] = [];
   for (const group of groups.values()) {
-    const total = group.records.length;
+    // 時間切れは「時間内に解答した問題」ではないため母集団から除外する。
+    const solved = group.records.filter(isSolvedRecord);
+    const total = solved.length;
     if (total < MIN_ATTEMPTS_FOR_WEAKNESS) continue;
 
-    const correct = group.records.filter((r) => r.isCorrect).length;
+    const correct = solved.filter((r) => r.isCorrect).length;
     const accuracy = correct / total;
     if (accuracy >= WEAKNESS_ACCURACY_THRESHOLD) continue;
 
     let lastWrongAt = 0;
-    for (const r of group.records) {
+    for (const r of solved) {
       if (r.isCorrect) continue;
       const t = new Date(r.answeredAt).getTime();
       if (Number.isFinite(t) && t > lastWrongAt) lastWrongAt = t;

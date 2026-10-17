@@ -1,90 +1,77 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-const { getPending, prepareLegacy, removeTask } = vi.hoisted(() => ({
-  getPending: vi.fn(),
-  prepareLegacy: vi.fn(),
-  removeTask: vi.fn(),
+const dbMocks = vi.hoisted(() => ({
+  getPendingDailyAnswerSyncTasks: vi.fn(),
+  prepareLegacyDailyAnswerSyncTasks: vi.fn(),
+  removeDailyAnswerSyncTask: vi.fn(),
 }));
 
-vi.mock('../storage/db', () => ({
-  getPendingDailyAnswerSyncTasks: getPending,
-  prepareLegacyDailyAnswerSyncTasks: prepareLegacy,
-  removeDailyAnswerSyncTask: removeTask,
-}));
+vi.mock('../storage/db', () => dbMocks);
 
-import { runDailyAnswerSync } from './dailyAnswerSync';
-
-function deferred<T>() {
-  let resolve!: (value: T) => void;
-  const promise = new Promise<T>((resolvePromise) => {
-    resolve = resolvePromise;
-  });
-  return { promise, resolve };
+async function importSyncService() {
+  vi.resetModules();
+  return import('./dailyAnswerSync');
 }
 
-describe('runDailyAnswerSync mode gating', () => {
+describe('daily answer sync mode gate', () => {
   beforeEach(() => {
+    vi.clearAllMocks();
     vi.stubEnv('VITE_SUPABASE_URL', 'https://example.supabase.co');
     vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'public-test-key');
-    getPending.mockReset();
-    prepareLegacy.mockReset().mockResolvedValue(undefined);
-    removeTask.mockReset().mockResolvedValue(undefined);
+    dbMocks.prepareLegacyDailyAnswerSyncTasks.mockResolvedValue(true);
+    dbMocks.getPendingDailyAnswerSyncTasks.mockResolvedValue([]);
+    dbMocks.removeDailyAnswerSyncTask.mockResolvedValue(undefined);
   });
 
-  afterEach(() => {
-    vi.unstubAllGlobals();
-    vi.unstubAllEnvs();
-  });
-
-  it('does not start queue preparation while admin mode is active', async () => {
-    const fetch = vi.fn();
-    vi.stubGlobal('fetch', fetch);
+  it('does not start DB or network work when the gate is closed', async () => {
+    const { runDailyAnswerSync } = await importSyncService();
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
 
     await runDailyAnswerSync(() => false);
 
-    expect(prepareLegacy).not.toHaveBeenCalled();
-    expect(getPending).not.toHaveBeenCalled();
-    expect(fetch).not.toHaveBeenCalled();
+    expect(dbMocks.prepareLegacyDailyAnswerSyncTasks).not.toHaveBeenCalled();
+    expect(dbMocks.getPendingDailyAnswerSyncTasks).not.toHaveBeenCalled();
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it('checks the live mode again after delayed legacy preparation', async () => {
-    const preparation = deferred<void>();
-    prepareLegacy.mockReturnValueOnce(preparation.promise);
-    getPending.mockResolvedValue([]);
-    let adminMode = false;
-    const sync = runDailyAnswerSync(() => !adminMode);
-    await vi.waitFor(() => expect(prepareLegacy).toHaveBeenCalledOnce());
+  it('does not process pending tasks if the gate closes during legacy preparation', async () => {
+    const { runDailyAnswerSync } = await importSyncService();
+    let canContinue = true;
+    dbMocks.prepareLegacyDailyAnswerSyncTasks.mockImplementationOnce(async (gate) => {
+      canContinue = false;
+      return gate();
+    });
 
-    adminMode = true;
-    preparation.resolve();
-    await sync;
+    await runDailyAnswerSync(() => canContinue);
 
-    expect(getPending).not.toHaveBeenCalled();
-
-    adminMode = false;
-    await runDailyAnswerSync(() => !adminMode);
-    expect(prepareLegacy).toHaveBeenCalledTimes(2);
-    expect(getPending).toHaveBeenCalledOnce();
+    expect(dbMocks.getPendingDailyAnswerSyncTasks).not.toHaveBeenCalled();
   });
 
-  it('acknowledges an in-flight successful task and stops before the next task', async () => {
-    const firstResponse = deferred<Response>();
-    const fetch = vi.fn().mockReturnValue(firstResponse.promise);
-    vi.stubGlobal('fetch', fetch);
-    getPending.mockResolvedValue([
-      { submissionId: 'normal-1', answeredAt: '2026-10-09T00:00:00.000Z' },
-      { submissionId: 'normal-2', answeredAt: '2026-10-09T00:01:00.000Z' },
+  it('removes an acknowledged task and stops before sending another after gate closure', async () => {
+    const { runDailyAnswerSync } = await importSyncService();
+    let canContinue = true;
+    let resolveResponse!: (response: { ok: boolean }) => void;
+    const fetchMock = vi.fn(
+      () =>
+        new Promise<{ ok: boolean }>((resolve) => {
+          resolveResponse = resolve;
+        }),
+    );
+    vi.stubGlobal('fetch', fetchMock);
+    dbMocks.getPendingDailyAnswerSyncTasks.mockResolvedValue([
+      { submissionId: 'first', answeredAt: '2026-10-09T00:00:00.000Z' },
+      { submissionId: 'second', answeredAt: '2026-10-09T00:01:00.000Z' },
     ]);
-    let adminMode = false;
-    const sync = runDailyAnswerSync(() => !adminMode);
-    await vi.waitFor(() => expect(fetch).toHaveBeenCalledOnce());
 
-    adminMode = true;
-    firstResponse.resolve(new Response(null, { status: 204 }));
+    const sync = runDailyAnswerSync(() => canContinue);
+    await vi.waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
+    canContinue = false;
+    resolveResponse({ ok: true });
     await sync;
 
-    expect(removeTask).toHaveBeenCalledOnce();
-    expect(removeTask).toHaveBeenCalledWith('normal-1');
-    expect(fetch).toHaveBeenCalledOnce();
+    expect(dbMocks.removeDailyAnswerSyncTask).toHaveBeenCalledOnce();
+    expect(dbMocks.removeDailyAnswerSyncTask).toHaveBeenCalledWith('first');
+    expect(fetchMock).toHaveBeenCalledOnce();
   });
 });

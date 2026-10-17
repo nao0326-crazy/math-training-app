@@ -11,8 +11,10 @@ import { describe, expect, it } from 'vitest';
 import { FilteredSelector } from './filteredSelector';
 import { EmptyQuestionPoolError, filterQuestionPool } from './questionPool';
 import { validateProblem } from '../validator/validator';
+import { fingerprintProblem } from '../diversity/metadata';
 import type { QuestionFilter } from './questionPool';
 import type { Problem } from '../../types/problem';
+import type { QuestionHistory } from '../../types/history';
 
 const request = { mode: { kind: 'full-random' } as const, difficulty: 2 as const };
 
@@ -68,6 +70,58 @@ describe('FilteredSelector: 条件付き出題', () => {
   it('条件が空なら通常モードと同じ完全ランダム (複数分野が出る)', () => {
     const categories = new Set(sample({}).map((p) => p.category));
     expect(categories.size).toBeGreaterThan(2);
+  });
+});
+
+describe('FilteredSelector: セッション内の重複抑制', () => {
+  /** 直近に出た問題の fingerprint を持つ QuestionHistory を作る */
+  function historyOf(problems: Problem[]): QuestionHistory[] {
+    return problems.map((p, i) => ({
+      problemId: p.id,
+      problemType: p.type,
+      parameters: p.parameters,
+      askedAt: new Date(Date.UTC(2026, 0, 1, 0, 0, i)).toISOString(),
+      fingerprint: fingerprintProblem(p),
+    }));
+  }
+
+  it('直前に出た問題と同一フィンガープリントなら引き直す', () => {
+    // 同一 (type, difficulty) で母集団を固定し、直前履歴をその母集団の
+    // 1問目に一致させる → 次の出題はその問題を避けなければならない。
+    const filter: QuestionFilter = { type: 'fraction_reduce', difficulty: 2 };
+    const first = sample(filter, 1)[0];
+    // 同じ問題が連続で出るかを、直前履歴にその問題を入れて試す
+    const selector = new FilteredSelector(filter);
+    const request = { mode: { kind: 'full-random' } as const, difficulty: 2 as const };
+    const problem = selector.selectNextQuestion([], historyOf([first]), request);
+    expect(fingerprintProblem(problem)).not.toBe(fingerprintProblem(first));
+  });
+
+  it('複数回の抽選で直前問題を避ける (母集団が2種以上なら必ず別問題)', () => {
+    const filter: QuestionFilter = { category: 'fraction', difficulty: 2 };
+    const request = { mode: { kind: 'full-random' } as const, difficulty: 2 as const };
+    const selector = new FilteredSelector(filter);
+    // 50 回連続で「直前の問題」と同じものが出ないこと
+    let prev = sample(filter, 1)[0];
+    for (let i = 0; i < 50; i++) {
+      const next = selector.selectNextQuestion([], historyOf([prev]), request);
+      expect(
+        fingerprintProblem(next),
+        `試行${i}で直前の問題と同一`,
+      ).not.toBe(fingerprintProblem(prev));
+      prev = next;
+    }
+  });
+
+  it('候補空間が1問しかない場合は絞り込みを壊さず出題を継続する', () => {
+    // 1問しか存在しない母集団では重複回避が不可能。従来どおり出題できることを確認。
+    const filter: QuestionFilter = { type: 'fraction_reduce', difficulty: 1 };
+    const selector = new FilteredSelector(filter);
+    const request = { mode: { kind: 'full-random' } as const, difficulty: 1 as const };
+    // 履歴が空でも例外なく出る
+    expect(() => selector.selectNextQuestion([], [], request)).not.toThrow();
+    const p = selector.selectNextQuestion([], [], request);
+    expect(p.type).toBe('fraction_reduce');
   });
 });
 

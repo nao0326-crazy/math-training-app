@@ -95,6 +95,8 @@ function renderQuiz(props: Partial<Parameters<typeof QuizPage>[0]> = {}) {
       category={null}
       difficulty={3}
       questionCount={3}
+      problemTypes={[]}
+      difficultyRange={{ min: 1, max: 5 }}
       studyMode={{ kind: 'full-random' }}
       isAdminMode={false}
       canStartNormalSync={() => true}
