@@ -106,4 +106,26 @@ describe('filterQuestionPool', () => {
     expect(error.message).toContain('category=fraction');
     expect(error.message).toContain('grade=1');
   });
+
+  it('types が空配列なら候補0件 (すべて選択と解釈しない)', () => {
+    expect(filterQuestionPool({ types: [] }, pool)).toEqual([]);
+  });
+
+  it('types が null / undefined なら種類で絞らない', () => {
+    expect(filterQuestionPool({ types: null }, pool).length).toBe(pool.length);
+    expect(filterQuestionPool({ types: undefined }, pool).length).toBe(pool.length);
+    expect(filterQuestionPool({}, pool).length).toBe(pool.length);
+  });
+
+  it('types に値があれば一致する種類だけになる (type と併用はAND)', () => {
+    const a = pool[0].type;
+    const b = pool[1].type;
+    const filtered = filterQuestionPool({ types: [a, b] }, pool);
+    expect(filtered.length).toBeGreaterThan(0);
+    for (const entry of filtered) expect([a, b]).toContain(entry.type);
+    expect(filterQuestionPool({ type: a, types: [a, b] }, pool).map((e) => e.type)).toEqual(
+      filterQuestionPool({ type: a }, pool).map((e) => e.type),
+    );
+    expect(filterQuestionPool({ type: a, types: [b] }, pool)).toEqual([]);
+  });
 });
