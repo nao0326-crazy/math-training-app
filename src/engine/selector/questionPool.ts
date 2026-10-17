@@ -49,6 +49,15 @@ export interface QuestionFilter {
   category?: Category | null;
   /** 問題タイプ (generator ID) */
   type?: string | null;
+  /**
+   * 問題タイプの一覧 (generator ID の配列)。
+   * 既存の `type: string` とは別枠で、複数指定用に使う。
+   * - `[]` は候補0件として扱う (「すべて選択」と解釈しない)。
+   * - `null` / `undefined` は種類による絞り込みを行わない。
+   * - 値ありは配列内の種類に一致する問題だけを候補にする。
+   * `type` と併用した場合は両方を満たす (AND)。
+   */
+  types?: string[] | null;
   /** 学年 */
   grade?: CurriculumGrade | null;
   /** 難易度 */
@@ -84,9 +93,17 @@ export function filterQuestionPool(
 ): QuestionPoolEntry[] {
   if (!filter) return [...pool];
 
+  // `types: []` は候補0件として扱う (「すべて選択」と解釈しない)。
+  // `null` / `undefined` は種類による絞り込みを行わない。
+  if (filter.types !== undefined && filter.types !== null && filter.types.length === 0) {
+    return [];
+  }
+  const allowedTypes = filter.types ? new Set(filter.types) : null;
+
   return pool.filter((entry) => {
     if (filter.category && entry.category !== filter.category) return false;
     if (filter.type && entry.type !== filter.type) return false;
+    if (allowedTypes && !allowedTypes.has(entry.type)) return false;
     if (filter.grade && entry.grade !== filter.grade) return false;
     if (filter.difficulty && !entry.supportedLevels.includes(filter.difficulty)) return false;
     return true;
