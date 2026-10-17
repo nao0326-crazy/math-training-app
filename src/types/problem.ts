@@ -285,3 +285,16 @@ export interface ValidationResult {
   valid: boolean;
   errors: string[];
 }
+/**
+ * 問題の種類（generator レジストリで登録されている問題タイプ）
+ */
+export type ProblemType = string;
+
+/** 問題の種類の一覧（全登録ジェネレータから重複なしで取得する） */
+export function listProblemTypes(): ProblemType[] {
+  const types = new Set<ProblemType>();
+  for (const generator of getAllGenerators()) {
+    types.add(generator.type);
+  }
+  return Array.from(types).sort();
+}
