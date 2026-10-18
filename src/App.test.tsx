@@ -22,7 +22,6 @@ describe('App mode boundary', () => {
 
     expect(markup).toContain('app-header');
     expect(markup).toContain(`v${__APP_VERSION__}`);
-    expect(markup).toContain('どの分野を勉強しますか？');
     expect(markup).not.toContain('admin-category');
   });
 });

@@ -4,32 +4,26 @@ import QuizPage from './pages/QuizPage';
 import HistoryPage from './pages/HistoryPage';
 import DailyProgressNotification from './components/DailyProgressNotification';
 import type { Category, DifficultyRange } from './types/problem';
-import { REVIEW_QUESTION_COUNT } from './utils/weakAreas';
 import { runDailyAnswerSync } from './services/dailyAnswerSync';
+import { REVIEW_QUESTION_COUNT } from './utils/weakAreas';
 import MaintenancePage from './components/MaintenancePage';
 import { isMaintenanceMode } from './utils/maintenanceMode';
 import type { QuizSelection } from './pages/quizSelection';
 import VerificationCodePage from './pages/VerificationCodePage';
 import PracticeSetupPage from './pages/PracticeSetupPage';
-import {
-  DEFAULT_ADMIN_PRACTICE_DIFFICULTY_RANGE,
-  getAdminPracticeConfiguration,
-} from './storage/db';
-import { getAvailableDifficultyLevels } from './engine/selector/questionSelector';
+import { getAdminPracticeConfiguration } from './storage/db';
 
 type Page = 'home' | 'quiz' | 'history' | 'verification' | 'practiceSetup';
 
 function NormalApp() {
   const [page, setPage] = useState<Page>('home');
   const [questionCount, setQuestionCount] = useState(10);
-  /** 出題条件 (共有出題では category / difficulty のみ使用) */
+  /** 出題条件 (filtered = 管理者出題範囲による一様ランダム出題のみ) */
   const [selection, setSelection] = useState<QuizSelection>({
-    studyMode: { kind: 'full-random' },
-    category: null,
+    studyMode: { kind: 'filtered', filter: {} },
     difficulty: 2,
     filter: null,
   });
-  const [adminUnlocked, setAdminUnlocked] = useState(false);
   const [isAdminQuiz, setIsAdminQuiz] = useState(false);
   const isAdminQuizRef = useRef(false);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
@@ -56,10 +50,8 @@ function NormalApp() {
 
   const clearAdminMode = () => {
     setAdminQuizMode(false);
-    setAdminUnlocked(false);
     setSelection({
-      studyMode: { kind: 'full-random' },
-      category: null,
+      studyMode: { kind: 'filtered', filter: {} },
       difficulty: 2,
       filter: null,
     });
@@ -116,44 +108,18 @@ function NormalApp() {
   };
 
   /**
-   * 通常モードで学習を始める (分野指定つきの適応難易度)
+   * 学習を始める (全学習共通): 保存済みの管理者出題範囲を厳密に適用する。
    *
-   * selection を明示的に adaptive に戻す。管理者モードで指定して開始した
-   * 直後でも、分野を選ぶと通常モードの分野別学習に戻る
-   * (管理者の絞り込みが残り続けない)。
-   */
-  const startAreaQuiz = (area: string) => {
-    setAdminQuizMode(false);
-    setAdminUnlocked(false);
-    setSelection({
-      studyMode: { kind: 'adaptive', area },
-      category: null,
-      difficulty: 2,
-      filter: null,
-    });
-    setQuestionCount(10);
-    setPage('quiz');
-  };
-
-  /** 管理者モードから指定条件つきで学習を始める */
-  const startAdminQuiz = (next: QuizSelection) => {
-    setSelection(next);
-    setQuestionCount(10);
-    setAdminQuizMode(true);
-    setPage('quiz');
-  };
-
-  /**
-   * 共有出題 (問題を解く): 保存済みの出題範囲を検証してから開始する
-   *
-   * selection に studyMode がない共有出題では、QuizPage 内で
-   * QuestionSelector が保存済み範囲 (problemTypes / difficultyRange) に
-   * 従って問題を選ぶ。
+   * 管理者が設定した problemTypes / difficultyRange を filter に変換し、
+   * FilteredSelector で一様ランダム出題する。
+   * 復習 (reviewCategory 指定) も同じ出題範囲に「苦手カテゴリ」を追加絞り込み
+   * するだけで、範囲外への緩和や履歴・苦手度による重み付けは行わない。
+   * 出題範囲が空、または条件に一致する問題が0件の場合はエラーを表示する。
    */
   const startQuiz = async (
     difficulty: number,
-    category: Category | null = null,
     count = 10,
+    reviewCategory?: Category,
   ) => {
     if (startLockRef.current) return;
     startLockRef.current = true;
@@ -165,23 +131,26 @@ function NormalApp() {
       setSavedProblemTypes(problemTypes);
       setSavedDifficultyRange(difficultyRange);
       setScopeLoadError(null);
+
       if (problemTypes.length === 0) {
-        setStartError('出題範囲が空です。管理者タブで出題範囲を設定してください。');
-        setPage('home');
-        return;
-      }
-      if (getAvailableDifficultyLevels(problemTypes, difficultyRange, category).length === 0) {
-        setStartError(
-          `設定範囲（Lv${difficultyRange.min}〜Lv${difficultyRange.max}）で出題できる問題がありません。管理者タブで難易度範囲を見直してください。`,
-        );
+        setStartError('出題範囲が設定されていません。管理者タブで出題範囲を設定してください。');
         setPage('home');
         return;
       }
 
-      // 共有出題では selection に studyMode を持たせず、
-      // category / difficulty と保存済み範囲だけで QuizPage を開始する。
+      // 管理者設定を QuestionFilter に変換 (復習時は苦手カテゴリでも追加絞り込み)
+      const filter = {
+        category: reviewCategory ?? null,
+        types: problemTypes,
+        difficultyRange,
+      };
+
       setAdminQuizMode(false);
-      setSelection({ studyMode: undefined, category, difficulty, filter: null });
+      setSelection({
+        studyMode: { kind: 'filtered', filter },
+        difficulty,
+        filter,
+      });
       setQuestionCount(count);
       setPage('quiz');
     } catch {
@@ -193,21 +162,6 @@ function NormalApp() {
       startLockRef.current = false;
       setIsStarting(false);
     }
-  };
-
-  /**
-   * 学習履歴ページから苦手復習を開始する
-   *
-   * weak モードで開始する。WeakSelector は復習対象の
-   * problemType x difficulty を回答履歴から決めるため、
-   * QuestionSelector に Fallback しない。
-   */
-  const startReview = (_category: Category, difficulty: number) => {
-    setAdminQuizMode(false);
-    setAdminUnlocked(false);
-    setSelection({ studyMode: { kind: 'weak', types: [] }, category: null, difficulty, filter: null });
-    setQuestionCount(REVIEW_QUESTION_COUNT);
-    setPage('quiz');
   };
 
   return (
@@ -241,14 +195,10 @@ function NormalApp() {
       <main className="app-main">
         {page === 'home' && (
           <HomePage
-            onStartArea={startAreaQuiz}
             onShowHistory={() => {
               clearAdminMode();
               setPage('history');
             }}
-            adminUnlocked={adminUnlocked}
-            onAdminUnlockedChange={setAdminUnlocked}
-            onStartAdminQuiz={startAdminQuiz}
             onStartQuiz={(difficulty) => void startQuiz(difficulty)}
             onOpenVerification={() => setPage('verification')}
             onOpenPracticeSetup={() => setPage('practiceSetup')}
@@ -266,19 +216,22 @@ function NormalApp() {
         )}
         {page === 'quiz' && (
           <QuizPage
-            category={selection.category}
             difficulty={selection.difficulty}
             questionCount={questionCount}
             studyMode={selection.studyMode}
             filter={selection.filter}
             isAdminMode={isAdminQuiz}
-            problemTypes={savedProblemTypes ?? []}
-            difficultyRange={savedDifficultyRange ?? DEFAULT_ADMIN_PRACTICE_DIFFICULTY_RANGE}
             canStartNormalSync={canStartNormalSync}
             onExit={returnToNormalMode}
           />
         )}
-        {page === 'history' && <HistoryPage onStartReview={startReview} />}
+        {page === 'history' && (
+          <HistoryPage
+            onStartReview={(category, difficulty) =>
+              void startQuiz(difficulty, REVIEW_QUESTION_COUNT, category)
+            }
+          />
+        )}
         {page === 'verification' && (
           <VerificationCodePage
             onVerified={() => {

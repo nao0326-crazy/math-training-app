@@ -1,110 +1,42 @@
 /**
  * セレクター組み立て (createQuizSelector) のテスト
  *
- * 通常モードと管理者モードの分岐が、型と実装の両方で
- * 狙いどおりになっていることを確認する。
+ * すべての学習で FilteredSelector を使用し、管理者が設定した
+ * 出題範囲を厳密に適用することを確認する。
  */
 
 import { describe, expect, it } from 'vitest';
-import {
-  createQuizSelector,
-  toDifficultyLevel,
-  LegacyQuestionSelectorAdapter,
-} from './quizSelection';
-import { FullRandomSelector } from '../engine/selector/fullRandomSelector';
+import { createQuizSelector, toDifficultyLevel } from './quizSelection';
 import { FilteredSelector } from '../engine/selector/filteredSelector';
-import { RandomSelector } from '../engine/selector/randomSelector';
-import { WeakSelector } from '../engine/selector/weakSelector';
-import { AdaptiveSelector } from '../engine/selector/adaptiveSelector';
+import type { StudyMode } from '../engine/selector/types';
 
-describe('createQuizSelector: 通常モード', () => {
-  it('full-random は FullRandomSelector (全母集団からランダム)', () => {
+describe('createQuizSelector', () => {
+  it('filtered モードで FilteredSelector を返す', () => {
     const s = createQuizSelector({
-      studyMode: { kind: 'full-random' },
-      category: null,
+      studyMode: { kind: 'filtered', filter: {} },
       difficulty: 2,
       filter: null,
     });
-    expect(s).toBeInstanceOf(FullRandomSelector);
+    expect(s).toBeInstanceOf(FilteredSelector);
   });
 
-  it('filter が無くても category が null なら完全ランダムになる', () => {
-    const s = createQuizSelector({ category: null, difficulty: 2 });
-    expect(s).toBeInstanceOf(FullRandomSelector);
-  });
-
-  it('難易度・分野を指定しても full-random は指定を使わない', () => {
-    const s = createQuizSelector({
-      studyMode: { kind: 'full-random' },
-      category: 'fraction',
-      difficulty: 5,
-      filter: { category: 'fraction' },
-    });
-    expect(s).toBeInstanceOf(FullRandomSelector);
-  });
-});
-
-describe('createQuizSelector: 管理者モード', () => {
-  it('filtered は FilteredSelector', () => {
+  it('filter があれば FilteredSelector に渡す', () => {
     const s = createQuizSelector({
       studyMode: { kind: 'filtered', filter: { category: 'fraction', difficulty: 3 } },
-      category: 'fraction',
       difficulty: 3,
       filter: { category: 'fraction', difficulty: 3 },
     });
     expect(s).toBeInstanceOf(FilteredSelector);
   });
 
-  it('filter だけの指定があれば FilteredSelector', () => {
-    const s = createQuizSelector({
-      category: null,
-      difficulty: 2,
-      filter: { grade: 6 },
-    });
-    expect(s).toBeInstanceOf(FilteredSelector);
-  });
-
-  it('旧モード (weak / random / category) も従来セレクターに接続する', () => {
-    expect(
+  it('未対応の学習モードはエラーを投げる', () => {
+    expect(() =>
       createQuizSelector({
-        studyMode: { kind: 'weak', types: [] },
-        category: null,
+        studyMode: { kind: 'full-random' } as StudyMode,
         difficulty: 2,
+        filter: null,
       }),
-    ).toBeInstanceOf(WeakSelector);
-
-    expect(
-      createQuizSelector({ studyMode: { kind: 'random' }, category: null, difficulty: 2 }),
-    ).toBeInstanceOf(RandomSelector);
-
-    expect(
-      createQuizSelector({
-        studyMode: { kind: 'category', category: 'fraction' },
-        category: 'fraction',
-        difficulty: 2,
-      }),
-    ).toBeInstanceOf(LegacyQuestionSelectorAdapter);
-  });
-});
-
-describe('createQuizSelector: 通常モード (分野別・適応難易度)', () => {
-  it('adaptive は AdaptiveSelector (分野固定で毎回難易度を決める)', () => {
-    const s = createQuizSelector({
-      studyMode: { kind: 'adaptive', area: '図形' },
-      category: null,
-      difficulty: 2,
-      filter: null,
-    });
-    expect(s).toBeInstanceOf(AdaptiveSelector);
-  });
-
-  it('全モード (adaptive) を指定したときのみ AdaptiveSelector になる', () => {
-    expect(
-      createQuizSelector({ studyMode: { kind: 'full-random' }, category: null, difficulty: 2 }),
-    ).not.toBeInstanceOf(AdaptiveSelector);
-    expect(createQuizSelector({ category: null, difficulty: 2 })).not.toBeInstanceOf(
-      AdaptiveSelector,
-    );
+    ).toThrow('未対応の学習モード');
   });
 });
 

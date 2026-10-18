@@ -12,7 +12,11 @@
  * ここに閉じ込める (既存の生成器・問題データ・解答判定は変更しない)。
  */
 
-import type { Category, DifficultyLevel } from '../../types/problem';
+import type {
+  Category,
+  DifficultyLevel,
+  DifficultyRange,
+} from '../../types/problem';
 import {
   getCurriculumScope,
   type CurriculumCategory,
@@ -62,6 +66,8 @@ export interface QuestionFilter {
   grade?: CurriculumGrade | null;
   /** 難易度 */
   difficulty?: DifficultyLevel | null;
+  /** 難易度範囲。指定時は範囲内の難易度を生成できる型だけを候補にする。 */
+  difficultyRange?: DifficultyRange | null;
 }
 
 /** 母集団を作る (generatorRegistry の全件をメタデータ付きに列挙) */
@@ -106,6 +112,13 @@ export function filterQuestionPool(
     if (allowedTypes && !allowedTypes.has(entry.type)) return false;
     if (filter.grade && entry.grade !== filter.grade) return false;
     if (filter.difficulty && !entry.supportedLevels.includes(filter.difficulty)) return false;
+    if (filter.difficultyRange) {
+      const { min, max } = filter.difficultyRange;
+      const hasLevelInRange = entry.supportedLevels.some(
+        (level) => level >= min && level <= max,
+      );
+      if (!hasLevelInRange) return false;
+    }
     return true;
   });
 }

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { Category, DifficultyRange, Problem } from '../types/problem';
-import { QuestionSelector } from '../engine/selector/questionSelector';
+import type { Problem } from '../types/problem';
 import { NoWeakTargetError } from '../engine/selector/weakSelector';
+import { EmptyQuestionPoolError } from '../engine/selector/questionPool';
 import type { StudyMode } from '../engine/selector/types';
 import type { QuestionFilter } from '../engine/selector/questionPool';
 import { createQuizSelector, toDifficultyLevel } from './quizSelection';
@@ -34,28 +34,13 @@ import ScratchPad from '../components/ScratchPad';
 import { createScratchAttemptId } from '../types/scratch';
 
 interface QuizPageProps {
-  /** 旧セレクター互換のカテゴリ指定 (共有出題では選出条件に使われる) */
-  category: Category | null;
   /** 難易度 */
   difficulty: number;
-  /** 共有出題で使う保存済みの問題タイプ範囲 (管理者タブで設定) */
-  problemTypes: string[];
-  /** 共有出題で使う保存済みの難易度範囲 (管理者タブで設定) */
-  difficultyRange: DifficultyRange;
   questionCount?: number;
-  /**
-   * 学習モード。
-   * - full-random : 通常モードの標準。全出題可能母集団からランダム
-   * - filtered    : 管理者モード。filter で母集団を絞る
-   * - weak        : WeakSelector (回答履歴から苦手 problemType x difficulty を抽出)
-   * - random      : RandomSelector (指定難易度の全カテゴリ横断)
-   * - category    : 旧 QuestionSelector
-   * 指定がない共有出題 (問題を解く) では problemTypes / difficultyRange で
-   * QuestionSelector を使って保存済みの出題範囲から選ぶ。
-   */
-  studyMode?: StudyMode;
-  /** 管理者モード用の絞り込み条件 (通常モードでは null) */
-  filter?: QuestionFilter | null;
+  /** 学習モード (常に 'filtered') */
+  studyMode: StudyMode;
+  /** 絞り込み条件 (管理者が設定した出題範囲) */
+  filter: QuestionFilter | null;
   /** 管理者演習かどうか。true の場合は通常学習データを読み書きしない */
   isAdminMode: boolean;
   /** モード切替後の遅延保存が同期を新規開始してよいかを動的に判定する */
@@ -66,10 +51,7 @@ interface QuizPageProps {
 /** 問題未表示時・初期化前に使う既定の制限時間 (現行ポリシーの既定値) */
 const DEFAULT_LIMIT_SEC = getTimeLimitSeconds(null);
 export default function QuizPage({
-  category,
   difficulty,
-  problemTypes,
-  difficultyRange,
   questionCount = 10,
   studyMode,
   filter = null,
@@ -101,10 +83,8 @@ export default function QuizPage({
    */
   const [attemptId, setAttemptId] = useState<string>(() => createScratchAttemptId());
 
-  /** 学習設定 (分野別・復習・管理者絞込) のセレクター (初期化時に1回だけ組み立てる) */
+  /** 学習設定 (管理者絞込) のセレクター (初期化時に1回だけ組み立てる) */
   const selectorRef = useRef<ReturnType<typeof createQuizSelector> | null>(null);
-  /** 共有出題 (問題を解く) 用: 保存済み出題範囲で選ぶ QuestionSelector */
-  const questionSelectorRef = useRef<QuestionSelector | null>(null);
   const startTimeRef = useRef<number>(0);
   /** 確定した制限時間の ref 値 (回答確定時の保存に使う。表示と同じ値) */
   const limitSecRef = useRef<number>(DEFAULT_LIMIT_SEC);
@@ -124,13 +104,8 @@ export default function QuizPage({
         if (cancelled) return;
         historyRef.current = history;
         questionHistoryRef.current = questionHistory;
-        // 学習設定 (分野別・復習・管理者絞込) があるときは設定ベースのセレクターを使い、
-        // 共有出題 (問題を解く) では保存済みの出題範囲で QuestionSelector を使う。
-        if (studyMode || filter) {
-          selectorRef.current = createQuizSelector({ studyMode, category, difficulty, filter });
-        } else {
-          questionSelectorRef.current = new QuestionSelector();
-        }
+        // すべての学習で管理者が設定した出題範囲 (filter) を厳密に適用する。
+        selectorRef.current = createQuizSelector({ studyMode, difficulty, filter });
         loadNextQuestion();
       } catch {
         if (!cancelled) {
@@ -152,48 +127,35 @@ export default function QuizPage({
   const loadNextQuestion = useCallback(() => {
     let nextProblem: Problem;
     try {
-      if (selectorRef.current) {
-        // 学習設定ベース (分野別 adaptive / 復習 weak / 管理者 filteredなど)
-        nextProblem = selectorRef.current.selectNextQuestion(
-          historyRef.current,
-          questionHistoryRef.current,
-          {
-            mode: studyMode ?? { kind: 'full-random' },
-            difficulty: toDifficultyLevel(difficulty),
-          },
-        );
-      } else if (questionSelectorRef.current) {
-        // 共有出題: 管理者タブで保存された出題範囲に従って選ぶ
-        nextProblem = questionSelectorRef.current.selectNextQuestion(
-          historyRef.current,
-          questionHistoryRef.current,
-          {
-            difficultyLevel: difficulty,
-            category,
-            problemTypes,
-            difficultyRange,
-          },
-        );
-      } else {
+      if (!selectorRef.current) return;
+      // 管理者が設定した出題範囲から一様ランダムに出題する。
+      nextProblem = selectorRef.current.selectNextQuestion(
+        historyRef.current,
+        questionHistoryRef.current,
+        {
+          mode: studyMode,
+          difficulty: toDifficultyLevel(difficulty),
+        },
+      );
+    } catch (e) {
+      // 条件に一致する問題が0件の場合は、条件を緩和せずエラーを表示する。
+      if (e instanceof EmptyQuestionPoolError) {
+        setError(e.message);
         return;
       }
-    } catch (e) {
       // 復習対象が0件 (履歴がない / 全問正解) の場合は画面を壊さず、
       // エラーメッセージを表示して安全に終了できるようにする。
       if (e instanceof NoWeakTargetError) {
         setError(e.message);
         return;
       }
-      // 共有出題では出題範囲の不備などのメッセージをそのまま表示する。
-      // 学習設定セレクターの内部エラーは露出しない。
-      if (e instanceof Error && !selectorRef.current) {
+      if (e instanceof Error) {
         setError(e.message);
         return;
       }
       setError('問題の生成に失敗しました。');
       return;
     }
-
     // 1 問ごとの制限時間をここで一度だけ決定する (適応型。記録不足時は現行の初期時間)。
     // タイマー表示・時間切れ判定・履歴保存はすべてこの値を使う。
     // setProblem より先に設定し、問題が表示される最初のレンダリングで確定させることで
@@ -225,9 +187,9 @@ export default function QuizPage({
     };
     questionHistoryRef.current.push(record);
     void persistQuizQuestion(isAdminMode, record);
-    // 絞り込み (filter / category) はセレクター生成時 (初期化) に確定するため、
+    // 絞り込み (filter) はセレクター生成時 (初期化) に確定するため、
     // 毎問変わるのは difficulty と studyMode だけ。
-  }, [category, difficulty, difficultyRange, isAdminMode, problemTypes, studyMode]);
+  }, [difficulty, isAdminMode, studyMode]);
 
   /**
    * 回答を判定する
@@ -305,7 +267,7 @@ export default function QuizPage({
         { timedOut: timedOutSubmit, correct, answerTimeSec },
       );
     },
-    [canStartNormalSync, isAdminMode, problem, isAnswered, questionNumber],
+    [canStartNormalSync, isAdminMode, problem, isAnswered, questionNumber, attemptId],
   );
 
   /**

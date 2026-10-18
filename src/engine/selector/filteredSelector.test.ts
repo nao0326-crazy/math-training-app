@@ -16,14 +16,12 @@ import type { QuestionFilter } from './questionPool';
 import type { Problem } from '../../types/problem';
 import type { QuestionHistory } from '../../types/history';
 
-const request = { mode: { kind: 'full-random' } as const, difficulty: 2 as const };
-
 /** 条件から出る問題の集合 (充分な試行数) */
 function sample(filter: QuestionFilter, times = 60): Problem[] {
   const selector = new FilteredSelector(filter);
   const problems: Problem[] = [];
   for (let i = 0; i < times; i++) {
-    problems.push(selector.selectNextQuestion([], [], request));
+    problems.push(selector.selectNextQuestion([], []));
   }
   return problems;
 }
@@ -92,19 +90,17 @@ describe('FilteredSelector: セッション内の重複抑制', () => {
     const first = sample(filter, 1)[0];
     // 同じ問題が連続で出るかを、直前履歴にその問題を入れて試す
     const selector = new FilteredSelector(filter);
-    const request = { mode: { kind: 'full-random' } as const, difficulty: 2 as const };
-    const problem = selector.selectNextQuestion([], historyOf([first]), request);
+    const problem = selector.selectNextQuestion([], historyOf([first]));
     expect(fingerprintProblem(problem)).not.toBe(fingerprintProblem(first));
   });
 
   it('複数回の抽選で直前問題を避ける (母集団が2種以上なら必ず別問題)', () => {
     const filter: QuestionFilter = { category: 'fraction', difficulty: 2 };
-    const request = { mode: { kind: 'full-random' } as const, difficulty: 2 as const };
     const selector = new FilteredSelector(filter);
     // 50 回連続で「直前の問題」と同じものが出ないこと
     let prev = sample(filter, 1)[0];
     for (let i = 0; i < 50; i++) {
-      const next = selector.selectNextQuestion([], historyOf([prev]), request);
+      const next = selector.selectNextQuestion([], historyOf([prev]));
       expect(
         fingerprintProblem(next),
         `試行${i}で直前の問題と同一`,
@@ -117,10 +113,9 @@ describe('FilteredSelector: セッション内の重複抑制', () => {
     // 1問しか存在しない母集団では重複回避が不可能。従来どおり出題できることを確認。
     const filter: QuestionFilter = { type: 'fraction_reduce', difficulty: 1 };
     const selector = new FilteredSelector(filter);
-    const request = { mode: { kind: 'full-random' } as const, difficulty: 1 as const };
     // 履歴が空でも例外なく出る
-    expect(() => selector.selectNextQuestion([], [], request)).not.toThrow();
-    const p = selector.selectNextQuestion([], [], request);
+    expect(() => selector.selectNextQuestion([], [])).not.toThrow();
+    const p = selector.selectNextQuestion([], []);
     expect(p.type).toBe('fraction_reduce');
   });
 });
@@ -128,6 +123,6 @@ describe('FilteredSelector: セッション内の重複抑制', () => {
 describe('FilteredSelector: 条件が成立しない場合', () => {
   it('母集団が空になる条件は EmptyQuestionPoolError', () => {
     const selector = new FilteredSelector({ category: 'fraction', grade: 1 });
-    expect(() => selector.selectNextQuestion([], [], request)).toThrow(EmptyQuestionPoolError);
+    expect(() => selector.selectNextQuestion([], [])).toThrow(EmptyQuestionPoolError);
   });
 });

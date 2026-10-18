@@ -2,12 +2,12 @@
  * 絞り込み指定セレクター (管理者モード専用)
  *
  * 母集団 (questionPool) に対して filter を適用してから等確率で選ぶ。
- * 既存の QuestionSelector (カテゴリ指定・苦手優先) や
- * RandomSelector (指定難易度の全カテゴリ横断) とは別物で、
- * 「学年・分野・問題タイプ・難易度」をまとめて指定できる管理者用の入口。
+ * 「学年・分野・問題タイプ・難易度・難易度範囲」をまとめて指定でき、
+ * 学習履歴や苦手度による重み付けは行わない。
  *
- * filter が空 (未指定) の場合は FullRandomSelector と同じ
- * 「全出題可能範囲からランダム」になる。
+ * filter が空 (未指定) の場合も絞り込みを行わず、
+ * 全出題可能範囲から等確率で選ぶ (「すべて選択」とは解釈しない)。
+ * ただし `types: []` は候補0件として扱う (questionPool.ts 側で処理)。
  */
 
 import type { Problem, DifficultyLevel } from '../../types/problem';
@@ -24,28 +24,24 @@ import {
   filterQuestionPool,
   type QuestionFilter,
 } from './questionPool';
-import { FullRandomSelector } from './fullRandomSelector';
-import type { ProblemSelector, SelectionRequest } from './types';
+import type { ProblemSelector } from './types';
 
 /**
  * セッション内重複を避けるための引き直し上限 (回)。
  *
  * FilteredSelector は絞り込み母集団から等確率抽選するため、狭い母集団
- * (例: 特定タイプ + 特定難易度) では同一問題が連続で出やすい。既存の
- * QuestionSelector と同様、直近に出たフィンガープリントと一致しない問題を
- * 探すまでこの回数だけ抽選し直す。母集団サイズが上限より大きい場合は
- * 母集団サイズ分だけ試す (呼び出し側で Math.max を取る)。
+ * (例: 特定タイプ + 特定難易度) では同一問題が連続で出やすい。
+ * 直近に出たフィンガープリントと一致しない問題を探すまでこの回数だけ
+ * 抽選し直す。母集団サイズが上限より大きい場合は
+ * 母集団サイズ分だけ試す。
  */
 const FILTERED_REDRAW_ATTEMPTS = 10;
 
 export class FilteredSelector implements ProblemSelector {
   private filter: QuestionFilter;
-  /** filter が空のときは完全ランダムに委譲する */
-  private fallback: FullRandomSelector;
 
   constructor(filter: QuestionFilter = {}) {
     this.filter = filter;
-    this.fallback = new FullRandomSelector();
   }
 
   /** このセレクターが保持している絞り込み条件 */
@@ -53,42 +49,50 @@ export class FilteredSelector implements ProblemSelector {
     return this.filter;
   }
 
+  /**
+   * 難易度を決定する。
+   * - filter.difficulty が指定されていればそれを使う。
+   * - filter.difficultyRange が指定されていれば、その範囲内で entry が
+   *   対応する難易度の中からランダムに1つ選ぶ。
+   * - どちらも指定されていなければ entry.supportedLevels[0] を使う。
+   */
+  private difficultyOf(
+    entry: { supportedLevels: readonly DifficultyLevel[] },
+    random: () => number = Math.random,
+  ): DifficultyLevel {
+    if (this.filter.difficulty) return this.filter.difficulty;
+    if (this.filter.difficultyRange) {
+      const { min, max } = this.filter.difficultyRange;
+      const inRange = entry.supportedLevels.filter(
+        (level) => level >= min && level <= max,
+      );
+      if (inRange.length > 0) return inRange[Math.floor(random() * inRange.length)];
+    }
+    return entry.supportedLevels[0];
+  }
+
   selectNextQuestion(
-    history: AnswerRecord[],
+    _history: AnswerRecord[],
     questionHistory: QuestionHistory[],
-    request: SelectionRequest,
   ): Problem {
     const pool = filterQuestionPool(this.filter, buildQuestionPool());
     if (pool.length === 0) throw new EmptyQuestionPoolError(this.filter);
 
-    // 条件が1つも無い場合は通常モードと同一の完全ランダム出題にする
-    const hasCondition = Object.values(this.filter).some(
-      (v) => v !== undefined && v !== null,
-    );
-    if (!hasCondition) return this.fallback.selectNextQuestion(history, questionHistory, request);
-
     // セッション内で「すでに出した問題 (同一フィンガープリント)」を避ける。
-    // 狭い候補空間 (例: lv3 の volume_cube は実質数種) では、直前1問だけを
-    // 見るだけだと 2問前・3問前と同じ問題を連続で出してしまう。
-    // 既存の QuestionSelector と同じ仕組み (buildRecentContext) で直近の
+    // 狭い候補空間では直近1問だけを見ると2問前・3問前と同じ問題を
+    // 連続で出す可能性があるため、buildRecentContext で直近の
     // フィンガープリント集合を作り、それに一致しない問題を選ぶ。
     const recentFingerprints = buildRecentContext(
       questionHistory,
       DEFAULT_DIVERSITY_CONFIG,
     ).fingerprints;
 
-    const difficultyOf = (entry: { supportedLevels: readonly DifficultyLevel[] }): DifficultyLevel =>
-      this.filter.difficulty ?? entry.supportedLevels[0];
-
-    // 候補空間から最大 attempts 回まで抽選し、セッション内で未出の問題を返す。
-    // 見つからなければ、絞り込みを尊重してその空間の最初の抽選結果に戻す
-    // (絞り込み指定を破らず、学習を止めない)。
     let firstPick: Problem | null = null;
     const maxAttempts = Math.max(FILTERED_REDRAW_ATTEMPTS, pool.length);
 
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
       const target = pool[Math.floor(Math.random() * pool.length)];
-      const difficulty = difficultyOf(target);
+      const difficulty = this.difficultyOf(target);
 
       let problem: Problem;
       try {
@@ -107,7 +111,7 @@ export class FilteredSelector implements ProblemSelector {
     }
 
     // どの抽選も過去に出た問題だった (候補空間が極端に狭い)。
-    // 従来どおり、直近1問と完全同一になる場合だけ別型で引き直す。
+    // 絞り込みを尊重してその空間の最初の抽選結果に戻す。
     if (firstPick) {
       const last = questionHistory[questionHistory.length - 1];
       if (
@@ -120,7 +124,7 @@ export class FilteredSelector implements ProblemSelector {
           try {
             return generateProblem({
               type: alternative.type,
-              difficulty: difficultyOf(alternative),
+              difficulty: this.difficultyOf(alternative),
             });
           } catch {
             return firstPick;
