@@ -8,16 +8,14 @@
  * - 出題範囲が未設定または空の場合は、エラーを表示して学習を開始できない。
  */
 
-import type { DifficultyLevel, DifficultyRange } from '../types/problem';
+import type { DifficultyRange } from '../types/problem';
 
-/** 難易度の一覧 (表示・選択用) */
-const DIFFICULTIES: DifficultyLevel[] = [1, 2, 3, 4, 5];
 
 interface HomePageProps {
   /** 学習履歴へ移動 */
   onShowHistory: () => void;
-  /** 保存済みの出題範囲に従って学習を始める */
-  onStartQuiz: (difficulty: number) => void;
+  /** 保存済みの出題範囲に従って学習を始める (引数なし: 管理者設定の難易度範囲を使用) */
+  onStartQuiz: () => void;
   /** 管理者タブ (認証) を開く */
   onOpenVerification: () => void;
   /** 管理者タブ (設定済み) を開く */
@@ -51,12 +49,6 @@ export default function HomePage({
   startError,
   isStarting,
 }: HomePageProps) {
-  const selectableDifficulties = savedDifficultyRange
-    ? DIFFICULTIES.filter(
-        (level) => level >= savedDifficultyRange.min && level <= savedDifficultyRange.max,
-      )
-    : DIFFICULTIES;
-
   return (
     <div className="home-page">
       <section className="hero-section">
@@ -93,7 +85,7 @@ export default function HomePage({
         <button
           className="primary-button start-button"
           disabled={isStarting || savedProblemTypeCount === 0}
-          onClick={() => onStartQuiz(selectableDifficulties[0])}
+          onClick={() => onStartQuiz()}
         >
           {isStarting ? '設定を読み込んでいます...' : '問題を解く'}
         </button>

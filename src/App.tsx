@@ -199,7 +199,7 @@ function NormalApp() {
               clearAdminMode();
               setPage('history');
             }}
-            onStartQuiz={(difficulty) => void startQuiz(difficulty)}
+            onStartQuiz={() => void startQuiz(2)}
             onOpenVerification={() => setPage('verification')}
             onOpenPracticeSetup={() => setPage('practiceSetup')}
             onCloseAdminSettings={() => {
