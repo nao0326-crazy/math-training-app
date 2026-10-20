@@ -15,7 +15,9 @@
 import { describe, expect, it } from 'vitest';
 import {
   CircleCircumferenceGenerator,
+  CircleAreaFromDiameterGenerator,
   TrapezoidAreaGenerator,
+  ParallelogramAreaGenerator,
   UnitConversionBasicGenerator,
 } from './generators';
 import { validateProblem } from '../../engine/validator/validator';
@@ -379,5 +381,68 @@ describe('新規3型の validate は改ざんを検出する', () => {
       parameters: { ...p.parameters, variant: 'nope' },
     };
     expect(gen.validate(bad).valid).toBe(false);
+  });
+});
+
+/** 回帰テスト: 直径37 (半径18.5) で小数第3位が5になる境界ケース
+ *
+ * 生成器は Math.round(r*r*3.14*100)/100 を使用する。半径18.5 の場合
+ * 3.14*18.5*18.5 = 1074.665 で、×100 後が 107466.5 となり Math.round で
+ * 107467 → 1074.67。検算側が 3.14*r*r (未丸め) と厳密未満0.005 で比較すると
+ * 差がちょうど0.005 で不一致となるため、生成器と同じ丸めを検算側でも使う必要がある。
+ */
+describe('circle_area_diameter: 半径18.5 の丸め境界', () => {
+  const gen = new CircleAreaFromDiameterGenerator();
+
+  it('半径18.5の場合、面積は 1074.67 (半端丸めの正確な一致)', () => {
+    // 半径18.5 (直径37) を生成するシードを探す
+    let found = false;
+    for (let s = 0; s < 5000 && !found; s++) {
+      const p = gen.generate({ difficulty: 5, seed: s * 7919 + 5 * 31 + 7 });
+      const params = p.parameters as { diameter: number; radius: number; area: number };
+      if (params.diameter === 37) {
+        found = true;
+        expect(params.radius).toBe(18.5);
+        const want = Math.round(18.5 * 18.5 * 3.14 * 100) / 100;
+        expect(params.area).toBe(want);
+        expect(params.area).toBe(1074.67);
+      }
+    }
+    expect(found).toBe(true);
+  });
+
+  it('複数シードで直径×3.14×(d/2)^2 と小数第2位で一致する', () => {
+    for (let s = 0; s < 200; s++) {
+      const p = gen.generate({ difficulty: 5, seed: s * 7919 + 5 * 31 + 7 });
+      const params = p.parameters as { diameter: number; radius: number; area: number };
+      const r = params.diameter / 2;
+      const want = Math.round(r * r * 3.14 * 100) / 100;
+      expect(Math.abs(params.area - want)).toBeLessThan(1e-9);
+    }
+  });
+});
+
+/** 回帰テスト: 平行四辺形 two_triangles 変種では答えが面積の半分 */
+describe('parallelogram_area: two_triangles 変種', () => {
+  const gen = new ParallelogramAreaGenerator();
+
+  it('two_triangles の答えは bottom×height÷2', () => {
+    // two_triangles は area が偶数の組合せのみ生成される
+    for (let s = 0; s < 200; s++) {
+      const p = gen.generate({ difficulty: 5, seed: s * 7919 + 5 * 31 + 7 });
+      const params = p.parameters as {
+        variant: string;
+        base: number;
+        height: number;
+        area: number;
+        triangleArea?: number;
+        answer: number;
+      };
+      if (params.variant !== 'two_triangles') continue;
+      expect(params.area % 2).toBe(0);
+      expect(params.triangleArea).toBe(params.area / 2);
+      expect(params.answer).toBe(params.area / 2);
+      expect(params.answer).toBe(params.triangleArea);
+    }
   });
 });

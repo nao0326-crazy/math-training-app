@@ -163,12 +163,12 @@ function verify(p: Problem): Verdict {
       const part = num('part');
       switch (variant) {
         case 'find_percent':
-          // 「5 の 40% はいくつですか」 → 全体の何%かを求める変種もあるため
+        case 'what_percent':
           // part が whole の何%かを検算する
           if (whole === 0) return 'mismatch';
           return Math.abs(got - (part / whole) * 100) < 1e-9 ? 'ok' : 'skip';
         default: {
-          // 「全体の x% はいくつですか」 = 全体 × 百分率 / 100
+          // percent_of: 「全体の x% はいくつですか」 = 全体 × 百分率 / 100
           const want = (whole * pct) / 100;
           return Math.abs(got - want) < 1e-9 ? 'ok' : 'mismatch';
         }
@@ -303,6 +303,11 @@ function verify(p: Problem): Verdict {
           : (num('base') * num('height')) / 2;
       if (!Number.isInteger(area)) return 'mismatch';
       const got = intOf(p);
+      const variant = q['variant'] as string | undefined;
+      // two_triangles 変種では答えは平行四辺形面積の半分 (三角形1つの面積)
+      if (p.type === 'parallelogram_area' && variant === 'two_triangles') {
+        return got === area / 2 ? 'ok' : 'mismatch';
+      }
       if (got === num('height') || got === num('base')) {
         return q['area'] === area ? 'ok' : 'mismatch';
       }
@@ -364,7 +369,8 @@ function verify(p: Problem): Verdict {
       if (!has('radius') || !has('area')) return 'skip';
       const got = decOf(p) ?? intOf(p);
       if (got === null) return 'skip';
-      return Math.abs(got - 3.14 * num('radius') * num('radius')) < 0.005 ? 'ok' : 'mismatch';
+      const want = Math.round(num('radius') * num('radius') * 3.14 * 100) / 100;
+      return Math.abs(got - want) < 1e-9 ? 'ok' : 'mismatch';
     }
     case 'circle_area_diameter': {
       // 直径 d から 3.14 × (d/2)^2
@@ -372,7 +378,8 @@ function verify(p: Problem): Verdict {
       const got = decOf(p) ?? intOf(p);
       if (got === null) return 'skip';
       const r = num('diameter') / 2;
-      return Math.abs(got - 3.14 * r * r) < 0.005 ? 'ok' : 'mismatch';
+      const want = Math.round(r * r * 3.14 * 100) / 100;
+      return Math.abs(got - want) < 1e-9 ? 'ok' : 'mismatch';
     }
     case 'radius_from_area': {
       if (!has('area')) return 'skip';
