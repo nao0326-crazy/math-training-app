@@ -11,9 +11,8 @@
  * @vitest-environment jsdom
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
-import { cleanup } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import QuizPage from './QuizPage';
 import type { Problem } from '../types/problem';
 import type { AnswerRecord, QuestionHistory } from '../types/history';
@@ -137,6 +136,16 @@ function pressDigits(digits: string): void {
   }
 }
 
+beforeEach(() => {
+  cleanup();
+  resetTimerStore();
+});
+
+afterEach(() => {
+  // タイムアウト失敗時でもフェイクタイマーを後続テストに残さない
+  vi.useRealTimers();
+});
+
 afterEach(() => {
   cleanup();
 });
@@ -238,5 +247,134 @@ describe('QuizPage + 途中式: 既存機能との統合', () => {
     expect(h.savedAnswers[1].scratchAttemptId).toBeTruthy();
     expect(h.savedAnswers[1].scratchAttemptId).not.toBe(firstAttempt);
     expect(h.savedQuestions).toHaveLength(2);
+  });
+});
+
+describe('QuizPage + 途中式: 回答後の無効化', () => {
+  it('正解時に途中式ノートが無効化される', async () => {
+    const p = makeProblem({
+      type: 'integer_addition',
+      category: 'integer',
+      answer: { kind: 'integer', value: 5 },
+      question: '2 + 3 = ?',
+    });
+    resetScript([p]);
+    resetTimerStore();
+    renderQuiz();
+
+    await screen.findByText('2 + 3 = ?');
+    await flushLoad();
+
+    pressDigits('5');
+    fireEvent.click(screen.getByRole('button', { name: '決定する' }));
+    await screen.findByText('🎉 せいかい！');
+
+    // 正解後は ScratchPad が非表示 (canvas が存在しない)
+    expect(document.querySelector('.scratch-canvas')).toBeNull();
+  });
+
+  it('不正解時に途中式ノートが非表示になる', async () => {
+    const p = makeProblem({
+      type: 'integer_addition',
+      category: 'integer',
+      answer: { kind: 'integer', value: 5 },
+      question: '2 + 3 = ?',
+    });
+    resetScript([p]);
+    resetTimerStore();
+    renderQuiz();
+
+    await screen.findByText('2 + 3 = ?');
+    await flushLoad();
+
+    pressDigits('4');
+    fireEvent.click(screen.getByRole('button', { name: '決定する' }));
+    await screen.findByText('❌ ざんねん...');
+
+    // 不正解後は ScratchPad が非表示 (canvas が存在しない)
+    expect(document.querySelector('.scratch-canvas')).toBeNull();
+  });
+
+  it('時間切れ時に途中式ノートが非表示になる', async () => {
+    const p = makeProblem({
+      type: 'integer_addition',
+      category: 'integer',
+      // 制限時間 level1 integer = 30秒 (flow.test と同じ前提)
+      difficulty: {
+        level: 1,
+        components: {
+          calculationComplexity: 1,
+          numberComplexity: 1,
+          reasoningComplexity: 1,
+          readingComplexity: 1,
+        },
+      },
+      answer: { kind: 'integer', value: 5 },
+      question: '2 + 3 = ?',
+    });
+    resetScript([p]);
+    resetTimerStore();
+    // setTimeout は偽装せず interval/Date のみ偽装 (findByText を動作させる)
+    vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval', 'Date'] });
+    try {
+      renderQuiz();
+
+      // 初回ロード (loadQuizHistory の Promise 解決) を流す
+      await act(async () => {
+        await Promise.resolve();
+      });
+      expect(screen.getByText('2 + 3 = ?')).toBeTruthy();
+
+      // 30秒制限 → 31秒進めて時間切れ
+      await act(async () => {
+        vi.advanceTimersByTime(31_000);
+      });
+      expect(screen.getByText('⏰ 時間切れ！')).toBeTruthy();
+
+      // 時間切れ後は ScratchPad が非表示 (canvas が存在しない)
+      expect(document.querySelector('.scratch-canvas')).toBeNull();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it('次の問題に進むと途中式ノートが再び表示される', async () => {
+    const p1 = makeProblem({
+      type: 'integer_addition',
+      category: 'integer',
+      answer: { kind: 'integer', value: 5 },
+      question: '2 + 3 = ?',
+    });
+    const p2 = makeProblem({
+      type: 'integer_addition',
+      category: 'integer',
+      answer: { kind: 'integer', value: 7 },
+      question: '3 + 4 = ?',
+    });
+    resetScript([p1, p2]);
+    resetTimerStore();
+    renderQuiz({ questionCount: 3 });
+
+    await screen.findByText('2 + 3 = ?');
+    await flushLoad();
+
+    pressDigits('5');
+    fireEvent.click(screen.getByRole('button', { name: '決定する' }));
+    await screen.findByText('🎉 せいかい！');
+
+    // 正解後は ScratchPad が非表示
+    expect(document.querySelector('.scratch-canvas')).toBeNull();
+
+    // 次の問題へ
+    fireEvent.click(screen.getByRole('button', { name: 'つぎの問題へ' }));
+    await screen.findByText('3 + 4 = ?');
+    await flushLoad();
+
+    // 次の問題では ScratchPad が再び表示され描画できる
+    const canvas = getCanvas();
+    expect(canvas).not.toBeNull();
+    fireEvent(canvas, pointerEvent('pointerdown', 64, 22));
+    fireEvent(canvas, pointerEvent('pointerup', 128, 44));
+    expect(canvas.getAttribute('data-stroke-count')).toBe('1');
   });
 });

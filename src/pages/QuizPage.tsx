@@ -6,6 +6,7 @@ import type { StudyMode } from '../engine/selector/types';
 import type { QuestionFilter } from '../engine/selector/questionPool';
 import { createQuizSelector, toDifficultyLevel } from './quizSelection';
 import { formatAnswer, judgeUserAnswer, type AnswerJudgement } from '../utils/answer';
+import { getProblemInputType } from '../utils/inputType';
 import { getTimeLimitSeconds, TIME_OUT_USER_ANSWER } from '../utils/quizTimer';
 import { resolveTimeLimitSeconds } from '../utils/adaptiveTimeLimit';
 import {
@@ -83,8 +84,7 @@ export default function QuizPage({
    */
   const [attemptId, setAttemptId] = useState<string>(() => createScratchAttemptId());
 
-  /** 学習設定 (管理者絞込) のセレクター (初期化時に1回だけ組み立てる) */
-  const selectorRef = useRef<ReturnType<typeof createQuizSelector> | null>(null);
+    const selectorRef = useRef<ReturnType<typeof createQuizSelector> | null>(null);
   const startTimeRef = useRef<number>(0);
   /** 確定した制限時間の ref 値 (回答確定時の保存に使う。表示と同じ値) */
   const limitSecRef = useRef<number>(DEFAULT_LIMIT_SEC);
@@ -128,7 +128,8 @@ export default function QuizPage({
     let nextProblem: Problem;
     try {
       if (!selectorRef.current) return;
-      // 管理者が設定した出題範囲から一様ランダムに出題する。
+      // 出題範囲 (filter) 内から、技能ごとの習熟度にもとづく
+      // 目標レベル (習熟 +1) で問題を選出する。
       nextProblem = selectorRef.current.selectNextQuestion(
         historyRef.current,
         questionHistoryRef.current,
@@ -187,8 +188,8 @@ export default function QuizPage({
     };
     questionHistoryRef.current.push(record);
     void persistQuizQuestion(isAdminMode, record);
-    // 絞り込み (filter) はセレクター生成時 (初期化) に確定するため、
-    // 毎問変わるのは difficulty と studyMode だけ。
+    // 絞り込み (filter) はセレクター生成時 (初期化) に確定する。
+    // 出題レベルは毎問ごとに、直近までの履歴から習熟度を再評価して決まる。
   }, [difficulty, isAdminMode, studyMode]);
 
   /**
@@ -280,6 +281,20 @@ export default function QuizPage({
     handleSubmit('', { timedOut: true });
   }, [handleSubmit]);
 
+  /** E2E/開発時のみ: 現在の問題と入力種別を window に公開する (本番ビルドでは無効) */
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+    const w = window as unknown as Record<string, unknown>;
+    w.__E2E_CURRENT_PROBLEM__ = problem;
+    w.__E2E_CURRENT_INPUT_TYPE__ = problem ? getProblemInputType(problem) : null;
+    w.__E2E_EXPECTED_ANSWER__ = problem ? formatAnswer(problem.answer) : null;
+    w.__E2E_SUBMIT__ = problem
+      ? (value: string) => {
+          handleSubmit(value);
+        }
+      : null;
+  }, [problem, handleSubmit]);
+
   /**
    * 次の問題へ進む
    */
@@ -370,18 +385,21 @@ export default function QuizPage({
 
   return (
     <div className="quiz-page">
-      <div className="quiz-header">
-        {isAdminMode && <div className="quiz-admin-mode">管理者モード</div>}
-        <div className="quiz-progress">
-          問題 {questionNumber} / {questionCount}
+      {/* ヘッダー：問題番号・進捗・カテゴリ・難易度（解答中のみ表示。解答後は非表示） */}
+      {!isAnswered && (
+        <div className="quiz-header">
+          {isAdminMode && <div className="quiz-admin-mode">管理者モード</div>}
+          <div className="quiz-progress">
+            問題 {questionNumber} / {questionCount}
+          </div>
+          <div className="quiz-meta">
+            <span className="quiz-category">{categoryLabel(problem.category)}</span>
+            <span className="quiz-difficulty">
+              {difficultyLabel(problem.difficulty.level)}
+            </span>
+          </div>
         </div>
-        <div className="quiz-meta">
-          <span className="quiz-category">{categoryLabel(problem.category)}</span>
-          <span className="quiz-difficulty">
-            {difficultyLabel(problem.difficulty.level)}
-          </span>
-        </div>
-      </div>
+      )}
 
       {/* 残り時間のカウントダウン。回答済み (解答・時間切れ後) は表示しない。
           期限は問題IDを鍵に管理し、新しい問題だけ新しい制限時間で始まる。 */}
@@ -393,28 +411,35 @@ export default function QuizPage({
         />
       )}
 
-      <div className="question-card">
-        <p className="question-text">{problem.question}</p>
-        {/* 図形は figure を持つ問題でのみ描画される (未設定なら何も描かない) */}
-        <FigureRenderer spec={problem.figure} />
-        {/* 現実連動の写真は image を持つ問題でのみ描画される (未設定なら何も描かない)。
-            読み込み失敗時は ImageRenderer 内で代替テキストを表示する。 */}
-        <ImageRenderer spec={problem.image} />
-      </div>
+      {/* 問題文・図表（解答中のみ表示。解答後は非表示。
+          解説に必要な問題文や図表は SolutionDisplay 側で個別に表示する） */}
+      {!isAnswered && (
+        <div className="question-card">
+          <p className="question-text">{problem.question}</p>
+          {/* 図形は figure を持つ問題でのみ描画される (未設定なら何も描かない) */}
+          <FigureRenderer spec={problem.figure} />
+          {/* 現実連動の写真は image を持つ問題でのみ描画される (未設定なら何も描かない)。
+              読み込み失敗時は ImageRenderer 内で代替テキストを表示する。 */}
+          <ImageRenderer spec={problem.image} />
+        </div>
+      )}
 
-      {/* 手書き途中式ノート (解答の必須条件にはしない。出題ごとに attemptId で保存) */}
-      <div className="scratch-section">
-        <ScratchPad
-          key={attemptId}
-          meta={{
-            attemptId,
-            problemId: problem.id,
-            problemType: problem.type,
-            category: problem.category,
-            question: problem.question,
-          }}
-        />
-      </div>
+      {/* 手書き途中式ノート (解答中のみ表示。解答後は非表示にして操作不可にする) */}
+      {!isAnswered && (
+        <div className="scratch-section">
+          <ScratchPad
+            key={attemptId}
+            disabled={false}
+            meta={{
+              attemptId,
+              problemId: problem.id,
+              problemType: problem.type,
+              category: problem.category,
+              question: problem.question,
+            }}
+          />
+        </div>
+      )}
 
       {/* 問題タイプに応じた専用入力UI (OSキーボードを表示しない) */}
       {!isAnswered && (
