@@ -1,7 +1,7 @@
 /**
  * 管理者専用: 全問題タイプ手動検証モード
  */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { Problem, DifficultyLevel } from '../types/problem';
 import { getAllGenerators } from '../engine/selector/generatorRegistry';
 import { generateProblem } from '../engine/selector/generatorRegistry';
@@ -133,6 +133,20 @@ export default function AdminVerificationPage({ onExit }: AdminVerificationPageP
     },
     [problem, isAnswered],
   );
+
+  /** E2E/開発時のみ: 現在の問題と期待解答を window に公開する (本番ビルドでは無効) */
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+    const w = window as unknown as Record<string, unknown>;
+    w.__E2E_CURRENT_PROBLEM__ = problem;
+    w.__E2E_CURRENT_INPUT_TYPE__ = problem ? null : null;
+    w.__E2E_EXPECTED_ANSWER__ = problem ? (formatAnswer(problem.answer) as unknown) : null;
+    w.__E2E_SUBMIT__ = problem
+      ? (value: string) => {
+          handleSubmit(value);
+        }
+      : null;
+  }, [problem, handleSubmit]);
 
   if (!started) {
     return (
