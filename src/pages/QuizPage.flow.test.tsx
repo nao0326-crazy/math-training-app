@@ -351,4 +351,49 @@ describe('QuizPage: 時間切れと送信の競合', () => {
   });
 });
 
+describe('QuizPage: 問題スキップ', () => {
+  it('スキップで次の問題へ進み、解答記録を残さない', async () => {
+    const p1 = makeProblem({
+      type: 'integer_addition',
+      category: 'integer',
+      answer: { kind: 'integer', value: 5 },
+      question: '1問目です。',
+    });
+    const p2 = makeProblem({
+      type: 'integer_addition',
+      category: 'integer',
+      answer: { kind: 'integer', value: 7 },
+      question: '2問目です。',
+    });
+    resetScript([p1, p2]);
+    renderQuiz({ questionCount: 2 });
+
+    await screen.findByText('1問目です。');
+    expect(h.savedAnswers).toHaveLength(0);
+
+    fireEvent.click(screen.getByRole('button', { name: '問題をスキップ' }));
+
+    await screen.findByText('2問目です。');
+    expect(h.savedAnswers).toHaveLength(0);
+  });
+
+  it('スキップは正誤判定を実行せず、難易度評価用の保存も行わない', async () => {
+    const p1 = makeProblem({
+      type: 'integer_addition',
+      category: 'integer',
+      answer: { kind: 'integer', value: 5 },
+      question: 'スキップ対象。',
+    });
+    resetScript([p1]);
+    renderQuiz({ questionCount: 1 });
+
+    await screen.findByText('スキップ対象。');
+    fireEvent.click(screen.getByRole('button', { name: '問題をスキップ' }));
+
+    // 最終問題のスキップで結果画面へ
+    await screen.findByText('けっか');
+    expect(h.savedAnswers).toHaveLength(0);
+  });
+});
+
 
