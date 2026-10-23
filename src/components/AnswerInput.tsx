@@ -619,6 +619,12 @@ export default function AnswerInput({
         if (e.key === 'Enter') {
           e.preventDefault();
           handleSubmit();
+        } else if (e.key === 'y' || e.key === 'Y') {
+          e.preventDefault();
+          handleYesNoSelect('はい');
+        } else if (e.key === 'n' || e.key === 'N') {
+          e.preventDefault();
+          handleYesNoSelect('いいえ');
         }
       } else if (inputType === 'fraction') {
         if (e.key >= '0' && e.key <= '9') {
@@ -646,6 +652,7 @@ export default function AnswerInput({
       fracActive,
       handleRatioKeyDown, handleTextKey,
       handleSubmit,
+      handleYesNoSelect,
     ],
   );
 
