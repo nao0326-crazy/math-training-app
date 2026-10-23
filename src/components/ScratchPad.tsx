@@ -32,6 +32,8 @@ type HistoryEntry =
 interface ScratchPadProps {
   /** 出題インスタンスと問題のメタ情報 (attemptId を主キーに保存する) */
   meta: ScratchNoteMeta;
+  /** 回答確定後などに true で描画・操作を無効化する */
+  disabled?: boolean;
 }
 
 function getDpr(): number {
@@ -48,7 +50,7 @@ function getDpr(): number {
  * - 描画の変更はデバウンスして自動保存する (描画ごとには保存しない)。
  * - 途中式は解答の必須条件にしない (保存失敗も解答・描画を妨げない)。
  */
-export default function ScratchPad({ meta }: ScratchPadProps) {
+export default function ScratchPad({ meta, disabled = false }: ScratchPadProps) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -265,6 +267,7 @@ export default function ScratchPad({ meta }: ScratchPadProps) {
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent<HTMLCanvasElement>) => {
+      if (disabled) return; // 回答確定後は描画を受け付けない
       if (!loadedRef.current) return; // 読み込み前に描かせて既存記録を保護する
       e.preventDefault();
       const p = toNorm(e.clientX, e.clientY);
@@ -283,11 +286,12 @@ export default function ScratchPad({ meta }: ScratchPadProps) {
       }
       redraw();
     },
-    [toNorm, eraseAt, redraw],
+    [disabled, toNorm, eraseAt, redraw],
   );
 
   const handlePointerMove = useCallback(
     (e: React.PointerEvent<HTMLCanvasElement>) => {
+      if (disabled) return; // 回答確定後は描画を受け付けない
       const mode = modeRef.current;
       if (mode === 'idle') return;
       e.preventDefault();
@@ -300,11 +304,12 @@ export default function ScratchPad({ meta }: ScratchPadProps) {
       }
       redraw();
     },
-    [toNorm, eraseAt, redraw],
+    [disabled, toNorm, eraseAt, redraw],
   );
 
   const endStroke = useCallback(
     (e: React.PointerEvent<HTMLCanvasElement>) => {
+      if (disabled) return; // 回答確定後は描画を受け付けない
       const mode = modeRef.current;
       if (mode === 'idle') return;
       try {
@@ -332,7 +337,7 @@ export default function ScratchPad({ meta }: ScratchPadProps) {
       }
       redraw();
     },
-    [applyStrokes, pushUndo, markDirty, redraw],
+    [disabled, applyStrokes, pushUndo, markDirty, redraw],
   );
 
   const handleUndo = useCallback(() => {
@@ -374,33 +379,36 @@ export default function ScratchPad({ meta }: ScratchPadProps) {
         <div className="scratch-tools">
           <button
             type="button"
-            className={`scratch-tool-btn ${tool === 'pen' ? 'active' : ''}`}
+            className={`scratch-tool-btn ${tool === 'pen' ? 'active' : ''} ${disabled ? 'disabled' : ''}`}
             aria-label="ペン"
+            disabled={disabled}
             onClick={() => setTool('pen')}
           >
             ペン
           </button>
           <button
             type="button"
-            className={`scratch-tool-btn ${tool === 'eraser' ? 'active' : ''}`}
+            className={`scratch-tool-btn ${tool === 'eraser' ? 'active' : ''} ${disabled ? 'disabled' : ''}`}
             aria-label="消しゴム"
+            disabled={disabled}
             onClick={() => setTool('eraser')}
           >
             消しゴム
           </button>
           <button
             type="button"
-            className="scratch-tool-btn"
+            className={`scratch-tool-btn ${disabled ? 'disabled' : ''}`}
             aria-label="ひとつ戻す"
-            disabled={undoSize === 0}
+            disabled={disabled || undoSize === 0}
             onClick={handleUndo}
           >
             もどす
           </button>
           <button
             type="button"
-            className="scratch-tool-btn"
+            className={`scratch-tool-btn ${disabled ? 'disabled' : ''}`}
             aria-label="ぜんぶ消す"
+            disabled={disabled}
             onClick={() => setConfirmingClear(true)}
           >
             全消去
@@ -410,9 +418,10 @@ export default function ScratchPad({ meta }: ScratchPadProps) {
               <button
                 key={c.value}
                 type="button"
-                className={`scratch-color ${color === c.value ? 'active' : ''}`}
+                className={`scratch-color ${color === c.value ? 'active' : ''} ${disabled ? 'disabled' : ''}`}
                 style={{ background: c.value }}
                 aria-label={`色 ${c.label}`}
+                disabled={disabled}
                 onClick={() => {
                   setColor(c.value);
                   setTool('pen');
@@ -429,7 +438,7 @@ export default function ScratchPad({ meta }: ScratchPadProps) {
       <div className="scratch-canvas-wrap" ref={wrapRef}>
         <canvas
           ref={canvasRef}
-          className="scratch-canvas"
+          className={`scratch-canvas ${disabled ? 'scratch-disabled' : ''}`}
           data-stroke-count={strokes.length}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
@@ -443,16 +452,18 @@ export default function ScratchPad({ meta }: ScratchPadProps) {
           <span className="scratch-confirm-text">ぜんぶ消しますか？</span>
           <button
             type="button"
-            className="scratch-confirm-yes"
+            className={`scratch-confirm-yes ${disabled ? 'disabled' : ''}`}
             aria-label="全消去する"
+            disabled={disabled}
             onClick={handleClearConfirm}
           >
             消す
           </button>
           <button
             type="button"
-            className="scratch-confirm-no"
+            className={`scratch-confirm-no ${disabled ? 'disabled' : ''}`}
             aria-label="やめる"
+            disabled={disabled}
             onClick={() => setConfirmingClear(false)}
           >
             やめる

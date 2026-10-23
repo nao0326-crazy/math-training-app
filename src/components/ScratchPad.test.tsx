@@ -420,3 +420,48 @@ describe('ScratchPad: 保存と復元', () => {
     }
   });
 });
+
+describe('ScratchPad: 回答後の無効化 (disabled prop)', () => {
+  it('disabled=true で線の描画を受け付けない', async () => {
+    render(<ScratchPad meta={makeMeta(freshAttempt('d10'))} disabled />);
+    await flushLoad();
+    const canvas = getCanvas();
+    drawStroke(canvas, [
+      [64, 22],
+      [128, 44],
+    ]);
+    // disabled なのでストロークが追加されない
+    expect(canvas.getAttribute('data-stroke-count')).toBe('0');
+  });
+
+  it('disabled=true でツールバーのボタンが無効化される', async () => {
+    render(<ScratchPad meta={makeMeta(freshAttempt('d11'))} disabled />);
+    await flushLoad();
+    const penBtn = screen.getByRole('button', { name: 'ペン' });
+    const eraserBtn = screen.getByRole('button', { name: '消しゴム' });
+    const undoBtn = screen.getByRole('button', { name: 'ひとつ戻す' });
+    const clearBtn = screen.getByRole('button', { name: 'ぜんぶ消す' });
+    expect((penBtn as HTMLButtonElement).disabled).toBe(true);
+    expect((eraserBtn as HTMLButtonElement).disabled).toBe(true);
+    expect((undoBtn as HTMLButtonElement).disabled).toBe(true);
+    expect((clearBtn as HTMLButtonElement).disabled).toBe(true);
+  });
+
+  it('disabled=true でキャンバスに scratch-disabled クラスが付与される', async () => {
+    render(<ScratchPad meta={makeMeta(freshAttempt('d12'))} disabled />);
+    await flushLoad();
+    const canvas = getCanvas();
+    expect(canvas.className).toContain('scratch-disabled');
+  });
+
+  it('disabled=false (既定) では線を描画できる', async () => {
+    render(<ScratchPad meta={makeMeta(freshAttempt('d13'))} />);
+    await flushLoad();
+    const canvas = getCanvas();
+    drawStroke(canvas, [
+      [64, 22],
+      [128, 44],
+    ]);
+    expect(canvas.getAttribute('data-stroke-count')).toBe('1');
+  });
+});
