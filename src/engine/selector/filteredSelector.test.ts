@@ -11,10 +11,10 @@ import { describe, expect, it } from 'vitest';
 import { FilteredSelector } from './filteredSelector';
 import { EmptyQuestionPoolError, filterQuestionPool } from './questionPool';
 import { validateProblem } from '../validator/validator';
-import { fingerprintProblem } from '../diversity/metadata';
+import { fingerprintProblem, getTypeSupportedLevels } from '../diversity/metadata';
 import type { QuestionFilter } from './questionPool';
 import type { Problem } from '../../types/problem';
-import type { QuestionHistory } from '../../types/history';
+import type { AnswerRecord, QuestionHistory } from '../../types/history';
 
 /** 条件から出る問題の集合 (充分な試行数) */
 function sample(filter: QuestionFilter, times = 60): Problem[] {
@@ -124,5 +124,96 @@ describe('FilteredSelector: 条件が成立しない場合', () => {
   it('母集団が空になる条件は EmptyQuestionPoolError', () => {
     const selector = new FilteredSelector({ category: 'fraction', grade: 1 });
     expect(() => selector.selectNextQuestion([], [])).toThrow(EmptyQuestionPoolError);
+  });
+});
+
+describe('FilteredSelector: 習熟度ベースの出題レベル', () => {
+  /** 技能 type で level を n 問正解した履歴を作る */
+  function stableHistory(type: string, level: number, n: number): AnswerRecord[] {
+    return Array.from({ length: n }, (_, index) => ({
+      problemId: `${type}-${level}-${index}`,
+      problemType: type,
+      category: 'fraction',
+      isCorrect: true,
+      answerTimeSec: 10,
+      answeredAt: new Date(Date.UTC(2026, 0, 1, 0, 0, index)).toISOString(),
+      difficultyLevel: level,
+      question: 'question',
+      userAnswer: 'answer',
+      correctAnswer: 'answer',
+    }));
+  }
+
+  /** 技能 type で level を n 問不正解した履歴を作る */
+  function failingHistory(type: string, level: number, n: number): AnswerRecord[] {
+    return stableHistory(type, level, n).map((record) => ({
+      ...record,
+      isCorrect: false,
+    }));
+  }
+
+  const TYPE = 'fraction_add_sub';
+
+  it('履歴が無いときは対象型の最下位レベル (基礎) から出題する', () => {
+    const selector = new FilteredSelector({ types: [TYPE] });
+    const lowest = Math.min(...getTypeSupportedLevels(TYPE));
+    for (let i = 0; i < 8; i++) {
+      const problem = selector.selectNextQuestion([], []);
+      expect(problem.type).toBe(TYPE);
+      expect(problem.difficulty.level).toBe(lowest);
+    }
+  });
+
+  it('レベル2を安定して解めばレベル3を出題する (習熟 + 1)', () => {
+    // 前提: この型は Lv3 に対応している (未宣言なら Lv1〜5)
+    expect(getTypeSupportedLevels(TYPE)).toContain(3);
+    const selector = new FilteredSelector({ types: [TYPE] });
+    const history = stableHistory(TYPE, 2, 5);
+    for (let i = 0; i < 8; i++) {
+      const problem = selector.selectNextQuestion(history, []);
+      expect(problem.difficulty.level, `${i}問目が想定外`).toBe(3);
+    }
+  });
+
+  it('目標レベルで繰り返し不正解すると出題レベルが下がる', () => {
+    const selector = new FilteredSelector({ types: [TYPE] });
+    const history = [
+      ...stableHistory(TYPE, 2, 5),
+      ...failingHistory(TYPE, 3, 5),
+    ];
+    const problem = selector.selectNextQuestion(history, []);
+    // 習熟 2 → 1 に下がり、出題目標も 3 → 2 になる
+    expect(problem.difficulty.level).toBe(2);
+  });
+
+  it('最高レベルで習熟しても存在しないレベルを出さない', () => {
+    const selector = new FilteredSelector({ types: [TYPE] });
+    const history = stableHistory(TYPE, 5, 6);
+    for (let i = 0; i < 5; i++) {
+      const problem = selector.selectNextQuestion(history, []);
+      expect(problem.difficulty.level).toBe(5);
+    }
+  });
+
+  it('filter.difficulty の明示指定は習熟度より優先される', () => {
+    const selector = new FilteredSelector({ types: [TYPE], difficulty: 4 });
+    const history = stableHistory(TYPE, 2, 5);
+    const problem = selector.selectNextQuestion(history, []);
+    expect(problem.difficulty.level).toBe(4);
+  });
+
+  it('filter.difficultyRange が条件にある場合はその範囲内に収まる (エンジン互換)', () => {
+    const selector = new FilteredSelector({
+      types: [TYPE],
+      difficultyRange: { min: 2, max: 3 },
+    });
+    // 履歴なし (習熟0) → 範囲の最下位から開始
+    for (let i = 0; i < 6; i++) {
+      const problem = selector.selectNextQuestion([], []);
+      expect(problem.difficulty.level).toBe(2);
+    }
+    // 習熟4 でも範囲上限を超えない
+    const advanced = selector.selectNextQuestion(stableHistory(TYPE, 4, 5), []);
+    expect(advanced.difficulty.level).toBe(3);
   });
 });

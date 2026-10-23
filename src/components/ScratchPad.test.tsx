@@ -295,7 +295,7 @@ describe('ScratchPad: 保存と復元', () => {
       // 正規化座標で保存されている (既定幅 640・高さ 220 に対する比率)
       const p0 = saved?.strokes[0].points[0];
       expect(p0?.x).toBeCloseTo(64 / 640, 3);
-      expect(p0?.y).toBeCloseTo(22 / 220, 3);
+      expect(p0?.y).toBeCloseTo(22 / 440, 3);
       expect(screen.getByRole('status').textContent).toBe('保存済み');
     } finally {
       vi.useRealTimers();

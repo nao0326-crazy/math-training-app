@@ -18,7 +18,7 @@ describe('PercentageGenerator: what_percent 変種', () => {
   const gen = new PercentageGenerator();
 
   it('答えは percent = part÷whole×100 (whole×percent÷100 ではない)', () => {
-    for (let lv of LEVELS) {
+    for (const lv of LEVELS) {
       for (let s = 0; s < 200; s++) {
         const p = gen.generate({ difficulty: lv, seed: s * 7919 + lv * 31 + 7 });
         const params = p.parameters as {
@@ -37,7 +37,7 @@ describe('PercentageGenerator: what_percent 変種', () => {
   });
 
   it('percent_of 変種では 答え = whole×percent÷100 = part', () => {
-    for (let lv of LEVELS) {
+    for (const lv of LEVELS) {
       for (let s = 0; s < 200; s++) {
         const p = gen.generate({ difficulty: lv, seed: s * 7919 + lv * 31 + 7 });
         const params = p.parameters as {
@@ -56,7 +56,7 @@ describe('PercentageGenerator: what_percent 変種', () => {
   });
 
   it('find_percent 変種では 答え = part÷whole×100 = percent', () => {
-    for (let lv of LEVELS) {
+    for (const lv of LEVELS) {
       for (let s = 0; s < 200; s++) {
         const p = gen.generate({ difficulty: lv, seed: s * 7919 + lv * 31 + 7 });
         const params = p.parameters as {
@@ -76,7 +76,7 @@ describe('PercentageGenerator: what_percent 変種', () => {
 
   it('全レベルでバリアントが偏らず生成される', () => {
     const counts: Record<string, number> = {};
-    for (let lv of LEVELS) {
+    for (const lv of LEVELS) {
       for (let s = 0; s < 200; s++) {
         const p = gen.generate({ difficulty: lv, seed: s * 7919 + lv * 31 + 7 });
         const params = p.parameters as { variant: string };

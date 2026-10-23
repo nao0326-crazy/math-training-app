@@ -19,11 +19,9 @@ import {
 } from '../utils/learningCalendar';
 import {
   findWeakAreas,
-  getMostRecentDifficultyLevel,
   REVIEW_QUESTION_COUNT,
   type WeakArea,
 } from '../utils/weakAreas';
-import { difficultyLabel } from '../engine/difficulty/difficulty';
 import ScratchNoteView from '../components/ScratchNoteView';
 import { loadAllScratchNotes } from '../services/scratchNote';
 import type { ScratchNote } from '../types/scratch';
@@ -47,8 +45,8 @@ function safeCorrectAnswer(record: AnswerRecord): string {
 }
 
 interface HistoryPageProps {
-  /** 苦手分野から復習を開始する (カテゴリと直近の難易度を渡す) */
-  onStartReview: (category: Category, difficulty: number) => void;
+  /** 苦手分野から復習を開始する (カテゴリを渡す。出題レベルは習熟度から自動決定) */
+  onStartReview: (category: Category) => void;
 }
 
 export default function HistoryPage({ onStartReview }: HistoryPageProps) {
@@ -125,8 +123,9 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
   /** 確認ダイアログで「復習をはじめる」を選んだとき */
   const handleConfirmReview = () => {
     if (!confirmArea) return;
-    // 直近で使用していた難易度のまま、既存の問題生成システムで復習する
-    onStartReview(confirmArea.category as Category, getMostRecentDifficultyLevel(records));
+    // 出題レベルは復習でも技能ごとの習熟度 (学習履歴から推定) に従って
+    // 自動で決まる。ここでは復習対象のカテゴリだけを渡す。
+    onStartReview(confirmArea.category as Category);
     setConfirmArea(null);
   };
 
@@ -299,34 +298,6 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
                       <td>{cat.solvedCount}問</td>
                       <td>{formatPercent(cat.correctCount / cat.totalCount)}</td>
                       <td>{formatTime(cat.averageTimeSec)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-          </section>
-
-          <section className="stats-section">
-            <h3>難易度別成績</h3>
-            {stats.byDifficulty.length === 0 ? (
-              <p className="no-data">データがありません</p>
-            ) : (
-              <table className="stats-table">
-                <thead>
-                  <tr>
-                    <th>難易度</th>
-                    <th>問題数</th>
-                    <th>正答率</th>
-                    <th>平均時間</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {stats.byDifficulty.map((diff) => (
-                    <tr key={diff.level}>
-                      <td>{difficultyLabel(diff.level as 1 | 2 | 3 | 4 | 5)}</td>
-                      <td>{diff.solvedCount}問</td>
-                      <td>{formatPercent(diff.correctCount / diff.totalCount)}</td>
-                      <td>{formatTime(diff.averageTimeSec)}</td>
                     </tr>
                   ))}
                 </tbody>

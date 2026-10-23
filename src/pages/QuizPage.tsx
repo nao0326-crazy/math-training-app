@@ -74,6 +74,8 @@ export default function QuizPage({
   const [judgement, setJudgement] = useState<AnswerJudgement | null>(null);
   /** 時間切れで解答受付を打ち切ったか (通常の誤答と区別する) */
   const [timedOut, setTimedOut] = useState(false);
+  /** 問題をスキップして次へ進む遷移中か (二重遷移防止・タイマー停止用) */
+  const [isSkipped, setIsSkipped] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [result, setResult] = useState<SessionCounts | null>(null);
@@ -171,6 +173,7 @@ export default function QuizPage({
     setJudgement(null);
     setTimedOut(false);
     setShowSolution(false);
+    setIsSkipped(false);
     // 次の出題ごとに途中式の保存単位 (attemptId) を新しくする
     setAttemptId(createScratchAttemptId());
     startTimeRef.current = Date.now();
@@ -281,6 +284,27 @@ export default function QuizPage({
     handleSubmit('', { timedOut: true });
   }, [handleSubmit]);
 
+  /**
+   * 問題をスキップする。
+   * 解答処理 (handleSubmit) は呼ばない。正誤判定・履歴保存・適応型難易度・
+   * 正答率・連続正解/不正解数の更新を一切行わない。
+   * 二重遷移は answerSubmitLockRef と isSkipped で防止する。
+   */
+  const handleSkip = useCallback(() => {
+    if (!problem || isAnswered || isSkipped || answerSubmitLockRef.current) return;
+    // タイムアウトと競合した場合は、先に lock を立てた側が勝つ。
+    answerSubmitLockRef.current = true;
+    setIsSkipped(true);
+
+    if (questionNumber >= questionCount) {
+      setResult(toSessionCounts(resultRef.current));
+      answerSubmitLockRef.current = false;
+    } else {
+      setQuestionNumber((n) => n + 1);
+      loadNextQuestion();
+    }
+  }, [problem, isAnswered, isSkipped, questionNumber, questionCount, loadNextQuestion]);
+
   /** E2E/開発時のみ: 現在の問題と入力種別を window に公開する (本番ビルドでは無効) */
   useEffect(() => {
     if (!import.meta.env.DEV) return;
@@ -384,7 +408,7 @@ export default function QuizPage({
   }
 
   return (
-    <div className="quiz-page">
+    <div className="quiz-page" data-difficulty-level={problem.difficulty.level}>
       {/* ヘッダー：問題番号・進捗・カテゴリ・難易度（解答中のみ表示。解答後は非表示） */}
       {!isAnswered && (
         <div className="quiz-header">
@@ -394,16 +418,18 @@ export default function QuizPage({
           </div>
           <div className="quiz-meta">
             <span className="quiz-category">{categoryLabel(problem.category)}</span>
-            <span className="quiz-difficulty">
-              {difficultyLabel(problem.difficulty.level)}
-            </span>
+            {isAdminMode && (
+              <span className="quiz-difficulty">
+                {difficultyLabel(problem.difficulty.level)}
+              </span>
+            )}
           </div>
         </div>
       )}
 
       {/* 残り時間のカウントダウン。回答済み (解答・時間切れ後) は表示しない。
           期限は問題IDを鍵に管理し、新しい問題だけ新しい制限時間で始まる。 */}
-      {!isAnswered && (
+      {!isAnswered && !isSkipped && (
         <QuizTimer
           problemId={problem.id}
           limitSec={limitSec}
@@ -413,7 +439,7 @@ export default function QuizPage({
 
       {/* 問題文・図表（解答中のみ表示。解答後は非表示。
           解説に必要な問題文や図表は SolutionDisplay 側で個別に表示する） */}
-      {!isAnswered && (
+      {!isAnswered && !isSkipped && (
         <div className="question-card">
           <p className="question-text">{problem.question}</p>
           {/* 図形は figure を持つ問題でのみ描画される (未設定なら何も描かない) */}
@@ -425,7 +451,7 @@ export default function QuizPage({
       )}
 
       {/* 手書き途中式ノート (解答中のみ表示。解答後は非表示にして操作不可にする) */}
-      {!isAnswered && (
+      {!isAnswered && !isSkipped && (
         <div className="scratch-section">
           <ScratchPad
             key={attemptId}
@@ -442,7 +468,7 @@ export default function QuizPage({
       )}
 
       {/* 問題タイプに応じた専用入力UI (OSキーボードを表示しない) */}
-      {!isAnswered && (
+      {!isAnswered && !isSkipped && (
         <div className="answer-section">
           <AnswerInput
             key={problem.id}
@@ -450,6 +476,14 @@ export default function QuizPage({
             disabled={isAnswered}
             onSubmit={(value) => handleSubmit(value)}
           />
+          <button
+            type="button"
+            className="secondary-button skip-button"
+            onClick={handleSkip}
+            disabled={isAnswered || isSkipped}
+          >
+            問題をスキップ
+          </button>
         </div>
       )}
 

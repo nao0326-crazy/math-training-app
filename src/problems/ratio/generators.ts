@@ -697,10 +697,10 @@ function buildPercentage(
       answerKind = 'integer';
     }
 
-    const explanation =
-      '割合は「全体を100としたときの割合の値」です。'
-      + 'この問題の答えは、' + part + ' ÷ ' + whole + ' × 100 = ' + roundPercent(percent)
-      + ' パーセントと求められます。';
+    // 解説は variant ごとに「何を求めるか」に合わせて式を分ける。
+    // percent_of は「全体の何%か」ではなく「全体の何%がいくらか」を問うため、
+    // part ÷ whole × 100 という式では答えに到達できない。
+    const explanation = buildPercentageExplanation(variant, { percent, whole, part, answer });
 
     return {
       id: generateProblemId(),
@@ -718,4 +718,24 @@ function buildPercentage(
     };
   }
   return null;
+}
+
+/** 百分率の variant ごとの解説文 */
+function buildPercentageExplanation(
+  variant: PercentageVariant,
+  v: { percent: number; whole: number; part: number; answer: number },
+): string {
+  const { percent, whole, part, answer } = v;
+  if (variant === 'percent_of') {
+    // 「全体の何%がいくらか」を問うので、全体 × 百分率 ÷ 100 で求める
+    return '「' + percent + ' パーセントは全体の量に対していくつ分か」を求めるので、'
+      + '全体の ' + whole + ' に ' + percent + ' パーセントを掛けます。'
+      + ' ' + whole + ' × ' + percent + ' ÷ 100 = ' + answer
+      + ' となります。';
+  }
+  // find_percent / what_percent は「部分量が全体の何%か」を問うので、割り算で求める
+  return '割合をパーセントで表すには、'
+    + '「全体を100としたときの割合の値」に直します。'
+    + 'つまり、' + part + ' ÷ ' + whole + ' × 100 = ' + roundPercent(percent)
+    + ' パーセントと求められます。';
 }

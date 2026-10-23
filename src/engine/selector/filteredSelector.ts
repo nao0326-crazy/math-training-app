@@ -1,12 +1,22 @@
 /**
- * 絞り込み指定セレクター (管理者モード専用)
+ * 絞り込み指定セレクター (管理者出題範囲 × 習熟度ベース出題)
  *
  * 母集団 (questionPool) に対して filter を適用してから等確率で選ぶ。
- * 「学年・分野・問題タイプ・難易度・難易度範囲」をまとめて指定でき、
- * 学習履歴や苦手度による重み付けは行わない。
+ * 「分野・問題タイプ・学年・難易度・難易度範囲」をまとめて指定でき、
+ * 学習履歴や苦手度による母集団への重み付けは行わない
+ * (選択された出題範囲を常に尊重する)。
+ *
+ * 出題レベルの決定 (従来の「難易度範囲内のランダム選択」を廃止):
+ * - 技能 (problemType) ごとに学習履歴から習熟レベルを推定し、
+ *   出題目標 = 現在の習熟レベル + 1 段階を resolveTargetLevel で決定する。
+ * - filter.difficulty が明示指定されている場合はそれに従う
+ *   (エンジン層の明示条件。UI からは渡さない)。
+ * - 履歴が無い (習熟度未評価) ときは、条件の基礎レベルから出題が始まる。
+ * - 問題が存在しないレベルは出さない (習熟+1 を超える候補が無ければ
+ *   その型の最高レベルを出題し続ける)。
  *
  * filter が空 (未指定) の場合も絞り込みを行わず、
- * 全出題可能範囲から等確率で選ぶ (「すべて選択」とは解釈しない)。
+ * 全出題可能範囲から等確率で選ぶ。
  * ただし `types: []` は候補0件として扱う (questionPool.ts 側で処理)。
  */
 
@@ -23,8 +33,14 @@ import {
   EmptyQuestionPoolError,
   filterQuestionPool,
   type QuestionFilter,
+  type QuestionPoolEntry,
 } from './questionPool';
 import type { ProblemSelector } from './types';
+import {
+  estimateSkillMastery,
+  resolveTargetLevel,
+  type SkillMastery,
+} from '../../utils/mastery';
 
 /**
  * セッション内重複を避けるための引き直し上限 (回)。
@@ -50,29 +66,32 @@ export class FilteredSelector implements ProblemSelector {
   }
 
   /**
-   * 難易度を決定する。
-   * - filter.difficulty が指定されていればそれを使う。
-   * - filter.difficultyRange が指定されていれば、その範囲内で entry が
-   *   対応する難易度の中からランダムに1つ選ぶ。
-   * - どちらも指定されていなければ entry.supportedLevels[0] を使う。
+   * 出題レベル (内部的な問題難易度) を決定する。
+   *
+   * - filter.difficulty が明示指定されていればそれに従う。
+   * - それ以外は、技能 (entry.type) の習熟レベルから「一段上」の
+   *   目標レベルを resolveTargetLevel で決める。
+   *   - 習熟レベル+1 が候補にあればちょうど一段上を出題する。
+   *   - 最高レベル到達・型の上限では、その最高レベルを出し続ける
+   *     (存在しないレベルを出さない)。
+   *   - 履歴が無い場合は条件の基礎レベル (最下位) から始まる。
+   *   - filter.difficultyRange が残っている条件 (エンジン層互換) なら
+   *     その範囲内に収める。
    */
   private difficultyOf(
     entry: { supportedLevels: readonly DifficultyLevel[] },
-    random: () => number = Math.random,
+    mastery: SkillMastery,
   ): DifficultyLevel {
     if (this.filter.difficulty) return this.filter.difficulty;
-    if (this.filter.difficultyRange) {
-      const { min, max } = this.filter.difficultyRange;
-      const inRange = entry.supportedLevels.filter(
-        (level) => level >= min && level <= max,
-      );
-      if (inRange.length > 0) return inRange[Math.floor(random() * inRange.length)];
-    }
-    return entry.supportedLevels[0];
+    return resolveTargetLevel(
+      entry.supportedLevels,
+      mastery.level,
+      this.filter.difficultyRange,
+    );
   }
 
   selectNextQuestion(
-    _history: AnswerRecord[],
+    history: AnswerRecord[],
     questionHistory: QuestionHistory[],
   ): Problem {
     const pool = filterQuestionPool(this.filter, buildQuestionPool());
@@ -87,21 +106,35 @@ export class FilteredSelector implements ProblemSelector {
       DEFAULT_DIVERSITY_CONFIG,
     ).fingerprints;
 
+    // 技能ごとの習熟度 (1回の出題でまとめて計算し、候補間で共有する)。
+    // 履歴は出題のたびに更新されるため、セッション内でも毎回最新になる。
+    const masteryCache = new Map<string, SkillMastery>();
+    const masteryOf = (entry: QuestionPoolEntry): SkillMastery => {
+      const cached = masteryCache.get(entry.type);
+      if (cached) return cached;
+      const mastery = estimateSkillMastery(history, entry.type, entry.category);
+      masteryCache.set(entry.type, mastery);
+      return mastery;
+    };
+
     let firstPick: Problem | null = null;
+    const failures: string[] = [];
     const maxAttempts = Math.max(FILTERED_REDRAW_ATTEMPTS, pool.length);
 
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
       const target = pool[Math.floor(Math.random() * pool.length)];
-      const difficulty = this.difficultyOf(target);
+      const difficulty = this.difficultyOf(target, masteryOf(target));
 
       let problem: Problem;
       try {
         problem = generateProblem({ type: target.type, difficulty });
       } catch (e) {
-        throw new EmptyQuestionPoolError({
-          ...this.filter,
-          type: `${target.type} (${e instanceof Error ? e.message.slice(0, 40) : '生成失敗'})`,
-        });
+        // この型・このレベルでは生成できない種がある (既存仕様)。
+        // 絞り込み条件は緩めず、次の抽選で別の候補に切り替える。
+        failures.push(
+          `${target.type} lv${difficulty}: ${e instanceof Error ? e.message.slice(0, 40) : '生成失敗'}`,
+        );
+        continue;
       }
 
       if (!firstPick) firstPick = problem;
@@ -124,7 +157,7 @@ export class FilteredSelector implements ProblemSelector {
           try {
             return generateProblem({
               type: alternative.type,
-              difficulty: this.difficultyOf(alternative),
+              difficulty: this.difficultyOf(alternative, masteryOf(alternative)),
             });
           } catch {
             return firstPick;
@@ -135,6 +168,11 @@ export class FilteredSelector implements ProblemSelector {
     }
 
     // 全ての抽選が生成失敗した場合のみここへ到達する。
-    throw new EmptyQuestionPoolError(this.filter);
+    // 条件を緩めずにエラー表示できるよう、失敗内容も添える。
+    const error = new EmptyQuestionPoolError(this.filter);
+    if (failures.length > 0) {
+      error.message += ` 生成失敗: ${failures.slice(0, 3).join(' / ')}`;
+    }
+    throw error;
   }
 }

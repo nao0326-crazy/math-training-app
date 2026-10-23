@@ -34,6 +34,7 @@ vi.mock('./dailyAnswerSync', () => ({
 }));
 
 import { loadQuizHistory, persistQuizAnswer, persistQuizQuestion } from './quizPersistence';
+import { estimateSkillMastery } from '../utils/mastery';
 
 const answer: AnswerRecord = {
   problemId: 'admin-problem',
@@ -108,6 +109,37 @@ describe('quiz persistence mode isolation', () => {
     expect(database.dailySync).toEqual(['admin-submission']);
     expect(sync).toHaveBeenCalledOnce();
     expect(answerRecorded).toHaveBeenCalledOnce();
+  });
+
+  it('保存した回答履歴を再読込すると同じ習熟度が復元される (再起動耐性)', async () => {
+    // 技能 fraction_add_sub を Lv2 で5問正解した履歴を保存する
+    const records: AnswerRecord[] = Array.from({ length: 5 }, (_, index) => ({
+      problemId: `mastery-${index}`,
+      problemType: 'fraction_add_sub',
+      category: 'fraction',
+      isCorrect: true,
+      answerTimeSec: 12,
+      answeredAt: new Date(Date.UTC(2026, 0, 2, 0, 0, index)).toISOString(),
+      difficultyLevel: 2,
+      question: 'question',
+      userAnswer: 'answer',
+      correctAnswer: 'answer',
+      submissionId: `mastery-submission-${index}`,
+    }));
+    const before = estimateSkillMastery(records, 'fraction_add_sub', 'fraction');
+    expect(before.level).toBe(2);
+
+    for (const record of records) {
+      await persistQuizAnswer(false, record);
+    }
+
+    // アプリ再起動を模して保存済み履歴を再読込する
+    const { answers } = await loadQuizHistory(false);
+    expect(answers).toHaveLength(5);
+    const after = estimateSkillMastery(answers, 'fraction_add_sub', 'fraction');
+    expect(after.level).toBe(before.level);
+    expect(after.targetLevel).toBe(before.targetLevel);
+    expect(after.confidence).toBe(before.confidence);
   });
 
   it('finishes an accepted normal answer after a mode switch without starting a new sync', async () => {

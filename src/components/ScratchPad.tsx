@@ -5,7 +5,7 @@ import { loadScratchNote, storeScratchNote } from '../services/scratchNote';
 
 /** 未計測時 (表示前・jsdom) の既定キャンバスサイズ */
 const DEFAULT_WIDTH = 640;
-const DEFAULT_HEIGHT = 220;
+const DEFAULT_HEIGHT = 440;
 /** 線の既定色と太さ */
 const DEFAULT_COLOR = '#1f2937';
 const COLOR_CHOICES = [

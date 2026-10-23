@@ -37,6 +37,14 @@ export default function SolutionDisplay({ solutionSteps, answer }: SolutionDispl
   const answerText = formatAnswer(answer);
   const steps = solutionSteps ?? [];
 
+  // 途中式 (expression) を持つステップだけに番号を振る。
+  // 説明だけのステップ (expression なし) は番号を消費しない。
+  let expressionCounter = 0;
+  const numberedSteps = steps.map((step) => ({
+    step,
+    number: step.expression ? expressionCounter++ : null,
+  }));
+
   return (
     <div className="solution-display">
       <div className="solution-answer-top">
@@ -49,14 +57,14 @@ export default function SolutionDisplay({ solutionSteps, answer }: SolutionDispl
           <div className="solution-divider" aria-hidden="true"></div>
           <div className="solution-heading">途中式</div>
           <ol className="solution-steps">
-            {steps.map((step, i) => (
+            {numberedSteps.map(({ step, number }, i) => (
               <li key={i} className="solution-step">
                 {step.explanation && (
                   <p className="solution-explanation">{step.explanation}</p>
                 )}
                 {step.expression && (
                   <p className="solution-expression">
-                    <span className="solution-num">{stepNumber(i)}</span>
+                    <span className="solution-num">{stepNumber(number!)}</span>
                     {step.expression}
                   </p>
                 )}

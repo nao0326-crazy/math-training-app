@@ -423,7 +423,7 @@ export class VolumeFromHeightGenerator implements ProblemGenerator {
  */
 export class VolumeUnitGenerator implements ProblemGenerator {
   readonly type = 'volume_unit';
-  readonly category = 'geometry' as const;
+  readonly category = 'integer' as const;
   readonly description = '体積の単位換算';
 
   generate(config?: GenerationConfig): Problem {
@@ -1134,7 +1134,7 @@ const UNIT_FACTORS: Record<UnitConversionVariant, Record<string, number>> = {
 
 export class UnitConversionBasicGenerator implements ProblemGenerator {
   readonly type = 'unit_conversion_basic';
-  readonly category = 'geometry' as const;
+  readonly category = 'integer' as const;
   readonly description = '基本単位の換算';
 
   generate(config?: GenerationConfig): Problem {
@@ -2261,7 +2261,7 @@ function buildRectangleArea(
       + '掛け算を使うので、答えは「' + correct + '」です。'
       + h + ' × ' + w + ' = ' + answer + ' cm2 となります。'
       + '足し算では単位が合いません。',
-    parameters: { variant, width: w, height: h, area: answer, answer: answer, unit: 'cm2' },
+    parameters: { variant, width: w, height: h, area: answer, answer: answer, answerLabel: correct, unit: 'cm2' },
     steps: 1,
     choices: [wrongA, correct, wrongB],
   });
@@ -2815,11 +2815,16 @@ export class CongruentJudgeSameGenerator implements ProblemGenerator {
       question: wording,
       answer: { kind: 'string', value: 'はい' },
       explanation:
-        '図Bは図Aを' + angle + '°回転させ、平行移動した図形です。'
-        + '回転と平行移動では辺の長さと角の大きさが変わらないので、'
-        + '図Aと図Bは合同です。',
+        transform === 'reflect'
+          ? '図Bは図Aを線対称移動（鏡映）し、平行移動した図形です。'
+            + '線対称移動と平行移動では辺の長さと角の大きさが変わらないので、'
+            + '図Aと図Bは合同です。'
+          : '図Bは図Aを' + angle + '°回転させ、平行移動した図形です。'
+            + '回転と平行移動では辺の長さと角の大きさが変わらないので、'
+            + '図Aと図Bは合同です。',
       parameters: {
-        rotationDeg: angle,
+        rotationDeg: transform === 'reflect' ? undefined : angle,
+        transform,
         difficultyLevel: lv,
         // tx/ty (平行移動量) と図Aの座標は figure に含まれている。
         // parameters には数値を残さない。数値パラメータを問題文・解説に

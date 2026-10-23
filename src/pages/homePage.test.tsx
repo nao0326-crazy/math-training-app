@@ -10,7 +10,6 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import HomePage from './HomePage';
-import type { DifficultyRange } from '../types/problem';
 
 const noop = () => {};
 
@@ -24,7 +23,6 @@ function baseProps(): Parameters<typeof HomePage>[0] {
     onCloseAdminSettings: noop,
     isAdminAuthenticated: false,
     savedProblemTypeCount: 2,
-    savedDifficultyRange: { min: 2, max: 4 } satisfies DifficultyRange,
     scopeLoadError: null,
     startError: null,
     isStarting: false,
@@ -38,9 +36,12 @@ function render(props: Parameters<typeof HomePage>[0]): string {
 describe('HomePage: 通常表示', () => {
   const markup = render(baseProps());
 
-  it('出題範囲が表示される', () => {
+  it('出題範囲が表示される (難易度範囲の表示は廃止済み)', () => {
     expect(markup).toContain('出題範囲：2種類');
-    expect(markup).toContain('出題難易度：Lv2〜Lv4');
+    // 従来の「出題難易度：Lv〜」表示は手動難易度方式の廃止により削除
+    expect(markup).not.toContain('出題難易度：');
+    // 習熟度ベース出題の案内が表示される
+    expect(markup).toContain('学習履歴から自動で推定');
   });
 
   it('「問題を解く」ボタンがある', () => {

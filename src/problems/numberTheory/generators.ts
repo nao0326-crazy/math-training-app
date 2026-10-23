@@ -420,7 +420,8 @@ export class PrimeJudgmentGenerator implements ProblemGenerator {
     const level = (config?.difficulty ?? rng.int(1, 2)) as DifficultyLevel;
 
     const maxNum = level === 1 ? 30 : 100;
-    const primeCount = rng.int(1, 2);
+    const primeCount = 1;
+
     const primes = getPrimesInRange(2, maxNum);
     const compositePool = Array.from({ length: maxNum - 1 }, (_, i) => i + 2).filter(
       (n) => !isPrime(n),
@@ -934,7 +935,7 @@ export class GcdCalculationGenerator implements ProblemGenerator {
       question: `${a}と${b}の最大公約数を求めなさい`,
       answer: { kind: 'integer', value: g },
       explanation: `${a}と${b}の最大公約数は ${g} です。`,
-      parameters: { a, b, answer: g, difficultyLevel: lv },
+      parameters: { a, b, numbers: [a, b], answer: g, difficultyLevel: lv },
     };
   }
 
@@ -1032,7 +1033,7 @@ export class GcdLcmWordGenerator implements ProblemGenerator {
       },
       {
         type: 'period' as const,
-        template: 'ケーキは{c}個ずつ、クッキーは{d}個ずつ入った箱を、同じ数になるように買いたい。それぞれ最も少ないセットは何箱ずつ買えばよいですか',
+        template: '{c}個ずつと{d}個ずつ入った箱を、同じ数になるように買いたい。同じ数になる最も少ない個数は何個ですか',
       },
     ];
 

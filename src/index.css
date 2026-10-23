@@ -2564,7 +2564,11 @@ button.calendar-cell.day.selected {
 .scratch-canvas-wrap {
   position: relative;
   width: 100%;
-  height: 220px;
+  height: clamp(360px, 52vh, 560px);
+  min-height: 320px;
+  max-height: 80vh;
+  /* 縦方向のみ利用者が広さを調整できる (ResizeObserver が再描画するため筆跡は保持される) */
+  resize: vertical;
   border: 1px dashed var(--border);
   border-radius: 8px;
   background-color: #fff;
@@ -2583,6 +2587,12 @@ button.calendar-cell.day.selected {
   /* 描画中のページスクロール・ブラウザジェスチャーとの競合を防ぐ */
   touch-action: none;
   cursor: crosshair;
+}
+
+.scratch-canvas.scratch-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .scratch-confirm {
@@ -2714,7 +2724,11 @@ button.calendar-cell.day.selected {
   }
 
   .scratch-canvas-wrap {
-    height: 200px;
+    height: clamp(320px, 48vh, 480px);
+    min-height: 300px;
+    /* 狭い画面では手動リサイズを無効にし、画面はみ出しを防ぐ */
+    resize: none;
+    overflow: hidden;
   }
 }
 

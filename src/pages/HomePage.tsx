@@ -1,20 +1,18 @@
 /**
- * ホーム画面 (管理者出題範囲による学習)
+ * ホーム画面 (管理者出題範囲 × 習熟度ベース出題)
  *
  * 方針:
- * - すべての学習で管理者が設定した出題範囲 (problemTypes / difficultyRange) を使用する。
- * - 「通常モード」は存在しない。分野別・適応難易度・苦手復習などの通常モードは廃止。
- * - 管理者認証後、PracticeSetupPage で出題範囲を設定し、「問題を解く」で学習を始める。
+ * - 出題範囲 (問題タイプ) は管理者が設定し、その範囲は常に尊重する。
+ * - 出題レベルは手動選択を廃止し、学習履歴から推定した技能ごとの
+ *   習熟レベルの一段上を自動で出題する (utils/mastery.ts)。
+ * - 「通常モード」は存在しない。復習・苦手診断も同じ出題経路を通る。
  * - 出題範囲が未設定または空の場合は、エラーを表示して学習を開始できない。
  */
-
-import type { DifficultyRange } from '../types/problem';
-
 
 interface HomePageProps {
   /** 学習履歴へ移動 */
   onShowHistory: () => void;
-  /** 保存済みの出題範囲に従って学習を始める (引数なし: 管理者設定の難易度範囲を使用) */
+  /** 保存済みの出題範囲に従って学習を始める (出題レベルは履歴から自動決定) */
   onStartQuiz: () => void;
   /** 管理者タブ (認証) を開く */
   onOpenVerification: () => void;
@@ -26,8 +24,6 @@ interface HomePageProps {
   isAdminAuthenticated: boolean;
   /** 保存済みの問題タイプ数 (null = 読み込み中) */
   savedProblemTypeCount: number | null;
-  /** 保存済みの難易度範囲 (null = 読み込み中) */
-  savedDifficultyRange: DifficultyRange | null;
   /** 出題範囲の読み込みエラー */
   scopeLoadError: string | null;
   /** 学習開始時のエラー */
@@ -44,7 +40,6 @@ export default function HomePage({
   onCloseAdminSettings,
   isAdminAuthenticated,
   savedProblemTypeCount,
-  savedDifficultyRange,
   scopeLoadError,
   startError,
   isStarting,
@@ -54,6 +49,7 @@ export default function HomePage({
       <section className="hero-section">
         <h2>ようこそ！</h2>
         <p>管理者が設定した出題範囲から問題を出題します。</p>
+        <p>問題のレベルは学習履歴から自動で推定し、今の実力より一段階上の問題に挑戦します。</p>
         <p>「問題を解く」で学習を始めましょう。</p>
       </section>
 
@@ -65,11 +61,6 @@ export default function HomePage({
             ? '保存済みの出題範囲を確認しています...'
             : `出題範囲：${savedProblemTypeCount}種類`}
         </p>
-        {savedDifficultyRange && (
-          <p aria-live="polite">
-            出題難易度：Lv{savedDifficultyRange.min}〜Lv{savedDifficultyRange.max}
-          </p>
-        )}
         {savedProblemTypeCount === 0 && (
           <p className="error-message" role="status">
             出題範囲が設定されていません。管理者タブで出題範囲を設定してください。

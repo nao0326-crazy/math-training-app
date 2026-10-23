@@ -900,16 +900,20 @@ function speedMultiStep(p: Problem): SolutionStep[] {
 
 function circleAreaRadius(p: Problem): SolutionStep[] {
   const { radius, area } = P<{ radius: number; area: number; pi?: number }>(p);
+  const product = radius * radius * 3.14;
+  const op = Math.abs(product - area) < 1e-9 ? '=' : '≈';
   return [
-    S(`${radius} × ${radius} × 3.14 = ${pv(area)}`, '円の面積 ＝ 半径 × 半径 × 円周率'),
+    S(`${radius} × ${radius} × 3.14 ${op} ${pv(area)}`, '円の面積 ＝ 半径 × 半径 × 円周率'),
   ];
 }
 
 function circleAreaDiameter(p: Problem): SolutionStep[] {
   const { diameter, radius, area } = P<{ diameter: number; radius: number; area: number }>(p);
+  const product = radius * radius * 3.14;
+  const op = Math.abs(product - area) < 1e-9 ? '=' : '≈';
   return [
     S(`${diameter} ÷ 2 = ${num(radius)}`, '直径の半分が半径です'),
-    S(`${num(radius)} × ${num(radius)} × 3.14 = ${pv(area)}`, '円の面積 ＝ 半径 × 半径 × 円周率'),
+    S(`${num(radius)} × ${num(radius)} × 3.14 ${op} ${pv(area)}`, '円の面積 ＝ 半径 × 半径 × 円周率'),
   ];
 }
 
@@ -1012,8 +1016,17 @@ function judgeDiffers(p: Problem): SolutionStep[] {
  * 図Bは図Aを合同変換した図形なので、両者は合同である。
  */
 function judgeSame(p: Problem): SolutionStep[] {
-  const { rotationDeg } = P<{ rotationDeg: number }>(p);
+  const { rotationDeg, transform } = P<{ rotationDeg: number; transform?: 'rotate' | 'reflect' }>(p);
   const ans = formatAnswer(p.answer);
+  if (transform === 'reflect') {
+    return [
+      S(undefined, '図形を動かせば重なるか、辺の長さと角の大きさを比べます'),
+      S(
+        '線対称移動と平行移動では辺の長さが変わらない',
+        `図Aと図Bは合同なので ${ans}`,
+      ),
+    ];
+  }
   return [
     S(undefined, '図形を動かせば重なるか、辺の長さと角の大きさを比べます'),
     S(
@@ -1659,7 +1672,7 @@ function arrangeSimple(p: Problem): SolutionStep[] {
     case 'pick_only':
       return [
         S(undefined, '1人めの選び方 × 2人めの選び方 × … の順で数えます'),
-        ...chainSteps(n, r, `1番めに並べるのは${n}人のうち誰か、${r}通りです`),
+        ...chainSteps(n, r, `1番めに並べるのは${n}人のうち誰か、${n}通りです`),
         S(`全部で ${ans} 通り`),
       ];
 
@@ -1750,7 +1763,7 @@ function combineSimple(p: Problem): SolutionStep[] {
     for (let i = count; i >= 2; i--) dTerms.push(String(i));
     return [
       S(`${terms.join(' × ')} = ${falling}`, 'まず「誰が選ばれたか + 順番」まですべて数えます'),
-      S(`${falling} ÷ ${dTerms.join(' × ')} = ${falling / factorial(count)}`, `同じ${count}人の並べかえ (${dTerms.join(' × ')} 通り) は同じ選び方なのでわります`),
+      S(`${falling} ÷ (${dTerms.join(' × ')}) = ${falling / factorial(count)}`, `同じ${count}人の並べかえ (${dTerms.join(' × ')} 通り) は同じ選び方なのでわります`),
     ];
   };
 
@@ -1780,17 +1793,16 @@ function arrangeTree(p: Problem): SolutionStep[] {
   switch (variant) {
     case 'all': {
       const chain = factorialChainSteps(n, '1番め、2番め、… の選び方をかけ合わせます');
-      return [S(undefined, chain.steps[0]?.explanation), ...chain.steps, S(`全部で ${ans} 通り`)];
+      return [...chain.steps, S(`全部で ${ans} 通り`)];
     }
     case 'fixed_first': {
       // 1文字の位置が決まっているので、残り n-1 個の並び方になる
       const chain = factorialChainSteps(n - 1, '位置が決まった1文字を残りの n-1 個の並びとして数えます');
-      return [S(undefined, chain.steps[0]?.explanation), ...chain.steps, S(`全部で ${ans} 通り`)];
+      return [...chain.steps, S(`全部で ${ans} 通り`)];
     }
     case 'both_ends': {
       const chain = factorialChainSteps(n - 2, '両端を埋める2文字を除いた残りの並び方を数えます');
       return [
-        S(undefined, chain.steps[0]?.explanation),
         ...chain.steps,
         S(`2 × ${chain.product} = ${ans} 通り`, '両端の2文字の左右は入れかわるので2倍します'),
       ];
@@ -1799,14 +1811,13 @@ function arrangeTree(p: Problem): SolutionStep[] {
       // 隣り合う2文字を「1つのまとまり」にして数える
       const chain = factorialChainSteps(n - 1, '隣り合う2文字を1つのまとまりとして数えます');
       return [
-        S(undefined, chain.steps[0]?.explanation),
         ...chain.steps,
         S(`2 × ${chain.product} = ${ans} 通り`, '2文字の左右は入れかわるので2倍します'),
       ];
     }
     case 'circle': {
       const chain = factorialChainSteps(n - 1, '回転して重なる並びは同じなので、1文字を1つの目印に固定して数えます');
-      return [S(undefined, chain.steps[0]?.explanation), ...chain.steps, S(`全部で ${ans} 通り`)];
+      return [...chain.steps, S(`全部で ${ans} 通り`)];
     }
     default: {
       const chain = factorialChainSteps(n, '選び方をかけ合わせます');
