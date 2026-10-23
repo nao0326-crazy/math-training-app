@@ -1,19 +1,26 @@
+/**
+ * 管理者タブ: 出題範囲 (問題タイプ) の設定
+ *
+ * 難易度は管理者が設定する方式を廃止し、出題レベルは学習履歴から推定した
+ * 習熟度にもとづいて自動決定される (utils/mastery.ts)。
+ * ここで設定するのは「どの問題の種類を出題範囲にするか」だけ。
+ */
+
 import { useEffect, useMemo, useState } from 'react';
 import type { Category } from '../types/problem';
 import { getAllGenerators } from '../engine/selector/generatorRegistry';
 import { getTypeSupportedLevels } from '../engine/diversity/metadata';
 import { categoryLabel } from '../utils/stats';
-import { difficultyLabel } from '../engine/difficulty/difficulty';
 import {
-  DEFAULT_ADMIN_PRACTICE_DIFFICULTY_RANGE,
-  getAdminPracticeConfiguration,
-  saveAdminPracticeConfiguration,
+  getAdminPracticeTypes,
+  saveAdminPracticeTypes,
 } from '../storage/db';
-import type { DifficultyLevel, DifficultyRange } from '../types/problem';
 
 interface PracticeSetupPageProps {
-  onSaved: (problemTypes: string[], difficultyRange: DifficultyRange) => void;
+  /** 出題範囲 (問題タイプ) を保存したとき */
+  onSaved: (problemTypes: string[]) => void;
   onClose: () => void;
+  onOpenVerificationMode?: () => void;
 }
 
 const GENERATORS = getAllGenerators().filter(
@@ -21,11 +28,8 @@ const GENERATORS = getAllGenerators().filter(
 );
 const CATEGORIES = [...new Set(GENERATORS.map((generator) => generator.category))];
 
-export default function PracticeSetupPage({ onSaved, onClose }: PracticeSetupPageProps) {
+export default function PracticeSetupPage({ onSaved, onClose, onOpenVerificationMode }: PracticeSetupPageProps) {
   const [problemTypes, setProblemTypes] = useState<string[]>([]);
-  const [difficultyRange, setDifficultyRange] = useState<DifficultyRange>(
-    DEFAULT_ADMIN_PRACTICE_DIFFICULTY_RANGE,
-  );
   const [isLoading, setIsLoading] = useState(true);
   const [loadFailed, setLoadFailed] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -35,11 +39,10 @@ export default function PracticeSetupPage({ onSaved, onClose }: PracticeSetupPag
 
   useEffect(() => {
     let cancelled = false;
-    void getAdminPracticeConfiguration()
-      .then((configuration) => {
+    void getAdminPracticeTypes()
+      .then((types) => {
         if (!cancelled) {
-          setProblemTypes(configuration.problemTypes);
-          setDifficultyRange(configuration.difficultyRange);
+          setProblemTypes(types);
         }
       })
       .catch(() => {
@@ -79,8 +82,8 @@ export default function PracticeSetupPage({ onSaved, onClose }: PracticeSetupPag
     setIsSaving(true);
     setError(null);
     try {
-      await saveAdminPracticeConfiguration(problemTypes, difficultyRange);
-      onSaved(problemTypes, difficultyRange);
+      await saveAdminPracticeTypes(problemTypes);
+      onSaved(problemTypes);
     } catch {
       setError('出題設定を保存できませんでした。');
     } finally {
@@ -93,50 +96,8 @@ export default function PracticeSetupPage({ onSaved, onClose }: PracticeSetupPag
       <section className="settings-section">
         <h2>管理者タブ：出題設定</h2>
         <p>出題範囲にする問題の種類をえらんでください。</p>
+        <p>出題レベルは学習履歴から自動で決まります。</p>
         <p aria-live="polite">選択中：{problemTypes.length}種類</p>
-        <div className="difficulty-range-controls">
-          <label>
-            出題難易度の下限
-            <select
-              value={difficultyRange.min}
-              disabled={isLoading || loadFailed}
-              onChange={(event) => {
-                const min = Number(event.target.value) as DifficultyLevel;
-                setDifficultyRange((current) => ({
-                  min,
-                  max: Math.max(min, current.max) as DifficultyLevel,
-                }));
-                setError(null);
-              }}
-            >
-              {[1, 2, 3, 4, 5].map((level) => (
-                <option key={level} value={level}>{`Lv${level} - ${difficultyLabel(level as DifficultyLevel)}`}</option>
-              ))}
-            </select>
-          </label>
-          <label>
-            出題難易度の上限
-            <select
-              value={difficultyRange.max}
-              disabled={isLoading || loadFailed}
-              onChange={(event) => {
-                const max = Number(event.target.value) as DifficultyLevel;
-                setDifficultyRange((current) => ({
-                  min: Math.min(current.min, max) as DifficultyLevel,
-                  max,
-                }));
-                setError(null);
-              }}
-            >
-              {[1, 2, 3, 4, 5].map((level) => (
-                <option key={level} value={level}>{`Lv${level} - ${difficultyLabel(level as DifficultyLevel)}`}</option>
-              ))}
-            </select>
-          </label>
-          <p aria-live="polite">
-            設定範囲：Lv{difficultyRange.min}〜Lv{difficultyRange.max}
-          </p>
-        </div>
       </section>
       {isLoading ? (
         <p className="loading-message">保存済みの範囲を読み込んでいます...</p>
@@ -205,7 +166,16 @@ export default function PracticeSetupPage({ onSaved, onClose }: PracticeSetupPag
         >
           {isSaving ? '保存しています...' : '出題範囲を保存'}
         </button>
-        <button className="secondary-button" type="button" onClick={onClose}>
+        {onOpenVerificationMode && (
+        <button
+          className="secondary-button"
+          type="button"
+          onClick={onOpenVerificationMode}
+        >
+          全問題タイプ手動検証
+        </button>
+      )}
+      <button className="secondary-button" type="button" onClick={onClose}>
           管理者タブを閉じる
         </button>
       </div>

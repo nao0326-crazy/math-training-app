@@ -3,7 +3,7 @@ import HomePage from './pages/HomePage';
 import QuizPage from './pages/QuizPage';
 import HistoryPage from './pages/HistoryPage';
 import DailyProgressNotification from './components/DailyProgressNotification';
-import type { Category, DifficultyRange } from './types/problem';
+import type { Category } from './types/problem';
 import { runDailyAnswerSync } from './services/dailyAnswerSync';
 import { REVIEW_QUESTION_COUNT } from './utils/weakAreas';
 import MaintenancePage from './components/MaintenancePage';
@@ -11,9 +11,10 @@ import { isMaintenanceMode } from './utils/maintenanceMode';
 import type { QuizSelection } from './pages/quizSelection';
 import VerificationCodePage from './pages/VerificationCodePage';
 import PracticeSetupPage from './pages/PracticeSetupPage';
-import { getAdminPracticeConfiguration } from './storage/db';
+import AdminVerificationPage from './pages/AdminVerificationPage';
+import { getAdminPracticeTypes } from './storage/db';
 
-type Page = 'home' | 'quiz' | 'history' | 'verification' | 'practiceSetup';
+type Page = 'home' | 'quiz' | 'history' | 'verification' | 'practiceSetup' | 'adminVerification';
 
 function NormalApp() {
   const [page, setPage] = useState<Page>('home');
@@ -28,7 +29,6 @@ function NormalApp() {
   const isAdminQuizRef = useRef(false);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
   const [savedProblemTypes, setSavedProblemTypes] = useState<string[] | null>(null);
-  const [savedDifficultyRange, setSavedDifficultyRange] = useState<DifficultyRange | null>(null);
   const [scopeLoadError, setScopeLoadError] = useState<string | null>(null);
   const [startError, setStartError] = useState<string | null>(null);
   const [isStarting, setIsStarting] = useState(false);
@@ -63,17 +63,15 @@ function NormalApp() {
     if (page !== 'home') return;
     let cancelled = false;
     setScopeLoadError(null);
-    void getAdminPracticeConfiguration()
-      .then((configuration) => {
+    void getAdminPracticeTypes()
+      .then((types) => {
         if (!cancelled) {
-          setSavedProblemTypes(configuration.problemTypes);
-          setSavedDifficultyRange(configuration.difficultyRange);
+          setSavedProblemTypes(types);
         }
       })
       .catch(() => {
         if (!cancelled) {
           setSavedProblemTypes(null);
-          setSavedDifficultyRange(null);
           setScopeLoadError('保存済みの出題設定を読み込めませんでした。');
         }
       });
@@ -110,26 +108,21 @@ function NormalApp() {
   /**
    * 学習を始める (全学習共通): 保存済みの管理者出題範囲を厳密に適用する。
    *
-   * 管理者が設定した problemTypes / difficultyRange を filter に変換し、
-   * FilteredSelector で一様ランダム出題する。
+   * 管理者が設定した problemTypes を filter に変換し、
+   * FilteredSelector で出題する。出題レベルは難易度を手動指定する方式を
+   * 廃止し、技能ごとの習熟度 (学習履歴から推定) の一段上が自動で選ばれる。
    * 復習 (reviewCategory 指定) も同じ出題範囲に「苦手カテゴリ」を追加絞り込み
-   * するだけで、範囲外への緩和や履歴・苦手度による重み付けは行わない。
+   * するだけで、範囲外への緩和や履歴・苦手度による母集団の重み付けは行わない。
    * 出題範囲が空、または条件に一致する問題が0件の場合はエラーを表示する。
    */
-  const startQuiz = async (
-    difficulty: number,
-    count = 10,
-    reviewCategory?: Category,
-  ) => {
+  const startQuiz = async (count = 10, reviewCategory?: Category) => {
     if (startLockRef.current) return;
     startLockRef.current = true;
     setIsStarting(true);
     setStartError(null);
     try {
-      const configuration = await getAdminPracticeConfiguration();
-      const { problemTypes, difficultyRange } = configuration;
+      const problemTypes = await getAdminPracticeTypes();
       setSavedProblemTypes(problemTypes);
-      setSavedDifficultyRange(difficultyRange);
       setScopeLoadError(null);
 
       if (problemTypes.length === 0) {
@@ -138,24 +131,23 @@ function NormalApp() {
         return;
       }
 
-      // 管理者設定を QuestionFilter に変換 (復習時は苦手カテゴリでも追加絞り込み)
+      // 管理者設定を QuestionFilter に変換 (復習時は苦手カテゴリでも追加絞り込み)。
+      // difficulty は filtered モードでは出題決定に使わない (型互換のための既定値)。
       const filter = {
         category: reviewCategory ?? null,
         types: problemTypes,
-        difficultyRange,
       };
 
       setAdminQuizMode(false);
       setSelection({
         studyMode: { kind: 'filtered', filter },
-        difficulty,
+        difficulty: 2,
         filter,
       });
       setQuestionCount(count);
       setPage('quiz');
     } catch {
       setSavedProblemTypes(null);
-      setSavedDifficultyRange(null);
       setStartError('保存済みの出題設定を読み込めないため、学習を開始できません。');
       setPage('home');
     } finally {
@@ -199,7 +191,7 @@ function NormalApp() {
               clearAdminMode();
               setPage('history');
             }}
-            onStartQuiz={() => void startQuiz(2)}
+            onStartQuiz={() => void startQuiz()}
             onOpenVerification={() => setPage('verification')}
             onOpenPracticeSetup={() => setPage('practiceSetup')}
             onCloseAdminSettings={() => {
@@ -208,7 +200,6 @@ function NormalApp() {
             }}
             isAdminAuthenticated={isAdminAuthenticated}
             savedProblemTypeCount={savedProblemTypes?.length ?? null}
-            savedDifficultyRange={savedDifficultyRange}
             scopeLoadError={scopeLoadError}
             startError={startError}
             isStarting={isStarting}
@@ -227,8 +218,8 @@ function NormalApp() {
         )}
         {page === 'history' && (
           <HistoryPage
-            onStartReview={(category, difficulty) =>
-              void startQuiz(difficulty, REVIEW_QUESTION_COUNT, category)
+            onStartReview={(category) =>
+              void startQuiz(REVIEW_QUESTION_COUNT, category)
             }
           />
         )}
@@ -243,15 +234,23 @@ function NormalApp() {
         )}
         {page === 'practiceSetup' && (
           <PracticeSetupPage
-            onSaved={(problemTypes, difficultyRange) => {
+            onSaved={(problemTypes) => {
               setSavedProblemTypes(problemTypes);
-              setSavedDifficultyRange(difficultyRange);
               setStartError(null);
               setPage('home');
             }}
             onClose={() => {
               setIsAdminAuthenticated(false);
               setPage('home');
+            }}
+            onOpenVerificationMode={() => setPage('adminVerification')}
+          />
+        )}
+        {page === 'adminVerification' && (
+          <AdminVerificationPage
+            onExit={() => {
+              setIsAdminAuthenticated(true);
+              setPage('practiceSetup');
             }}
           />
         )}
