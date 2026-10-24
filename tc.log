@@ -1,0 +1,46 @@
+SERVER UP http://127.0.0.1:5199
+PASS triangle_classify lv1 Q1 question text :: 霎ｺ縺ｮ髟ｷ縺輔′ 6cm縲・cm縲・cm 縺ｮ荳芽ｧ貞ｽ｢縺ｯ縲√←繧薙↑荳芽ｧ貞ｽ｢縺ｧ縺吶°縲・PASS triangle_classify lv1 Q1 correct feedback :: 脂 縺帙＞縺九＞・・譛繧る聞縺・ｾｺ縺ｯ 8cm縲∽ｻ悶・2霎ｺ縺ｮ蜥後・ 11cm 縺ｧ縲∽ｸ芽ｧ貞ｽ｢縺後〒
+PASS triangle_classify lv1 Q1 solution display :: steps=2
+PASS triangle_classify lv1 Q1 solution answer value :: expected=荳咲ｭ芽ｾｺ荳芽ｧ貞ｽ｢
+PASS triangle_classify lv1 Q2 no leftover input :: empty
+PASS triangle_classify lv1 Q2 question text :: 霎ｺ縺ｮ髟ｷ縺輔′ 4cm縲・cm縲・cm 縺ｮ荳芽ｧ貞ｽ｢縺ｯ縲√←繧薙↑荳芽ｧ貞ｽ｢縺ｧ縺吶°縲・PASS triangle_classify lv1 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ 荳咲ｭ芽ｾｺ荳芽ｧ貞ｽ｢ 縺ｧ縺・譛繧る聞縺・ｾｺ縺ｯ 8cm縲∽ｻ悶・2霎ｺ縺ｮ
+PASS triangle_classify lv1 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ 荳咲ｭ芽ｾｺ荳芽ｧ貞ｽ｢ 縺ｧ縺・expected=荳咲ｭ芽ｾｺ荳芽ｧ貞ｽ｢
+PASS triangle_classify lv1 Q2 solution display :: steps=2
+PASS triangle_classify lv1 result page reachable :: not reached (questionCount>2)
+PASS triangle_classify lv1 no 404 :: none
+PASS triangle_classify lv2 Q1 question text :: 霎ｺ縺ｮ髟ｷ縺輔′ 8cm縲・cm縲・cm 縺ｮ荳芽ｧ貞ｽ｢縺ｯ縲√←繧薙↑荳芽ｧ貞ｽ｢縺ｧ縺吶°縲・PASS triangle_classify lv2 Q1 correct feedback :: 脂 縺帙＞縺九＞・・譛繧る聞縺・ｾｺ縺ｯ 8cm縲∽ｻ悶・2霎ｺ縺ｮ蜥後・ 13cm 縺ｧ縲∽ｸ芽ｧ貞ｽ｢縺後〒
+PASS triangle_classify lv2 Q1 solution display :: steps=2
+PASS triangle_classify lv2 Q1 solution answer value :: expected=荳咲ｭ芽ｾｺ荳芽ｧ貞ｽ｢
+PASS triangle_classify lv2 Q2 no leftover input :: empty
+PASS triangle_classify lv2 Q2 question text :: 霎ｺ縺ｮ髟ｷ縺輔′ 7cm縲・cm縲・cm 縺ｮ荳芽ｧ貞ｽ｢縺ｧ縲・聞縺輔′遲峨＠縺・ｾｺ縺ｯ菴墓悽縺ゅｊ縺ｾ縺吶°縲・PASS triangle_classify lv2 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ 2 縺ｧ縺・3霎ｺ縺ｮ髟ｷ縺輔ｒ鬆・↓荳ｦ縺ｹ繧九→ 4縲・縲・ 縺ｧ縺・PASS triangle_classify lv2 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ 2 縺ｧ縺・expected=2
+PASS triangle_classify lv2 Q2 solution display :: steps=3
+PASS triangle_classify lv2 result page reachable :: not reached (questionCount>2)
+PASS triangle_classify lv2 no 404 :: none
+PASS triangle_classify lv3 Q1 question text :: 霎ｺ縺ｮ髟ｷ縺輔′ 2cm縲・cm縲・cm 縺ｮ荳芽ｧ貞ｽ｢縺ｯ縲√←繧薙↑荳芽ｧ貞ｽ｢縺ｧ縺吶°縲・PASS triangle_classify lv3 Q1 correct feedback :: 脂 縺帙＞縺九＞・・譛繧る聞縺・ｾｺ縺ｯ 2cm縲∽ｻ悶・2霎ｺ縺ｮ蜥後・ 4cm 縺ｧ縲∽ｸ芽ｧ貞ｽ｢縺後〒縺・PASS triangle_classify lv3 Q1 solution display :: steps=2
+PASS triangle_classify lv3 Q1 solution answer value :: expected=豁｣荳芽ｧ貞ｽ｢
+PASS triangle_classify lv3 Q2 no leftover input :: empty
+PASS triangle_classify lv3 Q2 question text :: 霎ｺ縺ｮ髟ｷ縺輔′ 4cm縲・cm縲・cm 縺ｮ荳芽ｧ貞ｽ｢縺ｯ縲√←繧薙↑荳芽ｧ貞ｽ｢縺ｧ縺吶°縲・PASS triangle_classify lv3 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ 莠檎ｭ芽ｾｺ荳芽ｧ貞ｽ｢ 縺ｧ縺・譛繧る聞縺・ｾｺ縺ｯ 6cm縲∽ｻ悶・2霎ｺ縺ｮ
+PASS triangle_classify lv3 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ 莠檎ｭ芽ｾｺ荳芽ｧ貞ｽ｢ 縺ｧ縺・expected=莠檎ｭ芽ｾｺ荳芽ｧ貞ｽ｢
+PASS triangle_classify lv3 Q2 solution display :: steps=2
+PASS triangle_classify lv3 result page reachable :: not reached (questionCount>2)
+PASS triangle_classify lv3 no 404 :: none
+PASS triangle_classify lv4 Q1 question text :: 霎ｺ縺ｮ髟ｷ縺輔′ 9cm縲・cm縲・cm 縺ｮ荳芽ｧ貞ｽ｢縺ｯ縲√←繧薙↑荳芽ｧ貞ｽ｢縺ｧ縺吶°縲・PASS triangle_classify lv4 Q1 correct feedback :: 脂 縺帙＞縺九＞・・譛繧る聞縺・ｾｺ縺ｯ 9cm縲∽ｻ悶・2霎ｺ縺ｮ蜥後・ 13cm 縺ｧ縲∽ｸ芽ｧ貞ｽ｢縺後〒
+PASS triangle_classify lv4 Q1 solution display :: steps=2
+PASS triangle_classify lv4 Q1 solution answer value :: expected=荳咲ｭ芽ｾｺ荳芽ｧ貞ｽ｢
+PASS triangle_classify lv4 Q2 no leftover input :: empty
+PASS triangle_classify lv4 Q2 question text :: 霎ｺ縺ｮ髟ｷ縺輔′ 7cm縲・cm縲・cm 縺ｮ荳芽ｧ貞ｽ｢縺ｯ縲√←繧薙↑荳芽ｧ貞ｽ｢縺ｧ縺吶°縲・PASS triangle_classify lv4 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ 荳咲ｭ芽ｾｺ荳芽ｧ貞ｽ｢ 縺ｧ縺・譛繧る聞縺・ｾｺ縺ｯ 9cm縲∽ｻ悶・2霎ｺ縺ｮ
+PASS triangle_classify lv4 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ 荳咲ｭ芽ｾｺ荳芽ｧ貞ｽ｢ 縺ｧ縺・expected=荳咲ｭ芽ｾｺ荳芽ｧ貞ｽ｢
+PASS triangle_classify lv4 Q2 solution display :: steps=2
+PASS triangle_classify lv4 result page reachable :: not reached (questionCount>2)
+PASS triangle_classify lv4 no 404 :: none
+PASS triangle_classify lv5 Q1 question text :: 霎ｺ縺ｮ髟ｷ縺輔′ 7cm縲・cm縲・cm 縺ｮ荳芽ｧ貞ｽ｢縺ｧ縲・聞縺輔′遲峨＠縺・ｾｺ縺ｯ菴墓悽縺ゅｊ縺ｾ縺吶°縲・PASS triangle_classify lv5 Q1 correct feedback :: 脂 縺帙＞縺九＞・・3霎ｺ縺ｮ髟ｷ縺輔ｒ鬆・↓荳ｦ縺ｹ繧九→ 6縲・縲・ 縺ｧ縺吶る聞縺輔′蜷後§霎ｺ縺・譛ｬ
+PASS triangle_classify lv5 Q1 solution display :: steps=3
+PASS triangle_classify lv5 Q1 solution answer value :: expected=2
+PASS triangle_classify lv5 Q2 no leftover input :: empty
+PASS triangle_classify lv5 Q2 question text :: 霎ｺ縺ｮ髟ｷ縺輔′ 5cm縲・cm縲・cm 縺ｮ荳芽ｧ貞ｽ｢縺ｯ縲√←繧薙↑荳芽ｧ貞ｽ｢縺ｧ縺吶°縲・PASS triangle_classify lv5 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ 莠檎ｭ芽ｾｺ荳芽ｧ貞ｽ｢ 縺ｧ縺・譛繧る聞縺・ｾｺ縺ｯ 5cm縲∽ｻ悶・2霎ｺ縺ｮ
+PASS triangle_classify lv5 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ 莠檎ｭ芽ｾｺ荳芽ｧ貞ｽ｢ 縺ｧ縺・expected=莠檎ｭ芽ｾｺ荳芽ｧ貞ｽ｢
+PASS triangle_classify lv5 Q2 solution display :: steps=2
+PASS triangle_classify lv5 result page reachable :: not reached (questionCount>2)
+PASS triangle_classify lv5 no 404 :: none
+
+SUMMARY pass=55 fail=0 cases=430

@@ -1,0 +1,7 @@
+export class SpeedCalculationGenerator implements ProblemGenerator {
+export class DistanceCalculatorGenerator implements ProblemGenerator {
+export class TimeCalculatorGenerator implements ProblemGenerator {
+export class SpeedUnitConversionGenerator implements ProblemGenerator {
+export class SpeedComparisonGenerator implements ProblemGenerator {
+export class SpeedWordGenerator implements ProblemGenerator {
+export class SpeedMultiStepGenerator implements ProblemGenerator {

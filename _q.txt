@@ -1,0 +1,178 @@
+integer_addition [(none)] :: 3に2をたすといくつになりますか  ==> {"kind":"integer","value":5}
+integer_subtraction [(none)] :: 4から1をひくといくつになりますか  ==> {"kind":"integer","value":3}
+integer_multiplication [(none)] :: 3に2をかけるといくつになりますか  ==> {"kind":"integer","value":6}
+integer_division [(none)] :: 4を4でわると、商はいくつになりますか  ==> {"kind":"integer","value":1}
+integer_multi_step [(none)] :: 1 + 9 + 1 はいくつになりますか  ==> {"kind":"integer","value":11}
+integer_fill_blank [(none)] :: 2−□＝1 の □ にあてはまる数はいくつですか  ==> {"kind":"integer","value":1}
+estimate_product [estimate_to_tens] :: 16 × 41 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数）に四捨五入してから掛け合わせてください。  ==> {"kind":"integer","value":800}
+estimate_product [estimate_one_exact] :: 45 × 27 の積は、およそいくつですか。45 はそのまま使い、27 だけを十の位（10の倍数）に四捨五入してから掛け合わせてください。  ==> {"kind":"integer","value":1350}
+estimate_product [estimate_to_hundreds] :: 340 × 359 の積は、およそいくつですか。2つの数をどちらも百の位（100の倍数）に四捨五入してから掛け合わせてください。  ==> {"kind":"integer","value":120000}
+estimate_product [estimate_mixed_places] :: 36 × 351 の積は、およそいくつですか。36 を十の位（10の倍数）に、351 を百の位（100の倍数）に四捨五入してから掛け合わせてください。  ==> {"kind":"integer","value":16000}
+estimate_product [estimate_shopping] :: 1個 180 円のノートを 44 冊買うとき、およそいくらになりますか。1個の値段を百の位（100の倍数）に、個数を十の位（10の倍数）に四捨五入してから掛け合わせてください。  ==> {"kind":"integer","value":8000}
+integer_word_problem [(none)] :: クッキーが3個あります。1個たべました。のこりは何個ですか。  ==> {"kind":"integer","value":2}
+divisors_finding [(none)] :: 42の約数をすべて答えなさい。(小さい順にカンマ区切りで)  ==> {"kind":"string","value":"1, 2, 3, 6, 7, 14, 21, 42"}
+divisors_count [(none)] :: 48の約数は何個ありますか  ==> {"kind":"integer","value":10}
+multiples_finding [list_first_n] :: 3の倍数を小さい方から3こ答えなさい  ==> {"kind":"string","value":"3, 6, 9"}
+multiples_finding [list_up_to] :: 37以下の4の倍数をすべて答えなさい  ==> {"kind":"string","value":"4, 8, 12, 16, 20, 24, 28, 32, 36"}
+multiples_finding [list_between] :: 16から28までの間にある5の倍数をすべて答えなさい  ==> {"kind":"string","value":"20, 25"}
+multiples_finding [nth_multiple] :: 6の倍数を小さい方から10番目は何ですか  ==> {"kind":"integer","value":60}
+multiples_finding [count_in_range] :: 1から51までにある6の倍数はいくつありますか  ==> {"kind":"integer","value":8}
+prime_judgment [(none)] :: 89、66、49 の中で素数はどれですか  ==> {"kind":"string","value":"89"}
+prime_range [(none)] :: 3から9までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)  ==> {"kind":"string","value":"3, 5, 7"}
+common_divisors [(none)] :: 30と18の公約数をすべて答えなさい  ==> {"kind":"string","value":"1, 2, 3, 6"}
+common_multiples [list_first_n] :: 2と4の公倍数を小さい方から5つ答えなさい  ==> {"kind":"string","value":"4, 8, 12, 16, 20"}
+common_multiples [list_up_to] :: 39以下の6と9の公倍数をすべて答えなさい  ==> {"kind":"string","value":"18, 36"}
+common_multiples [list_between] :: 2から32までの間にある2と5の公倍数をすべて答えなさい  ==> {"kind":"string","value":"10, 20, 30"}
+common_multiples [count_in_range] :: 1から18までにある3と6の公倍数はいくつありますか  ==> {"kind":"integer","value":3}
+gcd_calculation [(none)] :: 30と45の最大公約数を求めなさい  ==> {"kind":"integer","value":15}
+lcm_calculation [(none)] :: 5と6の最小公倍数を求めなさい  ==> {"kind":"integer","value":30}
+gcd_lcm_word [(none)] :: 32このアメと48このガムを、何人かの子どもに同じ数ずつ分けます。あまりなく分けるとき、最も多い人数は何人ですか  ==> {"kind":"integer","value":16}
+period_repetition [(none)] :: 赤、白、青の旗を「赤、白、青」の順にくり返しならべます。29番目は何色ですか  ==> {"kind":"string","value":"白"}
+fraction_mul_integer [(none)] :: 3分の1に2をかけるといくつになりますか  ==> {"kind":"fraction","numerator":2,"denominator":3}
+fraction_mul_fraction [(none)] :: 3分の1と2分の1をかけるといくつになりますか  ==> {"kind":"fraction","numerator":1,"denominator":6}
+fraction_div_integer [(none)] :: 3分の1を2でわると、いくつになりますか  ==> {"kind":"fraction","numerator":1,"denominator":6}
+fraction_div_fraction [(none)] :: 4分の1を7分の5でわると、商はいくつですか  ==> {"kind":"fraction","numerator":7,"denominator":20}
+fraction_mul_mixed [(none)] :: 1と2分の1と6分の1をかけるといくつになりますか  ==> {"kind":"fraction","numerator":1,"denominator":4}
+fraction_div_mixed [(none)] :: 1と2分の1を5分の1でわると、いくつになりますか  ==> {"kind":"mixed","whole":7,"numerator":1,"denominator":2}
+fraction_reduce [(none)] :: 6分の2を約分しなさい  ==> {"kind":"fraction","numerator":1,"denominator":3}
+fraction_common_denominator [(none)] :: 4分の3と2分の1を、分母を最小公倍数にそろえて表しなさい  ==> {"kind":"fractions","values":[{"numerator":3,"denominator":4},{"numerator":2,"denominator":4}]}
+fraction_mixed_convert [(none)] :: 9/2 を帯分数で表しなさい  ==> {"kind":"mixed","whole":4,"numerator":1,"denominator":2}
+fraction_big_small [(none)] :: 8分の1と4分の3 のどちらが大きいか比べなさい  ==> {"kind":"string","value":"4分の3"}
+speed_calculation [(none)] :: 4kmを2時間で進みました。速さは何kmですか（1時間あたり）  ==> {"kind":"decimal","value":2}
+distance_calculation [(none)] :: 時速13kmで2時間走ると、何km進みますか  ==> {"kind":"integer","value":26}
+time_calculation [(none)] :: 時速8kmで8km進むと、何時間かかりますか  ==> {"kind":"integer","value":1}
+speed_unit_conversion [kmh_to_mmin] :: 時速60kmは、分速何mですか  ==> {"kind":"decimal","value":1000}
+speed_unit_conversion [mmin_to_kmh] :: 分速300mは、時速何kmですか  ==> {"kind":"decimal","value":18}
+speed_unit_conversion [kmh_to_ms] :: 時速36kmは、秒速何mですか  ==> {"kind":"decimal","value":10}
+speed_unit_conversion [ms_to_kmh] :: 秒速25mは、時速何kmですか  ==> {"kind":"decimal","value":90}
+speed_comparison [(none)] :: たろうさんは時速9km、はなこさんは時速3kmで進みます。どちらが速いですか  ==> {"kind":"string","value":"たろうさん"}
+speed_word [(none)] :: おうちから学校まで分速57mで歩くと2分かかります。学校までは何mですか。  ==> {"kind":"integer","value":114}
+speed_multi_step [(none)] :: はじめの4時間は時速14kmで走り、つぎの4時間は時速20kmで走りました。走った距離は全部で何kmですか。また平均の速さは時速何kmですか（2つ目の答えを入力）  ==> {"kind":"decimal","value":17}
+circle_area_radius [(none)] :: 半径7cmの円の面積を求めなさい。円周率は3.14とします。  ==> {"kind":"decimal","value":153.86}
+circle_area_diameter [(none)] :: 直径13cmの円の面積を求めなさい。円周率は3.14とします。  ==> {"kind":"decimal","value":132.67}
+circle_radius_from_area [(none)] :: 面積が50.24cm²の円があります。この円の半径は何cmですか。円周率は3.14とします。  ==> {"kind":"integer","value":4}
+volume_box [(none)] :: 縦3cm、横2cm、高さ2cmの直方体の体積を求めよ。  ==> {"kind":"integer","value":12}
+volume_cube [(none)] :: 1辺が3cmの立方体の体積を求めよ。  ==> {"kind":"integer","value":27}
+volume_prism [(none)] :: 底面積が6cm²、高さ2cmの角柱の体積を求めよ。  ==> {"kind":"integer","value":12}
+volume_cylinder [(none)] :: 半径3cm、高さ2cmの円柱の体積を求めよ。円周率は3.14。  ==> {"kind":"decimal","value":56.52}
+volume_from_height [(none)] :: 底面積が5cm²の角柱の体積が15cm³のとき、この角柱の高さを求めよ。  ==> {"kind":"integer","value":3}
+volume_unit [(none)] :: 1Lは何cm³ですか  ==> {"kind":"integer","value":1000}
+symmetry_fold [(none)] :: 正五角形は線対称な図形ですか？（はい/いいえ）  ==> {"kind":"string","value":"はい"}
+symmetry_point [(none)] :: 正六角形は点対称な図形ですか？（はい/いいえ）  ==> {"kind":"string","value":"はい"}
+scale_length [(none)] :: ある図形を3倍に拡大しました。もとの図形の長さが2cmのとき、拡大後の長さは何cmですか？  ==> {"kind":"integer","value":6}
+angle_basic [(none)] :: 三角形の2つの角が57°と89°です。残りの角は何度ですか。  ==> {"kind":"integer","value":34}
+circle_circumference [from_diameter] :: 直径3cmの円の円周の長さを求めなさい。円周率は3.14とします。  ==> {"kind":"decimal","value":9.42}
+circle_circumference [from_circumference] :: 円周が6.28cmの円の直径は何cmですか。円周率は3.14とします。  ==> {"kind":"integer","value":2}
+trapezoid_area [basic] :: 上底が2cm、下底が8cm、高さが2cmの台形の面積を求めなさい。  ==> {"kind":"integer","value":10}
+trapezoid_area [reverse_height] :: 上底が16cm、下底が16cm、面積が96cm²の台形の高さは何cmですか。  ==> {"kind":"integer","value":6}
+trapezoid_area [reverse_base] :: 下底が13cm、高さが11cm、面積が121cm²の台形の上底は何cmですか。  ==> {"kind":"integer","value":9}
+unit_conversion_basic [length] :: 7mは何cmですか  ==> {"kind":"integer","value":700}
+unit_conversion_basic [time] :: 7時は何秒ですか  ==> {"kind":"integer","value":25200}
+unit_conversion_basic [mass] :: 4kgは何gですか  ==> {"kind":"integer","value":4000}
+unit_conversion_basic [area] :: 7㎡は何㎠ですか  ==> {"kind":"integer","value":70000}
+decimal_place_value [read_digit] :: 小数 0.9 の10分の1の位の数字は何ですか。  ==> {"kind":"integer","value":9}
+decimal_place_value [place_value] :: 10分の1の位が3のとき、小数はいくつになりますか。  ==> {"kind":"decimal","value":0.3}
+decimal_place_value [compose] :: 10分の1の位が2となる小数を作ってください。  ==> {"kind":"decimal","value":0.2}
+decimal_place_value [decompose] :: 小数 1.3 を、10分の1の位と100分の1の位の和で表してください。  ==> {"kind":"string","value":"0.8 + 0.5"}
+fraction_unit_intro [meaning] :: ある量を2等分したときの1つ分は、何分の一ですか。  ==> {"kind":"string","value":"1/2"}
+fraction_unit_intro [how_many_units] :: 2/4 は、1/4 いくつ分ですか。  ==> {"kind":"integer","value":2}
+fraction_unit_intro [read_fraction] :: 2/6 の分母は何ですか。  ==> {"kind":"integer","value":6}
+fraction_unit_intro [count_units] :: 1/5 を 4 個集めると、何分の一になりますか。  ==> {"kind":"string","value":"4/5"}
+fraction_add_sub [add] :: 1/2 ＋ 1/3 を計算し、約分した答えを書きなさい。  ==> {"kind":"fraction","numerator":5,"denominator":6}
+fraction_add_sub [subtract] :: 1/2 − 1/4 を計算し、約分した答えを書きなさい。  ==> {"kind":"fraction","numerator":1,"denominator":4}
+fraction_add_sub [add_reduces] :: 2/4 − 1/5 を計算し、約分した答えを書きなさい。  ==> {"kind":"fraction","numerator":3,"denominator":10}
+fraction_add_sub [add_improper] :: 2/4 ＋ 1/2 を計算し、約分した答えを書きなさい。  ==> {"kind":"fraction","numerator":1,"denominator":1}
+fraction_add_sub [fill_blank] :: □ ＋ 3/4 = 4/5 のとき、□ に入る分数はいくつですか。  ==> {"kind":"fraction","numerator":31,"denominator":20}
+triangle_classify [classify] :: 辺の長さが 8cm、6cm、7cm の三角形は、どんな三角形ですか。  ==> {"kind":"string","value":"不等辺三角形"}
+triangle_classify [which_sides_equal] :: 辺の長さが 5cm、5cm、2cm の三角形で、長さが等しい辺は何本ありますか。  ==> {"kind":"integer","value":2}
+parallel_perpendicular [definition_parallel] :: 同じ平面上にある2本の直線が、互いに交わらないとき、この2本の直線を何といいますか。  ==> {"kind":"string","value":"平行"}
+parallel_perpendicular [definition_perpendicular] :: 2本の直線が直角に交わるとき、この2本の直線の関係は何といいますか。  ==> {"kind":"string","value":"垂直"}
+parallel_perpendicular [angle_judgment] :: 2本の直線が交わっています。そのうち1つの角は 90° です。この2本の直線について、説明の正しいものはどれですか。  ==> {"kind":"string","value":"垂直"}
+parallel_perpendicular [intersection_judgment] :: 同じ平面上にある2本の直線 l と m は、交わることを確かめています。l と m の関係として正しいものはどれですか。  ==> {"kind":"string","value":"平行ではありません"}
+parallel_perpendicular [equal_distance] :: 同じ平面上にある2本の直線の間で、2直線の間の距離は、どの場所でも 13cm 的一样です。この2本の直線は何といいますか。  ==> {"kind":"string","value":"平行"}
+parallel_perpendicular [find_pair] :: 3本の直線 あ、い、う があります。直線あと直線いは平行で、直線あと直線うは垂直です。perpendicularな2本の直線の組はどれですか。  ==> {"kind":"string","value":"直線あと直線う"}
+area_unit_conversion [sqm_to_sqcm] :: 面積の単位を直します。2㎡ は何㎠ です。  ==> {"kind":"integer","value":20000}
+area_unit_conversion [aresu_to_sqm] :: 面積の単位を直します。4a は何㎡ です。  ==> {"kind":"integer","value":400}
+area_unit_conversion [hektaru_to_aresu] :: 面積の単位を直します。8ha は何a です。  ==> {"kind":"integer","value":800}
+area_unit_conversion [sqm_to_aresu] :: 面積の単位を直します。100㎡ は何a です。  ==> {"kind":"integer","value":1}
+area_unit_conversion [sqkm_to_hektaru] :: 面積の単位を直します。2㎢ は何ha です。  ==> {"kind":"integer","value":200}
+area_unit_conversion [hektaru_to_sqkm] :: 面積の単位を直します。300ha は何㎢ です。  ==> {"kind":"integer","value":3}
+area_unit_conversion [sqm_to_hektaru] :: 面積の単位を直します。30000㎡ は何ha です。  ==> {"kind":"integer","value":3}
+area_unit_conversion [hektaru_to_sqm] :: 面積の単位を直します。1ha は何㎡ です。  ==> {"kind":"integer","value":10000}
+rectangle_area [square] :: 1辺が 2 cm の正方形の面積を求めなさい。  ==> {"kind":"integer","value":4}
+rectangle_area [rectangle] :: 縦 2 cm、横 3 cm の長方形の面積を求めなさい。  ==> {"kind":"integer","value":6}
+rectangle_area [find_side] :: 縦 5 cm、横 8 cm の長方形があります。横の長さが 8 cm のとき、縦の長さはいくつですか。  ==> {"kind":"integer","value":5}
+rectangle_area [choose_formula] :: 縦 5 cm、横 6 cm の長方形の面積を求める式はどれですか。(1) 縦 ＋ 横  (2) 横 × 縦  (3) 縦 × 縦  ==> {"kind":"string","value":"横 × 縦"}
+rectangle_area [unit_convert] :: 1辺が 3 m の正方形の面積を cm2 で表すと、何 cm2 ですか。  ==> {"kind":"integer","value":90000}
+triangle_area [find_area] :: 底辺が 3 cm、高さが 2 cm の三角形の面積を求めなさい。  ==> {"kind":"integer","value":3}
+triangle_area [find_area_with_slant] :: 底辺が 6 cm、斜辺が 18 cm、高さが 16 cm の三角形の面積を求めなさい。  ==> {"kind":"integer","value":48}
+triangle_area [find_height] :: 底辺が 7 cm、面積が 91 cm2 の三角形があります。高さは何cmですか。  ==> {"kind":"integer","value":26}
+triangle_area [find_base] :: 高さが 68 cm、面積が 510 cm2 の三角形があります。底辺は何cmですか。  ==> {"kind":"integer","value":15}
+triangle_area [compare_with_rectangle] :: 底辺が 12 cm、高さが 86 cm の長方形と、底辺と高さが同じ三角形の面積のの差は何 cm2 ですか。（三角形の面積は小数になりません。）  ==> {"kind":"integer","value":516}
+parallelogram_area [find_area] :: 底辺が 3 cm、高さが 2 cm の平行四辺形の面積を求めなさい。  ==> {"kind":"integer","value":6}
+parallelogram_area [find_area_with_slant] :: 底辺が 6 cm、斜辺が 18 cm、底辺に垂直な辺（高さ）が 16 cm の平行四辺形の面積を求めなさい。  ==> {"kind":"integer","value":96}
+parallelogram_area [find_height] :: 底辺が 7 cm、面積が 182 cm2 の平行四辺形があります。高さは何cmですか。  ==> {"kind":"integer","value":26}
+parallelogram_area [find_base] :: 高さが 17 cm、面積が 391 cm2 の平行四辺形があります。底辺は何cmですか。  ==> {"kind":"integer","value":23}
+parallelogram_area [two_triangles] :: 底辺が 12 cm、高さが 86 cm の平行四辺形を、対角線で2つの三角形に分けました。このうち1つの三角形の面積は何 cm2 ですか。  ==> {"kind":"integer","value":516}
+judge_same [(none)] :: 下の図Aと図Bは合同した図形ですか。（はい/いいえ）  ==> {"kind":"string","value":"はい"}
+judge_differs [apex_moved] :: 図Aは二等辺三角形です。図Aと図Bは、辺の長さと角の大きさがすべて対応して等しいですか。（はい/いいえ）  ==> {"kind":"string","value":"いいえ"}
+judge_differs [base_widened] :: 図Aは不等辺三角形です。図Aと図Bは、重ねるとぴったり重なりますか。（はい/いいえ）  ==> {"kind":"string","value":"いいえ"}
+judge_differs [scaled] :: 図Aは不等辺三角形です。図Aと図Bは、辺の長さと角の大きさがすべて対応して等しいですか。（はい/いいえ）  ==> {"kind":"string","value":"いいえ"}
+ratio_simplify [(none)] :: 4：16を、できるだけ簡単な比になおしなさい  ==> {"kind":"string","value":"1：4"}
+ratio_value [(none)] :: 2：8 の比の値を求めなさい  ==> {"kind":"decimal","value":0.25}
+ratio_equal [(none)] :: 2：1 は、4：2 と同じ比ですか？（はい/いいえ）  ==> {"kind":"string","value":"はい"}
+ratio_quantity [(none)] :: 全体が21のとき、2：1に分けると小さいほうはいくつになりますか  ==> {"kind":"integer","value":7}
+proportional_expression [(none)] :: 1個5円のりんごをx個買うときの代金y円です。yをxの式で表しなさい  ==> {"kind":"string","value":"y=5x"}
+proportional_word [(none)] :: 2個買うと8円の品物があります。同じ品物を10個買うと何円ですか  ==> {"kind":"integer","value":40}
+inverse_expression [(none)] :: 面積が8㎠の長方形があります。縦の長さをxcm、横の長さをycmとすると、yをxで表しなさい  ==> {"kind":"string","value":"y=8÷x"}
+expression_meaning [(none)] :: x4円という式があります。どのような意味があるか文章で説明してください  ==> {"kind":"string","value":"x4円は、x円の物を1こと4円の品物を買ったときの代金です"}
+inverse_word [(none)] :: 32こを2人で分けると1人16こになります。同じ数を8人で分けると、1人何こになりますか  ==> {"kind":"integer","value":4}
+percentage [find_percent] :: 全体 4 のうち 1 は、何パーセントですか。  ==> {"kind":"integer","value":25}
+percentage [percent_of] :: ある量が 60 です。その 75 パーセントは何ですか。  ==> {"kind":"integer","value":45}
+percentage [what_percent] :: ある量が 125 で、そのうち 25 が占めています。何パーセントですか。  ==> {"kind":"integer","value":20}
+decimal_mul_decimal [(none)] :: 0.3に0.2をかけるといくつになりますか  ==> {"kind":"decimal","value":0.06}
+decimal_addition [(none)] :: 1.2に0.3をたすといくつになりますか  ==> {"kind":"decimal","value":1.5}
+decimal_subtraction [(none)] :: 1.9から1.8をひくといくつになりますか  ==> {"kind":"decimal","value":0.1}
+decimal_div_decimal [(none)] :: 0.2を0.2でわると、商はいくつですか  ==> {"kind":"decimal","value":1}
+decimal_mul_integer [(none)] :: 0.3×2 はいくつになりますか  ==> {"kind":"decimal","value":0.6}
+decimal_div_integer [(none)] :: 0.3を3でわると、いくつになりますか  ==> {"kind":"decimal","value":0.1}
+decimal_round [(none)] :: 2.95を、小数第1位まで四捨五入しなさい  ==> {"kind":"decimal","value":3}
+expression_make [(none)] :: 1本x円のえんぴつを4本買ったときの代金を、xを使った式で表しなさい  ==> {"kind":"string","value":"4x"}
+expression_substitution [(none)] :: x=1 のとき、1x+1 の値を求めなさい  ==> {"kind":"integer","value":2}
+expression_word_make [(none)] :: 1こ4円のチョコレートをxこ買います。代金をxの式で表しなさい  ==> {"kind":"string","value":"4×x"}
+expression_blank [(none)] :: □×2＝6 のとき、□に書く数はいくつですか  ==> {"kind":"integer","value":3}
+expression_multi_condition [(none)] :: はじめに10個ありました。1分間に5こずつ5分間ふえると、最終的にいくつになりますか。また式 (あれば x+ b の形) で表しなさい  ==> {"kind":"integer","value":35}
+arrange_simple [pick_only] :: 3人の中から2人を選んで1列に並べます。並べ方は全部で何通りありますか  ==> {"kind":"integer","value":6}
+arrange_simple [pick_special] :: 3人の中から2人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか  ==> {"kind":"integer","value":6}
+arrange_simple [pick_include_one] :: 4人の中から3人を選んで1列に並べます。ただし、Aさんは必ず選ぶことにします。並べ方は何通りありますか  ==> {"kind":"integer","value":6}
+arrange_simple [pick_first_fixed] :: 5人の中から4人を選んで1列に並べます。ただし、Aさんは必ず選び、1番め（いちばん左）に置くことにします。並べ方は何通りありますか  ==> {"kind":"integer","value":24}
+arrange_simple [pick_both_ends] :: 6人の中から4人を選んで1列に並べます。ただし、BさんとCさんは両方とも選び、左右のはしに入れることにします。並べ方は何通りありますか  ==> {"kind":"integer","value":24}
+combine_simple [pick_only] :: 3人の中から2人を選びます。選び方は何通りありますか  ==> {"kind":"integer","value":3}
+combine_simple [include_one] :: 3人の中から2人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか  ==> {"kind":"integer","value":2}
+combine_simple [exclude_one] :: 5人の中から3人を選びます。ただし、Aさんは選ばないことにします。選び方は何通りありますか  ==> {"kind":"integer","value":4}
+arrange_tree [all] :: A、B、Cの3個の文字をすべて1回ずつ使って、左から1列に並べます。並べ方は何通りありますか  ==> {"kind":"integer","value":6}
+arrange_tree [fixed_first] :: A、B、Cの3個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの2個を自由に並べて、並べ方は何通りありますか  ==> {"kind":"integer","value":2}
+arrange_tree [both_ends] :: A、B、C、Dの4個の文字のうち、AとBを左右のはしに入れると決まっています。残りの2個を自由に並べて、並べ方は何通りありますか  ==> {"kind":"integer","value":4}
+arrange_tree [adjacent] :: A、B、C、D、Eの5個の文字のうち、AとBは必ず隣り合うように並べます。並べ方は何通りありますか  ==> {"kind":"integer","value":48}
+arrange_tree [circle] :: A、B、C、D、Eの5個の文字を円卓のまわりに1つずつ並べます。回転させたら重なる並びは同じものとして数えます。並べ方は何通りありますか  ==> {"kind":"integer","value":24}
+combine_table [round_robin] :: 4チームのサッカー大会で、どの2チームも1回ずつ試合します。試合の数は全部で何試合になりますか  ==> {"kind":"integer","value":6}
+combine_table [two_rounds] :: 5チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか  ==> {"kind":"integer","value":20}
+combine_table [one_team_games] :: 6チームのサッカー大会で、どの2チームも1回ずつ試合します。このうち、ある1チームが試合する試合は何試合になりますか  ==> {"kind":"integer","value":5}
+combine_table [one_game_pairs] :: 8チームが総当たりで1回ずつ試合します。1試合の対戦になる2チームの選び方は何通りありますか  ==> {"kind":"integer","value":28}
+duplicate_removal [(none)] :: A、A、Bの3枚のカードをすべて使って一列に並べます。同じ文字は区別できないとして、並べ方は何通りありますか  ==> {"kind":"integer","value":3}
+data_average [(none)] :: 7、15、1、15 の平均を求めなさい  ==> {"kind":"decimal","value":9.5}
+data_total_from_average [(none)] :: 3この平均が1です。この3この合計はいくつですか  ==> {"kind":"integer","value":3}
+data_max_min [(none)] :: 3、2、1、9、1 の中で、最大の数と最小の数を答えなさい  ==> {"kind":"string","value":"9 と 1"}
+data_compare [(none)] :: A組のテストの点は 4、8、4、1、4 で、B組のテストの点は 1、8、8、8、3 です。それぞれ平均を比べると、どちらが高いと言えますか  ==> {"kind":"string","value":"B組"}
+realworld_shopping [two_sum] :: 写真の値札を見て、たまご1パックとぎゅうにゅう1本を買います。代金は合計いくらですか。  ==> {"kind":"integer","value":300}
+realworld_shopping [same_item_multiple] :: 写真の値札を見て、クッキーを2箱買います。代金はいくらですか。  ==> {"kind":"integer","value":180}
+realworld_shopping [change] :: 1000円札で、たまご1パックと食パン1袋を買います。おつりはいくらですか。  ==> {"kind":"integer","value":730}
+realworld_shopping [three_sum] :: 写真の値札を見て、食パン1袋とぎゅうにゅう1本とクッキー1箱を買います。代金は合計いくらですか。  ==> {"kind":"integer","value":420}
+realworld_shopping [multi_and_sum] :: 写真の値札を見て、オレンジジュースを2本と、たまご1パックを買います。代金は合計いくらですか。  ==> {"kind":"integer","value":520}
+realworld_shopping [max_count] :: 600円を持っています。写真の値札を見て、オレンジジュースは何本買えますか。  ==> {"kind":"integer","value":3}
+realworld_shopping [split_bill] :: 食パン1袋とクッキー1箱をみんなで買いました。写真の値札を見て、代金を4人で同じずつ分けると、1人分はいくらですか。  ==> {"kind":"integer","value":60}
+realworld_eggs [fill_carton] :: 写真を見て、卵の数を数えます。1つのカートンには卵を6個入れることにします（この6個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。  ==> {"kind":"integer","value":4}
+realworld_eggs [pair_price] :: 茶色い卵は1個30円、白い卵は1個25円です（この値段は問題で設定した数値です）。写真のように、茶色い卵を1個と白い卵を1個買います。代金は合計いくらですか。  ==> {"kind":"integer","value":55}
+realworld_eggs [pairs_total] :: 写真の茶色い卵1個と白い卵1個を、1組とします。この1組を10組用意します（この10組は問題で設定した数値です）。卵は合わせて何個になりますか。  ==> {"kind":"integer","value":20}
+realworld_eggs [pairs_in_carton] :: 写真の茶色い卵1個と白い卵1個を、1組とします。1つのカートンには卵を12個入れることにします（この12個は問題で設定した数値です）。茶色い卵と白い卵を1個ずつ組にしてカートンをいっぱいにすると、何組できますか。  ==> {"kind":"integer","value":6}
+realworld_eggs [pairs_cost] :: 茶色い卵は1個30円、白い卵は1個25円です（この値段は問題で設定した数値です）。写真のように、茶色い卵1個と白い卵1個を1組として、この1組を5組買います（この5組は問題で設定した数値です）。代金は合計いくらですか。  ==> {"kind":"integer","value":275}

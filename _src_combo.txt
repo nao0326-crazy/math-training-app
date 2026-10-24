@@ -1,0 +1,200 @@
+   1 | /**
+   2 |  * 場合の数の問題ジェネレータ
+   3 |  * 小学6年生の学習範囲:
+   4 |  * - 並べ方・組み合わせ
+   5 |  * - 樹形図・表による整理
+   6 |  * - 条件付きの場合の数
+   7 |  * - 重複を除く
+   8 |  */
+   9 | 
+  10 | import type {
+  11 |   DifficultyLevel,
+  12 |   GenerationConfig,
+  13 |   Problem,
+  14 |   ProblemGenerator,
+  15 |   ValidationResult,
+  16 | } from '../../types/problem';
+  17 | import { createRandom, generateProblemId } from '../../utils/random';
+  18 | import {
+  19 |   createDifficulty,
+  20 |   numberSizeToComplexity,
+  21 |   calculationStepsToComplexity,
+  22 | } from '../../engine/difficulty/difficulty';
+  23 | 
+  24 | function createCombDifficulty(
+  25 |   level: DifficultyLevel,
+  26 |   value: number,
+  27 |   reasoningLevel: DifficultyLevel = 1,
+  28 |   readingLevel: DifficultyLevel = 1,
+  29 | ) {
+  30 |   return createDifficulty({
+  31 |     calculationComplexity: calculationStepsToComplexity(level),
+  32 |     numberComplexity: numberSizeToComplexity(value),
+  33 |     reasoningComplexity: reasoningLevel,
+  34 |     readingComplexity: readingLevel,
+  35 |   });
+  36 | }
+  37 | 
+  38 | /** 順列を数える nPr = n! / (n-r)! (小6なので小さい値のみ) */
+  39 | function permutation(n: number, r: number): number {
+  40 |   let result = 1;
+  41 |   for (let i = 0; i < r; i++) {
+  42 |     result *= n - i;
+  43 |   }
+  44 |   return result;
+  45 | }
+  46 | 
+  47 | /** 組合せの数え上げ nCr */
+  48 | function combination(n: number, r: number): number {
+  49 |   if (r === 0) return 1;
+  50 |   if (r > n) return 0;
+  51 |   return permutation(n, r) / factorial(r);
+  52 | }
+  53 | 
+  54 | /** 階乗 */
+  55 | function factorial(n: number): number {
+  56 |   let result = 1;
+  57 |   for (let i = 2; i <= n; i++) result *= i;
+  58 |   return result;
+  59 | }
+  60 | /**
+  61 |  * 並べ方の問題の種類 (「n個から一部を選んで並べる」を対象にしたもの)
+  62 |  *
+  63 |  * arrange_tree (「すべてを並べる」) と明確に区別するため、ここでは必ず r < n
+  64 |  * (一部しか選ばない) ことを前提とする。種類ごとに「選ぶ段階」と「並べる段階」の
+  65 |  * どちらに条件があるかで、考え方も解法も異なる。
+  66 |  *
+  67 |  * 採用した種類はいずれも小6の基本的な方法 (かけ算・順序を考えて選ぶ) で解ける。
+  68 |  * 組合せの公式 nCr を使う解法 (n! を r! で割る方法) は採用しない。
+  69 |  */
+  70 | export type ArrangeSimpleVariant =
+  71 |   /** 並べる段階の条件なし: n個から r個を選んで並べる */
+  72 |   | 'pick_only'
+  73 |   /** 選ぶ段階の条件: n個から r個を選び、そのうち1人を特別扱いする */
+  74 |   | 'pick_special'
+  75 |   /** 並べる段階の条件: r人の中に必ずAさんを含める */
+  76 |   | 'pick_include_one'
+  77 |   /** 並べる段階の条件: Aさんを必ず選び、1番めに固定 */
+  78 |   | 'pick_first_fixed'
+  79 |   /** 並べる段階の条件: BさんとCさんを必ず選び、両端に固定 */
+  80 |   | 'pick_both_ends';
+  81 | 
+  82 | /** 難易度ごとの候補 (条件が増えるほど思考が増える順) */
+  83 | const ARRANGE_SIMPLE_VARIANTS: Record<DifficultyLevel, ArrangeSimpleVariant[]> = {
+  84 |   1: ['pick_only', 'pick_special'],
+  85 |   2: ['pick_only', 'pick_special', 'pick_include_one'],
+  86 |   3: ['pick_only', 'pick_special', 'pick_include_one', 'pick_first_fixed'],
+  87 |   4: ['pick_only', 'pick_special', 'pick_include_one', 'pick_first_fixed', 'pick_both_ends'],
+  88 |   5: ['pick_special', 'pick_include_one', 'pick_first_fixed', 'pick_both_ends'],
+  89 | };
+  90 | 
+  91 | /** 難易度ごとの「何人いるか (n)」の範囲 */
+  92 | const ARRANGE_SIMPLE_N: Record<DifficultyLevel, [number, number]> = {
+  93 |   1: [3, 4],
+  94 |   2: [3, 5],
+  95 |   3: [4, 6],
+  96 |   4: [4, 7],
+  97 |   5: [4, 7],
+  98 | };
+  99 | 
+ 100 | /** from 個から count 個を選んで並べる通り数 (かけ算の積で求める) */
+ 101 | function prod(from: number, count: number): number {
+ 102 |   let v = 1;
+ 103 |   for (let i = 0; i < count; i++) v *= from - i;
+ 104 |   return v;
+ 105 | }
+ 106 | 
+ 107 | /**
+ 108 |  * 種類ごとの答えを求める。
+ 109 |  *
+ 110 |  * pick_special だけは「並べない」問題になるため combination を使う。
+ 111 |  * それ以外はすべてかけ算の積 (prod) で求められる。
+ 112 |  */
+ 113 | function solveArrangeSimple(variant: ArrangeSimpleVariant, n: number, r: number): number {
+ 114 |   switch (variant) {
+ 115 |     case 'pick_only':
+ 116 |       // n個から r個を選んで並べる = n × (n-1) × … の r 個
+ 117 |       return prod(n, r);
+ 118 |     case 'pick_special':
+ 119 |       // 特別の1人を n 人の中から決める n 通り × 残り n-1 人から r-1 人を選ぶ
+ 120 |       return n * combination(n - 1, r - 1);
+ 121 |     case 'pick_include_one':
+ 122 |       // 必ずAさんを含めるので、残り n-1 人から r-1 人を選んで並べる
+ 123 |       return prod(n - 1, r - 1);
+ 124 |     case 'pick_first_fixed':
+ 125 |       // 先頭はAさんなので、残り n-1 人から r-1 人を選んで並べる
+ 126 |       return prod(n - 1, r - 1);
+ 127 |     case 'pick_both_ends':
+ 128 |       // 両端はBさんとCさん (左右2通り)、残り n-2 人から r-2 人を選んで並べる
+ 129 |       return 2 * prod(n - 2, r - 2);
+ 130 |   }
+ 131 | }
+ 132 | 
+ 133 | /** 難易度・乱数から、成立する (variant, n, r) を選び出す */
+ 134 | function pickVariantAndParams(
+ 135 |   rng: ReturnType<typeof createRandom>,
+ 136 |   lv: DifficultyLevel,
+ 137 | ): { variant: ArrangeSimpleVariant; n: number; r: number } {
+ 138 |   const [minN, maxN] = ARRANGE_SIMPLE_N[lv];
+ 139 |   const usable = ARRANGE_SIMPLE_VARIANTS[lv];
+ 140 | 
+ 141 |   for (let attempt = 0; attempt < 50; attempt++) {
+ 142 |     const variant = rng.pick(usable);
+ 143 |     const n = rng.int(minN, maxN);
+ 144 |     // pick_both_ends は両端に2人固定するので最低3人選ぶ必要がある
+ 145 |     const minR = variant === 'pick_both_ends' ? 3 : 2;
+ 146 |     // r < n を保証する (r = n は arrange_tree と重複するため使わない)
+ 147 |     const maxR = n - 1;
+ 148 |     if (maxR < minR) continue;
+ 149 |     return { variant, n, r: rng.int(minR, maxR) };
+ 150 |   }
+ 151 | 
+ 152 |   // フォールバック (必ず成立する最小の組合せ)
+ 153 |   const fallbackN = Math.max(minN, 4);
+ 154 |   const fallback =
+ 155 |     usable.find((v) => (v === 'pick_both_ends' ? fallbackN >= 4 : true)) ?? 'pick_only';
+ 156 |   return { variant: fallback, n: fallbackN, r: 2 };
+ 157 | }
+ 158 | 
+ 159 | /** 積の式を「n×n-1×…×n-r+1」の文字列にする (count<=1 は1通り) */
+ 160 | function fallingString(from: number, count: number): string {
+ 161 |   if (count <= 1) return '1';
+ 162 |   const parts: string[] = [];
+ 163 |   for (let i = 0; i < count; i++) parts.push(String(from - i));
+ 164 |   return parts.join('×');
+ 165 | }
+ 166 | 
+ 167 | /** 種類ごとの問題文と解説 (問題文の条件と解法を正しく反映させる) */
+ 168 | function arrangeSimpleText(
+ 169 |   variant: ArrangeSimpleVariant,
+ 170 |   n: number,
+ 171 |   r: number,
+ 172 |   answer: number,
+ 173 | ): { question: string; explanation: string } {
+ 174 |   switch (variant) {
+ 175 |     case 'pick_only':
+ 176 |       return {
+ 177 |         question: `${n}人の中から${r}人を選んで1列に並べます。並べ方は全部で何通りありますか`,
+ 178 |         explanation: `1番めに並べるのは${n}人のうち誰か、2番めは残り${n - 1}人のうち誰か、…と選ぶので、${fallingString(n, r)}＝${answer}通りです。`,
+ 179 |       };
+ 180 |     case 'pick_special': {
+ 181 |       // 特別の1人を n 人の中から決める (選んだ r 人の中からではない点に注意)
+ 182 |       // = n通り (特別の1人) × (そのほかの n-1 人から r-1 人を選ぶ)
+ 183 |       const rest = combination(n - 1, r - 1);
+ 184 |       return {
+ 185 |         question: `${n}人の中から${r}人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか`,
+ 186 |         explanation: `特別の1人は、${n}人のうち誰でもよいので${n}通りです。残りの${r - 1}人はそのほかの${n - 1}人から選ぶので、${n}×${rest}＝${answer}通りです。`,
+ 187 |       };
+ 188 |     }
+ 189 |     case 'pick_include_one': {
+ 190 |       const terms = fallingString(n - 1, r - 1);
+ 191 |       return {
+ 192 |         question: `${n}人の中から${r}人を選んで1列に並べます。ただし、Aさんは必ず選ぶことにします。並べ方は何通りありますか`,
+ 193 |         explanation:
+ 194 |           r - 1 <= 1
+ 195 |             ? `Aさんは必ず選ぶので、残りはAさん以外の${n - 1}人から${r - 1}人を選びます。1人だけなら選び方は${n - 1}通り、答えは${answer}通りです。`
+ 196 |             : `Aさんは必ず選ぶので、残りはAさん以外の${n - 1}人から${r - 1}人を選んで並べます。${terms}＝${answer}通りです。`,
+ 197 |       };
+ 198 |     }
+ 199 |     case 'pick_first_fixed': {
+ 200 |       const terms = fallingString(n - 1, r - 1);

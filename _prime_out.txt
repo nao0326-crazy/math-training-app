@@ -1,0 +1,6 @@
+BASIC: 94、65、83 の中で素数はどれですか
+  answer={"kind":"string","value":"83"}
+  expl=83は、約数が1と自分自身だけなので素数です。ほかの数は素数ではありません。(1は素数ではないことに注意)
+  params={"choices":[94,65,83],"answer":83,"difficultyLevel":3}
+MULTI-PRIME CASE: 71、22、47 の中で素数はどれですか | choices=[71,22,47] answer=71 primes=[71,47]
+total=3000 multiPrimeCases=1500

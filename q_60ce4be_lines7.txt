@@ -1,0 +1,39 @@
+        <div className={`feedback ${isCorrect ? 'correct' : timedOut ? 'timed-out' : 'incorrect'}`}>
+          <div className="feedback-title">
+            {isCorrect
+              ? '🎉 せいかい！'
+              : timedOut
+                ? '⏰ 時間切れ！'
+                : judgement?.status === 'equivalent-not-canonical'
+                  ? '⭕ 計算は合っています！'
+                  : '❌ ざんねん...'}
+          </div>
+          {timedOut && (
+            <div className="feedback-explanation">制限時間内に解けませんでした。</div>
+          )}
+          {judgement?.status === 'equivalent-not-canonical' && (
+            <div className="feedback-explanation">{judgement.message}</div>
+          )}
+          {!isCorrect && (
+            <div className="feedback-answer">
+              正解は <strong>{formatAnswer(problem.answer)}</strong> です
+            </div>
+          )}
+          {problem.explanation && (
+            <div className="feedback-explanation">{problem.explanation}</div>
+          )}
+
+          {/* 解き方 (途中式) — 答えを開示したときだけ表示する */}
+          {!isCorrect && (
+            <SolutionDisplay
+              solutionSteps={problem.solutionSteps}
+              answer={problem.answer}
+            />
+          )}
+          {isCorrect && !showSolution && (
+            <button
+              type="button"
+              className="secondary-button toggle-solution-btn"
+              onClick={() => setShowSolution(true)}
+            >
+              答えと解き方をみる

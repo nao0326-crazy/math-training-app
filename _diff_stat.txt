@@ -1,0 +1,29 @@
+warning: in the working copy of 'e2e-step1.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'e2e-step2.json', LF will be replaced by CRLF the next time Git touches it
+ _diff_app.txt                                | 259 +++++++++--------
+ _test_out.txt                                | 407 +++++++++++++++++++++------
+ e2e-step1.json                               |   4 +-
+ e2e-step2.json                               |   6 +-
+ eslint.config.js                             |   4 +-
+ src/App.tsx                                  |  47 ++--
+ src/components/ScratchPad.test.tsx           |  47 +++-
+ src/components/ScratchPad.tsx                |  39 ++-
+ src/components/SolutionDisplay.tsx           |  12 +-
+ src/engine/selector/filteredSelector.test.ts |  96 ++++++-
+ src/engine/selector/filteredSelector.ts      |  90 ++++--
+ src/engine/selector/types.ts                 |   7 +-
+ src/engine/solution/solutionGenerator.ts     |  31 +-
+ src/index.css                                |  18 +-
+ src/pages/App.adminScope.test.tsx            |  67 +++--
+ src/pages/HistoryPage.tsx                    |  10 +-
+ src/pages/HomePage.tsx                       |  23 +-
+ src/pages/PracticeSetupPage.tsx              |  76 ++---
+ src/pages/QuizPage.scratch.test.tsx          | 146 +++++++++-
+ src/pages/QuizPage.tsx                       |  26 +-
+ src/pages/homePage.test.tsx                  |   9 +-
+ src/pages/quizSelection.ts                   |   9 +-
+ src/problems/geometry/generators.ts          |  19 +-
+ src/problems/numberTheory/generators.ts      |   7 +-
+ src/problems/ratio/generators.ts             |  28 +-
+ src/services/quizPersistence.test.ts         |  32 +++
+ 26 files changed, 1069 insertions(+), 450 deletions(-)

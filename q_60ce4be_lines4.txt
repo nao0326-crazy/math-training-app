@@ -1,0 +1,29 @@
+    <div className="quiz-page">
+      <div className="quiz-header">
+        {isAdminMode && <div className="quiz-admin-mode">管理者モード</div>}
+        <div className="quiz-progress">
+          問題 {questionNumber} / {questionCount}
+        </div>
+        <div className="quiz-meta">
+          <span className="quiz-category">{categoryLabel(problem.category)}</span>
+          <span className="quiz-difficulty">
+            {difficultyLabel(problem.difficulty.level)}
+          </span>
+        </div>
+      </div>
+
+      {/* 残り時間のカウントダウン。回答済み (解答・時間切れ後) は表示しない。
+          期限は問題IDを鍵に管理し、新しい問題だけ新しい制限時間で始まる。 */}
+      {!isAnswered && (
+        <QuizTimer
+          problemId={problem.id}
+          limitSec={limitSec}
+          onExpire={handleTimeout}
+        />
+      )}
+
+      <div className="question-card">
+        <p className="question-text">{problem.question}</p>
+        {/* 図形は figure を持つ問題でのみ描画される (未設定なら何も描かない) */}
+        <FigureRenderer spec={problem.figure} />
+        {/* 現実連動の写真は image を持つ問題でのみ描画される (未設定なら何も描かない)。

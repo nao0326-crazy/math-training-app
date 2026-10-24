@@ -1,0 +1,386 @@
+== integer_addition | integer | in=undefined | kind=integer
+   Q: 10に10をたすといくつになりますか
+   A: {"v":20}
+   P: {"a":10,"b":10,"operator":"+","answer":20,"difficultyLevel":3}
+== integer_subtraction | integer | in=undefined | kind=integer
+   Q: 32から23をひくといくつになりますか
+   A: {"v":9}
+   P: {"a":32,"b":23,"operator":"-","answer":9,"difficultyLevel":3,"borrowCount":1,"borrowPositions":[0],"maxBorrowRun":1}
+== integer_multiplication | integer | in=undefined | kind=integer
+   Q: 2に2をかけるといくつになりますか
+   A: {"v":4}
+   P: {"a":2,"b":2,"operator":"×","answer":4,"difficultyLevel":3}
+== integer_division | integer | in=undefined | kind=integer
+   Q: 4を2でわると、商はいくつになりますか
+   A: {"v":2}
+   P: {"dividend":4,"divisor":2,"quotient":2,"operator":"÷","answer":2,"difficultyLevel":3}
+== integer_multi_step | integer | in=undefined | kind=integer
+   Q: 11 + 13 + 19 はいくつになりますか
+   A: {"v":43}
+   P: {"numbers":[11,13,19],"operators":["+","+"],"expression":"11 + 13 + 19","answer":43,"difficultyLevel":3,"termCount":3}
+== integer_fill_blank | integer | in=undefined | kind=integer
+   Q: 1＋□＝29 の □ にあてはまる数はいくつですか
+   A: {"v":28}
+   P: {"a":1,"operator":"+","answer":28,"difficultyLevel":4,"blankPosition":"second"}
+== estimate_product | integer | in=undefined | kind=integer
+   Q: 15 × 34 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数）に四捨五入してから掛け合わせてください。
+   A: {"v":600}
+   P: {"variant":"estimate_to_tens","a":15,"b":34,"placeA":10,"placeB":10,"roundedA":20,"roundedB":30,"estimate":600,"exactProduct":510,"difficultyLevel":4}
+== integer_word_problem | integer | in=undefined | kind=integer
+   Q: りんごが1個あります。そこに28個もってきました。りんごは全部で何個になりますか。
+   A: {"v":29}
+   P: {"a":1,"b":28,"operator":"+","answer":29,"difficultyLevel":3,"templateIndex":0,"readingLevel":1,"reasoningLevel":1}
+== divisors_finding | numberTheory | in=undefined | kind=string
+   Q: 120の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+   A: {"v":"1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 24, 30, 40, 60, 120"}
+   P: {"n":120,"answer":"1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 24, 30, 40, 60, 120","difficultyLevel":4,"divisorCount":16}
+== divisors_count | numberTheory | in=undefined | kind=integer
+   Q: 120の約数は何個ありますか
+   A: {"v":16}
+   P: {"n":120,"count":16,"answer":16,"divisorCount":16,"difficultyLevel":4}
+== multiples_finding | numberTheory | in=undefined | kind=string
+   Q: 2の倍数を小さい方から5こ答えなさい
+   A: {"v":"2, 4, 6, 8, 10"}
+   P: {"n":2,"variant":"list_first_n","arg1":5,"arg2":null,"count":5,"answer":"2, 4, 6, 8, 10","difficultyLevel":3}
+== prime_judgment | numberTheory | in=undefined | kind=string
+   Q: 58、2、68 の中で素数はどれですか
+   A: {"v":"2"}
+   P: {"choices":[58,2,68],"answer":2,"difficultyLevel":4}
+== prime_range | numberTheory | in=undefined | kind=string
+   Q: 1から11までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+   A: {"v":"2, 3, 5, 7, 11"}
+   P: {"min":1,"max":11,"answer":"2, 3, 5, 7, 11","primeCount":5,"difficultyLevel":3}
+== common_divisors | numberTheory | in=undefined | kind=string
+   Q: 180と120の公約数をすべて答えなさい
+   A: {"v":"1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60"}
+   P: {"a":180,"b":120,"answer":"1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60","g":60,"difficultyLevel":4,"commonDivisorCount":12}
+== common_multiples | numberTheory | in=list | kind=string
+   Q: 2と3の公倍数を小さい方から5つ答えなさい
+   A: {"v":"6, 12, 18, 24, 30"}
+   P: {"a":2,"b":3,"variant":"list_first_n","arg1":5,"arg2":null,"count":5,"answer":"6, 12, 18, 24, 30","lcm":6,"difficultyLevel":4}
+== gcd_calculation | numberTheory | in=undefined | kind=integer
+   Q: 18、18、18の最大公約数はいくつですか
+   A: {"v":18}
+   P: {"numbers":[18,18,18],"answer":18,"difficultyLevel":4,"inputType":"三数"}
+== lcm_calculation | numberTheory | in=undefined | kind=integer
+   Q: 2と3の最小公倍数を求めなさい
+   A: {"v":6}
+   P: {"a":2,"b":3,"answer":6,"difficultyLevel":4}
+== gcd_lcm_word | numberTheory | in=undefined | kind=integer
+   Q: 12cmのリボンと18cmのリボンを、同じ長さに切って、あまりがないようにします。最も長い1本分の長さは何cmですか
+   A: {"v":6}
+   P: {"t":"gcd","a":12,"b":18,"answer":6,"difficultyLevel":4}
+== period_repetition | numberTheory | in=undefined | kind=string
+   Q: 赤、白の旗を「赤、白」の順にくり返しならべます。10番目は何色ですか
+   A: {"v":"白"}
+   P: {"pattern":["赤","白"],"period":2,"n":10,"answer":"白","difficultyLevel":4,"remainder":0}
+== fraction_mul_integer | fraction | in=undefined | kind=mixed
+   Q: 2分の1に7をかけるといくつになりますか
+   A: {"n":1,"d":2,"w":3}
+   P: {"numerator":1,"denominator":2,"integer":7,"answerNumerator":7,"answerDenominator":2,"difficultyLevel":3,"requiresReduction":false,"isImproper":true}
+== fraction_mul_fraction | fraction | in=undefined | kind=fraction
+   Q: 2分の1と7分の4をかけるといくつになりますか
+   A: {"n":2,"d":7}
+   P: {"n1":1,"d1":2,"n2":4,"d2":7,"answerNumerator":2,"answerDenominator":7,"difficultyLevel":3,"isProperAnswer":true}
+== fraction_div_integer | fraction | in=undefined | kind=fraction
+   Q: 2分の1を2でわると、いくつになりますか
+   A: {"n":1,"d":4}
+   P: {"numerator":1,"denominator":2,"integer":2,"answerNumerator":1,"answerDenominator":4,"difficultyLevel":3}
+== fraction_div_fraction | fraction | in=undefined | kind=fraction
+   Q: 2分の1を3分の2でわると、商はいくつですか
+   A: {"n":3,"d":4}
+   P: {"n1":1,"d1":2,"n2":6,"d2":9,"answerNumerator":3,"answerDenominator":4,"difficultyLevel":4}
+== fraction_mul_mixed | fraction | in=undefined | kind=integer
+   Q: 1と6分の1と7分の6をかけるといくつになりますか
+   A: {"v":1}
+   P: {"whole":1,"numerator":1,"denominator":6,"n2":6,"d2":7,"mixedNumerator":7,"mixedDenominator":6,"answerNumerator":1,"answerDenominator":1,"difficultyLevel":3}
+== fraction_div_mixed | fraction | in=undefined | kind=mixed
+   Q: 1と4分の1を5分の4でわると、いくつになりますか
+   A: {"n":9,"d":16,"w":1}
+   P: {"whole":1,"numerator":1,"denominator":4,"n2":4,"d2":5,"mixedNumerator":5,"mixedDenominator":4,"answerNumerator":25,"answerDenominator":16,"difficultyLevel":3}
+== fraction_reduce | fraction | in=undefined | kind=fraction
+   Q: 6分の4を約分しなさい
+   A: {"n":2,"d":3}
+   P: {"numerator":4,"denominator":6,"answerNumerator":2,"answerDenominator":3,"divisor":2,"difficultyLevel":3}
+== fraction_common_denominator | fraction | in=undefined | kind=fractions
+   Q: 2分の1と5分の4を、分母を最小公倍数にそろえて表しなさい
+   A: {}
+   P: {"n1":1,"d1":2,"n2":4,"d2":5,"common":10,"newN1":5,"newN2":8,"difficultyLevel":4}
+== fraction_mixed_convert | fraction | in=undefined | kind=mixed
+   Q: 7/2 を帯分数で表しなさい
+   A: {"n":1,"d":2,"w":3}
+   P: {"numerator":7,"denominator":2,"whole":3,"answerNumerator":1,"answerDenominator":2,"difficultyLevel":4}
+== fraction_big_small | fraction | in=choice | kind=string
+   Q: 7分の6と7分の1 のどちらが大きいか比べなさい
+   A: {"v":"7分の6"}
+   P: {"numerator":6,"denominator":7,"smallerNumerator":1,"difficultyLevel":4}
+   C: ["7分の6","7分の1"]
+== speed_calculation | speed | in=undefined | kind=decimal
+   Q: 45kmを3時間で進みました。速さは何kmですか（1時間あたり）
+   A: {"v":15}
+   P: {"distance":45,"time":3,"timeUnit":"時間","distUnit":"km","answer":15,"difficultyLevel":3}
+== distance_calculation | speed | in=undefined | kind=integer
+   Q: 時速21kmで4時間走ると、何km進みますか
+   A: {"v":84}
+   P: {"speed":21,"time":4,"answer":84,"difficultyLevel":4}
+== time_calculation | speed | in=undefined | kind=integer
+   Q: 時速10kmで30km進むと、何時間かかりますか
+   A: {"v":3}
+   P: {"speed":10,"distance":30,"answer":3,"difficultyLevel":4}
+== speed_unit_conversion | speed | in=undefined | kind=decimal
+   Q: 時速60kmは、分速何mですか
+   A: {"v":1000}
+   P: {"kmPerHour":60,"givenValue":60,"variant":"kmh_to_mmin","conversionType":"kmh_to_mmin","answer":1000,"difficultyLevel":4}
+== speed_comparison | speed | in=undefined | kind=string
+   Q: たろうさんは時速4km、はなこさんは時速3kmで進みます。どちらが速いですか
+   A: {"v":"たろうさん"}
+   P: {"speedA":4,"speedB":3,"answer":"たろうさん","difficultyLevel":4}
+== speed_word | speed | in=undefined | kind=integer
+   Q: 自動車で時速81kmで4時間走ると何km進みますか。
+   A: {"v":324}
+   P: {"speed":81,"time":4,"answer":324,"scenario":"4","difficultyLevel":4}
+== speed_multi_step | speed | in=undefined | kind=decimal
+   Q: はじめの8時間は時速14kmで走り、つぎの8時間は時速18kmで走りました。走った距離は全部で何kmですか。また平均の速さは時速何kmですか（2つ目の答えを入力）
+   A: {"v":16}
+   P: {"speed1":14,"time1":8,"speed2":18,"time2":8,"totalDistance":256,"totalTime":16,"averageSpeed":16,"answer":16,"difficultyLevel":4}
+== circle_area_radius | geometry | in=undefined | kind=decimal
+   Q: 半径12cmの円の面積を求めなさい。円周率は3.14とします。
+   A: {"v":452.16}
+   P: {"radius":12,"area":452.16,"answer":452.16,"pi":3.14,"difficultyLevel":4}
+== circle_area_diameter | geometry | in=undefined | kind=decimal
+   Q: 直径16cmの円の面積を求めなさい。円周率は3.14とします。
+   A: {"v":200.96}
+   P: {"diameter":16,"radius":8,"area":200.96,"difficultyLevel":4}
+== circle_radius_from_area | geometry | in=undefined | kind=integer
+   Q: 面積が50.24cm²の円があります。この円の半径は何cmですか。円周率は3.14とします。
+   A: {"v":4}
+   P: {"radius":4,"area":50.24,"difficultyLevel":4}
+== volume_box | geometry | in=undefined | kind=integer
+   Q: 縦2cm、横2cm、高さ7cmの直方体の体積を求めよ。
+   A: {"v":28}
+   P: {"length":2,"width":2,"height":7,"volume":28,"difficultyLevel":3}
+== volume_cube | geometry | in=undefined | kind=integer
+   Q: 1辺が3cmの立方体の体積を求めよ。
+   A: {"v":27}
+   P: {"edge":3,"volume":27,"difficultyLevel":3}
+== volume_prism | geometry | in=undefined | kind=integer
+   Q: 底面積が5cm²、高さ4cmの角柱の体積を求めよ。
+   A: {"v":20}
+   P: {"baseArea":5,"height":4,"volume":20,"difficultyLevel":4}
+== volume_cylinder | geometry | in=undefined | kind=decimal
+   Q: 半径4cm、高さ4cmの円柱の体積を求めよ。円周率は3.14。
+   A: {"v":200.96}
+   P: {"radius":4,"height":4,"baseArea":50.24,"volume":200.96,"difficultyLevel":4}
+== volume_from_height | geometry | in=undefined | kind=integer
+   Q: 底面積が5cm²の角柱の体積が25cm³のとき、この角柱の高さを求めよ。
+   A: {"v":5}
+   P: {"baseArea":5,"volume":25,"height":5,"difficultyLevel":4}
+== volume_unit | geometry | in=undefined | kind=integer
+   Q: 2Lは何cm³ですか
+   A: {"v":2000}
+   P: {"liters":2,"cm3":2000,"difficultyLevel":3}
+== symmetry_fold | geometry | in=undefined | kind=string
+   Q: 正三角形は線対称な図形ですか？（はい/いいえ）
+   A: {"v":"はい"}
+   P: {"shape":"正三角形","isFold":true,"count":3,"difficultyLevel":4}
+== symmetry_point | geometry | in=undefined | kind=string
+   Q: 長方形は点対称な図形ですか？（はい/いいえ）
+   A: {"v":"はい"}
+   P: {"shape":"長方形","isPoint":true,"difficultyLevel":4}
+== scale_length | geometry | in=undefined | kind=integer
+   Q: ある図形を3倍に拡大しました。もとの図形の長さが4cmのとき、拡大後の長さは何cmですか？
+   A: {"v":12}
+   P: {"scale":3,"base":4,"result":12,"difficultyLevel":4,"isEnlarge":true}
+== angle_basic | geometry | in=undefined | kind=integer
+   Q: 三角形の2つの角が31°と31°です。残りの角は何度ですか。
+   A: {"v":118}
+   P: {"angleA":31,"angleB":31,"angleC":118,"difficultyLevel":4}
+== circle_circumference | geometry | in=undefined | kind=decimal
+   Q: 直径11cmの円の円周の長さを求めなさい。円周率は3.14とします。
+   A: {"v":34.54}
+   P: {"variant":"from_diameter","diameter":11,"circumference":34.54,"unit":"cm","pi":3.14,"difficultyLevel":3}
+== trapezoid_area | geometry | in=undefined | kind=integer
+   Q: 下底が14cm、高さが14cm、面積が182cm²の台形の上底は何cmですか。
+   A: {"v":12}
+   P: {"variant":"reverse_base","a":12,"b":14,"h":14,"area":182,"difficultyLevel":3}
+== unit_conversion_basic | geometry | in=undefined | kind=integer
+   Q: 5㎡は何㎠ですか
+   A: {"v":50000}
+   P: {"variant":"area","from":"㎡","to":"㎠","value":5,"answer":50000,"difficultyLevel":3}
+== decimal_place_value | decimal | in=undefined | kind=integer
+   Q: 小数 0.6 の10分の1の位の数字は何ですか。
+   A: {"v":6}
+   P: {"variant":"read_digit","place":1,"digits":[6],"answer":6,"difficultyLevel":3}
+== fraction_unit_intro | fraction | in=undefined | kind=string
+   Q: ある量を2等分したときの1つ分は、何分の一ですか。
+   A: {"v":"1/2"}
+   P: {"variant":"meaning","num":1,"den":2,"answer":"1/2","difficultyLevel":3}
+== fraction_add_sub | fraction | in=undefined | kind=fraction
+   Q: 1/2 ＋ 2/6 を計算し、約分した答えを書きなさい。
+   A: {"n":5,"d":6}
+   P: {"variant":"add","operation":"add","n1":1,"d1":2,"n2":2,"d2":6,"numerator":5,"denominator":6,"commonDenominator":6,"difficultyLevel":3}
+== triangle_classify | geometry | in=undefined | kind=string
+   Q: 辺の長さが 29cm、13cm、29cm の三角形は、どんな三角形ですか。
+   A: {"v":"二等辺三角形"}
+   P: {"variant":"classify","a":29,"b":13,"c":29,"kind":"二等辺三角形","difficultyLevel":3}
+== parallel_perpendicular | geometry | in=choice | kind=string
+   Q: 同じ平面上にある2本の直線が、互いに交わらないとき、この2本の直線を何といいますか。
+   A: {"v":"平行"}
+   P: {"variant":"definition_parallel","answerKind":"parallel","difficultyLevel":3}
+   C: ["平行","垂直","垂直ではありません","平行ではありません"]
+== area_unit_conversion | geometry | in=undefined | kind=integer
+   Q: 面積の単位を直します。1㎡ は何㎠ です。
+   A: {"v":10000}
+   P: {"variant":"sqm_to_sqcm","from":"㎡","to":"㎠","givenValue":1,"multiplier":10000,"answer":10000,"difficultyLevel":3}
+== rectangle_area | geometry | in=undefined | kind=integer
+   Q: 1辺が 2 cm の正方形の面積を求めなさい。
+   A: {"v":4}
+   P: {"variant":"square","width":2,"height":2,"area":4,"answer":4,"unit":"cm2","difficultyLevel":3}
+== triangle_area | geometry | in=undefined | kind=integer
+   Q: 底辺が 12 cm、高さが 47 cm の三角形の面積を求めなさい。
+   A: {"v":282}
+   P: {"variant":"find_area","base":12,"height":47,"area":282,"answer":282,"difficultyLevel":3}
+== parallelogram_area | geometry | in=undefined | kind=integer
+   Q: 底辺が 3 cm、高さが 51 cm の平行四辺形の面積を求めなさい。
+   A: {"v":153}
+   P: {"variant":"find_area","base":3,"height":51,"area":153,"answer":153,"difficultyLevel":3}
+== judge_same | geometry | in=undefined | kind=string
+   Q: 図Aと図Bは、重ねるとぴったり重なりますか。（はい/いいえ）
+   A: {"v":"はい"}
+   P: {"rotationDeg":0,"difficultyLevel":3}
+== judge_differs | geometry | in=undefined | kind=string
+   Q: 図Aは不等辺三角形です。図Aと図Bの形と大きさは同じですか。（はい/いいえ）
+   A: {"v":"いいえ"}
+   P: {"variant":"base_widened","difficultyLevel":4}
+== ratio_simplify | ratio | in=ratio | kind=string
+   Q: 3：12を、できるだけ簡単な比になおしなさい
+   A: {"v":"1：4"}
+   P: {"a":3,"b":12,"gcd":3,"answer":"1：4","difficultyLevel":3}
+== ratio_value | ratio | in=undefined | kind=decimal
+   Q: 19：4 の比の値を求めなさい
+   A: {"v":4.75}
+   P: {"a":19,"b":4,"answer":4.75,"difficultyLevel":3}
+== ratio_equal | ratio | in=undefined | kind=string
+   Q: 4：5 は、24：30 と同じ比ですか？（はい/いいえ）
+   A: {"v":"はい"}
+   P: {"a":4,"b":5,"x":24,"y":30,"factor":6,"difficultyLevel":3}
+== ratio_quantity | ratio | in=undefined | kind=integer
+   Q: 全体が171のとき、4：5に分けると大きいほうはいくつになりますか
+   A: {"v":95}
+   P: {"a":4,"b":5,"unit":19,"total":171,"askPart":5,"answer":95,"difficultyLevel":4}
+== proportional_expression | ratio | in=expression | kind=string
+   Q: 1個5円のりんごをx個買うときの代金y円です。yをxの式で表しなさい
+   A: {"v":"y=5x"}
+   P: {"k":5,"answer":"y=5x","constant":5,"difficultyLevel":4}
+== proportional_word | ratio | in=undefined | kind=integer
+   Q: 4個買うと20円の品物があります。同じ品物を13個買うと何円ですか
+   A: {"v":65}
+   P: {"k":5,"x1":4,"x2":13,"y1":20,"y2":65,"answer":65,"difficultyLevel":4}
+== inverse_expression | ratio | in=expression | kind=string
+   Q: 面積が12㎠の長方形があります。縦の長さをxcm、横の長さをycmとすると、yをxで表しなさい
+   A: {"v":"y=12÷x"}
+   P: {"k":12,"answer":"y=12÷x","difficultyLevel":4}
+== expression_meaning | expression | in=undefined | kind=string
+   Q: x5円という式があります。どのような意味があるか文章で説明してください
+   A: {"v":"x5円は、x円の物を1こと5円の品物を買ったときの代金です"}
+   P: {"b":5,"answer":"x5円は、x円の物を1こと5円の品物を買ったときの代金です","difficultyLevel":4}
+== inverse_word | ratio | in=undefined | kind=integer
+   Q: 30こを3人で分けると1人10こになります。同じ数を10人で分けると、1人何こになりますか
+   A: {"v":3}
+   P: {"total":30,"people1":3,"people2":10,"per1":10,"per2":3,"answer":3,"difficultyLevel":4}
+== percentage | ratio | in=undefined | kind=integer
+   Q: 全体 110 のうち 11 は、何パーセントですか。
+   A: {"v":10}
+   P: {"variant":"find_percent","percent":10,"whole":110,"part":11,"answer":10,"difficultyLevel":3}
+== decimal_mul_decimal | decimal | in=undefined | kind=decimal
+   Q: 0.3に1.1をかけるといくつになりますか
+   A: {"v":0.33}
+   P: {"a":0.3,"b":1.1,"answer":0.33,"difficultyLevel":3}
+== decimal_addition | decimal | in=undefined | kind=decimal
+   Q: 5.63に9.12をたすといくつになりますか
+   A: {"v":14.75}
+   P: {"a":5.63,"b":9.12,"answer":14.75,"carryCount":1,"carryPositions":[3],"difficultyLevel":3}
+== decimal_subtraction | decimal | in=undefined | kind=decimal
+   Q: 9.12から5.63をひくといくつになりますか
+   A: {"v":3.49}
+   P: {"a":9.12,"b":5.63,"answer":3.49,"borrowCount":2,"borrowPositions":[0,1],"difficultyLevel":3}
+== decimal_div_decimal | decimal | in=undefined | kind=decimal
+   Q: 0.1を0.1でわると、商はいくつですか
+   A: {"v":1}
+   P: {"dividend":0.1,"divisor":0.1,"quotient":1,"answer":1,"difficultyLevel":3}
+== decimal_mul_integer | decimal | in=undefined | kind=decimal
+   Q: 1.1×10 はいくつになりますか
+   A: {"v":11}
+   P: {"a":1.1,"b":10,"answer":11,"difficultyLevel":3}
+== decimal_div_integer | decimal | in=undefined | kind=decimal
+   Q: 0.2を2でわると、いくつになりますか
+   A: {"v":0.1}
+   P: {"dividend":0.2,"divisor":2,"quotient":0.1,"answer":0.1,"difficultyLevel":3}
+== decimal_round | decimal | in=undefined | kind=decimal
+   Q: 1.692を、小数第2位まで四捨五入しなさい
+   A: {"v":1.69}
+   P: {"value":1.692,"roundTo":2,"rounded":1.69,"answer":1.69,"difficultyLevel":3}
+== expression_make | expression | in=expression | kind=string
+   Q: 1本x円のえんぴつを5本買ったときの代金を、xを使った式で表しなさい
+   A: {"v":"5x"}
+   P: {"count":5,"x":"x","answer":"5x","difficultyLevel":4}
+== expression_substitution | expression | in=undefined | kind=integer
+   Q: x=9 のとき、2x+2 の値を求めなさい
+   A: {"v":20}
+   P: {"a":2,"b":2,"x":9,"answer":20,"difficultyLevel":3}
+== expression_word_make | expression | in=expression | kind=string
+   Q: 1こ5円のチョコレートをxこ買います。代金をxの式で表しなさい
+   A: {"v":"5×x"}
+   P: {"price":5,"answer":"5×x","difficultyLevel":4}
+== expression_blank | expression | in=undefined | kind=integer
+   Q: □×3＝9 のとき、□に書く数はいくつですか
+   A: {"v":3}
+   P: {"a":3,"b":3,"result":9,"answer":3,"difficultyLevel":3}
+== expression_multi_condition | expression | in=undefined | kind=integer
+   Q: はじめに3個ありました。1分間に4こずつ8分間ふえると、最終的にいくつになりますか。また式 (あれば x+ b の形) で表しなさい
+   A: {"v":35}
+   P: {"a":4,"b":3,"x":8,"answer":35,"difficultyLevel":4}
+== arrange_simple | combinatorics | in=undefined | kind=integer
+   Q: 4人の中から3人を選んで1列に並べます。並べ方は全部で何通りありますか
+   A: {"v":24}
+   P: {"n":4,"r":3,"variant":"pick_only","answer":24,"difficultyLevel":3}
+== combine_simple | combinatorics | in=undefined | kind=integer
+   Q: 4人の中から3人を選びます。選び方は何通りありますか
+   A: {"v":4}
+   P: {"n":4,"r":3,"variant":"pick_only","answer":4,"difficultyLevel":3}
+== arrange_tree | combinatorics | in=undefined | kind=integer
+   Q: A、B、C、Dの4個の文字をすべて1回ずつ使って、左から1列に並べます。並べ方は何通りありますか
+   A: {"v":24}
+   P: {"n":4,"letters":["A","B","C","D"],"variant":"all","answer":24,"difficultyLevel":3}
+== combine_table | combinatorics | in=undefined | kind=integer
+   Q: 5チームのサッカー大会で、どの2チームも1回ずつ試合します。試合の数は全部で何試合になりますか
+   A: {"v":10}
+   P: {"n":5,"variant":"round_robin","answer":10,"difficultyLevel":3}
+== duplicate_removal | combinatorics | in=undefined | kind=integer
+   Q: A、A、B、Bの4枚のカードをすべて使って一列に並べます。同じ文字は区別できないとして、並べ方は何通りありますか
+   A: {"v":6}
+   P: {"letters":["A","A","B","B"],"symbolMode":"letter","answer":6,"difficultyLevel":3}
+== data_average | data | in=undefined | kind=decimal
+   Q: 49、4、35、24、20、48 の平均を求めなさい
+   A: {"v":30}
+   P: {"numbers":[49,4,35,24,20,48],"sum":180,"count":6,"average":30,"answer":30,"difficultyLevel":4}
+== data_total_from_average | data | in=undefined | kind=integer
+   Q: 4この平均が2です。この4この合計はいくつですか
+   A: {"v":8}
+   P: {"count":4,"average":2,"total":8,"answer":8,"difficultyLevel":3}
+== data_max_min | data | in=undefined | kind=string
+   Q: 1、1、17、20、28、4 の中で、最大の数と最小の数を答えなさい
+   A: {"v":"28 と 1"}
+   P: {"numbers":[1,1,17,20,28,4],"max":28,"min":1,"answer":"28 と 1","difficultyLevel":3}
+== data_compare | data | in=undefined | kind=string
+   Q: A組のテストの点は 1、17、28、15、18、2、29 で、B組のテストの点は 1、20、4、17、24、23、3 です。それぞれ平均を比べると、どちらが高いと言えますか
+   A: {"v":"A組"}
+   P: {"groupA":[1,17,28,15,18,2,29],"groupB":[1,20,4,17,24,23,3],"avgA":15.714285714285714,"avgB":13.142857142857142,"answer":"A組","difficultyLevel":4}
+== realworld_shopping | realWorld | in=undefined | kind=integer
+   Q: 写真の値札を見て、たまご1パックとりんご1ふさとオレンジジュース1本を買います。代金は合計いくらですか。
+   A: {"v":580}
+   P: {"variant":"three_sum","productA":"たまご","productB":"りんご","productC":"オレンジジュース","priceA":120,"priceB":260,"priceC":200,"answer":580,"difficultyLevel":3}
+== realworld_eggs | realWorld | in=undefined | kind=integer
+   Q: 写真の茶色い卵1個と白い卵1個を、1組とします。この1組を3組用意します（この3組は問題で設定した数値です）。卵は合わせて何個になりますか。
+   A: {"v":6}
+   P: {"variant":"pairs_total","pairs":3,"eggsPerPair":2,"answer":6,"difficultyLevel":3}

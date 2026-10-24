@@ -1,0 +1,14 @@
+
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mC:/Users/monty/Desktop/蝠城｡・[39m
+
+[90mstdout[2m | src/quality/problem-consistency-audit.test.ts[2m > [22m[2m迢ｬ遶九が繝ｩ繧ｯ繝ｫ縺ｫ繧医ｋ蝠城｡梧枚/豁｣隗｣縺ｮ謨ｴ蜷域ｧ[2m > [22m[2m96遞ｮ鬘槭☆縺ｹ縺ｦ縺ｮ逕滓・蝎ｨ繧堤屮譟ｻ縺励∽ｸ肴紛蜷医′0莉ｶ縺ｧ縺ゅｋ
+[22m[39m[consistency-audit] total=8600 checked=8151 issues=0 skippedTypes=5
+[consistency-audit] skipped=unit_conversion_basic,area_unit_conversion,expression_meaning,realworld_shopping,realworld_eggs
+
+ [32m笨・[39m src/quality/problem-consistency-audit.test.ts [2m([22m[2m1 test[22m[2m)[22m[90m 127[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m   Start at [22m 16:43:43
+[2m   Duration [22m 1.18s[2m (transform 363ms, setup 0ms, collect 548ms, tests 127ms, environment 0ms, prepare 188ms)[22m
+

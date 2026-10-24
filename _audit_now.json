@@ -1,0 +1,608 @@
+{
+  "generators": 96,
+  "poolSize": 96,
+  "totalGenerated": 4300,
+  "generationFailures": 0,
+  "validatorFailures": 0,
+  "unanswerableAnswers": 0,
+  "missingSolutionSteps": 0,
+  "meaninglessProblems": 0,
+  "ruleHits": {},
+  "curriculumOutOfRangeSignals": 0,
+  "scopeCategoryCounts": {
+    "review": 440,
+    "required": 3730,
+    "extension": 80,
+    "uncertain": 50
+  },
+  "uniqueness": [
+    {
+      "type": "judge_same",
+      "generated": 50,
+      "unique": 3,
+      "ratio": 0.06
+    },
+    {
+      "type": "symmetry_fold",
+      "generated": 40,
+      "unique": 6,
+      "ratio": 0.15
+    },
+    {
+      "type": "symmetry_point",
+      "generated": 40,
+      "unique": 6,
+      "ratio": 0.15
+    },
+    {
+      "type": "lcm_calculation",
+      "generated": 40,
+      "unique": 11,
+      "ratio": 0.275
+    },
+    {
+      "type": "judge_differs",
+      "generated": 40,
+      "unique": 12,
+      "ratio": 0.3
+    },
+    {
+      "type": "volume_cube",
+      "generated": 50,
+      "unique": 17,
+      "ratio": 0.34
+    },
+    {
+      "type": "combine_table",
+      "generated": 50,
+      "unique": 20,
+      "ratio": 0.4
+    },
+    {
+      "type": "arrange_tree",
+      "generated": 50,
+      "unique": 21,
+      "ratio": 0.42
+    },
+    {
+      "type": "circle_radius_from_area",
+      "generated": 40,
+      "unique": 17,
+      "ratio": 0.425
+    },
+    {
+      "type": "gcd_calculation",
+      "generated": 40,
+      "unique": 20,
+      "ratio": 0.5
+    },
+    {
+      "type": "parallel_perpendicular",
+      "generated": 50,
+      "unique": 27,
+      "ratio": 0.54
+    },
+    {
+      "type": "duplicate_removal",
+      "generated": 50,
+      "unique": 27,
+      "ratio": 0.54
+    },
+    {
+      "type": "expression_make",
+      "generated": 40,
+      "unique": 22,
+      "ratio": 0.55
+    },
+    {
+      "type": "circle_area_radius",
+      "generated": 40,
+      "unique": 23,
+      "ratio": 0.575
+    },
+    {
+      "type": "fraction_reduce",
+      "generated": 50,
+      "unique": 29,
+      "ratio": 0.58
+    },
+    {
+      "type": "realworld_eggs",
+      "generated": 50,
+      "unique": 29,
+      "ratio": 0.58
+    },
+    {
+      "type": "combine_simple",
+      "generated": 50,
+      "unique": 31,
+      "ratio": 0.62
+    },
+    {
+      "type": "circle_area_diameter",
+      "generated": 40,
+      "unique": 25,
+      "ratio": 0.625
+    },
+    {
+      "type": "decimal_place_value",
+      "generated": 50,
+      "unique": 32,
+      "ratio": 0.64
+    },
+    {
+      "type": "arrange_simple",
+      "generated": 50,
+      "unique": 32,
+      "ratio": 0.64
+    },
+    {
+      "type": "volume_unit",
+      "generated": 50,
+      "unique": 33,
+      "ratio": 0.66
+    },
+    {
+      "type": "speed_unit_conversion",
+      "generated": 40,
+      "unique": 28,
+      "ratio": 0.7
+    },
+    {
+      "type": "proportional_expression",
+      "generated": 40,
+      "unique": 28,
+      "ratio": 0.7
+    },
+    {
+      "type": "expression_meaning",
+      "generated": 40,
+      "unique": 28,
+      "ratio": 0.7
+    },
+    {
+      "type": "expression_word_make",
+      "generated": 40,
+      "unique": 28,
+      "ratio": 0.7
+    },
+    {
+      "type": "area_unit_conversion",
+      "generated": 50,
+      "unique": 36,
+      "ratio": 0.72
+    },
+    {
+      "type": "gcd_lcm_word",
+      "generated": 30,
+      "unique": 22,
+      "ratio": 0.733
+    },
+    {
+      "type": "divisors_finding",
+      "generated": 40,
+      "unique": 30,
+      "ratio": 0.75
+    },
+    {
+      "type": "inverse_expression",
+      "generated": 40,
+      "unique": 30,
+      "ratio": 0.75
+    },
+    {
+      "type": "speed_calculation",
+      "generated": 50,
+      "unique": 39,
+      "ratio": 0.78
+    },
+    {
+      "type": "fraction_unit_intro",
+      "generated": 50,
+      "unique": 39,
+      "ratio": 0.78
+    },
+    {
+      "type": "fraction_mixed_convert",
+      "generated": 40,
+      "unique": 32,
+      "ratio": 0.8
+    },
+    {
+      "type": "volume_cylinder",
+      "generated": 40,
+      "unique": 32,
+      "ratio": 0.8
+    },
+    {
+      "type": "fraction_add_sub",
+      "generated": 50,
+      "unique": 41,
+      "ratio": 0.82
+    },
+    {
+      "type": "rectangle_area",
+      "generated": 50,
+      "unique": 41,
+      "ratio": 0.82
+    },
+    {
+      "type": "circle_circumference",
+      "generated": 50,
+      "unique": 42,
+      "ratio": 0.84
+    },
+    {
+      "type": "ratio_value",
+      "generated": 50,
+      "unique": 43,
+      "ratio": 0.86
+    },
+    {
+      "type": "decimal_addition",
+      "generated": 50,
+      "unique": 43,
+      "ratio": 0.86
+    },
+    {
+      "type": "inverse_word",
+      "generated": 30,
+      "unique": 26,
+      "ratio": 0.867
+    },
+    {
+      "type": "fraction_common_denominator",
+      "generated": 40,
+      "unique": 35,
+      "ratio": 0.875
+    },
+    {
+      "type": "volume_from_height",
+      "generated": 40,
+      "unique": 35,
+      "ratio": 0.875
+    },
+    {
+      "type": "ratio_equal",
+      "generated": 50,
+      "unique": 44,
+      "ratio": 0.88
+    },
+    {
+      "type": "realworld_shopping",
+      "generated": 50,
+      "unique": 44,
+      "ratio": 0.88
+    },
+    {
+      "type": "fraction_div_mixed",
+      "generated": 50,
+      "unique": 45,
+      "ratio": 0.9
+    },
+    {
+      "type": "data_total_from_average",
+      "generated": 50,
+      "unique": 45,
+      "ratio": 0.9
+    },
+    {
+      "type": "integer_division",
+      "generated": 50,
+      "unique": 46,
+      "ratio": 0.92
+    },
+    {
+      "type": "parallelogram_area",
+      "generated": 50,
+      "unique": 46,
+      "ratio": 0.92
+    },
+    {
+      "type": "divisors_count",
+      "generated": 40,
+      "unique": 37,
+      "ratio": 0.925
+    },
+    {
+      "type": "common_divisors",
+      "generated": 40,
+      "unique": 37,
+      "ratio": 0.925
+    },
+    {
+      "type": "scale_length",
+      "generated": 40,
+      "unique": 37,
+      "ratio": 0.925
+    },
+    {
+      "type": "integer_multiplication",
+      "generated": 50,
+      "unique": 47,
+      "ratio": 0.94
+    },
+    {
+      "type": "unit_conversion_basic",
+      "generated": 50,
+      "unique": 47,
+      "ratio": 0.94
+    },
+    {
+      "type": "decimal_subtraction",
+      "generated": 50,
+      "unique": 47,
+      "ratio": 0.94
+    },
+    {
+      "type": "expression_blank",
+      "generated": 50,
+      "unique": 47,
+      "ratio": 0.94
+    },
+    {
+      "type": "fraction_mul_fraction",
+      "generated": 50,
+      "unique": 48,
+      "ratio": 0.96
+    },
+    {
+      "type": "triangle_area",
+      "generated": 50,
+      "unique": 48,
+      "ratio": 0.96
+    },
+    {
+      "type": "fraction_div_fraction",
+      "generated": 40,
+      "unique": 39,
+      "ratio": 0.975
+    },
+    {
+      "type": "ratio_quantity",
+      "generated": 40,
+      "unique": 39,
+      "ratio": 0.975
+    },
+    {
+      "type": "multiples_finding",
+      "generated": 50,
+      "unique": 49,
+      "ratio": 0.98
+    },
+    {
+      "type": "fraction_div_integer",
+      "generated": 50,
+      "unique": 49,
+      "ratio": 0.98
+    },
+    {
+      "type": "fraction_mul_mixed",
+      "generated": 50,
+      "unique": 49,
+      "ratio": 0.98
+    },
+    {
+      "type": "ratio_simplify",
+      "generated": 50,
+      "unique": 49,
+      "ratio": 0.98
+    },
+    {
+      "type": "percentage",
+      "generated": 50,
+      "unique": 49,
+      "ratio": 0.98
+    },
+    {
+      "type": "decimal_div_decimal",
+      "generated": 50,
+      "unique": 49,
+      "ratio": 0.98
+    },
+    {
+      "type": "decimal_div_integer",
+      "generated": 50,
+      "unique": 49,
+      "ratio": 0.98
+    },
+    {
+      "type": "integer_addition",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "integer_subtraction",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "integer_multi_step",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "integer_fill_blank",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    },
+    {
+      "type": "estimate_product",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    },
+    {
+      "type": "integer_word_problem",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "prime_judgment",
+      "generated": 30,
+      "unique": 30,
+      "ratio": 1
+    },
+    {
+      "type": "prime_range",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "common_multiples",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    },
+    {
+      "type": "period_repetition",
+      "generated": 30,
+      "unique": 30,
+      "ratio": 1
+    },
+    {
+      "type": "fraction_mul_integer",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "fraction_big_small",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    },
+    {
+      "type": "distance_calculation",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    },
+    {
+      "type": "time_calculation",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    },
+    {
+      "type": "speed_comparison",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    },
+    {
+      "type": "speed_word",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    },
+    {
+      "type": "speed_multi_step",
+      "generated": 30,
+      "unique": 30,
+      "ratio": 1
+    },
+    {
+      "type": "volume_box",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "volume_prism",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    },
+    {
+      "type": "angle_basic",
+      "generated": 30,
+      "unique": 30,
+      "ratio": 1
+    },
+    {
+      "type": "trapezoid_area",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "triangle_classify",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "proportional_word",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    },
+    {
+      "type": "decimal_mul_decimal",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "decimal_mul_integer",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "decimal_round",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "expression_substitution",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "expression_multi_condition",
+      "generated": 30,
+      "unique": 30,
+      "ratio": 1
+    },
+    {
+      "type": "data_average",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    },
+    {
+      "type": "data_max_min",
+      "generated": 50,
+      "unique": 50,
+      "ratio": 1
+    },
+    {
+      "type": "data_compare",
+      "generated": 40,
+      "unique": 40,
+      "ratio": 1
+    }
+  ],
+  "fullRandom": {
+    "draws": 300,
+    "distinctTypesSeen": 95,
+    "missingTypes": [
+      "fraction_add_sub"
+    ],
+    "expectedPerType": 3.1,
+    "minCount": 1,
+    "maxCount": 9,
+    "exactAdjacentRepeat": 0,
+    "sameTypeAdjacent": 4
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "totalGenerated": 17200,
+  "ok": 6412,
+  "mismatch": 0,
+  "skipped": 10788,
+  "coveragePct": 37.3,
+  "typesVerified": 35,
+  "typesNotAutoVerified": [
+    "integer_division",
+    "integer_multi_step",
+    "integer_fill_blank",
+    "estimate_product",
+    "integer_word_problem",
+    "divisors_finding",
+    "divisors_count",
+    "multiples_finding",
+    "prime_judgment",
+    "common_divisors",
+    "common_multiples",
+    "gcd_lcm_word",
+    "period_repetition",
+    "fraction_mul_fraction",
+    "fraction_div_fraction",
+    "fraction_mul_mixed",
+    "fraction_div_mixed",
+    "fraction_common_denominator",
+    "fraction_mixed_convert",
+    "fraction_big_small",
+    "speed_calculation",
+    "speed_comparison",
+    "speed_word",
+    "speed_multi_step",
+    "circle_radius_from_area",
+    "volume_box",
+    "volume_cylinder",
+    "symmetry_fold",
+    "symmetry_point",
+    "scale_length",
+    "angle_basic",
+    "decimal_place_value",
+    "fraction_unit_intro",
+    "fraction_add_sub",
+    "triangle_classify",
+    "parallel_perpendicular",
+    "judge_same",
+    "judge_differs",
+    "ratio_simplify",
+    "ratio_equal",
+    "ratio_quantity",
+    "proportional_expression",
+    "proportional_word",
+    "inverse_expression",
+    "expression_meaning",
+    "inverse_word",
+    "expression_make",
+    "expression_substitution",
+    "expression_word_make",
+    "expression_blank",
+    "expression_multi_condition",
+    "combine_simple",
+    "arrange_tree",
+    "combine_table",
+    "duplicate_removal",
+    "data_average",
+    "data_total_from_average",
+    "data_max_min",
+    "data_compare",
+    "realworld_shopping",
+    "realworld_eggs"
+  ],
+  "roundingBalanceAudit": {
+    "up": 1104,
+    "down": 896,
+    "exactly5": 395,
+    "upRatio": 0.552,
+    "perLevel": {
+      "lv1": {
+        "up": 223,
+        "down": 177
+      },
+      "lv2": {
+        "up": 225,
+        "down": 175
+      },
+      "lv3": {
+        "up": 219,
+        "down": 181
+      },
+      "lv4": {
+        "up": 217,
+        "down": 183
+      },
+      "lv5": {
+        "up": 220,
+        "down": 180
+      }
+    }
+  },
+  "ratioValuePrecisionAudit": {
+    "affected": 0,
+    "samples": []
+  },
+  "mismatches": [],
+  "perTypeWithCoverage": [
+    {
+      "type": "integer_addition",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "integer_subtraction",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "integer_multiplication",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "prime_range",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "gcd_calculation",
+      "ok": 123,
+      "mismatch": 0,
+      "skip": 37,
+      "coverage": 1
+    },
+    {
+      "type": "lcm_calculation",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "fraction_mul_integer",
+      "ok": 9,
+      "mismatch": 0,
+      "skip": 191,
+      "coverage": 1
+    },
+    {
+      "type": "fraction_div_integer",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "fraction_reduce",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "distance_calculation",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "time_calculation",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "speed_unit_conversion",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "circle_area_radius",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "circle_area_diameter",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_cube",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_prism",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_from_height",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_unit",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "circle_circumference",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "trapezoid_area",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "unit_conversion_basic",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "area_unit_conversion",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "rectangle_area",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "triangle_area",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "parallelogram_area",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "ratio_value",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "percentage",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_mul_decimal",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_addition",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_subtraction",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_div_decimal",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_mul_integer",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_div_integer",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_round",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "arrange_simple",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import type {
   ValidationResult,
 } from '../../types/problem';
 import { createRandom, generateProblemId } from '../../utils/random';
+import { buildNumericChoiceOptions } from '../../utils/choiceOptions';
 import {
   createDifficulty,
   numberSizeToComplexity,
@@ -473,6 +474,8 @@ export class SpeedWordGenerator implements ProblemGenerator {
       question: s.question,
       answer: { kind: 'integer', value: ans },
       explanation: '道のり＝速さ×時間 なので、' + s.speed + '×' + s.time + '＝' + ans + 'です。',
+      inputType: 'choice',
+      choices: buildNumericChoiceOptions(rng, ans, [ans + 1, ans - 1 > 0 ? ans - 1 : ans + 10, ans + speed + time]),
       parameters: { speed: s.speed, time: s.time, answer: ans, scenario: String(lv), difficultyLevel: lv },
     };
   }

@@ -1,0 +1,34 @@
+diff --git a/src/components/SolutionDisplay.tsx b/src/components/SolutionDisplay.tsx
+index 7845621..900e8fb 100644
+--- a/src/components/SolutionDisplay.tsx
++++ b/src/components/SolutionDisplay.tsx
+@@ -37,6 +37,14 @@ export default function SolutionDisplay({ solutionSteps, answer }: SolutionDispl
+   const answerText = formatAnswer(answer);
+   const steps = solutionSteps ?? [];
+ 
++  // 騾比ｸｭ蠑・(expression) 繧呈戟縺､繧ｹ繝・ャ繝励□縺代↓逡ｪ蜿ｷ繧呈険繧九・+  // 隱ｬ譏弱□縺代・繧ｹ繝・ャ繝・(expression 縺ｪ縺・ 縺ｯ逡ｪ蜿ｷ繧呈ｶ郁ｲｻ縺励↑縺・・+  let expressionCounter = 0;
++  const numberedSteps = steps.map((step) => ({
++    step,
++    number: step.expression ? expressionCounter++ : null,
++  }));
++
+   return (
+     <div className="solution-display">
+       <div className="solution-answer-top">
+@@ -49,14 +57,14 @@ export default function SolutionDisplay({ solutionSteps, answer }: SolutionDispl
+           <div className="solution-divider" aria-hidden="true"></div>
+           <div className="solution-heading">騾比ｸｭ蠑・/div>
+           <ol className="solution-steps">
+-            {steps.map((step, i) => (
++            {numberedSteps.map(({ step, number }, i) => (
+               <li key={i} className="solution-step">
+                 {step.explanation && (
+                   <p className="solution-explanation">{step.explanation}</p>
+                 )}
+                 {step.expression && (
+                   <p className="solution-expression">
+-                    <span className="solution-num">{stepNumber(i)}</span>
++                    <span className="solution-num">{stepNumber(number!)}</span>
+                     {step.expression}
+                   </p>
+                 )}

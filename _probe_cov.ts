@@ -1,0 +1,12 @@
+import { getAllGenerators } from './src/engine/selector/generatorRegistry';
+import { readFileSync } from 'fs';
+const types = getAllGenerators().map(g => g.type).sort();
+const src = readFileSync('scripts/verify-answers.ts', 'utf8');
+const covered = new Set<string>();
+for (const m of src.matchAll(/case '([a-z_]+)':/g)) covered.add(m[1]);
+const missing = types.filter(t => !covered.has(t));
+console.log('total types:', types.length);
+console.log('types WITHOUT a verifier case (' + missing.length + '):');
+console.log(missing.join('\n'));
+console.log('--- verifier cases not matching any type ---');
+console.log([...covered].filter(c => !types.includes(c)).join('\n'));

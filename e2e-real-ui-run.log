@@ -1,0 +1,77 @@
+SERVER UP http://127.0.0.1:5199
+PASS ratio_value lv1 Q1 question text :: 7：4 の比の値を求めなさい
+PASS ratio_value lv1 Q1 input type :: decimal
+PASS ratio_value lv1 Q1 expected answer :: 1.75
+PASS ratio_value lv1 Q1 correct feedback :: 🎉 せいかい！ 比の値は「前の数÷後の数」なので、7÷4＝1.75です。 答え
+PASS ratio_value lv1 Q1 solution display :: steps=1
+PASS ratio_value lv1 Q1 solution answer value :: expected=1.75
+PASS ratio_value lv1 Q2 no leftover input :: empty
+PASS ratio_value lv1 Q2 question text :: 4：2 の比の値を求めなさい
+PASS ratio_value lv1 Q2 input type :: decimal
+PASS ratio_value lv1 Q2 expected answer :: 2
+PASS ratio_value lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 比の値は「前の数÷後の数」なので、4÷2＝
+PASS ratio_value lv1 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS ratio_value lv1 Q2 solution display :: steps=1
+PASS ratio_value lv1 no page errors :: none
+PASS ratio_value lv1 no 404 :: none
+PASS ratio_value lv2 Q1 question text :: 2：4 の比の値を求めなさい
+PASS ratio_value lv2 Q1 input type :: decimal
+PASS ratio_value lv2 Q1 expected answer :: 0.5
+PASS ratio_value lv2 Q1 correct feedback :: 🎉 せいかい！ 比の値は「前の数÷後の数」なので、2÷4＝0.5です。 答えと
+PASS ratio_value lv2 Q1 solution display :: steps=1
+PASS ratio_value lv2 Q1 solution answer value :: expected=0.5
+PASS ratio_value lv2 Q2 no leftover input :: empty
+PASS ratio_value lv2 Q2 question text :: 4：2 の比の値を求めなさい
+PASS ratio_value lv2 Q2 input type :: decimal
+PASS ratio_value lv2 Q2 expected answer :: 2
+PASS ratio_value lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 比の値は「前の数÷後の数」なので、4÷2＝
+PASS ratio_value lv2 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS ratio_value lv2 Q2 solution display :: steps=1
+PASS ratio_value lv2 no page errors :: none
+PASS ratio_value lv2 no 404 :: none
+PASS ratio_value lv3 Q1 question text :: 2：8 の比の値を求めなさい
+PASS ratio_value lv3 Q1 input type :: decimal
+PASS ratio_value lv3 Q1 expected answer :: 0.25
+PASS ratio_value lv3 Q1 correct feedback :: 🎉 せいかい！ 比の値は「前の数÷後の数」なので、2÷8＝0.25です。 答え
+PASS ratio_value lv3 Q1 solution display :: steps=1
+PASS ratio_value lv3 Q1 solution answer value :: expected=0.25
+PASS ratio_value lv3 Q2 no leftover input :: empty
+PASS ratio_value lv3 Q2 question text :: 8：5 の比の値を求めなさい
+PASS ratio_value lv3 Q2 input type :: decimal
+PASS ratio_value lv3 Q2 expected answer :: 1.6
+PASS ratio_value lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1.6 です 比の値は「前の数÷後の数」なので、8÷
+PASS ratio_value lv3 Q2 correct answer shown :: shown=正解は 1.6 です expected=1.6
+PASS ratio_value lv3 Q2 solution display :: steps=1
+PASS ratio_value lv3 no page errors :: none
+PASS ratio_value lv3 no 404 :: none
+PASS ratio_value lv4 Q1 question text :: 6：8 の比の値を求めなさい
+PASS ratio_value lv4 Q1 input type :: decimal
+PASS ratio_value lv4 Q1 expected answer :: 0.75
+PASS ratio_value lv4 Q1 correct feedback :: 🎉 せいかい！ 比の値は「前の数÷後の数」なので、6÷8＝0.75です。 答え
+PASS ratio_value lv4 Q1 solution display :: steps=1
+PASS ratio_value lv4 Q1 solution answer value :: expected=0.75
+PASS ratio_value lv4 Q2 no leftover input :: empty
+PASS ratio_value lv4 Q2 question text :: 3：5 の比の値を求めなさい
+PASS ratio_value lv4 Q2 input type :: decimal
+PASS ratio_value lv4 Q2 expected answer :: 0.6
+PASS ratio_value lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 0.6 です 比の値は「前の数÷後の数」なので、3÷
+PASS ratio_value lv4 Q2 correct answer shown :: shown=正解は 0.6 です expected=0.6
+PASS ratio_value lv4 Q2 solution display :: steps=1
+PASS ratio_value lv4 no page errors :: none
+PASS ratio_value lv4 no 404 :: none
+PASS ratio_value lv5 Q1 question text :: 7：2 の比の値を求めなさい
+PASS ratio_value lv5 Q1 input type :: decimal
+PASS ratio_value lv5 Q1 expected answer :: 3.5
+PASS ratio_value lv5 Q1 correct feedback :: 🎉 せいかい！ 比の値は「前の数÷後の数」なので、7÷2＝3.5です。 答えと
+PASS ratio_value lv5 Q1 solution display :: steps=1
+PASS ratio_value lv5 Q1 solution answer value :: expected=3.5
+PASS ratio_value lv5 Q2 no leftover input :: empty
+PASS ratio_value lv5 Q2 question text :: 8：5 の比の値を求めなさい
+PASS ratio_value lv5 Q2 input type :: decimal
+PASS ratio_value lv5 Q2 expected answer :: 1.6
+PASS ratio_value lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1.6 です 比の値は「前の数÷後の数」なので、8÷
+PASS ratio_value lv5 Q2 correct answer shown :: shown=正解は 1.6 です expected=1.6
+PASS ratio_value lv5 Q2 solution display :: steps=1
+FAIL ratio_value lv5 EXCEPTION :: locator.count: Target page, context or browser has been closed
+
+SUMMARY pass=73 fail=1 cases=430

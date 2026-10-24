@@ -1,0 +1,601 @@
+
+> grade6-math-generator@1.0.0 test
+> vitest run
+
+
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mC:/Users/monty/Desktop/蝠城｡・[39m
+
+ [32m笨・[39m src/utils/inputType.test.ts [2m([22m[2m69 tests[22m[2m)[22m[90m 10[2mms[22m[39m
+ [32m笨・[39m src/utils/adaptiveTimeLimit.test.ts [2m([22m[2m49 tests[22m[2m)[22m[90m 16[2mms[22m[39m
+ [32m笨・[39m src/utils/mastery.test.ts [2m([22m[2m31 tests[22m[2m)[22m[90m 13[2mms[22m[39m
+ [32m笨・[39m src/utils/answer.test.ts [2m([22m[2m61 tests[22m[2m)[22m[90m 10[2mms[22m[39m
+ [32m笨・[39m src/problems/combinatorics/variety-phase2b.test.ts [2m([22m[2m14 tests[22m[2m)[22m[90m 72[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/geometry-phase2s.test.ts [2m([22m[2m24 tests[22m[2m)[22m[90m 298[2mms[22m[39m
+[90mstdout[2m | src/problems/arithmetic/integer/estimate-product.test.ts[2m > [22m[2mestimate_product: 480蝠上・迢ｬ遶区､懃ｮ・(lv2-5 x 120)[2m > [22m[2m蜈ｨ480蝠上′荳ｸ繧√・隕狗ｩ阪ｊ繝ｻ髮｣譏灘ｺｦ繝ｻ隗｣隱ｬ縺ｧ迢ｬ遶区､懃ｮ励ｒ騾夐℃縺吶ｋ
+[22m[39m480蝠冗峡遶区､懃ｮ・ {"perLevel":{"2":{"gen":120,"ok":120,"fail":0},"3":{"gen":120,"ok":120,"fail":0},"4":{"gen":120,"ok":120,"fail":0},"5":{"gen":120,"ok":120,"fail":0}},"perVariant":{"estimate_to_tens":{"gen":153,"ok":153,"fail":0},"estimate_one_exact":{"gen":133,"ok":133,"fail":0},"estimate_to_hundreds":{"gen":88,"ok":88,"fail":0},"estimate_mixed_places":{"gen":82,"ok":82,"fail":0},"estimate_shopping":{"gen":24,"ok":24,"fail":0}}}
+
+ [32m笨・[39m src/problems/arithmetic/integer/estimate-product.test.ts [2m([22m[2m22 tests[22m[2m)[22m[90m 94[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/questionSelector.test.ts [2m([22m[2m25 tests[22m[2m)[22m[90m 43[2mms[22m[39m
+ [32m笨・[39m src/problems/decimal/decimalArithmeticGenerators.test.ts [2m([22m[2m39 tests[22m[2m)[22m[90m 234[2mms[22m[39m
+ [32m笨・[39m src/problems/problems-phase2t.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 502[2mms[22m[39m
+ [32m笨・[39m src/problems/quality-phase2.test.ts [2m([22m[2m28 tests[22m[2m)[22m[33m 393[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/weakTargets.test.ts [2m([22m[2m28 tests[22m[2m)[22m[33m 308[2mms[22m[39m
+ [32m笨・[39m src/problems/combinatorics/variety-phase2e.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 705[2mms[22m[39m
+   [33m[2m笨・[22m[39m combine_simple: 譌｢蟄伜梛縺ｨ縺ｮ驥崎､・′縺ｪ縺・[2m > [22mcombinatorics 縺ｮ莉門梛縺ｨ蝠城｡梧枚縺御ｸ閾ｴ縺励↑縺・[33m377[2mms[22m[39m
+ [32m笨・[39m src/engine/curriculum/curriculumScope.test.ts [2m([22m[2m27 tests[22m[2m)[22m[90m 183[2mms[22m[39m
+ [32m笨・[39m src/problems/arithmetic/integer/subtraction-structure.test.ts [2m([22m[2m28 tests[22m[2m)[22m[90m 108[2mms[22m[39m
+ [32m笨・[39m src/quality/phase2f-validate.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 122[2mms[22m[39m
+ [32m笨・[39m src/problems/numberTheory/generators.test.ts [2m([22m[2m24 tests[22m[2m)[22m[90m 102[2mms[22m[39m
+ [32m笨・[39m src/utils/quizTimer.test.ts [2m([22m[2m23 tests[22m[2m)[22m[90m 22[2mms[22m[39m
+ [32m笨・[39m src/quality/learning-quality.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 192[2mms[22m[39m
+[90mstdout[2m | src/engine/diversity/diversity.test.ts[2m > [22m[2mQuestionSelector 螟壽ｧ俶ｧ邨ｱ蜷医ユ繧ｹ繝・[2m > [22m[2m20蝠冗函謌舌〒 family 蛛上ｊ繝ｻ驥崎､・・騾｣邯壹ｒ謚大宛縺吶ｋ
+[22m[39mFamily distribution (20 questions): {
+  word_problem: [33m2[39m,
+  gcd_lcm: [33m1[39m,
+  circle_area: [33m1[39m,
+  proportional: [33m1[39m,
+  addition: [33m1[39m,
+  read_expression: [33m1[39m,
+  combination: [33m2[39m,
+  arrangement: [33m1[39m,
+  divisors: [33m1[39m,
+  speed_triple: [33m2[39m,
+  primes: [33m1[39m,
+  multiples: [33m1[39m,
+  symmetry: [33m1[39m,
+  multi_step: [33m1[39m,
+  unit_conversion: [33m1[39m,
+  equivalent_ratio: [33m1[39m,
+  subtraction: [33m1[39m
+}
+
+ [32m笨・[39m src/engine/diversity/diversity.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 258[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/geometry-phase2u.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 215[2mms[22m[39m
+ [32m笨・[39m src/problems/phase2z1.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 446[2mms[22m[39m
+ [32m笨・[39m src/problems/combinatorics/variety-phase2d.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 1561[2mms[22m[39m
+   [33m[2m笨・[22m[39m duplicate_removal: 驥崎､・ｧ区・縺ｮ螟壽ｧ俶ｧ縺ｨ豁｣縺励＆[2m > [22mvalidate 縺悟・逕滓・蝠城｡後〒騾壹ｋ [33m351[2mms[22m[39m
+ [32m笨・[39m src/engine/solution/solutionGenerator.test.ts [2m([22m[2m13 tests[22m[2m)[22m[33m 425[2mms[22m[39m
+   [33m[2m笨・[22m[39m 蜈ｨ蝠城｡後ち繧､繝励〒縺ｮ騾比ｸｭ蠑上→豁｣隗｣縺ｮ謨ｴ蜷域ｧ[2m > [22m縺吶∋縺ｦ縺ｮ繧ｸ繧ｧ繝阪Ξ繝ｼ繧ｿﾃ鈴屮譏灘ｺｦﾃ励す繝ｼ繝峨〒縲・比ｸｭ蠑上′逕滓・縺輔ｌ譛邨ゅせ繝・ャ繝励′遲斐∴縺ｨ荳閾ｴ縺吶ｋ [33m329[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/geometry-phase2v.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 496[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/congruent-judge-differs.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 93[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/symmetry-validate.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 24[2mms[22m[39m
+ [32m笨・[39m src/utils/answer.judging.extra.test.ts [2m([22m[2m40 tests[22m[2m)[22m[90m 17[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/filteredSelector.test.ts [2m([22m[2m16 tests[22m[2m)[22m[90m 188[2mms[22m[39m
+ [32m笨・[39m src/utils/adaptiveDifficulty.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 19[2mms[22m[39m
+ [32m笨・[39m src/problems/geometry/congruent-judge-same.test.ts [2m([22m[2m11 tests[22m[2m)[22m[90m 126[2mms[22m[39m
+ [32m笨・[39m src/problems/phase2y.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 482[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/randomSelector.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 1805[2mms[22m[39m
+   [33m[2m笨・[22m[39m RandomSelector: 螻･豁ｴ0莉ｶ縺ｧ繧ょ・繧ｫ繝・ざ繝ｪ縺九ｉ蜃ｺ鬘後〒縺阪ｋ[2m > [22m蜈ｨ髮｣譏灘ｺｦ縺ｧ蟆代↑縺上→繧・蝠上・蜃ｺ鬘後〒縺阪ｋ [33m715[2mms[22m[39m
+ [32m笨・[39m src/problems/realWorld/eggs.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 59[2mms[22m[39m
+ [32m笨・[39m src/utils/stats.test.ts [2m([22m[2m14 tests[22m[2m)[22m[90m 18[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/adaptiveSelector.test.ts [2m([22m[2m11 tests[22m[2m)[22m[90m 85[2mms[22m[39m
+ [32m笨・[39m src/components/figure.test.tsx [2m([22m[2m12 tests[22m[2m)[22m[90m 24[2mms[22m[39m
+ [32m笨・[39m src/utils/fraction.test.ts [2m([22m[2m25 tests[22m[2m)[22m[90m 17[2mms[22m[39m
+ [32m笨・[39m src/problems/fraction/fraction-explanation.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 26[2mms[22m[39m
+ [32m笨・[39m src/problems/realWorld/integration.test.ts [2m([22m[2m12 tests[22m[2m)[22m[90m 152[2mms[22m[39m
+ [32m笨・[39m src/services/quizPersistence.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 13[2mms[22m[39m
+ [32m笨・[39m src/utils/sessionTally.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 9[2mms[22m[39m
+ [32m笨・[39m src/problems/arithmetic/integer/basicOperations.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 65[2mms[22m[39m
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m驥咲せ逶｣譟ｻ[2m > [22m[2mSpeedWordGenerator[2m > [22m[2m繝ｬ繝吶Ν5縺ｮ蝠城｡後ｒ逕滓・縺励※遒ｺ隱・[22m[39m
+===== SpeedWordGenerator 繝ｬ繝吶Ν5 =====
+
+--- 蝠城｡・---
+蝠城｡・ 閾ｪ蜍戊ｻ翫〒譎る・90km縺ｧ8譎る俣襍ｰ繧九→菴斌m騾ｲ縺ｿ縺ｾ縺吶°縲・豁｣隗｣: {"kind":"integer","value":1520}
+隗｣隱ｬ: 驕薙・繧奇ｼ晞溘＆ﾃ玲凾髢・縺ｪ縺ｮ縺ｧ縲・90ﾃ・・・520縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 閾ｪ蜍戊ｻ翫〒譎る・23km縺ｧ7譎る俣襍ｰ繧九→菴斌m騾ｲ縺ｿ縺ｾ縺吶°縲・豁｣隗｣: {"kind":"integer","value":861}
+隗｣隱ｬ: 驕薙・繧奇ｼ晞溘＆ﾃ玲凾髢・縺ｪ縺ｮ縺ｧ縲・23ﾃ・・・61縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 閾ｪ蜍戊ｻ翫〒譎る・23km縺ｧ8譎る俣襍ｰ繧九→菴斌m騾ｲ縺ｿ縺ｾ縺吶°縲・豁｣隗｣: {"kind":"integer","value":984}
+隗｣隱ｬ: 驕薙・繧奇ｼ晞溘＆ﾃ玲凾髢・縺ｪ縺ｮ縺ｧ縲・23ﾃ・・・84縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 閾ｪ蜍戊ｻ翫〒譎る・23km縺ｧ9譎る俣襍ｰ繧九→菴斌m騾ｲ縺ｿ縺ｾ縺吶°縲・豁｣隗｣: {"kind":"integer","value":1107}
+隗｣隱ｬ: 驕薙・繧奇ｼ晞溘＆ﾃ玲凾髢・縺ｪ縺ｮ縺ｧ縲・23ﾃ・・・107縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 閾ｪ蜍戊ｻ翫〒譎る・23km縺ｧ10譎る俣襍ｰ繧九→菴斌m騾ｲ縺ｿ縺ｾ縺吶°縲・豁｣隗｣: {"kind":"integer","value":1230}
+隗｣隱ｬ: 驕薙・繧奇ｼ晞溘＆ﾃ玲凾髢・縺ｪ縺ｮ縺ｧ縲・23ﾃ・0・・230縺ｧ縺吶・
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m驥咲せ逶｣譟ｻ[2m > [22m[2mDecimalDivDecimalGenerator[2m > [22m[2m蝠城｡後ｒ逕滓・縺励※荳ｸ繧∵欠遉ｺ繧堤｢ｺ隱・[22m[39m
+===== DecimalDivDecimalGenerator =====
+
+--- 蝠城｡・---
+蝠城｡・ 1.5繧・.5縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":3}
+隗｣隱ｬ: 1.5ﾃｷ0.5・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 4.5繧・.9縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":5}
+隗｣隱ｬ: 4.5ﾃｷ0.9・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 9.8繧・.4縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":7}
+隗｣隱ｬ: 9.8ﾃｷ1.4・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 27.6繧・.3縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":12}
+隗｣隱ｬ: 27.6ﾃｷ2.3・・2縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 103.5繧・.5縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":23}
+隗｣隱ｬ: 103.5ﾃｷ4.5・・3縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 0.4繧・.2縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":2}
+隗｣隱ｬ: 0.4ﾃｷ0.2・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 1.2繧・.3縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":4}
+隗｣隱ｬ: 1.2ﾃｷ0.3・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 2.4繧・.4縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":6}
+隗｣隱ｬ: 2.4ﾃｷ0.4・・縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 6繧・.6縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":10}
+隗｣隱ｬ: 6ﾃｷ0.6・・0縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+--- 蝠城｡・---
+蝠城｡・ 22.8繧・.2縺ｧ繧上ｋ縺ｨ縲∝膚縺ｯ縺・￥縺､縺ｧ縺吶°
+豁｣隗｣: {"kind":"decimal","value":19}
+隗｣隱ｬ: 22.8ﾃｷ1.2・・9縺ｧ縺吶・蝠城｡檎せ: 蟆乗焚ﾃｷ蟆乗焚縺ｮ蝠城｡後↓荳ｸ繧∵婿縺ｮ謖・､ｺ縺後↑縺・
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m驥咲せ逶｣譟ｻ[2m > [22m[2mFractionBigSmallGenerator[2m > [22m[2m蝠城｡後ｒ逕滓・縺励※邏・・縺ｮ荳雋ｫ諤ｧ繧堤｢ｺ隱・[22m[39m
+===== FractionBigSmallGenerator =====
+
+--- 蝠城｡・---
+蝠城｡・ 2蛻・・1縺ｨ5蛻・・4 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"5蛻・・4"}
+隗｣隱ｬ: 5蛻・・4 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 7蛻・・3縺ｨ14蛻・・11 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"14蛻・・11"}
+隗｣隱ｬ: 14蛻・・11 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・1縲∝・豈・4)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 19蛻・・9縺ｨ19蛻・・15 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"19蛻・・15"}
+隗｣隱ｬ: 19蛻・・15 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・5縲∝・豈・9)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 19蛻・・9縺ｨ19蛻・・15 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"19蛻・・15"}
+隗｣隱ｬ: 19蛻・・15 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・5縲∝・豈・9)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 19蛻・・9縺ｨ19蛻・・15 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"19蛻・・15"}
+隗｣隱ｬ: 19蛻・・15 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・5縲∝・豈・9)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 5蛻・・2縺ｨ5蛻・・3 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"5蛻・・3"}
+隗｣隱ｬ: 5蛻・・3 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 12蛻・・1縺ｨ12蛻・・5 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"12蛻・・5"}
+隗｣隱ｬ: 12蛻・・5 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・2)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 8蛻・・3縺ｨ2蛻・・1 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"8蛻・・3"}
+隗｣隱ｬ: 8蛻・・3 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 8蛻・・3縺ｨ2蛻・・1 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"8蛻・・3"}
+隗｣隱ｬ: 8蛻・・3 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 8蛻・・3縺ｨ2蛻・・1 縺ｮ縺ｩ縺｡繧峨′螟ｧ縺阪＞縺区ｯ斐∋縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"8蛻・・3"}
+隗｣隱ｬ: 8蛻・・3 縺ｮ譁ｹ縺悟､ｧ縺阪＞縺ｧ縺吶・(蛻・ｭ・縲∝・豈・)繧ゅ≧荳譁ｹ縺ｯ蛻・ｭ・縺ｧ縺吶・
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m驥咲せ逶｣譟ｻ[2m > [22m[2mRatioSimplifyGenerator[2m > [22m[2m蝠城｡後ｒ逕滓・縺励※譌｢邏・ｯ斐〒縺ｪ縺・％縺ｨ繧堤｢ｺ隱・[22m[39m
+===== RatioSimplifyGenerator =====
+
+--- 蝠城｡・---
+蝠城｡・ 8・・6繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"1・・"}
+隗｣隱ｬ: 8縺ｨ16繧呈怙螟ｧ蜈ｬ邏・焚8縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 18・・0繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"3・・"}
+隗｣隱ｬ: 18縺ｨ30繧呈怙螟ｧ蜈ｬ邏・焚6縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 32・・8繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"2・・"}
+隗｣隱ｬ: 32縺ｨ48繧呈怙螟ｧ蜈ｬ邏・焚16縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 50・・0繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"5・・"}
+隗｣隱ｬ: 50縺ｨ90繧呈怙螟ｧ蜈ｬ邏・焚10縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 98・・82繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"7・・3"}
+隗｣隱ｬ: 98縺ｨ182繧呈怙螟ｧ蜈ｬ邏・焚14縺ｧ繧上ｋ縺ｨ縲・・・3縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 4・・繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"2・・"}
+隗｣隱ｬ: 4縺ｨ6繧呈怙螟ｧ蜈ｬ邏・焚2縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 6・・繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"2・・"}
+隗｣隱ｬ: 6縺ｨ9繧呈怙螟ｧ蜈ｬ邏・焚3縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 12・・6繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"3・・"}
+隗｣隱ｬ: 12縺ｨ16繧呈怙螟ｧ蜈ｬ邏・焚4縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 20・・0繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"2・・"}
+隗｣隱ｬ: 20縺ｨ30繧呈怙螟ｧ蜈ｬ邏・焚10縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+--- 蝠城｡・---
+蝠城｡・ 42・・6繧偵√〒縺阪ｋ縺縺醍ｰ｡蜊倥↑豈斐↓縺ｪ縺翫＠縺ｪ縺輔＞
+豁｣隗｣: {"kind":"string","value":"3・・"}
+隗｣隱ｬ: 42縺ｨ56繧呈怙螟ｧ蜈ｬ邏・焚14縺ｧ繧上ｋ縺ｨ縲・・・縺ｧ縺吶・
+縺吶∋縺ｦ縺ｮ蝠城｡後′邁｡蜊伜喧縺ｧ縺阪ｋ: true
+逕滓・縺輔ｌ縺溷撫鬘梧焚: 500
+
+ [32m笨・[39m src/quality/deep-audit.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 23[2mms[22m[39m
+ [32m笨・[39m src/quality/quality-gate.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 3164[2mms[22m[39m
+   [33m[2m笨・[22m[39m requested difficulty is honoured[2m > [22mgenerateProblem({difficulty}) always returns exactly that difficulty level [33m458[2mms[22m[39m
+   [33m[2m笨・[22m[39m supportedLevels matches real generation capability[2m > [22mevery declared level is actually producible for its own type [33m1794[2mms[22m[39m
+ [32m笨・[39m src/utils/weakAreas.test.ts [2m([22m[2m13 tests[22m[2m)[22m[90m 16[2mms[22m[39m
+ [32m笨・[39m src/problems/phase2z.test.ts [2m([22m[2m6 tests[22m[2m)[22m[90m 161[2mms[22m[39m
+ [32m笨・[39m src/problems/combinatorics/variety-phase2a.test.ts [2m([22m[2m27 tests[22m[2m)[22m[33m 3579[2mms[22m[39m
+   [33m[2m笨・[22m[39m arrange_tree: 螳溯ｳｪ逧・↑螟壽ｧ俶ｧ[2m > [22m譚｡莉ｶ (n, variant) 縺ｮ邨・∩蜷医ｏ縺帙′蜊∝・縺ｫ螟壹＞ [33m664[2mms[22m[39m
+   [33m[2m笨・[22m[39m arrange_tree: 螳溯ｳｪ逧・↑螟壽ｧ俶ｧ[2m > [22m隍・焚縺ｮ譚｡莉ｶ遞ｮ鬘槭′蜃ｺ迴ｾ縺吶ｋ (1遞ｮ鬘槭↓蝗ｺ螳壹＆繧後↑縺・ [33m605[2mms[22m[39m
+   [33m[2m笨・[22m[39m arrange_tree: 譚｡莉ｶ縺ｨ遲斐∴縺ｮ豁｣縺励＆[2m > [22m蜈ｨ髮｣譏灘ｺｦ繝ｻ蜈ｨ繧ｷ繝ｼ繝峨〒 validate 繧帝壹ｊ縲∫ｭ斐∴縺梧ｭ｣縺ｮ謨ｴ謨ｰ縺ｫ縺ｪ繧・[33m585[2mms[22m[39m
+   [33m[2m笨・[22m[39m arrange_tree: 譚｡莉ｶ縺ｨ遲斐∴縺ｮ豁｣縺励＆[2m > [22m蠅・阜: n 縺ｯ3莉･荳翫〒縲∫ｭ斐∴繧・莉･荳翫↓縺ｪ繧・[33m394[2mms[22m[39m
+ [32m笨・[39m src/storage/db.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 763[2mms[22m[39m
+ [32m笨・[39m src/utils/dailyCount.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 46[2mms[22m[39m
+ [32m笨・[39m src/problems/arithmetic/integer/subtraction-zero.test.ts [2m([22m[2m8 tests[22m[2m)[22m[90m 232[2mms[22m[39m
+ [32m笨・[39m src/problems/decimal/decimal-place-value.test.ts [2m([22m[2m5 tests[22m[2m)[22m[90m 16[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/questionPool.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 28[2mms[22m[39m
+ [32m笨・[39m src/problems/realWorld/generators.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 71[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/generationVariety.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 2129[2mms[22m[39m
+   [33m[2m笨・[22m[39m 謨ｰ蛟､繝ｩ繝ｳ繝繝蛹・(繧ｸ繧ｧ繝阪Ξ繝ｼ繧ｿ蜊倅ｽ阪・豎ｺ螳夊ｫ・[2m > [22m蜈ｨ繧ｸ繧ｧ繝阪Ξ繝ｼ繧ｿ縺ｧ縲・屮譏灘ｺｦ1縲・ﾃ苓､・焚繧ｷ繝ｼ繝峨°繧芽､・焚縺ｮ謨ｰ蛟､繝代ち繝ｼ繝ｳ縺檎函謌舌＆繧後∝・蝠上′讀懆ｨｼ繧帝夐℃縺吶ｋ [33m470[2mms[22m[39m
+   [33m[2m笨・[22m[39m 謨ｰ蛟､繝ｩ繝ｳ繝繝蛹・(繧ｸ繧ｧ繝阪Ξ繝ｼ繧ｿ蜊倅ｽ阪・豎ｺ螳夊ｫ・[2m > [22m蜈ｨ繧ｸ繧ｧ繝阪Ξ繝ｼ繧ｿ縺ｧ縲√≠繧矩屮譏灘ｺｦ蜀・□縺題ｦ九※繧よ焚蛟､繝代ち繝ｼ繝ｳ縺瑚､・焚縺ゅｋ [33m343[2mms[22m[39m
+   [33m[2m笨・[22m[39m 謨ｰ蛟､繝ｩ繝ｳ繝繝蛹・(繝ｬ繧ｸ繧ｹ繝医Μ邨瑚ｷｯ)[2m > [22m蜷・き繝・ざ繝ｪﾃ鈴屮譏灘ｺｦ縺ｧ seed 繧貞､峨∴繧九→逡ｰ縺ｪ繧句撫鬘後′逕滓・縺輔ｌ繧・[33m1088[2mms[22m[39m
+ [32m笨・[39m src/problems/fraction/generators.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 164[2mms[22m[39m
+ [32m笨・[39m src/utils/scratchDraw.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 12[2mms[22m[39m
+ [32m笨・[39m src/engine/validator/validator.test.ts [2m([22m[2m17 tests[22m[2m)[22m[90m 14[2mms[22m[39m
+ [32m笨・[39m src/problems/expression/generators.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 11[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/generatorSweep.test.ts [2m([22m[2m289 tests[22m[2m)[22m[33m 2472[2mms[22m[39m
+ [32m笨・[39m src/quality/problem-quality-regression.test.ts [2m([22m[2m6 tests[22m[2m)[22m[90m 8[2mms[22m[39m
+ [32m笨・[39m src/engine/difficulty/difficulty.test.ts [2m([22m[2m14 tests[22m[2m)[22m[90m 8[2mms[22m[39m
+ [32m笨・[39m src/storage/db.adminPracticeTypes.test.ts [2m([22m[2m6 tests[22m[2m)[22m[90m 14[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/fullRandomSelector.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 273[2mms[22m[39m
+ [32m笨・[39m src/problems/ratio/percentage.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 65[2mms[22m[39m
+ [32m笨・[39m src/problems/arithmetic/integer/multiStep.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 34[2mms[22m[39m
+ [32m笨・[39m src/services/scratchNote.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 10[2mms[22m[39m
+ [32m笨・[39m src/utils/learningCalendar.test.ts [2m([22m[2m8 tests[22m[2m)[22m[90m 9[2mms[22m[39m
+ [32m笨・[39m src/pages/homePage.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[90m 9[2mms[22m[39m
+ [32m笨・[39m src/utils/random.test.ts [2m([22m[2m14 tests[22m[2m)[22m[90m 141[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/randomSession.test.ts [2m([22m[2m2 tests[22m[2m)[22m[90m 37[2mms[22m[39m
+ [32m笨・[39m src/components/ImageRenderer.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[90m 15[2mms[22m[39m
+[90mstdout[2m | src/quality/quality.audit.test.ts[2m > [22m[2m蝠城｡檎函謌仙刀雉ｪ逶｣譟ｻ[2m > [22m[2m蜈ｨGenerator縺九ｉ蝠城｡後ｒ逕滓・縺励※蜩∬ｳｪ繧呈､懈渊縺吶ｋ
+[22m[39m
+讀懷・縺輔ｌ縺溷撫鬘梧焚: 95
+蝠城｡後・蜀・ｨｳ:
+  蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ: 95
+
+蝠城｡後し繝ｳ繝励Ν・域怙蛻昴・20莉ｶ・・
+
+[unit_conversion_basic]
+  蝠城｡・ 7譎ゅ・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":25200}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 6蛻・・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":360}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 7蛻・・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":420}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 7譎ゅ・菴募・縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":420}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 8m縺ｯ菴瀕m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":8000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 9蛻・・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":540}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 9km縺ｯ菴瀕縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":9000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 8譎ゅ・菴募・縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":480}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 2譎ゅ・菴募・縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":120}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 2m縺ｯ菴瀕m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":2000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 3蛻・・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":180}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 2m縺ｯ菴苗m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":200}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 3m縺ｯ菴瀕m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":3000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 5km縺ｯ菴瀕縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":5000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 2譎ゅ・菴募・縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":120}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 6km縺ｯ菴瀕縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":6000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 5譎ゅ・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":18000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 9m縺ｯ菴瀕m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":9000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 1譎ゅ・菴慕ｧ偵〒縺吶°
+  豁｣隗｣: {"kind":"integer","value":3600}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+[unit_conversion_basic]
+  蝠城｡・ 1m縺ｯ菴瀕m縺ｧ縺吶°
+  豁｣隗｣: {"kind":"integer","value":1000}
+  蝠城｡檎せ: 蝠城｡梧枚縺ｮ謖・､ｺ縺御ｸ肴・遒ｺ
+
+ [32m笨・[39m src/quality/quality.audit.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 381[2mms[22m[39m
+   [33m[2m笨・[22m[39m 蝠城｡檎函謌仙刀雉ｪ逶｣譟ｻ[2m > [22m蜈ｨGenerator縺九ｉ蝠城｡後ｒ逕滓・縺励※蜩∬ｳｪ繧呈､懈渊縺吶ｋ [33m320[2mms[22m[39m
+ [32m笨・[39m src/utils/adminMode.test.ts [2m([22m[2m8 tests[22m[2m)[22m[90m 9[2mms[22m[39m
+ [32m笨・[39m src/services/dailyAnswerSync.test.ts [2m([22m[2m3 tests[22m[2m)[22m[90m 134[2mms[22m[39m
+ [32m笨・[39m src/problems/arithmetic/integer/wordProblems.test.ts [2m([22m[2m5 tests[22m[2m)[22m[90m 25[2mms[22m[39m
+ [32m笨・[39m src/utils/solvedCount.test.ts [2m([22m[2m6 tests[22m[2m)[22m[90m 7[2mms[22m[39m
+ [32m笨・[39m src/utils/sha256.test.ts [2m([22m[2m3 tests[22m[2m)[22m[90m 7[2mms[22m[39m
+ [32m笨・[39m src/components/AdminGateDialog.test.tsx [2m([22m[2m1 test[22m[2m)[22m[90m 11[2mms[22m[39m
+ [32m笨・[39m src/pages/VerificationCodePage.test.tsx [2m([22m[2m1 test[22m[2m)[22m[90m 11[2mms[22m[39m
+ [32m笨・[39m src/pages/quizSelection.test.ts [2m([22m[2m5 tests[22m[2m)[22m[90m 8[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/generatorRegistry.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 898[2mms[22m[39m
+   [33m[2m笨・[22m[39m 蝠城｡檎函謌舌お繝ｳ繧ｸ繝ｳ[2m > [22m10000蝠冗函謌舌＠縺ｦ蜈ｨ蝠城｡後′讀懆ｨｼ繧帝夐℃縺吶ｋ [33m638[2mms[22m[39m
+ [32m笨・[39m src/utils/verificationCode.test.ts [2m([22m[2m1 test[22m[2m)[22m[90m 4[2mms[22m[39m
+ [32m笨・[39m src/utils/appVersion.test.ts [2m([22m[2m1 test[22m[2m)[22m[90m 4[2mms[22m[39m
+ [32m笨・[39m src/engine/selector/difficultyDiagnostic.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 595[2mms[22m[39m
+ [32m笨・[39m src/App.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[90m 11[2mms[22m[39m
+ [32m笨・[39m src/utils/maintenanceMode.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 11[2mms[22m[39m
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 謠冗判 > 繝・・繝ｫ縺ｨ遨ｺ縺ｮ繧ｭ繝｣繝ｳ繝舌せ繧定｡ｨ遉ｺ縺吶ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 謠冗判 > 邱壹ｒ謠冗判縺励※遲・ｷ｡縺悟渚譏縺輔ｌ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 謠冗判 > 邱壹ｒ謠冗判縺励※遲・ｷ｡縺悟渚譏縺輔ｌ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 謠冗判 > 隍・焚縺ｮ繧ｹ繝医Ο繝ｼ繧ｯ繧呈緒逕ｻ縺ｧ縺阪ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 謠冗判 > 隍・焚縺ｮ繧ｹ繝医Ο繝ｼ繧ｯ繧呈緒逕ｻ縺ｧ縺阪ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 謠冗判 > 豸医＠繧ｴ繝縺ｨ蜿悶ｊ豸医＠縺梧ｩ溯・縺吶ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+ [32m笨・[39m src/components/SolutionDisplay.test.tsx [2m([22m[2m1 test[22m[2m)[22m[90m 34[2mms[22m[39m
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 謠冗判 > 豸医＠繧ｴ繝縺ｨ蜿悶ｊ豸医＠縺梧ｩ溯・縺吶ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 謠冗判 > 蜈ｨ豸亥悉蠕後↓繧ｭ繝｣繝ｳ繝舌せ縺檎ｩｺ縺ｫ縺ｪ繧・(遒ｺ隱阪▽縺阪・蜿悶ｊ豸医＠蜿ｯ)
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 謠冗判 > 蜈ｨ豸亥悉蠕後↓繧ｭ繝｣繝ｳ繝舌せ縺檎ｩｺ縺ｫ縺ｪ繧・(遒ｺ隱阪▽縺阪・蜿悶ｊ豸医＠蜿ｯ)
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 繝ｪ繧ｵ繧､繧ｺ > 繝ｪ繧ｵ繧､繧ｺ蠕後ｂ遲・ｷ｡縺碁←蛻・↓菫晄戟縺輔ｌ繧・(豁｣隕丞喧蠎ｧ讓吶〒菫晏ｭ・
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 繝ｪ繧ｵ繧､繧ｺ > 繝ｪ繧ｵ繧､繧ｺ蠕後ｂ遲・ｷ｡縺碁←蛻・↓菫晄戟縺輔ｌ繧・(豁｣隕丞喧蠎ｧ讓吶〒菫晏ｭ・
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 菫晏ｭ倥→蠕ｩ蜈・[2m > 謠冗判繝・・繧ｿ縺後Ο繝ｼ繧ｫ繝ｫ縺ｫ菫晏ｭ倥＆繧後ｋ (繝・ヰ繧ｦ繝ｳ繧ｹ蠕後・蜷御ｸ attemptId)
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 菫晏ｭ倥→蠕ｩ蜈・[2m > 菫晏ｭ倥＠縺溘ョ繝ｼ繧ｿ縺九ｉ遲・ｷ｡繧貞ｾｩ蜈・〒縺阪ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 菫晏ｭ倥→蠕ｩ蜈・[2m > 蝠城｡後ｒ蛻・ｊ譖ｿ縺医※繧ょ挨縺ｮ蝠城｡後・騾比ｸｭ蠑上→豺ｷ縺悶ｉ縺ｪ縺・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 菫晏ｭ倥→蠕ｩ蜈・[2m > 蝠城｡後ｒ蛻・ｊ譖ｿ縺医※繧ょ挨縺ｮ蝠城｡後・騾比ｸｭ蠑上→豺ｷ縺悶ｉ縺ｪ縺・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 菫晏ｭ倥→蠕ｩ蜈・[2m > 蜷後§遞ｮ鬘槭・蝠城｡後′蜀榊・鬘後＆繧後※繧る℃蜴ｻ縺ｮ險倬鹸繧剃ｸ頑嶌縺阪＠縺ｪ縺・(attemptId 縺檎焚縺ｪ繧・
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/HistoryPage.scratch.test.tsx > HistoryPage: 騾比ｸｭ蠑上・蠕ｩ鄙・[2m > 險倬鹸縺ｮ縺ゅｋ蝠城｡後〒縺ｯ騾比ｸｭ蠑上き繝ｼ繝峨′陦ｨ遉ｺ縺輔ｌ繧・(蝠城｡梧枚繝ｻ蝗樒ｭ斐・豁｣隱､繝ｻ譎る俣繝ｻ騾比ｸｭ蠑・
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 菫晏ｭ倥→蠕ｩ蜈・[2m > 蜷後§遞ｮ鬘槭・蝠城｡後′蜀榊・鬘後＆繧後※繧る℃蜴ｻ縺ｮ險倬鹸繧剃ｸ頑嶌縺阪＠縺ｪ縺・(attemptId 縺檎焚縺ｪ繧・
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 菫晏ｭ倥→蠕ｩ蜈・[2m > 閾ｪ蜍穂ｿ晏ｭ倅ｸｭ縺ｮ逕ｻ髱｢驕ｷ遘ｻ (繧｢繝ｳ繝槭え繝ｳ繝・ 縺ｧ繝・・繧ｿ縺悟､ｱ繧上ｌ縺ｪ縺・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 菫晏ｭ倥→蠕ｩ蜈・[2m > 閾ｪ蜍穂ｿ晏ｭ倅ｸｭ縺ｮ逕ｻ髱｢驕ｷ遘ｻ (繧｢繝ｳ繝槭え繝ｳ繝・ 縺ｧ繝・・繧ｿ縺悟､ｱ繧上ｌ縺ｪ縺・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 菫晏ｭ倥→蠕ｩ蜈・[2m > 蜈ｨ豸亥悉縺ｮ迥ｶ諷九ｂ菫晏ｭ倥＆繧後ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 菫晏ｭ倥→蠕ｩ蜈・[2m > 菫晏ｭ伜､ｱ謨玲凾縺ｫ繧｢繝励Μ蜈ｨ菴薙′繧ｯ繝ｩ繝・す繝･縺帙★繧ｨ繝ｩ繝ｼ繧定｡ｨ遉ｺ縺吶ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 菫晏ｭ倥→蠕ｩ蜈・[2m > 菫晏ｭ伜､ｱ謨玲凾縺ｫ繧｢繝励Μ蜈ｨ菴薙′繧ｯ繝ｩ繝・す繝･縺帙★繧ｨ繝ｩ繝ｼ繧定｡ｨ遉ｺ縺吶ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 蝗樒ｭ泌ｾ後・辟｡蜉ｹ蛹・(disabled prop) > disabled=true 縺ｧ邱壹・謠冗判繧貞女縺台ｻ倥￠縺ｪ縺・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 蝗樒ｭ泌ｾ後・辟｡蜉ｹ蛹・(disabled prop) > disabled=true 縺ｧ繝・・繝ｫ繝舌・縺ｮ繝懊ち繝ｳ縺檎┌蜉ｹ蛹悶＆繧後ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/HistoryPage.scratch.test.tsx > HistoryPage: 騾比ｸｭ蠑上・蠕ｩ鄙・[2m > 譎る俣蛻・ｌ縺ｮ險倬鹸繧よｭ｣蟶ｸ縺ｫ陦ｨ遉ｺ縺輔ｌ繧・(譌｢蟄倬寔險医↓蠖ｱ髻ｿ縺励↑縺・｡ｨ遉ｺ縺ｮ縺ｿ)
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/HistoryPage.scratch.test.tsx > HistoryPage: 騾比ｸｭ蠑上・蠕ｩ鄙・[2m > 蛻･縺ｮ蜃ｺ鬘後・騾比ｸｭ蠑上・蛻･繧ｫ繝ｼ繝峨↓陦ｨ遉ｺ縺輔ｌ豺ｷ縺悶ｉ縺ｪ縺・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 蝗樒ｭ泌ｾ後・辟｡蜉ｹ蛹・(disabled prop) > disabled=true 縺ｧ繧ｭ繝｣繝ｳ繝舌せ縺ｫ scratch-disabled 繧ｯ繝ｩ繧ｹ縺御ｻ倅ｸ弱＆繧後ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+ [32m笨・[39m src/pages/HistoryPage.scratch.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[90m 182[2mms[22m[39m
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 蝗樒ｭ泌ｾ後・辟｡蜉ｹ蛹・(disabled prop) > disabled=false (譌｢螳・ 縺ｧ縺ｯ邱壹ｒ謠冗判縺ｧ縺阪ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/components/ScratchPad.test.tsx > ScratchPad: 蝗樒ｭ泌ｾ後・辟｡蜉ｹ蛹・(disabled prop) > disabled=false (譌｢螳・ 縺ｧ縺ｯ邱壹ｒ謠冗判縺ｧ縺阪ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+ [32m笨・[39m src/components/ScratchPad.test.tsx [2m([22m[2m17 tests[22m[2m)[22m[33m 478[2mms[22m[39m
+ [32m笨・[39m src/components/AnswerInput.test.tsx [2m([22m[2m24 tests[22m[2m)[22m[33m 541[2mms[22m[39m
+stderr | src/pages/QuizPage.scratch.test.tsx > QuizPage + 騾比ｸｭ蠑・ 譌｢蟄俶ｩ溯・縺ｨ縺ｮ邨ｱ蜷・[2m > 騾比ｸｭ蠑上ｒ譖ｸ縺九★縺ｫ蝗樒ｭ斐〒縺阪ｋ (豁｣隗｣繝ｻ險倬鹸繝ｻ蛻､螳壹′蠕捺擂縺ｩ縺翫ｊ)
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.flow.test.tsx > QuizPage: 陦ｨ遉ｺ 竊・蝗樒ｭ・竊・謗｡轤ｹ 竊・谺｡縺ｮ蝠城｡・竊・邨先棡 > 豁｣遲斐・隱､遲斐・險倬鹸繝ｻ髮・ｨ医′荳騾｣縺ｧ豁｣縺励￥蜍輔￥
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.scratch.test.tsx > QuizPage + 騾比ｸｭ蠑・ 譌｢蟄俶ｩ溯・縺ｨ縺ｮ邨ｱ蜷・[2m > 騾比ｸｭ蠑上ｒ譖ｸ縺・◆蠕後ｂ譌｢蟄倥・蝗樒ｭ疲ｬ・°繧牙屓遲斐〒縺阪ｋ (荳肴ｭ｣隗｣縺ｮ蛻､螳壹ｂ蠕捺擂縺ｩ縺翫ｊ)
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.flow.test.tsx > QuizPage: 陦ｨ遉ｺ 竊・蝗樒ｭ・竊・謗｡轤ｹ 竊・谺｡縺ｮ蝠城｡・竊・邨先棡 > 豁｣遲斐・隱､遲斐・險倬鹸繝ｻ髮・ｨ医′荳騾｣縺ｧ豁｣縺励￥蜍輔￥
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.scratch.test.tsx > QuizPage + 騾比ｸｭ蠑・ 譌｢蟄俶ｩ溯・縺ｨ縺ｮ邨ｱ蜷・[2m > 騾比ｸｭ蠑上ｒ譖ｸ縺・◆蠕後ｂ譌｢蟄倥・蝗樒ｭ疲ｬ・°繧牙屓遲斐〒縺阪ｋ (荳肴ｭ｣隗｣縺ｮ蛻､螳壹ｂ蠕捺擂縺ｩ縺翫ｊ)
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.scratch.test.tsx > QuizPage + 騾比ｸｭ蠑・ 譌｢蟄俶ｩ溯・縺ｨ縺ｮ邨ｱ蜷・[2m > 谺｡縺ｮ蝠城｡後∈縺ｮ驕ｷ遘ｻ縺ｧ attemptId 縺悟・繧頑崛繧上ｊ縲・比ｸｭ蠑上′豺ｷ縺悶ｉ縺ｪ縺・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.flow.test.tsx > QuizPage: 陦ｨ遉ｺ 竊・蝗樒ｭ・竊・謗｡轤ｹ 竊・谺｡縺ｮ蝠城｡・竊・邨先棡 > 豁｣遲斐・隱､遲斐・險倬鹸繝ｻ髮・ｨ医′荳騾｣縺ｧ豁｣縺励￥蜍輔￥
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.scratch.test.tsx > QuizPage + 騾比ｸｭ蠑・ 譌｢蟄俶ｩ溯・縺ｨ縺ｮ邨ｱ蜷・[2m > 谺｡縺ｮ蝠城｡後∈縺ｮ驕ｷ遘ｻ縺ｧ attemptId 縺悟・繧頑崛繧上ｊ縲・比ｸｭ蠑上′豺ｷ縺悶ｉ縺ｪ縺・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.flow.test.tsx > QuizPage: 陦ｨ遉ｺ 竊・蝗樒ｭ・竊・謗｡轤ｹ 竊・谺｡縺ｮ蝠城｡・竊・邨先棡 > 蜷御ｸ蝗樒ｭ斐・莠碁㍾騾∽ｿ｡縺ｧ縺ｯ險倬鹸1莉ｶ縺ｮ縺ｿ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.scratch.test.tsx > QuizPage + 騾比ｸｭ蠑・ 蝗樒ｭ泌ｾ後・辟｡蜉ｹ蛹・[2m > 豁｣隗｣譎ゅ↓騾比ｸｭ蠑上ヮ繝ｼ繝医′辟｡蜉ｹ蛹悶＆繧後ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.flow.test.tsx > QuizPage: 陦ｨ遉ｺ 竊・蝗樒ｭ・竊・謗｡轤ｹ 竊・谺｡縺ｮ蝠城｡・竊・邨先棡 > 豁｣遲泌ｾ後↓縲檎ｭ斐∴縺ｨ隗｣縺肴婿繧偵∩繧九阪〒騾比ｸｭ蠑上ｒ髢狗､ｺ縺ｧ縺阪ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.scratch.test.tsx > QuizPage + 騾比ｸｭ蠑・ 蝗樒ｭ泌ｾ後・辟｡蜉ｹ蛹・[2m > 荳肴ｭ｣隗｣譎ゅ↓騾比ｸｭ蠑上ヮ繝ｼ繝医′辟｡蜉ｹ蛹悶＆繧後ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/App.adminScope.test.tsx > 邂｡逅・・ｨｭ螳・竊・蜃ｺ鬘後・繝・・繧ｿ邨瑚ｷｯ (UI繝輔Ο繝ｼ蜈ｨ菴・ > 邂｡逅・・判髱｢縺ｧ蜊伜・96鬆・岼縺九ｉ驕ｸ謚槭＠縺ｦ菫晏ｭ倥☆繧九→縲∝・鬘後′縺昴・蜊伜・縺ｫ髯仙ｮ壹＆繧後ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.flow.test.tsx > QuizPage: 譎る俣蛻・ｌ縺ｨ騾∽ｿ｡縺ｮ遶ｶ蜷・[2m > 蛻ｶ髯先凾髢灘・繧後〒譎る俣蛻・ｌ險倬鹸1莉ｶ繝ｻ繝輔ぅ繝ｼ繝峨ヰ繝・け陦ｨ遉ｺ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.scratch.test.tsx > QuizPage + 騾比ｸｭ蠑・ 蝗樒ｭ泌ｾ後・辟｡蜉ｹ蛹・[2m > 譎る俣蛻・ｌ譎ゅ↓騾比ｸｭ蠑上ヮ繝ｼ繝医′辟｡蜉ｹ蛹悶＆繧後ｋ
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.scratch.test.tsx > QuizPage + 騾比ｸｭ蠑・ 蝗樒ｭ泌ｾ後・辟｡蜉ｹ蛹・[2m > 谺｡縺ｮ蝠城｡後↓騾ｲ繧縺ｨ騾比ｸｭ蠑上ヮ繝ｼ繝医′蜀阪・譛牙柑縺ｫ縺ｪ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.flow.test.tsx > QuizPage: 譎る俣蛻・ｌ縺ｨ騾∽ｿ｡縺ｮ遶ｶ蜷・[2m > 騾∽ｿ｡縺悟・縺ｫ遒ｺ螳壹＠縺溷ｾ後・譛滄剞蛻ｰ譚･縺ｧ荳頑嶌縺阪＆繧後↑縺・(遶ｶ蜷・
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/App.adminScope.test.tsx > 邂｡逅・・ｨｭ螳・竊・蜃ｺ鬘後・繝・・繧ｿ邨瑚ｷｯ (UI繝輔Ο繝ｼ蜈ｨ菴・ > 菫晏ｭ俶ｸ医∩縺ｮ邂｡逅・・ｨｭ螳・(隍・焚蜊伜・) 縺悟・蜃ｺ鬘後↓驕ｩ逕ｨ縺輔ｌ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+ [32m笨・[39m src/pages/QuizPage.flow.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 355[2mms[22m[39m
+stderr | src/pages/QuizPage.scratch.test.tsx > QuizPage + 騾比ｸｭ蠑・ 蝗樒ｭ泌ｾ後・辟｡蜉ｹ蛹・[2m > 谺｡縺ｮ蝠城｡後↓騾ｲ繧縺ｨ騾比ｸｭ蠑上ヮ繝ｼ繝医′蜀阪・譛牙柑縺ｫ縺ｪ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/App.adminScope.test.tsx > 邂｡逅・・ｨｭ螳・竊・蜃ｺ鬘後・繝・・繧ｿ邨瑚ｷｯ (UI繝輔Ο繝ｼ蜈ｨ菴・ > 菫晏ｭ俶ｸ医∩縺ｮ邂｡逅・・ｨｭ螳・(隍・焚蜊伜・) 縺悟・蜃ｺ鬘後↓驕ｩ逕ｨ縺輔ｌ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/QuizPage.scratch.test.tsx > QuizPage + 騾比ｸｭ蠑・ 蝗樒ｭ泌ｾ後・辟｡蜉ｹ蛹・[2m > 谺｡縺ｮ蝠城｡後↓騾ｲ繧縺ｨ騾比ｸｭ蠑上ヮ繝ｼ繝医′蜀阪・譛牙柑縺ｫ縺ｪ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+ [32m笨・[39m src/pages/QuizPage.scratch.test.tsx [2m([22m[2m7 tests[22m[2m)[22m[33m 408[2mms[22m[39m
+stderr | src/pages/App.adminScope.test.tsx > 邂｡逅・・ｨｭ螳・竊・蜃ｺ鬘後・繝・・繧ｿ邨瑚ｷｯ (UI繝輔Ο繝ｼ蜈ｨ菴・ > 菫晏ｭ俶ｸ医∩縺ｮ邂｡逅・・ｨｭ螳・(隍・焚蜊伜・) 縺悟・蜃ｺ鬘後↓驕ｩ逕ｨ縺輔ｌ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/App.adminScope.test.tsx > 邂｡逅・・ｨｭ螳・竊・蜃ｺ鬘後・繝・・繧ｿ邨瑚ｷｯ (UI繝輔Ο繝ｼ蜈ｨ菴・ > 菫晏ｭ俶ｸ医∩縺ｮ邂｡逅・・ｨｭ螳・(隍・焚蜊伜・) 縺悟・蜃ｺ鬘後↓驕ｩ逕ｨ縺輔ｌ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/App.adminScope.test.tsx > 邂｡逅・・ｨｭ螳・竊・蜃ｺ鬘後・繝・・繧ｿ邨瑚ｷｯ (UI繝輔Ο繝ｼ蜈ｨ菴・ > 菫晏ｭ俶ｸ医∩縺ｮ邂｡逅・・ｨｭ螳・(隍・焚蜊伜・) 縺悟・蜃ｺ鬘後↓驕ｩ逕ｨ縺輔ｌ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/App.adminScope.test.tsx > 邂｡逅・・ｨｭ螳・竊・蜃ｺ鬘後・繝・・繧ｿ邨瑚ｷｯ (UI繝輔Ο繝ｼ蜈ｨ菴・ > 菫晏ｭ俶ｸ医∩縺ｮ邂｡逅・・ｨｭ螳・(隍・焚蜊伜・) 縺悟・蜃ｺ鬘後↓驕ｩ逕ｨ縺輔ｌ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/App.adminScope.test.tsx > 邂｡逅・・ｨｭ螳・竊・蜃ｺ鬘後・繝・・繧ｿ邨瑚ｷｯ (UI繝輔Ο繝ｼ蜈ｨ菴・ > 菫晏ｭ俶ｸ医∩縺ｮ邂｡逅・・ｨｭ螳・(隍・焚蜊伜・) 縺悟・蜃ｺ鬘後↓驕ｩ逕ｨ縺輔ｌ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+stderr | src/pages/App.adminScope.test.tsx > 邂｡逅・・ｨｭ螳・竊・蜃ｺ鬘後・繝・・繧ｿ邨瑚ｷｯ (UI繝輔Ο繝ｼ蜈ｨ菴・ > 菫晏ｭ俶ｸ医∩縺ｮ邂｡逅・・ｨｭ螳・(隍・焚蜊伜・) 縺悟・蜃ｺ鬘後↓驕ｩ逕ｨ縺輔ｌ繧・Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+ [32m笨・[39m src/pages/App.adminScope.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 558[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m94 passed[39m[22m[90m (94)[39m
+[2m      Tests [22m [1m[32m1549 passed[39m[22m[90m (1549)[39m
+[2m   Start at [22m 15:16:27
+[2m   Duration [22m 9.30s[2m (transform 6.63s, setup 0ms, collect 23.58s, tests 28.25s, environment 8.16s, prepare 18.83s)[22m
+

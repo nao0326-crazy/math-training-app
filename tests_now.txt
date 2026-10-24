@@ -1,0 +1,49 @@
+
+    ディレクトリ:C:\Users\monty\Desktop\問題\src\pages
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          2026/10/18    15:32           8371 App.adminScope.t
+                                                  est.tsx
+-a---          2026/10/17     8:19           6833 HistoryPage.scra
+                                                  tch.test.tsx
+-a---          2026/10/18    14:32           3349 homePage.test.ts
+                                                  x
+-a---          2026/10/18    14:32          13182 QuizPage.flow.te
+                                                  st.tsx
+-a---          2026/10/18    14:32           8655 QuizPage.scratch
+                                                  .test.tsx
+-a---          2026/10/18    14:33           1855 quizSelection.te
+                                                  st.ts
+-a---          2026/10/17     8:31            559 VerificationCode
+                                                  Page.test.tsx
+
+    ディレクトリ:C:\Users\monty\Desktop\問題\src\engine\selector
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+la---          2026/10/09    10:46           7887 adaptiveSelector
+                                                  .test.ts
+la---          2026/08/20    19:09           2529 difficultyDiagno
+                                                  stic.test.ts
+-a---          2026/10/18    14:37           5614 filteredSelector
+                                                  .test.ts
+la---          2026/10/05    17:10           5168 fullRandomSelect
+                                                  or.test.ts
+la---          2026/10/04    15:45          10073 generationVariet
+                                                  y.test.ts
+-a---          2026/10/17     8:19           4425 generatorRegistr
+                                                  y.test.ts
+-a---          2026/10/17     8:19           9563 generatorSweep.t
+                                                  est.ts
+-a---          2026/10/18     1:24           5522 questionPool.tes
+                                                  t.ts
+-a---          2026/10/17     8:31          16044 questionSelector
+                                                  .test.ts
+-a---          2026/10/17     8:31          14739 randomSelector.t
+                                                  est.ts
+la---          2026/10/05    17:19           3384 randomSession.te
+                                                  st.ts
+la---          2026/10/04    21:30          15808 weakTargets.test
+                                                  .ts
+

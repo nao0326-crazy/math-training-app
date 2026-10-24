@@ -1,0 +1,16 @@
+  rectangle_area: {
+  triangle_area: {
+  parallelogram_area: {
+  expression_make: s('required', 5, '数量と関係の法則', '第5学年 B(2) 文字と式', 'partial'),
+  expression_substitution: s('required', 5, '数量と関係の法則', '第5学年 B(2) 文字と式', 'partial'),
+  expression_word_make: s('required', 5, '数量と関係の法則', '第5学年 B(2) 文字と式', 'partial'),
+  expression_meaning: s('required', 6, '数量と関係の法則', '第6学年 B(2) 文字と式', 'partial'),
+  expression_blank: s('required', 6, '数量と関係の法則', '第6学年 B(2) 文字と式', 'partial'),
+  expression_multi_condition: s('required', 6, '数量と関係の法則', '第6学年 B(2) 文字と式', 'partial',
+  data_average: s('required', 5, 'データの活用', '第5学年 D データの活用 平均', 'partial'),
+  data_total_from_average: s('required', 6, 'データの活用', '第6学年 D データの活用 平均', 'partial',
+  data_max_min: s('required', 5, 'データの活用', '第5学年 D データの活用', 'partial',
+  data_compare: s('required', 5, 'データの活用', '第5学年 D データの活用', 'partial',
+  realworld_shopping: s('review', 3, 'くらしの中の算数', '第3学年 A(4) を用いた日常の数量の読解', 'partial',
+  realworld_eggs: s('review', 2, 'くらしの中の算数', '第2学年 A(4) を用いた日常の数量の読解', 'partial',
+  type: string,

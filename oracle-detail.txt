@@ -1,0 +1,1036 @@
+===== parallel_perpendicular (200)
+  lv=1 seed=142
+    params: {"variant":"definition_parallel","answerKind":"parallel","difficultyLevel":1}
+    Q: 同じ平面上にある2本の直線が、互いに交わらないとき、この2本の直線を何といいますか。
+    exp: {"kind":"string","value":"parallel"}
+    act: {"kind":"string","value":"平行"}
+    expl: 同じ平面上にある2本の直線が、互いに交わらないとき、この2本の直線は平行といいます。平行な直線は、どこまでも交わらずに広がっています。
+  lv=1 seed=8061
+    params: {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":1}
+    Q: 2本の直線が直角に交わるとき、この2本の直線の関係は何といいますか。
+    exp: {"kind":"string","value":"perpendicular"}
+    act: {"kind":"string","value":"垂直"}
+    expl: 2本の直線が交わるとき、できる角が直角なら、この2本の直線は垂直といいます。垂直な2直線は、できる4つの角がすべて直角です。
+  lv=1 seed=15980
+    params: {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":1}
+    Q: 2本の直線が直角に交わるという関係は何といいますか。
+    exp: {"kind":"string","value":"perpendicular"}
+    act: {"kind":"string","value":"垂直"}
+    expl: 2本の直線が交わるとき、できる角が直角なら、この2本の直線は垂直といいます。垂直な2直線は、できる4つの角がすべて直角です。
+  lv=1 seed=23899
+    params: {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":1}
+    Q: 2本の直線が交わるとき、できる角が直角であるとき、この2本の直線を何といいますか。
+    exp: {"kind":"string","value":"perpendicular"}
+    act: {"kind":"string","value":"垂直"}
+    expl: 2本の直線が交わるとき、できる角が直角なら、この2本の直線は垂直といいます。垂直な2直線は、できる4つの角がすべて直角です。
+  lv=1 seed=31818
+    params: {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":1}
+    Q: 2本の直線が直角に交わるとき、この2本の直線の関係は何といいますか。
+    exp: {"kind":"string","value":"perpendicular"}
+    act: {"kind":"string","value":"垂直"}
+    expl: 2本の直線が交わるとき、できる角が直角なら、この2本の直線は垂直といいます。垂直な2直線は、できる4つの角がすべて直角です。
+  lv=1 seed=39737
+    params: {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":1}
+    Q: 2本の直線が直角に交わるという関係は何といいますか。
+    exp: {"kind":"string","value":"perpendicular"}
+    act: {"kind":"string","value":"垂直"}
+    expl: 2本の直線が交わるとき、できる角が直角なら、この2本の直線は垂直といいます。垂直な2直線は、できる4つの角がすべて直角です。
+===== realworld_shopping (181)
+  lv=1 seed=142
+    params: {"variant":"two_sum","productA":"たまご","productB":"ぎゅうにゅう","priceA":120,"priceB":180,"answer":300,"difficultyLevel":1}
+    Q: 写真の値札を見て、たまご1パックとぎゅうにゅう1本を買います。代金は合計いくらですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":300}
+    expl: たまごは1パック120円、ぎゅうにゅうは1本180円です。120＋180＝300より、代金は合計300円です。
+  lv=1 seed=8061
+    params: {"variant":"two_sum","productA":"食パン","productB":"ぎゅうにゅう","priceA":150,"priceB":180,"answer":330,"difficultyLevel":1}
+    Q: 写真の値札を見て、食パン1袋とぎゅうにゅう1本を買います。代金は合計いくらですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":330}
+    expl: 食パンは1袋150円、ぎゅうにゅうは1本180円です。150＋180＝330より、代金は合計330円です。
+  lv=1 seed=15980
+    params: {"variant":"two_sum","productA":"オレンジジュース","productB":"食パン","priceA":200,"priceB":150,"answer":350,"difficultyLevel":1}
+    Q: 写真の値札を見て、オレンジジュース1本と食パン1袋を買います。代金は合計いくらですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":350}
+    expl: オレンジジュースは1本200円、食パンは1袋150円です。200＋150＝350より、代金は合計350円です。
+  lv=1 seed=23899
+    params: {"variant":"two_sum","productA":"たまご","productB":"オレンジジュース","priceA":120,"priceB":200,"answer":320,"difficultyLevel":1}
+    Q: 写真の値札を見て、たまご1パックとオレンジジュース1本を買います。代金は合計いくらですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":320}
+    expl: たまごは1パック120円、オレンジジュースは1本200円です。120＋200＝320より、代金は合計320円です。
+  lv=1 seed=31818
+    params: {"variant":"two_sum","productA":"ぎゅうにゅう","productB":"クッキー","priceA":180,"priceB":90,"answer":270,"difficultyLevel":1}
+    Q: 写真の値札を見て、ぎゅうにゅう1本とクッキー1箱を買います。代金は合計いくらですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":270}
+    expl: ぎゅうにゅうは1本180円、クッキーは1箱90円です。180＋90＝270より、代金は合計270円です。
+  lv=1 seed=39737
+    params: {"variant":"two_sum","productA":"りんご","productB":"たまご","priceA":260,"priceB":120,"answer":380,"difficultyLevel":1}
+    Q: 写真の値札を見て、りんご1ふさとたまご1パックを買います。代金は合計いくらですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":380}
+    expl: りんごは1ふさ260円、たまごは1パック120円です。260＋120＝380より、代金は合計380円です。
+===== decimal_place_value (160)
+  lv=1 seed=8061
+    params: {"variant":"place_value","place":1,"digit":3,"answer":0.3,"difficultyLevel":1}
+    Q: 10分の1の位が3のとき、小数はいくつになりますか。
+    exp: {"kind":"integer"}
+    act: {"kind":"decimal","value":0.3}
+    expl: 10分の1の位は 1 の 10 分の1なので、0.1 が1つ分です。数字が 3 なら 3 個分なので 0.3 です。
+  lv=1 seed=15980
+    params: {"variant":"place_value","place":1,"digit":5,"answer":0.5,"difficultyLevel":1}
+    Q: 10分の1の位が5のとき、小数はいくつになりますか。
+    exp: {"kind":"integer"}
+    act: {"kind":"decimal","value":0.5}
+    expl: 10分の1の位は 1 の 10 分の1なので、0.1 が1つ分です。数字が 5 なら 5 個分なので 0.5 です。
+  lv=1 seed=23899
+    params: {"variant":"place_value","place":1,"digit":6,"answer":0.6,"difficultyLevel":1}
+    Q: 10分の1の位が6のとき、小数はいくつになりますか。
+    exp: {"kind":"integer"}
+    act: {"kind":"decimal","value":0.6}
+    expl: 10分の1の位は 1 の 10 分の1なので、0.1 が1つ分です。数字が 6 なら 6 個分なので 0.6 です。
+  lv=1 seed=31818
+    params: {"variant":"place_value","place":1,"digit":8,"answer":0.8,"difficultyLevel":1}
+    Q: 10分の1の位が8のとき、小数はいくつになりますか。
+    exp: {"kind":"integer"}
+    act: {"kind":"decimal","value":0.8}
+    expl: 10分の1の位は 1 の 10 分の1なので、0.1 が1つ分です。数字が 8 なら 8 個分なので 0.8 です。
+  lv=1 seed=39737
+    params: {"variant":"place_value","place":1,"digit":1,"answer":0.1,"difficultyLevel":1}
+    Q: 10分の1の位が1のとき、小数はいくつになりますか。
+    exp: {"kind":"integer"}
+    act: {"kind":"decimal","value":0.1}
+    expl: 10分の1の位は 1 の 10 分の1なので、0.1 が1つ分です。数字が 1 なら 1 個分なので 0.1 です。
+  lv=1 seed=47656
+    params: {"variant":"compose","place":1,"digits":[2],"answer":0.2,"difficultyLevel":1}
+    Q: 10分の1の位が2となる小数を作ってください。
+    exp: {"kind":"integer","value":2}
+    act: {"kind":"decimal","value":0.2}
+    expl: 各位の数字をその位の重みにかけます。2 × 0.1 ＝ 0.2 です。
+===== realworld_eggs (160)
+  lv=1 seed=142
+    params: {"variant":"fill_carton","carton":6,"totalEggs":2,"answer":4,"difficultyLevel":1}
+    Q: 写真を見て、卵の数を数えます。1つのカートンには卵を6個入れることにします（この6個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":4}
+    expl: 写真には茶色い卵が1個と白い卵が1個、合わせて2個の卵が写っています。カートンには6個入れるので、6−2＝4より、あと4個の卵が必要です。
+  lv=1 seed=8061
+    params: {"variant":"fill_carton","carton":10,"totalEggs":2,"answer":8,"difficultyLevel":1}
+    Q: 写真を見て、卵の数を数えます。1つのカートンには卵を10個入れることにします（この10個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":8}
+    expl: 写真には茶色い卵が1個と白い卵が1個、合わせて2個の卵が写っています。カートンには10個入れるので、10−2＝8より、あと8個の卵が必要です。
+  lv=1 seed=15980
+    params: {"variant":"fill_carton","carton":12,"totalEggs":2,"answer":10,"difficultyLevel":1}
+    Q: 写真を見て、卵の数を数えます。1つのカートンには卵を12個入れることにします（この12個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":10}
+    expl: 写真には茶色い卵が1個と白い卵が1個、合わせて2個の卵が写っています。カートンには12個入れるので、12−2＝10より、あと10個の卵が必要です。
+  lv=1 seed=23899
+    params: {"variant":"fill_carton","carton":6,"totalEggs":2,"answer":4,"difficultyLevel":1}
+    Q: 写真を見て、卵の数を数えます。1つのカートンには卵を6個入れることにします（この6個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":4}
+    expl: 写真には茶色い卵が1個と白い卵が1個、合わせて2個の卵が写っています。カートンには6個入れるので、6−2＝4より、あと4個の卵が必要です。
+  lv=1 seed=31818
+    params: {"variant":"fill_carton","carton":6,"totalEggs":2,"answer":4,"difficultyLevel":1}
+    Q: 写真を見て、卵の数を数えます。1つのカートンには卵を6個入れることにします（この6個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":4}
+    expl: 写真には茶色い卵が1個と白い卵が1個、合わせて2個の卵が写っています。カートンには6個入れるので、6−2＝4より、あと4個の卵が必要です。
+  lv=1 seed=39737
+    params: {"variant":"fill_carton","carton":10,"totalEggs":2,"answer":8,"difficultyLevel":1}
+    Q: 写真を見て、卵の数を数えます。1つのカートンには卵を10個入れることにします（この10個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。
+    exp: {"kind":"integer","value":null}
+    act: {"kind":"integer","value":8}
+    expl: 写真には茶色い卵が1個と白い卵が1個、合わせて2個の卵が写っています。カートンには10個入れるので、10−2＝8より、あと8個の卵が必要です。
+===== multiples_finding (155)
+  lv=1 seed=31818
+    params: {"n":4,"variant":"list_up_to","arg1":37,"arg2":null,"count":null,"answer":"4, 8, 12, 16, 20, 24, 28, 32, 36","difficultyLevel":1}
+    Q: 37以下の4の倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"4, 8, 12, 16, 20, 24, 28, 32, 36"}
+    expl: 37以下の4の倍数は、4, 8, 12, 16, 20, 24, 28, 32, 36 です。
+  lv=1 seed=39737
+    params: {"n":6,"variant":"list_up_to","arg1":25,"arg2":null,"count":null,"answer":"6, 12, 18, 24","difficultyLevel":1}
+    Q: 25以下の6の倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"6, 12, 18, 24"}
+    expl: 25以下の6の倍数は、6, 12, 18, 24 です。
+  lv=1 seed=47656
+    params: {"n":8,"variant":"list_up_to","arg1":34,"arg2":null,"count":null,"answer":"8, 16, 24, 32","difficultyLevel":1}
+    Q: 34以下の8の倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"8, 16, 24, 32"}
+    expl: 34以下の8の倍数は、8, 16, 24, 32 です。
+  lv=1 seed=55575
+    params: {"n":3,"variant":"list_up_to","arg1":25,"arg2":null,"count":null,"answer":"3, 6, 9, 12, 15, 18, 21, 24","difficultyLevel":1}
+    Q: 25以下の3の倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"3, 6, 9, 12, 15, 18, 21, 24"}
+    expl: 25以下の3の倍数は、3, 6, 9, 12, 15, 18, 21, 24 です。
+  lv=1 seed=63494
+    params: {"n":5,"variant":"list_up_to","arg1":34,"arg2":null,"count":null,"answer":"5, 10, 15, 20, 25, 30","difficultyLevel":1}
+    Q: 34以下の5の倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"5, 10, 15, 20, 25, 30"}
+    expl: 34以下の5の倍数は、5, 10, 15, 20, 25, 30 です。
+  lv=1 seed=71413
+    params: {"n":7,"variant":"list_up_to","arg1":39,"arg2":null,"count":null,"answer":"7, 14, 21, 28, 35","difficultyLevel":1}
+    Q: 39以下の7の倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"7, 14, 21, 28, 35"}
+    expl: 39以下の7の倍数は、7, 14, 21, 28, 35 です。
+===== arrange_tree (140)
+  lv=1 seed=15980
+    params: {"n":3,"letters":["A","B","C"],"variant":"fixed_first","answer":2,"difficultyLevel":1}
+    Q: A、B、Cの3個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの2個を自由に並べて、並べ方は何通りありますか
+    exp: {"kind":"integer","value":6}
+    act: {"kind":"integer","value":2}
+    expl: Aの位置が決まっているので、残り2個の並び方だけ数えます。2×1×…×1＝2通りです。
+  lv=1 seed=39737
+    params: {"n":4,"letters":["A","B","C","D"],"variant":"fixed_first","answer":6,"difficultyLevel":1}
+    Q: A、B、C、Dの4個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの3個を自由に並べて、並べ方は何通りありますか
+    exp: {"kind":"integer","value":24}
+    act: {"kind":"integer","value":6}
+    expl: Aの位置が決まっているので、残り3個の並び方だけ数えます。3×2×…×1＝6通りです。
+  lv=1 seed=47656
+    params: {"n":4,"letters":["A","B","C","D"],"variant":"fixed_first","answer":6,"difficultyLevel":1}
+    Q: A、B、C、Dの4個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの3個を自由に並べて、並べ方は何通りありますか
+    exp: {"kind":"integer","value":24}
+    act: {"kind":"integer","value":6}
+    expl: Aの位置が決まっているので、残り3個の並び方だけ数えます。3×2×…×1＝6通りです。
+  lv=1 seed=71413
+    params: {"n":4,"letters":["A","B","C","D"],"variant":"fixed_first","answer":6,"difficultyLevel":1}
+    Q: A、B、C、Dの4個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの3個を自由に並べて、並べ方は何通りありますか
+    exp: {"kind":"integer","value":24}
+    act: {"kind":"integer","value":6}
+    expl: Aの位置が決まっているので、残り3個の並び方だけ数えます。3×2×…×1＝6通りです。
+  lv=1 seed=79332
+    params: {"n":4,"letters":["A","B","C","D"],"variant":"fixed_first","answer":6,"difficultyLevel":1}
+    Q: A、B、C、Dの4個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの3個を自由に並べて、並べ方は何通りありますか
+    exp: {"kind":"integer","value":24}
+    act: {"kind":"integer","value":6}
+    expl: Aの位置が決まっているので、残り3個の並び方だけ数えます。3×2×…×1＝6通りです。
+  lv=1 seed=95170
+    params: {"n":3,"letters":["A","B","C"],"variant":"fixed_first","answer":2,"difficultyLevel":1}
+    Q: A、B、Cの3個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの2個を自由に並べて、並べ方は何通りありますか
+    exp: {"kind":"integer","value":6}
+    act: {"kind":"integer","value":2}
+    expl: Aの位置が決まっているので、残り2個の並び方だけ数えます。2×1×…×1＝2通りです。
+===== gcd_calculation (125)
+  lv=2 seed=273
+    params: {"a":30,"b":45,"answer":15,"difficultyLevel":2}
+    Q: 30と45の最大公約数を求めなさい
+    exp: {"kind":"integer"}
+    act: {"kind":"integer","value":15}
+    expl: 30と45の最大公約数は 15 です。
+  lv=2 seed=8192
+    params: {"a":36,"b":54,"answer":18,"difficultyLevel":2}
+    Q: 36と54の最大公約数を求めなさい
+    exp: {"kind":"integer"}
+    act: {"kind":"integer","value":18}
+    expl: 36と54の最大公約数は 18 です。
+  lv=2 seed=16111
+    params: {"a":42,"b":63,"answer":21,"difficultyLevel":2}
+    Q: 42と63の最大公約数を求めなさい
+    exp: {"kind":"integer"}
+    act: {"kind":"integer","value":21}
+    expl: 42と63の最大公約数は 21 です。
+  lv=2 seed=24030
+    params: {"a":28,"b":42,"answer":14,"difficultyLevel":2}
+    Q: 28と42の最大公約数を求めなさい
+    exp: {"kind":"integer"}
+    act: {"kind":"integer","value":14}
+    expl: 28と42の最大公約数は 14 です。
+  lv=2 seed=31949
+    params: {"a":32,"b":48,"answer":16,"difficultyLevel":2}
+    Q: 32と48の最大公約数を求めなさい
+    exp: {"kind":"integer"}
+    act: {"kind":"integer","value":16}
+    expl: 32と48の最大公約数は 16 です。
+  lv=2 seed=39868
+    params: {"a":15,"b":25,"answer":5,"difficultyLevel":2}
+    Q: 15と25の最大公約数を求めなさい
+    exp: {"kind":"integer"}
+    act: {"kind":"integer","value":5}
+    expl: 15と25の最大公約数は 5 です。
+===== arrange_simple (125)
+  lv=1 seed=71413
+    params: {"n":4,"r":3,"variant":"pick_special","answer":12,"difficultyLevel":1}
+    Q: 4人の中から3人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか
+    exp: {"kind":"integer","value":24}
+    act: {"kind":"integer","value":12}
+    expl: 特別の1人は、4人のうち誰でもよいので4通りです。残りの2人はそのほかの3人から選ぶので、4×3＝12通りです。
+  lv=1 seed=150603
+    params: {"n":4,"r":3,"variant":"pick_special","answer":12,"difficultyLevel":1}
+    Q: 4人の中から3人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか
+    exp: {"kind":"integer","value":24}
+    act: {"kind":"integer","value":12}
+    expl: 特別の1人は、4人のうち誰でもよいので4通りです。残りの2人はそのほかの3人から選ぶので、4×3＝12通りです。
+  lv=1 seed=182279
+    params: {"n":4,"r":3,"variant":"pick_special","answer":12,"difficultyLevel":1}
+    Q: 4人の中から3人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか
+    exp: {"kind":"integer","value":24}
+    act: {"kind":"integer","value":12}
+    expl: 特別の1人は、4人のうち誰でもよいので4通りです。残りの2人はそのほかの3人から選ぶので、4×3＝12通りです。
+  lv=1 seed=190198
+    params: {"n":4,"r":3,"variant":"pick_special","answer":12,"difficultyLevel":1}
+    Q: 4人の中から3人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか
+    exp: {"kind":"integer","value":24}
+    act: {"kind":"integer","value":12}
+    expl: 特別の1人は、4人のうち誰でもよいので4通りです。残りの2人はそのほかの3人から選ぶので、4×3＝12通りです。
+  lv=1 seed=261469
+    params: {"n":4,"r":3,"variant":"pick_special","answer":12,"difficultyLevel":1}
+    Q: 4人の中から3人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか
+    exp: {"kind":"integer","value":24}
+    act: {"kind":"integer","value":12}
+    expl: 特別の1人は、4人のうち誰でもよいので4通りです。残りの2人はそのほかの3人から選ぶので、4×3＝12通りです。
+  lv=1 seed=293145
+    params: {"n":4,"r":3,"variant":"pick_special","answer":12,"difficultyLevel":1}
+    Q: 4人の中から3人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか
+    exp: {"kind":"integer","value":24}
+    act: {"kind":"integer","value":12}
+    expl: 特別の1人は、4人のうち誰でもよいので4通りです。残りの2人はそのほかの3人から選ぶので、4×3＝12通りです。
+===== common_multiples (124)
+  lv=2 seed=24030
+    params: {"a":6,"b":9,"variant":"list_up_to","arg1":39,"arg2":null,"count":null,"answer":"18, 36","lcm":18,"difficultyLevel":2}
+    Q: 39以下の6と9の公倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"18, 36"}
+    expl: 6と9の最小公倍数は 18 です。18 の整数倍のうち 39 以下のものは 18, 36 です。
+  lv=2 seed=31949
+    params: {"a":2,"b":8,"variant":"list_up_to","arg1":26,"arg2":null,"count":null,"answer":"8, 16, 24","lcm":8,"difficultyLevel":2}
+    Q: 26以下の2と8の公倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"8, 16, 24"}
+    expl: 2と8の最小公倍数は 8 です。8 の整数倍のうち 26 以下のものは 8, 16, 24 です。
+  lv=2 seed=39868
+    params: {"a":3,"b":10,"variant":"list_up_to","arg1":103,"arg2":null,"count":null,"answer":"30, 60, 90","lcm":30,"difficultyLevel":2}
+    Q: 103以下の3と10の公倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"30, 60, 90"}
+    expl: 3と10の最小公倍数は 30 です。30 の整数倍のうち 103 以下のものは 30, 60, 90 です。
+  lv=2 seed=47787
+    params: {"a":5,"b":8,"variant":"list_up_to","arg1":142,"arg2":null,"count":null,"answer":"40, 80, 120","lcm":40,"difficultyLevel":2}
+    Q: 142以下の5と8の公倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"40, 80, 120"}
+    expl: 5と8の最小公倍数は 40 です。40 の整数倍のうち 142 以下のものは 40, 80, 120 です。
+  lv=2 seed=55706
+    params: {"a":2,"b":3,"variant":"list_up_to","arg1":16,"arg2":null,"count":null,"answer":"6, 12","lcm":6,"difficultyLevel":2}
+    Q: 16以下の2と3の公倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"6, 12"}
+    expl: 2と3の最小公倍数は 6 です。6 の整数倍のうち 16 以下のものは 6, 12 です。
+  lv=2 seed=63625
+    params: {"a":3,"b":5,"variant":"list_up_to","arg1":42,"arg2":null,"count":null,"answer":"15, 30","lcm":15,"difficultyLevel":2}
+    Q: 42以下の3と5の公倍数をすべて答えなさい
+    exp: {"kind":"string","value":""}
+    act: {"kind":"string","value":"15, 30"}
+    expl: 3と5の最小公倍数は 15 です。15 の整数倍のうち 42 以下のものは 15, 30 です。
+===== circle_circumference (120)
+  lv=2 seed=273
+    params: {"variant":"from_circumference","diameter":2,"circumference":6.28,"unit":"cm","pi":3.14,"difficultyLevel":2}
+    Q: 円周が6.28cmの円の直径は何cmですか。円周率は3.14とします。
+    exp: {"kind":"decimal","value":6.28}
+    act: {"kind":"integer","value":2}
+    expl: 円周＝直径×円周率 なので、円周を円周率で割ると直径になります。6.28÷3.14＝2cmです。
+  lv=2 seed=8192
+    params: {"variant":"from_circumference","diameter":4,"circumference":12.56,"unit":"cm","pi":3.14,"difficultyLevel":2}
+    Q: 円周が12.56cmの円の直径は何cmですか。円周率は3.14とします。
+    exp: {"kind":"decimal","value":12.56}
+    act: {"kind":"integer","value":4}
+    expl: 円周＝直径×円周率 なので、円周を円周率で割ると直径になります。12.56÷3.14＝4cmです。
+  lv=2 seed=16111
+    params: {"variant":"from_circumference","diameter":6,"circumference":18.84,"unit":"cm","pi":3.14,"difficultyLevel":2}
+    Q: 円周が18.84cmの円の直径は何cmですか。円周率は3.14とします。
+    exp: {"kind":"decimal","value":18.84}
+    act: {"kind":"integer","value":6}
+    expl: 円周＝直径×円周率 なので、円周を円周率で割ると直径になります。18.84÷3.14＝6cmです。
+  lv=2 seed=24030
+    params: {"variant":"from_circumference","diameter":9,"circumference":28.26,"unit":"cm","pi":3.14,"difficultyLevel":2}
+    Q: 円周が28.26cmの円の直径は何cmですか。円周率は3.14とします。
+    exp: {"kind":"decimal","value":28.26}
+    act: {"kind":"integer","value":9}
+    expl: 円周＝直径×円周率 なので、円周を円周率で割ると直径になります。28.26÷3.14＝9cmです。
+  lv=2 seed=31949
+    params: {"variant":"from_circumference","diameter":3,"circumference":9.42,"unit":"cm","pi":3.14,"difficultyLevel":2}
+    Q: 円周が9.42cmの円の直径は何cmですか。円周率は3.14とします。
+    exp: {"kind":"decimal","value":9.42}
+    act: {"kind":"integer","value":3}
+    expl: 円周＝直径×円周率 なので、円周を円周率で割ると直径になります。9.42÷3.14＝3cmです。
+  lv=2 seed=39868
+    params: {"variant":"from_circumference","diameter":5,"circumference":15.7,"unit":"cm","pi":3.14,"difficultyLevel":2}
+    Q: 円周が15.7cmの円の直径は何cmですか。円周率は3.14とします。
+    exp: {"kind":"decimal","value":15.700000000000001}
+    act: {"kind":"integer","value":5}
+    expl: 円周＝直径×円周率 なので、円周を円周率で割ると直径になります。15.7÷3.14＝5cmです。
+===== inverse_word (120)
+  lv=3 seed=404
+    params: {"total":32,"people1":2,"people2":8,"per1":16,"per2":4,"answer":4,"difficultyLevel":3}
+    Q: 32こを2人で分けると1人16こになります。同じ数を8人で分けると、1人何こになりますか
+    exp: {"kind":"integer","value":2}
+    act: {"kind":"integer","value":4}
+    expl: 人数が増えると1人分は減る。32÷8＝4こです。(反比例)
+  lv=3 seed=8323
+    params: {"total":36,"people1":4,"people2":6,"per1":9,"per2":6,"answer":6,"difficultyLevel":3}
+    Q: 36こを4人で分けると1人9こになります。同じ数を6人で分けると、1人何こになりますか
+    exp: {"kind":"integer","value":1.5}
+    act: {"kind":"integer","value":6}
+    expl: 人数が増えると1人分は減る。36÷6＝6こです。(反比例)
+  lv=3 seed=16242
+    params: {"total":32,"people1":2,"people2":4,"per1":16,"per2":8,"answer":8,"difficultyLevel":3}
+    Q: 32こを2人で分けると1人16こになります。同じ数を4人で分けると、1人何こになりますか
+    exp: {"kind":"integer","value":4}
+    act: {"kind":"integer","value":8}
+    expl: 人数が増えると1人分は減る。32÷4＝8こです。(反比例)
+  lv=3 seed=24161
+    params: {"total":30,"people1":5,"people2":10,"per1":6,"per2":3,"answer":3,"difficultyLevel":3}
+    Q: 30こを5人で分けると1人6こになります。同じ数を10人で分けると、1人何こになりますか
+    exp: {"kind":"integer","value":0.6}
+    act: {"kind":"integer","value":3}
+    expl: 人数が増えると1人分は減る。30÷10＝3こです。(反比例)
+  lv=3 seed=32080
+    params: {"total":24,"people1":3,"people2":6,"per1":8,"per2":4,"answer":4,"difficultyLevel":3}
+    Q: 24こを3人で分けると1人8こになります。同じ数を6人で分けると、1人何こになりますか
+    exp: {"kind":"integer","value":1.3333333333333333}
+    act: {"kind":"integer","value":4}
+    expl: 人数が増えると1人分は減る。24÷6＝4こです。(反比例)
+  lv=3 seed=39999
+    params: {"total":27,"people1":3,"people2":9,"per1":9,"per2":3,"answer":3,"difficultyLevel":3}
+    Q: 27こを3人で分けると1人9こになります。同じ数を9人で分けると、1人何こになりますか
+    exp: {"kind":"integer","value":1}
+    act: {"kind":"integer","value":3}
+    expl: 人数が増えると1人分は減る。27÷9＝3こです。(反比例)
+===== fraction_unit_intro (119)
+  lv=1 seed=8061
+    params: {"variant":"how_many_units","num":2,"den":4,"answer":2,"difficultyLevel":1}
+    Q: 2/4 は、1/4 いくつ分ですか。
+    exp: {"kind":"string","value":"2/4"}
+    act: {"kind":"integer","value":2}
+    expl: 分母の 4 が同じなので、分子の 2 は 1/4 が 2 個分あることを表します。
+  lv=1 seed=15980
+    params: {"variant":"how_many_units","num":3,"den":5,"answer":3,"difficultyLevel":1}
+    Q: 3/5 は、1/5 いくつ分ですか。
+    exp: {"kind":"string","value":"3/5"}
+    act: {"kind":"integer","value":3}
+    expl: 分母の 5 が同じなので、分子の 3 は 1/5 が 3 個分あることを表します。
+  lv=1 seed=23899
+    params: {"variant":"how_many_units","num":2,"den":2,"answer":2,"difficultyLevel":1}
+    Q: 2/2 は、1/2 いくつ分ですか。
+    exp: {"kind":"string","value":"2/2"}
+    act: {"kind":"integer","value":2}
+    expl: 分母の 2 が同じなので、分子の 2 は 1/2 が 2 個分あることを表します。
+  lv=1 seed=31818
+    params: {"variant":"how_many_units","num":3,"den":3,"answer":3,"difficultyLevel":1}
+    Q: 3/3 は、1/3 いくつ分ですか。
+    exp: {"kind":"string","value":"3/3"}
+    act: {"kind":"integer","value":3}
+    expl: 分母の 3 が同じなので、分子の 3 は 1/3 が 3 個分あることを表します。
+  lv=1 seed=39737
+    params: {"variant":"how_many_units","num":1,"den":4,"answer":1,"difficultyLevel":1}
+    Q: 1/4 は、1/4 いくつ分ですか。
+    exp: {"kind":"string","value":"1/4"}
+    act: {"kind":"integer","value":1}
+    expl: 分母の 4 が同じなので、分子の 1 は 1/4 が 1 個分あることを表します。
+  lv=1 seed=47656
+    params: {"variant":"read_fraction","num":2,"den":6,"answer":6,"difficultyLevel":1}
+    Q: 2/6 の分母は何ですか。
+    exp: {"kind":"string","value":"2/6"}
+    act: {"kind":"integer","value":6}
+    expl: 2/6 の分母 6 は、下の数が表す 6 です。全体を6等分していることを表します。
+===== trapezoid_area (113)
+  lv=1 seed=142
+    params: {"variant":"basic","a":2,"b":8,"h":2,"area":10,"difficultyLevel":1}
+    Q: 上底が2cm、下底が8cm、高さが2cmの台形の面積を求めなさい。
+    exp: {"kind":"integer","value":2}
+    act: {"kind":"integer","value":10}
+    expl: 台形の面積＝（上底＋下底）×高さ÷2 なので、（2＋8）×2÷2＝10cm²です。
+  lv=1 seed=8061
+    params: {"variant":"basic","a":2,"b":4,"h":8,"area":24,"difficultyLevel":1}
+    Q: 上底が2cm、下底が4cm、高さが8cmの台形の面積を求めなさい。
+    exp: {"kind":"integer","value":8}
+    act: {"kind":"integer","value":24}
+    expl: 台形の面積＝（上底＋下底）×高さ÷2 なので、（2＋4）×8÷2＝24cm²です。
+  lv=1 seed=15980
+    params: {"variant":"basic","a":3,"b":5,"h":5,"area":20,"difficultyLevel":1}
+    Q: 上底が3cm、下底が5cm、高さが5cmの台形の面積を求めなさい。
+    exp: {"kind":"integer","value":5}
+    act: {"kind":"integer","value":20}
+    expl: 台形の面積＝（上底＋下底）×高さ÷2 なので、（3＋5）×5÷2＝20cm²です。
+  lv=1 seed=23899
+    params: {"variant":"basic","a":4,"b":6,"h":4,"area":20,"difficultyLevel":1}
+    Q: 上底が4cm、下底が6cm、高さが4cmの台形の面積を求めなさい。
+    exp: {"kind":"integer","value":4}
+    act: {"kind":"integer","value":20}
+    expl: 台形の面積＝（上底＋下底）×高さ÷2 なので、（4＋6）×4÷2＝20cm²です。
+  lv=1 seed=31818
+    params: {"variant":"basic","a":6,"b":8,"h":2,"area":14,"difficultyLevel":1}
+    Q: 上底が6cm、下底が8cm、高さが2cmの台形の面積を求めなさい。
+    exp: {"kind":"integer","value":2}
+    act: {"kind":"integer","value":14}
+    expl: 台形の面積＝（上底＋下底）×高さ÷2 なので、（6＋8）×2÷2＝14cm²です。
+  lv=1 seed=39737
+    params: {"variant":"basic","a":1,"b":7,"h":7,"area":28,"difficultyLevel":1}
+    Q: 上底が1cm、下底が7cm、高さが7cmの台形の面積を求めなさい。
+    exp: {"kind":"integer","value":7}
+    act: {"kind":"integer","value":28}
+    expl: 台形の面積＝（上底＋下底）×高さ÷2 なので、（1＋7）×7÷2＝28cm²です。
+===== combine_simple (113)
+  lv=2 seed=273
+    params: {"n":3,"r":2,"variant":"include_one","answer":2,"difficultyLevel":2}
+    Q: 3人の中から2人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+    exp: {"kind":"integer","value":3}
+    act: {"kind":"integer","value":2}
+    expl: Aさんは必ず選ぶので、残りはAさん以外の2人から1人を選びます。2個から1個だけ選ぶので2通りです。
+  lv=2 seed=8192
+    params: {"n":4,"r":3,"variant":"include_one","answer":3,"difficultyLevel":2}
+    Q: 4人の中から3人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+    exp: {"kind":"integer","value":4}
+    act: {"kind":"integer","value":3}
+    expl: Aさんは必ず選ぶので、残りはAさん以外の3人から2人を選びます。3×2 ÷ 2 ＝ 3通りです。
+  lv=2 seed=16111
+    params: {"n":6,"r":2,"variant":"include_one","answer":5,"difficultyLevel":2}
+    Q: 6人の中から2人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+    exp: {"kind":"integer","value":15}
+    act: {"kind":"integer","value":5}
+    expl: Aさんは必ず選ぶので、残りはAさん以外の5人から1人を選びます。5個から1個だけ選ぶので5通りです。
+  lv=2 seed=24030
+    params: {"n":7,"r":2,"variant":"include_one","answer":6,"difficultyLevel":2}
+    Q: 7人の中から2人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+    exp: {"kind":"integer","value":21}
+    act: {"kind":"integer","value":6}
+    expl: Aさんは必ず選ぶので、残りはAさん以外の6人から1人を選びます。6個から1個だけ選ぶので6通りです。
+  lv=2 seed=31949
+    params: {"n":3,"r":2,"variant":"include_one","answer":2,"difficultyLevel":2}
+    Q: 3人の中から2人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+    exp: {"kind":"integer","value":3}
+    act: {"kind":"integer","value":2}
+    expl: Aさんは必ず選ぶので、残りはAさん以外の2人から1人を選びます。2個から1個だけ選ぶので2通りです。
+  lv=2 seed=39868
+    params: {"n":5,"r":3,"variant":"exclude_one","answer":4,"difficultyLevel":2}
+    Q: 5人の中から3人を選びます。ただし、Aさんは選ばないことにします。選び方は何通りありますか
+    exp: {"kind":"integer","value":10}
+    act: {"kind":"integer","value":4}
+    expl: Aさんを選ばないので、Aさん以外の4人から3人を選びます。4×3×2 ÷ 2 × 3 ＝ 4通りです。
+===== integer_word_problem (107)
+  lv=1 seed=31818
+    params: {"a":3,"b":5,"operator":"×","answer":15,"difficultyLevel":1,"templateIndex":6,"readingLevel":1,"reasoningLevel":1}
+    Q: 1ふくろに3このあめが入っています。5ふくろあります。あめは全部で何こありますか。
+    exp: {"kind":"integer","value":8}
+    act: {"kind":"integer","value":15}
+    expl: 3×5＝15 です。
+  lv=1 seed=39737
+    params: {"a":4,"b":2,"operator":"×","answer":8,"difficultyLevel":1,"templateIndex":7,"readingLevel":2,"reasoningLevel":1}
+    Q: 1台の車に4人ずつのっています。2台あります。車にのっている人は全部で何人ですか。
+    exp: {"kind":"integer","value":6}
+    act: {"kind":"integer","value":8}
+    expl: 4×2＝8 です。
+  lv=1 seed=47656
+    params: {"a":5,"b":3,"operator":"×","answer":15,"difficultyLevel":1,"templateIndex":8,"readingLevel":2,"reasoningLevel":2}
+    Q: 1日で5ページずつ本をよみます。3日間よみました。よんだページは全部で何ページですか。
+    exp: {"kind":"integer","value":8}
+    act: {"kind":"integer","value":15}
+    expl: 5×3＝15 です。
+  lv=1 seed=55575
+    params: {"a":6,"b":2,"operator":"÷","answer":3,"difficultyLevel":1,"templateIndex":9,"readingLevel":1,"reasoningLevel":1}
+    Q: 6このあめを2人で同じ数ずつ分けます。1人分は何こになりますか。
+    exp: {"kind":"integer","value":8}
+    act: {"kind":"integer","value":3}
+    expl: 6÷2＝3 です。
+  lv=1 seed=63494
+    params: {"a":12,"b":3,"operator":"÷","answer":4,"difficultyLevel":1,"templateIndex":10,"readingLevel":1,"reasoningLevel":1}
+    Q: 12まいの色紙を3人で同じ数ずつ分けます。1人分は何まいになりますか。
+    exp: {"kind":"integer","value":15}
+    act: {"kind":"integer","value":4}
+    expl: 12÷3＝4 です。
+  lv=1 seed=71413
+    params: {"a":20,"b":4,"operator":"÷","answer":5,"difficultyLevel":1,"templateIndex":10,"readingLevel":1,"reasoningLevel":1}
+    Q: 20まいの色紙を4人で同じ数ずつ分けます。1人分は何まいになりますか。
+    exp: {"kind":"integer","value":24}
+    act: {"kind":"integer","value":5}
+    expl: 20÷4＝5 です。
+===== combine_table (91)
+  lv=2 seed=16111
+    params: {"n":5,"variant":"two_rounds","answer":20,"difficultyLevel":2}
+    Q: 5チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+    exp: {"kind":"integer","value":10}
+    act: {"kind":"integer","value":20}
+    expl: 1回分は5×4÷2＝10試合です。2回試合するので、10×2＝20試合になります。
+  lv=2 seed=24030
+    params: {"n":6,"variant":"two_rounds","answer":30,"difficultyLevel":2}
+    Q: 6チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+    exp: {"kind":"integer","value":15}
+    act: {"kind":"integer","value":30}
+    expl: 1回分は6×5÷2＝15試合です。2回試合するので、15×2＝30試合になります。
+  lv=2 seed=47787
+    params: {"n":7,"variant":"two_rounds","answer":42,"difficultyLevel":2}
+    Q: 7チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+    exp: {"kind":"integer","value":21}
+    act: {"kind":"integer","value":42}
+    expl: 1回分は7×6÷2＝21試合です。2回試合するので、21×2＝42試合になります。
+  lv=2 seed=71544
+    params: {"n":7,"variant":"two_rounds","answer":42,"difficultyLevel":2}
+    Q: 7チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+    exp: {"kind":"integer","value":21}
+    act: {"kind":"integer","value":42}
+    expl: 1回分は7×6÷2＝21試合です。2回試合するので、21×2＝42試合になります。
+  lv=2 seed=79463
+    params: {"n":4,"variant":"two_rounds","answer":12,"difficultyLevel":2}
+    Q: 4チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+    exp: {"kind":"integer","value":6}
+    act: {"kind":"integer","value":12}
+    expl: 1回分は4×3÷2＝6試合です。2回試合するので、6×2＝12試合になります。
+  lv=2 seed=103220
+    params: {"n":4,"variant":"two_rounds","answer":12,"difficultyLevel":2}
+    Q: 4チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+    exp: {"kind":"integer","value":6}
+    act: {"kind":"integer","value":12}
+    expl: 1回分は4×3÷2＝6試合です。2回試合するので、6×2＝12試合になります。
+===== fraction_mixed_convert (87)
+  lv=2 seed=24030
+    params: {"whole":2,"numerator":2,"denominator":9,"answerNumerator":20,"answerDenominator":9,"difficultyLevel":2}
+    Q: 2と9分の2 を仮分数で表しなさい
+    exp: {"kind":"mixed","whole":0,"numerator":2,"denominator":9}
+    act: {"kind":"fraction","numerator":20,"denominator":9}
+    expl: 2と2/9 = 2×9＋2 = 20 なので、20/9 です。
+  lv=2 seed=31949
+    params: {"whole":3,"numerator":1,"denominator":3,"answerNumerator":10,"answerDenominator":3,"difficultyLevel":2}
+    Q: 3と3分の1 を仮分数で表しなさい
+    exp: {"kind":"mixed","whole":0,"numerator":1,"denominator":3}
+    act: {"kind":"fraction","numerator":10,"denominator":3}
+    expl: 3と1/3 = 3×3＋1 = 10 なので、10/3 です。
+  lv=2 seed=39868
+    params: {"whole":4,"numerator":2,"denominator":5,"answerNumerator":22,"answerDenominator":5,"difficultyLevel":2}
+    Q: 4と5分の2 を仮分数で表しなさい
+    exp: {"kind":"mixed","whole":0,"numerator":2,"denominator":5}
+    act: {"kind":"fraction","numerator":22,"denominator":5}
+    expl: 4と2/5 = 4×5＋2 = 22 なので、22/5 です。
+  lv=2 seed=47787
+    params: {"whole":5,"numerator":4,"denominator":7,"answerNumerator":39,"answerDenominator":7,"difficultyLevel":2}
+    Q: 5と7分の4 を仮分数で表しなさい
+    exp: {"kind":"mixed","whole":0,"numerator":4,"denominator":7}
+    act: {"kind":"fraction","numerator":39,"denominator":7}
+    expl: 5と4/7 = 5×7＋4 = 39 なので、39/7 です。
+  lv=2 seed=55706
+    params: {"whole":1,"numerator":1,"denominator":2,"answerNumerator":3,"answerDenominator":2,"difficultyLevel":2}
+    Q: 1と2分の1 を仮分数で表しなさい
+    exp: {"kind":"mixed","whole":0,"numerator":1,"denominator":2}
+    act: {"kind":"fraction","numerator":3,"denominator":2}
+    expl: 1と1/2 = 1×2＋1 = 3 なので、3/2 です。
+  lv=2 seed=63625
+    params: {"whole":2,"numerator":3,"denominator":4,"answerNumerator":11,"answerDenominator":4,"difficultyLevel":2}
+    Q: 2と4分の3 を仮分数で表しなさい
+    exp: {"kind":"mixed","whole":0,"numerator":3,"denominator":4}
+    act: {"kind":"fraction","numerator":11,"denominator":4}
+    expl: 2と3/4 = 2×4＋3 = 11 なので、11/4 です。
+===== circle_area_diameter (73)
+  lv=2 seed=273
+    params: {"diameter":13,"radius":6.5,"area":132.67,"difficultyLevel":2}
+    Q: 直径13cmの円の面積を求めなさい。円周率は3.14とします。
+    exp: {"kind":"decimal","value":132.665}
+    act: {"kind":"decimal","value":132.67}
+    expl: 半径は13÷2＝6.5cm。面積＝6.5×6.5×3.14＝132.67cm²です。
+  lv=2 seed=16111
+    params: {"diameter":15,"radius":7.5,"area":176.63,"difficultyLevel":2}
+    Q: 直径15cmの円の面積を求めなさい。円周率は3.14とします。
+    exp: {"kind":"decimal","value":176.625}
+    act: {"kind":"decimal","value":176.63}
+    expl: 半径は15÷2＝7.5cm。面積＝7.5×7.5×3.14＝176.63cm²です。
+  lv=2 seed=39868
+    params: {"diameter":17,"radius":8.5,"area":226.87,"difficultyLevel":2}
+    Q: 直径17cmの円の面積を求めなさい。円周率は3.14とします。
+    exp: {"kind":"decimal","value":226.865}
+    act: {"kind":"decimal","value":226.87}
+    expl: 半径は17÷2＝8.5cm。面積＝8.5×8.5×3.14＝226.87cm²です。
+  lv=2 seed=55706
+    params: {"diameter":19,"radius":9.5,"area":283.39,"difficultyLevel":2}
+    Q: 直径19cmの円の面積を求めなさい。円周率は3.14とします。
+    exp: {"kind":"decimal","value":283.385}
+    act: {"kind":"decimal","value":283.39}
+    expl: 半径は19÷2＝9.5cm。面積＝9.5×9.5×3.14＝283.39cm²です。
+  lv=2 seed=63625
+    params: {"diameter":19,"radius":9.5,"area":283.39,"difficultyLevel":2}
+    Q: 直径19cmの円の面積を求めなさい。円周率は3.14とします。
+    exp: {"kind":"decimal","value":283.385}
+    act: {"kind":"decimal","value":283.39}
+    expl: 半径は19÷2＝9.5cm。面積＝9.5×9.5×3.14＝283.39cm²です。
+  lv=2 seed=87382
+    params: {"diameter":11,"radius":5.5,"area":94.99,"difficultyLevel":2}
+    Q: 直径11cmの円の面積を求めなさい。円周率は3.14とします。
+    exp: {"kind":"decimal","value":94.985}
+    act: {"kind":"decimal","value":94.99}
+    expl: 半径は11÷2＝5.5cm。面積＝5.5×5.5×3.14＝94.99cm²です。
+===== rectangle_area (72)
+  lv=2 seed=39868
+    params: {"variant":"find_side","width":8,"height":5,"area":40,"answer":5,"unit":"cm","difficultyLevel":2}
+    Q: 縦 5 cm、横 8 cm の長方形があります。横の長さが 8 cm のとき、縦の長さはいくつですか。
+    exp: {"kind":"integer","value":40}
+    act: {"kind":"integer","value":5}
+    expl: 長方形の面積は 縦 × 横 です。面積を縦の長さで割ると横の長さが求まります。面積は 5 × 8 = 40 cm2 なので、40 ÷ 8 = 5 cm です。
+  lv=2 seed=47787
+    params: {"variant":"find_side","width":9,"height":7,"area":63,"answer":9,"unit":"cm","difficultyLevel":2}
+    Q: 縦 7 cm、横 9 cm の長方形があります。縦の長さが 7 cm のとき、横の長さはいくつですか。
+    exp: {"kind":"integer","value":63}
+    act: {"kind":"integer","value":9}
+    expl: 長方形の面積は 縦 × 横 です。面積を縦の長さで割ると横の長さが求まります。面積は 7 × 9 = 63 cm2 なので、63 ÷ 7 = 9 cm です。
+  lv=2 seed=55706
+    params: {"variant":"find_side","width":3,"height":2,"area":6,"answer":3,"unit":"cm","difficultyLevel":2}
+    Q: 縦 2 cm、横 3 cm の長方形があります。縦の長さが 2 cm のとき、横の長さはいくつですか。
+    exp: {"kind":"integer","value":6}
+    act: {"kind":"integer","value":3}
+    expl: 長方形の面積は 縦 × 横 です。面積を縦の長さで割ると横の長さが求まります。面積は 2 × 3 = 6 cm2 なので、6 ÷ 2 = 3 cm です。
+  lv=2 seed=63625
+    params: {"variant":"find_side","width":5,"height":4,"area":20,"answer":5,"unit":"cm","difficultyLevel":2}
+    Q: 縦 4 cm、横 5 cm の長方形があります。縦の長さが 4 cm のとき、横の長さはいくつですか。
+    exp: {"kind":"integer","value":20}
+    act: {"kind":"integer","value":5}
+    expl: 長方形の面積は 縦 × 横 です。面積を縦の長さで割ると横の長さが求まります。面積は 4 × 5 = 20 cm2 なので、20 ÷ 4 = 5 cm です。
+  lv=2 seed=71544
+    params: {"variant":"find_side","width":6,"height":6,"area":36,"answer":6,"unit":"cm","difficultyLevel":2}
+    Q: 縦 6 cm、横 6 cm の長方形があります。縦の長さが 6 cm のとき、横の長さはいくつですか。
+    exp: {"kind":"integer","value":36}
+    act: {"kind":"integer","value":6}
+    expl: 長方形の面積は 縦 × 横 です。面積を縦の長さで割ると横の長さが求まります。面積は 6 × 6 = 36 cm2 なので、36 ÷ 6 = 6 cm です。
+  lv=2 seed=158653
+    params: {"variant":"find_side","width":8,"height":7,"area":56,"answer":7,"unit":"cm","difficultyLevel":2}
+    Q: 縦 7 cm、横 8 cm の長方形があります。横の長さが 8 cm のとき、縦の長さはいくつですか。
+    exp: {"kind":"integer","value":56}
+    act: {"kind":"integer","value":7}
+    expl: 長方形の面積は 縦 × 横 です。面積を縦の長さで割ると横の長さが求まります。面積は 7 × 8 = 56 cm2 なので、56 ÷ 8 = 7 cm です。
+===== prime_judgment (65)
+  lv=3 seed=16242
+    params: {"choices":[91,79,41],"answer":41,"difficultyLevel":3}
+    Q: 91、79、41 の中で素数はどれですか
+    exp: {"kind":"string","value":"AMBIGUOUS"}
+    act: {"kind":"string","value":"41"}
+    expl: 41は、約数が1と自分自身だけなので素数です。ほかの数は素数ではありません。(1は素数ではないことに注意)
+  lv=3 seed=24161
+    params: {"choices":[3,71,6],"answer":71,"difficultyLevel":3}
+    Q: 3、71、6 の中で素数はどれですか
+    exp: {"kind":"string","value":"AMBIGUOUS"}
+    act: {"kind":"string","value":"71"}
+    expl: 71は、約数が1と自分自身だけなので素数です。ほかの数は素数ではありません。(1は素数ではないことに注意)
+  lv=3 seed=32080
+    params: {"choices":[21,3,19],"answer":3,"difficultyLevel":3}
+    Q: 21、3、19 の中で素数はどれですか
+    exp: {"kind":"string","value":"AMBIGUOUS"}
+    act: {"kind":"string","value":"3"}
+    expl: 3は、約数が1と自分自身だけなので素数です。ほかの数は素数ではありません。(1は素数ではないことに注意)
+  lv=3 seed=39999
+    params: {"choices":[34,23,41],"answer":23,"difficultyLevel":3}
+    Q: 34、23、41 の中で素数はどれですか
+    exp: {"kind":"string","value":"AMBIGUOUS"}
+    act: {"kind":"string","value":"23"}
+    expl: 23は、約数が1と自分自身だけなので素数です。ほかの数は素数ではありません。(1は素数ではないことに注意)
+  lv=3 seed=47918
+    params: {"choices":[61,46,53],"answer":53,"difficultyLevel":3}
+    Q: 61、46、53 の中で素数はどれですか
+    exp: {"kind":"string","value":"AMBIGUOUS"}
+    act: {"kind":"string","value":"53"}
+    expl: 53は、約数が1と自分自身だけなので素数です。ほかの数は素数ではありません。(1は素数ではないことに注意)
+  lv=3 seed=55837
+    params: {"choices":[83,79,58],"answer":83,"difficultyLevel":3}
+    Q: 83、79、58 の中で素数はどれですか
+    exp: {"kind":"string","value":"AMBIGUOUS"}
+    act: {"kind":"string","value":"83"}
+    expl: 83は、約数が1と自分自身だけなので素数です。ほかの数は素数ではありません。(1は素数ではないことに注意)
+===== parallelogram_area (63)
+  lv=3 seed=32080
+    params: {"variant":"find_height","base":7,"height":26,"area":182,"answer":26,"difficultyLevel":3}
+    Q: 底辺が 7 cm、面積が 182 cm2 の平行四辺形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":182}
+    act: {"kind":"integer","value":26}
+    expl: 平行四辺形の面積は「底辺 × 高さ」です。面積を底辺で割ると高さが求まります。182 ÷ 7 = 26 cm となります。
+  lv=3 seed=39999
+    params: {"variant":"find_height","base":28,"height":35,"area":980,"answer":35,"difficultyLevel":3}
+    Q: 底辺が 28 cm、面積が 980 cm2 の平行四辺形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":980}
+    act: {"kind":"integer","value":35}
+    expl: 平行四辺形の面積は「底辺 × 高さ」です。面積を底辺で割ると高さが求まります。980 ÷ 28 = 35 cm となります。
+  lv=3 seed=47918
+    params: {"variant":"find_height","base":40,"height":12,"area":480,"answer":12,"difficultyLevel":3}
+    Q: 底辺が 40 cm、面積が 480 cm2 の平行四辺形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":480}
+    act: {"kind":"integer","value":12}
+    expl: 平行四辺形の面積は「底辺 × 高さ」です。面積を底辺で割ると高さが求まります。480 ÷ 40 = 12 cm となります。
+  lv=3 seed=55837
+    params: {"variant":"find_height","base":52,"height":16,"area":832,"answer":16,"difficultyLevel":3}
+    Q: 底辺が 52 cm、面積が 832 cm2 の平行四辺形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":832}
+    act: {"kind":"integer","value":16}
+    expl: 平行四辺形の面積は「底辺 × 高さ」です。面積を底辺で割ると高さが求まります。832 ÷ 52 = 16 cm となります。
+  lv=3 seed=63756
+    params: {"variant":"find_height","base":19,"height":9,"area":171,"answer":9,"difficultyLevel":3}
+    Q: 底辺が 19 cm、面積が 171 cm2 の平行四辺形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":171}
+    act: {"kind":"integer","value":9}
+    expl: 平行四辺形の面積は「底辺 × 高さ」です。面積を底辺で割ると高さが求まります。171 ÷ 19 = 9 cm となります。
+  lv=3 seed=150865
+    params: {"variant":"find_height","base":29,"height":32,"area":928,"answer":32,"difficultyLevel":3}
+    Q: 底辺が 29 cm、面積が 928 cm2 の平行四辺形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":928}
+    act: {"kind":"integer","value":32}
+    expl: 平行四辺形の面積は「底辺 × 高さ」です。面積を底辺で割ると高さが求まります。928 ÷ 29 = 32 cm となります。
+===== percentage (61)
+  lv=2 seed=24030
+    params: {"variant":"percent_of","percent":75,"whole":60,"part":45,"answer":45,"difficultyLevel":2}
+    Q: ある量が 60 です。その 75 パーセントは何ですか。
+    exp: {"kind":"integer","value":75}
+    act: {"kind":"integer","value":45}
+    expl: 「75 パーセントは全体の量に対していくつ分か」を求めるので、全体の 60 に 75 パーセントを掛けます。 60 × 75 ÷ 100 = 45 となります。
+  lv=2 seed=31949
+    params: {"variant":"percent_of","percent":25,"whole":56,"part":14,"answer":14,"difficultyLevel":2}
+    Q: 56 を100として考えたとき、25 パーセントはいくつですか。
+    exp: {"kind":"integer","value":25}
+    act: {"kind":"integer","value":14}
+    expl: 「25 パーセントは全体の量に対していくつ分か」を求めるので、全体の 56 に 25 パーセントを掛けます。 56 × 25 ÷ 100 = 14 となります。
+  lv=2 seed=39868
+    params: {"variant":"percent_of","percent":50,"whole":78,"part":39,"answer":39,"difficultyLevel":2}
+    Q: 全体の量が 78 あります。50 パーセントに相当する量を求めなさい。
+    exp: {"kind":"integer","value":50}
+    act: {"kind":"integer","value":39}
+    expl: 「50 パーセントは全体の量に対していくつ分か」を求めるので、全体の 78 に 50 パーセントを掛けます。 78 × 50 ÷ 100 = 39 となります。
+  lv=2 seed=47787
+    params: {"variant":"percent_of","percent":50,"whole":32,"part":16,"answer":16,"difficultyLevel":2}
+    Q: 32 を100として考えたとき、50 パーセントはいくつですか。
+    exp: {"kind":"integer","value":50}
+    act: {"kind":"integer","value":16}
+    expl: 「50 パーセントは全体の量に対していくつ分か」を求めるので、全体の 32 に 50 パーセントを掛けます。 32 × 50 ÷ 100 = 16 となります。
+  lv=2 seed=55706
+    params: {"variant":"percent_of","percent":60,"whole":70,"part":42,"answer":42,"difficultyLevel":2}
+    Q: 70 を100として考えたとき、60 パーセントはいくつですか。
+    exp: {"kind":"integer","value":60}
+    act: {"kind":"integer","value":42}
+    expl: 「60 パーセントは全体の量に対していくつ分か」を求めるので、全体の 70 に 60 パーセントを掛けます。 70 × 60 ÷ 100 = 42 となります。
+  lv=2 seed=63625
+    params: {"variant":"percent_of","percent":30,"whole":30,"part":9,"answer":9,"difficultyLevel":2}
+    Q: 30 を100として考えたとき、30 パーセントはいくつですか。
+    exp: {"kind":"integer","value":30}
+    act: {"kind":"integer","value":9}
+    expl: 「30 パーセントは全体の量に対していくつ分か」を求めるので、全体の 30 に 30 パーセントを掛けます。 30 × 30 ÷ 100 = 9 となります。
+===== speed_unit_conversion (56)
+  lv=2 seed=24030
+    params: {"kmPerHour":0,"givenValue":300,"variant":"mmin_to_kmh","conversionType":"mmin_to_kmh","answer":18,"difficultyLevel":2}
+    Q: 分速300mは、時速何kmですか
+    exp: {"kind":"decimal","value":0}
+    act: {"kind":"decimal","value":18}
+    expl: 分速300mは、1時間に18000m進みます。1000mが1kmなので、18000÷1000＝18kmです。
+  lv=2 seed=31949
+    params: {"kmPerHour":0,"givenValue":100,"variant":"mmin_to_kmh","conversionType":"mmin_to_kmh","answer":6,"difficultyLevel":2}
+    Q: 分速100mは、時速何kmですか
+    exp: {"kind":"decimal","value":0}
+    act: {"kind":"decimal","value":6}
+    expl: 分速100mは、1時間に6000m進みます。1000mが1kmなので、6000÷1000＝6kmです。
+  lv=2 seed=39868
+    params: {"kmPerHour":0,"givenValue":150,"variant":"mmin_to_kmh","conversionType":"mmin_to_kmh","answer":9,"difficultyLevel":2}
+    Q: 分速150mは、時速何kmですか
+    exp: {"kind":"decimal","value":0}
+    act: {"kind":"decimal","value":9}
+    expl: 分速150mは、1時間に9000m進みます。1000mが1kmなので、9000÷1000＝9kmです。
+  lv=2 seed=47787
+    params: {"kmPerHour":0,"givenValue":250,"variant":"mmin_to_kmh","conversionType":"mmin_to_kmh","answer":15,"difficultyLevel":2}
+    Q: 分速250mは、時速何kmですか
+    exp: {"kind":"decimal","value":0}
+    act: {"kind":"decimal","value":15}
+    expl: 分速250mは、1時間に15000m進みます。1000mが1kmなので、15000÷1000＝15kmです。
+  lv=2 seed=55706
+    params: {"kmPerHour":0,"givenValue":50,"variant":"mmin_to_kmh","conversionType":"mmin_to_kmh","answer":3,"difficultyLevel":2}
+    Q: 分速50mは、時速何kmですか
+    exp: {"kind":"decimal","value":0}
+    act: {"kind":"decimal","value":3}
+    expl: 分速50mは、1時間に3000m進みます。1000mが1kmなので、3000÷1000＝3kmです。
+  lv=2 seed=63625
+    params: {"kmPerHour":0,"givenValue":100,"variant":"mmin_to_kmh","conversionType":"mmin_to_kmh","answer":6,"difficultyLevel":2}
+    Q: 分速100mは、時速何kmですか
+    exp: {"kind":"decimal","value":0}
+    act: {"kind":"decimal","value":6}
+    expl: 分速100mは、1時間に6000m進みます。1000mが1kmなので、6000÷1000＝6kmです。
+===== triangle_area (53)
+  lv=3 seed=32080
+    params: {"variant":"find_height","base":7,"height":26,"area":91,"answer":26,"difficultyLevel":3}
+    Q: 底辺が 7 cm、面積が 91 cm2 の三角形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":91}
+    act: {"kind":"integer","value":26}
+    expl: 三角形の面積は「底辺 × 高さ ÷ 2」です。面積を底辺で割ると高さの2倍になるので、最後に2で割ります。91 × 2 = 182、182 ÷ 7 = 26 cm となります。
+  lv=3 seed=39999
+    params: {"variant":"find_height","base":33,"height":44,"area":726,"answer":44,"difficultyLevel":3}
+    Q: 底辺が 33 cm、面積が 726 cm2 の三角形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":726}
+    act: {"kind":"integer","value":44}
+    expl: 三角形の面積は「底辺 × 高さ ÷ 2」です。面積を底辺で割ると高さの2倍になるので、最後に2で割ります。726 × 2 = 1452、1452 ÷ 33 = 44 cm となります。
+  lv=3 seed=47918
+    params: {"variant":"find_height","base":40,"height":12,"area":240,"answer":12,"difficultyLevel":3}
+    Q: 底辺が 40 cm、面積が 240 cm2 の三角形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":240}
+    act: {"kind":"integer","value":12}
+    expl: 三角形の面積は「底辺 × 高さ ÷ 2」です。面積を底辺で割ると高さの2倍になるので、最後に2で割ります。240 × 2 = 480、480 ÷ 40 = 12 cm となります。
+  lv=3 seed=55837
+    params: {"variant":"find_height","base":52,"height":16,"area":416,"answer":16,"difficultyLevel":3}
+    Q: 底辺が 52 cm、面積が 416 cm2 の三角形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":416}
+    act: {"kind":"integer","value":16}
+    expl: 三角形の面積は「底辺 × 高さ ÷ 2」です。面積を底辺で割ると高さの2倍になるので、最後に2で割ります。416 × 2 = 832、832 ÷ 52 = 16 cm となります。
+  lv=3 seed=63756
+    params: {"variant":"find_height","base":26,"height":50,"area":650,"answer":50,"difficultyLevel":3}
+    Q: 底辺が 26 cm、面積が 650 cm2 の三角形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":650}
+    act: {"kind":"integer","value":50}
+    expl: 三角形の面積は「底辺 × 高さ ÷ 2」です。面積を底辺で割ると高さの2倍になるので、最後に2で割ります。650 × 2 = 1300、1300 ÷ 26 = 50 cm となります。
+  lv=3 seed=150865
+    params: {"variant":"find_height","base":29,"height":32,"area":464,"answer":32,"difficultyLevel":3}
+    Q: 底辺が 29 cm、面積が 464 cm2 の三角形があります。高さは何cmですか。
+    exp: {"kind":"integer","value":464}
+    act: {"kind":"integer","value":32}
+    expl: 三角形の面積は「底辺 × 高さ ÷ 2」です。面積を底辺で割ると高さの2倍になるので、最後に2で割ります。464 × 2 = 928、928 ÷ 29 = 32 cm となります。
+===== triangle_classify (44)
+  lv=1 seed=31818
+    params: {"variant":"which_sides_equal","a":5,"b":5,"c":2,"kind":"二等辺三角形","equalCount":2,"difficultyLevel":1}
+    Q: 辺の長さが 5cm、5cm、2cm の三角形で、長さが等しい辺は何本ありますか。
+    exp: {"kind":"string","value":"二等辺三角形"}
+    act: {"kind":"integer","value":2}
+    expl: 3辺の長さを順に並べると 2、5、5 です。長さが同じ辺が2本あるので、二等辺三角形であり等しい辺は2本です。
+  lv=1 seed=39737
+    params: {"variant":"which_sides_equal","a":6,"b":2,"c":6,"kind":"二等辺三角形","equalCount":2,"difficultyLevel":1}
+    Q: 辺の長さが 6cm、2cm、6cm の三角形で、長さが等しい辺は何本ありますか。
+    exp: {"kind":"string","value":"二等辺三角形"}
+    act: {"kind":"integer","value":2}
+    expl: 3辺の長さを順に並べると 2、6、6 です。長さが同じ辺が2本あるので、二等辺三角形であり等しい辺は2本です。
+  lv=1 seed=47656
+    params: {"variant":"which_sides_equal","a":6,"b":8,"c":8,"kind":"二等辺三角形","equalCount":2,"difficultyLevel":1}
+    Q: 辺の長さが 6cm、8cm、8cm の三角形で、長さが等しい辺は何本ありますか。
+    exp: {"kind":"string","value":"二等辺三角形"}
+    act: {"kind":"integer","value":2}
+    expl: 3辺の長さを順に並べると 6、8、8 です。長さが同じ辺が2本あるので、二等辺三角形であり等しい辺は2本です。
+  lv=1 seed=63494
+    params: {"variant":"which_sides_equal","a":8,"b":6,"c":8,"kind":"二等辺三角形","equalCount":2,"difficultyLevel":1}
+    Q: 辺の長さが 8cm、6cm、8cm の三角形で、長さが等しい辺は何本ありますか。
+    exp: {"kind":"string","value":"二等辺三角形"}
+    act: {"kind":"integer","value":2}
+    expl: 3辺の長さを順に並べると 6、8、8 です。長さが同じ辺が2本あるので、二等辺三角形であり等しい辺は2本です。
+  lv=1 seed=71413
+    params: {"variant":"which_sides_equal","a":9,"b":9,"c":8,"kind":"二等辺三角形","equalCount":2,"difficultyLevel":1}
+    Q: 辺の長さが 9cm、9cm、8cm の三角形で、長さが等しい辺は何本ありますか。
+    exp: {"kind":"string","value":"二等辺三角形"}
+    act: {"kind":"integer","value":2}
+    expl: 3辺の長さを順に並べると 8、9、9 です。長さが同じ辺が2本あるので、二等辺三角形であり等しい辺は2本です。
+  lv=1 seed=79332
+    params: {"variant":"which_sides_equal","a":3,"b":7,"c":7,"kind":"二等辺三角形","equalCount":2,"difficultyLevel":1}
+    Q: 辺の長さが 3cm、7cm、7cm の三角形で、長さが等しい辺は何本ありますか。
+    exp: {"kind":"string","value":"二等辺三角形"}
+    act: {"kind":"integer","value":2}
+    expl: 3辺の長さを順に並べると 3、7、7 です。長さが同じ辺が2本あるので、二等辺三角形であり等しい辺は2本です。
+===== integer_multi_step (39)
+  lv=3 seed=404
+    params: {"numbers":[9,13,13],"operators":["-","÷"],"expression":"9 - 13 ÷ 13","answer":8,"difficultyLevel":3,"termCount":3}
+    Q: 9 - 13 ÷ 13 はいくつになりますか
+    exp: {"kind":"integer","value":-0.3076923076923077}
+    act: {"kind":"integer","value":8}
+    expl: 9 - 13 ÷ 13＝8 です。かけ算・わり算を先に計算します。
+  lv=3 seed=79594
+    params: {"numbers":[10,18,2],"operators":["+","÷"],"expression":"10 + 18 ÷ 2","answer":19,"difficultyLevel":3,"termCount":3}
+    Q: 10 + 18 ÷ 2 はいくつになりますか
+    exp: {"kind":"integer","value":14}
+    act: {"kind":"integer","value":19}
+    expl: 10 + 18 ÷ 2＝19 です。かけ算・わり算を先に計算します。
+  lv=3 seed=111270
+    params: {"numbers":[7,6,2],"operators":["-","÷"],"expression":"7 - 6 ÷ 2","answer":4,"difficultyLevel":3,"termCount":3}
+    Q: 7 - 6 ÷ 2 はいくつになりますか
+    exp: {"kind":"integer","value":0.5}
+    act: {"kind":"integer","value":4}
+    expl: 7 - 6 ÷ 2＝4 です。かけ算・わり算を先に計算します。
+  lv=3 seed=166703
+    params: {"numbers":[7,15,15],"operators":["+","÷"],"expression":"7 + 15 ÷ 15","answer":8,"difficultyLevel":3,"termCount":3}
+    Q: 7 + 15 ÷ 15 はいくつになりますか
+    exp: {"kind":"integer","value":1.4666666666666666}
+    act: {"kind":"integer","value":8}
+    expl: 7 + 15 ÷ 15＝8 です。かけ算・わり算を先に計算します。
+  lv=3 seed=190460
+    params: {"numbers":[8,17,11],"operators":["+","×"],"expression":"8 + 17 × 11","answer":195,"difficultyLevel":3,"termCount":3}
+    Q: 8 + 17 × 11 はいくつになりますか
+    exp: {"kind":"integer","value":275}
+    act: {"kind":"integer","value":195}
+    expl: 8 + 17 × 11＝195 です。かけ算・わり算を先に計算します。
+  lv=3 seed=222136
+    params: {"numbers":[4,11,11],"operators":["-","÷"],"expression":"4 - 11 ÷ 11","answer":3,"difficultyLevel":3,"termCount":3}
+    Q: 4 - 11 ÷ 11 はいくつになりますか
+    exp: {"kind":"integer","value":-0.6363636363636364}
+    act: {"kind":"integer","value":3}
+    expl: 4 - 11 ÷ 11＝3 です。かけ算・わり算を先に計算します。
+===== gcd_lcm_word (27)
+  lv=3 seed=47918
+    params: {"t":"period","c":6,"d":7,"answer":42,"difficultyLevel":3}
+    Q: ケーキは6個ずつ、クッキーは7個ずつ入った箱を、同じ数になるように買いたい。それぞれ最も少ないセットは何箱ずつ買えばよいですか
+    exp: {"kind":"integer","value":1}
+    act: {"kind":"integer","value":42}
+    expl: 6と7の最小公倍数を求めると 42 です。
+  lv=3 seed=55837
+    params: {"t":"period","c":9,"d":9,"answer":9,"difficultyLevel":3}
+    Q: ケーキは9個ずつ、クッキーは9個ずつ入った箱を、同じ数になるように買いたい。それぞれ最も少ないセットは何箱ずつ買えばよいですか
+    exp: {"kind":"integer","value":1}
+    act: {"kind":"integer","value":9}
+    expl: 9と9の最小公倍数を求めると 9 です。
+  lv=3 seed=63756
+    params: {"t":"period","c":3,"d":2,"answer":6,"difficultyLevel":3}
+    Q: ケーキは3個ずつ、クッキーは2個ずつ入った箱を、同じ数になるように買いたい。それぞれ最も少ないセットは何箱ずつ買えばよいですか
+    exp: {"kind":"integer","value":1}
+    act: {"kind":"integer","value":6}
+    expl: 3と2の最小公倍数を求めると 6 です。
+  lv=3 seed=166703
+    params: {"t":"period","c":8,"d":7,"answer":56,"difficultyLevel":3}
+    Q: ケーキは8個ずつ、クッキーは7個ずつ入った箱を、同じ数になるように買いたい。それぞれ最も少ないセットは何箱ずつ買えばよいですか
+    exp: {"kind":"integer","value":1}
+    act: {"kind":"integer","value":56}
+    expl: 8と7の最小公倍数を求めると 56 です。
+  lv=3 seed=174622
+    params: {"t":"period","c":3,"d":9,"answer":9,"difficultyLevel":3}
+    Q: ケーキは3個ずつ、クッキーは9個ずつ入った箱を、同じ数になるように買いたい。それぞれ最も少ないセットは何箱ずつ買えばよいですか
+    exp: {"kind":"integer","value":1}
+    act: {"kind":"integer","value":9}
+    expl: 3と9の最小公倍数を求めると 9 です。
+  lv=3 seed=182541
+    params: {"t":"period","c":5,"d":3,"answer":15,"difficultyLevel":3}
+    Q: ケーキは5個ずつ、クッキーは3個ずつ入った箱を、同じ数になるように買いたい。それぞれ最も少ないセットは何箱ずつ買えばよいですか
+    exp: {"kind":"integer","value":1}
+    act: {"kind":"integer","value":15}
+    expl: 5と3の最小公倍数を求めると 15 です。
+===== symmetry_fold (15)
+  lv=2 seed=273
+    params: {"shape":"正五角形","isFold":true,"count":5,"difficultyLevel":2}
+    Q: 正五角形は線対称な図形ですか？（はい/いいえ）
+    exp: {"kind":"string","value":"いいえ"}
+    act: {"kind":"string","value":"はい"}
+    expl: 正五角形は線対称である。対称の軸は5本あります。
+  lv=2 seed=111139
+    params: {"shape":"正五角形","isFold":true,"count":5,"difficultyLevel":2}
+    Q: 正五角形は線対称な図形ですか？（はい/いいえ）
+    exp: {"kind":"string","value":"いいえ"}
+    act: {"kind":"string","value":"はい"}
+    expl: 正五角形は線対称である。対称の軸は5本あります。
+  lv=2 seed=222005
+    params: {"shape":"正五角形","isFold":true,"count":5,"difficultyLevel":2}
+    Q: 正五角形は線対称な図形ですか？（はい/いいえ）
+    exp: {"kind":"string","value":"いいえ"}
+    act: {"kind":"string","value":"はい"}
+    expl: 正五角形は線対称である。対称の軸は5本あります。
+  lv=2 seed=229924
+    params: {"shape":"正五角形","isFold":true,"count":5,"difficultyLevel":2}
+    Q: 正五角形は線対称な図形ですか？（はい/いいえ）
+    exp: {"kind":"string","value":"いいえ"}
+    act: {"kind":"string","value":"はい"}
+    expl: 正五角形は線対称である。対称の軸は5本あります。
+  lv=3 seed=103351
+    params: {"shape":"正五角形","isFold":true,"count":5,"difficultyLevel":3}
+    Q: 正五角形は線対称な図形ですか？（はい/いいえ）
+    exp: {"kind":"string","value":"いいえ"}
+    act: {"kind":"string","value":"はい"}
+    expl: 正五角形は線対称である。対称の軸は5本あります。
+  lv=3 seed=111270
+    params: {"shape":"正五角形","isFold":true,"count":5,"difficultyLevel":3}
+    Q: 正五角形は線対称な図形ですか？（はい/いいえ）
+    exp: {"kind":"string","value":"いいえ"}
+    act: {"kind":"string","value":"はい"}
+    expl: 正五角形は線対称である。対称の軸は5本あります。

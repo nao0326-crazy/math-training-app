@@ -1,0 +1,9 @@
+
+> grade6-math-generator@1.0.0 typecheck
+> tsc -b
+
+src/quality/prime-judgment-uniqueness.test.ts(17,32): error TS2339: Property 'value' does not exist on type 'Answer'.
+  Property 'value' does not exist on type '{ kind: "fraction"; numerator: number; denominator: number; }'.
+src/quality/prime-judgment-uniqueness.test.ts(17,50): error TS2339: Property 'value' does not exist on type 'Answer'.
+  Property 'value' does not exist on type '{ kind: "fraction"; numerator: number; denominator: number; }'.
+src/quality/problem-consistency-audit.test.ts(4,44): error TS2307: Cannot find module '../../scripts/oracle-audit' or its corresponding type declarations.

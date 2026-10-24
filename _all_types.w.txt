@@ -1,0 +1,2 @@
+Vercel CLI 65.2.0 (Node.js 24.15.0)
+Error: An unexpected error occurred in whoami: TypeError: Cannot convert argument to a ByteString because the character at index 0 has a value of 22235 which is greater than 255.

@@ -1,0 +1,483 @@
+
+> grade6-math-generator@1.0.0 test
+> vitest run
+
+
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mC:/Users/monty/Desktop/問題[39m
+
+ [32m✓[39m src/utils/mastery.test.ts [2m([22m[2m31 tests[22m[2m)[22m[90m 12[2mms[22m[39m
+ [32m✓[39m src/utils/inputType.test.ts [2m([22m[2m69 tests[22m[2m)[22m[90m 12[2mms[22m[39m
+ [32m✓[39m src/utils/adaptiveTimeLimit.test.ts [2m([22m[2m49 tests[22m[2m)[22m[90m 18[2mms[22m[39m
+ [32m✓[39m src/utils/answer.test.ts [2m([22m[2m61 tests[22m[2m)[22m[90m 13[2mms[22m[39m
+ [32m✓[39m src/problems/combinatorics/variety-phase2b.test.ts [2m([22m[2m14 tests[22m[2m)[22m[90m 65[2mms[22m[39m
+[90mstdout[2m | src/problems/arithmetic/integer/estimate-product.test.ts[2m > [22m[2mestimate_product: 480問の独立検算 (lv2-5 x 120)[2m > [22m[2m全480問が丸め・見積り・難易度・解説で独立検算を通過する
+[22m[39m480問独立検算: {"perLevel":{"2":{"gen":120,"ok":120,"fail":0},"3":{"gen":120,"ok":120,"fail":0},"4":{"gen":120,"ok":120,"fail":0},"5":{"gen":120,"ok":120,"fail":0}},"perVariant":{"estimate_to_tens":{"gen":153,"ok":153,"fail":0},"estimate_one_exact":{"gen":133,"ok":133,"fail":0},"estimate_to_hundreds":{"gen":88,"ok":88,"fail":0},"estimate_mixed_places":{"gen":82,"ok":82,"fail":0},"estimate_shopping":{"gen":24,"ok":24,"fail":0}}}
+
+ [32m✓[39m src/problems/arithmetic/integer/estimate-product.test.ts [2m([22m[2m22 tests[22m[2m)[22m[90m 129[2mms[22m[39m
+ [32m✓[39m src/problems/geometry/geometry-phase2s.test.ts [2m([22m[2m24 tests[22m[2m)[22m[33m 364[2mms[22m[39m
+ [32m✓[39m src/problems/decimal/decimalArithmeticGenerators.test.ts [2m([22m[2m39 tests[22m[2m)[22m[90m 249[2mms[22m[39m
+ [32m✓[39m src/problems/quality-phase2.test.ts [2m([22m[2m28 tests[22m[2m)[22m[33m 444[2mms[22m[39m
+ [32m✓[39m src/problems/problems-phase2t.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 570[2mms[22m[39m
+ [32m✓[39m src/engine/selector/questionSelector.test.ts [2m([22m[2m25 tests[22m[2m)[22m[90m 91[2mms[22m[39m
+ [32m✓[39m src/engine/selector/weakTargets.test.ts [2m([22m[2m28 tests[22m[2m)[22m[33m 328[2mms[22m[39m
+ [32m✓[39m src/problems/combinatorics/variety-phase2e.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 865[2mms[22m[39m
+   [33m[2m✓[22m[39m combine_simple: 既存型との重複がない[2m > [22mcombinatorics の他型と問題文が一致しない [33m480[2mms[22m[39m
+ [32m✓[39m src/engine/curriculum/curriculumScope.test.ts [2m([22m[2m27 tests[22m[2m)[22m[90m 207[2mms[22m[39m
+ [32m✓[39m src/problems/arithmetic/integer/subtraction-structure.test.ts [2m([22m[2m28 tests[22m[2m)[22m[90m 132[2mms[22m[39m
+ [32m✓[39m src/quality/phase2f-validate.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 121[2mms[22m[39m
+ [32m✓[39m src/utils/quizTimer.test.ts [2m([22m[2m23 tests[22m[2m)[22m[90m 27[2mms[22m[39m
+ [32m✓[39m src/quality/learning-quality.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 213[2mms[22m[39m
+ [32m✓[39m src/problems/numberTheory/generators.test.ts [2m([22m[2m24 tests[22m[2m)[22m[90m 133[2mms[22m[39m
+[90mstdout[2m | src/engine/diversity/diversity.test.ts[2m > [22m[2mQuestionSelector 多様性統合テスト[2m > [22m[2m20問生成で family 偏り・重複・連続を抑制する
+[22m[39mFamily distribution (20 questions): {
+  multiplication: [33m1[39m,
+  gcd_lcm: [33m1[39m,
+  average: [33m1[39m,
+  range: [33m2[39m,
+  word_problem: [33m2[39m,
+  arrangement: [33m1[39m,
+  unit_conversion: [33m1[39m,
+  rounding: [33m1[39m,
+  circle_area: [33m1[39m,
+  multi_step: [33m1[39m,
+  triangle_area: [33m1[39m,
+  volume: [33m1[39m,
+  divisors: [33m1[39m,
+  speed_triple: [33m1[39m,
+  combination: [33m1[39m,
+  parallelogram_area: [33m1[39m,
+  proportional: [33m1[39m,
+  angle: [33m1[39m
+}
+
+ [32m✓[39m src/engine/diversity/diversity.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 266[2mms[22m[39m
+ [32m✓[39m src/problems/geometry/geometry-phase2u.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 235[2mms[22m[39m
+ [32m✓[39m src/problems/combinatorics/variety-phase2d.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 1931[2mms[22m[39m
+   [33m[2m✓[22m[39m duplicate_removal: 重複構成の多様性と正しさ[2m > [22m答えは独立した全列挙 (正準形) と一致する [33m304[2mms[22m[39m
+   [33m[2m✓[22m[39m duplicate_removal: 重複構成の多様性と正しさ[2m > [22mvalidate が全生成問題で通る [33m442[2mms[22m[39m
+   [33m[2m✓[22m[39m duplicate_removal: 重複構成の多様性と正しさ[2m > [22m記号の種類数と枚数配分が変化している (水増しでないこと) [33m333[2mms[22m[39m
+   [33m[2m✓[22m[39m duplicate_removal: 重複構成の多様性と正しさ[2m > [22mPhase 2-D 共通チェック[2m > [22m同じ条件なら問題文は常に同一 (表現のゆらぎなし) [33m327[2mms[22m[39m
+ [32m✓[39m src/problems/phase2z1.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 590[2mms[22m[39m
+ [32m✓[39m src/problems/geometry/congruent-judge-differs.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 80[2mms[22m[39m
+ [32m✓[39m src/engine/solution/solutionGenerator.test.ts [2m([22m[2m13 tests[22m[2m)[22m[33m 478[2mms[22m[39m
+   [33m[2m✓[22m[39m 全問題タイプでの途中式と正解の整合性[2m > [22mすべてのジェネレータ×難易度×シードで、途中式が生成され最終ステップが答えと一致する [33m392[2mms[22m[39m
+ [32m✓[39m src/problems/geometry/symmetry-validate.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 25[2mms[22m[39m
+ [32m✓[39m src/problems/geometry/geometry-phase2v.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 645[2mms[22m[39m
+ [32m✓[39m src/utils/answer.judging.extra.test.ts [2m([22m[2m40 tests[22m[2m)[22m[90m 23[2mms[22m[39m
+ [32m✓[39m src/engine/selector/filteredSelector.test.ts [2m([22m[2m16 tests[22m[2m)[22m[90m 212[2mms[22m[39m
+ [32m✓[39m src/problems/realWorld/eggs.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 59[2mms[22m[39m
+ [32m✓[39m src/problems/phase2y.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 566[2mms[22m[39m
+ [32m✓[39m src/problems/geometry/congruent-judge-same.test.ts [2m([22m[2m11 tests[22m[2m)[22m[90m 132[2mms[22m[39m
+ [32m✓[39m src/engine/selector/randomSelector.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 2289[2mms[22m[39m
+   [33m[2m✓[22m[39m RandomSelector: 履歴0件でも全カテゴリから出題できる[2m > [22m全難易度で少なくとも1問は出題できる [33m802[2mms[22m[39m
+   [33m[2m✓[22m[39m RandomSelector: カテゴリ抽選は Generator 数に比例しない[2m > [22mgeometry は Generator が最多 (24個) だが過度に偏らない [33m399[2mms[22m[39m
+   [33m[2m✓[22m[39m RandomSelector: カテゴリ抽選は Generator 数に比例しない[2m > [22m全カテゴリの出題比率が極端な偏りを持たない [33m361[2mms[22m[39m
+ [32m✓[39m src/utils/adaptiveDifficulty.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 12[2mms[22m[39m
+ [32m✓[39m src/utils/stats.test.ts [2m([22m[2m14 tests[22m[2m)[22m[90m 15[2mms[22m[39m
+ [32m✓[39m src/engine/selector/adaptiveSelector.test.ts [2m([22m[2m11 tests[22m[2m)[22m[90m 52[2mms[22m[39m
+ [32m✓[39m src/problems/fraction/fraction-explanation.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 30[2mms[22m[39m
+ [32m✓[39m src/utils/fraction.test.ts [2m([22m[2m25 tests[22m[2m)[22m[90m 16[2mms[22m[39m
+ [32m✓[39m src/problems/realWorld/integration.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 367[2mms[22m[39m
+   [33m[2m✓[22m[39m 現実連動教材: 出題選択への統合[2m > [22mfull-random (通常ランダム) の母集団に realWorld が含まれる [33m341[2mms[22m[39m
+ [32m✓[39m src/components/figure.test.tsx [2m([22m[2m12 tests[22m[2m)[22m[90m 38[2mms[22m[39m
+ [32m✓[39m src/utils/sessionTally.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 11[2mms[22m[39m
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m重点監査[2m > [22m[2mSpeedWordGenerator[2m > [22m[2mレベル5の問題を生成して確認
+[22m[39m
+===== SpeedWordGenerator レベル5 =====
+
+--- 問題 ---
+問題: 自動車で時速190kmで8時間走ると何km進みますか。
+正解: {"kind":"integer","value":1520}
+解説: 道のり＝速さ×時間 なので、190×8＝1520です。
+
+--- 問題 ---
+問題: 自動車で時速123kmで7時間走ると何km進みますか。
+正解: {"kind":"integer","value":861}
+解説: 道のり＝速さ×時間 なので、123×7＝861です。
+
+--- 問題 ---
+問題: 自動車で時速123kmで8時間走ると何km進みますか。
+正解: {"kind":"integer","value":984}
+解説: 道のり＝速さ×時間 なので、123×8＝984です。
+
+--- 問題 ---
+問題: 自動車で時速123kmで9時間走ると何km進みますか。
+正解: {"kind":"integer","value":1107}
+解説: 道のり＝速さ×時間 なので、123×9＝1107です。
+
+--- 問題 ---
+問題: 自動車で時速123kmで10時間走ると何km進みますか。
+正解: {"kind":"integer","value":1230}
+解説: 道のり＝速さ×時間 なので、123×10＝1230です。
+
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m重点監査[2m > [22m[2mDecimalDivDecimalGenerator[2m > [22m[2m問題を生成して丸め指示を確認
+[22m[39m
+===== DecimalDivDecimalGenerator =====
+
+--- 問題 ---
+問題: 1.5を0.5でわると、商はいくつですか
+正解: {"kind":"decimal","value":3}
+解説: 1.5÷0.5＝3です。
+問題点: 小数÷小数の問題に丸め方の指示がない
+
+--- 問題 ---
+問題: 4.5を0.9でわると、商はいくつですか
+正解: {"kind":"decimal","value":5}
+解説: 4.5÷0.9＝5です。
+問題点: 小数÷小数の問題に丸め方の指示がない
+
+--- 問題 ---
+問題: 9.8を1.4でわると、商はいくつですか
+正解: {"kind":"decimal","value":7}
+解説: 9.8÷1.4＝7です。
+問題点: 小数÷小数の問題に丸め方の指示がない
+
+--- 問題 ---
+問題: 27.6を2.3でわると、商はいくつですか
+正解: {"kind":"decimal","value":12}
+解説: 27.6÷2.3＝12です。
+問題点: 小数÷小数の問題に丸め方の指示がない
+
+--- 問題 ---
+問題: 103.5を4.5でわると、商はいくつですか
+正解: {"kind":"decimal","value":23}
+解説: 103.5÷4.5＝23です。
+問題点: 小数÷小数の問題に丸め方の指示がない
+
+--- 問題 ---
+問題: 0.4を0.2でわると、商はいくつですか
+正解: {"kind":"decimal","value":2}
+解説: 0.4÷0.2＝2です。
+問題点: 小数÷小数の問題に丸め方の指示がない
+
+--- 問題 ---
+問題: 1.2を0.3でわると、商はいくつですか
+正解: {"kind":"decimal","value":4}
+解説: 1.2÷0.3＝4です。
+問題点: 小数÷小数の問題に丸め方の指示がない
+
+--- 問題 ---
+問題: 2.4を0.4でわると、商はいくつですか
+正解: {"kind":"decimal","value":6}
+解説: 2.4÷0.4＝6です。
+問題点: 小数÷小数の問題に丸め方の指示がない
+
+--- 問題 ---
+問題: 6を0.6でわると、商はいくつですか
+正解: {"kind":"decimal","value":10}
+解説: 6÷0.6＝10です。
+問題点: 小数÷小数の問題に丸め方の指示がない
+
+--- 問題 ---
+問題: 22.8を1.2でわると、商はいくつですか
+正解: {"kind":"decimal","value":19}
+解説: 22.8÷1.2＝19です。
+問題点: 小数÷小数の問題に丸め方の指示がない
+
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m重点監査[2m > [22m[2mFractionBigSmallGenerator[2m > [22m[2m問題を生成して約分の一貫性を確認
+[22m[39m
+===== FractionBigSmallGenerator =====
+
+--- 問題 ---
+問題: 2分の1と5分の4 のどちらが大きいか比べなさい
+正解: {"kind":"string","value":"5分の4"}
+解説: 5分の4 の方が大きいです。 (分子4、分母5)もう一方は分子1です。
+
+--- 問題 ---
+問題: 7分の3と14分の11 のどちらが大きいか比べなさい
+正解: {"kind":"string","value":"14分の11"}
+解説: 14分の11 の方が大きいです。 (分子11、分母14)もう一方は分子3です。
+
+--- 問題 ---
+問題: 19分の9と19分の15 のどちらが大きいか比べなさい
+正解: {"kind":"string","value":"19分の15"}
+解説: 19分の15 の方が大きいです。 (分子15、分母19)もう一方は分子9です。
+
+--- 問題 ---
+問題: 19分の9と19分の15 のどちらが大きいか比べなさい
+正解: {"kind":"string","value":"19分の15"}
+解説: 19分の15 の方が大きいです。 (分子15、分母19)もう一方は分子9です。
+
+--- 問題 ---
+問題: 19分の9と19分の15 のどちらが大きいか比べなさい
+正解: {"kind":"string","value":"19分の15"}
+解説: 19分の15 の方が大きいです。 (分子15、分母19)もう一方は分子9です。
+
+--- 問題 ---
+問題: 5分の2と5分の3 のどちらが大きいか比べなさい
+正解: {"kind":"string","value":"5分の3"}
+解説: 5分の3 の方が大きいです。 (分子3、分母5)もう一方は分子2です。
+
+--- 問題 ---
+問題: 12分の1と12分の5 のどちらが大きいか比べなさい
+正解: {"kind":"string","value":"12分の5"}
+解説: 12分の5 の方が大きいです。 (分子5、分母12)もう一方は分子1です。
+
+--- 問題 ---
+問題: 8分の3と2分の1 のどちらが大きいか比べなさい
+正解: {"kind":"string","value":"8分の3"}
+解説: 8分の3 の方が大きいです。 (分子3、分母8)もう一方は分子1です。
+
+--- 問題 ---
+問題: 8分の3と2分の1 のどちらが大きいか比べなさい
+正解: {"kind":"string","value":"8分の3"}
+解説: 8分の3 の方が大きいです。 (分子3、分母8)もう一方は分子1です。
+
+--- 問題 ---
+問題: 8分の3と2分の1 のどちらが大きいか比べなさい
+正解: {"kind":"string","value":"8分の3"}
+解説: 8分の3 の方が大きいです。 (分子3、分母8)もう一方は分子1です。
+
+[90mstdout[2m | src/quality/deep-audit.test.ts[2m > [22m[2m重点監査[2m > [22m[2mRatioSimplifyGenerator[2m > [22m[2m問題を生成して既約比でないことを確認
+[22m[39m
+===== RatioSimplifyGenerator =====
+
+--- 問題 ---
+問題: 8：16を、できるだけ簡単な比になおしなさい
+正解: {"kind":"string","value":"1：2"}
+解説: 8と16を最大公約数8でわると、1：2です。
+
+--- 問題 ---
+問題: 18：30を、できるだけ簡単な比になおしなさい
+正解: {"kind":"string","value":"3：5"}
+解説: 18と30を最大公約数6でわると、3：5です。
+
+--- 問題 ---
+問題: 32：48を、できるだけ簡単な比になおしなさい
+正解: {"kind":"string","value":"2：3"}
+解説: 32と48を最大公約数16でわると、2：3です。
+
+--- 問題 ---
+問題: 50：90を、できるだけ簡単な比になおしなさい
+正解: {"kind":"string","value":"5：9"}
+解説: 50と90を最大公約数10でわると、5：9です。
+
+--- 問題 ---
+問題: 98：182を、できるだけ簡単な比になおしなさい
+正解: {"kind":"string","value":"7：13"}
+解説: 98と182を最大公約数14でわると、7：13です。
+
+--- 問題 ---
+問題: 4：6を、できるだけ簡単な比になおしなさい
+正解: {"kind":"string","value":"2：3"}
+解説: 4と6を最大公約数2でわると、2：3です。
+
+--- 問題 ---
+問題: 6：9を、できるだけ簡単な比になおしなさい
+正解: {"kind":"string","value":"2：3"}
+解説: 6と9を最大公約数3でわると、2：3です。
+
+--- 問題 ---
+問題: 12：16を、できるだけ簡単な比になおしなさい
+正解: {"kind":"string","value":"3：4"}
+解説: 12と16を最大公約数4でわると、3：4です。
+
+--- 問題 ---
+問題: 20：30を、できるだけ簡単な比になおしなさい
+正解: {"kind":"string","value":"2：3"}
+解説: 20と30を最大公約数10でわると、2：3です。
+
+--- 問題 ---
+問題: 42：56を、できるだけ簡単な比になおしなさい
+正解: {"kind":"string","value":"3：4"}
+解説: 42と56を最大公約数14でわると、3：4です。
+
+すべての問題が簡単化できる: true
+生成された問題数: 500
+
+ [32m✓[39m src/quality/deep-audit.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 27[2mms[22m[39m
+ [32m✓[39m src/services/quizPersistence.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 17[2mms[22m[39m
+[90mstdout[2m | src/quality/problem-semantic-audit.test.ts[2m > [22m[2m問題の表示内容・意味的整合性監査[2m > [22m[2m全96タイプを監査し、高信頼チェックの不整合が0件である
+[22m[39m[problem-semantic-audit] total=2150 checked=2150 issues=0
+
+ [32m✓[39m src/problems/arithmetic/integer/basicOperations.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 98[2mms[22m[39m
+ [32m✓[39m src/quality/problem-semantic-audit.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 434[2mms[22m[39m
+   [33m[2m✓[22m[39m 問題の表示内容・意味的整合性監査[2m > [22m全96タイプを監査し、高信頼チェックの不整合が0件である [33m431[2mms[22m[39m
+ [32m✓[39m src/problems/combinatorics/variety-phase2a.test.ts [2m([22m[2m27 tests[22m[2m)[22m[33m 4173[2mms[22m[39m
+   [33m[2m✓[22m[39m arrange_tree: 実質的な多様性[2m > [22m条件 (n, variant) の組み合わせが十分に多い [33m731[2mms[22m[39m
+   [33m[2m✓[22m[39m arrange_tree: 実質的な多様性[2m > [22m複数の条件種類が出現する (1種類に固定されない) [33m654[2mms[22m[39m
+   [33m[2m✓[22m[39m arrange_tree: 条件と答えの正しさ[2m > [22m全難易度・全シードで validate を通り、答えが正の整数になる [33m651[2mms[22m[39m
+   [33m[2m✓[22m[39m arrange_tree: 条件と答えの正しさ[2m > [22m境界: 解説が壊れた式 (×0) を含まない [33m355[2mms[22m[39m
+   [33m[2m✓[22m[39m arrange_tree: 条件と答えの正しさ[2m > [22m境界: n は3以上で、答えも1以上になる [33m484[2mms[22m[39m
+ [32m✓[39m src/utils/weakAreas.test.ts [2m([22m[2m13 tests[22m[2m)[22m[90m 29[2mms[22m[39m
+ [32m✓[39m src/problems/phase2z.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 314[2mms[22m[39m
+ [32m✓[39m src/storage/db.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 1031[2mms[22m[39m
+   [33m[2m✓[22m[39m scratchNotes CRUD[2m > [22m全削除は scratchNotes も消す [33m333[2mms[22m[39m
+ [32m✓[39m src/quality/quality-gate.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 4425[2mms[22m[39m
+   [33m[2m✓[22m[39m decimal answer quality[2m > [22mfor every generator the displayed answer is accepted when typed back [33m373[2mms[22m[39m
+   [33m[2m✓[22m[39m requested difficulty is honoured[2m > [22mgenerateProblem({difficulty}) always returns exactly that difficulty level [33m542[2mms[22m[39m
+   [33m[2m✓[22m[39m supportedLevels matches real generation capability[2m > [22mevery declared level is actually producible for its own type [33m2630[2mms[22m[39m
+ [32m✓[39m src/problems/arithmetic/integer/subtraction-zero.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 371[2mms[22m[39m
+ [32m✓[39m src/utils/dailyCount.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 70[2mms[22m[39m
+ [32m✓[39m src/engine/selector/generationVariety.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 3165[2mms[22m[39m
+   [33m[2m✓[22m[39m 数値ランダム化 (ジェネレータ単位・決定論)[2m > [22m全ジェネレータで、難易度1〜5×複数シードから複数の数値パターンが生成され、全問が検証を通過する [33m588[2mms[22m[39m
+   [33m[2m✓[22m[39m 数値ランダム化 (ジェネレータ単位・決定論)[2m > [22m全ジェネレータで、ある難易度内だけ見ても数値パターンが複数ある [33m377[2mms[22m[39m
+   [33m[2m✓[22m[39m 数値ランダム化 (レジストリ経路)[2m > [22m各カテゴリ×難易度で seed を変えると異なる問題が生成される [33m1682[2mms[22m[39m
+   [33m[2m✓[22m[39m 数値ランダム化 (レジストリ経路)[2m > [22mシード未指定で連続生成しても問題が崩壊しない (自動シード経路のスモークテスト) [33m327[2mms[22m[39m
+ [32m✓[39m src/problems/decimal/decimal-place-value.test.ts [2m([22m[2m5 tests[22m[2m)[22m[90m 30[2mms[22m[39m
+ [32m✓[39m src/problems/realWorld/generators.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 122[2mms[22m[39m
+ [32m✓[39m src/utils/scratchDraw.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 17[2mms[22m[39m
+ [32m✓[39m src/engine/selector/questionPool.test.ts [2m([22m[2m15 tests[22m[2m)[22m[90m 30[2mms[22m[39m
+ [32m✓[39m src/engine/validator/validator.test.ts [2m([22m[2m17 tests[22m[2m)[22m[90m 18[2mms[22m[39m
+ [32m✓[39m src/problems/expression/generators.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 12[2mms[22m[39m
+ [32m✓[39m src/problems/fraction/generators.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 328[2mms[22m[39m
+ [32m✓[39m src/engine/selector/generatorSweep.test.ts [2m([22m[2m289 tests[22m[2m)[22m[33m 3483[2mms[22m[39m
+ [32m✓[39m src/quality/problem-quality-regression.test.ts [2m([22m[2m6 tests[22m[2m)[22m[90m 9[2mms[22m[39m
+ [32m✓[39m src/engine/difficulty/difficulty.test.ts [2m([22m[2m14 tests[22m[2m)[22m[90m 10[2mms[22m[39m
+ [32m✓[39m src/storage/db.adminPracticeTypes.test.ts [2m([22m[2m6 tests[22m[2m)[22m[90m 22[2mms[22m[39m
+ [32m✓[39m src/engine/selector/fullRandomSelector.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 265[2mms[22m[39m
+ [32m✓[39m src/problems/arithmetic/integer/multiStep.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 34[2mms[22m[39m
+ [32m✓[39m src/problems/ratio/percentage.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 84[2mms[22m[39m
+ [32m✓[39m src/utils/random.test.ts [2m([22m[2m14 tests[22m[2m)[22m[90m 164[2mms[22m[39m
+ [32m✓[39m src/services/scratchNote.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 12[2mms[22m[39m
+ [32m✓[39m src/utils/learningCalendar.test.ts [2m([22m[2m8 tests[22m[2m)[22m[90m 17[2mms[22m[39m
+ [32m✓[39m src/pages/homePage.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[90m 10[2mms[22m[39m
+ [32m✓[39m src/utils/adminMode.test.ts [2m([22m[2m8 tests[22m[2m)[22m[90m 14[2mms[22m[39m
+ [32m✓[39m src/services/dailyAnswerSync.test.ts [2m([22m[2m3 tests[22m[2m)[22m[90m 164[2mms[22m[39m
+ [32m✓[39m src/components/ImageRenderer.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[90m 20[2mms[22m[39m
+ [32m✓[39m src/engine/selector/randomSession.test.ts [2m([22m[2m2 tests[22m[2m)[22m[90m 60[2mms[22m[39m
+ [32m✓[39m src/problems/arithmetic/integer/wordProblems.test.ts [2m([22m[2m5 tests[22m[2m)[22m[90m 41[2mms[22m[39m
+[90mstdout[2m | src/quality/quality.audit.test.ts[2m > [22m[2m問題生成品質監査[2m > [22m[2m全Generatorから問題を生成して品質を検査する
+[22m[39m
+検出された問題数: 95
+問題の内訳:
+  問題文の指示が不明確: 95
+
+問題サンプル（最初の20件）:
+
+[unit_conversion_basic]
+  問題: 7時は何秒ですか
+  正解: {"kind":"integer","value":25200}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 6分は何秒ですか
+  正解: {"kind":"integer","value":360}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 7分は何秒ですか
+  正解: {"kind":"integer","value":420}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 7時は何分ですか
+  正解: {"kind":"integer","value":420}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 8mは何mmですか
+  正解: {"kind":"integer","value":8000}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 9分は何秒ですか
+  正解: {"kind":"integer","value":540}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 9kmは何mですか
+  正解: {"kind":"integer","value":9000}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 8時は何分ですか
+  正解: {"kind":"integer","value":480}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 2時は何分ですか
+  正解: {"kind":"integer","value":120}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 2mは何mmですか
+  正解: {"kind":"integer","value":2000}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 3分は何秒ですか
+  正解: {"kind":"integer","value":180}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 2mは何cmですか
+  正解: {"kind":"integer","value":200}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 3mは何mmですか
+  正解: {"kind":"integer","value":3000}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 5kmは何mですか
+  正解: {"kind":"integer","value":5000}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 2時は何分ですか
+  正解: {"kind":"integer","value":120}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 6kmは何mですか
+  正解: {"kind":"integer","value":6000}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 5時は何秒ですか
+  正解: {"kind":"integer","value":18000}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 9mは何mmですか
+  正解: {"kind":"integer","value":9000}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 1時は何秒ですか
+  正解: {"kind":"integer","value":3600}
+  問題点: 問題文の指示が不明確
+
+[unit_conversion_basic]
+  問題: 1mは何mmですか
+  正解: {"kind":"integer","value":1000}
+  問題点: 問題文の指示が不明確
+
+ [32m✓[39m src/quality/quality.audit.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 690[2mms[22m[39m
+   [33m[2m✓[22m[39m 問題生成品質監査[2m > [22m全Generatorから問題を生成して品質を検査する [33m601[2mms[22m[39m
+ [32m✓[39m src/utils/solvedCount.test.ts [2m([22m[2m6 tests[22m[2m)[22m[90m 8[2mms[22m[39m
+ [32m✓[39m src/utils/sha256.test.ts [2m([22m[2m3 tests[22m[2m)[22m[90m 8[2mms[22m[39m
+ [32m✓[39m src/engine/selector/generatorRegistry.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 1393[2mms[22m[39m
+   [33m[2m✓[22m[39m 問題生成エンジン[2m > [22m10000問生成して全問題が検証を通過する [33m1061[2mms[22m[39m
+ [32m✓[39m src/quality/oracle-five-types.test.ts [2m([22m[2m2 tests[22m[2m)[22m[90m 33[2mms[22m[39m
+ [32m✓[39m src/quality/prime-judgment-uniqueness.test.ts [2m([22m[2m1 test[22m[2m)[22m[90m 15[2mms[22m[39m
+ [32m✓[39m src/utils/verificationCode.test.ts [2m([22m[2m1 test[22m[2m)[22m[90m 5[2mms[22m[39m
+ [32m✓[39m src/pages/quizSelection.test.ts [2m([22m[2m5 tests[22m[2m)[22m[90m 9[2mms[22m[39m
+ [32m✓[39m src/utils/appVersion.test.ts [2m([22m[2m1 test[22m[2m)[22m[90m 5[2mms[22m[39m
+ [32m✓[39m src/components/AdminGateDialog.test.tsx [2m([22m[2m1 test[22m[2m)[22m[90m 13[2mms[22m[39m
+[90mstdout[2m | src/quality/problem-consistency-audit.test.ts[2m > [22m[2m独立オラクルによる問題文/正解の整合性[2m > [22m[2m96種類すべての生成器を監査し、不整合が0件である
+[22m[39m[consistency-audit] total=8600 checked=8600 issues=0 skippedTypes=0
+[consistency-audit] skipped=
+
+ [32m✓[39m src/quality/problem-consistency-audit.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 356[2mms[22m[39m
+   [33m[2m✓[22m[39m 独立オラクルによる問題文/正解の整合性[2m > [22m96種類すべての生成器を監査し、不整合が0件である [33m354[2mms[22m[39m
+ [32m✓[39m src/pages/VerificationCodePage.test.tsx [2m([22m[2m1 test[22m[2m)[22m[90m 12[2mms[22m[39m
+ [32m✓[39m src/engine/selector/difficultyDiagnostic.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 726[2mms[22m[39m
+ [32m✓[39m src/App.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[90m 7[2mms[22m[39m
+ [32m✓[39m src/utils/maintenanceMode.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 7[2mms[22m[39m
+ [32m✓[39m src/components/SolutionDisplay.test.tsx [2m([22m[2m1 test[22m[2m)[22m[90m 23[2mms[22m[39m
+ [32m✓[39m src/pages/HistoryPage.scratch.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[90m 190[2mms[22m[39m
+ [32m✓[39m src/components/ScratchPad.test.tsx [2m([22m[2m17 tests[22m[2m)[22m[33m 399[2mms[22m[39m
+ [32m✓[39m src/components/AnswerInput.test.tsx [2m([22m[2m24 tests[22m[2m)[22m[33m 482[2mms[22m[39m
+ [32m✓[39m src/pages/QuizPage.flow.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 395[2mms[22m[39m
+ [32m✓[39m src/pages/QuizPage.scratch.test.tsx [2m([22m[2m7 tests[22m[2m)[22m[33m 452[2mms[22m[39m
+ [32m✓[39m src/pages/App.adminScope.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 608[2mms[22m[39m
+   [33m[2m✓[22m[39m 管理者設定 → 出題のデータ経路 (UIフロー全体)[2m > [22m管理者画面で単元96項目から選択して保存すると、出題がその単元に限定される [33m308[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m98 passed[39m[22m[90m (98)[39m
+[2m      Tests [22m [1m[32m1554 passed[39m[22m[90m (1554)[39m
+[2m   Start at [22m 17:10:29
+[2m   Duration [22m 30.81s[2m (transform 10.60s, setup 0ms, collect 52.57s, tests 37.02s, environment 118.69s, prepare 28.67s)[22m
+

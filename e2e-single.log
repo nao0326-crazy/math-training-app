@@ -1,0 +1,509 @@
+SERVER UP http://127.0.0.1:5199
+PASS integer_addition lv1 Q1 question text :: 6に5をたすといくつになりますか
+PASS integer_addition lv1 Q1 input type :: integer
+PASS integer_addition lv1 Q1 expected answer :: 11
+PASS integer_addition lv1 Q1 correct feedback :: 🎉 せいかい！ 6＋5＝11 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv1 Q1 solution display :: steps=1
+PASS integer_addition lv1 Q1 solution answer value :: expected=11
+PASS integer_addition lv1 Q2 no leftover input :: empty
+PASS integer_addition lv1 Q2 question text :: 3に1をたすといくつになりますか
+PASS integer_addition lv1 Q2 input type :: integer
+PASS integer_addition lv1 Q2 expected answer :: 4
+PASS integer_addition lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 4 です 3＋1＝4 です。 答え4 途中式  ①3
+PASS integer_addition lv1 Q2 correct answer shown :: shown=正解は 4 です expected=4
+PASS integer_addition lv1 Q2 solution display :: steps=1
+PASS integer_addition lv1 no page errors :: none
+PASS integer_addition lv1 no 404 :: none
+PASS integer_addition lv2 Q1 question text :: 4に1をたすといくつになりますか
+PASS integer_addition lv2 Q1 input type :: integer
+PASS integer_addition lv2 Q1 expected answer :: 5
+PASS integer_addition lv2 Q1 correct feedback :: 🎉 せいかい！ 4＋1＝5 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv2 Q1 solution display :: steps=1
+PASS integer_addition lv2 Q1 solution answer value :: expected=5
+PASS integer_addition lv2 Q2 no leftover input :: empty
+PASS integer_addition lv2 Q2 question text :: 6に9をたすといくつになりますか
+PASS integer_addition lv2 Q2 input type :: integer
+PASS integer_addition lv2 Q2 expected answer :: 15
+PASS integer_addition lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 15 です 6＋9＝15 です。 答え15 途中式 
+PASS integer_addition lv2 Q2 correct answer shown :: shown=正解は 15 です expected=15
+PASS integer_addition lv2 Q2 solution display :: steps=1
+PASS integer_addition lv2 no page errors :: none
+PASS integer_addition lv2 no 404 :: none
+PASS integer_addition lv3 Q1 question text :: 3に4をたすといくつになりますか
+PASS integer_addition lv3 Q1 input type :: integer
+PASS integer_addition lv3 Q1 expected answer :: 7
+PASS integer_addition lv3 Q1 correct feedback :: 🎉 せいかい！ 3＋4＝7 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv3 Q1 solution display :: steps=1
+PASS integer_addition lv3 Q1 solution answer value :: expected=7
+PASS integer_addition lv3 Q2 no leftover input :: empty
+PASS integer_addition lv3 Q2 question text :: 6に5をたすといくつになりますか
+PASS integer_addition lv3 Q2 input type :: integer
+PASS integer_addition lv3 Q2 expected answer :: 11
+PASS integer_addition lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 11 です 6＋5＝11 です。 答え11 途中式 
+PASS integer_addition lv3 Q2 correct answer shown :: shown=正解は 11 です expected=11
+PASS integer_addition lv3 Q2 solution display :: steps=1
+PASS integer_addition lv3 no page errors :: none
+PASS integer_addition lv3 no 404 :: none
+PASS integer_addition lv4 Q1 question text :: 9に5をたすといくつになりますか
+PASS integer_addition lv4 Q1 input type :: integer
+PASS integer_addition lv4 Q1 expected answer :: 14
+PASS integer_addition lv4 Q1 correct feedback :: 🎉 せいかい！ 9＋5＝14 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv4 Q1 solution display :: steps=1
+PASS integer_addition lv4 Q1 solution answer value :: expected=14
+PASS integer_addition lv4 Q2 no leftover input :: empty
+PASS integer_addition lv4 Q2 question text :: 8に2をたすといくつになりますか
+PASS integer_addition lv4 Q2 input type :: integer
+PASS integer_addition lv4 Q2 expected answer :: 10
+PASS integer_addition lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 10 です 8＋2＝10 です。 答え10 途中式 
+PASS integer_addition lv4 Q2 correct answer shown :: shown=正解は 10 です expected=10
+PASS integer_addition lv4 Q2 solution display :: steps=1
+PASS integer_addition lv4 no page errors :: none
+PASS integer_addition lv4 no 404 :: none
+PASS integer_addition lv5 Q1 question text :: 1に8をたすといくつになりますか
+PASS integer_addition lv5 Q1 input type :: integer
+PASS integer_addition lv5 Q1 expected answer :: 9
+PASS integer_addition lv5 Q1 correct feedback :: 🎉 せいかい！ 1＋8＝9 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv5 Q1 solution display :: steps=1
+PASS integer_addition lv5 Q1 solution answer value :: expected=9
+PASS integer_addition lv5 Q2 no leftover input :: empty
+PASS integer_addition lv5 Q2 question text :: 9に3をたすといくつになりますか
+PASS integer_addition lv5 Q2 input type :: integer
+PASS integer_addition lv5 Q2 expected answer :: 12
+PASS integer_addition lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 12 です 9＋3＝12 です。 答え12 途中式 
+PASS integer_addition lv5 Q2 correct answer shown :: shown=正解は 12 です expected=12
+PASS integer_addition lv5 Q2 solution display :: steps=1
+PASS integer_addition lv5 no page errors :: none
+PASS integer_addition lv5 no 404 :: none
+PASS integer_subtraction lv1 Q1 question text :: 9から6をひくといくつになりますか
+PASS integer_subtraction lv1 Q1 input type :: integer
+PASS integer_subtraction lv1 Q1 expected answer :: 3
+PASS integer_subtraction lv1 Q1 correct feedback :: 🎉 せいかい！ 9−6＝3 です。 答えと解き方をみる つぎの問題へ
+PASS integer_subtraction lv1 Q1 solution display :: steps=1
+PASS integer_subtraction lv1 Q1 solution answer value :: expected=3
+PASS integer_subtraction lv1 Q2 no leftover input :: empty
+PASS integer_subtraction lv1 Q2 question text :: 5から2をひくといくつになりますか
+PASS integer_subtraction lv1 Q2 input type :: integer
+PASS integer_subtraction lv1 Q2 expected answer :: 3
+PASS integer_subtraction lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 5−2＝3 です。 答え3 途中式  ①5
+PASS integer_subtraction lv1 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS integer_subtraction lv1 Q2 solution display :: steps=1
+PASS integer_subtraction lv1 no page errors :: none
+PASS integer_subtraction lv1 no 404 :: none
+PASS integer_subtraction lv2 Q1 question text :: 9から3をひくといくつになりますか
+PASS integer_subtraction lv2 Q1 input type :: integer
+PASS integer_subtraction lv2 Q1 expected answer :: 6
+PASS integer_subtraction lv2 Q1 correct feedback :: 🎉 せいかい！ 9−3＝6 です。 答えと解き方をみる つぎの問題へ
+PASS integer_subtraction lv2 Q1 solution display :: steps=1
+PASS integer_subtraction lv2 Q1 solution answer value :: expected=6
+PASS integer_subtraction lv2 Q2 no leftover input :: empty
+PASS integer_subtraction lv2 Q2 question text :: 3から1をひくといくつになりますか
+PASS integer_subtraction lv2 Q2 input type :: integer
+PASS integer_subtraction lv2 Q2 expected answer :: 2
+PASS integer_subtraction lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 3−1＝2 です。 答え2 途中式  ①3
+PASS integer_subtraction lv2 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS integer_subtraction lv2 Q2 solution display :: steps=1
+PASS integer_subtraction lv2 no page errors :: none
+PASS integer_subtraction lv2 no 404 :: none
+PASS integer_subtraction lv3 Q1 question text :: 6から2をひくといくつになりますか
+PASS integer_subtraction lv3 Q1 input type :: integer
+PASS integer_subtraction lv3 Q1 expected answer :: 4
+PASS integer_subtraction lv3 Q1 correct feedback :: 🎉 せいかい！ 6−2＝4 です。 答えと解き方をみる つぎの問題へ
+PASS integer_subtraction lv3 Q1 solution display :: steps=1
+PASS integer_subtraction lv3 Q1 solution answer value :: expected=4
+PASS integer_subtraction lv3 Q2 no leftover input :: empty
+PASS integer_subtraction lv3 Q2 question text :: 6から1をひくといくつになりますか
+PASS integer_subtraction lv3 Q2 input type :: integer
+PASS integer_subtraction lv3 Q2 expected answer :: 5
+PASS integer_subtraction lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 5 です 6−1＝5 です。 答え5 途中式  ①6
+PASS integer_subtraction lv3 Q2 correct answer shown :: shown=正解は 5 です expected=5
+PASS integer_subtraction lv3 Q2 solution display :: steps=1
+PASS integer_subtraction lv3 no page errors :: none
+PASS integer_subtraction lv3 no 404 :: none
+PASS integer_subtraction lv4 Q1 question text :: 9から8をひくといくつになりますか
+PASS integer_subtraction lv4 Q1 input type :: integer
+PASS integer_subtraction lv4 Q1 expected answer :: 1
+PASS integer_subtraction lv4 Q1 correct feedback :: 🎉 せいかい！ 9−8＝1 です。 答えと解き方をみる つぎの問題へ
+PASS integer_subtraction lv4 Q1 solution display :: steps=1
+PASS integer_subtraction lv4 Q1 solution answer value :: expected=1
+PASS integer_subtraction lv4 Q2 no leftover input :: empty
+PASS integer_subtraction lv4 Q2 question text :: 8から7をひくといくつになりますか
+PASS integer_subtraction lv4 Q2 input type :: integer
+PASS integer_subtraction lv4 Q2 expected answer :: 1
+PASS integer_subtraction lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です 8−7＝1 です。 答え1 途中式  ①8
+PASS integer_subtraction lv4 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS integer_subtraction lv4 Q2 solution display :: steps=1
+PASS integer_subtraction lv4 no page errors :: none
+PASS integer_subtraction lv4 no 404 :: none
+PASS integer_subtraction lv5 Q1 question text :: 5から1をひくといくつになりますか
+PASS integer_subtraction lv5 Q1 input type :: integer
+PASS integer_subtraction lv5 Q1 expected answer :: 4
+PASS integer_subtraction lv5 Q1 correct feedback :: 🎉 せいかい！ 5−1＝4 です。 答えと解き方をみる つぎの問題へ
+PASS integer_subtraction lv5 Q1 solution display :: steps=1
+PASS integer_subtraction lv5 Q1 solution answer value :: expected=4
+PASS integer_subtraction lv5 Q2 no leftover input :: empty
+PASS integer_subtraction lv5 Q2 question text :: 4から2をひくといくつになりますか
+PASS integer_subtraction lv5 Q2 input type :: integer
+PASS integer_subtraction lv5 Q2 expected answer :: 2
+PASS integer_subtraction lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 4−2＝2 です。 答え2 途中式  ①4
+PASS integer_subtraction lv5 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS integer_subtraction lv5 Q2 solution display :: steps=1
+PASS integer_subtraction lv5 no page errors :: none
+PASS integer_subtraction lv5 no 404 :: none
+PASS integer_multiplication lv1 Q1 question text :: 2に2をかけるといくつになりますか
+PASS integer_multiplication lv1 Q1 input type :: integer
+PASS integer_multiplication lv1 Q1 expected answer :: 4
+PASS integer_multiplication lv1 Q1 correct feedback :: 🎉 せいかい！ 2×2＝4 です。 答えと解き方をみる つぎの問題へ
+PASS integer_multiplication lv1 Q1 solution display :: steps=1
+PASS integer_multiplication lv1 Q1 solution answer value :: expected=4
+PASS integer_multiplication lv1 Q2 no leftover input :: empty
+PASS integer_multiplication lv1 Q2 question text :: 7に9をかけるといくつになりますか
+PASS integer_multiplication lv1 Q2 input type :: integer
+PASS integer_multiplication lv1 Q2 expected answer :: 63
+PASS integer_multiplication lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 63 です 7×9＝63 です。 答え63 途中式 
+PASS integer_multiplication lv1 Q2 correct answer shown :: shown=正解は 63 です expected=63
+PASS integer_multiplication lv1 Q2 solution display :: steps=1
+PASS integer_multiplication lv1 no page errors :: none
+PASS integer_multiplication lv1 no 404 :: none
+PASS integer_multiplication lv2 Q1 question text :: 9に9をかけるといくつになりますか
+PASS integer_multiplication lv2 Q1 input type :: integer
+PASS integer_multiplication lv2 Q1 expected answer :: 81
+PASS integer_multiplication lv2 Q1 correct feedback :: 🎉 せいかい！ 9×9＝81 です。 答えと解き方をみる つぎの問題へ
+PASS integer_multiplication lv2 Q1 solution display :: steps=1
+PASS integer_multiplication lv2 Q1 solution answer value :: expected=81
+PASS integer_multiplication lv2 Q2 no leftover input :: empty
+PASS integer_multiplication lv2 Q2 question text :: 8に3をかけるといくつになりますか
+PASS integer_multiplication lv2 Q2 input type :: integer
+PASS integer_multiplication lv2 Q2 expected answer :: 24
+PASS integer_multiplication lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 24 です 8×3＝24 です。 答え24 途中式 
+PASS integer_multiplication lv2 Q2 correct answer shown :: shown=正解は 24 です expected=24
+PASS integer_multiplication lv2 Q2 solution display :: steps=1
+PASS integer_multiplication lv2 no page errors :: none
+PASS integer_multiplication lv2 no 404 :: none
+PASS integer_multiplication lv3 Q1 question text :: 9に1をかけるといくつになりますか
+PASS integer_multiplication lv3 Q1 input type :: integer
+PASS integer_multiplication lv3 Q1 expected answer :: 9
+PASS integer_multiplication lv3 Q1 correct feedback :: 🎉 せいかい！ 9×1＝9 です。 答えと解き方をみる つぎの問題へ
+PASS integer_multiplication lv3 Q1 solution display :: steps=1
+PASS integer_multiplication lv3 Q1 solution answer value :: expected=9
+PASS integer_multiplication lv3 Q2 no leftover input :: empty
+PASS integer_multiplication lv3 Q2 question text :: 8に7をかけるといくつになりますか
+PASS integer_multiplication lv3 Q2 input type :: integer
+PASS integer_multiplication lv3 Q2 expected answer :: 56
+PASS integer_multiplication lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 56 です 8×7＝56 です。 答え56 途中式 
+PASS integer_multiplication lv3 Q2 correct answer shown :: shown=正解は 56 です expected=56
+PASS integer_multiplication lv3 Q2 solution display :: steps=1
+PASS integer_multiplication lv3 no page errors :: none
+PASS integer_multiplication lv3 no 404 :: none
+PASS integer_multiplication lv4 Q1 question text :: 5に9をかけるといくつになりますか
+PASS integer_multiplication lv4 Q1 input type :: integer
+PASS integer_multiplication lv4 Q1 expected answer :: 45
+PASS integer_multiplication lv4 Q1 correct feedback :: 🎉 せいかい！ 5×9＝45 です。 答えと解き方をみる つぎの問題へ
+PASS integer_multiplication lv4 Q1 solution display :: steps=1
+PASS integer_multiplication lv4 Q1 solution answer value :: expected=45
+PASS integer_multiplication lv4 Q2 no leftover input :: empty
+PASS integer_multiplication lv4 Q2 question text :: 2に2をかけるといくつになりますか
+PASS integer_multiplication lv4 Q2 input type :: integer
+PASS integer_multiplication lv4 Q2 expected answer :: 4
+PASS integer_multiplication lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 4 です 2×2＝4 です。 答え4 途中式  ①2
+PASS integer_multiplication lv4 Q2 correct answer shown :: shown=正解は 4 です expected=4
+PASS integer_multiplication lv4 Q2 solution display :: steps=1
+PASS integer_multiplication lv4 no page errors :: none
+PASS integer_multiplication lv4 no 404 :: none
+PASS integer_multiplication lv5 Q1 question text :: 4に8をかけるといくつになりますか
+PASS integer_multiplication lv5 Q1 input type :: integer
+PASS integer_multiplication lv5 Q1 expected answer :: 32
+PASS integer_multiplication lv5 Q1 correct feedback :: 🎉 せいかい！ 4×8＝32 です。 答えと解き方をみる つぎの問題へ
+PASS integer_multiplication lv5 Q1 solution display :: steps=1
+PASS integer_multiplication lv5 Q1 solution answer value :: expected=32
+PASS integer_multiplication lv5 Q2 no leftover input :: empty
+PASS integer_multiplication lv5 Q2 question text :: 2に7をかけるといくつになりますか
+PASS integer_multiplication lv5 Q2 input type :: integer
+PASS integer_multiplication lv5 Q2 expected answer :: 14
+PASS integer_multiplication lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 14 です 2×7＝14 です。 答え14 途中式 
+PASS integer_multiplication lv5 Q2 correct answer shown :: shown=正解は 14 です expected=14
+PASS integer_multiplication lv5 Q2 solution display :: steps=1
+PASS integer_multiplication lv5 no page errors :: none
+PASS integer_multiplication lv5 no 404 :: none
+PASS integer_division lv1 Q1 question text :: 7を7でわると、商はいくつになりますか
+PASS integer_division lv1 Q1 input type :: integer
+PASS integer_division lv1 Q1 expected answer :: 1
+PASS integer_division lv1 Q1 correct feedback :: 🎉 せいかい！ 7÷7＝1 です。7×1＝7 なので確かめられます。 答えと解
+PASS integer_division lv1 Q1 solution display :: steps=2
+PASS integer_division lv1 Q1 solution answer value :: expected=1
+PASS integer_division lv1 Q2 no leftover input :: empty
+PASS integer_division lv1 Q2 question text :: 9を9でわると、商はいくつになりますか
+PASS integer_division lv1 Q2 input type :: integer
+PASS integer_division lv1 Q2 expected answer :: 1
+PASS integer_division lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です 9÷9＝1 です。9×1＝9 なので確かめ
+PASS integer_division lv1 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS integer_division lv1 Q2 solution display :: steps=2
+PASS integer_division lv1 no page errors :: none
+PASS integer_division lv1 no 404 :: none
+PASS integer_division lv2 Q1 question text :: 2を2でわると、商はいくつになりますか
+PASS integer_division lv2 Q1 input type :: integer
+PASS integer_division lv2 Q1 expected answer :: 1
+PASS integer_division lv2 Q1 correct feedback :: 🎉 せいかい！ 2÷2＝1 です。2×1＝2 なので確かめられます。 答えと解
+PASS integer_division lv2 Q1 solution display :: steps=2
+PASS integer_division lv2 Q1 solution answer value :: expected=1
+PASS integer_division lv2 Q2 no leftover input :: empty
+PASS integer_division lv2 Q2 question text :: 4を2でわると、商はいくつになりますか
+PASS integer_division lv2 Q2 input type :: integer
+PASS integer_division lv2 Q2 expected answer :: 2
+PASS integer_division lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 4÷2＝2 です。2×2＝4 なので確かめ
+PASS integer_division lv2 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS integer_division lv2 Q2 solution display :: steps=2
+PASS integer_division lv2 no page errors :: none
+PASS integer_division lv2 no 404 :: none
+PASS integer_division lv3 Q1 question text :: 5を5でわると、商はいくつになりますか
+PASS integer_division lv3 Q1 input type :: integer
+PASS integer_division lv3 Q1 expected answer :: 1
+PASS integer_division lv3 Q1 correct feedback :: 🎉 せいかい！ 5÷5＝1 です。5×1＝5 なので確かめられます。 答えと解
+PASS integer_division lv3 Q1 solution display :: steps=2
+PASS integer_division lv3 Q1 solution answer value :: expected=1
+PASS integer_division lv3 Q2 no leftover input :: empty
+PASS integer_division lv3 Q2 question text :: 4を4でわると、商はいくつになりますか
+PASS integer_division lv3 Q2 input type :: integer
+PASS integer_division lv3 Q2 expected answer :: 1
+PASS integer_division lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です 4÷4＝1 です。4×1＝4 なので確かめ
+PASS integer_division lv3 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS integer_division lv3 Q2 solution display :: steps=2
+PASS integer_division lv3 no page errors :: none
+PASS integer_division lv3 no 404 :: none
+PASS integer_division lv4 Q1 question text :: 8を8でわると、商はいくつになりますか
+PASS integer_division lv4 Q1 input type :: integer
+PASS integer_division lv4 Q1 expected answer :: 1
+PASS integer_division lv4 Q1 correct feedback :: 🎉 せいかい！ 8÷8＝1 です。8×1＝8 なので確かめられます。 答えと解
+PASS integer_division lv4 Q1 solution display :: steps=2
+PASS integer_division lv4 Q1 solution answer value :: expected=1
+PASS integer_division lv4 Q2 no leftover input :: empty
+PASS integer_division lv4 Q2 question text :: 4を4でわると、商はいくつになりますか
+PASS integer_division lv4 Q2 input type :: integer
+PASS integer_division lv4 Q2 expected answer :: 1
+PASS integer_division lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です 4÷4＝1 です。4×1＝4 なので確かめ
+PASS integer_division lv4 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS integer_division lv4 Q2 solution display :: steps=2
+PASS integer_division lv4 no page errors :: none
+PASS integer_division lv4 no 404 :: none
+PASS integer_division lv5 Q1 question text :: 8を8でわると、商はいくつになりますか
+PASS integer_division lv5 Q1 input type :: integer
+PASS integer_division lv5 Q1 expected answer :: 1
+PASS integer_division lv5 Q1 correct feedback :: 🎉 せいかい！ 8÷8＝1 です。8×1＝8 なので確かめられます。 答えと解
+PASS integer_division lv5 Q1 solution display :: steps=2
+PASS integer_division lv5 Q1 solution answer value :: expected=1
+PASS integer_division lv5 Q2 no leftover input :: empty
+PASS integer_division lv5 Q2 question text :: 6を6でわると、商はいくつになりますか
+PASS integer_division lv5 Q2 input type :: integer
+PASS integer_division lv5 Q2 expected answer :: 1
+PASS integer_division lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です 6÷6＝1 です。6×1＝6 なので確かめ
+PASS integer_division lv5 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS integer_division lv5 Q2 solution display :: steps=2
+PASS integer_division lv5 no page errors :: none
+PASS integer_division lv5 no 404 :: none
+PASS integer_multi_step lv1 Q1 question text :: 3 + 6 + 4 はいくつになりますか
+PASS integer_multi_step lv1 Q1 input type :: integer
+PASS integer_multi_step lv1 Q1 expected answer :: 13
+PASS integer_multi_step lv1 Q1 correct feedback :: 🎉 せいかい！ 3 + 6 + 4＝13 です。かけ算・わり算を先に計算します
+PASS integer_multi_step lv1 Q1 solution display :: steps=2
+PASS integer_multi_step lv1 Q1 solution answer value :: expected=13
+PASS integer_multi_step lv1 Q2 no leftover input :: empty
+PASS integer_multi_step lv1 Q2 question text :: 9 - 2 - 4 はいくつになりますか
+PASS integer_multi_step lv1 Q2 input type :: integer
+PASS integer_multi_step lv1 Q2 expected answer :: 3
+PASS integer_multi_step lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 9 - 2 - 4＝3 です。かけ算・わり
+PASS integer_multi_step lv1 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS integer_multi_step lv1 Q2 solution display :: steps=2
+PASS integer_multi_step lv1 no page errors :: none
+PASS integer_multi_step lv1 no 404 :: none
+PASS integer_multi_step lv2 Q1 question text :: 3 + 6 + 6 はいくつになりますか
+PASS integer_multi_step lv2 Q1 input type :: integer
+PASS integer_multi_step lv2 Q1 expected answer :: 15
+PASS integer_multi_step lv2 Q1 correct feedback :: 🎉 せいかい！ 3 + 6 + 6＝15 です。かけ算・わり算を先に計算します
+PASS integer_multi_step lv2 Q1 solution display :: steps=2
+PASS integer_multi_step lv2 Q1 solution answer value :: expected=15
+PASS integer_multi_step lv2 Q2 no leftover input :: empty
+PASS integer_multi_step lv2 Q2 question text :: 8 + 3 - 2 はいくつになりますか
+PASS integer_multi_step lv2 Q2 input type :: integer
+PASS integer_multi_step lv2 Q2 expected answer :: 9
+PASS integer_multi_step lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 9 です 8 + 3 - 2＝9 です。かけ算・わり
+PASS integer_multi_step lv2 Q2 correct answer shown :: shown=正解は 9 です expected=9
+PASS integer_multi_step lv2 Q2 solution display :: steps=2
+PASS integer_multi_step lv2 no page errors :: none
+PASS integer_multi_step lv2 no 404 :: none
+PASS integer_multi_step lv3 Q1 question text :: 4 - 4 + 4 はいくつになりますか
+PASS integer_multi_step lv3 Q1 input type :: integer
+PASS integer_multi_step lv3 Q1 expected answer :: 4
+PASS integer_multi_step lv3 Q1 correct feedback :: 🎉 せいかい！ 4 - 4 + 4＝4 です。かけ算・わり算を先に計算します。
+PASS integer_multi_step lv3 Q1 solution display :: steps=2
+PASS integer_multi_step lv3 Q1 solution answer value :: expected=4
+PASS integer_multi_step lv3 Q2 no leftover input :: empty
+PASS integer_multi_step lv3 Q2 question text :: 2 + 8 + 9 はいくつになりますか
+PASS integer_multi_step lv3 Q2 input type :: integer
+PASS integer_multi_step lv3 Q2 expected answer :: 19
+PASS integer_multi_step lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 19 です 2 + 8 + 9＝19 です。かけ算・
+PASS integer_multi_step lv3 Q2 correct answer shown :: shown=正解は 19 です expected=19
+PASS integer_multi_step lv3 Q2 solution display :: steps=2
+PASS integer_multi_step lv3 no page errors :: none
+PASS integer_multi_step lv3 no 404 :: none
+PASS integer_multi_step lv4 Q1 question text :: 1 + 4 + 1 はいくつになりますか
+PASS integer_multi_step lv4 Q1 input type :: integer
+PASS integer_multi_step lv4 Q1 expected answer :: 6
+PASS integer_multi_step lv4 Q1 correct feedback :: 🎉 せいかい！ 1 + 4 + 1＝6 です。かけ算・わり算を先に計算します。
+PASS integer_multi_step lv4 Q1 solution display :: steps=2
+PASS integer_multi_step lv4 Q1 solution answer value :: expected=6
+PASS integer_multi_step lv4 Q2 no leftover input :: empty
+PASS integer_multi_step lv4 Q2 question text :: 8 + 6 + 3 はいくつになりますか
+PASS integer_multi_step lv4 Q2 input type :: integer
+PASS integer_multi_step lv4 Q2 expected answer :: 17
+PASS integer_multi_step lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 17 です 8 + 6 + 3＝17 です。かけ算・
+PASS integer_multi_step lv4 Q2 correct answer shown :: shown=正解は 17 です expected=17
+PASS integer_multi_step lv4 Q2 solution display :: steps=2
+PASS integer_multi_step lv4 no page errors :: none
+PASS integer_multi_step lv4 no 404 :: none
+PASS integer_multi_step lv5 Q1 question text :: 8 + 5 + 1 はいくつになりますか
+PASS integer_multi_step lv5 Q1 input type :: integer
+PASS integer_multi_step lv5 Q1 expected answer :: 14
+PASS integer_multi_step lv5 Q1 correct feedback :: 🎉 せいかい！ 8 + 5 + 1＝14 です。かけ算・わり算を先に計算します
+PASS integer_multi_step lv5 Q1 solution display :: steps=2
+PASS integer_multi_step lv5 Q1 solution answer value :: expected=14
+PASS integer_multi_step lv5 Q2 no leftover input :: empty
+PASS integer_multi_step lv5 Q2 question text :: 2 - 2 + 5 はいくつになりますか
+PASS integer_multi_step lv5 Q2 input type :: integer
+PASS integer_multi_step lv5 Q2 expected answer :: 5
+PASS integer_multi_step lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 5 です 2 - 2 + 5＝5 です。かけ算・わり
+PASS integer_multi_step lv5 Q2 correct answer shown :: shown=正解は 5 です expected=5
+PASS integer_multi_step lv5 Q2 solution display :: steps=2
+PASS integer_multi_step lv5 no page errors :: none
+PASS integer_multi_step lv5 no 404 :: none
+PASS integer_fill_blank lv2 Q1 question text :: 9×□＝117 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv2 Q1 input type :: integer
+PASS integer_fill_blank lv2 Q1 expected answer :: 13
+PASS integer_fill_blank lv2 Q1 correct feedback :: 🎉 せいかい！ 117÷9＝13 です。 答えと解き方をみる つぎの問題へ
+PASS integer_fill_blank lv2 Q1 solution display :: steps=1
+PASS integer_fill_blank lv2 Q1 solution answer value :: expected=13
+PASS integer_fill_blank lv2 Q2 no leftover input :: empty
+PASS integer_fill_blank lv2 Q2 question text :: 4×□＝36 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv2 Q2 input type :: integer
+PASS integer_fill_blank lv2 Q2 expected answer :: 9
+PASS integer_fill_blank lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 9 です 36÷4＝9 です。 答え9 途中式  □
+PASS integer_fill_blank lv2 Q2 correct answer shown :: shown=正解は 9 です expected=9
+PASS integer_fill_blank lv2 Q2 solution display :: steps=1
+PASS integer_fill_blank lv2 no page errors :: none
+PASS integer_fill_blank lv2 no 404 :: none
+PASS integer_fill_blank lv3 Q1 question text :: 13×□＝221 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv3 Q1 input type :: integer
+PASS integer_fill_blank lv3 Q1 expected answer :: 17
+PASS integer_fill_blank lv3 Q1 correct feedback :: 🎉 せいかい！ 221÷13＝17 です。 答えと解き方をみる つぎの問題へ
+PASS integer_fill_blank lv3 Q1 solution display :: steps=1
+PASS integer_fill_blank lv3 Q1 solution answer value :: expected=17
+PASS integer_fill_blank lv3 Q2 no leftover input :: empty
+PASS integer_fill_blank lv3 Q2 question text :: 60÷□＝4 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv3 Q2 input type :: integer
+PASS integer_fill_blank lv3 Q2 expected answer :: 15
+PASS integer_fill_blank lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 15 です 60÷4＝15 です。 答え15 途中式
+PASS integer_fill_blank lv3 Q2 correct answer shown :: shown=正解は 15 です expected=15
+PASS integer_fill_blank lv3 Q2 solution display :: steps=1
+PASS integer_fill_blank lv3 no page errors :: none
+PASS integer_fill_blank lv3 no 404 :: none
+PASS integer_fill_blank lv4 Q1 question text :: 17×□＝102 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv4 Q1 input type :: integer
+PASS integer_fill_blank lv4 Q1 expected answer :: 6
+PASS integer_fill_blank lv4 Q1 correct feedback :: 🎉 せいかい！ 102÷17＝6 です。 答えと解き方をみる つぎの問題へ
+PASS integer_fill_blank lv4 Q1 solution display :: steps=1
+PASS integer_fill_blank lv4 Q1 solution answer value :: expected=6
+PASS integer_fill_blank lv4 Q2 no leftover input :: empty
+PASS integer_fill_blank lv4 Q2 question text :: 4＋□＝14 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv4 Q2 input type :: integer
+PASS integer_fill_blank lv4 Q2 expected answer :: 10
+PASS integer_fill_blank lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 10 です 14−4＝10 です。 答え10 途中式
+PASS integer_fill_blank lv4 Q2 correct answer shown :: shown=正解は 10 です expected=10
+PASS integer_fill_blank lv4 Q2 solution display :: steps=1
+PASS integer_fill_blank lv4 no page errors :: none
+PASS integer_fill_blank lv4 no 404 :: none
+PASS integer_fill_blank lv5 Q1 question text :: 16×□＝160 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv5 Q1 input type :: integer
+PASS integer_fill_blank lv5 Q1 expected answer :: 10
+PASS integer_fill_blank lv5 Q1 correct feedback :: 🎉 せいかい！ 160÷16＝10 です。 答えと解き方をみる つぎの問題へ
+PASS integer_fill_blank lv5 Q1 solution display :: steps=1
+PASS integer_fill_blank lv5 Q1 solution answer value :: expected=10
+PASS integer_fill_blank lv5 Q2 no leftover input :: empty
+PASS integer_fill_blank lv5 Q2 question text :: 13−□＝8 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv5 Q2 input type :: integer
+PASS integer_fill_blank lv5 Q2 expected answer :: 5
+PASS integer_fill_blank lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 5 です 13−8＝5 です。 答え5 途中式  □
+PASS integer_fill_blank lv5 Q2 correct answer shown :: shown=正解は 5 です expected=5
+PASS integer_fill_blank lv5 Q2 solution display :: steps=1
+PASS integer_fill_blank lv5 no page errors :: none
+PASS integer_fill_blank lv5 no 404 :: none
+PASS estimate_product lv2 Q1 question text :: 31 × 35 の積は、およそいくつですか。31 はそのまま使い、35 だけを十
+PASS estimate_product lv2 Q1 input type :: integer
+PASS estimate_product lv2 Q1 expected answer :: 1240
+PASS estimate_product lv2 Q1 correct feedback :: 🎉 せいかい！ 求めるのは正確な積ではなく、およその大きさです。大きい数を掛け
+PASS estimate_product lv2 Q1 solution display :: steps=4
+PASS estimate_product lv2 Q1 solution answer value :: expected=1240
+PASS estimate_product lv2 Q2 no leftover input :: empty
+PASS estimate_product lv2 Q2 question text :: 16 × 34 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数
+PASS estimate_product lv2 Q2 input type :: integer
+PASS estimate_product lv2 Q2 expected answer :: 600
+PASS estimate_product lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 600 です 求めるのは正確な積ではなく、およその大
+PASS estimate_product lv2 Q2 correct answer shown :: shown=正解は 600 です expected=600
+PASS estimate_product lv2 Q2 solution display :: steps=4
+PASS estimate_product lv2 no page errors :: none
+PASS estimate_product lv2 no 404 :: none
+PASS estimate_product lv3 Q1 question text :: 39 × 19 の積は、およそいくつですか。39 はそのまま使い、19 だけを十
+PASS estimate_product lv3 Q1 input type :: integer
+PASS estimate_product lv3 Q1 expected answer :: 780
+PASS estimate_product lv3 Q1 correct feedback :: 🎉 せいかい！ 求めるのは正確な積ではなく、およその大きさです。大きい数を掛け
+PASS estimate_product lv3 Q1 solution display :: steps=4
+PASS estimate_product lv3 Q1 solution answer value :: expected=780
+PASS estimate_product lv3 Q2 no leftover input :: empty
+PASS estimate_product lv3 Q2 question text :: 31 × 41 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数
+PASS estimate_product lv3 Q2 input type :: integer
+PASS estimate_product lv3 Q2 expected answer :: 1200
+PASS estimate_product lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1200 です 求めるのは正確な積ではなく、およその
+PASS estimate_product lv3 Q2 correct answer shown :: shown=正解は 1200 です expected=1200
+PASS estimate_product lv3 Q2 solution display :: steps=4
+PASS estimate_product lv3 no page errors :: none
+PASS estimate_product lv3 no 404 :: none
+PASS estimate_product lv4 Q1 question text :: 35 × 49 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数
+PASS estimate_product lv4 Q1 input type :: integer
+PASS estimate_product lv4 Q1 expected answer :: 2000
+PASS estimate_product lv4 Q1 correct feedback :: 🎉 せいかい！ 求めるのは正確な積ではなく、およその大きさです。大きな数をその
+PASS estimate_product lv4 Q1 solution display :: steps=4
+PASS estimate_product lv4 Q1 solution answer value :: expected=2000
+PASS estimate_product lv4 Q2 no leftover input :: empty
+PASS estimate_product lv4 Q2 question text :: 45 × 46 の積は、およそいくつですか。45 はそのまま使い、46 だけを十
+PASS estimate_product lv4 Q2 input type :: integer
+PASS estimate_product lv4 Q2 expected answer :: 2250
+PASS estimate_product lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2250 です 求めるのは正確な積ではなく、およその
+PASS estimate_product lv4 Q2 correct answer shown :: shown=正解は 2250 です expected=2250
+PASS estimate_product lv4 Q2 solution display :: steps=4
+PASS estimate_product lv4 no page errors :: none
+PASS estimate_product lv4 no 404 :: none
+PASS estimate_product lv5 Q1 question text :: 44 × 33 の積は、およそいくつですか。44 はそのまま使い、33 だけを十
+PASS estimate_product lv5 Q1 input type :: integer
+PASS estimate_product lv5 Q1 expected answer :: 1320
+PASS estimate_product lv5 Q1 correct feedback :: 🎉 せいかい！ 求めるのは正確な積ではなく、およその大きさです。大きい数を掛け
+PASS estimate_product lv5 Q1 solution display :: steps=4
+PASS estimate_product lv5 Q1 solution answer value :: expected=1320
+PASS estimate_product lv5 Q2 no leftover input :: empty
+PASS estimate_product lv5 Q2 question text :: 31 × 29 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数
+PASS estimate_product lv5 Q2 input type :: integer
+PASS estimate_product lv5 Q2 expected answer :: 900
+PASS estimate_product lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 900 です 求めるのは正確な積ではなく、およその大
+PASS estimate_product lv5 Q2 correct answer shown :: shown=正解は 900 です expected=900
+PASS estimate_product lv5 Q2 solution display :: steps=4
+PASS estimate_product lv5 no page errors :: none
+PASS estimate_product lv5 no 404 :: none
+PASS integer_word_problem lv1 Q1 question text :: 1ふくろに4このあめが入っています。2ふくろあります。あめは全部で何こありますか
+PASS integer_word_problem lv1 Q1 input type :: integer
+PASS integer_word_problem lv1 Q1 expected answer :: 8
+PASS integer_word_problem lv1 Q1 correct feedback :: 🎉 せいかい！ 4×2＝8 です。 答えと解き方をみる つぎの問題へ
+PASS integer_word_problem lv1 Q1 solution display :: steps=1
+PASS integer_word_problem lv1 Q1 solution answer value :: expected=8
+PASS integer_word_problem lv1 Q2 no leftover input :: empty
+PASS integer_word_problem lv1 Q2 question text :: 本が4冊あります。あたらしく2冊かいました。本は全部で何冊になりますか。
+PASS integer_word_problem lv1 Q2 input type :: integer
+PASS integer_word_problem lv1 Q2 expected answer :: 6
+PASS integer_word_problem lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 6 です 4＋2＝6 です。 答え6 途中式  もと
+PASS integer_word_problem lv1 Q2 correct answer shown :: shown=正解は 6 です expected=6
+PASS integer_word_problem lv1 Q2 solution display :: steps=1

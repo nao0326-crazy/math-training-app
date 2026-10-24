@@ -12,6 +12,7 @@ import type {
 } from '../../../types/problem';
 import { createRandom, generateProblemId } from '../../../utils/random';
 import { validateProblem } from '../../../engine/validator/validator';
+import { buildNumericChoiceOptions } from '../../../utils/choiceOptions';
 import { createIntegerDifficulty } from './helpers';
 
 /**
@@ -206,6 +207,24 @@ export class IntegerWordProblemGenerator implements ProblemGenerator {
       .replace('{b}', String(b))
       .replace('{answer}', String(answer));
 
+    // 4 択化: 正答と意味的に異なる誤答を 3 つ組み立てる
+    const distractorCandidates: number[] = [];
+    switch (template.op) {
+      case '+':
+        distractorCandidates.push(a + b + 1, a + b - 1 > 0 ? a + b - 1 : a + 1, a - b > 0 ? a - b : b + 1);
+        break;
+      case '-':
+        distractorCandidates.push(a - b + 1, a + b, a * b > 0 ? a * b : a + b);
+        break;
+      case '×':
+        distractorCandidates.push(a + b, a * (b + 1), b > 1 ? a * (b - 1) : a * b + a);
+        break;
+      case '÷':
+        distractorCandidates.push(answer + 1, a * b, a + b);
+        break;
+    }
+    const choices = buildNumericChoiceOptions(rng, answer, distractorCandidates);
+
     return {
       id: generateProblemId(),
       category: this.category,
@@ -220,6 +239,8 @@ export class IntegerWordProblemGenerator implements ProblemGenerator {
       question,
       answer: { kind: 'integer', value: answer },
       explanation,
+      inputType: 'choice',
+      choices,
       parameters: {
         a,
         b,

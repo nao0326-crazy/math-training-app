@@ -1,0 +1,5 @@
+60ce4be 出題方式を管理者範囲の一様ランダム出題に統一 (通常モード廃止)
+8838507 merge: questionPool types empty array returns zero candidates
+c624b5a feat: questionPool types empty array returns zero candidates
+2bf1ae8 feat: add ProblemType and listProblemTypes
+35dd340 fix: pnpm-lock.yamlをpackage.jsonに追随（不足していた3依存関係を追加）

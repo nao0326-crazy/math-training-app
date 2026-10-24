@@ -1,0 +1,1104 @@
+[
+  {
+    "type": "integer_addition",
+    "description": "整数の足し算",
+    "category": "integer",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "integer_subtraction",
+    "description": "整数の引き算",
+    "category": "integer",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "integer_multiplication",
+    "description": "整数の掛け算",
+    "category": "integer",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "integer_division",
+    "description": "整数の割り算 (割り切れる)",
+    "category": "integer",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "integer_multi_step",
+    "description": "整数の複数項の計算",
+    "category": "integer",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "integer_fill_blank",
+    "description": "整数の穴埋め問題",
+    "category": "integer",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "estimate_product",
+    "description": "積の見積もり",
+    "category": "integer",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "integer_word_problem",
+    "description": "整数の文章題",
+    "category": "integer",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "divisors_finding",
+    "description": "約数をすべて求める",
+    "category": "numberTheory",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "divisors_count",
+    "description": "約数の個数を求める",
+    "category": "numberTheory",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "multiples_finding",
+    "description": "倍数を求める",
+    "category": "numberTheory",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "prime_judgment",
+    "description": "素数かどうかを判定する",
+    "category": "numberTheory",
+    "levels": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "prime_range",
+    "description": "範囲内の素数をすべて求める",
+    "category": "numberTheory",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "common_divisors",
+    "description": "公約数をすべて求める",
+    "category": "numberTheory",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "common_multiples",
+    "description": "公倍数を求める",
+    "category": "numberTheory",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "gcd_calculation",
+    "description": "最大公約数を求める",
+    "category": "numberTheory",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "lcm_calculation",
+    "description": "最小公倍数を求める",
+    "category": "numberTheory",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "gcd_lcm_word",
+    "description": "約数・倍数の文章問題",
+    "category": "numberTheory",
+    "levels": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "period_repetition",
+    "description": "周期・繰り返しの問題",
+    "category": "numberTheory",
+    "levels": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_mul_integer",
+    "description": "分数×整数",
+    "category": "fraction",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_mul_fraction",
+    "description": "分数×分数",
+    "category": "fraction",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_div_integer",
+    "description": "分数÷整数",
+    "category": "fraction",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_div_fraction",
+    "description": "分数÷分数",
+    "category": "fraction",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_mul_mixed",
+    "description": "帯分数を含む掛け算",
+    "category": "fraction",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_div_mixed",
+    "description": "帯分数を含む割り算",
+    "category": "fraction",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_reduce",
+    "description": "約分する",
+    "category": "fraction",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_common_denominator",
+    "description": "通分",
+    "category": "fraction",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_mixed_convert",
+    "description": "仮分数と帯分数の変換",
+    "category": "fraction",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_big_small",
+    "description": "分数の大きさ比較",
+    "category": "fraction",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "speed_calculation",
+    "description": "速さを求める",
+    "category": "speed",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "distance_calculation",
+    "description": "道のりを求める",
+    "category": "speed",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "time_calculation",
+    "description": "時間を求める",
+    "category": "speed",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "speed_unit_conversion",
+    "description": "速さの単位変換",
+    "category": "speed",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "speed_comparison",
+    "description": "速さの比較",
+    "category": "speed",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "speed_word",
+    "description": "速さの文章題",
+    "category": "speed",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "speed_multi_step",
+    "description": "複数段階の速さ問題",
+    "category": "speed",
+    "levels": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "circle_area_radius",
+    "description": "円の面積を半径から求める",
+    "category": "geometry",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "circle_area_diameter",
+    "description": "円の面積を直径から求める",
+    "category": "geometry",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "circle_radius_from_area",
+    "description": "円の面積から半径を求める",
+    "category": "geometry",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "volume_box",
+    "description": "直方体の体積",
+    "category": "geometry",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "volume_cube",
+    "description": "立方体の体積",
+    "category": "geometry",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "volume_prism",
+    "description": "角柱の体積",
+    "category": "geometry",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "volume_cylinder",
+    "description": "円柱の体積",
+    "category": "geometry",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "volume_from_height",
+    "description": "体積から高さを求める",
+    "category": "geometry",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "volume_unit",
+    "description": "体積の単位換算",
+    "category": "integer",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "symmetry_fold",
+    "description": "線対称の判定",
+    "category": "geometry",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "symmetry_point",
+    "description": "点対称の判定",
+    "category": "geometry",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "scale_length",
+    "description": "拡大図・縮図の長さを求める",
+    "category": "geometry",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "angle_basic",
+    "description": "基本図形の角度",
+    "category": "geometry",
+    "levels": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "circle_circumference",
+    "description": "円周を求める",
+    "category": "geometry",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "trapezoid_area",
+    "description": "台形の面積を求める",
+    "category": "geometry",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "unit_conversion_basic",
+    "description": "基本単位の換算",
+    "category": "integer",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "decimal_place_value",
+    "description": "小数の位取り",
+    "category": "decimal",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_unit_intro",
+    "description": "単位分数の導入",
+    "category": "fraction",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "fraction_add_sub",
+    "description": "異分母の分数の加法・減法",
+    "category": "fraction",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "triangle_classify",
+    "description": "三角形の分類",
+    "category": "geometry",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "parallel_perpendicular",
+    "description": "平行と垂直",
+    "category": "geometry",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "area_unit_conversion",
+    "description": "面積の単位変換",
+    "category": "geometry",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "rectangle_area",
+    "description": "正方形・長方形の面積",
+    "category": "geometry",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "triangle_area",
+    "description": "三角形の面積",
+    "category": "geometry",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "parallelogram_area",
+    "description": "平行四辺形の面積",
+    "category": "geometry",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "judge_same",
+    "description": "2つの三角形が合同かどうかを判定する (合同である場合)",
+    "category": "geometry",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "judge_differs",
+    "description": "2つの三角形が合同かどうかを判定する (合同でない場合)",
+    "category": "geometry",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "ratio_simplify",
+    "description": "比の簡単化",
+    "category": "ratio",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "ratio_value",
+    "description": "比の値を求める",
+    "category": "ratio",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "ratio_equal",
+    "description": "等しい比",
+    "category": "ratio",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "ratio_quantity",
+    "description": "比を使って分ける",
+    "category": "ratio",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "proportional_expression",
+    "description": "比例の式",
+    "category": "ratio",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "proportional_word",
+    "description": "比例の文章題",
+    "category": "ratio",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "inverse_expression",
+    "description": "反比例の式",
+    "category": "ratio",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "expression_meaning",
+    "description": "式の意味を読み取る",
+    "category": "expression",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "inverse_word",
+    "description": "反比例の文章題",
+    "category": "ratio",
+    "levels": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "percentage",
+    "description": "百分率",
+    "category": "ratio",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "decimal_mul_decimal",
+    "description": "小数×小数",
+    "category": "decimal",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "decimal_addition",
+    "description": "小数の加算",
+    "category": "decimal",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "decimal_subtraction",
+    "description": "小数の減算",
+    "category": "decimal",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "decimal_div_decimal",
+    "description": "小数÷小数",
+    "category": "decimal",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "decimal_mul_integer",
+    "description": "小数×整数",
+    "category": "decimal",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "decimal_div_integer",
+    "description": "小数÷整数",
+    "category": "decimal",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "decimal_round",
+    "description": "四捨五入",
+    "category": "decimal",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "expression_make",
+    "description": "数量を文字で表す",
+    "category": "expression",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "expression_substitution",
+    "description": "式に数を代入する",
+    "category": "expression",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "expression_word_make",
+    "description": "文章を式にする",
+    "category": "expression",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "expression_blank",
+    "description": "□を使った問題",
+    "category": "expression",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "expression_multi_condition",
+    "description": "複数条件を含む文字式",
+    "category": "expression",
+    "levels": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "arrange_simple",
+    "description": "並べ方・選び方 (一部を選んで並べる・選ぶ)",
+    "category": "combinatorics",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "combine_simple",
+    "description": "組み合わせ",
+    "category": "combinatorics",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "arrange_tree",
+    "description": "並べ方 (樹形図の利用)",
+    "category": "combinatorics",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "combine_table",
+    "description": "表を使った組み合わせ",
+    "category": "combinatorics",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "duplicate_removal",
+    "description": "重複を除く",
+    "category": "combinatorics",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "data_average",
+    "description": "平均を求める",
+    "category": "data",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "data_total_from_average",
+    "description": "平均から合計を求める",
+    "category": "data",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "data_max_min",
+    "description": "最大値・最小値",
+    "category": "data",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "data_compare",
+    "description": "データの比較",
+    "category": "data",
+    "levels": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "realworld_shopping",
+    "description": "スーパーの買い物 (写真の値札を読み取って計算する)",
+    "category": "realWorld",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "type": "realworld_eggs",
+    "description": "卵の写真から数を読み取って計算する (現実連動)",
+    "category": "realWorld",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  }
+]

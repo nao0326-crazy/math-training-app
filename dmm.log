@@ -1,0 +1,58 @@
+SERVER UP http://127.0.0.1:5199
+PASS data_max_min lv1 Q1 question text :: 7縲・縲・縲・縲・ 縺ｮ荳ｭ縺ｧ縲∵怙螟ｧ縺ｮ謨ｰ縺ｨ譛蟆上・謨ｰ繧堤ｭ斐∴縺ｪ縺輔＞
+PASS data_max_min lv1 Q1 correct feedback :: 脂 縺帙＞縺九＞・・譛螟ｧ縺ｯ7縲∵怙蟆上・3縺ｧ縺吶・遲斐∴縺ｨ隗｣縺肴婿繧偵∩繧・縺､縺弱・蝠城｡後∈
+PASS data_max_min lv1 Q1 solution display :: steps=2
+PASS data_max_min lv1 Q1 solution answer value :: expected=7 縺ｨ 3
+PASS data_max_min lv1 Q2 no leftover input :: empty
+PASS data_max_min lv1 Q2 question text :: 9縲・縲・縲・縲・ 縺ｮ荳ｭ縺ｧ縲∵怙螟ｧ縺ｮ謨ｰ縺ｨ譛蟆上・謨ｰ繧堤ｭ斐∴縺ｪ縺輔＞
+PASS data_max_min lv1 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ 9 縺ｨ 1 縺ｧ縺・譛螟ｧ縺ｯ9縲∵怙蟆上・1縺ｧ縺吶・遲斐∴9 
+PASS data_max_min lv1 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ 9 縺ｨ 1 縺ｧ縺・expected=9 縺ｨ 1
+PASS data_max_min lv1 Q2 solution display :: steps=2
+PASS data_max_min lv1 result page reachable :: not reached (questionCount>2)
+PASS data_max_min lv1 no 404 :: none
+PASS data_max_min lv2 Q1 question text :: 6縲・縲・縲・縲・ 縺ｮ荳ｭ縺ｧ縲∵怙螟ｧ縺ｮ謨ｰ縺ｨ譛蟆上・謨ｰ繧堤ｭ斐∴縺ｪ縺輔＞
+PASS data_max_min lv2 Q1 correct feedback :: 脂 縺帙＞縺九＞・・譛螟ｧ縺ｯ9縲∵怙蟆上・4縺ｧ縺吶・遲斐∴縺ｨ隗｣縺肴婿繧偵∩繧・縺､縺弱・蝠城｡後∈
+PASS data_max_min lv2 Q1 solution display :: steps=2
+PASS data_max_min lv2 Q1 solution answer value :: expected=9 縺ｨ 4
+PASS data_max_min lv2 Q2 no leftover input :: empty
+PASS data_max_min lv2 Q2 question text :: 9縲・縲・縲・縲・ 縺ｮ荳ｭ縺ｧ縲∵怙螟ｧ縺ｮ謨ｰ縺ｨ譛蟆上・謨ｰ繧堤ｭ斐∴縺ｪ縺輔＞
+PASS data_max_min lv2 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ 9 縺ｨ 4 縺ｧ縺・譛螟ｧ縺ｯ9縲∵怙蟆上・4縺ｧ縺吶・遲斐∴9 
+PASS data_max_min lv2 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ 9 縺ｨ 4 縺ｧ縺・expected=9 縺ｨ 4
+PASS data_max_min lv2 Q2 solution display :: steps=2
+PASS data_max_min lv2 result page reachable :: not reached (questionCount>2)
+PASS data_max_min lv2 no 404 :: none
+PASS data_max_min lv3 Q1 question text :: 9縲・縲・縲・縲・ 縺ｮ荳ｭ縺ｧ縲∵怙螟ｧ縺ｮ謨ｰ縺ｨ譛蟆上・謨ｰ繧堤ｭ斐∴縺ｪ縺輔＞
+PASS data_max_min lv3 Q1 correct feedback :: 脂 縺帙＞縺九＞・・譛螟ｧ縺ｯ9縲∵怙蟆上・2縺ｧ縺吶・遲斐∴縺ｨ隗｣縺肴婿繧偵∩繧・縺､縺弱・蝠城｡後∈
+PASS data_max_min lv3 Q1 solution display :: steps=2
+PASS data_max_min lv3 Q1 solution answer value :: expected=9 縺ｨ 2
+PASS data_max_min lv3 Q2 no leftover input :: empty
+PASS data_max_min lv3 Q2 question text :: 1縲・縲・縲・縲・ 縺ｮ荳ｭ縺ｧ縲∵怙螟ｧ縺ｮ謨ｰ縺ｨ譛蟆上・謨ｰ繧堤ｭ斐∴縺ｪ縺輔＞
+PASS data_max_min lv3 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ 9 縺ｨ 1 縺ｧ縺・譛螟ｧ縺ｯ9縲∵怙蟆上・1縺ｧ縺吶・遲斐∴9 
+PASS data_max_min lv3 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ 9 縺ｨ 1 縺ｧ縺・expected=9 縺ｨ 1
+PASS data_max_min lv3 Q2 solution display :: steps=2
+PASS data_max_min lv3 result page reachable :: not reached (questionCount>2)
+PASS data_max_min lv3 no 404 :: none
+PASS data_max_min lv4 Q1 question text :: 4縲・縲・縲・縲・ 縺ｮ荳ｭ縺ｧ縲∵怙螟ｧ縺ｮ謨ｰ縺ｨ譛蟆上・謨ｰ繧堤ｭ斐∴縺ｪ縺輔＞
+PASS data_max_min lv4 Q1 correct feedback :: 脂 縺帙＞縺九＞・・譛螟ｧ縺ｯ4縲∵怙蟆上・3縺ｧ縺吶・遲斐∴縺ｨ隗｣縺肴婿繧偵∩繧・縺､縺弱・蝠城｡後∈
+PASS data_max_min lv4 Q1 solution display :: steps=2
+PASS data_max_min lv4 Q1 solution answer value :: expected=4 縺ｨ 3
+PASS data_max_min lv4 Q2 no leftover input :: empty
+PASS data_max_min lv4 Q2 question text :: 5縲・縲・縲・縲・ 縺ｮ荳ｭ縺ｧ縲∵怙螟ｧ縺ｮ謨ｰ縺ｨ譛蟆上・謨ｰ繧堤ｭ斐∴縺ｪ縺輔＞
+PASS data_max_min lv4 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ 9 縺ｨ 5 縺ｧ縺・譛螟ｧ縺ｯ9縲∵怙蟆上・5縺ｧ縺吶・遲斐∴9 
+PASS data_max_min lv4 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ 9 縺ｨ 5 縺ｧ縺・expected=9 縺ｨ 5
+PASS data_max_min lv4 Q2 solution display :: steps=2
+PASS data_max_min lv4 result page reachable :: not reached (questionCount>2)
+PASS data_max_min lv4 no 404 :: none
+PASS data_max_min lv5 Q1 question text :: 7縲・縲・縲・縲・ 縺ｮ荳ｭ縺ｧ縲∵怙螟ｧ縺ｮ謨ｰ縺ｨ譛蟆上・謨ｰ繧堤ｭ斐∴縺ｪ縺輔＞
+PASS data_max_min lv5 Q1 correct feedback :: 脂 縺帙＞縺九＞・・譛螟ｧ縺ｯ8縲∵怙蟆上・2縺ｧ縺吶・遲斐∴縺ｨ隗｣縺肴婿繧偵∩繧・縺､縺弱・蝠城｡後∈
+PASS data_max_min lv5 Q1 solution display :: steps=2
+PASS data_max_min lv5 Q1 solution answer value :: expected=8 縺ｨ 2
+PASS data_max_min lv5 Q2 no leftover input :: empty
+PASS data_max_min lv5 Q2 question text :: 2縲・縲・縲・縲・ 縺ｮ荳ｭ縺ｧ縲∵怙螟ｧ縺ｮ謨ｰ縺ｨ譛蟆上・謨ｰ繧堤ｭ斐∴縺ｪ縺輔＞
+PASS data_max_min lv5 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ 4 縺ｨ 2 縺ｧ縺・譛螟ｧ縺ｯ4縲∵怙蟆上・2縺ｧ縺吶・遲斐∴4 
+PASS data_max_min lv5 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ 4 縺ｨ 2 縺ｧ縺・expected=4 縺ｨ 2
+PASS data_max_min lv5 Q2 solution display :: steps=2
+PASS data_max_min lv5 result page reachable :: not reached (questionCount>2)
+PASS data_max_min lv5 no 404 :: none
+
+SUMMARY pass=55 fail=0 cases=430

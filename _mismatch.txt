@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import json; d=json.load(open('_verify_fresh.json',encoding='utf-8')); print('\n'.join(d['mismatches']))
+                   ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\monty\AppData\Local\Python\pythoncore-3.14-64\Lib\json\__init__.py", line 298, in load
+    return loads(fp.read(),
+        cls=cls, object_hook=object_hook,
+        parse_float=parse_float, parse_int=parse_int,
+        parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "C:\Users\monty\AppData\Local\Python\pythoncore-3.14-64\Lib\json\__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\monty\AppData\Local\Python\pythoncore-3.14-64\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\monty\AppData\Local\Python\pythoncore-3.14-64\Lib\json\decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 104 column 78 (char 2264)

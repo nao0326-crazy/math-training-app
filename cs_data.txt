@@ -1,0 +1,4 @@
+export class DataAverageGenerator implements ProblemGenerator {
+export class DataTotalFromAverageGenerator implements ProblemGenerator {
+export class DataMaxMinGenerator implements ProblemGenerator {
+export class DataCompareGenerator implements ProblemGenerator {

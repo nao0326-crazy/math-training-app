@@ -1,0 +1,12 @@
+export class FractionMulIntegerGenerator implements ProblemGenerator {
+export class FractionMulFractionGenerator implements ProblemGenerator {
+export class FractionDivIntegerGenerator implements ProblemGenerator {
+export class FractionDivFractionGenerator implements ProblemGenerator {
+export class FractionMulMixedGenerator implements ProblemGenerator {
+export class FractionMixedDivGenerator implements ProblemGenerator {
+export class FractionReduceGenerator implements ProblemGenerator {
+export class FractionCommonDenominatorGenerator implements ProblemGenerator {
+export class FractionMixedConvertGenerator implements ProblemGenerator {
+export class FractionBigSmallGenerator implements ProblemGenerator {
+export class FractionUnitIntroGenerator implements ProblemGenerator {
+export class FractionAddSubGenerator implements ProblemGenerator {

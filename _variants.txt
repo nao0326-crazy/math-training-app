@@ -1,0 +1,274 @@
+== integer_addition
+   [(none)] {"a":3,"b":2,"operator":"+","answer":5,"difficultyLevel":1}
+== integer_subtraction
+   [(none)] {"a":4,"b":1,"operator":"-","answer":3,"difficultyLevel":1,"borrowCount":0,"borrowPositions":[],"maxBorrowRun":0}
+== integer_multiplication
+   [(none)] {"a":3,"b":2,"operator":"×","answer":6,"difficultyLevel":1}
+== integer_division
+   [(none)] {"dividend":4,"divisor":4,"quotient":1,"operator":"÷","answer":1,"difficultyLevel":1}
+== integer_multi_step
+   [(none)] {"numbers":[1,9,1],"operators":["+","+"],"expression":"1 + 9 + 1","answer":11,"difficultyLevel":1,"termCount":3}
+== integer_fill_blank
+   [(none)] {"a":2,"operator":"-","answer":1,"difficultyLevel":2,"blankPosition":"second"}
+== estimate_product
+   [estimate_to_tens] {"variant":"estimate_to_tens","a":16,"b":41,"placeA":10,"placeB":10,"roundedA":20,"roundedB":40,"estimate":800,"exactProduct":656,"difficultyLevel":2}
+   [estimate_one_exact] {"variant":"estimate_one_exact","a":45,"b":27,"placeA":1,"placeB":10,"roundedA":45,"roundedB":30,"estimate":1350,"exactProduct":1215,"difficultyLevel":2}
+   [estimate_to_hundreds] {"variant":"estimate_to_hundreds","a":340,"b":359,"placeA":100,"placeB":100,"roundedA":300,"roundedB":400,"estimate":120000,"exactProduct":122060,"difficultyLevel":3}
+   [estimate_mixed_places] {"variant":"estimate_mixed_places","a":36,"b":351,"placeA":10,"placeB":100,"roundedA":40,"roundedB":400,"estimate":16000,"exactProduct":12636,"difficultyLevel":3}
+   [estimate_shopping] {"variant":"estimate_shopping","a":180,"b":44,"placeA":100,"placeB":10,"roundedA":200,"roundedB":40,"estimate":8000,"exactProduct":7920,"difficultyLevel":5}
+== integer_word_problem
+   [(none)] {"a":3,"b":1,"operator":"-","answer":2,"difficultyLevel":1,"templateIndex":3,"readingLevel":1,"reasoningLevel":1}
+== divisors_finding
+   [(none)] {"n":42,"answer":"1, 2, 3, 6, 7, 14, 21, 42","difficultyLevel":2,"divisorCount":8}
+== divisors_count
+   [(none)] {"n":48,"count":10,"answer":10,"divisorCount":10,"difficultyLevel":2}
+== multiples_finding
+   [list_first_n] {"n":3,"variant":"list_first_n","arg1":3,"arg2":null,"count":3,"answer":"3, 6, 9","difficultyLevel":1}
+   [list_up_to] {"n":4,"variant":"list_up_to","arg1":37,"arg2":null,"count":null,"answer":"4, 8, 12, 16, 20, 24, 28, 32, 36","difficultyLevel":1}
+   [list_between] {"n":5,"variant":"list_between","arg1":16,"arg2":28,"count":null,"answer":"20, 25","difficultyLevel":2}
+   [nth_multiple] {"n":6,"variant":"nth_multiple","arg1":10,"arg2":null,"count":null,"answer":"60","difficultyLevel":3}
+   [count_in_range] {"n":6,"variant":"count_in_range","arg1":51,"arg2":null,"count":null,"answer":"8","difficultyLevel":4}
+== prime_judgment
+   [(none)] {"choices":[89,66,49],"answer":89,"difficultyLevel":3}
+== prime_range
+   [(none)] {"min":3,"max":9,"answer":"3, 5, 7","primeCount":3,"difficultyLevel":1}
+== common_divisors
+   [(none)] {"a":30,"b":18,"answer":"1, 2, 3, 6","g":6,"difficultyLevel":2,"commonDivisorCount":4}
+== common_multiples
+   [list_first_n] {"a":2,"b":4,"variant":"list_first_n","arg1":5,"arg2":null,"count":5,"answer":"4, 8, 12, 16, 20","lcm":4,"difficultyLevel":2}
+   [list_up_to] {"a":6,"b":9,"variant":"list_up_to","arg1":39,"arg2":null,"count":null,"answer":"18, 36","lcm":18,"difficultyLevel":2}
+   [list_between] {"a":2,"b":5,"variant":"list_between","arg1":2,"arg2":32,"count":null,"answer":"10, 20, 30","lcm":10,"difficultyLevel":3}
+   [count_in_range] {"a":3,"b":6,"variant":"count_in_range","arg1":18,"arg2":null,"count":null,"answer":"3","lcm":6,"difficultyLevel":4}
+== gcd_calculation
+   [(none)] {"a":30,"b":45,"answer":15,"difficultyLevel":2}
+== lcm_calculation
+   [(none)] {"a":5,"b":6,"answer":30,"difficultyLevel":2}
+== gcd_lcm_word
+   [(none)] {"t":"gcd","a":32,"b":48,"answer":16,"difficultyLevel":3}
+== period_repetition
+   [(none)] {"pattern":["赤","白","青"],"period":3,"n":29,"answer":"白","difficultyLevel":3,"remainder":2}
+== fraction_mul_integer
+   [(none)] {"numerator":1,"denominator":3,"integer":2,"answerNumerator":2,"answerDenominator":3,"difficultyLevel":1,"requiresReduction":false,"isImproper":false}
+== fraction_mul_fraction
+   [(none)] {"n1":1,"d1":3,"n2":1,"d2":2,"answerNumerator":1,"answerDenominator":6,"difficultyLevel":1,"isProperAnswer":true}
+== fraction_div_integer
+   [(none)] {"numerator":1,"denominator":3,"integer":2,"answerNumerator":1,"answerDenominator":6,"difficultyLevel":1}
+== fraction_div_fraction
+   [(none)] {"n1":1,"d1":4,"n2":5,"d2":7,"answerNumerator":7,"answerDenominator":20,"difficultyLevel":2}
+== fraction_mul_mixed
+   [(none)] {"whole":1,"numerator":1,"denominator":2,"n2":1,"d2":6,"mixedNumerator":3,"mixedDenominator":2,"answerNumerator":1,"answerDenominator":4,"difficultyLevel":1}
+== fraction_div_mixed
+   [(none)] {"whole":1,"numerator":1,"denominator":2,"n2":1,"d2":5,"mixedNumerator":3,"mixedDenominator":2,"answerNumerator":15,"answerDenominator":2,"difficultyLevel":1}
+== fraction_reduce
+   [(none)] {"numerator":2,"denominator":6,"answerNumerator":1,"answerDenominator":3,"divisor":2,"difficultyLevel":1}
+== fraction_common_denominator
+   [(none)] {"n1":3,"d1":4,"n2":1,"d2":2,"common":4,"newN1":3,"newN2":2,"difficultyLevel":2}
+== fraction_mixed_convert
+   [(none)] {"numerator":9,"denominator":2,"whole":4,"answerNumerator":1,"answerDenominator":2,"difficultyLevel":2}
+== fraction_big_small
+   [(none)] {"numerator":3,"denominator":4,"smallerNumerator":1,"difficultyLevel":2}
+== speed_calculation
+   [(none)] {"distance":4,"time":2,"timeUnit":"時間","distUnit":"km","answer":2,"difficultyLevel":1}
+== distance_calculation
+   [(none)] {"speed":13,"time":2,"answer":26,"difficultyLevel":2}
+== time_calculation
+   [(none)] {"speed":8,"distance":8,"answer":1,"difficultyLevel":2}
+== speed_unit_conversion
+   [kmh_to_mmin] {"kmPerHour":60,"givenValue":60,"variant":"kmh_to_mmin","conversionType":"kmh_to_mmin","answer":1000,"difficultyLevel":2}
+   [mmin_to_kmh] {"kmPerHour":0,"givenValue":300,"variant":"mmin_to_kmh","conversionType":"mmin_to_kmh","answer":18,"difficultyLevel":2}
+   [kmh_to_ms] {"kmPerHour":36,"givenValue":36,"variant":"kmh_to_ms","conversionType":"kmh_to_ms","answer":10,"difficultyLevel":3}
+   [ms_to_kmh] {"kmPerHour":0,"givenValue":25,"variant":"ms_to_kmh","conversionType":"ms_to_kmh","answer":90,"difficultyLevel":4}
+== speed_comparison
+   [(none)] {"speedA":9,"speedB":3,"answer":"たろうさん","difficultyLevel":2}
+== speed_word
+   [(none)] {"speed":57,"time":2,"answer":114,"scenario":"2","difficultyLevel":2}
+== speed_multi_step
+   [(none)] {"speed1":14,"time1":4,"speed2":20,"time2":4,"totalDistance":136,"totalTime":8,"averageSpeed":17,"answer":17,"difficultyLevel":3}
+== circle_area_radius
+   [(none)] {"radius":7,"area":153.86,"answer":153.86,"pi":3.14,"difficultyLevel":2}
+== circle_area_diameter
+   [(none)] {"diameter":13,"radius":6.5,"area":132.67,"difficultyLevel":2}
+== circle_radius_from_area
+   [(none)] {"radius":4,"area":50.24,"difficultyLevel":2}
+== volume_box
+   [(none)] {"length":3,"width":2,"height":2,"volume":12,"difficultyLevel":1}
+== volume_cube
+   [(none)] {"edge":3,"volume":27,"difficultyLevel":1}
+== volume_prism
+   [(none)] {"baseArea":6,"height":2,"volume":12,"difficultyLevel":2}
+== volume_cylinder
+   [(none)] {"radius":3,"height":2,"baseArea":28.26,"volume":56.52,"difficultyLevel":2}
+== volume_from_height
+   [(none)] {"baseArea":5,"volume":15,"height":3,"difficultyLevel":2}
+== volume_unit
+   [(none)] {"liters":1,"cm3":1000,"difficultyLevel":1}
+== symmetry_fold
+   [(none)] {"shape":"正五角形","isFold":true,"count":5,"difficultyLevel":2}
+== symmetry_point
+   [(none)] {"shape":"正六角形","isPoint":true,"difficultyLevel":2}
+== scale_length
+   [(none)] {"scale":3,"base":2,"result":6,"difficultyLevel":2,"isEnlarge":true}
+== angle_basic
+   [(none)] {"angleA":57,"angleB":89,"angleC":34,"difficultyLevel":3}
+== circle_circumference
+   [from_diameter] {"variant":"from_diameter","diameter":3,"circumference":9.42,"unit":"cm","pi":3.14,"difficultyLevel":1}
+   [from_circumference] {"variant":"from_circumference","diameter":2,"circumference":6.28,"unit":"cm","pi":3.14,"difficultyLevel":2}
+== trapezoid_area
+   [basic] {"variant":"basic","a":2,"b":8,"h":2,"area":10,"difficultyLevel":1}
+   [reverse_height] {"variant":"reverse_height","a":16,"b":16,"h":6,"area":96,"difficultyLevel":2}
+   [reverse_base] {"variant":"reverse_base","a":9,"b":13,"h":11,"area":121,"difficultyLevel":3}
+== unit_conversion_basic
+   [length] {"variant":"length","from":"m","to":"cm","value":7,"answer":700,"difficultyLevel":1}
+   [time] {"variant":"time","from":"時","to":"秒","value":7,"answer":25200,"difficultyLevel":1}
+   [mass] {"variant":"mass","from":"kg","to":"g","value":4,"answer":4000,"difficultyLevel":2}
+   [area] {"variant":"area","from":"㎡","to":"㎠","value":7,"answer":70000,"difficultyLevel":3}
+== decimal_place_value
+   [read_digit] {"variant":"read_digit","place":1,"digits":[9],"answer":9,"difficultyLevel":1}
+   [place_value] {"variant":"place_value","place":1,"digit":3,"answer":0.3,"difficultyLevel":1}
+   [compose] {"variant":"compose","place":1,"digits":[2],"answer":0.2,"difficultyLevel":1}
+   [decompose] {"variant":"decompose","place":1,"low":5,"high":8,"bigPart":0.8,"smallPart":0.5,"answer":1.3,"difficultyLevel":3}
+== fraction_unit_intro
+   [meaning] {"variant":"meaning","num":1,"den":2,"answer":"1/2","difficultyLevel":1}
+   [how_many_units] {"variant":"how_many_units","num":2,"den":4,"answer":2,"difficultyLevel":1}
+   [read_fraction] {"variant":"read_fraction","num":2,"den":6,"answer":6,"difficultyLevel":1}
+   [count_units] {"variant":"count_units","num":4,"den":5,"answer":"4/5","difficultyLevel":3}
+== fraction_add_sub
+   [add] {"variant":"add","operation":"add","n1":1,"d1":2,"n2":1,"d2":3,"numerator":5,"denominator":6,"commonDenominator":6,"difficultyLevel":1}
+   [subtract] {"variant":"subtract","operation":"subtract","n1":1,"d1":2,"n2":1,"d2":4,"numerator":1,"denominator":4,"commonDenominator":4,"difficultyLevel":1}
+   [add_reduces] {"variant":"add_reduces","operation":"subtract","n1":2,"d1":4,"n2":1,"d2":5,"numerator":3,"denominator":10,"commonDenominator":20,"difficultyLevel":2}
+   [add_improper] {"variant":"add_improper","operation":"add","n1":2,"d1":4,"n2":1,"d2":2,"numerator":1,"denominator":1,"commonDenominator":4,"difficultyLevel":3}
+   [fill_blank] {"variant":"fill_blank","operation":"add","n1":4,"d1":5,"n2":3,"d2":4,"numerator":31,"denominator":20,"commonDenominator":20,"difficultyLevel":4}
+== triangle_classify
+   [classify] {"variant":"classify","a":8,"b":6,"c":7,"kind":"不等辺三角形","difficultyLevel":1}
+   [which_sides_equal] {"variant":"which_sides_equal","a":5,"b":5,"c":2,"kind":"二等辺三角形","equalCount":2,"difficultyLevel":1}
+== parallel_perpendicular
+   [definition_parallel] {"variant":"definition_parallel","answerKind":"parallel","difficultyLevel":1}
+   [definition_perpendicular] {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":1}
+   [angle_judgment] {"variant":"angle_judgment","angle":90,"answerKind":"perpendicular","difficultyLevel":1}
+   [intersection_judgment] {"variant":"intersection_judgment","intersects":true,"answerKind":"not_parallel","difficultyLevel":2}
+   [equal_distance] {"variant":"equal_distance","constantDistance":13,"answerKind":"parallel","difficultyLevel":3}
+   [find_pair] {"variant":"find_pair","relation":"perpendicular","pair":{"a":0,"b":2},"answerKind":"perpendicular","difficultyLevel":4}
+== area_unit_conversion
+   [sqm_to_sqcm] {"variant":"sqm_to_sqcm","from":"㎡","to":"㎠","givenValue":2,"multiplier":10000,"answer":20000,"difficultyLevel":1}
+   [aresu_to_sqm] {"variant":"aresu_to_sqm","from":"a","to":"㎡","givenValue":4,"multiplier":100,"answer":400,"difficultyLevel":1}
+   [hektaru_to_aresu] {"variant":"hektaru_to_aresu","from":"ha","to":"a","givenValue":8,"multiplier":100,"answer":800,"difficultyLevel":1}
+   [sqm_to_aresu] {"variant":"sqm_to_aresu","from":"㎡","to":"a","givenValue":100,"multiplier":100,"answer":1,"difficultyLevel":3}
+   [sqkm_to_hektaru] {"variant":"sqkm_to_hektaru","from":"㎢","to":"ha","givenValue":2,"multiplier":100,"answer":200,"difficultyLevel":3}
+   [hektaru_to_sqkm] {"variant":"hektaru_to_sqkm","from":"ha","to":"㎢","givenValue":300,"multiplier":100,"answer":3,"difficultyLevel":4}
+   [sqm_to_hektaru] {"variant":"sqm_to_hektaru","from":"㎡","to":"ha","givenValue":30000,"multiplier":10000,"answer":3,"difficultyLevel":5}
+   [hektaru_to_sqm] {"variant":"hektaru_to_sqm","from":"ha","to":"㎡","givenValue":1,"multiplier":10000,"answer":10000,"difficultyLevel":5}
+== rectangle_area
+   [square] {"variant":"square","width":2,"height":2,"area":4,"answer":4,"unit":"cm2","difficultyLevel":1}
+   [rectangle] {"variant":"rectangle","width":3,"height":2,"area":6,"answer":6,"unit":"cm2","difficultyLevel":1}
+   [find_side] {"variant":"find_side","width":8,"height":5,"area":40,"answer":5,"unit":"cm","difficultyLevel":2}
+   [choose_formula] {"variant":"choose_formula","width":6,"height":5,"area":30,"answer":30,"unit":"cm2","difficultyLevel":4}
+   [unit_convert] {"variant":"unit_convert","width":300,"height":300,"area":90000,"answer":90000,"unit":"cm2","difficultyLevel":5}
+== triangle_area
+   [find_area] {"variant":"find_area","base":3,"height":2,"area":3,"answer":3,"difficultyLevel":1}
+   [find_area_with_slant] {"variant":"find_area_with_slant","base":6,"height":16,"slant":18,"area":48,"answer":48,"difficultyLevel":2}
+   [find_height] {"variant":"find_height","base":7,"height":26,"area":91,"answer":26,"difficultyLevel":3}
+   [find_base] {"variant":"find_base","base":15,"height":68,"area":510,"answer":15,"difficultyLevel":4}
+   [compare_with_rectangle] {"variant":"compare_with_rectangle","base":12,"height":86,"area":516,"rectangleArea":1032,"answer":516,"difficultyLevel":5}
+== parallelogram_area
+   [find_area] {"variant":"find_area","base":3,"height":2,"area":6,"answer":6,"difficultyLevel":1}
+   [find_area_with_slant] {"variant":"find_area_with_slant","base":6,"height":16,"slant":18,"area":96,"answer":96,"difficultyLevel":2}
+   [find_height] {"variant":"find_height","base":7,"height":26,"area":182,"answer":26,"difficultyLevel":3}
+   [find_base] {"variant":"find_base","base":23,"height":17,"area":391,"answer":23,"difficultyLevel":4}
+   [two_triangles] {"variant":"two_triangles","base":12,"height":86,"area":1032,"triangleArea":516,"answer":516,"difficultyLevel":5}
+== judge_same
+   [(none)] {"rotationDeg":0,"difficultyLevel":1}
+== judge_differs
+   [apex_moved] {"variant":"apex_moved","difficultyLevel":2}
+   [base_widened] {"variant":"base_widened","difficultyLevel":2}
+   [scaled] {"variant":"scaled","difficultyLevel":2}
+== ratio_simplify
+   [(none)] {"a":4,"b":16,"gcd":4,"answer":"1：4","difficultyLevel":1}
+== ratio_value
+   [(none)] {"a":2,"b":8,"answer":0.25,"difficultyLevel":1}
+== ratio_equal
+   [(none)] {"a":2,"b":1,"x":4,"y":2,"factor":2,"difficultyLevel":1}
+== ratio_quantity
+   [(none)] {"a":2,"b":1,"unit":7,"total":21,"askPart":1,"answer":7,"difficultyLevel":2}
+== proportional_expression
+   [(none)] {"k":5,"answer":"y=5x","constant":5,"difficultyLevel":2}
+== proportional_word
+   [(none)] {"k":4,"x1":2,"x2":10,"y1":8,"y2":40,"answer":40,"difficultyLevel":2}
+== inverse_expression
+   [(none)] {"k":8,"answer":"y=8÷x","difficultyLevel":2}
+== expression_meaning
+   [(none)] {"b":4,"answer":"x4円は、x円の物を1こと4円の品物を買ったときの代金です","difficultyLevel":2}
+== inverse_word
+   [(none)] {"total":32,"people1":2,"people2":8,"per1":16,"per2":4,"answer":4,"difficultyLevel":3}
+== percentage
+   [find_percent] {"variant":"find_percent","percent":25,"whole":4,"part":1,"answer":25,"difficultyLevel":1}
+   [percent_of] {"variant":"percent_of","percent":75,"whole":60,"part":45,"answer":45,"difficultyLevel":2}
+   [what_percent] {"variant":"what_percent","percent":20,"whole":125,"part":25,"answer":20,"difficultyLevel":3}
+== decimal_mul_decimal
+   [(none)] {"a":0.3,"b":0.2,"answer":0.06,"difficultyLevel":1}
+== decimal_addition
+   [(none)] {"a":1.2,"b":0.3,"answer":1.5,"carryCount":0,"carryPositions":[],"difficultyLevel":1}
+== decimal_subtraction
+   [(none)] {"a":1.9,"b":1.8,"answer":0.1,"borrowCount":0,"borrowPositions":[],"difficultyLevel":1}
+== decimal_div_decimal
+   [(none)] {"dividend":0.2,"divisor":0.2,"quotient":1,"answer":1,"difficultyLevel":1}
+== decimal_mul_integer
+   [(none)] {"a":0.3,"b":2,"answer":0.6,"difficultyLevel":1}
+== decimal_div_integer
+   [(none)] {"dividend":0.3,"divisor":3,"quotient":0.1,"answer":0.1,"difficultyLevel":1}
+== decimal_round
+   [(none)] {"value":2.95,"roundTo":1,"rounded":3,"answer":3,"difficultyLevel":1}
+== expression_make
+   [(none)] {"count":4,"x":"x","answer":"4x","difficultyLevel":2}
+== expression_substitution
+   [(none)] {"a":1,"b":1,"x":1,"answer":2,"difficultyLevel":1}
+== expression_word_make
+   [(none)] {"price":4,"answer":"4×x","difficultyLevel":2}
+== expression_blank
+   [(none)] {"a":3,"b":2,"result":6,"answer":3,"difficultyLevel":1}
+== expression_multi_condition
+   [(none)] {"a":5,"b":10,"x":5,"answer":35,"difficultyLevel":3}
+== arrange_simple
+   [pick_only] {"n":3,"r":2,"variant":"pick_only","answer":6,"difficultyLevel":1}
+   [pick_special] {"n":3,"r":2,"variant":"pick_special","answer":6,"difficultyLevel":1}
+   [pick_include_one] {"n":4,"r":3,"variant":"pick_include_one","answer":6,"difficultyLevel":2}
+   [pick_first_fixed] {"n":5,"r":4,"variant":"pick_first_fixed","answer":24,"difficultyLevel":3}
+   [pick_both_ends] {"n":6,"r":4,"variant":"pick_both_ends","answer":24,"difficultyLevel":4}
+== combine_simple
+   [pick_only] {"n":3,"r":2,"variant":"pick_only","answer":3,"difficultyLevel":1}
+   [include_one] {"n":3,"r":2,"variant":"include_one","answer":2,"difficultyLevel":2}
+   [exclude_one] {"n":5,"r":3,"variant":"exclude_one","answer":4,"difficultyLevel":2}
+== arrange_tree
+   [all] {"n":3,"letters":["A","B","C"],"variant":"all","answer":6,"difficultyLevel":1}
+   [fixed_first] {"n":3,"letters":["A","B","C"],"variant":"fixed_first","answer":2,"difficultyLevel":1}
+   [both_ends] {"n":4,"letters":["A","B","C","D"],"variant":"both_ends","answer":4,"difficultyLevel":2}
+   [adjacent] {"n":5,"letters":["A","B","C","D","E"],"variant":"adjacent","answer":48,"difficultyLevel":3}
+   [circle] {"n":5,"letters":["A","B","C","D","E"],"variant":"circle","answer":24,"difficultyLevel":4}
+== combine_table
+   [round_robin] {"n":4,"variant":"round_robin","answer":6,"difficultyLevel":1}
+   [two_rounds] {"n":5,"variant":"two_rounds","answer":20,"difficultyLevel":2}
+   [one_team_games] {"n":6,"variant":"one_team_games","answer":5,"difficultyLevel":3}
+   [one_game_pairs] {"n":8,"variant":"one_game_pairs","answer":28,"difficultyLevel":4}
+== duplicate_removal
+   [(none)] {"letters":["A","A","B"],"symbolMode":"letter","answer":3,"difficultyLevel":1}
+== data_average
+   [(none)] {"numbers":[7,15,1,15],"sum":38,"count":4,"average":9.5,"answer":9.5,"difficultyLevel":2}
+== data_total_from_average
+   [(none)] {"count":3,"average":1,"total":3,"answer":3,"difficultyLevel":1}
+== data_max_min
+   [(none)] {"numbers":[3,2,1,9,1],"max":9,"min":1,"answer":"9 と 1","difficultyLevel":1}
+== data_compare
+   [(none)] {"groupA":[4,8,4,1,4],"groupB":[1,8,8,8,3],"avgA":4.2,"avgB":5.6,"answer":"B組","difficultyLevel":2}
+== realworld_shopping
+   [two_sum] {"variant":"two_sum","productA":"たまご","productB":"ぎゅうにゅう","priceA":120,"priceB":180,"answer":300,"difficultyLevel":1}
+   [same_item_multiple] {"variant":"same_item_multiple","product":"クッキー","count":2,"price":90,"answer":180,"difficultyLevel":2}
+   [change] {"variant":"change","productA":"たまご","productB":"食パン","budget":1000,"priceA":120,"priceB":150,"answer":730,"difficultyLevel":3}
+   [three_sum] {"variant":"three_sum","productA":"食パン","productB":"ぎゅうにゅう","productC":"クッキー","priceA":150,"priceB":180,"priceC":90,"answer":420,"difficultyLevel":3}
+   [multi_and_sum] {"variant":"multi_and_sum","productA":"オレンジジュース","productB":"たまご","count":2,"priceA":200,"priceB":120,"answer":520,"difficultyLevel":4}
+   [max_count] {"variant":"max_count","product":"オレンジジュース","budget":600,"price":200,"answer":3,"difficultyLevel":4}
+   [split_bill] {"variant":"split_bill","productA":"食パン","productB":"クッキー","people":4,"priceA":150,"priceB":90,"answer":60,"difficultyLevel":4}
+== realworld_eggs
+   [fill_carton] {"variant":"fill_carton","carton":6,"totalEggs":2,"answer":4,"difficultyLevel":1}
+   [pair_price] {"variant":"pair_price","priceA":30,"priceB":25,"answer":55,"difficultyLevel":2}
+   [pairs_total] {"variant":"pairs_total","pairs":10,"eggsPerPair":2,"answer":20,"difficultyLevel":3}
+   [pairs_in_carton] {"variant":"pairs_in_carton","carton":12,"eggsPerPair":2,"answer":6,"difficultyLevel":4}
+   [pairs_cost] {"variant":"pairs_cost","pairs":5,"priceA":30,"priceB":25,"pairCost":55,"answer":275,"difficultyLevel":4}

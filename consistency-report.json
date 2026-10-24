@@ -1,0 +1,1089 @@
+{
+  "total": 12900,
+  "issues": 1964,
+  "byKind": {
+    "expl-missing": 1964
+  },
+  "samples": [
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 142,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・1縺ｫ2繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 23899,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・1縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ1/4"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 31818,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・1縺ｫ6繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 39737,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・3縺ｫ2繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ1/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 47656,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・4縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2縺ｨ2/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 55575,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・1縺ｫ4繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "4/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 63494,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・1縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 79332,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "6蛻・・5縺ｫ2繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ2/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 87251,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・1縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 103089,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・1縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 118927,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・1縺ｫ2繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 142684,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・1縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ1/4"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 150603,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・3縺ｫ6繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "3縺ｨ3/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 158522,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・4縺ｫ2繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ3/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 166441,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・1縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "3/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 174360,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・1縺ｫ4繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ1/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 182279,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・2縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "3縺ｨ1/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 206036,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・1縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 1,
+      "seed": 221874,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・1縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ2/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 273,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・1縺ｫ7繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ3/4"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 8192,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・4縺ｫ9繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "7縺ｨ1/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 16111,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・7縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "4縺ｨ1/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 24030,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "6蛻・・11縺ｫ4繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "7縺ｨ1/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 39868,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・1縺ｫ4繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "4/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 47787,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・3縺ｫ9繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "13縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 55706,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "8蛻・・1縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "3/8"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 63625,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・2縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "3縺ｨ1/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 71544,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "9蛻・・11縺ｫ6繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "7縺ｨ1/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 79463,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "8蛻・・15縺ｫ6繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "11縺ｨ1/4"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 87382,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・1縺ｫ9繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "4縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 95301,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・3縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2縺ｨ1/4"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 103220,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・5縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "8縺ｨ1/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 111139,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・1縺ｫ6繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 119058,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・3縺ｫ8繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "4縺ｨ4/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 126977,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・6縺ｫ2繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2縺ｨ2/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 134896,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "6蛻・・11縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "5縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 142815,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・1縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ2/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 158653,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "7蛻・・10縺ｫ8繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "11縺ｨ3/7"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 166572,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "6蛻・・1縺ｫ4繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 174491,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "8蛻・・5縺ｫ4繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 182410,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "9蛻・・10縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "5縺ｨ5/9"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 190329,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "9蛻・・16縺ｫ7繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "12縺ｨ4/9"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 214086,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・5縺ｫ4繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "6縺ｨ2/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 222005,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・3縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ4/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 2,
+      "seed": 229924,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・3縺ｫ7繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "5縺ｨ1/4"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 8323,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "7蛻・・5縺ｫ9繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "6縺ｨ3/7"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 16242,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "7蛻・・11縺ｫ11繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "17縺ｨ2/7"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 24161,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "8蛻・・19縺ｫ2繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "4縺ｨ3/4"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 32080,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "9蛻・・2縺ｫ4繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "8/9"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 39999,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "10蛻・・11縺ｫ7繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "7縺ｨ7/10"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 47918,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "10蛻・・19縺ｫ9繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "17縺ｨ1/10"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 63756,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "12蛻・・7縺ｫ2繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ1/6"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 71675,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・3縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "7縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 79594,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・5縺ｫ7繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "17縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 119189,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・2縺ｫ7繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "4縺ｨ2/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 127108,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "7蛻・・10縺ｫ9繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "12縺ｨ6/7"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 142946,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "8蛻・・1縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "3/8"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 150865,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・8縺ｫ2繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "5縺ｨ1/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 158784,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・9縺ｫ7繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "12縺ｨ3/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 166703,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "11蛻・・29縺ｫ10繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "26縺ｨ4/11"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 190460,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・5縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "12縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 198379,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・1縺ｫ8繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2縺ｨ2/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 206298,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・1縺ｫ11繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "5縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 3,
+      "seed": 222136,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・13縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "7縺ｨ4/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 8454,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "9蛻・・4縺ｫ7繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "3縺ｨ1/9"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 24292,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "11蛻・・29縺ｫ12繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "31縺ｨ7/11"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 32211,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "6蛻・・23縺ｫ15繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "57縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 40130,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "13蛻・・12縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "4縺ｨ8/13"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 48049,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "14蛻・・29縺ｫ7繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "14縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 63887,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・1縺ｫ13繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "4縺ｨ1/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 79725,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・11縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "13縺ｨ3/4"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 87644,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・19縺ｫ8繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "30縺ｨ2/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 95563,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "6蛻・・5縺ｫ10繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "8縺ｨ1/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 103482,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・13縺ｫ6繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "15縺ｨ3/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 111401,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "8蛻・・25縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "9縺ｨ3/8"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 119320,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "9蛻・・2縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ1/9"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 127239,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・7縺ｫ8繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "11縺ｨ1/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 143077,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "11蛻・・40縺ｫ13繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "47縺ｨ3/11"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 150996,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・3縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2縺ｨ1/4"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 158915,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "13蛻・・25縺ｫ6繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "11縺ｨ7/13"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 166834,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "14蛻・・43縺ｫ8繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "24縺ｨ4/7"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 174753,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・1縺ｫ11繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "2縺ｨ1/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 182672,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・4縺ｫ14繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "18縺ｨ2/3"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 190591,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・5縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "7縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 198510,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・18縺ｫ6繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "21縺ｨ3/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 214348,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "6蛻・・11縺ｫ11繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "20縺ｨ1/6"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 222267,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・17縺ｫ3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "10縺ｨ1/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 4,
+      "seed": 230186,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "8蛻・・1縺ｫ4繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 8585,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "13蛻・・64縺ｫ4繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "19縺ｨ9/13"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 16504,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "7蛻・・9縺ｫ8繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "10縺ｨ2/7"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 24423,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "15蛻・・41縺ｫ11繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "30縺ｨ1/15"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 32342,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "17蛻・・70縺ｫ15繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "61縺ｨ13/17"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 48180,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "19蛻・・37縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "9縺ｨ14/19"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 56099,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "20蛻・・67縺ｫ8繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "26縺ｨ4/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 64018,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・6縺ｫ13繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "15縺ｨ3/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 79856,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "7蛻・・19縺ｫ19繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "51縺ｨ4/7"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 87775,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "8蛻・・33縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "20縺ｨ5/8"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 95694,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "9蛻・・4縺ｫ8繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "3縺ｨ5/9"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 103613,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "10蛻・・19縺ｫ12繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "22縺ｨ4/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 111532,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "11蛻・・36縺ｫ15繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "49縺ｨ1/11"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 119451,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "13蛻・・61縺ｫ19繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "89縺ｨ2/13"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 127370,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "7蛻・・8縺ｫ5繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "5縺ｨ5/7"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 135289,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "15蛻・・38縺ｫ9繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "22縺ｨ4/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 143208,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "16蛻・・63縺ｫ12繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "47縺ｨ1/4"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 151127,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "17蛻・・6縺ｫ16繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "5縺ｨ11/17"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 159046,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "9蛻・・16縺ｫ19繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "33縺ｨ7/9"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 166965,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・16縺ｫ6繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "19縺ｨ1/5"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 174884,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・19縺ｫ9繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "42縺ｨ3/4"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 198641,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "7蛻・・27縺ｫ20繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "77縺ｨ1/7"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 206560,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・1縺ｫ6繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 222398,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "11蛻・・34縺ｫ13繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "40縺ｨ2/11"
+    },
+    {
+      "type": "fraction_mul_integer",
+      "level": 5,
+      "seed": 230317,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "2蛻・・9縺ｫ17繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "76縺ｨ1/2"
+    },
+    {
+      "type": "fraction_mul_fraction",
+      "level": 1,
+      "seed": 142,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・1縺ｨ2蛻・・1繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1/6"
+    },
+    {
+      "type": "fraction_mul_fraction",
+      "level": 1,
+      "seed": 8061,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "3蛻・・1縺ｨ3蛻・・1繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1/9"
+    },
+    {
+      "type": "fraction_mul_fraction",
+      "level": 1,
+      "seed": 15980,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・3縺ｨ4蛻・・1繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "3/16"
+    },
+    {
+      "type": "fraction_mul_fraction",
+      "level": 1,
+      "seed": 23899,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・1縺ｨ5蛻・・2繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1/10"
+    },
+    {
+      "type": "fraction_mul_fraction",
+      "level": 1,
+      "seed": 31818,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "4蛻・・1縺ｨ2蛻・・1繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "1/8"
+    },
+    {
+      "type": "fraction_mul_fraction",
+      "level": 1,
+      "seed": 39737,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・3縺ｨ2蛻・・1繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "3/10"
+    },
+    {
+      "type": "fraction_mul_fraction",
+      "level": 1,
+      "seed": 47656,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・4縺ｨ3蛻・・2繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "8/15"
+    },
+    {
+      "type": "fraction_mul_fraction",
+      "level": 1,
+      "seed": 55575,
+      "kind": "expl-missing",
+      "detail": "no answer in expl",
+      "question": "5蛻・・1縺ｨ4蛻・・3繧偵°縺代ｋ縺ｨ縺・￥縺､縺ｫ縺ｪ繧翫∪縺吶°",
+      "answer": "3/20"
+    }
+  ]
+}

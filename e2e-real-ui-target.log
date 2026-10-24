@@ -1,0 +1,18 @@
+SERVER UP http://127.0.0.1:5199
+PASS expression_word_make lv2 Q1 question text :: 1こ8円のチョコレートをxこ買います。代金をxの式で表しなさい
+PASS expression_word_make lv2 Q1 input type :: expression
+PASS expression_word_make lv2 Q1 expected answer :: 8×x
+PASS expression_word_make lv2 Q1 correct feedback :: 🎉 せいかい！ 1こ8円がxこなので、8×x です。 答えと解き方をみる つぎ
+PASS expression_word_make lv2 Q1 solution display :: steps=1
+PASS expression_word_make lv2 Q1 solution answer value :: expected=8×x
+PASS expression_word_make lv2 Q2 no leftover input :: empty
+PASS expression_word_make lv2 Q2 question text :: 1こ6円のチョコレートをxこ買います。代金をxの式で表しなさい
+PASS expression_word_make lv2 Q2 input type :: expression
+PASS expression_word_make lv2 Q2 expected answer :: 6×x
+PASS expression_word_make lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 6×x です 1こ6円がxこなので、6×x です。 
+PASS expression_word_make lv2 Q2 correct answer shown :: shown=正解は 6×x です expected=6×x
+PASS expression_word_make lv2 Q2 solution display :: steps=1
+PASS expression_word_make lv2 no page errors :: none
+PASS expression_word_make lv2 no 404 :: none
+
+SUMMARY pass=15 fail=0 cases=430

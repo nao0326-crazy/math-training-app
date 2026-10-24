@@ -1,0 +1,128 @@
+diff --git a/scripts/verify-answers.ts b/scripts/verify-answers.ts
+index c7596d6..244f414 100644
+--- a/scripts/verify-answers.ts
++++ b/scripts/verify-answers.ts
+@@ -163,12 +163,12 @@ function verify(p: Problem): Verdict {
+       const part = num('part');
+       switch (variant) {
+         case 'find_percent':
+-          // 縲・ 縺ｮ 40% 縺ｯ縺・￥縺､縺ｧ縺吶°縲・竊・蜈ｨ菴薙・菴・縺九ｒ豎ゅａ繧句､臥ｨｮ繧ゅ≠繧九◆繧・+        case 'what_percent':
+           // part 縺・whole 縺ｮ菴・縺九ｒ讀懃ｮ励☆繧・           if (whole === 0) return 'mismatch';
+           return Math.abs(got - (part / whole) * 100) < 1e-9 ? 'ok' : 'skip';
+         default: {
+-          // 縲悟・菴薙・ x% 縺ｯ縺・￥縺､縺ｧ縺吶°縲・= 蜈ｨ菴・ﾃ・逋ｾ蛻・紫 / 100
++          // percent_of: 縲悟・菴薙・ x% 縺ｯ縺・￥縺､縺ｧ縺吶°縲・= 蜈ｨ菴・ﾃ・逋ｾ蛻・紫 / 100
+           const want = (whole * pct) / 100;
+           return Math.abs(got - want) < 1e-9 ? 'ok' : 'mismatch';
+         }
+@@ -303,6 +303,11 @@ function verify(p: Problem): Verdict {
+           : (num('base') * num('height')) / 2;
+       if (!Number.isInteger(area)) return 'mismatch';
+       const got = intOf(p);
++      const variant = q['variant'] as string | undefined;
++      // two_triangles 螟臥ｨｮ縺ｧ縺ｯ遲斐∴縺ｯ蟷ｳ陦悟屁霎ｺ蠖｢髱｢遨阪・蜊雁・ (荳芽ｧ貞ｽ｢1縺､縺ｮ髱｢遨・
++      if (p.type === 'parallelogram_area' && variant === 'two_triangles') {
++        return got === area / 2 ? 'ok' : 'mismatch';
++      }
+       if (got === num('height') || got === num('base')) {
+         return q['area'] === area ? 'ok' : 'mismatch';
+       }
+@@ -364,7 +369,8 @@ function verify(p: Problem): Verdict {
+       if (!has('radius') || !has('area')) return 'skip';
+       const got = decOf(p) ?? intOf(p);
+       if (got === null) return 'skip';
+-      return Math.abs(got - 3.14 * num('radius') * num('radius')) < 0.005 ? 'ok' : 'mismatch';
++      const want = Math.round(num('radius') * num('radius') * 3.14 * 100) / 100;
++      return Math.abs(got - want) < 1e-9 ? 'ok' : 'mismatch';
+     }
+     case 'circle_area_diameter': {
+       // 逶ｴ蠕・d 縺九ｉ 3.14 ﾃ・(d/2)^2
+@@ -372,7 +378,8 @@ function verify(p: Problem): Verdict {
+       const got = decOf(p) ?? intOf(p);
+       if (got === null) return 'skip';
+       const r = num('diameter') / 2;
+-      return Math.abs(got - 3.14 * r * r) < 0.005 ? 'ok' : 'mismatch';
++      const want = Math.round(r * r * 3.14 * 100) / 100;
++      return Math.abs(got - want) < 1e-9 ? 'ok' : 'mismatch';
+     }
+     case 'radius_from_area': {
+       if (!has('area')) return 'skip';
+diff --git a/src/problems/geometry/geometry-phase2s.test.ts b/src/problems/geometry/geometry-phase2s.test.ts
+index c9325c4..52cf894 100644
+--- a/src/problems/geometry/geometry-phase2s.test.ts
++++ b/src/problems/geometry/geometry-phase2s.test.ts
+@@ -15,7 +15,9 @@
+ import { describe, expect, it } from 'vitest';
+ import {
+   CircleCircumferenceGenerator,
++  CircleAreaFromDiameterGenerator,
+   TrapezoidAreaGenerator,
++  ParallelogramAreaGenerator,
+   UnitConversionBasicGenerator,
+ } from './generators';
+ import { validateProblem } from '../../engine/validator/validator';
+@@ -380,4 +382,67 @@ describe('譁ｰ隕・蝙九・ validate 縺ｯ謾ｹ縺悶ｓ繧呈､懷・縺吶ｋ', () => {
+     };
+     expect(gen.validate(bad).valid).toBe(false);
+   });
++});
++
++/** 蝗槫ｸｰ繝・せ繝・ 逶ｴ蠕・7 (蜊雁ｾ・8.5) 縺ｧ蟆乗焚隨ｬ3菴阪′5縺ｫ縺ｪ繧句｢・阜繧ｱ繝ｼ繧ｹ
++ *
++ * 逕滓・蝎ｨ縺ｯ Math.round(r*r*3.14*100)/100 繧剃ｽｿ逕ｨ縺吶ｋ縲ょ濠蠕・8.5 縺ｮ蝣ｴ蜷・+ * 3.14*18.5*18.5 = 1074.665 縺ｧ縲・・00 蠕後′ 107466.5 縺ｨ縺ｪ繧・Math.round 縺ｧ
++ * 107467 竊・1074.67縲よ､懃ｮ怜・縺・3.14*r*r (譛ｪ荳ｸ繧・ 縺ｨ蜴ｳ蟇・悴貅0.005 縺ｧ豈碑ｼ・☆繧九→
++ * 蟾ｮ縺後■繧・≧縺ｩ0.005 縺ｧ荳堺ｸ閾ｴ縺ｨ縺ｪ繧九◆繧√∫函謌仙勣縺ｨ蜷後§荳ｸ繧√ｒ讀懃ｮ怜・縺ｧ繧ゆｽｿ縺・ｿ・ｦ√′縺ゅｋ縲・+ */
++describe('circle_area_diameter: 蜊雁ｾ・8.5 縺ｮ荳ｸ繧∝｢・阜', () => {
++  const gen = new CircleAreaFromDiameterGenerator();
++
++  it('蜊雁ｾ・8.5縺ｮ蝣ｴ蜷医・擇遨阪・ 1074.67 (蜊顔ｫｯ荳ｸ繧√・豁｣遒ｺ縺ｪ荳閾ｴ)', () => {
++    // 蜊雁ｾ・8.5 (逶ｴ蠕・7) 繧堤函謌舌☆繧九す繝ｼ繝峨ｒ謗｢縺・+    let found = false;
++    for (let s = 0; s < 5000 && !found; s++) {
++      const p = gen.generate({ difficulty: 5, seed: s * 7919 + 5 * 31 + 7 });
++      const params = p.parameters as { diameter: number; radius: number; area: number };
++      if (params.diameter === 37) {
++        found = true;
++        expect(params.radius).toBe(18.5);
++        const want = Math.round(18.5 * 18.5 * 3.14 * 100) / 100;
++        expect(params.area).toBe(want);
++        expect(params.area).toBe(1074.67);
++      }
++    }
++    expect(found).toBe(true);
++  });
++
++  it('隍・焚繧ｷ繝ｼ繝峨〒逶ｴ蠕・・.14ﾃ・d/2)^2 縺ｨ蟆乗焚隨ｬ2菴阪〒荳閾ｴ縺吶ｋ', () => {
++    for (let s = 0; s < 200; s++) {
++      const p = gen.generate({ difficulty: 5, seed: s * 7919 + 5 * 31 + 7 });
++      const params = p.parameters as { diameter: number; radius: number; area: number };
++      const r = params.diameter / 2;
++      const want = Math.round(r * r * 3.14 * 100) / 100;
++      expect(Math.abs(params.area - want)).toBeLessThan(1e-9);
++    }
++  });
++});
++
++/** 蝗槫ｸｰ繝・せ繝・ 蟷ｳ陦悟屁霎ｺ蠖｢ two_triangles 螟臥ｨｮ縺ｧ縺ｯ遲斐∴縺碁擇遨阪・蜊雁・ */
++describe('parallelogram_area: two_triangles 螟臥ｨｮ', () => {
++  const gen = new ParallelogramAreaGenerator();
++
++  it('two_triangles 縺ｮ遲斐∴縺ｯ bottomﾃ揺eightﾃｷ2', () => {
++    // two_triangles 縺ｯ area 縺悟・謨ｰ縺ｮ邨・粋縺帙・縺ｿ逕滓・縺輔ｌ繧・+    for (let s = 0; s < 200; s++) {
++      const p = gen.generate({ difficulty: 5, seed: s * 7919 + 5 * 31 + 7 });
++      const params = p.parameters as {
++        variant: string;
++        base: number;
++        height: number;
++        area: number;
++        triangleArea?: number;
++        answer: number;
++      };
++      if (params.variant !== 'two_triangles') continue;
++      expect(params.area % 2).toBe(0);
++      expect(params.triangleArea).toBe(params.area / 2);
++      expect(params.answer).toBe(params.area / 2);
++      expect(params.answer).toBe(params.triangleArea);
++    }
++  });
+ });
+\ No newline at end of file

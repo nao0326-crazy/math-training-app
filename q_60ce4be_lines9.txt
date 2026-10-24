@@ -1,0 +1,16 @@
+          )}
+          {isCorrect && showSolution && (
+            <SolutionDisplay
+              solutionSteps={problem.solutionSteps}
+              answer={problem.answer}
+            />
+          )}
+
+          <button className="primary-button next-button" onClick={handleNext}>
+            {questionNumber >= questionCount ? 'けっかをみる' : 'つぎの問題へ'}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}

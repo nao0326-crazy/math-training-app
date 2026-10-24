@@ -1,0 +1,2 @@
+export class SupermarketShoppingGenerator implements ProblemGenerator {
+export class EggCountingGenerator implements ProblemGenerator {

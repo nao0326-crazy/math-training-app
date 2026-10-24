@@ -1,0 +1,6 @@
+export class ExpressionMakeGenerator implements ProblemGenerator {
+export class ExpressionSubstitutionGenerator implements ProblemGenerator {
+export class ExpressionWordToExpressionGenerator implements ProblemGenerator {
+export class ExpressionMeaningGenerator implements ProblemGenerator {
+export class ExpressionBlankGenerator implements ProblemGenerator {
+export class ExpressionComplexGenerator implements ProblemGenerator {

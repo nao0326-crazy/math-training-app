@@ -1,0 +1,10 @@
+
+> grade6-math-generator@1.0.0 typecheck
+> tsc -b
+
+scripts/oracle-audit.mts(12,31): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+scripts/oracle-audit.mts(17,22): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+scripts/oracle-audit.mts(87,7): error TS6133: 'ORACLE_UNIT_FACTORS' is declared but its value is never read.
+scripts/oracle-audit.mts(95,7): error TS6133: 'ORACLE_AREA_FACTOR' is declared but its value is never read.
+scripts/oracle-audit.mts(805,5): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+scripts/oracle-audit.mts(805,51): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.

@@ -1,0 +1,29 @@
+          )}
+          {problem.explanation && (
+            <div className="feedback-explanation">{problem.explanation}</div>
+          )}
+
+          {/* 解き方 (途中式) — 答えを開示したときだけ表示する */}
+          {!isCorrect && (
+            <SolutionDisplay
+              solutionSteps={problem.solutionSteps}
+              answer={problem.answer}
+            />
+          )}
+          {isCorrect && !showSolution && (
+            <button
+              type="button"
+              className="secondary-button toggle-solution-btn"
+              onClick={() => setShowSolution(true)}
+            >
+              答えと解き方をみる
+            </button>
+          )}
+          {isCorrect && showSolution && (
+            <SolutionDisplay
+              solutionSteps={problem.solutionSteps}
+              answer={problem.answer}
+            />
+          )}
+
+          <button className="primary-button next-button" onClick={handleNext}>

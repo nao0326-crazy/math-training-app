@@ -1,0 +1,10 @@
+warning: in the working copy of 'e2e-step1.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'e2e-step2.json', LF will be replaced by CRLF the next time Git touches it
+ _test_out.txt                                   | 407 [32m+++++++++++++++++++[m[31m-----[m
+ e2e-step1.json                                  |   4 [32m+[m[31m-[m
+ e2e-step2.json                                  |   6 [32m+[m[31m-[m
+ src/problems/arithmetic/integer/wordProblems.ts |  21 [32m++[m
+ src/problems/numberTheory/generators.ts         |  22 [32m++[m
+ src/problems/ratio/generators.ts                |   9 [32m+[m
+ src/problems/speed/generators.ts                |   3 [32m+[m
+ 7 files changed, 379 insertions(+), 93 deletions(-)

@@ -1,0 +1,405 @@
+{
+  "totalGenerated": 17200,
+  "ok": 6359,
+  "mismatch": 53,
+  "skipped": 10788,
+  "coveragePct": 37.3,
+  "typesVerified": 35,
+  "typesNotAutoVerified": [
+    "integer_division",
+    "integer_multi_step",
+    "integer_fill_blank",
+    "estimate_product",
+    "integer_word_problem",
+    "divisors_finding",
+    "divisors_count",
+    "multiples_finding",
+    "prime_judgment",
+    "common_divisors",
+    "common_multiples",
+    "gcd_lcm_word",
+    "period_repetition",
+    "fraction_mul_fraction",
+    "fraction_div_fraction",
+    "fraction_mul_mixed",
+    "fraction_div_mixed",
+    "fraction_common_denominator",
+    "fraction_mixed_convert",
+    "fraction_big_small",
+    "speed_calculation",
+    "speed_comparison",
+    "speed_word",
+    "speed_multi_step",
+    "circle_radius_from_area",
+    "volume_box",
+    "volume_cylinder",
+    "symmetry_fold",
+    "symmetry_point",
+    "scale_length",
+    "angle_basic",
+    "decimal_place_value",
+    "fraction_unit_intro",
+    "fraction_add_sub",
+    "triangle_classify",
+    "parallel_perpendicular",
+    "judge_same",
+    "judge_differs",
+    "ratio_simplify",
+    "ratio_equal",
+    "ratio_quantity",
+    "proportional_expression",
+    "proportional_word",
+    "inverse_expression",
+    "expression_meaning",
+    "inverse_word",
+    "expression_make",
+    "expression_substitution",
+    "expression_word_make",
+    "expression_blank",
+    "expression_multi_condition",
+    "combine_simple",
+    "arrange_tree",
+    "combine_table",
+    "duplicate_removal",
+    "data_average",
+    "data_total_from_average",
+    "data_max_min",
+    "data_compare",
+    "realworld_shopping",
+    "realworld_eggs"
+  ],
+  "roundingBalanceAudit": {
+    "up": 1104,
+    "down": 896,
+    "exactly5": 395,
+    "upRatio": 0.552,
+    "perLevel": {
+      "lv1": {
+        "up": 223,
+        "down": 177
+      },
+      "lv2": {
+        "up": 225,
+        "down": 175
+      },
+      "lv3": {
+        "up": 219,
+        "down": 181
+      },
+      "lv4": {
+        "up": 217,
+        "down": 183
+      },
+      "lv5": {
+        "up": 220,
+        "down": 180
+      }
+    }
+  },
+  "ratioValuePrecisionAudit": {
+    "affected": 0,
+    "samples": []
+  },
+  "mismatches": [
+    "circle_area_diameter: \"直径37cmの円の面積を求めなさい。円周率は3.14とします。\" params={\"diameter\":37,\"radius\":18.5,\"area\":1074.67,\"difficultyLevel\":5}",
+    "circle_area_diameter: \"直径37cmの円の面積を求めなさい。円周率は3.14とします。\" params={\"diameter\":37,\"radius\":18.5,\"area\":1074.67,\"difficultyLevel\":5}",
+    "circle_area_diameter: \"直径37cmの円の面積を求めなさい。円周率は3.14とします。\" params={\"diameter\":37,\"radius\":18.5,\"area\":1074.67,\"difficultyLevel\":5}",
+    "parallelogram_area: \"底辺が 73 cm、高さが 24 cm の平行四辺形を、対角線で2つの三角形に分けました。このうち1つの三角形の面積は何 cm2 ですか。\" params={\"variant\":\"two_triangles\",\"base\":73,\"height\":24,\"area\":1752,\"triangleArea\":876,\"answer\":876,\"difficultyLevel\":5}",
+    "parallelogram_area: \"底辺が 86 cm、高さが 8 cm の平行四辺形を、対角線で2つの三角形に分けました。このうち1つの三角形の面積は何 cm2 ですか。\" params={\"variant\":\"two_triangles\",\"base\":86,\"height\":8,\"area\":688,\"triangleArea\":344,\"answer\":344,\"difficultyLevel\":5}",
+    "parallelogram_area: \"底辺が 80 cm、高さが 79 cm の平行四辺形を、対角線で2つの三角形に分けました。このうち1つの三角形の面積は何 cm2 ですか。\" params={\"variant\":\"two_triangles\",\"base\":80,\"height\":79,\"area\":6320,\"triangleArea\":3160,\"answer\":3160,\"difficultyLevel\":5}",
+    "parallelogram_area: \"底辺が 21 cm、高さが 26 cm の平行四辺形を、対角線で2つの三角形に分けました。このうち1つの三角形の面積は何 cm2 ですか。\" params={\"variant\":\"two_triangles\",\"base\":21,\"height\":26,\"area\":546,\"triangleArea\":273,\"answer\":273,\"difficultyLevel\":5}",
+    "parallelogram_area: \"底辺が 49 cm、高さが 46 cm の平行四辺形を、対角線で2つの三角形に分けました。このうち1つの三角形の面積は何 cm2 ですか。\" params={\"variant\":\"two_triangles\",\"base\":49,\"height\":46,\"area\":2254,\"triangleArea\":1127,\"answer\":1127,\"difficultyLevel\":5}",
+    "parallelogram_area: \"底辺が 77 cm、高さが 66 cm の平行四辺形を、対角線で2つの三角形に分けました。このうち1つの三角形の面積は何 cm2 ですか。\" params={\"variant\":\"two_triangles\",\"base\":77,\"height\":66,\"area\":5082,\"triangleArea\":2541,\"answer\":2541,\"difficultyLevel\":5}",
+    "parallelogram_area: \"底辺が 57 cm、高さが 96 cm の平行四辺形を、対角線で2つの三角形に分けました。このうち1つの三角形の面積は何 cm2 ですか。\" params={\"variant\":\"two_triangles\",\"base\":57,\"height\":96,\"area\":5472,\"triangleArea\":2736,\"answer\":2736,\"difficultyLevel\":5}",
+    "parallelogram_area: \"底辺が 70 cm、高さが 71 cm の平行四辺形を、対角線で2つの三角形に分けました。このうち1つの三角形の面積は何 cm2 ですか。\" params={\"variant\":\"two_triangles\",\"base\":70,\"height\":71,\"area\":4970,\"triangleArea\":2485,\"answer\":2485,\"difficultyLevel\":5}",
+    "parallelogram_area: \"底辺が 83 cm、高さが 46 cm の平行四辺形を、対角線で2つの三角形に分けました。このうち1つの三角形の面積は何 cm2 ですか。\" params={\"variant\":\"two_triangles\",\"base\":83,\"height\":46,\"area\":3818,\"triangleArea\":1909,\"answer\":1909,\"difficultyLevel\":5}",
+    "percentage: \"ある量が 112 で、そのうち 84 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":112,\"part\":84,\"answer\":75,\"difficultyLevel\":3}",
+    "percentage: \"全体 110 に対して 88 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":80,\"whole\":110,\"part\":88,\"answer\":80,\"difficultyLevel\":3}",
+    "percentage: \"全体 120 に対して 90 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":120,\"part\":90,\"answer\":75,\"difficultyLevel\":3}",
+    "percentage: \"全体 150 に対して 90 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":60,\"whole\":150,\"part\":90,\"answer\":60,\"difficultyLevel\":3}",
+    "percentage: \"ある量が 80 で、そのうち 20 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":25,\"whole\":80,\"part\":20,\"answer\":25,\"difficultyLevel\":3}",
+    "percentage: \"ある量が 160 で、そのうち 96 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":60,\"whole\":160,\"part\":96,\"answer\":60,\"difficultyLevel\":3}",
+    "percentage: \"ある量が 40 で、そのうち 16 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":40,\"whole\":40,\"part\":16,\"answer\":40,\"difficultyLevel\":3}",
+    "percentage: \"ある量が 140 で、そのうち 98 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":70,\"whole\":140,\"part\":98,\"answer\":70,\"difficultyLevel\":3}",
+    "percentage: \"ある量が 60 で、そのうち 45 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":60,\"part\":45,\"answer\":75,\"difficultyLevel\":3}",
+    "percentage: \"ある量が 134 で、そのうち 67 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":134,\"part\":67,\"answer\":50,\"difficultyLevel\":3}",
+    "percentage: \"39 ものは、全体 130 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":30,\"whole\":130,\"part\":39,\"answer\":30,\"difficultyLevel\":3}",
+    "percentage: \"76 ものは、全体 95 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":80,\"whole\":95,\"part\":76,\"answer\":80,\"difficultyLevel\":3}",
+    "percentage: \"128 ものは、全体 256 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":256,\"part\":128,\"answer\":50,\"difficultyLevel\":4}",
+    "percentage: \"78 ものは、全体 195 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":40,\"whole\":195,\"part\":78,\"answer\":40,\"difficultyLevel\":4}",
+    "percentage: \"全体 265 に対して 159 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":60,\"whole\":265,\"part\":159,\"answer\":60,\"difficultyLevel\":4}",
+    "percentage: \"ある量が 172 で、そのうち 86 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":172,\"part\":86,\"answer\":50,\"difficultyLevel\":4}",
+    "percentage: \"ある量が 388 で、そのうち 194 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":388,\"part\":194,\"answer\":50,\"difficultyLevel\":4}",
+    "percentage: \"48 ものは、全体 120 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":40,\"whole\":120,\"part\":48,\"answer\":40,\"difficultyLevel\":4}",
+    "percentage: \"67 ものは、全体 335 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":20,\"whole\":335,\"part\":67,\"answer\":20,\"difficultyLevel\":4}",
+    "percentage: \"全体 10 に対して 4 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":40,\"whole\":10,\"part\":4,\"answer\":40,\"difficultyLevel\":4}",
+    "percentage: \"全体 400 に対して 40 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":10,\"whole\":400,\"part\":40,\"answer\":10,\"difficultyLevel\":4}",
+    "percentage: \"ある量が 394 で、そのうち 197 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":394,\"part\":197,\"answer\":50,\"difficultyLevel\":4}",
+    "percentage: \"65 ものは、全体 325 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":20,\"whole\":325,\"part\":65,\"answer\":20,\"difficultyLevel\":4}",
+    "percentage: \"全体 64 に対して 48 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":64,\"part\":48,\"answer\":75,\"difficultyLevel\":4}",
+    "percentage: \"62 ものは、全体 248 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":25,\"whole\":248,\"part\":62,\"answer\":25,\"difficultyLevel\":4}",
+    "percentage: \"228 ものは、全体 380 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":60,\"whole\":380,\"part\":228,\"answer\":60,\"difficultyLevel\":4}",
+    "percentage: \"24 ものは、全体 30 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":80,\"whole\":30,\"part\":24,\"answer\":80,\"difficultyLevel\":4}",
+    "percentage: \"全体 332 に対して 166 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":332,\"part\":166,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"ある量が 340 で、そのうち 204 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":60,\"whole\":340,\"part\":204,\"answer\":60,\"difficultyLevel\":5}",
+    "percentage: \"91 ものは、全体 130 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":70,\"whole\":130,\"part\":91,\"answer\":70,\"difficultyLevel\":5}",
+    "percentage: \"ある量が 390 で、そのうち 78 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":20,\"whole\":390,\"part\":78,\"answer\":20,\"difficultyLevel\":5}",
+    "percentage: \"全体 256 に対して 128 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":256,\"part\":128,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"全体 90 に対して 27 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":30,\"whole\":90,\"part\":27,\"answer\":30,\"difficultyLevel\":5}",
+    "percentage: \"ある量が 170 で、そのうち 85 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":170,\"part\":85,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"91 ものは、全体 182 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":182,\"part\":91,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"198 ものは、全体 264 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":264,\"part\":198,\"answer\":75,\"difficultyLevel\":5}",
+    "percentage: \"ある量が 365 で、そのうち 292 が占めています。何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":80,\"whole\":365,\"part\":292,\"answer\":80,\"difficultyLevel\":5}",
+    "percentage: \"45 ものは、全体 90 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":90,\"part\":45,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"56 ものは、全体 112 に対して何パーセントですか。\" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":112,\"part\":56,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"全体 280 に対して 112 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":40,\"whole\":280,\"part\":112,\"answer\":40,\"difficultyLevel\":5}",
+    "percentage: \"全体 268 に対して 201 です。$P が占める割合をパーセントで表してください。\" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":268,\"part\":201,\"answer\":75,\"difficultyLevel\":5}"
+  ],
+  "perTypeWithCoverage": [
+    {
+      "type": "percentage",
+      "ok": 159,
+      "mismatch": 41,
+      "skip": 0,
+      "coverage": 0.795
+    },
+    {
+      "type": "parallelogram_area",
+      "ok": 191,
+      "mismatch": 9,
+      "skip": 0,
+      "coverage": 0.955
+    },
+    {
+      "type": "circle_area_diameter",
+      "ok": 157,
+      "mismatch": 3,
+      "skip": 0,
+      "coverage": 0.981
+    },
+    {
+      "type": "integer_addition",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "integer_subtraction",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "integer_multiplication",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "prime_range",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "gcd_calculation",
+      "ok": 123,
+      "mismatch": 0,
+      "skip": 37,
+      "coverage": 1
+    },
+    {
+      "type": "lcm_calculation",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "fraction_mul_integer",
+      "ok": 9,
+      "mismatch": 0,
+      "skip": 191,
+      "coverage": 1
+    },
+    {
+      "type": "fraction_div_integer",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "fraction_reduce",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "distance_calculation",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "time_calculation",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "speed_unit_conversion",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "circle_area_radius",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_cube",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_prism",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_from_height",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_unit",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "circle_circumference",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "trapezoid_area",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "unit_conversion_basic",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "area_unit_conversion",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "rectangle_area",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "triangle_area",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "ratio_value",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_mul_decimal",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_addition",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_subtraction",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_div_decimal",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_mul_integer",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_div_integer",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_round",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "arrange_simple",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    }
+  ]
+}

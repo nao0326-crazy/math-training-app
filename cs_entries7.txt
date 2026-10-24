@@ -1,0 +1,48 @@
+  decimal_mul_decimal: s('required', 6, '数と計算', '第6学年 B(1) 小数×小数', 'partial'),
+  decimal_div_decimal: s('required', 6, '数と計算', '第6学年 B(2) 小数÷小数', 'partial'),
+  decimal_round: s('required', 5, '数と性質', '第5学年 B(2) およその数 近似値', 'partial',
+  decimal_place_value: {
+  speed_calculation: s('required', 5, '数量と関係の法則', '第5学年 C(1) 速さ', 'partial'),
+  distance_calculation: s('required', 5, '数量と関係の法則', '第5学年 C(1) 速さ', 'partial'),
+  time_calculation: s('required', 5, '数量と関係の法則', '第5学年 C(1) 速さ', 'partial'),
+  speed_unit_conversion: s('required', 5, '数量と関係の法則', '第5学年 C(1) 速さ 単位の換算', 'partial',
+  speed_comparison: s('required', 5, '数量と関係の法則', '第5学年 C(1) 速さ', 'partial'),
+  speed_word: s('required', 6, '数量と関係の法則', '第6学年 B/C 速さの文章題', 'partial'),
+  speed_multi_step: s('required', 6, '数量と関係の法則', '第6学年 数量と関係 複合問題', 'partial',
+  ratio_simplify: s('required', 6, '数量と関係の法則', '第6学年 C(1) 比', 'partial'),
+  ratio_value: s('required', 6, '数量と関係の法則', '第6学年 C(1) 比', 'partial'),
+  ratio_equal: s('required', 6, '数量と関係の法則', '第6学年 C(1) 比', 'partial'),
+  ratio_quantity: s('required', 6, '数量と関係の法則', '第6学年 C(1) 比 分配', 'partial'),
+  proportional_expression: k('required', 6, '数量と関係の法則', '第6学年 C(1) 比例 ア 比例の式', 'confirmed',
+  proportional_word: k('required', 6, '数量と関係の法則', '第6学年 C(1) 比例 イ 比例の性質', 'confirmed',
+  inverse_expression: k('required', 6, '数量と関係の法則', '第6学年 C(1) 比例 ウ 反比例の関係', 'confirmed',
+  inverse_word: k('required', 6, '数量と関係の法則', '第6学年 C(1) 比例 ウ 反比例の関係', 'confirmed',
+  circle_area_radius: s('required', 6, '図形', '第6学年 B(2) 円の面積', 'partial',
+  circle_area_diameter: s('required', 6, '図形', '第6学年 B(2) 円の面積', 'partial',
+  circle_radius_from_area: s('required', 6, '図形', '第6学年 B(2) 円の面積', 'partial',
+  circle_circumference: k('required', 5, '図形', '第5学年 B(3) 円の周長', 'confirmed',
+  trapezoid_area: {
+  angle_basic: {
+  triangle_classify: k('required', 3, '図形', '第3学年 B(1) 三角形', 'confirmed',
+  symmetry_fold: s('required', 6, '図形', '第6学年 B(3) 図形の対称', 'partial',
+  symmetry_point: s('required', 6, '図形', '第6学年 B(3) 図形の対称', 'partial',
+  judge_same: s('required', 6, '図形', '第6学年 B(3) 図形の合同', 'partial',
+  judge_differs: s('required', 6, '図形', '第6学年 B(3) 図形の合同', 'partial',
+  scale_length: s('required', 6, '図形', '第6学年 B(3) 拡大図 縮図', 'partial',
+  volume_box: s('required', 5, '図形', '第5学年 B(3) 直方体 立体', 'partial'),
+  volume_cube: s('required', 5, '図形', '第5学年 B(3) 立方体 立体', 'partial'),
+  volume_prism: s('required', 6, '図形', '第6学年 B(3) 立体 底面積と高さ', 'partial'),
+  volume_cylinder: s('required', 6, '図形', '第6学年 B(3) 円柱の体積', 'partial',
+  volume_from_height: s('required', 6, '図形', '第6学年 B(3) 立体 高さから体積', 'partial'),
+  volume_unit: s('required', 6, '量と単位', '第6学年 D 単位の換算 立体', 'partial',
+  unit_conversion_basic: k('required', 3, '量と単位', '第3学年 D 単位の換算', 'confirmed',
+  parallel_perpendicular: s('required', 4, '図形', '第4学年 B(1) 角と直線 (平行と垂直)', 'partial',
+  area_unit_conversion: {
+  fraction_add_sub: {
+  percentage: {
+  rectangle_area: {
+  triangle_area: {
+  parallelogram_area: {
+  expression_make: s('required', 5, '数量と関係の法則', '第5学年 B(2) 文字と式', 'partial'),
+  expression_substitution: s('required', 5, '数量と関係の法則', '第5学年 B(2) 文字と式', 'partial'),
+  expression_word_make: s('required', 5, '数量と関係の法則', '第5学年 B(2) 文字と式', 'partial'),

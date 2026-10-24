@@ -1,0 +1,29 @@
+          <button className="primary-button" onClick={handleRetry}>
+            もういちど
+          </button>
+          <button className="secondary-button" onClick={onExit}>
+            {isAdminMode ? '通常モードへ戻る' : 'ホームに戻る'}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!problem) {
+    return (
+      <div className="quiz-page">
+        <div className="loading-message">問題を準備しています...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="quiz-page">
+      <div className="quiz-header">
+        {isAdminMode && <div className="quiz-admin-mode">管理者モード</div>}
+        <div className="quiz-progress">
+          問題 {questionNumber} / {questionCount}
+        </div>
+        <div className="quiz-meta">
+          <span className="quiz-category">{categoryLabel(problem.category)}</span>
+          <span className="quiz-difficulty">

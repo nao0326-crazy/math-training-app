@@ -1,0 +1,39 @@
+            problemType: problem.type,
+            category: problem.category,
+            question: problem.question,
+          }}
+        />
+      </div>
+
+      {/* 問題タイプに応じた専用入力UI (OSキーボードを表示しない) */}
+      {!isAnswered && (
+        <div className="answer-section">
+          <AnswerInput
+            key={problem.id}
+            problem={problem}
+            disabled={isAnswered}
+            onSubmit={(value) => handleSubmit(value)}
+          />
+        </div>
+      )}
+
+      {isAnswered && (
+        <div className={`feedback ${isCorrect ? 'correct' : timedOut ? 'timed-out' : 'incorrect'}`}>
+          <div className="feedback-title">
+            {isCorrect
+              ? '🎉 せいかい！'
+              : timedOut
+                ? '⏰ 時間切れ！'
+                : judgement?.status === 'equivalent-not-canonical'
+                  ? '⭕ 計算は合っています！'
+                  : '❌ ざんねん...'}
+          </div>
+          {timedOut && (
+            <div className="feedback-explanation">制限時間内に解けませんでした。</div>
+          )}
+          {judgement?.status === 'equivalent-not-canonical' && (
+            <div className="feedback-explanation">{judgement.message}</div>
+          )}
+          {!isCorrect && (
+            <div className="feedback-answer">
+              正解は <strong>{formatAnswer(problem.answer)}</strong> です

@@ -1,0 +1,218 @@
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 描画[2m > [22m[2mツールと空のキャンバスを表示する
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 描画[2m > [22m[2m線を描画して筆跡が反映される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 描画[2m > [22m[2m線を描画して筆跡が反映される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 描画[2m > [22m[2m複数のストロークを描画できる
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 描画[2m > [22m[2m複数のストロークを描画できる
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 描画[2m > [22m[2m消しゴムと取り消しが機能する
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/HistoryPage.scratch.test.tsx[2m > [22m[2mHistoryPage: 途中式の復習[2m > [22m[2m記録のある問題では途中式カードが表示される (問題文・回答・正誤・時間・途中式)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 描画[2m > [22m[2m消しゴムと取り消しが機能する
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 描画[2m > [22m[2m全消去後にキャンバスが空になる (確認つき・取り消し可)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 描画[2m > [22m[2m全消去後にキャンバスが空になる (確認つき・取り消し可)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: リサイズ[2m > [22m[2mリサイズ後も筆跡が適切に保持される (正規化座標で保存)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: リサイズ[2m > [22m[2mリサイズ後も筆跡が適切に保持される (正規化座標で保存)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/HistoryPage.scratch.test.tsx[2m > [22m[2mHistoryPage: 途中式の復習[2m > [22m[2m時間切れの記録も正常に表示される (既存集計に影響しない表示のみ)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 保存と復元[2m > [22m[2m描画データがローカルに保存される (デバウンス後・同一 attemptId)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 保存と復元[2m > [22m[2m保存したデータから筆跡を復元できる
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 保存と復元[2m > [22m[2m問題を切り替えても別の問題の途中式と混ざらない
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/HistoryPage.scratch.test.tsx[2m > [22m[2mHistoryPage: 途中式の復習[2m > [22m[2m別の出題の途中式は別カードに表示され混ざらない
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 保存と復元[2m > [22m[2m問題を切り替えても別の問題の途中式と混ざらない
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 保存と復元[2m > [22m[2m同じ種類の問題が再出題されても過去の記録を上書きしない (attemptId が異なる)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 保存と復元[2m > [22m[2m同じ種類の問題が再出題されても過去の記録を上書きしない (attemptId が異なる)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 保存と復元[2m > [22m[2m自動保存中の画面遷移 (アンマウント) でデータが失われない
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 保存と復元[2m > [22m[2m自動保存中の画面遷移 (アンマウント) でデータが失われない
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 保存と復元[2m > [22m[2m全消去の状態も保存される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 保存と復元[2m > [22m[2m保存失敗時にアプリ全体がクラッシュせずエラーを表示する
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 保存と復元[2m > [22m[2m保存失敗時にアプリ全体がクラッシュせずエラーを表示する
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 回答後の無効化 (disabled prop)[2m > [22m[2mdisabled=true で線の描画を受け付けない
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 回答後の無効化 (disabled prop)[2m > [22m[2mdisabled=true でツールバーのボタンが無効化される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 回答後の無効化 (disabled prop)[2m > [22m[2mdisabled=true でキャンバスに scratch-disabled クラスが付与される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 回答後の無効化 (disabled prop)[2m > [22m[2mdisabled=false (既定) では線を描画できる
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/components/ScratchPad.test.tsx[2m > [22m[2mScratchPad: 回答後の無効化 (disabled prop)[2m > [22m[2mdisabled=false (既定) では線を描画できる
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.scratch.test.tsx[2m > [22m[2mQuizPage + 途中式: 既存機能との統合[2m > [22m[2m途中式を書かずに回答できる (正解・記録・判定が従来どおり)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.flow.test.tsx[2m > [22m[2mQuizPage: 表示 → 回答 → 採点 → 次の問題 → 結果[2m > [22m[2m正答・誤答・記録・集計が一連で正しく動く
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.scratch.test.tsx[2m > [22m[2mQuizPage + 途中式: 既存機能との統合[2m > [22m[2m途中式を書いた後も既存の回答欄から回答できる (不正解の判定も従来どおり)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.scratch.test.tsx[2m > [22m[2mQuizPage + 途中式: 既存機能との統合[2m > [22m[2m途中式を書いた後も既存の回答欄から回答できる (不正解の判定も従来どおり)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.flow.test.tsx[2m > [22m[2mQuizPage: 表示 → 回答 → 採点 → 次の問題 → 結果[2m > [22m[2m正答・誤答・記録・集計が一連で正しく動く
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.scratch.test.tsx[2m > [22m[2mQuizPage + 途中式: 既存機能との統合[2m > [22m[2m次の問題への遷移で attemptId が切り替わり、途中式が混ざらない
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.flow.test.tsx[2m > [22m[2mQuizPage: 表示 → 回答 → 採点 → 次の問題 → 結果[2m > [22m[2m正答・誤答・記録・集計が一連で正しく動く
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.scratch.test.tsx[2m > [22m[2mQuizPage + 途中式: 既存機能との統合[2m > [22m[2m次の問題への遷移で attemptId が切り替わり、途中式が混ざらない
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.flow.test.tsx[2m > [22m[2mQuizPage: 表示 → 回答 → 採点 → 次の問題 → 結果[2m > [22m[2m同一回答の二重送信では記録1件のみ
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.scratch.test.tsx[2m > [22m[2mQuizPage + 途中式: 回答後の無効化[2m > [22m[2m正解時に途中式ノートが無効化される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.flow.test.tsx[2m > [22m[2mQuizPage: 表示 → 回答 → 採点 → 次の問題 → 結果[2m > [22m[2m正答後に「答えと解き方をみる」で途中式を開示できる
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.scratch.test.tsx[2m > [22m[2mQuizPage + 途中式: 回答後の無効化[2m > [22m[2m不正解時に途中式ノートが無効化される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.flow.test.tsx[2m > [22m[2mQuizPage: 時間切れと送信の競合[2m > [22m[2m制限時間切れで時間切れ記録1件・フィードバック表示
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.flow.test.tsx[2m > [22m[2mQuizPage: 時間切れと送信の競合[2m > [22m[2m送信が先に確定した後は期限到来で上書きされない (競合)
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.scratch.test.tsx[2m > [22m[2mQuizPage + 途中式: 回答後の無効化[2m > [22m[2m時間切れ時に途中式ノートが無効化される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/App.adminScope.test.tsx[2m > [22m[2m管理者設定 → 出題のデータ経路 (UIフロー全体)[2m > [22m[2m管理者画面で単元96項目から選択して保存すると、出題がその単元に限定される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.scratch.test.tsx[2m > [22m[2mQuizPage + 途中式: 回答後の無効化[2m > [22m[2m次の問題に進むと途中式ノートが再び有効になる
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/App.adminScope.test.tsx[2m > [22m[2m管理者設定 → 出題のデータ経路 (UIフロー全体)[2m > [22m[2m保存済みの管理者設定 (複数単元) が全出題に適用される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.scratch.test.tsx[2m > [22m[2mQuizPage + 途中式: 回答後の無効化[2m > [22m[2m次の問題に進むと途中式ノートが再び有効になる
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/App.adminScope.test.tsx[2m > [22m[2m管理者設定 → 出題のデータ経路 (UIフロー全体)[2m > [22m[2m保存済みの管理者設定 (複数単元) が全出題に適用される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/QuizPage.scratch.test.tsx[2m > [22m[2mQuizPage + 途中式: 回答後の無効化[2m > [22m[2m次の問題に進むと途中式ノートが再び有効になる
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/App.adminScope.test.tsx[2m > [22m[2m管理者設定 → 出題のデータ経路 (UIフロー全体)[2m > [22m[2m保存済みの管理者設定 (複数単元) が全出題に適用される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/App.adminScope.test.tsx[2m > [22m[2m管理者設定 → 出題のデータ経路 (UIフロー全体)[2m > [22m[2m保存済みの管理者設定 (複数単元) が全出題に適用される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/App.adminScope.test.tsx[2m > [22m[2m管理者設定 → 出題のデータ経路 (UIフロー全体)[2m > [22m[2m保存済みの管理者設定 (複数単元) が全出題に適用される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/App.adminScope.test.tsx[2m > [22m[2m管理者設定 → 出題のデータ経路 (UIフロー全体)[2m > [22m[2m保存済みの管理者設定 (複数単元) が全出題に適用される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/App.adminScope.test.tsx[2m > [22m[2m管理者設定 → 出題のデータ経路 (UIフロー全体)[2m > [22m[2m保存済みの管理者設定 (複数単元) が全出題に適用される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+[90mstderr[2m | src/pages/App.adminScope.test.tsx[2m > [22m[2m管理者設定 → 出題のデータ経路 (UIフロー全体)[2m > [22m[2m保存済みの管理者設定 (複数単元) が全出題に適用される
+[22m[39mNot implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+

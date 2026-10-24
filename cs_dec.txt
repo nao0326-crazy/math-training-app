@@ -1,0 +1,6 @@
+export class DecimalMulDecimalGenerator implements ProblemGenerator {
+export class DecimalDivDecimalGenerator implements ProblemGenerator {
+export class DecimalMulIntegerGenerator implements ProblemGenerator {
+export class DecimalDivIntegerGenerator implements ProblemGenerator {
+export class DecimalRoundGenerator implements ProblemGenerator {
+export class DecimalPlaceValueGenerator implements ProblemGenerator {

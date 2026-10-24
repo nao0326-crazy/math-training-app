@@ -1,0 +1,35 @@
+SERVER UP http://127.0.0.1:5199
+PASS expression_meaning lv2 Q1 question text :: x9蜀・→縺・≧蠑上′縺ゅｊ縺ｾ縺吶ゅ←縺ｮ繧医≧縺ｪ諢丞袖縺後≠繧九°譁・ｫ縺ｧ隱ｬ譏弱＠縺ｦ縺上□縺輔＞
+PASS expression_meaning lv2 Q1 correct feedback :: 脂 縺帙＞縺九＞・・x9蜀・・縲』蜀・・迚ｩ繧・縺薙→9蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・遲・PASS expression_meaning lv2 Q1 solution display :: steps=1
+PASS expression_meaning lv2 Q1 solution answer value :: expected=x9蜀・・縲』蜀・・迚ｩ繧・縺薙→9蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・PASS expression_meaning lv2 Q2 no leftover input :: empty
+PASS expression_meaning lv2 Q2 question text :: x6蜀・→縺・≧蠑上′縺ゅｊ縺ｾ縺吶ゅ←縺ｮ繧医≧縺ｪ諢丞袖縺後≠繧九°譁・ｫ縺ｧ隱ｬ譏弱＠縺ｦ縺上□縺輔＞
+PASS expression_meaning lv2 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ x6蜀・・縲』蜀・・迚ｩ繧・縺薙→6蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣
+PASS expression_meaning lv2 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ x6蜀・・縲』蜀・・迚ｩ繧・縺薙→6蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・縺ｧ縺・expected=x6蜀・・縲』蜀・・迚ｩ繧・縺薙→6蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・PASS expression_meaning lv2 Q2 solution display :: steps=1
+PASS expression_meaning lv2 result page reachable :: not reached (questionCount>2)
+PASS expression_meaning lv2 no 404 :: none
+PASS expression_meaning lv3 Q1 question text :: x2蜀・→縺・≧蠑上′縺ゅｊ縺ｾ縺吶ゅ←縺ｮ繧医≧縺ｪ諢丞袖縺後≠繧九°譁・ｫ縺ｧ隱ｬ譏弱＠縺ｦ縺上□縺輔＞
+PASS expression_meaning lv3 Q1 correct feedback :: 脂 縺帙＞縺九＞・・x2蜀・・縲』蜀・・迚ｩ繧・縺薙→2蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・遲・PASS expression_meaning lv3 Q1 solution display :: steps=1
+PASS expression_meaning lv3 Q1 solution answer value :: expected=x2蜀・・縲』蜀・・迚ｩ繧・縺薙→2蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・PASS expression_meaning lv3 Q2 no leftover input :: empty
+PASS expression_meaning lv3 Q2 question text :: x7蜀・→縺・≧蠑上′縺ゅｊ縺ｾ縺吶ゅ←縺ｮ繧医≧縺ｪ諢丞袖縺後≠繧九°譁・ｫ縺ｧ隱ｬ譏弱＠縺ｦ縺上□縺輔＞
+PASS expression_meaning lv3 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ x7蜀・・縲』蜀・・迚ｩ繧・縺薙→7蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣
+PASS expression_meaning lv3 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ x7蜀・・縲』蜀・・迚ｩ繧・縺薙→7蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・縺ｧ縺・expected=x7蜀・・縲』蜀・・迚ｩ繧・縺薙→7蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・PASS expression_meaning lv3 Q2 solution display :: steps=1
+PASS expression_meaning lv3 result page reachable :: not reached (questionCount>2)
+PASS expression_meaning lv3 no 404 :: none
+PASS expression_meaning lv4 Q1 question text :: x6蜀・→縺・≧蠑上′縺ゅｊ縺ｾ縺吶ゅ←縺ｮ繧医≧縺ｪ諢丞袖縺後≠繧九°譁・ｫ縺ｧ隱ｬ譏弱＠縺ｦ縺上□縺輔＞
+PASS expression_meaning lv4 Q1 correct feedback :: 脂 縺帙＞縺九＞・・x6蜀・・縲』蜀・・迚ｩ繧・縺薙→6蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・遲・PASS expression_meaning lv4 Q1 solution display :: steps=1
+PASS expression_meaning lv4 Q1 solution answer value :: expected=x6蜀・・縲』蜀・・迚ｩ繧・縺薙→6蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・PASS expression_meaning lv4 Q2 no leftover input :: empty
+PASS expression_meaning lv4 Q2 question text :: x9蜀・→縺・≧蠑上′縺ゅｊ縺ｾ縺吶ゅ←縺ｮ繧医≧縺ｪ諢丞袖縺後≠繧九°譁・ｫ縺ｧ隱ｬ譏弱＠縺ｦ縺上□縺輔＞
+PASS expression_meaning lv4 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ x9蜀・・縲』蜀・・迚ｩ繧・縺薙→9蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣
+PASS expression_meaning lv4 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ x9蜀・・縲』蜀・・迚ｩ繧・縺薙→9蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・縺ｧ縺・expected=x9蜀・・縲』蜀・・迚ｩ繧・縺薙→9蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・PASS expression_meaning lv4 Q2 solution display :: steps=1
+PASS expression_meaning lv4 result page reachable :: not reached (questionCount>2)
+PASS expression_meaning lv4 no 404 :: none
+PASS expression_meaning lv5 Q1 question text :: x6蜀・→縺・≧蠑上′縺ゅｊ縺ｾ縺吶ゅ←縺ｮ繧医≧縺ｪ諢丞袖縺後≠繧九°譁・ｫ縺ｧ隱ｬ譏弱＠縺ｦ縺上□縺輔＞
+PASS expression_meaning lv5 Q1 correct feedback :: 脂 縺帙＞縺九＞・・x6蜀・・縲』蜀・・迚ｩ繧・縺薙→6蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・遲・PASS expression_meaning lv5 Q1 solution display :: steps=1
+PASS expression_meaning lv5 Q1 solution answer value :: expected=x6蜀・・縲』蜀・・迚ｩ繧・縺薙→6蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・PASS expression_meaning lv5 Q2 no leftover input :: empty
+PASS expression_meaning lv5 Q2 question text :: x5蜀・→縺・≧蠑上′縺ゅｊ縺ｾ縺吶ゅ←縺ｮ繧医≧縺ｪ諢丞袖縺後≠繧九°譁・ｫ縺ｧ隱ｬ譏弱＠縺ｦ縺上□縺輔＞
+PASS expression_meaning lv5 Q2 incorrect feedback :: 笶・縺悶ｓ縺ｭ繧・.. 豁｣隗｣縺ｯ x5蜀・・縲』蜀・・迚ｩ繧・縺薙→5蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣
+PASS expression_meaning lv5 Q2 correct answer shown :: shown=豁｣隗｣縺ｯ x5蜀・・縲』蜀・・迚ｩ繧・縺薙→5蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・縺ｧ縺・expected=x5蜀・・縲』蜀・・迚ｩ繧・縺薙→5蜀・・蜩∫黄繧定ｲｷ縺｣縺溘→縺阪・莉｣驥代〒縺・PASS expression_meaning lv5 Q2 solution display :: steps=1
+PASS expression_meaning lv5 result page reachable :: not reached (questionCount>2)
+PASS expression_meaning lv5 no 404 :: none
+
+SUMMARY pass=44 fail=0 cases=430

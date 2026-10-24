@@ -1,0 +1,405 @@
+{
+  "totalGenerated": 17200,
+  "ok": 6359,
+  "mismatch": 53,
+  "skipped": 10788,
+  "coveragePct": 37.3,
+  "typesVerified": 35,
+  "typesNotAutoVerified": [
+    "integer_division",
+    "integer_multi_step",
+    "integer_fill_blank",
+    "estimate_product",
+    "integer_word_problem",
+    "divisors_finding",
+    "divisors_count",
+    "multiples_finding",
+    "prime_judgment",
+    "common_divisors",
+    "common_multiples",
+    "gcd_lcm_word",
+    "period_repetition",
+    "fraction_mul_fraction",
+    "fraction_div_fraction",
+    "fraction_mul_mixed",
+    "fraction_div_mixed",
+    "fraction_common_denominator",
+    "fraction_mixed_convert",
+    "fraction_big_small",
+    "speed_calculation",
+    "speed_comparison",
+    "speed_word",
+    "speed_multi_step",
+    "circle_radius_from_area",
+    "volume_box",
+    "volume_cylinder",
+    "symmetry_fold",
+    "symmetry_point",
+    "scale_length",
+    "angle_basic",
+    "decimal_place_value",
+    "fraction_unit_intro",
+    "fraction_add_sub",
+    "triangle_classify",
+    "parallel_perpendicular",
+    "judge_same",
+    "judge_differs",
+    "ratio_simplify",
+    "ratio_equal",
+    "ratio_quantity",
+    "proportional_expression",
+    "proportional_word",
+    "inverse_expression",
+    "expression_meaning",
+    "inverse_word",
+    "expression_make",
+    "expression_substitution",
+    "expression_word_make",
+    "expression_blank",
+    "expression_multi_condition",
+    "combine_simple",
+    "arrange_tree",
+    "combine_table",
+    "duplicate_removal",
+    "data_average",
+    "data_total_from_average",
+    "data_max_min",
+    "data_compare",
+    "realworld_shopping",
+    "realworld_eggs"
+  ],
+  "roundingBalanceAudit": {
+    "up": 1104,
+    "down": 896,
+    "exactly5": 395,
+    "upRatio": 0.552,
+    "perLevel": {
+      "lv1": {
+        "up": 223,
+        "down": 177
+      },
+      "lv2": {
+        "up": 225,
+        "down": 175
+      },
+      "lv3": {
+        "up": 219,
+        "down": 181
+      },
+      "lv4": {
+        "up": 217,
+        "down": 183
+      },
+      "lv5": {
+        "up": 220,
+        "down": 180
+      }
+    }
+  },
+  "ratioValuePrecisionAudit": {
+    "affected": 0,
+    "samples": []
+  },
+  "mismatches": [
+    "circle_area_diameter: \"逶ｴ蠕・7cm縺ｮ蜀・・髱｢遨阪ｒ豎ゅａ縺ｪ縺輔＞縲ょ・蜻ｨ邇・・3.14縺ｨ縺励∪縺吶・" params={\"diameter\":37,\"radius\":18.5,\"area\":1074.67,\"difficultyLevel\":5}",
+    "circle_area_diameter: \"逶ｴ蠕・7cm縺ｮ蜀・・髱｢遨阪ｒ豎ゅａ縺ｪ縺輔＞縲ょ・蜻ｨ邇・・3.14縺ｨ縺励∪縺吶・" params={\"diameter\":37,\"radius\":18.5,\"area\":1074.67,\"difficultyLevel\":5}",
+    "circle_area_diameter: \"逶ｴ蠕・7cm縺ｮ蜀・・髱｢遨阪ｒ豎ゅａ縺ｪ縺輔＞縲ょ・蜻ｨ邇・・3.14縺ｨ縺励∪縺吶・" params={\"diameter\":37,\"radius\":18.5,\"area\":1074.67,\"difficultyLevel\":5}",
+    "parallelogram_area: \"蠎戊ｾｺ縺・73 cm縲・ｫ倥＆縺・24 cm 縺ｮ蟷ｳ陦悟屁霎ｺ蠖｢繧偵∝ｯｾ隗堤ｷ壹〒2縺､縺ｮ荳芽ｧ貞ｽ｢縺ｫ蛻・￠縺ｾ縺励◆縲ゅ％縺ｮ縺・■1縺､縺ｮ荳芽ｧ貞ｽ｢縺ｮ髱｢遨阪・菴・cm2 縺ｧ縺吶°縲・" params={\"variant\":\"two_triangles\",\"base\":73,\"height\":24,\"area\":1752,\"triangleArea\":876,\"answer\":876,\"difficultyLevel\":5}",
+    "parallelogram_area: \"蠎戊ｾｺ縺・86 cm縲・ｫ倥＆縺・8 cm 縺ｮ蟷ｳ陦悟屁霎ｺ蠖｢繧偵∝ｯｾ隗堤ｷ壹〒2縺､縺ｮ荳芽ｧ貞ｽ｢縺ｫ蛻・￠縺ｾ縺励◆縲ゅ％縺ｮ縺・■1縺､縺ｮ荳芽ｧ貞ｽ｢縺ｮ髱｢遨阪・菴・cm2 縺ｧ縺吶°縲・" params={\"variant\":\"two_triangles\",\"base\":86,\"height\":8,\"area\":688,\"triangleArea\":344,\"answer\":344,\"difficultyLevel\":5}",
+    "parallelogram_area: \"蠎戊ｾｺ縺・80 cm縲・ｫ倥＆縺・79 cm 縺ｮ蟷ｳ陦悟屁霎ｺ蠖｢繧偵∝ｯｾ隗堤ｷ壹〒2縺､縺ｮ荳芽ｧ貞ｽ｢縺ｫ蛻・￠縺ｾ縺励◆縲ゅ％縺ｮ縺・■1縺､縺ｮ荳芽ｧ貞ｽ｢縺ｮ髱｢遨阪・菴・cm2 縺ｧ縺吶°縲・" params={\"variant\":\"two_triangles\",\"base\":80,\"height\":79,\"area\":6320,\"triangleArea\":3160,\"answer\":3160,\"difficultyLevel\":5}",
+    "parallelogram_area: \"蠎戊ｾｺ縺・21 cm縲・ｫ倥＆縺・26 cm 縺ｮ蟷ｳ陦悟屁霎ｺ蠖｢繧偵∝ｯｾ隗堤ｷ壹〒2縺､縺ｮ荳芽ｧ貞ｽ｢縺ｫ蛻・￠縺ｾ縺励◆縲ゅ％縺ｮ縺・■1縺､縺ｮ荳芽ｧ貞ｽ｢縺ｮ髱｢遨阪・菴・cm2 縺ｧ縺吶°縲・" params={\"variant\":\"two_triangles\",\"base\":21,\"height\":26,\"area\":546,\"triangleArea\":273,\"answer\":273,\"difficultyLevel\":5}",
+    "parallelogram_area: \"蠎戊ｾｺ縺・49 cm縲・ｫ倥＆縺・46 cm 縺ｮ蟷ｳ陦悟屁霎ｺ蠖｢繧偵∝ｯｾ隗堤ｷ壹〒2縺､縺ｮ荳芽ｧ貞ｽ｢縺ｫ蛻・￠縺ｾ縺励◆縲ゅ％縺ｮ縺・■1縺､縺ｮ荳芽ｧ貞ｽ｢縺ｮ髱｢遨阪・菴・cm2 縺ｧ縺吶°縲・" params={\"variant\":\"two_triangles\",\"base\":49,\"height\":46,\"area\":2254,\"triangleArea\":1127,\"answer\":1127,\"difficultyLevel\":5}",
+    "parallelogram_area: \"蠎戊ｾｺ縺・77 cm縲・ｫ倥＆縺・66 cm 縺ｮ蟷ｳ陦悟屁霎ｺ蠖｢繧偵∝ｯｾ隗堤ｷ壹〒2縺､縺ｮ荳芽ｧ貞ｽ｢縺ｫ蛻・￠縺ｾ縺励◆縲ゅ％縺ｮ縺・■1縺､縺ｮ荳芽ｧ貞ｽ｢縺ｮ髱｢遨阪・菴・cm2 縺ｧ縺吶°縲・" params={\"variant\":\"two_triangles\",\"base\":77,\"height\":66,\"area\":5082,\"triangleArea\":2541,\"answer\":2541,\"difficultyLevel\":5}",
+    "parallelogram_area: \"蠎戊ｾｺ縺・57 cm縲・ｫ倥＆縺・96 cm 縺ｮ蟷ｳ陦悟屁霎ｺ蠖｢繧偵∝ｯｾ隗堤ｷ壹〒2縺､縺ｮ荳芽ｧ貞ｽ｢縺ｫ蛻・￠縺ｾ縺励◆縲ゅ％縺ｮ縺・■1縺､縺ｮ荳芽ｧ貞ｽ｢縺ｮ髱｢遨阪・菴・cm2 縺ｧ縺吶°縲・" params={\"variant\":\"two_triangles\",\"base\":57,\"height\":96,\"area\":5472,\"triangleArea\":2736,\"answer\":2736,\"difficultyLevel\":5}",
+    "parallelogram_area: \"蠎戊ｾｺ縺・70 cm縲・ｫ倥＆縺・71 cm 縺ｮ蟷ｳ陦悟屁霎ｺ蠖｢繧偵∝ｯｾ隗堤ｷ壹〒2縺､縺ｮ荳芽ｧ貞ｽ｢縺ｫ蛻・￠縺ｾ縺励◆縲ゅ％縺ｮ縺・■1縺､縺ｮ荳芽ｧ貞ｽ｢縺ｮ髱｢遨阪・菴・cm2 縺ｧ縺吶°縲・" params={\"variant\":\"two_triangles\",\"base\":70,\"height\":71,\"area\":4970,\"triangleArea\":2485,\"answer\":2485,\"difficultyLevel\":5}",
+    "parallelogram_area: \"蠎戊ｾｺ縺・83 cm縲・ｫ倥＆縺・46 cm 縺ｮ蟷ｳ陦悟屁霎ｺ蠖｢繧偵∝ｯｾ隗堤ｷ壹〒2縺､縺ｮ荳芽ｧ貞ｽ｢縺ｫ蛻・￠縺ｾ縺励◆縲ゅ％縺ｮ縺・■1縺､縺ｮ荳芽ｧ貞ｽ｢縺ｮ髱｢遨阪・菴・cm2 縺ｧ縺吶°縲・" params={\"variant\":\"two_triangles\",\"base\":83,\"height\":46,\"area\":3818,\"triangleArea\":1909,\"answer\":1909,\"difficultyLevel\":5}",
+    "percentage: \"縺ゅｋ驥上′ 112 縺ｧ縲√◎縺ｮ縺・■ 84 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":112,\"part\":84,\"answer\":75,\"difficultyLevel\":3}",
+    "percentage: \"蜈ｨ菴・110 縺ｫ蟇ｾ縺励※ 88 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":80,\"whole\":110,\"part\":88,\"answer\":80,\"difficultyLevel\":3}",
+    "percentage: \"蜈ｨ菴・120 縺ｫ蟇ｾ縺励※ 90 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":120,\"part\":90,\"answer\":75,\"difficultyLevel\":3}",
+    "percentage: \"蜈ｨ菴・150 縺ｫ蟇ｾ縺励※ 90 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":60,\"whole\":150,\"part\":90,\"answer\":60,\"difficultyLevel\":3}",
+    "percentage: \"縺ゅｋ驥上′ 80 縺ｧ縲√◎縺ｮ縺・■ 20 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":25,\"whole\":80,\"part\":20,\"answer\":25,\"difficultyLevel\":3}",
+    "percentage: \"縺ゅｋ驥上′ 160 縺ｧ縲√◎縺ｮ縺・■ 96 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":60,\"whole\":160,\"part\":96,\"answer\":60,\"difficultyLevel\":3}",
+    "percentage: \"縺ゅｋ驥上′ 40 縺ｧ縲√◎縺ｮ縺・■ 16 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":40,\"whole\":40,\"part\":16,\"answer\":40,\"difficultyLevel\":3}",
+    "percentage: \"縺ゅｋ驥上′ 140 縺ｧ縲√◎縺ｮ縺・■ 98 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":70,\"whole\":140,\"part\":98,\"answer\":70,\"difficultyLevel\":3}",
+    "percentage: \"縺ゅｋ驥上′ 60 縺ｧ縲√◎縺ｮ縺・■ 45 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":60,\"part\":45,\"answer\":75,\"difficultyLevel\":3}",
+    "percentage: \"縺ゅｋ驥上′ 134 縺ｧ縲√◎縺ｮ縺・■ 67 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":134,\"part\":67,\"answer\":50,\"difficultyLevel\":3}",
+    "percentage: \"39 繧ゅ・縺ｯ縲∝・菴・130 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":30,\"whole\":130,\"part\":39,\"answer\":30,\"difficultyLevel\":3}",
+    "percentage: \"76 繧ゅ・縺ｯ縲∝・菴・95 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":80,\"whole\":95,\"part\":76,\"answer\":80,\"difficultyLevel\":3}",
+    "percentage: \"128 繧ゅ・縺ｯ縲∝・菴・256 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":256,\"part\":128,\"answer\":50,\"difficultyLevel\":4}",
+    "percentage: \"78 繧ゅ・縺ｯ縲∝・菴・195 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":40,\"whole\":195,\"part\":78,\"answer\":40,\"difficultyLevel\":4}",
+    "percentage: \"蜈ｨ菴・265 縺ｫ蟇ｾ縺励※ 159 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":60,\"whole\":265,\"part\":159,\"answer\":60,\"difficultyLevel\":4}",
+    "percentage: \"縺ゅｋ驥上′ 172 縺ｧ縲√◎縺ｮ縺・■ 86 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":172,\"part\":86,\"answer\":50,\"difficultyLevel\":4}",
+    "percentage: \"縺ゅｋ驥上′ 388 縺ｧ縲√◎縺ｮ縺・■ 194 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":388,\"part\":194,\"answer\":50,\"difficultyLevel\":4}",
+    "percentage: \"48 繧ゅ・縺ｯ縲∝・菴・120 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":40,\"whole\":120,\"part\":48,\"answer\":40,\"difficultyLevel\":4}",
+    "percentage: \"67 繧ゅ・縺ｯ縲∝・菴・335 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":20,\"whole\":335,\"part\":67,\"answer\":20,\"difficultyLevel\":4}",
+    "percentage: \"蜈ｨ菴・10 縺ｫ蟇ｾ縺励※ 4 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":40,\"whole\":10,\"part\":4,\"answer\":40,\"difficultyLevel\":4}",
+    "percentage: \"蜈ｨ菴・400 縺ｫ蟇ｾ縺励※ 40 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":10,\"whole\":400,\"part\":40,\"answer\":10,\"difficultyLevel\":4}",
+    "percentage: \"縺ゅｋ驥上′ 394 縺ｧ縲√◎縺ｮ縺・■ 197 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":394,\"part\":197,\"answer\":50,\"difficultyLevel\":4}",
+    "percentage: \"65 繧ゅ・縺ｯ縲∝・菴・325 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":20,\"whole\":325,\"part\":65,\"answer\":20,\"difficultyLevel\":4}",
+    "percentage: \"蜈ｨ菴・64 縺ｫ蟇ｾ縺励※ 48 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":64,\"part\":48,\"answer\":75,\"difficultyLevel\":4}",
+    "percentage: \"62 繧ゅ・縺ｯ縲∝・菴・248 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":25,\"whole\":248,\"part\":62,\"answer\":25,\"difficultyLevel\":4}",
+    "percentage: \"228 繧ゅ・縺ｯ縲∝・菴・380 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":60,\"whole\":380,\"part\":228,\"answer\":60,\"difficultyLevel\":4}",
+    "percentage: \"24 繧ゅ・縺ｯ縲∝・菴・30 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":80,\"whole\":30,\"part\":24,\"answer\":80,\"difficultyLevel\":4}",
+    "percentage: \"蜈ｨ菴・332 縺ｫ蟇ｾ縺励※ 166 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":332,\"part\":166,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"縺ゅｋ驥上′ 340 縺ｧ縲√◎縺ｮ縺・■ 204 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":60,\"whole\":340,\"part\":204,\"answer\":60,\"difficultyLevel\":5}",
+    "percentage: \"91 繧ゅ・縺ｯ縲∝・菴・130 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":70,\"whole\":130,\"part\":91,\"answer\":70,\"difficultyLevel\":5}",
+    "percentage: \"縺ゅｋ驥上′ 390 縺ｧ縲√◎縺ｮ縺・■ 78 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":20,\"whole\":390,\"part\":78,\"answer\":20,\"difficultyLevel\":5}",
+    "percentage: \"蜈ｨ菴・256 縺ｫ蟇ｾ縺励※ 128 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":256,\"part\":128,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"蜈ｨ菴・90 縺ｫ蟇ｾ縺励※ 27 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":30,\"whole\":90,\"part\":27,\"answer\":30,\"difficultyLevel\":5}",
+    "percentage: \"縺ゅｋ驥上′ 170 縺ｧ縲√◎縺ｮ縺・■ 85 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":170,\"part\":85,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"91 繧ゅ・縺ｯ縲∝・菴・182 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":182,\"part\":91,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"198 繧ゅ・縺ｯ縲∝・菴・264 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":264,\"part\":198,\"answer\":75,\"difficultyLevel\":5}",
+    "percentage: \"縺ゅｋ驥上′ 365 縺ｧ縲√◎縺ｮ縺・■ 292 縺悟頃繧√※縺・∪縺吶ゆｽ輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":80,\"whole\":365,\"part\":292,\"answer\":80,\"difficultyLevel\":5}",
+    "percentage: \"45 繧ゅ・縺ｯ縲∝・菴・90 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":90,\"part\":45,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"56 繧ゅ・縺ｯ縲∝・菴・112 縺ｫ蟇ｾ縺励※菴輔ヱ繝ｼ繧ｻ繝ｳ繝医〒縺吶°縲・" params={\"variant\":\"what_percent\",\"percent\":50,\"whole\":112,\"part\":56,\"answer\":50,\"difficultyLevel\":5}",
+    "percentage: \"蜈ｨ菴・280 縺ｫ蟇ｾ縺励※ 112 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":40,\"whole\":280,\"part\":112,\"answer\":40,\"difficultyLevel\":5}",
+    "percentage: \"蜈ｨ菴・268 縺ｫ蟇ｾ縺励※ 201 縺ｧ縺吶・P 縺悟頃繧√ｋ蜑ｲ蜷医ｒ繝代・繧ｻ繝ｳ繝医〒陦ｨ縺励※縺上□縺輔＞縲・" params={\"variant\":\"what_percent\",\"percent\":75,\"whole\":268,\"part\":201,\"answer\":75,\"difficultyLevel\":5}"
+  ],
+  "perTypeWithCoverage": [
+    {
+      "type": "percentage",
+      "ok": 159,
+      "mismatch": 41,
+      "skip": 0,
+      "coverage": 0.795
+    },
+    {
+      "type": "parallelogram_area",
+      "ok": 191,
+      "mismatch": 9,
+      "skip": 0,
+      "coverage": 0.955
+    },
+    {
+      "type": "circle_area_diameter",
+      "ok": 157,
+      "mismatch": 3,
+      "skip": 0,
+      "coverage": 0.981
+    },
+    {
+      "type": "integer_addition",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "integer_subtraction",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "integer_multiplication",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "prime_range",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "gcd_calculation",
+      "ok": 123,
+      "mismatch": 0,
+      "skip": 37,
+      "coverage": 1
+    },
+    {
+      "type": "lcm_calculation",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "fraction_mul_integer",
+      "ok": 9,
+      "mismatch": 0,
+      "skip": 191,
+      "coverage": 1
+    },
+    {
+      "type": "fraction_div_integer",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "fraction_reduce",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "distance_calculation",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "time_calculation",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "speed_unit_conversion",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "circle_area_radius",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_cube",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_prism",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_from_height",
+      "ok": 160,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "volume_unit",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "circle_circumference",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "trapezoid_area",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "unit_conversion_basic",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "area_unit_conversion",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "rectangle_area",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "triangle_area",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "ratio_value",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_mul_decimal",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_addition",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_subtraction",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_div_decimal",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_mul_integer",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_div_integer",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "decimal_round",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    },
+    {
+      "type": "arrange_simple",
+      "ok": 200,
+      "mismatch": 0,
+      "skip": 0,
+      "coverage": 1
+    }
+  ]
+}

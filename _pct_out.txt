@@ -1,0 +1,17 @@
+### find_percent
+Q: 175 に注目して、105 が占める割合をパーセントで表すと何パーセントですか。
+A: {"kind":"integer","value":60}
+params: {"variant":"find_percent","percent":60,"whole":175,"part":105,"answer":60,"difficultyLevel":3}
+EXPL: 割合は「全体を100としたときの割合の値」です。この問題の答えは、105 ÷ 175 × 100 = 60 パーセントと求められます。
+
+### percent_of
+Q: 全体の量が 56 あります。50 パーセントに相当する量を求めなさい。
+A: {"kind":"integer","value":28}
+params: {"variant":"percent_of","percent":50,"whole":56,"part":28,"answer":28,"difficultyLevel":3}
+EXPL: 割合は「全体を100としたときの割合の値」です。この問題の答えは、28 ÷ 56 × 100 = 50 パーセントと求められます。
+
+### what_percent
+Q: ある量が 140 で、そのうち 126 が占めています。何パーセントですか。
+A: {"kind":"integer","value":90}
+params: {"variant":"what_percent","percent":90,"whole":140,"part":126,"answer":90,"difficultyLevel":3}
+EXPL: 割合は「全体を100としたときの割合の値」です。この問題の答えは、126 ÷ 140 × 100 = 90 パーセントと求められます。

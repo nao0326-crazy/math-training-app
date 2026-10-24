@@ -1,0 +1,29 @@
+SERVER UP http://127.0.0.1:5200
+PASS integer_addition lv1 Q1 question text :: 5に5をたすといくつになりますか
+PASS integer_addition lv1 Q1 input type :: integer
+PASS integer_addition lv1 Q1 expected answer :: 10
+PASS integer_addition lv1 Q1 correct feedback :: 🎉 せいかい！ 5＋5＝10 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv1 Q1 solution display :: steps=1
+PASS integer_addition lv1 Q1 solution answer value :: expected=10
+PASS integer_addition lv1 Q2 no leftover input :: empty
+PASS integer_addition lv1 Q2 question text :: 7に7をたすといくつになりますか
+PASS integer_addition lv1 Q2 input type :: integer
+PASS integer_addition lv1 Q2 expected answer :: 14
+PASS integer_addition lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 14 です 7＋7＝14 です。 答え14 途中式 
+PASS integer_addition lv1 Q2 correct answer shown :: shown=正解は 14 です expected=14
+PASS integer_addition lv1 Q2 solution display :: steps=1
+PASS integer_addition lv1 no page errors :: none
+PASS integer_addition lv1 no 404 :: none
+PASS integer_addition lv2 Q1 question text :: 9に2をたすといくつになりますか
+PASS integer_addition lv2 Q1 input type :: integer
+PASS integer_addition lv2 Q1 expected answer :: 11
+PASS integer_addition lv2 Q1 correct feedback :: 🎉 せいかい！ 9＋2＝11 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv2 Q1 solution display :: steps=1
+PASS integer_addition lv2 Q1 solution answer value :: expected=11
+PASS integer_addition lv2 Q2 no leftover input :: empty
+PASS integer_addition lv2 Q2 question text :: 2に6をたすといくつになりますか
+PASS integer_addition lv2 Q2 input type :: integer
+PASS integer_addition lv2 Q2 expected answer :: 8
+PASS integer_addition lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 8 です 2＋6＝8 です。 答え8 途中式  ①2
+PASS integer_addition lv2 Q2 correct answer shown :: shown=正解は 8 です expected=8
+PASS integer_addition lv2 Q2 solution display :: steps=1

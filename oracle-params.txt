@@ -1,0 +1,2072 @@
+===== integer_addition (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":3,"b":2,"operator":"+","answer":5,"difficultyLevel":1}
+    answer: {"kind":"integer","value":5}
+    Q: 3に2をたすといくつになりますか
+  lv=2 variant=-
+    params: {"a":8,"b":2,"operator":"+","answer":10,"difficultyLevel":2}
+    answer: {"kind":"integer","value":10}
+    Q: 8に2をたすといくつになりますか
+  lv=3 variant=-
+    params: {"a":26,"b":47,"operator":"+","answer":73,"difficultyLevel":3}
+    answer: {"kind":"integer","value":73}
+    Q: 26に47をたすといくつになりますか
+  lv=4 variant=-
+    params: {"a":55,"b":85,"operator":"+","answer":140,"difficultyLevel":4}
+    answer: {"kind":"integer","value":140}
+    Q: 55に85をたすといくつになりますか
+  lv=5 variant=-
+    params: {"a":124,"b":153,"operator":"+","answer":277,"difficultyLevel":5}
+    answer: {"kind":"integer","value":277}
+    Q: 124に153をたすといくつになりますか
+===== integer_subtraction (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":4,"b":1,"operator":"-","answer":3,"difficultyLevel":1,"borrowCount":0,"borrowPositions":[],"maxBorrowRun":0}
+    answer: {"kind":"integer","value":3}
+    Q: 4から1をひくといくつになりますか
+  lv=2 variant=-
+    params: {"a":12,"b":6,"operator":"-","answer":6,"difficultyLevel":2,"borrowCount":1,"borrowPositions":[0],"maxBorrowRun":1}
+    answer: {"kind":"integer","value":6}
+    Q: 12から6をひくといくつになりますか
+  lv=3 variant=-
+    params: {"a":36,"b":28,"operator":"-","answer":8,"difficultyLevel":3,"borrowCount":1,"borrowPositions":[0],"maxBorrowRun":1}
+    answer: {"kind":"integer","value":8}
+    Q: 36から28をひくといくつになりますか
+  lv=4 variant=-
+    params: {"a":100,"b":23,"operator":"-","answer":77,"difficultyLevel":4,"borrowCount":2,"borrowPositions":[0,1],"maxBorrowRun":2}
+    answer: {"kind":"integer","value":77}
+    Q: 100から23をひくといくつになりますか
+  lv=5 variant=-
+    params: {"a":102,"b":57,"operator":"-","answer":45,"difficultyLevel":5,"borrowCount":2,"borrowPositions":[0,1],"maxBorrowRun":2}
+    answer: {"kind":"integer","value":45}
+    Q: 102から57をひくといくつになりますか
+===== integer_multiplication (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":3,"b":2,"operator":"×","answer":6,"difficultyLevel":1}
+    answer: {"kind":"integer","value":6}
+    Q: 3に2をかけるといくつになりますか
+  lv=2 variant=-
+    params: {"a":4,"b":2,"operator":"×","answer":8,"difficultyLevel":2}
+    answer: {"kind":"integer","value":8}
+    Q: 4に2をかけるといくつになりますか
+  lv=3 variant=-
+    params: {"a":6,"b":12,"operator":"×","answer":72,"difficultyLevel":3}
+    answer: {"kind":"integer","value":72}
+    Q: 6に12をかけるといくつになりますか
+  lv=4 variant=-
+    params: {"a":10,"b":17,"operator":"×","answer":170,"difficultyLevel":4}
+    answer: {"kind":"integer","value":170}
+    Q: 10に17をかけるといくつになりますか
+  lv=5 variant=-
+    params: {"a":17,"b":22,"operator":"×","answer":374,"difficultyLevel":5}
+    answer: {"kind":"integer","value":374}
+    Q: 17に22をかけるといくつになりますか
+===== integer_division (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"dividend":4,"divisor":4,"quotient":1,"operator":"÷","answer":1,"difficultyLevel":1}
+    answer: {"kind":"integer","value":1}
+    Q: 4を4でわると、商はいくつになりますか
+  lv=2 variant=-
+    params: {"dividend":10,"divisor":5,"quotient":2,"operator":"÷","answer":2,"difficultyLevel":2}
+    answer: {"kind":"integer","value":2}
+    Q: 10を5でわると、商はいくつになりますか
+  lv=3 variant=-
+    params: {"dividend":171,"divisor":9,"quotient":19,"operator":"÷","answer":19,"difficultyLevel":3}
+    answer: {"kind":"integer","value":19}
+    Q: 171を9でわると、商はいくつになりますか
+  lv=4 variant=-
+    params: {"dividend":375,"divisor":15,"quotient":25,"operator":"÷","answer":25,"difficultyLevel":4}
+    answer: {"kind":"integer","value":25}
+    Q: 375を15でわると、商はいくつになりますか
+  lv=5 variant=-
+    params: {"dividend":972,"divisor":27,"quotient":36,"operator":"÷","answer":36,"difficultyLevel":5}
+    answer: {"kind":"integer","value":36}
+    Q: 972を27でわると、商はいくつになりますか
+===== integer_multi_step (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"numbers":[1,9,1],"operators":["+","+"],"expression":"1 + 9 + 1","answer":11,"difficultyLevel":1,"termCount":3}
+    answer: {"kind":"integer","value":11}
+    Q: 1 + 9 + 1 はいくつになりますか
+  lv=2 variant=-
+    params: {"numbers":[7,7,3],"operators":["+","+"],"expression":"7 + 7 + 3","answer":17,"difficultyLevel":2,"termCount":3}
+    answer: {"kind":"integer","value":17}
+    Q: 7 + 7 + 3 はいくつになりますか
+  lv=3 variant=-
+    params: {"numbers":[9,13,13],"operators":["-","÷"],"expression":"9 - 13 ÷ 13","answer":8,"difficultyLevel":3,"termCount":3}
+    answer: {"kind":"integer","value":8}
+    Q: 9 - 13 ÷ 13 はいくつになりますか
+  lv=4 variant=-
+    params: {"numbers":[48,48,33],"operators":["÷","+"],"expression":"48 ÷ 48 + 33","answer":34,"difficultyLevel":4,"termCount":3}
+    answer: {"kind":"integer","value":34}
+    Q: 48 ÷ 48 + 33 はいくつになりますか
+  lv=5 variant=-
+    params: {"numbers":[17,30,30],"operators":["×","÷"],"expression":"17 × 30 ÷ 30","answer":17,"difficultyLevel":5,"termCount":3}
+    answer: {"kind":"integer","value":17}
+    Q: 17 × 30 ÷ 30 はいくつになりますか
+===== integer_fill_blank (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"a":2,"operator":"-","answer":1,"difficultyLevel":2,"blankPosition":"second"}
+    answer: {"kind":"integer","value":1}
+    Q: 2−□＝1 の □ にあてはまる数はいくつですか
+  lv=3 variant=-
+    params: {"a":47,"operator":"-","answer":21,"difficultyLevel":3,"blankPosition":"second"}
+    answer: {"kind":"integer","value":21}
+    Q: 47−□＝26 の □ にあてはまる数はいくつですか
+  lv=4 variant=-
+    params: {"a":41,"operator":"-","answer":6,"difficultyLevel":4,"blankPosition":"second"}
+    answer: {"kind":"integer","value":6}
+    Q: 41−□＝35 の □ にあてはまる数はいくつですか
+  lv=5 variant=-
+    params: {"a":35,"operator":"-","answer":29,"difficultyLevel":5,"blankPosition":"second"}
+    answer: {"kind":"integer","value":29}
+    Q: 35−□＝6 の □ にあてはまる数はいくつですか
+===== estimate_product (levels: 2,3,4,5)
+  lv=2 variant=estimate_to_tens
+    params: {"variant":"estimate_to_tens","a":16,"b":41,"placeA":10,"placeB":10,"roundedA":20,"roundedB":40,"estimate":800,"exactProduct":656,"difficultyLevel":2}
+    answer: {"kind":"integer","value":800}
+    Q: 16 × 41 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数）に四捨五入してから掛け合わせてください。
+  lv=3 variant=estimate_to_hundreds
+    params: {"variant":"estimate_to_hundreds","a":340,"b":359,"placeA":100,"placeB":100,"roundedA":300,"roundedB":400,"estimate":120000,"exactProduct":122060,"difficultyLevel":3}
+    answer: {"kind":"integer","value":120000}
+    Q: 340 × 359 の積は、およそいくつですか。2つの数をどちらも百の位（100の倍数）に四捨五入してから掛け合わせてください。
+  lv=3 variant=estimate_one_exact
+    params: {"variant":"estimate_one_exact","a":19,"b":37,"placeA":1,"placeB":10,"roundedA":19,"roundedB":40,"estimate":760,"exactProduct":703,"difficultyLevel":3}
+    answer: {"kind":"integer","value":760}
+    Q: 19 × 37 の積は、およそいくつですか。19 はそのまま使い、37 だけを十の位（10の倍数）に四捨五入してから掛け合わせてください。
+  lv=4 variant=estimate_one_exact
+    params: {"variant":"estimate_one_exact","a":42,"b":19,"placeA":1,"placeB":10,"roundedA":42,"roundedB":20,"estimate":840,"exactProduct":798,"difficultyLevel":4}
+    answer: {"kind":"integer","value":840}
+    Q: 42 × 19 の積は、およそいくつですか。42 はそのまま使い、19 だけを十の位（10の倍数）に四捨五入してから掛け合わせてください。
+  lv=4 variant=estimate_to_hundreds
+    params: {"variant":"estimate_to_hundreds","a":176,"b":252,"placeA":100,"placeB":100,"roundedA":200,"roundedB":300,"estimate":60000,"exactProduct":44352,"difficultyLevel":4}
+    answer: {"kind":"integer","value":60000}
+    Q: 176 × 252 の積は、およそいくつですか。2つの数をどちらも百の位（100の倍数）に四捨五入してから掛け合わせてください。
+  lv=5 variant=estimate_to_hundreds
+    params: {"variant":"estimate_to_hundreds","a":356,"b":400,"placeA":100,"placeB":100,"roundedA":400,"roundedB":400,"estimate":160000,"exactProduct":142400,"difficultyLevel":5}
+    answer: {"kind":"integer","value":160000}
+    Q: 356 × 400 の積は、およそいくつですか。2つの数をどちらも百の位（100の倍数）に四捨五入してから掛け合わせてください。
+  lv=5 variant=estimate_mixed_places
+    params: {"variant":"estimate_mixed_places","a":23,"b":223,"placeA":10,"placeB":100,"roundedA":20,"roundedB":200,"estimate":4000,"exactProduct":5129,"difficultyLevel":5}
+    answer: {"kind":"integer","value":4000}
+    Q: 23 × 223 の積は、およそいくつですか。23 を十の位（10の倍数）に、223 を百の位（100の倍数）に四捨五入してから掛け合わせてください。
+===== integer_word_problem (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":3,"b":1,"operator":"-","answer":2,"difficultyLevel":1,"templateIndex":3,"readingLevel":1,"reasoningLevel":1}
+    answer: {"kind":"integer","value":2}
+    Q: クッキーが3個あります。1個たべました。のこりは何個ですか。
+  lv=2 variant=-
+    params: {"a":2,"b":1,"operator":"-","answer":1,"difficultyLevel":2,"templateIndex":4,"readingLevel":1,"reasoningLevel":1}
+    answer: {"kind":"integer","value":1}
+    Q: えんぴつが2本あります。1本つかいました。のこりは何本ですか。
+  lv=3 variant=-
+    params: {"a":47,"b":21,"operator":"-","answer":26,"difficultyLevel":3,"templateIndex":4,"readingLevel":1,"reasoningLevel":1}
+    answer: {"kind":"integer","value":26}
+    Q: えんぴつが47本あります。21本つかいました。のこりは何本ですか。
+  lv=4 variant=-
+    params: {"a":41,"b":6,"operator":"-","answer":35,"difficultyLevel":4,"templateIndex":5,"readingLevel":2,"reasoningLevel":2}
+    answer: {"kind":"integer","value":35}
+    Q: クラスに41人の子どもがいます。そのうち6人がおとこの子です。おんなの子は何人ですか。
+  lv=5 variant=-
+    params: {"a":35,"b":29,"operator":"-","answer":6,"difficultyLevel":5,"templateIndex":5,"readingLevel":2,"reasoningLevel":2}
+    answer: {"kind":"integer","value":6}
+    Q: クラスに35人の子どもがいます。そのうち29人がおとこの子です。おんなの子は何人ですか。
+===== divisors_finding (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"n":42,"answer":"1, 2, 3, 6, 7, 14, 21, 42","difficultyLevel":2,"divisorCount":8}
+    answer: {"kind":"string","value":"1, 2, 3, 6, 7, 14, 21, 42"}
+    Q: 42の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+  lv=3 variant=-
+    params: {"n":108,"answer":"1, 2, 3, 4, 6, 9, 12, 18, 27, 36, 54, 108","difficultyLevel":3,"divisorCount":12}
+    answer: {"kind":"string","value":"1, 2, 3, 4, 6, 9, 12, 18, 27, 36, 54, 108"}
+    Q: 108の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+  lv=4 variant=-
+    params: {"n":240,"answer":"1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 16, 20, 24, 30, 40, 48, 60, 80, 120, 240","difficultyLevel":4,"divisorCount":20}
+    answer: {"kind":"string","value":"1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 16, 20, 24, 30, 40, 48, 60, 80, 120, 240"}
+    Q: 240の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+  lv=5 variant=-
+    params: {"n":420,"answer":"1, 2, 3, 4, 5, 6, 7, 10, 12, 14, 15, 20, 21, 28, 30, 35, 42, 60, 70, 84, 105, 140, 210, 420","difficultyLevel":5,"divisorCount":24}
+    answer: {"kind":"string","value":"1, 2, 3, 4, 5, 6, 7, 10, 12, 14, 15, 20, 21, 28, 30, 35, 42, 60, 70, 84, 105, 140, 210, 420"}
+    Q: 420の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+===== divisors_count (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"n":48,"count":10,"answer":10,"divisorCount":10,"difficultyLevel":2}
+    answer: {"kind":"integer","value":10}
+    Q: 48の約数は何個ありますか
+  lv=3 variant=-
+    params: {"n":108,"count":12,"answer":12,"divisorCount":12,"difficultyLevel":3}
+    answer: {"kind":"integer","value":12}
+    Q: 108の約数は何個ありますか
+  lv=4 variant=-
+    params: {"n":240,"count":20,"answer":20,"divisorCount":20,"difficultyLevel":4}
+    answer: {"kind":"integer","value":20}
+    Q: 240の約数は何個ありますか
+  lv=5 variant=-
+    params: {"n":420,"count":24,"answer":24,"divisorCount":24,"difficultyLevel":5}
+    answer: {"kind":"integer","value":24}
+    Q: 420の約数は何個ありますか
+===== multiples_finding (levels: 1,2,3,4,5)
+  lv=1 variant=list_first_n
+    params: {"n":3,"variant":"list_first_n","arg1":3,"arg2":null,"count":3,"answer":"3, 6, 9","difficultyLevel":1}
+    answer: {"kind":"string","value":"3, 6, 9"}
+    Q: 3の倍数を小さい方から3こ答えなさい
+  lv=2 variant=list_up_to
+    params: {"n":2,"variant":"list_up_to","arg1":41,"arg2":null,"count":null,"answer":"2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40","difficultyLevel":2}
+    answer: {"kind":"string","value":"2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40"}
+    Q: 41以下の2の倍数をすべて答えなさい
+  lv=3 variant=list_up_to
+    params: {"n":9,"variant":"list_up_to","arg1":47,"arg2":null,"count":null,"answer":"9, 18, 27, 36, 45","difficultyLevel":3}
+    answer: {"kind":"string","value":"9, 18, 27, 36, 45"}
+    Q: 47以下の9の倍数をすべて答えなさい
+  lv=3 variant=list_between
+    params: {"n":5,"variant":"list_between","arg1":18,"arg2":33,"count":null,"answer":"20, 25, 30","difficultyLevel":3}
+    answer: {"kind":"string","value":"20, 25, 30"}
+    Q: 18から33までの間にある5の倍数をすべて答えなさい
+  lv=4 variant=list_between
+    params: {"n":8,"variant":"list_between","arg1":4,"arg2":24,"count":null,"answer":"8, 16, 24","difficultyLevel":4}
+    answer: {"kind":"string","value":"8, 16, 24"}
+    Q: 4から24までの間にある8の倍数をすべて答えなさい
+  lv=5 variant=list_between
+    params: {"n":7,"variant":"list_between","arg1":17,"arg2":33,"count":null,"answer":"21, 28","difficultyLevel":5}
+    answer: {"kind":"string","value":"21, 28"}
+    Q: 17から33までの間にある7の倍数をすべて答えなさい
+  lv=5 variant=nth_multiple
+    params: {"n":9,"variant":"nth_multiple","arg1":4,"arg2":null,"count":null,"answer":"36","difficultyLevel":5}
+    answer: {"kind":"integer","value":36}
+    Q: 9の倍数を小さい方から4番目は何ですか
+===== prime_judgment (levels: 3,4,5)
+  lv=3 variant=-
+    params: {"choices":[89,66,49],"answer":89,"difficultyLevel":3}
+    answer: {"kind":"string","value":"89"}
+    Q: 89、66、49 の中で素数はどれですか
+  lv=4 variant=-
+    params: {"choices":[73,20,52],"answer":73,"difficultyLevel":4}
+    answer: {"kind":"string","value":"73"}
+    Q: 73、20、52 の中で素数はどれですか
+  lv=5 variant=-
+    params: {"choices":[36,86,61],"answer":61,"difficultyLevel":5}
+    answer: {"kind":"string","value":"61"}
+    Q: 36、86、61 の中で素数はどれですか
+===== prime_range (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"min":3,"max":9,"answer":"3, 5, 7","primeCount":3,"difficultyLevel":1}
+    answer: {"kind":"string","value":"3, 5, 7"}
+    Q: 3から9までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+  lv=2 variant=-
+    params: {"min":7,"max":17,"answer":"7, 11, 13, 17","primeCount":4,"difficultyLevel":2}
+    answer: {"kind":"string","value":"7, 11, 13, 17"}
+    Q: 7から17までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+  lv=3 variant=-
+    params: {"min":8,"max":32,"answer":"11, 13, 17, 19, 23, 29, 31","primeCount":7,"difficultyLevel":3}
+    answer: {"kind":"string","value":"11, 13, 17, 19, 23, 29, 31"}
+    Q: 8から32までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+  lv=4 variant=-
+    params: {"min":9,"max":31,"answer":"11, 13, 17, 19, 23, 29, 31","primeCount":7,"difficultyLevel":4}
+    answer: {"kind":"string","value":"11, 13, 17, 19, 23, 29, 31"}
+    Q: 9から31までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+  lv=5 variant=-
+    params: {"min":10,"max":30,"answer":"11, 13, 17, 19, 23, 29","primeCount":6,"difficultyLevel":5}
+    answer: {"kind":"string","value":"11, 13, 17, 19, 23, 29"}
+    Q: 10から30までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+===== common_divisors (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"a":30,"b":18,"answer":"1, 2, 3, 6","g":6,"difficultyLevel":2,"commonDivisorCount":4}
+    answer: {"kind":"string","value":"1, 2, 3, 6"}
+    Q: 30と18の公約数をすべて答えなさい
+  lv=3 variant=-
+    params: {"a":60,"b":120,"answer":"1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60","g":60,"difficultyLevel":3,"commonDivisorCount":12}
+    answer: {"kind":"string","value":"1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60"}
+    Q: 60と120の公約数をすべて答えなさい
+  lv=4 variant=-
+    params: {"a":168,"b":252,"answer":"1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, 84","g":84,"difficultyLevel":4,"commonDivisorCount":12}
+    answer: {"kind":"string","value":"1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, 84"}
+    Q: 168と252の公約数をすべて答えなさい
+  lv=5 variant=-
+    params: {"a":336,"b":504,"answer":"1, 2, 3, 4, 6, 7, 8, 12, 14, 21, 24, 28, 42, 56, 84, 168","g":168,"difficultyLevel":5,"commonDivisorCount":16}
+    answer: {"kind":"string","value":"1, 2, 3, 4, 6, 7, 8, 12, 14, 21, 24, 28, 42, 56, 84, 168"}
+    Q: 336と504の公約数をすべて答えなさい
+===== common_multiples (levels: 2,3,4,5)
+  lv=2 variant=list_first_n
+    params: {"a":2,"b":4,"variant":"list_first_n","arg1":5,"arg2":null,"count":5,"answer":"4, 8, 12, 16, 20","lcm":4,"difficultyLevel":2}
+    answer: {"kind":"string","value":"4, 8, 12, 16, 20"}
+    Q: 2と4の公倍数を小さい方から5つ答えなさい
+  lv=3 variant=list_up_to
+    params: {"a":9,"b":10,"variant":"list_up_to","arg1":326,"arg2":null,"count":null,"answer":"90, 180, 270","lcm":90,"difficultyLevel":3}
+    answer: {"kind":"string","value":"90, 180, 270"}
+    Q: 326以下の9と10の公倍数をすべて答えなさい
+  lv=4 variant=list_up_to
+    params: {"a":7,"b":12,"variant":"list_up_to","arg1":207,"arg2":null,"count":null,"answer":"84, 168","lcm":84,"difficultyLevel":4}
+    answer: {"kind":"string","value":"84, 168"}
+    Q: 207以下の7と12の公倍数をすべて答えなさい
+  lv=4 variant=list_between
+    params: {"a":2,"b":7,"variant":"list_between","arg1":22,"arg2":78,"count":null,"answer":"28, 42, 56, 70","lcm":14,"difficultyLevel":4}
+    answer: {"kind":"string","value":"28, 42, 56, 70"}
+    Q: 22から78までの間にある2と7の公倍数をすべて答えなさい
+  lv=5 variant=list_between
+    params: {"a":6,"b":10,"variant":"list_between","arg1":70,"arg2":130,"count":null,"answer":"90, 120","lcm":30,"difficultyLevel":5}
+    answer: {"kind":"string","value":"90, 120"}
+    Q: 70から130までの間にある6と10の公倍数をすべて答えなさい
+===== gcd_calculation (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"a":30,"b":45,"answer":15,"difficultyLevel":2}
+    answer: {"kind":"integer","value":15}
+    Q: 30と45の最大公約数を求めなさい
+  lv=3 variant=-
+    params: {"a":30,"b":45,"answer":15,"difficultyLevel":3}
+    answer: {"kind":"integer","value":15}
+    Q: 30と45の最大公約数を求めなさい
+  lv=4 variant=-
+    params: {"a":36,"b":54,"answer":18,"difficultyLevel":4}
+    answer: {"kind":"integer","value":18}
+    Q: 36と54の最大公約数を求めなさい
+  lv=5 variant=-
+    params: {"a":42,"b":63,"answer":21,"difficultyLevel":5}
+    answer: {"kind":"integer","value":21}
+    Q: 42と63の最大公約数を求めなさい
+===== lcm_calculation (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"a":5,"b":6,"answer":30,"difficultyLevel":2}
+    answer: {"kind":"integer","value":30}
+    Q: 5と6の最小公倍数を求めなさい
+  lv=3 variant=-
+    params: {"a":5,"b":6,"answer":30,"difficultyLevel":3}
+    answer: {"kind":"integer","value":30}
+    Q: 5と6の最小公倍数を求めなさい
+  lv=4 variant=-
+    params: {"a":4,"b":7,"answer":28,"difficultyLevel":4}
+    answer: {"kind":"integer","value":28}
+    Q: 4と7の最小公倍数を求めなさい
+  lv=5 variant=-
+    params: {"a":6,"b":8,"answer":24,"difficultyLevel":5}
+    answer: {"kind":"integer","value":24}
+    Q: 6と8の最小公倍数を求めなさい
+===== gcd_lcm_word (levels: 3,4,5)
+  lv=3 variant=-
+    params: {"t":"gcd","a":32,"b":48,"answer":16,"difficultyLevel":3}
+    answer: {"kind":"integer","value":16}
+    Q: 32このアメと48このガムを、何人かの子どもに同じ数ずつ分けます。あまりなく分けるとき、最も多い人数は何人ですか
+  lv=4 variant=-
+    params: {"t":"lcm","a":6,"b":8,"answer":24,"difficultyLevel":4}
+    answer: {"kind":"integer","value":24}
+    Q: ある電車Aは6分ごと、電車Bは8分ごとに発車します。最初に同時に発車したあと、次に同時に発車するのは何分後ですか
+  lv=5 variant=-
+    params: {"t":"lcm","a":5,"b":6,"answer":30,"difficultyLevel":5}
+    answer: {"kind":"integer","value":30}
+    Q: ある電車Aは5分ごと、電車Bは6分ごとに発車します。最初に同時に発車したあと、次に同時に発車するのは何分後ですか
+===== period_repetition (levels: 3,4,5)
+  lv=3 variant=-
+    params: {"pattern":["赤","白","青"],"period":3,"n":29,"answer":"白","difficultyLevel":3,"remainder":2}
+    answer: {"kind":"string","value":"白"}
+    Q: 赤、白、青の旗を「赤、白、青」の順にくり返しならべます。29番目は何色ですか
+  lv=4 variant=-
+    params: {"pattern":["赤","白","青"],"period":3,"n":27,"answer":"青","difficultyLevel":4,"remainder":0}
+    answer: {"kind":"string","value":"青"}
+    Q: 赤、白、青の旗を「赤、白、青」の順にくり返しならべます。27番目は何色ですか
+  lv=5 variant=-
+    params: {"pattern":["赤","白","青"],"period":3,"n":25,"answer":"赤","difficultyLevel":5,"remainder":1}
+    answer: {"kind":"string","value":"赤"}
+    Q: 赤、白、青の旗を「赤、白、青」の順にくり返しならべます。25番目は何色ですか
+===== fraction_mul_integer (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"numerator":1,"denominator":3,"integer":2,"answerNumerator":2,"answerDenominator":3,"difficultyLevel":1,"requiresReduction":false,"isImproper":false}
+    answer: {"kind":"fraction","numerator":2,"denominator":3}
+    Q: 3分の1に2をかけるといくつになりますか
+  lv=2 variant=-
+    params: {"numerator":1,"denominator":4,"integer":7,"answerNumerator":7,"answerDenominator":4,"difficultyLevel":2,"requiresReduction":false,"isImproper":true}
+    answer: {"kind":"mixed","whole":1,"numerator":3,"denominator":4}
+    Q: 4分の1に7をかけるといくつになりますか
+  lv=3 variant=-
+    params: {"numerator":17,"denominator":6,"integer":6,"answerNumerator":17,"answerDenominator":1,"difficultyLevel":3,"requiresReduction":true,"isImproper":true}
+    answer: {"kind":"integer","value":17}
+    Q: 6分の17に6をかけるといくつになりますか
+  lv=4 variant=-
+    params: {"numerator":26,"denominator":8,"integer":4,"answerNumerator":13,"answerDenominator":1,"difficultyLevel":4,"requiresReduction":true,"isImproper":true}
+    answer: {"kind":"integer","value":13}
+    Q: 4分の13に4をかけるといくつになりますか
+  lv=5 variant=-
+    params: {"numerator":42,"denominator":12,"integer":18,"answerNumerator":63,"answerDenominator":1,"difficultyLevel":5,"requiresReduction":true,"isImproper":true}
+    answer: {"kind":"integer","value":63}
+    Q: 2分の7に18をかけるといくつになりますか
+===== fraction_mul_fraction (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"n1":1,"d1":3,"n2":1,"d2":2,"answerNumerator":1,"answerDenominator":6,"difficultyLevel":1,"isProperAnswer":true}
+    answer: {"kind":"fraction","numerator":1,"denominator":6}
+    Q: 3分の1と2分の1をかけるといくつになりますか
+  lv=2 variant=-
+    params: {"n1":1,"d1":4,"n2":5,"d2":7,"answerNumerator":5,"answerDenominator":28,"difficultyLevel":2,"isProperAnswer":true}
+    answer: {"kind":"fraction","numerator":5,"denominator":28}
+    Q: 4分の1と7分の5をかけるといくつになりますか
+  lv=3 variant=-
+    params: {"n1":5,"d1":6,"n2":4,"d2":6,"answerNumerator":5,"answerDenominator":9,"difficultyLevel":3,"isProperAnswer":true}
+    answer: {"kind":"fraction","numerator":5,"denominator":9}
+    Q: 6分の5と3分の2をかけるといくつになりますか
+  lv=4 variant=-
+    params: {"n1":6,"d1":8,"n2":1,"d2":3,"answerNumerator":1,"answerDenominator":4,"difficultyLevel":4,"isProperAnswer":true}
+    answer: {"kind":"fraction","numerator":1,"denominator":4}
+    Q: 4分の3と3分の1をかけるといくつになりますか
+  lv=5 variant=-
+    params: {"n1":7,"d1":11,"n2":6,"d2":17,"answerNumerator":42,"answerDenominator":187,"difficultyLevel":5,"isProperAnswer":true}
+    answer: {"kind":"fraction","numerator":42,"denominator":187}
+    Q: 11分の7と17分の6をかけるといくつになりますか
+===== fraction_div_integer (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"numerator":1,"denominator":3,"integer":2,"answerNumerator":1,"answerDenominator":6,"difficultyLevel":1}
+    answer: {"kind":"fraction","numerator":1,"denominator":6}
+    Q: 3分の1を2でわると、いくつになりますか
+  lv=2 variant=-
+    params: {"numerator":3,"denominator":4,"integer":2,"answerNumerator":3,"answerDenominator":8,"difficultyLevel":2}
+    answer: {"kind":"fraction","numerator":3,"denominator":8}
+    Q: 4分の3を2でわると、いくつになりますか
+  lv=3 variant=-
+    params: {"numerator":1,"denominator":6,"integer":12,"answerNumerator":1,"answerDenominator":72,"difficultyLevel":3}
+    answer: {"kind":"fraction","numerator":1,"denominator":72}
+    Q: 6分の1を12でわると、いくつになりますか
+  lv=4 variant=-
+    params: {"numerator":1,"denominator":8,"integer":13,"answerNumerator":1,"answerDenominator":104,"difficultyLevel":4}
+    answer: {"kind":"fraction","numerator":1,"denominator":104}
+    Q: 8分の1を13でわると、いくつになりますか
+  lv=5 variant=-
+    params: {"numerator":7,"denominator":12,"integer":15,"answerNumerator":7,"answerDenominator":180,"difficultyLevel":5}
+    answer: {"kind":"fraction","numerator":7,"denominator":180}
+    Q: 12分の7を15でわると、いくつになりますか
+===== fraction_div_fraction (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"n1":1,"d1":4,"n2":5,"d2":7,"answerNumerator":7,"answerDenominator":20,"difficultyLevel":2}
+    answer: {"kind":"fraction","numerator":7,"denominator":20}
+    Q: 4分の1を7分の5でわると、商はいくつですか
+  lv=3 variant=-
+    params: {"n1":5,"d1":6,"n2":4,"d2":6,"answerNumerator":5,"answerDenominator":4,"difficultyLevel":3}
+    answer: {"kind":"mixed","whole":1,"numerator":1,"denominator":4}
+    Q: 6分の5を3分の2でわると、商はいくつですか
+  lv=4 variant=-
+    params: {"n1":6,"d1":8,"n2":1,"d2":3,"answerNumerator":9,"answerDenominator":4,"difficultyLevel":4}
+    answer: {"kind":"mixed","whole":2,"numerator":1,"denominator":4}
+    Q: 4分の3を3分の1でわると、商はいくつですか
+  lv=5 variant=-
+    params: {"n1":7,"d1":11,"n2":6,"d2":17,"answerNumerator":119,"answerDenominator":66,"difficultyLevel":5}
+    answer: {"kind":"mixed","whole":1,"numerator":53,"denominator":66}
+    Q: 11分の7を17分の6でわると、商はいくつですか
+===== fraction_mul_mixed (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"whole":1,"numerator":1,"denominator":2,"n2":1,"d2":6,"mixedNumerator":3,"mixedDenominator":2,"answerNumerator":1,"answerDenominator":4,"difficultyLevel":1}
+    answer: {"kind":"fraction","numerator":1,"denominator":4}
+    Q: 1と2分の1と6分の1をかけるといくつになりますか
+  lv=2 variant=-
+    params: {"whole":1,"numerator":1,"denominator":5,"n2":2,"d2":5,"mixedNumerator":6,"mixedDenominator":5,"answerNumerator":12,"answerDenominator":25,"difficultyLevel":2}
+    answer: {"kind":"fraction","numerator":12,"denominator":25}
+    Q: 1と5分の1と5分の2をかけるといくつになりますか
+  lv=3 variant=-
+    params: {"whole":2,"numerator":5,"denominator":7,"n2":4,"d2":6,"mixedNumerator":19,"mixedDenominator":7,"answerNumerator":38,"answerDenominator":21,"difficultyLevel":3}
+    answer: {"kind":"mixed","whole":1,"numerator":17,"denominator":21}
+    Q: 2と7分の5と3分の2をかけるといくつになりますか
+  lv=4 variant=-
+    params: {"whole":2,"numerator":5,"denominator":6,"n2":6,"d2":7,"mixedNumerator":17,"mixedDenominator":6,"answerNumerator":17,"answerDenominator":7,"difficultyLevel":4}
+    answer: {"kind":"mixed","whole":2,"numerator":3,"denominator":7}
+    Q: 2と6分の5と7分の6をかけるといくつになりますか
+  lv=5 variant=-
+    params: {"whole":3,"numerator":6,"denominator":14,"n2":2,"d2":6,"mixedNumerator":48,"mixedDenominator":14,"answerNumerator":8,"answerDenominator":7,"difficultyLevel":5}
+    answer: {"kind":"mixed","whole":1,"numerator":1,"denominator":7}
+    Q: 3と7分の3と3分の1をかけるといくつになりますか
+===== fraction_div_mixed (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"whole":1,"numerator":1,"denominator":2,"n2":1,"d2":5,"mixedNumerator":3,"mixedDenominator":2,"answerNumerator":15,"answerDenominator":2,"difficultyLevel":1}
+    answer: {"kind":"mixed","whole":7,"numerator":1,"denominator":2}
+    Q: 1と2分の1を5分の1でわると、いくつになりますか
+  lv=2 variant=-
+    params: {"whole":1,"numerator":1,"denominator":4,"n2":2,"d2":5,"mixedNumerator":5,"mixedDenominator":4,"answerNumerator":25,"answerDenominator":8,"difficultyLevel":2}
+    answer: {"kind":"mixed","whole":3,"numerator":1,"denominator":8}
+    Q: 1と4分の1を5分の2でわると、いくつになりますか
+  lv=3 variant=-
+    params: {"whole":1,"numerator":4,"denominator":5,"n2":3,"d2":5,"mixedNumerator":9,"mixedDenominator":5,"answerNumerator":3,"answerDenominator":1,"difficultyLevel":3}
+    answer: {"kind":"integer","value":3}
+    Q: 1と5分の4を5分の3でわると、いくつになりますか
+  lv=4 variant=-
+    params: {"whole":2,"numerator":5,"denominator":6,"n2":4,"d2":5,"mixedNumerator":17,"mixedDenominator":6,"answerNumerator":85,"answerDenominator":24,"difficultyLevel":4}
+    answer: {"kind":"mixed","whole":3,"numerator":13,"denominator":24}
+    Q: 2と6分の5を5分の4でわると、いくつになりますか
+  lv=5 variant=-
+    params: {"whole":2,"numerator":5,"denominator":10,"n2":1,"d2":4,"mixedNumerator":25,"mixedDenominator":10,"answerNumerator":10,"answerDenominator":1,"difficultyLevel":5}
+    answer: {"kind":"integer","value":10}
+    Q: 2と2分の1を4分の1でわると、いくつになりますか
+===== fraction_reduce (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"numerator":2,"denominator":6,"answerNumerator":1,"answerDenominator":3,"divisor":2,"difficultyLevel":1}
+    answer: {"kind":"fraction","numerator":1,"denominator":3}
+    Q: 6分の2を約分しなさい
+  lv=2 variant=-
+    params: {"numerator":5,"denominator":10,"answerNumerator":1,"answerDenominator":2,"divisor":5,"difficultyLevel":2}
+    answer: {"kind":"fraction","numerator":1,"denominator":2}
+    Q: 10分の5を約分しなさい
+  lv=3 variant=-
+    params: {"numerator":10,"denominator":15,"answerNumerator":2,"answerDenominator":3,"divisor":5,"difficultyLevel":3}
+    answer: {"kind":"fraction","numerator":2,"denominator":3}
+    Q: 15分の10を約分しなさい
+  lv=4 variant=-
+    params: {"numerator":6,"denominator":12,"answerNumerator":1,"answerDenominator":2,"divisor":6,"difficultyLevel":4}
+    answer: {"kind":"fraction","numerator":1,"denominator":2}
+    Q: 12分の6を約分しなさい
+  lv=5 variant=-
+    params: {"numerator":6,"denominator":10,"answerNumerator":3,"answerDenominator":5,"divisor":2,"difficultyLevel":5}
+    answer: {"kind":"fraction","numerator":3,"denominator":5}
+    Q: 10分の6を約分しなさい
+===== fraction_common_denominator (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"n1":3,"d1":4,"n2":1,"d2":2,"common":4,"newN1":3,"newN2":2,"difficultyLevel":2}
+    answer: {"kind":"fractions","values":[{"numerator":3,"denominator":4},{"numerator":2,"denominator":4}]}
+    Q: 4分の3と2分の1を、分母を最小公倍数にそろえて表しなさい
+  lv=3 variant=-
+    params: {"n1":1,"d1":2,"n2":5,"d2":8,"common":8,"newN1":4,"newN2":5,"difficultyLevel":3}
+    answer: {"kind":"fractions","values":[{"numerator":4,"denominator":8},{"numerator":5,"denominator":8}]}
+    Q: 2分の1と8分の5を、分母を最小公倍数にそろえて表しなさい
+  lv=4 variant=-
+    params: {"n1":1,"d1":5,"n2":3,"d2":7,"common":35,"newN1":7,"newN2":15,"difficultyLevel":4}
+    answer: {"kind":"fractions","values":[{"numerator":7,"denominator":35},{"numerator":15,"denominator":35}]}
+    Q: 5分の1と7分の3を、分母を最小公倍数にそろえて表しなさい
+  lv=5 variant=-
+    params: {"n1":4,"d1":5,"n2":1,"d2":3,"common":15,"newN1":12,"newN2":5,"difficultyLevel":5}
+    answer: {"kind":"fractions","values":[{"numerator":12,"denominator":15},{"numerator":5,"denominator":15}]}
+    Q: 5分の4と3分の1を、分母を最小公倍数にそろえて表しなさい
+===== fraction_mixed_convert (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"numerator":9,"denominator":2,"whole":4,"answerNumerator":1,"answerDenominator":2,"difficultyLevel":2}
+    answer: {"kind":"mixed","whole":4,"numerator":1,"denominator":2}
+    Q: 9/2 を帯分数で表しなさい
+  lv=3 variant=-
+    params: {"numerator":32,"denominator":9,"whole":3,"answerNumerator":5,"answerDenominator":9,"difficultyLevel":3}
+    answer: {"kind":"mixed","whole":3,"numerator":5,"denominator":9}
+    Q: 32/9 を帯分数で表しなさい
+  lv=4 variant=-
+    params: {"numerator":12,"denominator":8,"whole":1,"answerNumerator":1,"answerDenominator":2,"difficultyLevel":4}
+    answer: {"kind":"mixed","whole":1,"numerator":1,"denominator":2}
+    Q: 12/8 を帯分数で表しなさい
+  lv=5 variant=-
+    params: {"numerator":37,"denominator":7,"whole":5,"answerNumerator":2,"answerDenominator":7,"difficultyLevel":5}
+    answer: {"kind":"mixed","whole":5,"numerator":2,"denominator":7}
+    Q: 37/7 を帯分数で表しなさい
+===== fraction_big_small (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"numerator":3,"denominator":4,"smallerNumerator":1,"difficultyLevel":2}
+    answer: {"kind":"string","value":"4分の3"}
+    Q: 8分の1と4分の3 のどちらが大きいか比べなさい
+  lv=3 variant=-
+    params: {"numerator":9,"denominator":10,"smallerNumerator":2,"difficultyLevel":3}
+    answer: {"kind":"string","value":"10分の9"}
+    Q: 10分の9と5分の2 のどちらが大きいか比べなさい
+  lv=4 variant=-
+    params: {"numerator":9,"denominator":11,"smallerNumerator":2,"difficultyLevel":4}
+    answer: {"kind":"string","value":"11分の9"}
+    Q: 11分の9と11分の2 のどちらが大きいか比べなさい
+  lv=5 variant=-
+    params: {"numerator":5,"denominator":6,"smallerNumerator":2,"difficultyLevel":5}
+    answer: {"kind":"string","value":"6分の5"}
+    Q: 3分の2と6分の5 のどちらが大きいか比べなさい
+===== speed_calculation (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"distance":4,"time":2,"timeUnit":"時間","distUnit":"km","answer":2,"difficultyLevel":1}
+    answer: {"kind":"decimal","value":2}
+    Q: 4kmを2時間で進みました。速さは何kmですか（1時間あたり）
+  lv=2 variant=-
+    params: {"distance":30,"time":3,"timeUnit":"時間","distUnit":"km","answer":10,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":10}
+    Q: 30kmを3時間で進みました。速さは何kmですか（1時間あたり）
+  lv=3 variant=-
+    params: {"distance":152,"time":4,"timeUnit":"時間","distUnit":"km","answer":38,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":38}
+    Q: 152kmを4時間で進みました。速さは何kmですか（1時間あたり）
+  lv=4 variant=-
+    params: {"distance":265,"time":5,"timeUnit":"時間","distUnit":"km","answer":53,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":53}
+    Q: 265kmを5時間で進みました。速さは何kmですか（1時間あたり）
+  lv=5 variant=-
+    params: {"distance":378,"time":6,"timeUnit":"時間","distUnit":"km","answer":63,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":63}
+    Q: 378kmを6時間で進みました。速さは何kmですか（1時間あたり）
+===== distance_calculation (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"speed":13,"time":2,"answer":26,"difficultyLevel":2}
+    answer: {"kind":"integer","value":26}
+    Q: 時速13kmで2時間走ると、何km進みますか
+  lv=3 variant=-
+    params: {"speed":26,"time":12,"answer":312,"difficultyLevel":3}
+    answer: {"kind":"integer","value":312}
+    Q: 時速26kmで12時間走ると、何km進みますか
+  lv=4 variant=-
+    params: {"speed":47,"time":13,"answer":611,"difficultyLevel":4}
+    answer: {"kind":"integer","value":611}
+    Q: 時速47kmで13時間走ると、何km進みますか
+  lv=5 variant=-
+    params: {"speed":74,"time":15,"answer":1110,"difficultyLevel":5}
+    answer: {"kind":"integer","value":1110}
+    Q: 時速74kmで15時間走ると、何km進みますか
+===== time_calculation (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"speed":8,"distance":8,"answer":1,"difficultyLevel":2}
+    answer: {"kind":"integer","value":1}
+    Q: 時速8kmで8km進むと、何時間かかりますか
+  lv=3 variant=-
+    params: {"speed":15,"distance":150,"answer":10,"difficultyLevel":3}
+    answer: {"kind":"integer","value":10}
+    Q: 時速15kmで150km進むと、何時間かかりますか
+  lv=4 variant=-
+    params: {"speed":28,"distance":308,"answer":11,"difficultyLevel":4}
+    answer: {"kind":"integer","value":11}
+    Q: 時速28kmで308km進むと、何時間かかりますか
+  lv=5 variant=-
+    params: {"speed":50,"distance":600,"answer":12,"difficultyLevel":5}
+    answer: {"kind":"integer","value":12}
+    Q: 時速50kmで600km進むと、何時間かかりますか
+===== speed_unit_conversion (levels: 2,3,4,5)
+  lv=2 variant=kmh_to_mmin
+    params: {"kmPerHour":60,"givenValue":60,"variant":"kmh_to_mmin","conversionType":"kmh_to_mmin","answer":1000,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":1000}
+    Q: 時速60kmは、分速何mですか
+  lv=3 variant=mmin_to_kmh
+    params: {"kmPerHour":0,"givenValue":500,"variant":"mmin_to_kmh","conversionType":"mmin_to_kmh","answer":30,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":30}
+    Q: 分速500mは、時速何kmですか
+  lv=4 variant=mmin_to_kmh
+    params: {"kmPerHour":0,"givenValue":650,"variant":"mmin_to_kmh","conversionType":"mmin_to_kmh","answer":39,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":39}
+    Q: 分速650mは、時速何kmですか
+  lv=4 variant=kmh_to_ms
+    params: {"kmPerHour":54,"givenValue":54,"variant":"kmh_to_ms","conversionType":"kmh_to_ms","answer":15,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":15}
+    Q: 時速54kmは、秒速何mですか
+  lv=5 variant=kmh_to_ms
+    params: {"kmPerHour":270,"givenValue":270,"variant":"kmh_to_ms","conversionType":"kmh_to_ms","answer":75,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":75}
+    Q: 時速270kmは、秒速何mですか
+===== speed_comparison (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"speedA":9,"speedB":3,"answer":"たろうさん","difficultyLevel":2}
+    answer: {"kind":"string","value":"たろうさん"}
+    Q: たろうさんは時速9km、はなこさんは時速3kmで進みます。どちらが速いですか
+  lv=3 variant=-
+    params: {"speedA":17,"speedB":38,"answer":"はなこさん","difficultyLevel":3}
+    answer: {"kind":"string","value":"はなこさん"}
+    Q: たろうさんは時速17km、はなこさんは時速38kmで進みます。どちらが速いですか
+  lv=4 variant=-
+    params: {"speedA":28,"speedB":49,"answer":"はなこさん","difficultyLevel":4}
+    answer: {"kind":"string","value":"はなこさん"}
+    Q: たろうさんは時速28km、はなこさんは時速49kmで進みます。どちらが速いですか
+  lv=5 variant=-
+    params: {"speedA":51,"speedB":70,"answer":"はなこさん","difficultyLevel":5}
+    answer: {"kind":"string","value":"はなこさん"}
+    Q: たろうさんは時速51km、はなこさんは時速70kmで進みます。どちらが速いですか
+===== speed_word (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"speed":57,"time":2,"answer":114,"scenario":"2","difficultyLevel":2}
+    answer: {"kind":"integer","value":114}
+    Q: おうちから学校まで分速57mで歩くと2分かかります。学校までは何mですか。
+  lv=3 variant=-
+    params: {"speed":83,"time":8,"answer":664,"scenario":"3","difficultyLevel":3}
+    answer: {"kind":"integer","value":664}
+    Q: 自動車で時速83kmで8時間走ると何km進みますか。
+  lv=4 variant=-
+    params: {"speed":111,"time":9,"answer":999,"scenario":"4","difficultyLevel":4}
+    answer: {"kind":"integer","value":999}
+    Q: 自動車で時速111kmで9時間走ると何km進みますか。
+  lv=5 variant=-
+    params: {"speed":149,"time":10,"answer":1490,"scenario":"5","difficultyLevel":5}
+    answer: {"kind":"integer","value":1490}
+    Q: 自動車で時速149kmで10時間走ると何km進みますか。
+===== speed_multi_step (levels: 3,4,5)
+  lv=3 variant=-
+    params: {"speed1":14,"time1":4,"speed2":20,"time2":4,"totalDistance":136,"totalTime":8,"averageSpeed":17,"answer":17,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":17}
+    Q: はじめの4時間は時速14kmで走り、つぎの4時間は時速20kmで走りました。走った距離は全部で何kmですか。また平均の速さは時速何kmですか（2つ目の答えを入力）
+  lv=4 variant=-
+    params: {"speed1":10,"time1":6,"speed2":18,"time2":6,"totalDistance":168,"totalTime":12,"averageSpeed":14,"answer":14,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":14}
+    Q: はじめの6時間は時速10kmで走り、つぎの6時間は時速18kmで走りました。走った距離は全部で何kmですか。また平均の速さは時速何kmですか（2つ目の答えを入力）
+  lv=5 variant=-
+    params: {"speed1":17,"time1":9,"speed2":29,"time2":9,"totalDistance":414,"totalTime":18,"averageSpeed":23,"answer":23,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":23}
+    Q: はじめの9時間は時速17kmで走り、つぎの9時間は時速29kmで走りました。走った距離は全部で何kmですか。また平均の速さは時速何kmですか（2つ目の答えを入力）
+===== circle_area_radius (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"radius":7,"area":153.86,"answer":153.86,"pi":3.14,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":153.86}
+    Q: 半径7cmの円の面積を求めなさい。円周率は3.14とします。
+  lv=3 variant=-
+    params: {"radius":12,"area":452.16,"answer":452.16,"pi":3.14,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":452.16}
+    Q: 半径12cmの円の面積を求めなさい。円周率は3.14とします。
+  lv=4 variant=-
+    params: {"radius":15,"area":706.5,"answer":706.5,"pi":3.14,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":706.5}
+    Q: 半径15cmの円の面積を求めなさい。円周率は3.14とします。
+  lv=5 variant=-
+    params: {"radius":22,"area":1519.76,"answer":1519.76,"pi":3.14,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":1519.76}
+    Q: 半径22cmの円の面積を求めなさい。円周率は3.14とします。
+===== circle_area_diameter (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"diameter":13,"radius":6.5,"area":132.67,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":132.67}
+    Q: 直径13cmの円の面積を求めなさい。円周率は3.14とします。
+  lv=3 variant=-
+    params: {"diameter":17,"radius":8.5,"area":226.87,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":226.87}
+    Q: 直径17cmの円の面積を求めなさい。円周率は3.14とします。
+  lv=4 variant=-
+    params: {"diameter":22,"radius":11,"area":379.94,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":379.94}
+    Q: 直径22cmの円の面積を求めなさい。円周率は3.14とします。
+  lv=5 variant=-
+    params: {"diameter":30,"radius":15,"area":706.5,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":706.5}
+    Q: 直径30cmの円の面積を求めなさい。円周率は3.14とします。
+===== circle_radius_from_area (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"radius":4,"area":50.24,"difficultyLevel":2}
+    answer: {"kind":"integer","value":4}
+    Q: 面積が50.24cm²の円があります。この円の半径は何cmですか。円周率は3.14とします。
+  lv=3 variant=-
+    params: {"radius":6,"area":113.04,"difficultyLevel":3}
+    answer: {"kind":"integer","value":6}
+    Q: 面積が113.04cm²の円があります。この円の半径は何cmですか。円周率は3.14とします。
+  lv=4 variant=-
+    params: {"radius":9,"area":254.34,"difficultyLevel":4}
+    answer: {"kind":"integer","value":9}
+    Q: 面積が254.34cm²の円があります。この円の半径は何cmですか。円周率は3.14とします。
+  lv=5 variant=-
+    params: {"radius":12,"area":452.16,"difficultyLevel":5}
+    answer: {"kind":"integer","value":12}
+    Q: 面積が452.16cm²の円があります。この円の半径は何cmですか。円周率は3.14とします。
+===== volume_box (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"length":3,"width":2,"height":2,"volume":12,"difficultyLevel":1}
+    answer: {"kind":"integer","value":12}
+    Q: 縦3cm、横2cm、高さ2cmの直方体の体積を求めよ。
+  lv=2 variant=-
+    params: {"length":4,"width":2,"height":7,"volume":56,"difficultyLevel":2}
+    answer: {"kind":"integer","value":56}
+    Q: 縦4cm、横2cm、高さ7cmの直方体の体積を求めよ。
+  lv=3 variant=-
+    params: {"length":6,"width":12,"height":6,"volume":432,"difficultyLevel":3}
+    answer: {"kind":"integer","value":432}
+    Q: 縦6cm、横12cm、高さ6cmの直方体の体積を求めよ。
+  lv=4 variant=-
+    params: {"length":8,"width":13,"height":3,"volume":312,"difficultyLevel":4}
+    answer: {"kind":"integer","value":312}
+    Q: 縦8cm、横13cm、高さ3cmの直方体の体積を求めよ。
+  lv=5 variant=-
+    params: {"length":11,"width":15,"height":17,"volume":2805,"difficultyLevel":5}
+    answer: {"kind":"integer","value":2805}
+    Q: 縦11cm、横15cm、高さ17cmの直方体の体積を求めよ。
+===== volume_cube (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"edge":3,"volume":27,"difficultyLevel":1}
+    answer: {"kind":"integer","value":27}
+    Q: 1辺が3cmの立方体の体積を求めよ。
+  lv=2 variant=-
+    params: {"edge":4,"volume":64,"difficultyLevel":2}
+    answer: {"kind":"integer","value":64}
+    Q: 1辺が4cmの立方体の体積を求めよ。
+  lv=3 variant=-
+    params: {"edge":6,"volume":216,"difficultyLevel":3}
+    answer: {"kind":"integer","value":216}
+    Q: 1辺が6cmの立方体の体積を求めよ。
+  lv=4 variant=-
+    params: {"edge":9,"volume":729,"difficultyLevel":4}
+    answer: {"kind":"integer","value":729}
+    Q: 1辺が9cmの立方体の体積を求めよ。
+  lv=5 variant=-
+    params: {"edge":12,"volume":1728,"difficultyLevel":5}
+    answer: {"kind":"integer","value":1728}
+    Q: 1辺が12cmの立方体の体積を求めよ。
+===== volume_prism (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"baseArea":6,"height":2,"volume":12,"difficultyLevel":2}
+    answer: {"kind":"integer","value":12}
+    Q: 底面積が6cm²、高さ2cmの角柱の体積を求めよ。
+  lv=3 variant=-
+    params: {"baseArea":8,"height":10,"volume":80,"difficultyLevel":3}
+    answer: {"kind":"integer","value":80}
+    Q: 底面積が8cm²、高さ10cmの角柱の体積を求めよ。
+  lv=4 variant=-
+    params: {"baseArea":12,"height":11,"volume":132,"difficultyLevel":4}
+    answer: {"kind":"integer","value":132}
+    Q: 底面積が12cm²、高さ11cmの角柱の体積を求めよ。
+  lv=5 variant=-
+    params: {"baseArea":18,"height":12,"volume":216,"difficultyLevel":5}
+    answer: {"kind":"integer","value":216}
+    Q: 底面積が18cm²、高さ12cmの角柱の体積を求めよ。
+===== volume_cylinder (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"radius":3,"height":2,"baseArea":28.26,"volume":56.52,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":56.52}
+    Q: 半径3cm、高さ2cmの円柱の体積を求めよ。円周率は3.14。
+  lv=3 variant=-
+    params: {"radius":4,"height":8,"baseArea":50.24,"volume":401.92,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":401.92}
+    Q: 半径4cm、高さ8cmの円柱の体積を求めよ。円周率は3.14。
+  lv=4 variant=-
+    params: {"radius":6,"height":9,"baseArea":113.04,"volume":1017.36,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":1017.36}
+    Q: 半径6cm、高さ9cmの円柱の体積を求めよ。円周率は3.14。
+  lv=5 variant=-
+    params: {"radius":7,"height":10,"baseArea":153.86,"volume":1538.6,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":1538.6}
+    Q: 半径7cm、高さ10cmの円柱の体積を求めよ。円周率は3.14。
+===== volume_from_height (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"baseArea":5,"volume":15,"height":3,"difficultyLevel":2}
+    answer: {"kind":"integer","value":3}
+    Q: 底面積が5cm²の角柱の体積が15cm³のとき、この角柱の高さを求めよ。
+  lv=3 variant=-
+    params: {"baseArea":6,"volume":60,"height":10,"difficultyLevel":3}
+    answer: {"kind":"integer","value":10}
+    Q: 底面積が6cm²の角柱の体積が60cm³のとき、この角柱の高さを求めよ。
+  lv=4 variant=-
+    params: {"baseArea":8,"volume":88,"height":11,"difficultyLevel":4}
+    answer: {"kind":"integer","value":11}
+    Q: 底面積が8cm²の角柱の体積が88cm³のとき、この角柱の高さを求めよ。
+  lv=5 variant=-
+    params: {"baseArea":10,"volume":120,"height":12,"difficultyLevel":5}
+    answer: {"kind":"integer","value":12}
+    Q: 底面積が10cm²の角柱の体積が120cm³のとき、この角柱の高さを求めよ。
+===== volume_unit (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"liters":1,"cm3":1000,"difficultyLevel":1}
+    answer: {"kind":"integer","value":1000}
+    Q: 1Lは何cm³ですか
+  lv=2 variant=-
+    params: {"liters":4,"cm3":4000,"difficultyLevel":2}
+    answer: {"kind":"integer","value":4000}
+    Q: 4Lは何cm³ですか
+  lv=3 variant=-
+    params: {"liters":9,"cm3":9000,"difficultyLevel":3}
+    answer: {"kind":"integer","value":9000}
+    Q: 9Lは何cm³ですか
+  lv=4 variant=-
+    params: {"liters":24,"cm3":24000,"difficultyLevel":4}
+    answer: {"kind":"integer","value":24000}
+    Q: 24Lは何cm³ですか
+  lv=5 variant=-
+    params: {"liters":52,"cm3":52000,"difficultyLevel":5}
+    answer: {"kind":"integer","value":52000}
+    Q: 52Lは何cm³ですか
+===== symmetry_fold (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"shape":"正五角形","isFold":true,"count":5,"difficultyLevel":2}
+    answer: {"kind":"string","value":"はい"}
+    Q: 正五角形は線対称な図形ですか？（はい/いいえ）
+  lv=3 variant=-
+    params: {"shape":"ひし形","isFold":true,"count":2,"difficultyLevel":3}
+    answer: {"kind":"string","value":"はい"}
+    Q: ひし形は線対称な図形ですか？（はい/いいえ）
+  lv=4 variant=-
+    params: {"shape":"ひし形","isFold":true,"count":2,"difficultyLevel":4}
+    answer: {"kind":"string","value":"はい"}
+    Q: ひし形は線対称な図形ですか？（はい/いいえ）
+  lv=5 variant=-
+    params: {"shape":"ひし形","isFold":true,"count":2,"difficultyLevel":5}
+    answer: {"kind":"string","value":"はい"}
+    Q: ひし形は線対称な図形ですか？（はい/いいえ）
+===== symmetry_point (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"shape":"正六角形","isPoint":true,"difficultyLevel":2}
+    answer: {"kind":"string","value":"はい"}
+    Q: 正六角形は点対称な図形ですか？（はい/いいえ）
+  lv=3 variant=-
+    params: {"shape":"正六角形","isPoint":true,"difficultyLevel":3}
+    answer: {"kind":"string","value":"はい"}
+    Q: 正六角形は点対称な図形ですか？（はい/いいえ）
+  lv=4 variant=-
+    params: {"shape":"円","isPoint":true,"difficultyLevel":4}
+    answer: {"kind":"string","value":"はい"}
+    Q: 円は点対称な図形ですか？（はい/いいえ）
+  lv=5 variant=-
+    params: {"shape":"円","isPoint":true,"difficultyLevel":5}
+    answer: {"kind":"string","value":"はい"}
+    Q: 円は点対称な図形ですか？（はい/いいえ）
+===== scale_length (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"scale":3,"base":2,"result":6,"difficultyLevel":2,"isEnlarge":true}
+    answer: {"kind":"integer","value":6}
+    Q: ある図形を3倍に拡大しました。もとの図形の長さが2cmのとき、拡大後の長さは何cmですか？
+  lv=3 variant=-
+    params: {"scale":4,"base":10,"result":40,"difficultyLevel":3,"isEnlarge":true}
+    answer: {"kind":"integer","value":40}
+    Q: ある図形を4倍に拡大しました。もとの図形の長さが10cmのとき、拡大後の長さは何cmですか？
+  lv=4 variant=-
+    params: {"scale":6,"base":11,"result":66,"difficultyLevel":4,"isEnlarge":true}
+    answer: {"kind":"integer","value":66}
+    Q: ある図形を6倍に拡大しました。もとの図形の長さが11cmのとき、拡大後の長さは何cmですか？
+  lv=5 variant=-
+    params: {"scale":8,"base":12,"result":96,"difficultyLevel":5,"isEnlarge":true}
+    answer: {"kind":"integer","value":96}
+    Q: ある図形を8倍に拡大しました。もとの図形の長さが12cmのとき、拡大後の長さは何cmですか？
+===== angle_basic (levels: 3,4,5)
+  lv=3 variant=-
+    params: {"angleA":57,"angleB":89,"angleC":34,"difficultyLevel":3}
+    answer: {"kind":"integer","value":34}
+    Q: 三角形の2つの角が57°と89°です。残りの角は何度ですか。
+  lv=4 variant=-
+    params: {"angleA":65,"angleB":75,"angleC":40,"difficultyLevel":4}
+    answer: {"kind":"integer","value":40}
+    Q: 三角形の2つの角が65°と75°です。残りの角は何度ですか。
+  lv=5 variant=-
+    params: {"angleA":74,"angleB":62,"angleC":44,"difficultyLevel":5}
+    answer: {"kind":"integer","value":44}
+    Q: 三角形の2つの角が74°と62°です。残りの角は何度ですか。
+===== circle_circumference (levels: 1,2,3,4,5)
+  lv=1 variant=from_diameter
+    params: {"variant":"from_diameter","diameter":3,"circumference":9.42,"unit":"cm","pi":3.14,"difficultyLevel":1}
+    answer: {"kind":"decimal","value":9.42}
+    Q: 直径3cmの円の円周の長さを求めなさい。円周率は3.14とします。
+  lv=2 variant=from_circumference
+    params: {"variant":"from_circumference","diameter":2,"circumference":6.28,"unit":"cm","pi":3.14,"difficultyLevel":2}
+    answer: {"kind":"integer","value":2}
+    Q: 円周が6.28cmの円の直径は何cmですか。円周率は3.14とします。
+  lv=3 variant=from_diameter
+    params: {"variant":"from_diameter","diameter":93,"circumference":292.02,"unit":"cm","pi":3.14,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":292.02}
+    Q: 直径93cmの円の円周の長さを求めなさい。円周率は3.14とします。
+  lv=4 variant=from_diameter
+    params: {"variant":"from_diameter","diameter":824,"circumference":2587.36,"unit":"cm","answerUnit":"m","pi":3.14,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":25.87}
+    Q: 直径824cmの円の円周の長さをmで求めなさい。円周率は3.14とします。
+  lv=5 variant=from_circumference
+    params: {"variant":"from_circumference","diameter":7,"circumference":21.98,"unit":"m","pi":3.14,"difficultyLevel":5}
+    answer: {"kind":"integer","value":7}
+    Q: 円周が21.98mの円の直径は何mですか。円周率は3.14とします。
+===== trapezoid_area (levels: 1,2,3,4,5)
+  lv=1 variant=basic
+    params: {"variant":"basic","a":2,"b":8,"h":2,"area":10,"difficultyLevel":1}
+    answer: {"kind":"integer","value":10}
+    Q: 上底が2cm、下底が8cm、高さが2cmの台形の面積を求めなさい。
+  lv=2 variant=reverse_height
+    params: {"variant":"reverse_height","a":16,"b":16,"h":6,"area":96,"difficultyLevel":2}
+    answer: {"kind":"integer","value":6}
+    Q: 上底が16cm、下底が16cm、面積が96cm²の台形の高さは何cmですか。
+  lv=3 variant=reverse_base
+    params: {"variant":"reverse_base","a":9,"b":13,"h":11,"area":121,"difficultyLevel":3}
+    answer: {"kind":"integer","value":9}
+    Q: 下底が13cm、高さが11cm、面積が121cm²の台形の上底は何cmですか。
+  lv=4 variant=basic
+    params: {"variant":"basic","a":5,"b":15,"h":19,"area":190,"difficultyLevel":4}
+    answer: {"kind":"integer","value":190}
+    Q: 上底が5cm、下底が15cm、高さが19cmの台形の面積を求めなさい。
+  lv=5 variant=reverse_height
+    params: {"variant":"reverse_height","a":13,"b":35,"h":7,"area":168,"difficultyLevel":5}
+    answer: {"kind":"integer","value":7}
+    Q: 上底が13cm、下底が35cm、面積が168cm²の台形の高さは何cmですか。
+===== unit_conversion_basic (levels: 1,2,3,4,5)
+  lv=1 variant=length
+    params: {"variant":"length","from":"m","to":"cm","value":7,"answer":700,"difficultyLevel":1}
+    answer: {"kind":"integer","value":700}
+    Q: 7mは何cmですか
+  lv=1 variant=time
+    params: {"variant":"time","from":"時","to":"秒","value":7,"answer":25200,"difficultyLevel":1}
+    answer: {"kind":"integer","value":25200}
+    Q: 7時は何秒ですか
+  lv=2 variant=length
+    params: {"variant":"length","from":"m","to":"cm","value":27,"answer":2700,"difficultyLevel":2}
+    answer: {"kind":"integer","value":2700}
+    Q: 27mは何cmですか
+  lv=2 variant=mass
+    params: {"variant":"mass","from":"kg","to":"g","value":4,"answer":4000,"difficultyLevel":2}
+    answer: {"kind":"integer","value":4000}
+    Q: 4kgは何gですか
+  lv=3 variant=area
+    params: {"variant":"area","from":"㎡","to":"㎠","value":7,"answer":70000,"difficultyLevel":3}
+    answer: {"kind":"integer","value":70000}
+    Q: 7㎡は何㎠ですか
+  lv=3 variant=time
+    params: {"variant":"time","from":"分","to":"時","value":840,"answer":14,"difficultyLevel":3}
+    answer: {"kind":"integer","value":14}
+    Q: 840分は何時ですか
+  lv=4 variant=area
+    params: {"variant":"area","from":"㎡","to":"㎠","value":5,"answer":50000,"difficultyLevel":4}
+    answer: {"kind":"integer","value":50000}
+    Q: 5㎡は何㎠ですか
+  lv=4 variant=length
+    params: {"variant":"length","from":"m","to":"mm","value":100,"answer":100000,"difficultyLevel":4}
+    answer: {"kind":"integer","value":100000}
+    Q: 100mは何mmですか
+  lv=4 variant=time
+    params: {"variant":"time","from":"分","to":"時","value":7140,"answer":119,"difficultyLevel":4}
+    answer: {"kind":"integer","value":119}
+    Q: 7140分は何時ですか
+  lv=5 variant=area
+    params: {"variant":"area","from":"㎠","to":"㎡","value":50000,"answer":5,"difficultyLevel":5}
+    answer: {"kind":"integer","value":5}
+    Q: 50000㎠は何㎡ですか
+  lv=5 variant=length
+    params: {"variant":"length","from":"m","to":"km","value":73000,"answer":73,"difficultyLevel":5}
+    answer: {"kind":"integer","value":73}
+    Q: 73000mは何kmですか
+===== decimal_place_value (levels: 1,2,3,4,5)
+  lv=1 variant=read_digit
+    params: {"variant":"read_digit","place":1,"digits":[9],"answer":9,"difficultyLevel":1}
+    answer: {"kind":"integer","value":9}
+    Q: 小数 0.9 の10分の1の位の数字は何ですか。
+  lv=1 variant=place_value
+    params: {"variant":"place_value","place":1,"digit":3,"answer":0.3,"difficultyLevel":1}
+    answer: {"kind":"decimal","value":0.3}
+    Q: 10分の1の位が3のとき、小数はいくつになりますか。
+  lv=2 variant=place_value
+    params: {"variant":"place_value","place":1,"digit":7,"answer":0.7,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":0.7}
+    Q: 10分の1の位が7のとき、小数はいくつになりますか。
+  lv=3 variant=place_value
+    params: {"variant":"place_value","place":2,"digit":4,"answer":0.04,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":0.04}
+    Q: 100分の1の位が4のとき、小数はいくつになりますか。
+  lv=3 variant=decompose
+    params: {"variant":"decompose","place":1,"low":5,"high":8,"bigPart":0.8,"smallPart":0.5,"answer":1.3,"difficultyLevel":3}
+    answer: {"kind":"string","value":"0.8 + 0.5"}
+    Q: 小数 1.3 を、10分の1の位と100分の1の位の和で表してください。
+  lv=4 variant=place_value
+    params: {"variant":"place_value","place":2,"digit":2,"answer":0.02,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":0.02}
+    Q: 100分の1の位が2のとき、小数はいくつになりますか。
+  lv=4 variant=decompose
+    params: {"variant":"decompose","place":1,"low":2,"high":5,"bigPart":0.5,"smallPart":0.2,"answer":0.7,"difficultyLevel":4}
+    answer: {"kind":"string","value":"0.5 + 0.2"}
+    Q: 小数 0.7 を、10分の1の位と100分の1の位の和で表してください。
+  lv=5 variant=place_value
+    params: {"variant":"place_value","place":2,"digit":8,"answer":0.08,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":0.08}
+    Q: 100分の1の位が8のとき、小数はいくつになりますか。
+  lv=5 variant=read_digit
+    params: {"variant":"read_digit","place":1,"digits":[7],"answer":7,"difficultyLevel":5}
+    answer: {"kind":"integer","value":7}
+    Q: 小数 0.7 の10分の1の位の数字は何ですか。
+  lv=5 variant=decompose
+    params: {"variant":"decompose","place":1,"low":2,"high":5,"bigPart":0.5,"smallPart":0.2,"answer":0.7,"difficultyLevel":5}
+    answer: {"kind":"string","value":"0.5 + 0.2"}
+    Q: 小数 0.7 を、10分の1の位と100分の1の位の和で表してください。
+===== fraction_unit_intro (levels: 1,2,3,4,5)
+  lv=1 variant=meaning
+    params: {"variant":"meaning","num":1,"den":2,"answer":"1/2","difficultyLevel":1}
+    answer: {"kind":"string","value":"1/2"}
+    Q: ある量を2等分したときの1つ分は、何分の一ですか。
+  lv=1 variant=how_many_units
+    params: {"variant":"how_many_units","num":2,"den":4,"answer":2,"difficultyLevel":1}
+    answer: {"kind":"integer","value":2}
+    Q: 2/4 は、1/4 いくつ分ですか。
+  lv=2 variant=how_many_units
+    params: {"variant":"how_many_units","num":2,"den":2,"answer":2,"difficultyLevel":2}
+    answer: {"kind":"integer","value":2}
+    Q: 2/2 は、1/2 いくつ分ですか。
+  lv=3 variant=how_many_units
+    params: {"variant":"how_many_units","num":4,"den":8,"answer":4,"difficultyLevel":3}
+    answer: {"kind":"integer","value":4}
+    Q: 4/8 は、1/8 いくつ分ですか。
+  lv=3 variant=count_units
+    params: {"variant":"count_units","num":4,"den":5,"answer":"4/5","difficultyLevel":3}
+    answer: {"kind":"string","value":"4/5"}
+    Q: 1/5 を 4 個集めると、何分の一になりますか。
+  lv=4 variant=how_many_units
+    params: {"variant":"how_many_units","num":1,"den":7,"answer":1,"difficultyLevel":4}
+    answer: {"kind":"integer","value":1}
+    Q: 1/7 は、1/7 いくつ分ですか。
+  lv=4 variant=count_units
+    params: {"variant":"count_units","num":1,"den":2,"answer":"1/2","difficultyLevel":4}
+    answer: {"kind":"string","value":"1/2"}
+    Q: 1/2 を 1 個集めると、何分の一になりますか。
+  lv=5 variant=how_many_units
+    params: {"variant":"how_many_units","num":6,"den":6,"answer":6,"difficultyLevel":5}
+    answer: {"kind":"integer","value":6}
+    Q: 6/6 は、1/6 いくつ分ですか。
+  lv=5 variant=count_units
+    params: {"variant":"count_units","num":4,"den":8,"answer":"4/8","difficultyLevel":5}
+    answer: {"kind":"string","value":"4/8"}
+    Q: 1/8 を 4 個集めると、何分の一になりますか。
+===== fraction_add_sub (levels: 1,2,3,4,5)
+  lv=1 variant=add
+    params: {"variant":"add","operation":"add","n1":1,"d1":2,"n2":1,"d2":3,"numerator":5,"denominator":6,"commonDenominator":6,"difficultyLevel":1}
+    answer: {"kind":"fraction","numerator":5,"denominator":6}
+    Q: 1/2 ＋ 1/3 を計算し、約分した答えを書きなさい。
+  lv=2 variant=subtract
+    params: {"variant":"subtract","operation":"subtract","n1":1,"d1":2,"n2":2,"d2":5,"numerator":1,"denominator":10,"commonDenominator":10,"difficultyLevel":2}
+    answer: {"kind":"fraction","numerator":1,"denominator":10}
+    Q: 1/2 − 2/5 を計算し、約分した答えを書きなさい。
+  lv=3 variant=subtract
+    params: {"variant":"subtract","operation":"subtract","n1":3,"d1":4,"n2":2,"d2":3,"numerator":1,"denominator":12,"commonDenominator":12,"difficultyLevel":3}
+    answer: {"kind":"fraction","numerator":1,"denominator":12}
+    Q: 3/4 − 2/3 を計算し、約分した答えを書きなさい。
+  lv=3 variant=add_reduces
+    params: {"variant":"add_reduces","operation":"subtract","n1":6,"d1":8,"n2":1,"d2":3,"numerator":5,"denominator":12,"commonDenominator":24,"difficultyLevel":3}
+    answer: {"kind":"fraction","numerator":5,"denominator":12}
+    Q: 6/8 − 1/3 を計算し、約分した答えを書きなさい。
+  lv=4 variant=add_reduces
+    params: {"variant":"add_reduces","operation":"subtract","n1":3,"d1":4,"n2":6,"d2":9,"numerator":1,"denominator":12,"commonDenominator":36,"difficultyLevel":4}
+    answer: {"kind":"fraction","numerator":1,"denominator":12}
+    Q: 3/4 − 6/9 を計算し、約分した答えを書きなさい。
+  lv=5 variant=add_reduces
+    params: {"variant":"add_reduces","operation":"subtract","n1":4,"d1":5,"n2":2,"d2":4,"numerator":3,"denominator":10,"commonDenominator":20,"difficultyLevel":5}
+    answer: {"kind":"fraction","numerator":3,"denominator":10}
+    Q: 4/5 − 2/4 を計算し、約分した答えを書きなさい。
+  lv=5 variant=add_improper
+    params: {"variant":"add_improper","operation":"add","n1":1,"d1":2,"n2":3,"d2":4,"numerator":5,"denominator":4,"commonDenominator":4,"difficultyLevel":5}
+    answer: {"kind":"fraction","numerator":5,"denominator":4}
+    Q: 1/2 ＋ 3/4 を計算し、約分した答えを書きなさい。
+===== triangle_classify (levels: 1,2,3,4,5)
+  lv=1 variant=classify
+    params: {"variant":"classify","a":8,"b":6,"c":7,"kind":"不等辺三角形","difficultyLevel":1}
+    answer: {"kind":"string","value":"不等辺三角形"}
+    Q: 辺の長さが 8cm、6cm、7cm の三角形は、どんな三角形ですか。
+  lv=2 variant=classify
+    params: {"variant":"classify","a":2,"b":7,"c":8,"kind":"不等辺三角形","difficultyLevel":2}
+    answer: {"kind":"string","value":"不等辺三角形"}
+    Q: 辺の長さが 2cm、7cm、8cm の三角形は、どんな三角形ですか。
+  lv=2 variant=which_sides_equal
+    params: {"variant":"which_sides_equal","a":9,"b":8,"c":8,"kind":"二等辺三角形","equalCount":2,"difficultyLevel":2}
+    answer: {"kind":"integer","value":2}
+    Q: 辺の長さが 9cm、8cm、8cm の三角形で、長さが等しい辺は何本ありますか。
+  lv=3 variant=classify
+    params: {"variant":"classify","a":28,"b":14,"c":20,"kind":"不等辺三角形","difficultyLevel":3}
+    answer: {"kind":"string","value":"不等辺三角形"}
+    Q: 辺の長さが 28cm、14cm、20cm の三角形は、どんな三角形ですか。
+  lv=4 variant=classify
+    params: {"variant":"classify","a":20,"b":30,"c":19,"kind":"不等辺三角形","difficultyLevel":4}
+    answer: {"kind":"string","value":"不等辺三角形"}
+    Q: 辺の長さが 20cm、30cm、19cm の三角形は、どんな三角形ですか。
+  lv=5 variant=classify
+    params: {"variant":"classify","a":21,"b":26,"c":11,"kind":"不等辺三角形","difficultyLevel":5}
+    answer: {"kind":"string","value":"不等辺三角形"}
+    Q: 辺の長さが 21cm、26cm、11cm の三角形は、どんな三角形ですか。
+  lv=5 variant=which_sides_equal
+    params: {"variant":"which_sides_equal","a":22,"b":25,"c":25,"kind":"二等辺三角形","equalCount":2,"difficultyLevel":5}
+    answer: {"kind":"integer","value":2}
+    Q: 辺の長さが 22cm、25cm、25cm の三角形で、長さが等しい辺は何本ありますか。
+===== parallel_perpendicular (levels: 1,2,3,4,5)
+  lv=1 variant=definition_parallel
+    params: {"variant":"definition_parallel","answerKind":"parallel","difficultyLevel":1}
+    answer: {"kind":"string","value":"平行"}
+    Q: 同じ平面上にある2本の直線が、互いに交わらないとき、この2本の直線を何といいますか。
+  lv=1 variant=definition_perpendicular
+    params: {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":1}
+    answer: {"kind":"string","value":"垂直"}
+    Q: 2本の直線が直角に交わるとき、この2本の直線の関係は何といいますか。
+  lv=2 variant=definition_perpendicular
+    params: {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":2}
+    answer: {"kind":"string","value":"垂直"}
+    Q: 2本の直線が交わるとき、できる角が直角であるとき、この2本の直線を何といいますか。
+  lv=3 variant=definition_perpendicular
+    params: {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":3}
+    answer: {"kind":"string","value":"垂直"}
+    Q: 2本の直線が交わるとき、できる4つの角がすべて直角であるとき、この2本の直線を何といいますか。
+  lv=3 variant=angle_judgment
+    params: {"variant":"angle_judgment","angle":120,"answerKind":"not_perpendicular","difficultyLevel":3}
+    answer: {"kind":"string","value":"垂直ではありません"}
+    Q: 2本の直線が交わっています。そのうち1つの角は 120° です。この2本の直線について、説明の正しいものはどれですか。
+  lv=4 variant=angle_judgment
+    params: {"variant":"angle_judgment","angle":90,"answerKind":"perpendicular","difficultyLevel":4}
+    answer: {"kind":"string","value":"垂直"}
+    Q: 2本の直線が交わっています。そのうち1つの角は 90° です。この2本の直線について、説明の正しいものはどれですか。
+  lv=4 variant=intersection_judgment
+    params: {"variant":"intersection_judgment","intersects":false,"answerKind":"parallel","difficultyLevel":4}
+    answer: {"kind":"string","value":"平行"}
+    Q: 同じ平面上にある2本の直線 l と m は、互いに交わらないことを確かめています。l と m の関係として正しいものはどれですか。
+  lv=5 variant=angle_judgment
+    params: {"variant":"angle_judgment","angle":90,"answerKind":"perpendicular","difficultyLevel":5}
+    answer: {"kind":"string","value":"垂直"}
+    Q: 2本の直線が交わっています。そのうち1つの角は 90° です。この2本の直線について、説明の正しいものはどれですか。
+  lv=5 variant=intersection_judgment
+    params: {"variant":"intersection_judgment","intersects":true,"answerKind":"not_parallel","difficultyLevel":5}
+    answer: {"kind":"string","value":"平行ではありません"}
+    Q: 同じ平面上にある2本の直線 l と m は、1つの点で交わることが分かっています。l と m の関係として正しいものはどれですか。
+===== area_unit_conversion (levels: 1,2,3,4,5)
+  lv=1 variant=sqm_to_sqcm
+    params: {"variant":"sqm_to_sqcm","from":"㎡","to":"㎠","givenValue":2,"multiplier":10000,"answer":20000,"difficultyLevel":1}
+    answer: {"kind":"integer","value":20000}
+    Q: 面積の単位を直します。2㎡ は何㎠ です。
+  lv=1 variant=aresu_to_sqm
+    params: {"variant":"aresu_to_sqm","from":"a","to":"㎡","givenValue":4,"multiplier":100,"answer":400,"difficultyLevel":1}
+    answer: {"kind":"integer","value":400}
+    Q: 面積の単位を直します。4a は何㎡ です。
+  lv=2 variant=aresu_to_sqm
+    params: {"variant":"aresu_to_sqm","from":"a","to":"㎡","givenValue":2,"multiplier":100,"answer":200,"difficultyLevel":2}
+    answer: {"kind":"integer","value":200}
+    Q: 面積の単位を直します。2a は何㎡ です。
+  lv=3 variant=aresu_to_sqm
+    params: {"variant":"aresu_to_sqm","from":"a","to":"㎡","givenValue":28,"multiplier":100,"answer":2800,"difficultyLevel":3}
+    answer: {"kind":"integer","value":2800}
+    Q: 面積の単位を直します。28a は何㎡ です。
+  lv=3 variant=hektaru_to_aresu
+    params: {"variant":"hektaru_to_aresu","from":"ha","to":"a","givenValue":2,"multiplier":100,"answer":200,"difficultyLevel":3}
+    answer: {"kind":"integer","value":200}
+    Q: 面積の単位を直します。2ha は何a です。
+  lv=4 variant=sqm_to_aresu
+    params: {"variant":"sqm_to_aresu","from":"㎡","to":"a","givenValue":800,"multiplier":100,"answer":8,"difficultyLevel":4}
+    answer: {"kind":"integer","value":8}
+    Q: 面積の単位を直します。800㎡ は何a です。
+  lv=4 variant=sqkm_to_hektaru
+    params: {"variant":"sqkm_to_hektaru","from":"㎢","to":"ha","givenValue":2,"multiplier":100,"answer":200,"difficultyLevel":4}
+    answer: {"kind":"integer","value":200}
+    Q: 面積の単位を直します。2㎢ は何ha です。
+  lv=5 variant=sqm_to_aresu
+    params: {"variant":"sqm_to_aresu","from":"㎡","to":"a","givenValue":700,"multiplier":100,"answer":7,"difficultyLevel":5}
+    answer: {"kind":"integer","value":7}
+    Q: 面積の単位を直します。700㎡ は何a です。
+  lv=5 variant=sqkm_to_hektaru
+    params: {"variant":"sqkm_to_hektaru","from":"㎢","to":"ha","givenValue":0.25,"multiplier":100,"answer":25,"difficultyLevel":5}
+    answer: {"kind":"integer","value":25}
+    Q: 面積の単位を直します。0.25㎢ は何ha です。
+  lv=5 variant=sqm_to_hektaru
+    params: {"variant":"sqm_to_hektaru","from":"㎡","to":"ha","givenValue":30000,"multiplier":10000,"answer":3,"difficultyLevel":5}
+    answer: {"kind":"integer","value":3}
+    Q: 面積の単位を直します。30000㎡ は何ha です。
+===== rectangle_area (levels: 1,2,3,4,5)
+  lv=1 variant=square
+    params: {"variant":"square","width":2,"height":2,"area":4,"answer":4,"unit":"cm2","difficultyLevel":1}
+    answer: {"kind":"integer","value":4}
+    Q: 1辺が 2 cm の正方形の面積を求めなさい。
+  lv=2 variant=rectangle
+    params: {"variant":"rectangle","width":3,"height":7,"area":21,"answer":21,"unit":"cm2","difficultyLevel":2}
+    answer: {"kind":"integer","value":21}
+    Q: 縦 7 cm、横 3 cm の長方形の面積を求めなさい。
+  lv=3 variant=rectangle
+    params: {"variant":"rectangle","width":14,"height":8,"area":112,"answer":112,"unit":"cm2","difficultyLevel":3}
+    answer: {"kind":"integer","value":112}
+    Q: 縦 8 cm、横 14 cm の長方形の面積を求めなさい。
+  lv=4 variant=rectangle
+    params: {"variant":"rectangle","width":17,"height":4,"area":68,"answer":68,"unit":"cm2","difficultyLevel":4}
+    answer: {"kind":"integer","value":68}
+    Q: 縦 4 cm、横 17 cm の長方形の面積を求めなさい。
+  lv=4 variant=find_side
+    params: {"variant":"find_side","width":8,"height":3,"area":24,"answer":8,"unit":"cm","difficultyLevel":4}
+    answer: {"kind":"integer","value":8}
+    Q: 縦 3 cm、横 8 cm の長方形があります。縦の長さが 3 cm のとき、横の長さはいくつですか。
+  lv=5 variant=find_side
+    params: {"variant":"find_side","width":27,"height":22,"area":594,"answer":22,"unit":"cm","difficultyLevel":5}
+    answer: {"kind":"integer","value":22}
+    Q: 縦 22 cm、横 27 cm の長方形があります。横の長さが 27 cm のとき、縦の長さはいくつですか。
+  lv=5 variant=unit_convert
+    params: {"variant":"unit_convert","width":300,"height":300,"area":90000,"answer":90000,"unit":"cm2","difficultyLevel":5}
+    answer: {"kind":"integer","value":90000}
+    Q: 1辺が 3 m の正方形の面積を cm2 で表すと、何 cm2 ですか。
+===== triangle_area (levels: 1,2,3,4,5)
+  lv=1 variant=find_area
+    params: {"variant":"find_area","base":3,"height":2,"area":3,"answer":3,"difficultyLevel":1}
+    answer: {"kind":"integer","value":3}
+    Q: 底辺が 3 cm、高さが 2 cm の三角形の面積を求めなさい。
+  lv=2 variant=find_area
+    params: {"variant":"find_area","base":21,"height":2,"area":21,"answer":21,"difficultyLevel":2}
+    answer: {"kind":"integer","value":21}
+    Q: 底辺が 21 cm、高さが 2 cm の三角形の面積を求めなさい。
+  lv=3 variant=find_area_with_slant
+    params: {"variant":"find_area_with_slant","base":72,"height":4,"slant":7,"area":144,"answer":144,"difficultyLevel":3}
+    answer: {"kind":"integer","value":144}
+    Q: 底辺が 72 cm、斜辺が 7 cm、高さが 4 cm の三角形の面積を求めなさい。
+  lv=4 variant=find_area_with_slant
+    params: {"variant":"find_area_with_slant","base":80,"height":15,"slant":19,"area":600,"answer":600,"difficultyLevel":4}
+    answer: {"kind":"integer","value":600}
+    Q: 底辺が 80 cm、斜辺が 19 cm、高さが 15 cm の三角形の面積を求めなさい。
+  lv=4 variant=find_height
+    params: {"variant":"find_height","base":10,"height":35,"area":175,"answer":35,"difficultyLevel":4}
+    answer: {"kind":"integer","value":35}
+    Q: 底辺が 10 cm、面積が 175 cm2 の三角形があります。高さは何cmですか。
+  lv=5 variant=find_height
+    params: {"variant":"find_height","base":33,"height":26,"area":429,"answer":26,"difficultyLevel":5}
+    answer: {"kind":"integer","value":26}
+    Q: 底辺が 33 cm、面積が 429 cm2 の三角形があります。高さは何cmですか。
+  lv=5 variant=find_base
+    params: {"variant":"find_base","base":26,"height":25,"area":325,"answer":26,"difficultyLevel":5}
+    answer: {"kind":"integer","value":26}
+    Q: 高さが 25 cm、面積が 325 cm2 の三角形があります。底辺は何cmですか。
+===== parallelogram_area (levels: 1,2,3,4,5)
+  lv=1 variant=find_area
+    params: {"variant":"find_area","base":3,"height":2,"area":6,"answer":6,"difficultyLevel":1}
+    answer: {"kind":"integer","value":6}
+    Q: 底辺が 3 cm、高さが 2 cm の平行四辺形の面積を求めなさい。
+  lv=2 variant=find_area
+    params: {"variant":"find_area","base":3,"height":21,"area":63,"answer":63,"difficultyLevel":2}
+    answer: {"kind":"integer","value":63}
+    Q: 底辺が 3 cm、高さが 21 cm の平行四辺形の面積を求めなさい。
+  lv=3 variant=find_area_with_slant
+    params: {"variant":"find_area_with_slant","base":72,"height":4,"slant":8,"area":288,"answer":288,"difficultyLevel":3}
+    answer: {"kind":"integer","value":288}
+    Q: 底辺が 72 cm、斜辺が 8 cm、底辺に垂直な辺（高さ）が 4 cm の平行四辺形の面積を求めなさい。
+  lv=4 variant=find_area_with_slant
+    params: {"variant":"find_area_with_slant","base":80,"height":15,"slant":23,"area":1200,"answer":1200,"difficultyLevel":4}
+    answer: {"kind":"integer","value":1200}
+    Q: 底辺が 80 cm、斜辺が 23 cm、底辺に垂直な辺（高さ）が 15 cm の平行四辺形の面積を求めなさい。
+  lv=4 variant=find_height
+    params: {"variant":"find_height","base":10,"height":35,"area":350,"answer":35,"difficultyLevel":4}
+    answer: {"kind":"integer","value":35}
+    Q: 底辺が 10 cm、面積が 350 cm2 の平行四辺形があります。高さは何cmですか。
+  lv=5 variant=find_height
+    params: {"variant":"find_height","base":69,"height":83,"area":5727,"answer":83,"difficultyLevel":5}
+    answer: {"kind":"integer","value":83}
+    Q: 底辺が 69 cm、面積が 5727 cm2 の平行四辺形があります。高さは何cmですか。
+  lv=5 variant=find_base
+    params: {"variant":"find_base","base":26,"height":25,"area":650,"answer":26,"difficultyLevel":5}
+    answer: {"kind":"integer","value":26}
+    Q: 高さが 25 cm、面積が 650 cm2 の平行四辺形があります。底辺は何cmですか。
+===== judge_same (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"rotationDeg":0,"difficultyLevel":1}
+    answer: {"kind":"string","value":"はい"}
+    Q: 下の図Aと図Bは合同した図形ですか。（はい/いいえ）
+  lv=2 variant=-
+    params: {"rotationDeg":270,"difficultyLevel":2}
+    answer: {"kind":"string","value":"はい"}
+    Q: 図Aと図Bは、重ねるとぴったり重なりますか。（はい/いいえ）
+  lv=3 variant=-
+    params: {"rotationDeg":270,"difficultyLevel":3}
+    answer: {"kind":"string","value":"はい"}
+    Q: 図Aと図Bは合同ですか。（はい/いいえ）
+  lv=4 variant=-
+    params: {"rotationDeg":0,"difficultyLevel":4}
+    answer: {"kind":"string","value":"はい"}
+    Q: 図Aと図Bは合同ですか。（はい/いいえ）
+  lv=5 variant=-
+    params: {"rotationDeg":270,"difficultyLevel":5}
+    answer: {"kind":"string","value":"はい"}
+    Q: 下の図Aと図Bは合同した図形ですか。（はい/いいえ）
+===== judge_differs (levels: 2,3,4,5)
+  lv=2 variant=apex_moved
+    params: {"variant":"apex_moved","difficultyLevel":2}
+    answer: {"kind":"string","value":"いいえ"}
+    Q: 図Aは二等辺三角形です。図Aと図Bは、辺の長さと角の大きさがすべて対応して等しいですか。（はい/いいえ）
+  lv=2 variant=base_widened
+    params: {"variant":"base_widened","difficultyLevel":2}
+    answer: {"kind":"string","value":"いいえ"}
+    Q: 図Aは不等辺三角形です。図Aと図Bは、重ねるとぴったり重なりますか。（はい/いいえ）
+  lv=3 variant=scaled
+    params: {"variant":"scaled","difficultyLevel":3}
+    answer: {"kind":"string","value":"いいえ"}
+    Q: 図Aは不等辺三角形です。下の図Aと図Bは合同ですか。（はい/いいえ）
+  lv=3 variant=apex_moved
+    params: {"variant":"apex_moved","difficultyLevel":3}
+    answer: {"kind":"string","value":"いいえ"}
+    Q: 図Aは不等辺三角形です。図Aと図Bは、重ねるとぴったり重なりますか。（はい/いいえ）
+  lv=4 variant=base_widened
+    params: {"variant":"base_widened","difficultyLevel":4}
+    answer: {"kind":"string","value":"いいえ"}
+    Q: 図Aは不等辺三角形です。図Aと図Bは合同した図形ですか。（はい/いいえ）
+  lv=4 variant=scaled
+    params: {"variant":"scaled","difficultyLevel":4}
+    answer: {"kind":"string","value":"いいえ"}
+    Q: 図Aは不等辺三角形です。図Aと図Bは合同した図形ですか。（はい/いいえ）
+  lv=5 variant=scaled
+    params: {"variant":"scaled","difficultyLevel":5}
+    answer: {"kind":"string","value":"いいえ"}
+    Q: 図Aは不等辺三角形です。下の図Aと図Bは合同ですか。（はい/いいえ）
+  lv=5 variant=base_widened
+    params: {"variant":"base_widened","difficultyLevel":5}
+    answer: {"kind":"string","value":"いいえ"}
+    Q: 図Aは不等辺三角形です。下の図Aと図Bは合同ですか。（はい/いいえ）
+  lv=5 variant=apex_moved
+    params: {"variant":"apex_moved","difficultyLevel":5}
+    answer: {"kind":"string","value":"いいえ"}
+    Q: 図Aは不等辺三角形です。図Aと図Bは合同ですか。（はい/いいえ）
+===== ratio_simplify (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":4,"b":16,"gcd":4,"answer":"1：4","difficultyLevel":1}
+    answer: {"kind":"string","value":"1：4"}
+    Q: 4：16を、できるだけ簡単な比になおしなさい
+  lv=2 variant=-
+    params: {"a":3,"b":12,"gcd":3,"answer":"1：4","difficultyLevel":2}
+    answer: {"kind":"string","value":"1：4"}
+    Q: 3：12を、できるだけ簡単な比になおしなさい
+  lv=3 variant=-
+    params: {"a":35,"b":20,"gcd":5,"answer":"7：4","difficultyLevel":3}
+    answer: {"kind":"string","value":"7：4"}
+    Q: 35：20を、できるだけ簡単な比になおしなさい
+  lv=4 variant=-
+    params: {"a":63,"b":14,"gcd":7,"answer":"9：2","difficultyLevel":4}
+    answer: {"kind":"string","value":"9：2"}
+    Q: 63：14を、できるだけ簡単な比になおしなさい
+  lv=5 variant=-
+    params: {"a":110,"b":130,"gcd":10,"answer":"11：13","difficultyLevel":5}
+    answer: {"kind":"string","value":"11：13"}
+    Q: 110：130を、できるだけ簡単な比になおしなさい
+===== ratio_value (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":2,"b":8,"answer":0.25,"difficultyLevel":1}
+    answer: {"kind":"decimal","value":0.25}
+    Q: 2：8 の比の値を求めなさい
+  lv=2 variant=-
+    params: {"a":5,"b":2,"answer":2.5,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":2.5}
+    Q: 5：2 の比の値を求めなさい
+  lv=3 variant=-
+    params: {"a":13,"b":10,"answer":1.3,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":1.3}
+    Q: 13：10 の比の値を求めなさい
+  lv=4 variant=-
+    params: {"a":14,"b":25,"answer":0.56,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":0.56}
+    Q: 14：25 の比の値を求めなさい
+  lv=5 variant=-
+    params: {"a":40,"b":20,"answer":2,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":2}
+    Q: 40：20 の比の値を求めなさい
+===== ratio_equal (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":2,"b":1,"x":4,"y":2,"factor":2,"difficultyLevel":1}
+    answer: {"kind":"string","value":"はい"}
+    Q: 2：1 は、4：2 と同じ比ですか？（はい/いいえ）
+  lv=2 variant=-
+    params: {"a":2,"b":1,"x":8,"y":4,"factor":4,"difficultyLevel":2}
+    answer: {"kind":"string","value":"はい"}
+    Q: 2：1 は、8：4 と同じ比ですか？（はい/いいえ）
+  lv=3 variant=-
+    params: {"a":3,"b":7,"x":12,"y":28,"factor":4,"difficultyLevel":3}
+    answer: {"kind":"string","value":"はい"}
+    Q: 3：7 は、12：28 と同じ比ですか？（はい/いいえ）
+  lv=4 variant=-
+    params: {"a":5,"b":9,"x":20,"y":36,"factor":4,"difficultyLevel":4}
+    answer: {"kind":"string","value":"はい"}
+    Q: 5：9 は、20：36 と同じ比ですか？（はい/いいえ）
+  lv=5 variant=-
+    params: {"a":8,"b":11,"x":88,"y":121,"factor":11,"difficultyLevel":5}
+    answer: {"kind":"string","value":"はい"}
+    Q: 8：11 は、88：121 と同じ比ですか？（はい/いいえ）
+===== ratio_quantity (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"a":2,"b":1,"unit":7,"total":21,"askPart":1,"answer":7,"difficultyLevel":2}
+    answer: {"kind":"integer","value":7}
+    Q: 全体が21のとき、2：1に分けると小さいほうはいくつになりますか
+  lv=3 variant=-
+    params: {"a":2,"b":5,"unit":7,"total":49,"askPart":2,"answer":14,"difficultyLevel":3}
+    answer: {"kind":"integer","value":14}
+    Q: 全体が49のとき、2：5に分けると小さいほうはいくつになりますか
+  lv=4 variant=-
+    params: {"a":4,"b":6,"unit":6,"total":60,"askPart":6,"answer":36,"difficultyLevel":4}
+    answer: {"kind":"integer","value":36}
+    Q: 全体が60のとき、4：6に分けると大きいほうはいくつになりますか
+  lv=5 variant=-
+    params: {"a":5,"b":7,"unit":26,"total":312,"askPart":7,"answer":182,"difficultyLevel":5}
+    answer: {"kind":"integer","value":182}
+    Q: 全体が312のとき、5：7に分けると大きいほうはいくつになりますか
+===== proportional_expression (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"k":5,"answer":"y=5x","constant":5,"difficultyLevel":2}
+    answer: {"kind":"string","value":"y=5x"}
+    Q: 1個5円のりんごをx個買うときの代金y円です。yをxの式で表しなさい
+  lv=3 variant=-
+    params: {"k":8,"answer":"y=8x","constant":8,"difficultyLevel":3}
+    answer: {"kind":"string","value":"y=8x"}
+    Q: 1個8円のりんごをx個買うときの代金y円です。yをxの式で表しなさい
+  lv=4 variant=-
+    params: {"k":14,"answer":"y=14x","constant":14,"difficultyLevel":4}
+    answer: {"kind":"string","value":"y=14x"}
+    Q: 1個14円のりんごをx個買うときの代金y円です。yをxの式で表しなさい
+  lv=5 variant=-
+    params: {"k":29,"answer":"y=29x","constant":29,"difficultyLevel":5}
+    answer: {"kind":"string","value":"y=29x"}
+    Q: 1個29円のりんごをx個買うときの代金y円です。yをxの式で表しなさい
+===== proportional_word (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"k":4,"x1":2,"x2":10,"y1":8,"y2":40,"answer":40,"difficultyLevel":2}
+    answer: {"kind":"integer","value":40}
+    Q: 2個買うと8円の品物があります。同じ品物を10個買うと何円ですか
+  lv=3 variant=-
+    params: {"k":6,"x1":6,"x2":10,"y1":36,"y2":60,"answer":60,"difficultyLevel":3}
+    answer: {"kind":"integer","value":60}
+    Q: 6個買うと36円の品物があります。同じ品物を10個買うと何円ですか
+  lv=4 variant=-
+    params: {"k":12,"x1":8,"x2":10,"y1":96,"y2":120,"answer":120,"difficultyLevel":4}
+    answer: {"kind":"integer","value":120}
+    Q: 8個買うと96円の品物があります。同じ品物を10個買うと何円ですか
+  lv=5 variant=-
+    params: {"k":19,"x1":9,"x2":27,"y1":171,"y2":513,"answer":513,"difficultyLevel":5}
+    answer: {"kind":"integer","value":513}
+    Q: 9個買うと171円の品物があります。同じ品物を27個買うと何円ですか
+===== inverse_expression (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"k":8,"answer":"y=8÷x","difficultyLevel":2}
+    answer: {"kind":"string","value":"y=8÷x"}
+    Q: 面積が8㎠の長方形があります。縦の長さをxcm、横の長さをycmとすると、yをxで表しなさい
+  lv=3 variant=-
+    params: {"k":13,"answer":"y=13÷x","difficultyLevel":3}
+    answer: {"kind":"string","value":"y=13÷x"}
+    Q: 面積が13㎠の長方形があります。縦の長さをxcm、横の長さをycmとすると、yをxで表しなさい
+  lv=4 variant=-
+    params: {"k":20,"answer":"y=20÷x","difficultyLevel":4}
+    answer: {"kind":"string","value":"y=20÷x"}
+    Q: 面積が20㎠の長方形があります。縦の長さをxcm、横の長さをycmとすると、yをxで表しなさい
+  lv=5 variant=-
+    params: {"k":35,"answer":"y=35÷x","difficultyLevel":5}
+    answer: {"kind":"string","value":"y=35÷x"}
+    Q: 面積が35㎠の長方形があります。縦の長さをxcm、横の長さをycmとすると、yをxで表しなさい
+===== expression_meaning (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"b":4,"answer":"x4円は、x円の物を1こと4円の品物を買ったときの代金です","difficultyLevel":2}
+    answer: {"kind":"string","value":"x4円は、x円の物を1こと4円の品物を買ったときの代金です"}
+    Q: x4円という式があります。どのような意味があるか文章で説明してください
+  lv=3 variant=-
+    params: {"b":8,"answer":"x8円は、x円の物を1こと8円の品物を買ったときの代金です","difficultyLevel":3}
+    answer: {"kind":"string","value":"x8円は、x円の物を1こと8円の品物を買ったときの代金です"}
+    Q: x8円という式があります。どのような意味があるか文章で説明してください
+  lv=4 variant=-
+    params: {"b":14,"answer":"x14円は、x円の物を1こと14円の品物を買ったときの代金です","difficultyLevel":4}
+    answer: {"kind":"string","value":"x14円は、x円の物を1こと14円の品物を買ったときの代金です"}
+    Q: x14円という式があります。どのような意味があるか文章で説明してください
+  lv=5 variant=-
+    params: {"b":29,"answer":"x29円は、x円の物を1こと29円の品物を買ったときの代金です","difficultyLevel":5}
+    answer: {"kind":"string","value":"x29円は、x円の物を1こと29円の品物を買ったときの代金です"}
+    Q: x29円という式があります。どのような意味があるか文章で説明してください
+===== inverse_word (levels: 3,4,5)
+  lv=3 variant=-
+    params: {"total":32,"people1":2,"people2":8,"per1":16,"per2":4,"answer":4,"difficultyLevel":3}
+    answer: {"kind":"integer","value":4}
+    Q: 32こを2人で分けると1人16こになります。同じ数を8人で分けると、1人何こになりますか
+  lv=4 variant=-
+    params: {"total":60,"people1":5,"people2":10,"per1":12,"per2":6,"answer":6,"difficultyLevel":4}
+    answer: {"kind":"integer","value":6}
+    Q: 60こを5人で分けると1人12こになります。同じ数を10人で分けると、1人何こになりますか
+  lv=5 variant=-
+    params: {"total":55,"people1":5,"people2":11,"per1":11,"per2":5,"answer":5,"difficultyLevel":5}
+    answer: {"kind":"integer","value":5}
+    Q: 55こを5人で分けると1人11こになります。同じ数を11人で分けると、1人何こになりますか
+===== percentage (levels: 1,2,3,4,5)
+  lv=1 variant=find_percent
+    params: {"variant":"find_percent","percent":25,"whole":4,"part":1,"answer":25,"difficultyLevel":1}
+    answer: {"kind":"integer","value":25}
+    Q: 全体 4 のうち 1 は、何パーセントですか。
+  lv=2 variant=find_percent
+    params: {"variant":"find_percent","percent":75,"whole":40,"part":30,"answer":75,"difficultyLevel":2}
+    answer: {"kind":"integer","value":75}
+    Q: 全体を 40 と見たとき、30 は何パーセントですか。
+  lv=3 variant=percent_of
+    params: {"variant":"percent_of","percent":75,"whole":24,"part":18,"answer":18,"difficultyLevel":3}
+    answer: {"kind":"integer","value":18}
+    Q: 全体の量が 24 あります。75 パーセントに相当する量を求めなさい。
+  lv=4 variant=percent_of
+    params: {"variant":"percent_of","percent":50,"whole":378,"part":189,"answer":189,"difficultyLevel":4}
+    answer: {"kind":"integer","value":189}
+    Q: 全体の量が 378 あります。50 パーセントに相当する量を求めなさい。
+  lv=5 variant=percent_of
+    params: {"variant":"percent_of","percent":25,"whole":316,"part":79,"answer":79,"difficultyLevel":5}
+    answer: {"kind":"integer","value":79}
+    Q: 全体の量が 316 あります。25 パーセントに相当する量を求めなさい。
+===== decimal_mul_decimal (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":0.3,"b":0.2,"answer":0.06,"difficultyLevel":1}
+    answer: {"kind":"decimal","value":0.06}
+    Q: 0.3に0.2をかけるといくつになりますか
+  lv=2 variant=-
+    params: {"a":4,"b":0.1,"answer":0.4,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":0.4}
+    Q: 4に0.1をかけるといくつになりますか
+  lv=3 variant=-
+    params: {"a":3.9,"b":9.3,"answer":36.27,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":36.27}
+    Q: 3.9に9.3をかけるといくつになりますか
+  lv=4 variant=-
+    params: {"a":49.9,"b":8,"answer":399.2,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":399.2}
+    Q: 49.9に8をかけるといくつになりますか
+  lv=5 variant=-
+    params: {"a":54.4,"b":7.1,"answer":386.24,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":386.24}
+    Q: 54.4に7.1をかけるといくつになりますか
+===== decimal_addition (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":1.2,"b":0.3,"answer":1.5,"carryCount":0,"carryPositions":[],"difficultyLevel":1}
+    answer: {"kind":"decimal","value":1.5}
+    Q: 1.2に0.3をたすといくつになりますか
+  lv=2 variant=-
+    params: {"a":2.2,"b":4.8,"answer":7,"carryCount":1,"carryPositions":[1],"difficultyLevel":2}
+    answer: {"kind":"decimal","value":7}
+    Q: 2.2に4.8をたすといくつになりますか
+  lv=3 variant=-
+    params: {"a":4.62,"b":6.7,"answer":11.32,"carryCount":2,"carryPositions":[2,3],"difficultyLevel":3}
+    answer: {"kind":"decimal","value":11.32}
+    Q: 4.62に6.7をたすといくつになりますか
+  lv=4 variant=-
+    params: {"a":2.5,"b":9.6,"answer":12.1,"carryCount":2,"carryPositions":[1,2],"difficultyLevel":4}
+    answer: {"kind":"decimal","value":12.1}
+    Q: 2.5に9.6をたすといくつになりますか
+  lv=5 variant=-
+    params: {"a":83.32,"b":25.6,"answer":108.92,"carryCount":1,"carryPositions":[4],"difficultyLevel":5}
+    answer: {"kind":"decimal","value":108.92}
+    Q: 83.32に25.6をたすといくつになりますか
+===== decimal_subtraction (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":1.9,"b":1.8,"answer":0.1,"borrowCount":0,"borrowPositions":[],"difficultyLevel":1}
+    answer: {"kind":"decimal","value":0.1}
+    Q: 1.9から1.8をひくといくつになりますか
+  lv=2 variant=-
+    params: {"a":5.5,"b":4.7,"answer":0.8,"borrowCount":1,"borrowPositions":[0],"difficultyLevel":2}
+    answer: {"kind":"decimal","value":0.8}
+    Q: 5.5から4.7をひくといくつになりますか
+  lv=3 variant=-
+    params: {"a":6.7,"b":4.62,"answer":2.08,"borrowCount":1,"borrowPositions":[0],"difficultyLevel":3}
+    answer: {"kind":"decimal","value":2.08}
+    Q: 6.7から4.62をひくといくつになりますか
+  lv=4 variant=-
+    params: {"a":9.6,"b":2.5,"answer":7.1,"borrowCount":0,"borrowPositions":[],"difficultyLevel":4}
+    answer: {"kind":"decimal","value":7.1}
+    Q: 9.6から2.5をひくといくつになりますか
+  lv=5 variant=-
+    params: {"a":83.32,"b":25.6,"answer":57.72,"borrowCount":2,"borrowPositions":[1,2],"difficultyLevel":5}
+    answer: {"kind":"decimal","value":57.72}
+    Q: 83.32から25.6をひくといくつになりますか
+===== decimal_div_decimal (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"dividend":0.2,"divisor":0.2,"quotient":1,"answer":1,"difficultyLevel":1}
+    answer: {"kind":"decimal","value":1}
+    Q: 0.2を0.2でわると、商はいくつですか
+  lv=2 variant=-
+    params: {"dividend":0.4,"divisor":0.4,"quotient":1,"answer":1,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":1}
+    Q: 0.4を0.4でわると、商はいくつですか
+  lv=3 variant=-
+    params: {"dividend":8.4,"divisor":0.6,"quotient":14,"answer":14,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":14}
+    Q: 8.4を0.6でわると、商はいくつですか
+  lv=4 variant=-
+    params: {"dividend":25.2,"divisor":1.2,"quotient":21,"answer":21,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":21}
+    Q: 25.2を1.2でわると、商はいくつですか
+  lv=5 variant=-
+    params: {"dividend":87.5,"divisor":2.5,"quotient":35,"answer":35,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":35}
+    Q: 87.5を2.5でわると、商はいくつですか
+===== decimal_mul_integer (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":0.3,"b":2,"answer":0.6,"difficultyLevel":1}
+    answer: {"kind":"decimal","value":0.6}
+    Q: 0.3×2 はいくつになりますか
+  lv=2 variant=-
+    params: {"a":4,"b":2,"answer":8,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":8}
+    Q: 4×2 はいくつになりますか
+  lv=3 variant=-
+    params: {"a":4.5,"b":20,"answer":90,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":90}
+    Q: 4.5×20 はいくつになりますか
+  lv=4 variant=-
+    params: {"a":4.9,"b":29,"answer":142.1,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":142.1}
+    Q: 4.9×29 はいくつになりますか
+  lv=5 variant=-
+    params: {"a":5.4,"b":44,"answer":237.6,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":237.6}
+    Q: 5.4×44 はいくつになりますか
+===== decimal_div_integer (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"dividend":0.3,"divisor":3,"quotient":0.1,"answer":0.1,"difficultyLevel":1}
+    answer: {"kind":"decimal","value":0.1}
+    Q: 0.3を3でわると、いくつになりますか
+  lv=2 variant=-
+    params: {"dividend":0.4,"divisor":4,"quotient":0.1,"answer":0.1,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":0.1}
+    Q: 0.4を4でわると、いくつになりますか
+  lv=3 variant=-
+    params: {"dividend":9.8,"divisor":7,"quotient":1.4,"answer":1.4,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":1.4}
+    Q: 9.8を7でわると、いくつになりますか
+  lv=4 variant=-
+    params: {"dividend":27.3,"divisor":13,"quotient":2.1,"answer":2.1,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":2.1}
+    Q: 27.3を13でわると、いくつになりますか
+  lv=5 variant=-
+    params: {"dividend":94.5,"divisor":27,"quotient":3.5,"answer":3.5,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":3.5}
+    Q: 94.5を27でわると、いくつになりますか
+===== decimal_round (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"value":2.95,"roundTo":1,"rounded":3,"answer":3,"difficultyLevel":1}
+    answer: {"kind":"decimal","value":3}
+    Q: 2.95を、小数第1位まで四捨五入しなさい
+  lv=2 variant=-
+    params: {"value":5.73,"roundTo":1,"rounded":5.7,"answer":5.7,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":5.7}
+    Q: 5.73を、小数第1位まで四捨五入しなさい
+  lv=3 variant=-
+    params: {"value":9.662,"roundTo":2,"rounded":9.66,"answer":9.66,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":9.66}
+    Q: 9.662を、小数第2位まで四捨五入しなさい
+  lv=4 variant=-
+    params: {"value":94.633,"roundTo":2,"rounded":94.63,"answer":94.63,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":94.63}
+    Q: 94.633を、小数第2位まで四捨五入しなさい
+  lv=5 variant=-
+    params: {"value":687.324,"roundTo":2,"rounded":687.32,"answer":687.32,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":687.32}
+    Q: 687.324を、小数第2位まで四捨五入しなさい
+===== expression_make (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"count":4,"x":"x","answer":"4x","difficultyLevel":2}
+    answer: {"kind":"string","value":"4x"}
+    Q: 1本x円のえんぴつを4本買ったときの代金を、xを使った式で表しなさい
+  lv=3 variant=-
+    params: {"count":6,"x":"x","answer":"6x","difficultyLevel":3}
+    answer: {"kind":"string","value":"6x"}
+    Q: 1本x円のえんぴつを6本買ったときの代金を、xを使った式で表しなさい
+  lv=4 variant=-
+    params: {"count":12,"x":"x","answer":"12x","difficultyLevel":4}
+    answer: {"kind":"string","value":"12x"}
+    Q: 1本x円のえんぴつを12本買ったときの代金を、xを使った式で表しなさい
+  lv=5 variant=-
+    params: {"count":19,"x":"x","answer":"19x","difficultyLevel":5}
+    answer: {"kind":"string","value":"19x"}
+    Q: 1本x円のえんぴつを19本買ったときの代金を、xを使った式で表しなさい
+===== expression_substitution (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":1,"b":1,"x":1,"answer":2,"difficultyLevel":1}
+    answer: {"kind":"integer","value":2}
+    Q: x=1 のとき、1x+1 の値を求めなさい
+  lv=2 variant=-
+    params: {"a":2,"b":1,"x":8,"answer":17,"difficultyLevel":2}
+    answer: {"kind":"integer","value":17}
+    Q: x=8 のとき、2x+1 の値を求めなさい
+  lv=3 variant=-
+    params: {"a":4,"b":14,"x":8,"answer":46,"difficultyLevel":3}
+    answer: {"kind":"integer","value":46}
+    Q: x=8 のとき、4x+14 の値を求めなさい
+  lv=4 variant=-
+    params: {"a":7,"b":21,"x":5,"answer":56,"difficultyLevel":4}
+    answer: {"kind":"integer","value":56}
+    Q: x=5 のとき、7x+21 の値を求めなさい
+  lv=5 variant=-
+    params: {"a":12,"b":36,"x":26,"answer":348,"difficultyLevel":5}
+    answer: {"kind":"integer","value":348}
+    Q: x=26 のとき、12x+36 の値を求めなさい
+===== expression_word_make (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"price":4,"answer":"4×x","difficultyLevel":2}
+    answer: {"kind":"string","value":"4×x"}
+    Q: 1こ4円のチョコレートをxこ買います。代金をxの式で表しなさい
+  lv=3 variant=-
+    params: {"price":8,"answer":"8×x","difficultyLevel":3}
+    answer: {"kind":"string","value":"8×x"}
+    Q: 1こ8円のチョコレートをxこ買います。代金をxの式で表しなさい
+  lv=4 variant=-
+    params: {"price":14,"answer":"14×x","difficultyLevel":4}
+    answer: {"kind":"string","value":"14×x"}
+    Q: 1こ14円のチョコレートをxこ買います。代金をxの式で表しなさい
+  lv=5 variant=-
+    params: {"price":29,"answer":"29×x","difficultyLevel":5}
+    answer: {"kind":"string","value":"29×x"}
+    Q: 1こ29円のチョコレートをxこ買います。代金をxの式で表しなさい
+===== expression_blank (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"a":3,"b":2,"result":6,"answer":3,"difficultyLevel":1}
+    answer: {"kind":"integer","value":3}
+    Q: □×2＝6 のとき、□に書く数はいくつですか
+  lv=2 variant=-
+    params: {"a":4,"b":2,"result":8,"answer":4,"difficultyLevel":2}
+    answer: {"kind":"integer","value":4}
+    Q: □×2＝8 のとき、□に書く数はいくつですか
+  lv=3 variant=-
+    params: {"a":8,"b":12,"result":96,"answer":8,"difficultyLevel":3}
+    answer: {"kind":"integer","value":8}
+    Q: □×12＝96 のとき、□に書く数はいくつですか
+  lv=4 variant=-
+    params: {"a":14,"b":17,"result":238,"answer":14,"difficultyLevel":4}
+    answer: {"kind":"integer","value":14}
+    Q: □×17＝238 のとき、□に書く数はいくつですか
+  lv=5 variant=-
+    params: {"a":29,"b":23,"result":667,"answer":29,"difficultyLevel":5}
+    answer: {"kind":"integer","value":29}
+    Q: □×23＝667 のとき、□に書く数はいくつですか
+===== expression_multi_condition (levels: 3,4,5)
+  lv=3 variant=-
+    params: {"a":5,"b":10,"x":5,"answer":35,"difficultyLevel":3}
+    answer: {"kind":"integer","value":35}
+    Q: はじめに10個ありました。1分間に5こずつ5分間ふえると、最終的にいくつになりますか。また式 (あれば x+ b の形) で表しなさい
+  lv=4 variant=-
+    params: {"a":7,"b":13,"x":4,"answer":41,"difficultyLevel":4}
+    answer: {"kind":"integer","value":41}
+    Q: はじめに13個ありました。1分間に7こずつ4分間ふえると、最終的にいくつになりますか。また式 (あれば x+ b の形) で表しなさい
+  lv=5 variant=-
+    params: {"a":13,"b":22,"x":18,"answer":256,"difficultyLevel":5}
+    answer: {"kind":"integer","value":256}
+    Q: はじめに22個ありました。1分間に13こずつ18分間ふえると、最終的にいくつになりますか。また式 (あれば x+ b の形) で表しなさい
+===== arrange_simple (levels: 1,2,3,4,5)
+  lv=1 variant=pick_only
+    params: {"n":3,"r":2,"variant":"pick_only","answer":6,"difficultyLevel":1}
+    answer: {"kind":"integer","value":6}
+    Q: 3人の中から2人を選んで1列に並べます。並べ方は全部で何通りありますか
+  lv=2 variant=pick_special
+    params: {"n":3,"r":2,"variant":"pick_special","answer":6,"difficultyLevel":2}
+    answer: {"kind":"integer","value":6}
+    Q: 3人の中から2人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか
+  lv=3 variant=pick_special
+    params: {"n":6,"r":3,"variant":"pick_special","answer":60,"difficultyLevel":3}
+    answer: {"kind":"integer","value":60}
+    Q: 6人の中から3人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか
+  lv=3 variant=pick_include_one
+    params: {"n":5,"r":4,"variant":"pick_include_one","answer":24,"difficultyLevel":3}
+    answer: {"kind":"integer","value":24}
+    Q: 5人の中から4人を選んで1列に並べます。ただし、Aさんは必ず選ぶことにします。並べ方は何通りありますか
+  lv=4 variant=pick_include_one
+    params: {"n":7,"r":2,"variant":"pick_include_one","answer":6,"difficultyLevel":4}
+    answer: {"kind":"integer","value":6}
+    Q: 7人の中から2人を選んで1列に並べます。ただし、Aさんは必ず選ぶことにします。並べ方は何通りありますか
+  lv=5 variant=pick_include_one
+    params: {"n":6,"r":5,"variant":"pick_include_one","answer":120,"difficultyLevel":5}
+    answer: {"kind":"integer","value":120}
+    Q: 6人の中から5人を選んで1列に並べます。ただし、Aさんは必ず選ぶことにします。並べ方は何通りありますか
+  lv=5 variant=pick_first_fixed
+    params: {"n":7,"r":2,"variant":"pick_first_fixed","answer":6,"difficultyLevel":5}
+    answer: {"kind":"integer","value":6}
+    Q: 7人の中から2人を選んで1列に並べます。ただし、Aさんは必ず選び、1番め（いちばん左）に置くことにします。並べ方は何通りありますか
+===== combine_simple (levels: 1,2,3,4,5)
+  lv=1 variant=pick_only
+    params: {"n":3,"r":2,"variant":"pick_only","answer":3,"difficultyLevel":1}
+    answer: {"kind":"integer","value":3}
+    Q: 3人の中から2人を選びます。選び方は何通りありますか
+  lv=2 variant=include_one
+    params: {"n":3,"r":2,"variant":"include_one","answer":2,"difficultyLevel":2}
+    answer: {"kind":"integer","value":2}
+    Q: 3人の中から2人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+  lv=3 variant=include_one
+    params: {"n":9,"r":2,"variant":"include_one","answer":8,"difficultyLevel":3}
+    answer: {"kind":"integer","value":8}
+    Q: 9人の中から2人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+  lv=4 variant=include_one
+    params: {"n":9,"r":2,"variant":"include_one","answer":8,"difficultyLevel":4}
+    answer: {"kind":"integer","value":8}
+    Q: 9人の中から2人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+  lv=5 variant=include_one
+    params: {"n":10,"r":4,"variant":"include_one","answer":84,"difficultyLevel":5}
+    answer: {"kind":"integer","value":84}
+    Q: 10人の中から4人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+===== arrange_tree (levels: 1,2,3,4,5)
+  lv=1 variant=all
+    params: {"n":3,"letters":["A","B","C"],"variant":"all","answer":6,"difficultyLevel":1}
+    answer: {"kind":"integer","value":6}
+    Q: A、B、Cの3個の文字をすべて1回ずつ使って、左から1列に並べます。並べ方は何通りありますか
+  lv=1 variant=fixed_first
+    params: {"n":3,"letters":["A","B","C"],"variant":"fixed_first","answer":2,"difficultyLevel":1}
+    answer: {"kind":"integer","value":2}
+    Q: A、B、Cの3個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの2個を自由に並べて、並べ方は何通りありますか
+  lv=2 variant=all
+    params: {"n":4,"letters":["A","B","C","D"],"variant":"all","answer":24,"difficultyLevel":2}
+    answer: {"kind":"integer","value":24}
+    Q: A、B、C、Dの4個の文字をすべて1回ずつ使って、左から1列に並べます。並べ方は何通りありますか
+  lv=2 variant=fixed_first
+    params: {"n":4,"letters":["A","B","C","D"],"variant":"fixed_first","answer":6,"difficultyLevel":2}
+    answer: {"kind":"integer","value":6}
+    Q: A、B、C、Dの4個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの3個を自由に並べて、並べ方は何通りありますか
+  lv=3 variant=adjacent
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"adjacent","answer":48,"difficultyLevel":3}
+    answer: {"kind":"integer","value":48}
+    Q: A、B、C、D、Eの5個の文字のうち、AとBは必ず隣り合うように並べます。並べ方は何通りありますか
+  lv=3 variant=all
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"all","answer":120,"difficultyLevel":3}
+    answer: {"kind":"integer","value":120}
+    Q: A、B、C、D、Eの5個の文字をすべて1回ずつ使って、左から1列に並べます。並べ方は何通りありますか
+  lv=3 variant=fixed_first
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"fixed_first","answer":24,"difficultyLevel":3}
+    answer: {"kind":"integer","value":24}
+    Q: A、B、C、D、Eの5個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの4個を自由に並べて、並べ方は何通りありますか
+  lv=4 variant=circle
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"circle","answer":24,"difficultyLevel":4}
+    answer: {"kind":"integer","value":24}
+    Q: A、B、C、D、Eの5個の文字を円卓のまわりに1つずつ並べます。回転させたら重なる並びは同じものとして数えます。並べ方は何通りありますか
+  lv=4 variant=all
+    params: {"n":6,"letters":["A","B","C","D","E","F"],"variant":"all","answer":720,"difficultyLevel":4}
+    answer: {"kind":"integer","value":720}
+    Q: A、B、C、D、E、Fの6個の文字をすべて1回ずつ使って、左から1列に並べます。並べ方は何通りありますか
+  lv=4 variant=fixed_first
+    params: {"n":6,"letters":["A","B","C","D","E","F"],"variant":"fixed_first","answer":120,"difficultyLevel":4}
+    answer: {"kind":"integer","value":120}
+    Q: A、B、C、D、E、Fの6個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの5個を自由に並べて、並べ方は何通りありますか
+  lv=5 variant=adjacent
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"adjacent","answer":48,"difficultyLevel":5}
+    answer: {"kind":"integer","value":48}
+    Q: A、B、C、D、Eの5個の文字のうち、AとBは必ず隣り合うように並べます。並べ方は何通りありますか
+  lv=5 variant=circle
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"circle","answer":24,"difficultyLevel":5}
+    answer: {"kind":"integer","value":24}
+    Q: A、B、C、D、Eの5個の文字を円卓のまわりに1つずつ並べます。回転させたら重なる並びは同じものとして数えます。並べ方は何通りありますか
+  lv=5 variant=fixed_first
+    params: {"n":6,"letters":["A","B","C","D","E","F"],"variant":"fixed_first","answer":120,"difficultyLevel":5}
+    answer: {"kind":"integer","value":120}
+    Q: A、B、C、D、E、Fの6個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの5個を自由に並べて、並べ方は何通りありますか
+===== combine_table (levels: 1,2,3,4,5)
+  lv=1 variant=round_robin
+    params: {"n":4,"variant":"round_robin","answer":6,"difficultyLevel":1}
+    answer: {"kind":"integer","value":6}
+    Q: 4チームのサッカー大会で、どの2チームも1回ずつ試合します。試合の数は全部で何試合になりますか
+  lv=2 variant=round_robin
+    params: {"n":5,"variant":"round_robin","answer":10,"difficultyLevel":2}
+    answer: {"kind":"integer","value":10}
+    Q: 5チームのサッカー大会で、どの2チームも1回ずつ試合します。試合の数は全部で何試合になりますか
+  lv=2 variant=two_rounds
+    params: {"n":5,"variant":"two_rounds","answer":20,"difficultyLevel":2}
+    answer: {"kind":"integer","value":20}
+    Q: 5チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+  lv=3 variant=one_team_games
+    params: {"n":6,"variant":"one_team_games","answer":5,"difficultyLevel":3}
+    answer: {"kind":"integer","value":5}
+    Q: 6チームのサッカー大会で、どの2チームも1回ずつ試合します。このうち、ある1チームが試合する試合は何試合になりますか
+  lv=3 variant=round_robin
+    params: {"n":6,"variant":"round_robin","answer":15,"difficultyLevel":3}
+    answer: {"kind":"integer","value":15}
+    Q: 6チームのサッカー大会で、どの2チームも1回ずつ試合します。試合の数は全部で何試合になりますか
+  lv=3 variant=two_rounds
+    params: {"n":7,"variant":"two_rounds","answer":42,"difficultyLevel":3}
+    answer: {"kind":"integer","value":42}
+    Q: 7チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+  lv=4 variant=one_game_pairs
+    params: {"n":8,"variant":"one_game_pairs","answer":28,"difficultyLevel":4}
+    answer: {"kind":"integer","value":28}
+    Q: 8チームが総当たりで1回ずつ試合します。1試合の対戦になる2チームの選び方は何通りありますか
+  lv=4 variant=round_robin
+    params: {"n":8,"variant":"round_robin","answer":28,"difficultyLevel":4}
+    answer: {"kind":"integer","value":28}
+    Q: 8チームのサッカー大会で、どの2チームも1回ずつ試合します。試合の数は全部で何試合になりますか
+  lv=4 variant=two_rounds
+    params: {"n":8,"variant":"two_rounds","answer":56,"difficultyLevel":4}
+    answer: {"kind":"integer","value":56}
+    Q: 8チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+  lv=5 variant=one_game_pairs
+    params: {"n":8,"variant":"one_game_pairs","answer":28,"difficultyLevel":5}
+    answer: {"kind":"integer","value":28}
+    Q: 8チームが総当たりで1回ずつ試合します。1試合の対戦になる2チームの選び方は何通りありますか
+  lv=5 variant=two_rounds
+    params: {"n":9,"variant":"two_rounds","answer":72,"difficultyLevel":5}
+    answer: {"kind":"integer","value":72}
+    Q: 9チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+===== duplicate_removal (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"letters":["A","A","B"],"symbolMode":"letter","answer":3,"difficultyLevel":1}
+    answer: {"kind":"integer","value":3}
+    Q: A、A、Bの3枚のカードをすべて使って一列に並べます。同じ文字は区別できないとして、並べ方は何通りありますか
+  lv=2 variant=-
+    params: {"letters":["A","B","B"],"symbolMode":"letter","answer":3,"difficultyLevel":2}
+    answer: {"kind":"integer","value":3}
+    Q: A、B、Bの3枚のカードをすべて使って一列に並べます。同じ文字は区別できないとして、並べ方は何通りありますか
+  lv=3 variant=-
+    params: {"letters":["A","A","B","B","B"],"symbolMode":"letter","answer":10,"difficultyLevel":3}
+    answer: {"kind":"integer","value":10}
+    Q: A、A、B、B、Bの5枚のカードをすべて使って一列に並べます。同じ文字は区別できないとして、並べ方は何通りありますか
+  lv=4 variant=-
+    params: {"letters":["1","1","2","2","3","3"],"symbolMode":"digit","answer":90,"difficultyLevel":4}
+    answer: {"kind":"integer","value":90}
+    Q: 1、1、2、2、3、3の6枚のカードをすべて使って一列に並べます。同じ数字は区別できないとして、並べ方は何通りありますか
+  lv=5 variant=-
+    params: {"letters":["A","B","B","C","C","D","D"],"symbolMode":"letter","answer":630,"difficultyLevel":5}
+    answer: {"kind":"integer","value":630}
+    Q: A、B、B、C、C、D、Dの7枚のカードをすべて使って一列に並べます。同じ文字は区別できないとして、並べ方は何通りありますか
+===== data_average (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"numbers":[7,15,1,15],"sum":38,"count":4,"average":9.5,"answer":9.5,"difficultyLevel":2}
+    answer: {"kind":"decimal","value":9.5}
+    Q: 7、15、1、15 の平均を求めなさい
+  lv=3 variant=-
+    params: {"numbers":[12,28,14,19,20],"sum":93,"count":5,"average":18.6,"answer":18.6,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":18.6}
+    Q: 12、28、14、19、20 の平均を求めなさい
+  lv=4 variant=-
+    params: {"numbers":[48,40,34,16,27,6],"sum":171,"count":6,"average":28.5,"answer":28.5,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":28.5}
+    Q: 48、40、34、16、27、6 の平均を求めなさい
+  lv=5 variant=-
+    params: {"numbers":[50,69,84,33,26,60,42],"sum":364,"count":7,"average":52,"answer":52,"difficultyLevel":5}
+    answer: {"kind":"decimal","value":52}
+    Q: 50、69、84、33、26、60、42 の平均を求めなさい
+===== data_total_from_average (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"count":3,"average":1,"total":3,"answer":3,"difficultyLevel":1}
+    answer: {"kind":"integer","value":3}
+    Q: 3この平均が1です。この3この合計はいくつですか
+  lv=2 variant=-
+    params: {"count":5,"average":1,"total":5,"answer":5,"difficultyLevel":2}
+    answer: {"kind":"integer","value":5}
+    Q: 5この平均が1です。この5この合計はいくつですか
+  lv=3 variant=-
+    params: {"count":6,"average":14,"total":84,"answer":84,"difficultyLevel":3}
+    answer: {"kind":"integer","value":84}
+    Q: 6この平均が14です。この6この合計はいくつですか
+  lv=4 variant=-
+    params: {"count":8,"average":21,"total":168,"answer":168,"difficultyLevel":4}
+    answer: {"kind":"integer","value":168}
+    Q: 8この平均が21です。この8この合計はいくつですか
+  lv=5 variant=-
+    params: {"count":10,"average":36,"total":360,"answer":360,"difficultyLevel":5}
+    answer: {"kind":"integer","value":360}
+    Q: 10この平均が36です。この10この合計はいくつですか
+===== data_max_min (levels: 1,2,3,4,5)
+  lv=1 variant=-
+    params: {"numbers":[3,2,1,9,1],"max":9,"min":1,"answer":"9 と 1","difficultyLevel":1}
+    answer: {"kind":"string","value":"9 と 1"}
+    Q: 3、2、1、9、1 の中で、最大の数と最小の数を答えなさい
+  lv=2 variant=-
+    params: {"numbers":[7,1,15,16,7],"max":16,"min":1,"answer":"16 と 1","difficultyLevel":2}
+    answer: {"kind":"string","value":"16 と 1"}
+    Q: 7、1、15、16、7 の中で、最大の数と最小の数を答えなさい
+  lv=3 variant=-
+    params: {"numbers":[12,28,14,19,20,21],"max":28,"min":12,"answer":"28 と 12","difficultyLevel":3}
+    answer: {"kind":"string","value":"28 と 12"}
+    Q: 12、28、14、19、20、21 の中で、最大の数と最小の数を答えなさい
+  lv=4 variant=-
+    params: {"numbers":[23,41,7,24,48,33,48],"max":48,"min":7,"answer":"48 と 7","difficultyLevel":4}
+    answer: {"kind":"string","value":"48 と 7"}
+    Q: 23、41、7、24、48、33、48 の中で、最大の数と最小の数を答えなさい
+  lv=5 variant=-
+    params: {"numbers":[50,69,84,33,26,60,42,80],"max":84,"min":26,"answer":"84 と 26","difficultyLevel":5}
+    answer: {"kind":"string","value":"84 と 26"}
+    Q: 50、69、84、33、26、60、42、80 の中で、最大の数と最小の数を答えなさい
+===== data_compare (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"groupA":[4,8,4,1,4],"groupB":[1,8,8,8,3],"avgA":4.2,"avgB":5.6,"answer":"B組","difficultyLevel":2}
+    answer: {"kind":"string","value":"B組"}
+    Q: A組のテストの点は 4、8、4、1、4 で、B組のテストの点は 1、8、8、8、3 です。それぞれ平均を比べると、どちらが高いと言えますか
+  lv=3 variant=-
+    params: {"groupA":[8,9,13,10,1,3],"groupB":[19,13,14,16,16,9],"avgA":7.333333333333333,"avgB":14.5,"answer":"B組","difficultyLevel":3}
+    answer: {"kind":"string","value":"B組"}
+    Q: A組のテストの点は 8、9、13、10、1、3 で、B組のテストの点は 19、13、14、16、16、9 です。それぞれ平均を比べると、どちらが高いと言えますか
+  lv=4 variant=-
+    params: {"groupA":[14,5,29,29,21,17,8],"groupB":[25,15,20,24,10,4,4],"avgA":17.571428571428573,"avgB":14.571428571428571,"answer":"A組","difficultyLevel":4}
+    answer: {"kind":"string","value":"A組"}
+    Q: A組のテストの点は 14、5、29、29、21、17、8 で、B組のテストの点は 25、15、20、24、10、4、4 です。それぞれ平均を比べると、どちらが高いと言えますか
+  lv=5 variant=-
+    params: {"groupA":[25,42,13,21,16,49,11,4],"groupB":[35,17,30,40,43,42,40,47],"avgA":22.625,"avgB":36.75,"answer":"B組","difficultyLevel":5}
+    answer: {"kind":"string","value":"B組"}
+    Q: A組のテストの点は 25、42、13、21、16、49、11、4 で、B組のテストの点は 35、17、30、40、43、42、40、47 です。それぞれ平均を比べると、どちらが高いと言えますか
+===== realworld_shopping (levels: 1,2,3,4,5)
+  lv=1 variant=two_sum
+    params: {"variant":"two_sum","productA":"たまご","productB":"ぎゅうにゅう","priceA":120,"priceB":180,"answer":300,"difficultyLevel":1}
+    answer: {"kind":"integer","value":300}
+    Q: 写真の値札を見て、たまご1パックとぎゅうにゅう1本を買います。代金は合計いくらですか。
+  lv=2 variant=two_sum
+    params: {"variant":"two_sum","productA":"たまご","productB":"オレンジジュース","priceA":120,"priceB":200,"answer":320,"difficultyLevel":2}
+    answer: {"kind":"integer","value":320}
+    Q: 写真の値札を見て、たまご1パックとオレンジジュース1本を買います。代金は合計いくらですか。
+  lv=3 variant=same_item_multiple
+    params: {"variant":"same_item_multiple","product":"クッキー","count":2,"price":90,"answer":180,"difficultyLevel":3}
+    answer: {"kind":"integer","value":180}
+    Q: 写真の値札を見て、クッキーを2箱買います。代金はいくらですか。
+  lv=4 variant=multi_and_sum
+    params: {"variant":"multi_and_sum","productA":"オレンジジュース","productB":"たまご","count":2,"priceA":200,"priceB":120,"answer":520,"difficultyLevel":4}
+    answer: {"kind":"integer","value":520}
+    Q: 写真の値札を見て、オレンジジュースを2本と、たまご1パックを買います。代金は合計いくらですか。
+  lv=5 variant=max_count
+    params: {"variant":"max_count","product":"オレンジジュース","budget":600,"price":200,"answer":3,"difficultyLevel":5}
+    answer: {"kind":"integer","value":3}
+    Q: 600円を持っています。写真の値札を見て、オレンジジュースは何本買えますか。
+  lv=5 variant=split_bill
+    params: {"variant":"split_bill","productA":"食パン","productB":"オレンジジュース","people":2,"priceA":150,"priceB":200,"answer":175,"difficultyLevel":5}
+    answer: {"kind":"integer","value":175}
+    Q: 食パン1袋とオレンジジュース1本をみんなで買いました。写真の値札を見て、代金を2人で同じずつ分けると、1人分はいくらですか。
+===== realworld_eggs (levels: 1,2,3,4,5)
+  lv=1 variant=fill_carton
+    params: {"variant":"fill_carton","carton":6,"totalEggs":2,"answer":4,"difficultyLevel":1}
+    answer: {"kind":"integer","value":4}
+    Q: 写真を見て、卵の数を数えます。1つのカートンには卵を6個入れることにします（この6個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。
+  lv=2 variant=pair_price
+    params: {"variant":"pair_price","priceA":30,"priceB":25,"answer":55,"difficultyLevel":2}
+    answer: {"kind":"integer","value":55}
+    Q: 茶色い卵は1個30円、白い卵は1個25円です（この値段は問題で設定した数値です）。写真のように、茶色い卵を1個と白い卵を1個買います。代金は合計いくらですか。
+  lv=3 variant=pairs_total
+    params: {"variant":"pairs_total","pairs":10,"eggsPerPair":2,"answer":20,"difficultyLevel":3}
+    answer: {"kind":"integer","value":20}
+    Q: 写真の茶色い卵1個と白い卵1個を、1組とします。この1組を10組用意します（この10組は問題で設定した数値です）。卵は合わせて何個になりますか。
+  lv=4 variant=pairs_in_carton
+    params: {"variant":"pairs_in_carton","carton":12,"eggsPerPair":2,"answer":6,"difficultyLevel":4}
+    answer: {"kind":"integer","value":6}
+    Q: 写真の茶色い卵1個と白い卵1個を、1組とします。1つのカートンには卵を12個入れることにします（この12個は問題で設定した数値です）。茶色い卵と白い卵を1個ずつ組にしてカートンをいっぱいにすると、何組できますか。
+  lv=4 variant=pairs_cost
+    params: {"variant":"pairs_cost","pairs":5,"priceA":30,"priceB":25,"pairCost":55,"answer":275,"difficultyLevel":4}
+    answer: {"kind":"integer","value":275}
+    Q: 茶色い卵は1個30円、白い卵は1個25円です（この値段は問題で設定した数値です）。写真のように、茶色い卵1個と白い卵1個を1組として、この1組を5組買います（この5組は問題で設定した数値です）。代金は合計いくらですか。
+  lv=5 variant=pairs_cost
+    params: {"variant":"pairs_cost","pairs":10,"priceA":25,"priceB":30,"pairCost":55,"answer":550,"difficultyLevel":5}
+    answer: {"kind":"integer","value":550}
+    Q: 茶色い卵は1個25円、白い卵は1個30円です（この値段は問題で設定した数値です）。写真のように、茶色い卵1個と白い卵1個を1組として、この1組を10組買います（この10組は問題で設定した数値です）。代金は合計いくらですか。

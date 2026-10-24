@@ -1,0 +1,69 @@
+    setQuestionNumber(1);
+    setResult(null);
+    loadNextQuestion();
+  }, [loadNextQuestion]);
+
+  if (error) {
+    return (
+      <div className="quiz-page">
+        <div className="error-message">{error}</div>
+        <button className="primary-button" onClick={onExit}>
+          {isAdminMode ? '通常モードへ戻る' : 'ホームに戻る'}
+        </button>
+      </div>
+    );
+  }
+
+  // 結果表示
+  if (result) {
+    // 正答率・平均解答時間は既存仕様どおり分母 = totalCount (時間切れを含む)。
+    // 「せいかい N問」の N は解いた問題数 (時間切れを除く) で表示する。
+    const accuracyRate = result.totalCount > 0 ? result.correctCount / result.totalCount : 0;
+    const averageTime = result.totalCount > 0 ? result.totalTimeSec / result.totalCount : 0;
+
+    return (
+      <div className="quiz-page result-page">
+        <h2>けっか</h2>
+        <div className="result-card">
+          <div className="result-score">
+            <span className="result-number">{result.correctCount}</span>
+            <span className="result-divider">/</span>
+            {/* 分母は解いた問題数 (時間切れを除く) */}
+            <span className="result-number">{result.solvedCount}</span>
+            <span className="result-unit">問 せいかい</span>
+          </div>
+          <div className="result-stats">
+            <div className="result-stat">
+              <span className="stat-label">正答率</span>
+              <span className="stat-value">{Math.round(accuracyRate * 100)}%</span>
+            </div>
+            <div className="result-stat">
+              <span className="stat-label">平均解答時間</span>
+              <span className="stat-value">{Math.round(averageTime)}秒</span>
+            </div>
+            <div className="result-stat">
+              <span className="stat-label">時間切れ</span>
+              <span className="stat-value">{result.timedOutCount}問</span>
+            </div>
+          </div>
+        </div>
+        <div className="action-buttons">
+          <button className="primary-button" onClick={handleRetry}>
+            もういちど
+          </button>
+          <button className="secondary-button" onClick={onExit}>
+            {isAdminMode ? '通常モードへ戻る' : 'ホームに戻る'}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!problem) {
+    return (
+      <div className="quiz-page">
+        <div className="loading-message">問題を準備しています...</div>
+      </div>
+    );
+  }
+

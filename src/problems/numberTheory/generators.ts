@@ -11,6 +11,7 @@ import type {
   ValidationResult,
 } from '../../types/problem';
 import { createRandom, generateProblemId } from '../../utils/random';
+import { buildNumericChoiceOptions } from '../../utils/choiceOptions';
 import {
   getDivisors,
   isPrime,
@@ -1042,6 +1043,11 @@ export class GcdLcmWordGenerator implements ProblemGenerator {
     if (t.type === 'gcd') {
       const [a, b] = rng.pick([[12, 18], [16, 24], [20, 30], [18, 27], [24, 36], [28, 42], [32, 48]] as [number, number][]);
       const ans = gcd(a, b);
+      // 4 択化: 正答と意味的に異なる誤答を 3 つ組み立てる
+      const distractorCandidates: number[] = [];
+      // 正解 ans に対する誤答: あまりの有無や桁数の関係で誤答を作成
+      distractorCandidates.push(ans + 1, ans - 1 > 0 ? ans - 1 : ans + 10, ans + Math.max(a, b) / 2);
+      const choices = buildNumericChoiceOptions(rng, ans, distractorCandidates);
       const story = t.template.replace('{a}', String(a)).replace('{b}', String(b));
       return {
         id: generateProblemId(),
@@ -1051,6 +1057,8 @@ export class GcdLcmWordGenerator implements ProblemGenerator {
         question: story,
         answer: { kind: 'integer', value: ans },
         explanation: `${a}と${b}の最大公約数を求めます。${a}と${b}の最大公約数は ${ans} です。`,
+        inputType: 'choice',
+        choices,
         parameters: { t: 'gcd', a, b, answer: ans, difficultyLevel: lv },
       };
     }
@@ -1058,6 +1066,11 @@ export class GcdLcmWordGenerator implements ProblemGenerator {
     if (t.type === 'lcm') {
       const [a, b] = rng.pick([[2, 3], [3, 4], [2, 5], [4, 6], [5, 6], [6, 8], [4, 10]] as [number, number][]);
       const ans = lcm(a, b);
+      // 4 択化: 正答と意味的に異なる誤答を 3 つ組み立てる
+      const distractorCandidates: number[] = [];
+      // 正解 ans に対する誤答
+      distractorCandidates.push(ans + 1, ans - 1 > 0 ? ans - 1 : ans + 10, ans * 2);
+      const choices = buildNumericChoiceOptions(rng, ans, distractorCandidates);
       const story = t.template.replace('{a}', String(a)).replace('{b}', String(b));
       return {
         id: generateProblemId(),
@@ -1067,6 +1080,8 @@ export class GcdLcmWordGenerator implements ProblemGenerator {
         question: story,
         answer: { kind: 'integer', value: ans },
         explanation: `${a}と${b}の最小公倍数を求めます。${a}と${b}の最小公倍数は ${ans} です。`,
+        inputType: 'choice',
+        choices,
         parameters: { t: 'lcm', a, b, answer: ans, difficultyLevel: lv },
       };
     }
@@ -1075,6 +1090,11 @@ export class GcdLcmWordGenerator implements ProblemGenerator {
     const c = rng.int(2, 9);
     const d = rng.int(2, 9);
     const ans = lcm(c, d);
+    // 4 択化: 正答と意味的に異なる誤答を 3 つ組み立てる
+    const distractorCandidates: number[] = [];
+    // 正解 ans に対する誤答
+    distractorCandidates.push(ans + 1, ans - 1 > 0 ? ans - 1 : ans + 10, ans * 2);
+    const choices = buildNumericChoiceOptions(rng, ans, distractorCandidates);
     const story = t.template.replace('{c}', String(c)).replace('{d}', String(d));
     return {
       id: generateProblemId(),
@@ -1084,6 +1104,8 @@ export class GcdLcmWordGenerator implements ProblemGenerator {
       question: story,
       answer: { kind: 'integer', value: ans },
       explanation: `${c}と${d}の最小公倍数を求めると ${ans} です。`,
+      inputType: 'choice',
+      choices,
       parameters: { t: 'period', c, d, answer: ans, difficultyLevel: lv },
     };
   }

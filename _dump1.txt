@@ -1,0 +1,273 @@
+===== multiples_finding (levels: 1,2,3,4,5)
+  lv=1 variant=list_first_n
+    params: {"n":3,"variant":"list_first_n","arg1":3,"arg2":null,"count":3,"answer":"3, 6, 9","difficultyLevel":1}
+    answer: {"kind":"string","value":"3, 6, 9"}
+    Q: 3縺ｮ蛟肴焚繧貞ｰ上＆縺・婿縺九ｉ3縺鍋ｭ斐∴縺ｪ縺輔＞
+  lv=2 variant=list_up_to
+    params: {"n":2,"variant":"list_up_to","arg1":41,"arg2":null,"count":null,"answer":"2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40","difficultyLevel":2}
+    answer: {"kind":"string","value":"2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40"}
+    Q: 41莉･荳九・2縺ｮ蛟肴焚繧偵☆縺ｹ縺ｦ遲斐∴縺ｪ縺輔＞
+  lv=3 variant=list_up_to
+    params: {"n":9,"variant":"list_up_to","arg1":47,"arg2":null,"count":null,"answer":"9, 18, 27, 36, 45","difficultyLevel":3}
+    answer: {"kind":"string","value":"9, 18, 27, 36, 45"}
+    Q: 47莉･荳九・9縺ｮ蛟肴焚繧偵☆縺ｹ縺ｦ遲斐∴縺ｪ縺輔＞
+  lv=3 variant=list_between
+    params: {"n":5,"variant":"list_between","arg1":18,"arg2":33,"count":null,"answer":"20, 25, 30","difficultyLevel":3}
+    answer: {"kind":"string","value":"20, 25, 30"}
+    Q: 18縺九ｉ33縺ｾ縺ｧ縺ｮ髢薙↓縺ゅｋ5縺ｮ蛟肴焚繧偵☆縺ｹ縺ｦ遲斐∴縺ｪ縺輔＞
+  lv=4 variant=list_between
+    params: {"n":8,"variant":"list_between","arg1":4,"arg2":24,"count":null,"answer":"8, 16, 24","difficultyLevel":4}
+    answer: {"kind":"string","value":"8, 16, 24"}
+    Q: 4縺九ｉ24縺ｾ縺ｧ縺ｮ髢薙↓縺ゅｋ8縺ｮ蛟肴焚繧偵☆縺ｹ縺ｦ遲斐∴縺ｪ縺輔＞
+  lv=5 variant=list_between
+    params: {"n":7,"variant":"list_between","arg1":17,"arg2":33,"count":null,"answer":"21, 28","difficultyLevel":5}
+    answer: {"kind":"string","value":"21, 28"}
+    Q: 17縺九ｉ33縺ｾ縺ｧ縺ｮ髢薙↓縺ゅｋ7縺ｮ蛟肴焚繧偵☆縺ｹ縺ｦ遲斐∴縺ｪ縺輔＞
+  lv=5 variant=nth_multiple
+    params: {"n":9,"variant":"nth_multiple","arg1":4,"arg2":null,"count":null,"answer":"36","difficultyLevel":5}
+    answer: {"kind":"integer","value":36}
+    Q: 9縺ｮ蛟肴焚繧貞ｰ上＆縺・婿縺九ｉ4逡ｪ逶ｮ縺ｯ菴輔〒縺吶°
+===== common_multiples (levels: 2,3,4,5)
+  lv=2 variant=list_first_n
+    params: {"a":2,"b":4,"variant":"list_first_n","arg1":5,"arg2":null,"count":5,"answer":"4, 8, 12, 16, 20","lcm":4,"difficultyLevel":2}
+    answer: {"kind":"string","value":"4, 8, 12, 16, 20"}
+    Q: 2縺ｨ4縺ｮ蜈ｬ蛟肴焚繧貞ｰ上＆縺・婿縺九ｉ5縺､遲斐∴縺ｪ縺輔＞
+  lv=3 variant=list_up_to
+    params: {"a":9,"b":10,"variant":"list_up_to","arg1":326,"arg2":null,"count":null,"answer":"90, 180, 270","lcm":90,"difficultyLevel":3}
+    answer: {"kind":"string","value":"90, 180, 270"}
+    Q: 326莉･荳九・9縺ｨ10縺ｮ蜈ｬ蛟肴焚繧偵☆縺ｹ縺ｦ遲斐∴縺ｪ縺輔＞
+  lv=4 variant=list_up_to
+    params: {"a":7,"b":12,"variant":"list_up_to","arg1":207,"arg2":null,"count":null,"answer":"84, 168","lcm":84,"difficultyLevel":4}
+    answer: {"kind":"string","value":"84, 168"}
+    Q: 207莉･荳九・7縺ｨ12縺ｮ蜈ｬ蛟肴焚繧偵☆縺ｹ縺ｦ遲斐∴縺ｪ縺輔＞
+  lv=4 variant=list_between
+    params: {"a":2,"b":7,"variant":"list_between","arg1":22,"arg2":78,"count":null,"answer":"28, 42, 56, 70","lcm":14,"difficultyLevel":4}
+    answer: {"kind":"string","value":"28, 42, 56, 70"}
+    Q: 22縺九ｉ78縺ｾ縺ｧ縺ｮ髢薙↓縺ゅｋ2縺ｨ7縺ｮ蜈ｬ蛟肴焚繧偵☆縺ｹ縺ｦ遲斐∴縺ｪ縺輔＞
+  lv=5 variant=list_between
+    params: {"a":6,"b":10,"variant":"list_between","arg1":70,"arg2":130,"count":null,"answer":"90, 120","lcm":30,"difficultyLevel":5}
+    answer: {"kind":"string","value":"90, 120"}
+    Q: 70縺九ｉ130縺ｾ縺ｧ縺ｮ髢薙↓縺ゅｋ6縺ｨ10縺ｮ蜈ｬ蛟肴焚繧偵☆縺ｹ縺ｦ遲斐∴縺ｪ縺輔＞
+===== gcd_calculation (levels: 2,3,4,5)
+  lv=2 variant=-
+    params: {"a":30,"b":45,"answer":15,"difficultyLevel":2}
+    answer: {"kind":"integer","value":15}
+    Q: 30縺ｨ45縺ｮ譛螟ｧ蜈ｬ邏・焚繧呈ｱゅａ縺ｪ縺輔＞
+  lv=3 variant=-
+    params: {"a":30,"b":45,"answer":15,"difficultyLevel":3}
+    answer: {"kind":"integer","value":15}
+    Q: 30縺ｨ45縺ｮ譛螟ｧ蜈ｬ邏・焚繧呈ｱゅａ縺ｪ縺輔＞
+  lv=4 variant=-
+    params: {"a":36,"b":54,"answer":18,"difficultyLevel":4}
+    answer: {"kind":"integer","value":18}
+    Q: 36縺ｨ54縺ｮ譛螟ｧ蜈ｬ邏・焚繧呈ｱゅａ縺ｪ縺輔＞
+  lv=5 variant=-
+    params: {"a":42,"b":63,"answer":21,"difficultyLevel":5}
+    answer: {"kind":"integer","value":21}
+    Q: 42縺ｨ63縺ｮ譛螟ｧ蜈ｬ邏・焚繧呈ｱゅａ縺ｪ縺輔＞
+===== circle_circumference (levels: 1,2,3,4,5)
+  lv=1 variant=from_diameter
+    params: {"variant":"from_diameter","diameter":3,"circumference":9.42,"unit":"cm","pi":3.14,"difficultyLevel":1}
+    answer: {"kind":"decimal","value":9.42}
+    Q: 逶ｴ蠕・cm縺ｮ蜀・・蜀・捉縺ｮ髟ｷ縺輔ｒ豎ゅａ縺ｪ縺輔＞縲ょ・蜻ｨ邇・・3.14縺ｨ縺励∪縺吶・  lv=2 variant=from_circumference
+    params: {"variant":"from_circumference","diameter":2,"circumference":6.28,"unit":"cm","pi":3.14,"difficultyLevel":2}
+    answer: {"kind":"integer","value":2}
+    Q: 蜀・捉縺・.28cm縺ｮ蜀・・逶ｴ蠕・・菴苗m縺ｧ縺吶°縲ょ・蜻ｨ邇・・3.14縺ｨ縺励∪縺吶・  lv=3 variant=from_diameter
+    params: {"variant":"from_diameter","diameter":93,"circumference":292.02,"unit":"cm","pi":3.14,"difficultyLevel":3}
+    answer: {"kind":"decimal","value":292.02}
+    Q: 逶ｴ蠕・3cm縺ｮ蜀・・蜀・捉縺ｮ髟ｷ縺輔ｒ豎ゅａ縺ｪ縺輔＞縲ょ・蜻ｨ邇・・3.14縺ｨ縺励∪縺吶・  lv=4 variant=from_diameter
+    params: {"variant":"from_diameter","diameter":824,"circumference":2587.36,"unit":"cm","answerUnit":"m","pi":3.14,"difficultyLevel":4}
+    answer: {"kind":"decimal","value":25.87}
+    Q: 逶ｴ蠕・24cm縺ｮ蜀・・蜀・捉縺ｮ髟ｷ縺輔ｒm縺ｧ豎ゅａ縺ｪ縺輔＞縲ょ・蜻ｨ邇・・3.14縺ｨ縺励∪縺吶・  lv=5 variant=from_circumference
+    params: {"variant":"from_circumference","diameter":7,"circumference":21.98,"unit":"m","pi":3.14,"difficultyLevel":5}
+    answer: {"kind":"integer","value":7}
+    Q: 蜀・捉縺・1.98m縺ｮ蜀・・逶ｴ蠕・・菴瀕縺ｧ縺吶°縲ょ・蜻ｨ邇・・3.14縺ｨ縺励∪縺吶・===== fraction_unit_intro (levels: 1,2,3,4,5)
+  lv=1 variant=meaning
+    params: {"variant":"meaning","num":1,"den":2,"answer":"1/2","difficultyLevel":1}
+    answer: {"kind":"string","value":"1/2"}
+    Q: 縺ゅｋ驥上ｒ2遲牙・縺励◆縺ｨ縺阪・1縺､蛻・・縲∽ｽ募・縺ｮ荳縺ｧ縺吶°縲・  lv=1 variant=how_many_units
+    params: {"variant":"how_many_units","num":2,"den":4,"answer":2,"difficultyLevel":1}
+    answer: {"kind":"integer","value":2}
+    Q: 2/4 縺ｯ縲・/4 縺・￥縺､蛻・〒縺吶°縲・  lv=2 variant=how_many_units
+    params: {"variant":"how_many_units","num":2,"den":2,"answer":2,"difficultyLevel":2}
+    answer: {"kind":"integer","value":2}
+    Q: 2/2 縺ｯ縲・/2 縺・￥縺､蛻・〒縺吶°縲・  lv=3 variant=how_many_units
+    params: {"variant":"how_many_units","num":4,"den":8,"answer":4,"difficultyLevel":3}
+    answer: {"kind":"integer","value":4}
+    Q: 4/8 縺ｯ縲・/8 縺・￥縺､蛻・〒縺吶°縲・  lv=3 variant=count_units
+    params: {"variant":"count_units","num":4,"den":5,"answer":"4/5","difficultyLevel":3}
+    answer: {"kind":"string","value":"4/5"}
+    Q: 1/5 繧・4 蛟矩寔繧√ｋ縺ｨ縲∽ｽ募・縺ｮ荳縺ｫ縺ｪ繧翫∪縺吶°縲・  lv=4 variant=how_many_units
+    params: {"variant":"how_many_units","num":1,"den":7,"answer":1,"difficultyLevel":4}
+    answer: {"kind":"integer","value":1}
+    Q: 1/7 縺ｯ縲・/7 縺・￥縺､蛻・〒縺吶°縲・  lv=4 variant=count_units
+    params: {"variant":"count_units","num":1,"den":2,"answer":"1/2","difficultyLevel":4}
+    answer: {"kind":"string","value":"1/2"}
+    Q: 1/2 繧・1 蛟矩寔繧√ｋ縺ｨ縲∽ｽ募・縺ｮ荳縺ｫ縺ｪ繧翫∪縺吶°縲・  lv=5 variant=how_many_units
+    params: {"variant":"how_many_units","num":6,"den":6,"answer":6,"difficultyLevel":5}
+    answer: {"kind":"integer","value":6}
+    Q: 6/6 縺ｯ縲・/6 縺・￥縺､蛻・〒縺吶°縲・  lv=5 variant=count_units
+    params: {"variant":"count_units","num":4,"den":8,"answer":"4/8","difficultyLevel":5}
+    answer: {"kind":"string","value":"4/8"}
+    Q: 1/8 繧・4 蛟矩寔繧√ｋ縺ｨ縲∽ｽ募・縺ｮ荳縺ｫ縺ｪ繧翫∪縺吶°縲・===== parallel_perpendicular (levels: 1,2,3,4,5)
+  lv=1 variant=definition_parallel
+    params: {"variant":"definition_parallel","answerKind":"parallel","difficultyLevel":1}
+    answer: {"kind":"string","value":"蟷ｳ陦・}
+    Q: 蜷後§蟷ｳ髱｢荳翫↓縺ゅｋ2譛ｬ縺ｮ逶ｴ邱壹′縲∽ｺ偵＞縺ｫ莠､繧上ｉ縺ｪ縺・→縺阪√％縺ｮ2譛ｬ縺ｮ逶ｴ邱壹ｒ菴輔→縺・＞縺ｾ縺吶°縲・  lv=1 variant=definition_perpendicular
+    params: {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":1}
+    answer: {"kind":"string","value":"蝙ら峩"}
+    Q: 2譛ｬ縺ｮ逶ｴ邱壹′逶ｴ隗偵↓莠､繧上ｋ縺ｨ縺阪√％縺ｮ2譛ｬ縺ｮ逶ｴ邱壹・髢｢菫ゅ・菴輔→縺・＞縺ｾ縺吶°縲・  lv=2 variant=definition_perpendicular
+    params: {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":2}
+    answer: {"kind":"string","value":"蝙ら峩"}
+    Q: 2譛ｬ縺ｮ逶ｴ邱壹′莠､繧上ｋ縺ｨ縺阪√〒縺阪ｋ隗偵′逶ｴ隗偵〒縺ゅｋ縺ｨ縺阪√％縺ｮ2譛ｬ縺ｮ逶ｴ邱壹ｒ菴輔→縺・＞縺ｾ縺吶°縲・  lv=3 variant=definition_perpendicular
+    params: {"variant":"definition_perpendicular","answerKind":"perpendicular","difficultyLevel":3}
+    answer: {"kind":"string","value":"蝙ら峩"}
+    Q: 2譛ｬ縺ｮ逶ｴ邱壹′莠､繧上ｋ縺ｨ縺阪√〒縺阪ｋ4縺､縺ｮ隗偵′縺吶∋縺ｦ逶ｴ隗偵〒縺ゅｋ縺ｨ縺阪√％縺ｮ2譛ｬ縺ｮ逶ｴ邱壹ｒ菴輔→縺・＞縺ｾ縺吶°縲・  lv=3 variant=angle_judgment
+    params: {"variant":"angle_judgment","angle":120,"answerKind":"not_perpendicular","difficultyLevel":3}
+    answer: {"kind":"string","value":"蝙ら峩縺ｧ縺ｯ縺ゅｊ縺ｾ縺帙ｓ"}
+    Q: 2譛ｬ縺ｮ逶ｴ邱壹′莠､繧上▲縺ｦ縺・∪縺吶ゅ◎縺ｮ縺・■1縺､縺ｮ隗偵・ 120ﾂｰ 縺ｧ縺吶ゅ％縺ｮ2譛ｬ縺ｮ逶ｴ邱壹↓縺､縺・※縲∬ｪｬ譏弱・豁｣縺励＞繧ゅ・縺ｯ縺ｩ繧後〒縺吶°縲・  lv=4 variant=angle_judgment
+    params: {"variant":"angle_judgment","angle":90,"answerKind":"perpendicular","difficultyLevel":4}
+    answer: {"kind":"string","value":"蝙ら峩"}
+    Q: 2譛ｬ縺ｮ逶ｴ邱壹′莠､繧上▲縺ｦ縺・∪縺吶ゅ◎縺ｮ縺・■1縺､縺ｮ隗偵・ 90ﾂｰ 縺ｧ縺吶ゅ％縺ｮ2譛ｬ縺ｮ逶ｴ邱壹↓縺､縺・※縲∬ｪｬ譏弱・豁｣縺励＞繧ゅ・縺ｯ縺ｩ繧後〒縺吶°縲・  lv=4 variant=intersection_judgment
+    params: {"variant":"intersection_judgment","intersects":false,"answerKind":"parallel","difficultyLevel":4}
+    answer: {"kind":"string","value":"蟷ｳ陦・}
+    Q: 蜷後§蟷ｳ髱｢荳翫↓縺ゅｋ2譛ｬ縺ｮ逶ｴ邱・l 縺ｨ m 縺ｯ縲∽ｺ偵＞縺ｫ莠､繧上ｉ縺ｪ縺・％縺ｨ繧堤｢ｺ縺九ａ縺ｦ縺・∪縺吶Ｍ 縺ｨ m 縺ｮ髢｢菫ゅ→縺励※豁｣縺励＞繧ゅ・縺ｯ縺ｩ繧後〒縺吶°縲・  lv=5 variant=angle_judgment
+    params: {"variant":"angle_judgment","angle":90,"answerKind":"perpendicular","difficultyLevel":5}
+    answer: {"kind":"string","value":"蝙ら峩"}
+    Q: 2譛ｬ縺ｮ逶ｴ邱壹′莠､繧上▲縺ｦ縺・∪縺吶ゅ◎縺ｮ縺・■1縺､縺ｮ隗偵・ 90ﾂｰ 縺ｧ縺吶ゅ％縺ｮ2譛ｬ縺ｮ逶ｴ邱壹↓縺､縺・※縲∬ｪｬ譏弱・豁｣縺励＞繧ゅ・縺ｯ縺ｩ繧後〒縺吶°縲・  lv=5 variant=intersection_judgment
+    params: {"variant":"intersection_judgment","intersects":true,"answerKind":"not_parallel","difficultyLevel":5}
+    answer: {"kind":"string","value":"蟷ｳ陦後〒縺ｯ縺ゅｊ縺ｾ縺帙ｓ"}
+    Q: 蜷後§蟷ｳ髱｢荳翫↓縺ゅｋ2譛ｬ縺ｮ逶ｴ邱・l 縺ｨ m 縺ｯ縲・縺､縺ｮ轤ｹ縺ｧ莠､繧上ｋ縺薙→縺悟・縺九▲縺ｦ縺・∪縺吶Ｍ 縺ｨ m 縺ｮ髢｢菫ゅ→縺励※豁｣縺励＞繧ゅ・縺ｯ縺ｩ繧後〒縺吶°縲・===== inverse_word (levels: 3,4,5)
+  lv=3 variant=-
+    params: {"total":32,"people1":2,"people2":8,"per1":16,"per2":4,"answer":4,"difficultyLevel":3}
+    answer: {"kind":"integer","value":4}
+    Q: 32縺薙ｒ2莠ｺ縺ｧ蛻・￠繧九→1莠ｺ16縺薙↓縺ｪ繧翫∪縺吶ょ酔縺俶焚繧・莠ｺ縺ｧ蛻・￠繧九→縲・莠ｺ菴輔％縺ｫ縺ｪ繧翫∪縺吶°
+  lv=4 variant=-
+    params: {"total":60,"people1":5,"people2":10,"per1":12,"per2":6,"answer":6,"difficultyLevel":4}
+    answer: {"kind":"integer","value":6}
+    Q: 60縺薙ｒ5莠ｺ縺ｧ蛻・￠繧九→1莠ｺ12縺薙↓縺ｪ繧翫∪縺吶ょ酔縺俶焚繧・0莠ｺ縺ｧ蛻・￠繧九→縲・莠ｺ菴輔％縺ｫ縺ｪ繧翫∪縺吶°
+  lv=5 variant=-
+    params: {"total":55,"people1":5,"people2":11,"per1":11,"per2":5,"answer":5,"difficultyLevel":5}
+    answer: {"kind":"integer","value":5}
+    Q: 55縺薙ｒ5莠ｺ縺ｧ蛻・￠繧九→1莠ｺ11縺薙↓縺ｪ繧翫∪縺吶ょ酔縺俶焚繧・1莠ｺ縺ｧ蛻・￠繧九→縲・莠ｺ菴輔％縺ｫ縺ｪ繧翫∪縺吶°
+===== arrange_simple (levels: 1,2,3,4,5)
+  lv=1 variant=pick_only
+    params: {"n":3,"r":2,"variant":"pick_only","answer":6,"difficultyLevel":1}
+    answer: {"kind":"integer","value":6}
+    Q: 3莠ｺ縺ｮ荳ｭ縺九ｉ2莠ｺ繧帝∈繧薙〒1蛻励↓荳ｦ縺ｹ縺ｾ縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ蜈ｨ驛ｨ縺ｧ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=2 variant=pick_special
+    params: {"n":3,"r":2,"variant":"pick_special","answer":6,"difficultyLevel":2}
+    answer: {"kind":"integer","value":6}
+    Q: 3莠ｺ縺ｮ荳ｭ縺九ｉ2莠ｺ繧帝∈縺ｳ縲√◎縺ｮ縺・■1莠ｺ繧偵檎音蛻･縺ｮ1莠ｺ縲阪→縺励※豎ｺ繧√∪縺吶ら音蛻･縺ｮ1莠ｺ莉･螟悶・荳ｦ縺ｹ縺ｪ縺上※縺九∪縺・∪縺帙ｓ縲る∈縺ｳ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=3 variant=pick_special
+    params: {"n":6,"r":3,"variant":"pick_special","answer":60,"difficultyLevel":3}
+    answer: {"kind":"integer","value":60}
+    Q: 6莠ｺ縺ｮ荳ｭ縺九ｉ3莠ｺ繧帝∈縺ｳ縲√◎縺ｮ縺・■1莠ｺ繧偵檎音蛻･縺ｮ1莠ｺ縲阪→縺励※豎ｺ繧√∪縺吶ら音蛻･縺ｮ1莠ｺ莉･螟悶・荳ｦ縺ｹ縺ｪ縺上※縺九∪縺・∪縺帙ｓ縲る∈縺ｳ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=3 variant=pick_include_one
+    params: {"n":5,"r":4,"variant":"pick_include_one","answer":24,"difficultyLevel":3}
+    answer: {"kind":"integer","value":24}
+    Q: 5莠ｺ縺ｮ荳ｭ縺九ｉ4莠ｺ繧帝∈繧薙〒1蛻励↓荳ｦ縺ｹ縺ｾ縺吶ゅ◆縺縺励、縺輔ｓ縺ｯ蠢・★驕ｸ縺ｶ縺薙→縺ｫ縺励∪縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=4 variant=pick_include_one
+    params: {"n":7,"r":2,"variant":"pick_include_one","answer":6,"difficultyLevel":4}
+    answer: {"kind":"integer","value":6}
+    Q: 7莠ｺ縺ｮ荳ｭ縺九ｉ2莠ｺ繧帝∈繧薙〒1蛻励↓荳ｦ縺ｹ縺ｾ縺吶ゅ◆縺縺励、縺輔ｓ縺ｯ蠢・★驕ｸ縺ｶ縺薙→縺ｫ縺励∪縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=5 variant=pick_include_one
+    params: {"n":6,"r":5,"variant":"pick_include_one","answer":120,"difficultyLevel":5}
+    answer: {"kind":"integer","value":120}
+    Q: 6莠ｺ縺ｮ荳ｭ縺九ｉ5莠ｺ繧帝∈繧薙〒1蛻励↓荳ｦ縺ｹ縺ｾ縺吶ゅ◆縺縺励、縺輔ｓ縺ｯ蠢・★驕ｸ縺ｶ縺薙→縺ｫ縺励∪縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=5 variant=pick_first_fixed
+    params: {"n":7,"r":2,"variant":"pick_first_fixed","answer":6,"difficultyLevel":5}
+    answer: {"kind":"integer","value":6}
+    Q: 7莠ｺ縺ｮ荳ｭ縺九ｉ2莠ｺ繧帝∈繧薙〒1蛻励↓荳ｦ縺ｹ縺ｾ縺吶ゅ◆縺縺励、縺輔ｓ縺ｯ蠢・★驕ｸ縺ｳ縲・逡ｪ繧・ｼ医＞縺｡縺ｰ繧灘ｷｦ・峨↓鄂ｮ縺上％縺ｨ縺ｫ縺励∪縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+===== arrange_tree (levels: 1,2,3,4,5)
+  lv=1 variant=all
+    params: {"n":3,"letters":["A","B","C"],"variant":"all","answer":6,"difficultyLevel":1}
+    answer: {"kind":"integer","value":6}
+    Q: A縲。縲，縺ｮ3蛟九・譁・ｭ励ｒ縺吶∋縺ｦ1蝗槭★縺､菴ｿ縺｣縺ｦ縲∝ｷｦ縺九ｉ1蛻励↓荳ｦ縺ｹ縺ｾ縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=1 variant=fixed_first
+    params: {"n":3,"letters":["A","B","C"],"variant":"fixed_first","answer":2,"difficultyLevel":1}
+    answer: {"kind":"integer","value":2}
+    Q: A縲。縲，縺ｮ3蛟九・譁・ｭ励・縺・■縲、縺ｯ1逡ｪ繧・ｼ医＞縺｡縺ｰ繧灘ｷｦ・峨↓鄂ｮ縺上→豎ｺ縺ｾ縺｣縺ｦ縺・∪縺吶よｮ九ｊ縺ｮ2蛟九ｒ閾ｪ逕ｱ縺ｫ荳ｦ縺ｹ縺ｦ縲∽ｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=2 variant=all
+    params: {"n":4,"letters":["A","B","C","D"],"variant":"all","answer":24,"difficultyLevel":2}
+    answer: {"kind":"integer","value":24}
+    Q: A縲。縲，縲．縺ｮ4蛟九・譁・ｭ励ｒ縺吶∋縺ｦ1蝗槭★縺､菴ｿ縺｣縺ｦ縲∝ｷｦ縺九ｉ1蛻励↓荳ｦ縺ｹ縺ｾ縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=2 variant=fixed_first
+    params: {"n":4,"letters":["A","B","C","D"],"variant":"fixed_first","answer":6,"difficultyLevel":2}
+    answer: {"kind":"integer","value":6}
+    Q: A縲。縲，縲．縺ｮ4蛟九・譁・ｭ励・縺・■縲、縺ｯ1逡ｪ繧・ｼ医＞縺｡縺ｰ繧灘ｷｦ・峨↓鄂ｮ縺上→豎ｺ縺ｾ縺｣縺ｦ縺・∪縺吶よｮ九ｊ縺ｮ3蛟九ｒ閾ｪ逕ｱ縺ｫ荳ｦ縺ｹ縺ｦ縲∽ｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=3 variant=adjacent
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"adjacent","answer":48,"difficultyLevel":3}
+    answer: {"kind":"integer","value":48}
+    Q: A縲。縲，縲．縲・縺ｮ5蛟九・譁・ｭ励・縺・■縲、縺ｨB縺ｯ蠢・★髫｣繧雁粋縺・ｈ縺・↓荳ｦ縺ｹ縺ｾ縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=3 variant=all
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"all","answer":120,"difficultyLevel":3}
+    answer: {"kind":"integer","value":120}
+    Q: A縲。縲，縲．縲・縺ｮ5蛟九・譁・ｭ励ｒ縺吶∋縺ｦ1蝗槭★縺､菴ｿ縺｣縺ｦ縲∝ｷｦ縺九ｉ1蛻励↓荳ｦ縺ｹ縺ｾ縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=3 variant=fixed_first
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"fixed_first","answer":24,"difficultyLevel":3}
+    answer: {"kind":"integer","value":24}
+    Q: A縲。縲，縲．縲・縺ｮ5蛟九・譁・ｭ励・縺・■縲、縺ｯ1逡ｪ繧・ｼ医＞縺｡縺ｰ繧灘ｷｦ・峨↓鄂ｮ縺上→豎ｺ縺ｾ縺｣縺ｦ縺・∪縺吶よｮ九ｊ縺ｮ4蛟九ｒ閾ｪ逕ｱ縺ｫ荳ｦ縺ｹ縺ｦ縲∽ｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=4 variant=circle
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"circle","answer":24,"difficultyLevel":4}
+    answer: {"kind":"integer","value":24}
+    Q: A縲。縲，縲．縲・縺ｮ5蛟九・譁・ｭ励ｒ蜀・酷縺ｮ縺ｾ繧上ｊ縺ｫ1縺､縺壹▽荳ｦ縺ｹ縺ｾ縺吶ょ屓霆｢縺輔○縺溘ｉ驥阪↑繧倶ｸｦ縺ｳ縺ｯ蜷後§繧ゅ・縺ｨ縺励※謨ｰ縺医∪縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=4 variant=all
+    params: {"n":6,"letters":["A","B","C","D","E","F"],"variant":"all","answer":720,"difficultyLevel":4}
+    answer: {"kind":"integer","value":720}
+    Q: A縲。縲，縲．縲・縲：縺ｮ6蛟九・譁・ｭ励ｒ縺吶∋縺ｦ1蝗槭★縺､菴ｿ縺｣縺ｦ縲∝ｷｦ縺九ｉ1蛻励↓荳ｦ縺ｹ縺ｾ縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=4 variant=fixed_first
+    params: {"n":6,"letters":["A","B","C","D","E","F"],"variant":"fixed_first","answer":120,"difficultyLevel":4}
+    answer: {"kind":"integer","value":120}
+    Q: A縲。縲，縲．縲・縲：縺ｮ6蛟九・譁・ｭ励・縺・■縲、縺ｯ1逡ｪ繧・ｼ医＞縺｡縺ｰ繧灘ｷｦ・峨↓鄂ｮ縺上→豎ｺ縺ｾ縺｣縺ｦ縺・∪縺吶よｮ九ｊ縺ｮ5蛟九ｒ閾ｪ逕ｱ縺ｫ荳ｦ縺ｹ縺ｦ縲∽ｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=5 variant=adjacent
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"adjacent","answer":48,"difficultyLevel":5}
+    answer: {"kind":"integer","value":48}
+    Q: A縲。縲，縲．縲・縺ｮ5蛟九・譁・ｭ励・縺・■縲、縺ｨB縺ｯ蠢・★髫｣繧雁粋縺・ｈ縺・↓荳ｦ縺ｹ縺ｾ縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=5 variant=circle
+    params: {"n":5,"letters":["A","B","C","D","E"],"variant":"circle","answer":24,"difficultyLevel":5}
+    answer: {"kind":"integer","value":24}
+    Q: A縲。縲，縲．縲・縺ｮ5蛟九・譁・ｭ励ｒ蜀・酷縺ｮ縺ｾ繧上ｊ縺ｫ1縺､縺壹▽荳ｦ縺ｹ縺ｾ縺吶ょ屓霆｢縺輔○縺溘ｉ驥阪↑繧倶ｸｦ縺ｳ縺ｯ蜷後§繧ゅ・縺ｨ縺励※謨ｰ縺医∪縺吶ゆｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+  lv=5 variant=fixed_first
+    params: {"n":6,"letters":["A","B","C","D","E","F"],"variant":"fixed_first","answer":120,"difficultyLevel":5}
+    answer: {"kind":"integer","value":120}
+    Q: A縲。縲，縲．縲・縲：縺ｮ6蛟九・譁・ｭ励・縺・■縲、縺ｯ1逡ｪ繧・ｼ医＞縺｡縺ｰ繧灘ｷｦ・峨↓鄂ｮ縺上→豎ｺ縺ｾ縺｣縺ｦ縺・∪縺吶よｮ九ｊ縺ｮ5蛟九ｒ閾ｪ逕ｱ縺ｫ荳ｦ縺ｹ縺ｦ縲∽ｸｦ縺ｹ譁ｹ縺ｯ菴暮壹ｊ縺ゅｊ縺ｾ縺吶°
+===== realworld_shopping (levels: 1,2,3,4,5)
+  lv=1 variant=two_sum
+    params: {"variant":"two_sum","productA":"縺溘∪縺・,"productB":"縺弱ｅ縺・↓繧・≧","priceA":120,"priceB":180,"answer":300,"difficultyLevel":1}
+    answer: {"kind":"integer","value":300}
+    Q: 蜀咏悄縺ｮ蛟､譛ｭ繧定ｦ九※縲√◆縺ｾ縺・繝代ャ繧ｯ縺ｨ縺弱ｅ縺・↓繧・≧1譛ｬ繧定ｲｷ縺・∪縺吶ゆｻ｣驥代・蜷郁ｨ医＞縺上ｉ縺ｧ縺吶°縲・  lv=2 variant=two_sum
+    params: {"variant":"two_sum","productA":"縺溘∪縺・,"productB":"繧ｪ繝ｬ繝ｳ繧ｸ繧ｸ繝･繝ｼ繧ｹ","priceA":120,"priceB":200,"answer":320,"difficultyLevel":2}
+    answer: {"kind":"integer","value":320}
+    Q: 蜀咏悄縺ｮ蛟､譛ｭ繧定ｦ九※縲√◆縺ｾ縺・繝代ャ繧ｯ縺ｨ繧ｪ繝ｬ繝ｳ繧ｸ繧ｸ繝･繝ｼ繧ｹ1譛ｬ繧定ｲｷ縺・∪縺吶ゆｻ｣驥代・蜷郁ｨ医＞縺上ｉ縺ｧ縺吶°縲・  lv=3 variant=same_item_multiple
+    params: {"variant":"same_item_multiple","product":"繧ｯ繝・く繝ｼ","count":2,"price":90,"answer":180,"difficultyLevel":3}
+    answer: {"kind":"integer","value":180}
+    Q: 蜀咏悄縺ｮ蛟､譛ｭ繧定ｦ九※縲√け繝・く繝ｼ繧・邂ｱ雋ｷ縺・∪縺吶ゆｻ｣驥代・縺・￥繧峨〒縺吶°縲・  lv=4 variant=multi_and_sum
+    params: {"variant":"multi_and_sum","productA":"繧ｪ繝ｬ繝ｳ繧ｸ繧ｸ繝･繝ｼ繧ｹ","productB":"縺溘∪縺・,"count":2,"priceA":200,"priceB":120,"answer":520,"difficultyLevel":4}
+    answer: {"kind":"integer","value":520}
+    Q: 蜀咏悄縺ｮ蛟､譛ｭ繧定ｦ九※縲√が繝ｬ繝ｳ繧ｸ繧ｸ繝･繝ｼ繧ｹ繧・譛ｬ縺ｨ縲√◆縺ｾ縺・繝代ャ繧ｯ繧定ｲｷ縺・∪縺吶ゆｻ｣驥代・蜷郁ｨ医＞縺上ｉ縺ｧ縺吶°縲・  lv=5 variant=max_count
+    params: {"variant":"max_count","product":"繧ｪ繝ｬ繝ｳ繧ｸ繧ｸ繝･繝ｼ繧ｹ","budget":600,"price":200,"answer":3,"difficultyLevel":5}
+    answer: {"kind":"integer","value":3}
+    Q: 600蜀・ｒ謖√▲縺ｦ縺・∪縺吶ょ・逵溘・蛟､譛ｭ繧定ｦ九※縲√が繝ｬ繝ｳ繧ｸ繧ｸ繝･繝ｼ繧ｹ縺ｯ菴墓悽雋ｷ縺医∪縺吶°縲・  lv=5 variant=split_bill
+    params: {"variant":"split_bill","productA":"鬟溘ヱ繝ｳ","productB":"繧ｪ繝ｬ繝ｳ繧ｸ繧ｸ繝･繝ｼ繧ｹ","people":2,"priceA":150,"priceB":200,"answer":175,"difficultyLevel":5}
+    answer: {"kind":"integer","value":175}
+    Q: 鬟溘ヱ繝ｳ1陲九→繧ｪ繝ｬ繝ｳ繧ｸ繧ｸ繝･繝ｼ繧ｹ1譛ｬ繧偵∩繧薙↑縺ｧ雋ｷ縺・∪縺励◆縲ょ・逵溘・蛟､譛ｭ繧定ｦ九※縲∽ｻ｣驥代ｒ2莠ｺ縺ｧ蜷後§縺壹▽蛻・￠繧九→縲・莠ｺ蛻・・縺・￥繧峨〒縺吶°縲・===== realworld_eggs (levels: 1,2,3,4,5)
+  lv=1 variant=fill_carton
+    params: {"variant":"fill_carton","carton":6,"totalEggs":2,"answer":4,"difficultyLevel":1}
+    answer: {"kind":"integer","value":4}
+    Q: 蜀咏悄繧定ｦ九※縲∝嵯縺ｮ謨ｰ繧呈焚縺医∪縺吶・縺､縺ｮ繧ｫ繝ｼ繝医Φ縺ｫ縺ｯ蜊ｵ繧・蛟句・繧後ｋ縺薙→縺ｫ縺励∪縺呻ｼ医％縺ｮ6蛟九・蝠城｡後〒險ｭ螳壹＠縺滓焚蛟､縺ｧ縺呻ｼ峨ょ・逵溘↓蜀吶▲縺ｦ縺・ｋ蜊ｵ繧貞・繧後◆縺ゅ→縲√き繝ｼ繝医Φ繧偵＞縺｣縺ｱ縺・↓縺吶ｋ縺ｫ縺ｯ縺ゅ→菴募九・蜊ｵ縺悟ｿ・ｦ√〒縺吶°縲・  lv=2 variant=pair_price
+    params: {"variant":"pair_price","priceA":30,"priceB":25,"answer":55,"difficultyLevel":2}
+    answer: {"kind":"integer","value":55}
+    Q: 闌ｶ濶ｲ縺・嵯縺ｯ1蛟・0蜀・∫區縺・嵯縺ｯ1蛟・5蜀・〒縺呻ｼ医％縺ｮ蛟､谿ｵ縺ｯ蝠城｡後〒險ｭ螳壹＠縺滓焚蛟､縺ｧ縺呻ｼ峨ょ・逵溘・繧医≧縺ｫ縲∬幻濶ｲ縺・嵯繧・蛟九→逋ｽ縺・嵯繧・蛟玖ｲｷ縺・∪縺吶ゆｻ｣驥代・蜷郁ｨ医＞縺上ｉ縺ｧ縺吶°縲・  lv=3 variant=pairs_total
+    params: {"variant":"pairs_total","pairs":10,"eggsPerPair":2,"answer":20,"difficultyLevel":3}
+    answer: {"kind":"integer","value":20}
+    Q: 蜀咏悄縺ｮ闌ｶ濶ｲ縺・嵯1蛟九→逋ｽ縺・嵯1蛟九ｒ縲・邨・→縺励∪縺吶ゅ％縺ｮ1邨・ｒ10邨・畑諢上＠縺ｾ縺呻ｼ医％縺ｮ10邨・・蝠城｡後〒險ｭ螳壹＠縺滓焚蛟､縺ｧ縺呻ｼ峨ょ嵯縺ｯ蜷医ｏ縺帙※菴募九↓縺ｪ繧翫∪縺吶°縲・  lv=4 variant=pairs_in_carton
+    params: {"variant":"pairs_in_carton","carton":12,"eggsPerPair":2,"answer":6,"difficultyLevel":4}
+    answer: {"kind":"integer","value":6}
+    Q: 蜀咏悄縺ｮ闌ｶ濶ｲ縺・嵯1蛟九→逋ｽ縺・嵯1蛟九ｒ縲・邨・→縺励∪縺吶・縺､縺ｮ繧ｫ繝ｼ繝医Φ縺ｫ縺ｯ蜊ｵ繧・2蛟句・繧後ｋ縺薙→縺ｫ縺励∪縺呻ｼ医％縺ｮ12蛟九・蝠城｡後〒險ｭ螳壹＠縺滓焚蛟､縺ｧ縺呻ｼ峨り幻濶ｲ縺・嵯縺ｨ逋ｽ縺・嵯繧・蛟九★縺､邨・↓縺励※繧ｫ繝ｼ繝医Φ繧偵＞縺｣縺ｱ縺・↓縺吶ｋ縺ｨ縲∽ｽ慕ｵ・〒縺阪∪縺吶°縲・  lv=4 variant=pairs_cost
+    params: {"variant":"pairs_cost","pairs":5,"priceA":30,"priceB":25,"pairCost":55,"answer":275,"difficultyLevel":4}
+    answer: {"kind":"integer","value":275}
+    Q: 闌ｶ濶ｲ縺・嵯縺ｯ1蛟・0蜀・∫區縺・嵯縺ｯ1蛟・5蜀・〒縺呻ｼ医％縺ｮ蛟､谿ｵ縺ｯ蝠城｡後〒險ｭ螳壹＠縺滓焚蛟､縺ｧ縺呻ｼ峨ょ・逵溘・繧医≧縺ｫ縲∬幻濶ｲ縺・嵯1蛟九→逋ｽ縺・嵯1蛟九ｒ1邨・→縺励※縲√％縺ｮ1邨・ｒ5邨・ｲｷ縺・∪縺呻ｼ医％縺ｮ5邨・・蝠城｡後〒險ｭ螳壹＠縺滓焚蛟､縺ｧ縺呻ｼ峨ゆｻ｣驥代・蜷郁ｨ医＞縺上ｉ縺ｧ縺吶°縲・  lv=5 variant=pairs_cost
+    params: {"variant":"pairs_cost","pairs":10,"priceA":25,"priceB":30,"pairCost":55,"answer":550,"difficultyLevel":5}
+    answer: {"kind":"integer","value":550}
+    Q: 闌ｶ濶ｲ縺・嵯縺ｯ1蛟・5蜀・∫區縺・嵯縺ｯ1蛟・0蜀・〒縺呻ｼ医％縺ｮ蛟､谿ｵ縺ｯ蝠城｡後〒險ｭ螳壹＠縺滓焚蛟､縺ｧ縺呻ｼ峨ょ・逵溘・繧医≧縺ｫ縲∬幻濶ｲ縺・嵯1蛟九→逋ｽ縺・嵯1蛟九ｒ1邨・→縺励※縲√％縺ｮ1邨・ｒ10邨・ｲｷ縺・∪縺呻ｼ医％縺ｮ10邨・・蝠城｡後〒險ｭ螳壹＠縺滓焚蛟､縺ｧ縺呻ｼ峨ゆｻ｣驥代・蜷郁ｨ医＞縺上ｉ縺ｧ縺吶°縲・

@@ -1,0 +1,5 @@
+export class ArrangeSimpleGenerator implements ProblemGenerator {
+export class CombineSimpleGenerator implements ProblemGenerator {
+export class TreeDiagramGenerator implements ProblemGenerator {
+export class CombineTableGenerator implements ProblemGenerator {
+export class DuplicateRemovalGenerator implements ProblemGenerator {

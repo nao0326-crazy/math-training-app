@@ -1,0 +1,196 @@
+### integer_multi_step (39)
+  expected={"kind":"integer","value":-0.3076923076923077} actual={"kind":"integer","value":8}
+  Q: 9 - 13 ÷ 13 はいくつになりますか
+  expected={"kind":"integer","value":14} actual={"kind":"integer","value":19}
+  Q: 10 + 18 ÷ 2 はいくつになりますか
+  expected={"kind":"integer","value":0.5} actual={"kind":"integer","value":4}
+  Q: 7 - 6 ÷ 2 はいくつになりますか
+### integer_word_problem (107)
+  expected={"kind":"integer","value":8} actual={"kind":"integer","value":15}
+  Q: 1ふくろに3このあめが入っています。5ふくろあります。あめは全部で何こありますか。
+  expected={"kind":"integer","value":6} actual={"kind":"integer","value":8}
+  Q: 1台の車に4人ずつのっています。2台あります。車にのっている人は全部で何人ですか。
+  expected={"kind":"integer","value":8} actual={"kind":"integer","value":15}
+  Q: 1日で5ページずつ本をよみます。3日間よみました。よんだページは全部で何ページですか。
+### multiples_finding (155)
+  expected={"kind":"string","value":""} actual={"kind":"string","value":"4, 8, 12, 16, 20, 24, 28, 32, 36"}
+  Q: 37以下の4の倍数をすべて答えなさい
+  expected={"kind":"string","value":""} actual={"kind":"string","value":"6, 12, 18, 24"}
+  Q: 25以下の6の倍数をすべて答えなさい
+  expected={"kind":"string","value":""} actual={"kind":"string","value":"8, 16, 24, 32"}
+  Q: 34以下の8の倍数をすべて答えなさい
+### prime_judgment (65)
+  expected={"kind":"string","value":"AMBIGUOUS"} actual={"kind":"string","value":"41"}
+  Q: 91、79、41 の中で素数はどれですか
+  expected={"kind":"string","value":"AMBIGUOUS"} actual={"kind":"string","value":"71"}
+  Q: 3、71、6 の中で素数はどれですか
+  expected={"kind":"string","value":"AMBIGUOUS"} actual={"kind":"string","value":"3"}
+  Q: 21、3、19 の中で素数はどれですか
+### common_multiples (124)
+  expected={"kind":"string","value":""} actual={"kind":"string","value":"18, 36"}
+  Q: 39以下の6と9の公倍数をすべて答えなさい
+  expected={"kind":"string","value":""} actual={"kind":"string","value":"8, 16, 24"}
+  Q: 26以下の2と8の公倍数をすべて答えなさい
+  expected={"kind":"string","value":""} actual={"kind":"string","value":"30, 60, 90"}
+  Q: 103以下の3と10の公倍数をすべて答えなさい
+### gcd_calculation (125)
+  expected={"kind":"integer"} actual={"kind":"integer","value":15}
+  Q: 30と45の最大公約数を求めなさい
+  expected={"kind":"integer"} actual={"kind":"integer","value":18}
+  Q: 36と54の最大公約数を求めなさい
+  expected={"kind":"integer"} actual={"kind":"integer","value":21}
+  Q: 42と63の最大公約数を求めなさい
+### gcd_lcm_word (27)
+  expected={"kind":"integer","value":1} actual={"kind":"integer","value":42}
+  Q: ケーキは6個ずつ、クッキーは7個ずつ入った箱を、同じ数になるように買いたい。それぞれ最も少ないセットは何箱ずつ買えばよいですか
+  expected={"kind":"integer","value":1} actual={"kind":"integer","value":9}
+  Q: ケーキは9個ずつ、クッキーは9個ずつ入った箱を、同じ数になるように買いたい。それぞれ最も少ないセットは何箱ずつ買えばよいですか
+  expected={"kind":"integer","value":1} actual={"kind":"integer","value":6}
+  Q: ケーキは3個ずつ、クッキーは2個ずつ入った箱を、同じ数になるように買いたい。それぞれ最も少ないセットは何箱ずつ買えばよいですか
+### fraction_mixed_convert (87)
+  expected={"kind":"mixed","whole":0,"numerator":2,"denominator":9} actual={"kind":"fraction","numerator":20,"denominator":9}
+  Q: 2と9分の2 を仮分数で表しなさい
+  expected={"kind":"mixed","whole":0,"numerator":1,"denominator":3} actual={"kind":"fraction","numerator":10,"denominator":3}
+  Q: 3と3分の1 を仮分数で表しなさい
+  expected={"kind":"mixed","whole":0,"numerator":2,"denominator":5} actual={"kind":"fraction","numerator":22,"denominator":5}
+  Q: 4と5分の2 を仮分数で表しなさい
+### speed_unit_conversion (56)
+  expected={"kind":"decimal","value":0} actual={"kind":"decimal","value":18}
+  Q: 分速300mは、時速何kmですか
+  expected={"kind":"decimal","value":0} actual={"kind":"decimal","value":6}
+  Q: 分速100mは、時速何kmですか
+  expected={"kind":"decimal","value":0} actual={"kind":"decimal","value":9}
+  Q: 分速150mは、時速何kmですか
+### circle_area_diameter (73)
+  expected={"kind":"decimal","value":132.665} actual={"kind":"decimal","value":132.67}
+  Q: 直径13cmの円の面積を求めなさい。円周率は3.14とします。
+  expected={"kind":"decimal","value":176.625} actual={"kind":"decimal","value":176.63}
+  Q: 直径15cmの円の面積を求めなさい。円周率は3.14とします。
+  expected={"kind":"decimal","value":226.865} actual={"kind":"decimal","value":226.87}
+  Q: 直径17cmの円の面積を求めなさい。円周率は3.14とします。
+### symmetry_fold (15)
+  expected={"kind":"string","value":"いいえ"} actual={"kind":"string","value":"はい"}
+  Q: 正五角形は線対称な図形ですか？（はい/いいえ）
+  expected={"kind":"string","value":"いいえ"} actual={"kind":"string","value":"はい"}
+  Q: 正五角形は線対称な図形ですか？（はい/いいえ）
+  expected={"kind":"string","value":"いいえ"} actual={"kind":"string","value":"はい"}
+  Q: 正五角形は線対称な図形ですか？（はい/いいえ）
+### circle_circumference (120)
+  expected={"kind":"decimal","value":6.28} actual={"kind":"integer","value":2}
+  Q: 円周が6.28cmの円の直径は何cmですか。円周率は3.14とします。
+  expected={"kind":"decimal","value":12.56} actual={"kind":"integer","value":4}
+  Q: 円周が12.56cmの円の直径は何cmですか。円周率は3.14とします。
+  expected={"kind":"decimal","value":18.84} actual={"kind":"integer","value":6}
+  Q: 円周が18.84cmの円の直径は何cmですか。円周率は3.14とします。
+### trapezoid_area (113)
+  expected={"kind":"integer","value":2} actual={"kind":"integer","value":10}
+  Q: 上底が2cm、下底が8cm、高さが2cmの台形の面積を求めなさい。
+  expected={"kind":"integer","value":8} actual={"kind":"integer","value":24}
+  Q: 上底が2cm、下底が4cm、高さが8cmの台形の面積を求めなさい。
+  expected={"kind":"integer","value":5} actual={"kind":"integer","value":20}
+  Q: 上底が3cm、下底が5cm、高さが5cmの台形の面積を求めなさい。
+### decimal_place_value (160)
+  expected={"kind":"integer"} actual={"kind":"decimal","value":0.3}
+  Q: 10分の1の位が3のとき、小数はいくつになりますか。
+  expected={"kind":"integer"} actual={"kind":"decimal","value":0.5}
+  Q: 10分の1の位が5のとき、小数はいくつになりますか。
+  expected={"kind":"integer"} actual={"kind":"decimal","value":0.6}
+  Q: 10分の1の位が6のとき、小数はいくつになりますか。
+### fraction_unit_intro (119)
+  expected={"kind":"string","value":"2/4"} actual={"kind":"integer","value":2}
+  Q: 2/4 は、1/4 いくつ分ですか。
+  expected={"kind":"string","value":"3/5"} actual={"kind":"integer","value":3}
+  Q: 3/5 は、1/5 いくつ分ですか。
+  expected={"kind":"string","value":"2/2"} actual={"kind":"integer","value":2}
+  Q: 2/2 は、1/2 いくつ分ですか。
+### triangle_classify (44)
+  expected={"kind":"string","value":"二等辺三角形"} actual={"kind":"integer","value":2}
+  Q: 辺の長さが 5cm、5cm、2cm の三角形で、長さが等しい辺は何本ありますか。
+  expected={"kind":"string","value":"二等辺三角形"} actual={"kind":"integer","value":2}
+  Q: 辺の長さが 6cm、2cm、6cm の三角形で、長さが等しい辺は何本ありますか。
+  expected={"kind":"string","value":"二等辺三角形"} actual={"kind":"integer","value":2}
+  Q: 辺の長さが 6cm、8cm、8cm の三角形で、長さが等しい辺は何本ありますか。
+### parallel_perpendicular (200)
+  expected={"kind":"string","value":"parallel"} actual={"kind":"string","value":"平行"}
+  Q: 同じ平面上にある2本の直線が、互いに交わらないとき、この2本の直線を何といいますか。
+  expected={"kind":"string","value":"perpendicular"} actual={"kind":"string","value":"垂直"}
+  Q: 2本の直線が直角に交わるとき、この2本の直線の関係は何といいますか。
+  expected={"kind":"string","value":"perpendicular"} actual={"kind":"string","value":"垂直"}
+  Q: 2本の直線が直角に交わるという関係は何といいますか。
+### rectangle_area (72)
+  expected={"kind":"integer","value":40} actual={"kind":"integer","value":5}
+  Q: 縦 5 cm、横 8 cm の長方形があります。横の長さが 8 cm のとき、縦の長さはいくつですか。
+  expected={"kind":"integer","value":63} actual={"kind":"integer","value":9}
+  Q: 縦 7 cm、横 9 cm の長方形があります。縦の長さが 7 cm のとき、横の長さはいくつですか。
+  expected={"kind":"integer","value":6} actual={"kind":"integer","value":3}
+  Q: 縦 2 cm、横 3 cm の長方形があります。縦の長さが 2 cm のとき、横の長さはいくつですか。
+### triangle_area (53)
+  expected={"kind":"integer","value":91} actual={"kind":"integer","value":26}
+  Q: 底辺が 7 cm、面積が 91 cm2 の三角形があります。高さは何cmですか。
+  expected={"kind":"integer","value":726} actual={"kind":"integer","value":44}
+  Q: 底辺が 33 cm、面積が 726 cm2 の三角形があります。高さは何cmですか。
+  expected={"kind":"integer","value":240} actual={"kind":"integer","value":12}
+  Q: 底辺が 40 cm、面積が 240 cm2 の三角形があります。高さは何cmですか。
+### parallelogram_area (63)
+  expected={"kind":"integer","value":182} actual={"kind":"integer","value":26}
+  Q: 底辺が 7 cm、面積が 182 cm2 の平行四辺形があります。高さは何cmですか。
+  expected={"kind":"integer","value":980} actual={"kind":"integer","value":35}
+  Q: 底辺が 28 cm、面積が 980 cm2 の平行四辺形があります。高さは何cmですか。
+  expected={"kind":"integer","value":480} actual={"kind":"integer","value":12}
+  Q: 底辺が 40 cm、面積が 480 cm2 の平行四辺形があります。高さは何cmですか。
+### inverse_word (120)
+  expected={"kind":"integer","value":2} actual={"kind":"integer","value":4}
+  Q: 32こを2人で分けると1人16こになります。同じ数を8人で分けると、1人何こになりますか
+  expected={"kind":"integer","value":1.5} actual={"kind":"integer","value":6}
+  Q: 36こを4人で分けると1人9こになります。同じ数を6人で分けると、1人何こになりますか
+  expected={"kind":"integer","value":4} actual={"kind":"integer","value":8}
+  Q: 32こを2人で分けると1人16こになります。同じ数を4人で分けると、1人何こになりますか
+### percentage (61)
+  expected={"kind":"integer","value":75} actual={"kind":"integer","value":45}
+  Q: ある量が 60 です。その 75 パーセントは何ですか。
+  expected={"kind":"integer","value":25} actual={"kind":"integer","value":14}
+  Q: 56 を100として考えたとき、25 パーセントはいくつですか。
+  expected={"kind":"integer","value":50} actual={"kind":"integer","value":39}
+  Q: 全体の量が 78 あります。50 パーセントに相当する量を求めなさい。
+### arrange_simple (125)
+  expected={"kind":"integer","value":24} actual={"kind":"integer","value":12}
+  Q: 4人の中から3人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか
+  expected={"kind":"integer","value":24} actual={"kind":"integer","value":12}
+  Q: 4人の中から3人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか
+  expected={"kind":"integer","value":24} actual={"kind":"integer","value":12}
+  Q: 4人の中から3人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか
+### combine_simple (113)
+  expected={"kind":"integer","value":3} actual={"kind":"integer","value":2}
+  Q: 3人の中から2人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+  expected={"kind":"integer","value":4} actual={"kind":"integer","value":3}
+  Q: 4人の中から3人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+  expected={"kind":"integer","value":15} actual={"kind":"integer","value":5}
+  Q: 6人の中から2人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか
+### arrange_tree (140)
+  expected={"kind":"integer","value":6} actual={"kind":"integer","value":2}
+  Q: A、B、Cの3個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの2個を自由に並べて、並べ方は何通りありますか
+  expected={"kind":"integer","value":24} actual={"kind":"integer","value":6}
+  Q: A、B、C、Dの4個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの3個を自由に並べて、並べ方は何通りありますか
+  expected={"kind":"integer","value":24} actual={"kind":"integer","value":6}
+  Q: A、B、C、Dの4個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの3個を自由に並べて、並べ方は何通りありますか
+### combine_table (91)
+  expected={"kind":"integer","value":10} actual={"kind":"integer","value":20}
+  Q: 5チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+  expected={"kind":"integer","value":15} actual={"kind":"integer","value":30}
+  Q: 6チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+  expected={"kind":"integer","value":21} actual={"kind":"integer","value":42}
+  Q: 7チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか
+### realworld_shopping (181)
+  expected={"kind":"integer","value":null} actual={"kind":"integer","value":300}
+  Q: 写真の値札を見て、たまご1パックとぎゅうにゅう1本を買います。代金は合計いくらですか。
+  expected={"kind":"integer","value":null} actual={"kind":"integer","value":330}
+  Q: 写真の値札を見て、食パン1袋とぎゅうにゅう1本を買います。代金は合計いくらですか。
+  expected={"kind":"integer","value":null} actual={"kind":"integer","value":350}
+  Q: 写真の値札を見て、オレンジジュース1本と食パン1袋を買います。代金は合計いくらですか。
+### realworld_eggs (160)
+  expected={"kind":"integer","value":null} actual={"kind":"integer","value":4}
+  Q: 写真を見て、卵の数を数えます。1つのカートンには卵を6個入れることにします（この6個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。
+  expected={"kind":"integer","value":null} actual={"kind":"integer","value":8}
+  Q: 写真を見て、卵の数を数えます。1つのカートンには卵を10個入れることにします（この10個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。
+  expected={"kind":"integer","value":null} actual={"kind":"integer","value":10}
+  Q: 写真を見て、卵の数を数えます。1つのカートンには卵を12個入れることにします（この12個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。

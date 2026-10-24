@@ -1,0 +1,24 @@
+        { timedOut: timedOutSubmit, correct, answerTimeSec },
+      );
+    },
+    [canStartNormalSync, isAdminMode, problem, isAnswered, questionNumber, attemptId],
+  );
+
+  /**
+   * 時間切れ時の処理。
+   * 既存の保存・集計経路を再利用するため、handleSubmit へ timedOut 付きで委譲する
+   * (時間切れ専用の別ルートを作らない)。
+   */
+  const handleTimeout = useCallback(() => {
+    // 空文字を渡し、timedOut フラグで「不正解確定 + 時間切れ記録」にする。
+    handleSubmit('', { timedOut: true });
+  }, [handleSubmit]);
+
+  /**
+   * 次の問題へ進む
+   */
+  const handleNext = useCallback(() => {
+    // 終了判定は questionCount に従う (復習は5問・通常は10問)。
+    // ハードコードの10だと復習モードで問題数が画面表示とずれる。
+    if (questionNumber >= questionCount) {
+      setResult(toSessionCounts(resultRef.current));

@@ -1,0 +1,9 @@
+export class RatioSimplifyGenerator implements ProblemGenerator {
+export class RatioValueGenerator implements ProblemGenerator {
+export class RatioEqualQuestionGenerator implements ProblemGenerator {
+export class RatioQuantityGenerator implements ProblemGenerator {
+export class ProportionalExpressionGenerator implements ProblemGenerator {
+export class ProportionalWordGenerator implements ProblemGenerator {
+export class InverseExpressionGenerator implements ProblemGenerator {
+export class InverseWordGenerator implements ProblemGenerator {
+export class PercentageGenerator implements ProblemGenerator {

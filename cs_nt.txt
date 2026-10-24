@@ -1,0 +1,11 @@
+export class DivisorsFindingGenerator implements ProblemGenerator {
+export class DivisorsCountGenerator implements ProblemGenerator {
+export class MultiplesFindingGenerator implements ProblemGenerator {
+export class PrimeJudgmentGenerator implements ProblemGenerator {
+export class PrimeRangeGenerator implements ProblemGenerator {
+export class CommonDivisorsGenerator implements ProblemGenerator {
+export class CommonMultiplesGenerator implements ProblemGenerator {
+export class GcdCalculationGenerator implements ProblemGenerator {
+export class LcmCalculationGenerator implements ProblemGenerator {
+export class GcdLcmWordGenerator implements ProblemGenerator {
+export class PeriodRepetitionGenerator implements ProblemGenerator {

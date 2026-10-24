@@ -1,0 +1,2538 @@
+SERVER UP http://127.0.0.1:5199
+PASS integer_addition lv1 Q1 question text :: 8に2をたすといくつになりますか
+PASS integer_addition lv1 Q1 input type :: integer
+PASS integer_addition lv1 Q1 expected answer :: 10
+PASS integer_addition lv1 Q1 correct feedback :: 🎉 せいかい！ 8＋2＝10 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv1 Q1 solution display :: steps=1
+PASS integer_addition lv1 Q1 solution answer value :: expected=10
+PASS integer_addition lv1 Q2 no leftover input :: empty
+PASS integer_addition lv1 Q2 question text :: 1に2をたすといくつになりますか
+PASS integer_addition lv1 Q2 input type :: integer
+PASS integer_addition lv1 Q2 expected answer :: 3
+PASS integer_addition lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 1＋2＝3 です。 答え3 途中式  ①1
+PASS integer_addition lv1 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS integer_addition lv1 Q2 solution display :: steps=1
+PASS integer_addition lv1 no page errors :: none
+PASS integer_addition lv1 no 404 :: none
+PASS integer_addition lv2 Q1 question text :: 4に3をたすといくつになりますか
+PASS integer_addition lv2 Q1 input type :: integer
+PASS integer_addition lv2 Q1 expected answer :: 7
+PASS integer_addition lv2 Q1 correct feedback :: 🎉 せいかい！ 4＋3＝7 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv2 Q1 solution display :: steps=1
+PASS integer_addition lv2 Q1 solution answer value :: expected=7
+PASS integer_addition lv2 Q2 no leftover input :: empty
+PASS integer_addition lv2 Q2 question text :: 2に9をたすといくつになりますか
+PASS integer_addition lv2 Q2 input type :: integer
+PASS integer_addition lv2 Q2 expected answer :: 11
+PASS integer_addition lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 11 です 2＋9＝11 です。 答え11 途中式 
+PASS integer_addition lv2 Q2 correct answer shown :: shown=正解は 11 です expected=11
+PASS integer_addition lv2 Q2 solution display :: steps=1
+PASS integer_addition lv2 no page errors :: none
+PASS integer_addition lv2 no 404 :: none
+PASS integer_addition lv3 Q1 question text :: 6に8をたすといくつになりますか
+PASS integer_addition lv3 Q1 input type :: integer
+PASS integer_addition lv3 Q1 expected answer :: 14
+PASS integer_addition lv3 Q1 correct feedback :: 🎉 せいかい！ 6＋8＝14 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv3 Q1 solution display :: steps=1
+PASS integer_addition lv3 Q1 solution answer value :: expected=14
+PASS integer_addition lv3 Q2 no leftover input :: empty
+PASS integer_addition lv3 Q2 question text :: 1に5をたすといくつになりますか
+PASS integer_addition lv3 Q2 input type :: integer
+PASS integer_addition lv3 Q2 expected answer :: 6
+PASS integer_addition lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 6 です 1＋5＝6 です。 答え6 途中式  ①1
+PASS integer_addition lv3 Q2 correct answer shown :: shown=正解は 6 です expected=6
+PASS integer_addition lv3 Q2 solution display :: steps=1
+PASS integer_addition lv3 no page errors :: none
+PASS integer_addition lv3 no 404 :: none
+PASS integer_addition lv4 Q1 question text :: 7に3をたすといくつになりますか
+PASS integer_addition lv4 Q1 input type :: integer
+PASS integer_addition lv4 Q1 expected answer :: 10
+PASS integer_addition lv4 Q1 correct feedback :: 🎉 せいかい！ 7＋3＝10 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv4 Q1 solution display :: steps=1
+PASS integer_addition lv4 Q1 solution answer value :: expected=10
+PASS integer_addition lv4 Q2 no leftover input :: empty
+PASS integer_addition lv4 Q2 question text :: 9に2をたすといくつになりますか
+PASS integer_addition lv4 Q2 input type :: integer
+PASS integer_addition lv4 Q2 expected answer :: 11
+PASS integer_addition lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 11 です 9＋2＝11 です。 答え11 途中式 
+PASS integer_addition lv4 Q2 correct answer shown :: shown=正解は 11 です expected=11
+PASS integer_addition lv4 Q2 solution display :: steps=1
+PASS integer_addition lv4 no page errors :: none
+PASS integer_addition lv4 no 404 :: none
+PASS integer_addition lv5 Q1 question text :: 7に2をたすといくつになりますか
+PASS integer_addition lv5 Q1 input type :: integer
+PASS integer_addition lv5 Q1 expected answer :: 9
+PASS integer_addition lv5 Q1 correct feedback :: 🎉 せいかい！ 7＋2＝9 です。 答えと解き方をみる つぎの問題へ
+PASS integer_addition lv5 Q1 solution display :: steps=1
+PASS integer_addition lv5 Q1 solution answer value :: expected=9
+PASS integer_addition lv5 Q2 no leftover input :: empty
+PASS integer_addition lv5 Q2 question text :: 9に2をたすといくつになりますか
+PASS integer_addition lv5 Q2 input type :: integer
+PASS integer_addition lv5 Q2 expected answer :: 11
+PASS integer_addition lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 11 です 9＋2＝11 です。 答え11 途中式 
+PASS integer_addition lv5 Q2 correct answer shown :: shown=正解は 11 です expected=11
+PASS integer_addition lv5 Q2 solution display :: steps=1
+PASS integer_addition lv5 no page errors :: none
+PASS integer_addition lv5 no 404 :: none
+PASS integer_subtraction lv1 Q1 question text :: 6から2をひくといくつになりますか
+PASS integer_subtraction lv1 Q1 input type :: integer
+PASS integer_subtraction lv1 Q1 expected answer :: 4
+PASS integer_subtraction lv1 Q1 correct feedback :: 🎉 せいかい！ 6−2＝4 です。 答えと解き方をみる つぎの問題へ
+PASS integer_subtraction lv1 Q1 solution display :: steps=1
+PASS integer_subtraction lv1 Q1 solution answer value :: expected=4
+PASS integer_subtraction lv1 Q2 no leftover input :: empty
+PASS integer_subtraction lv1 Q2 question text :: 9から4をひくといくつになりますか
+PASS integer_subtraction lv1 Q2 input type :: integer
+PASS integer_subtraction lv1 Q2 expected answer :: 5
+PASS integer_subtraction lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 5 です 9−4＝5 です。 答え5 途中式  ①9
+PASS integer_subtraction lv1 Q2 correct answer shown :: shown=正解は 5 です expected=5
+PASS integer_subtraction lv1 Q2 solution display :: steps=1
+PASS integer_subtraction lv1 no page errors :: none
+PASS integer_subtraction lv1 no 404 :: none
+PASS integer_subtraction lv2 Q1 question text :: 4から2をひくといくつになりますか
+PASS integer_subtraction lv2 Q1 input type :: integer
+PASS integer_subtraction lv2 Q1 expected answer :: 2
+PASS integer_subtraction lv2 Q1 correct feedback :: 🎉 せいかい！ 4−2＝2 です。 答えと解き方をみる つぎの問題へ
+PASS integer_subtraction lv2 Q1 solution display :: steps=1
+PASS integer_subtraction lv2 Q1 solution answer value :: expected=2
+PASS integer_subtraction lv2 Q2 no leftover input :: empty
+PASS integer_subtraction lv2 Q2 question text :: 7から4をひくといくつになりますか
+PASS integer_subtraction lv2 Q2 input type :: integer
+PASS integer_subtraction lv2 Q2 expected answer :: 3
+PASS integer_subtraction lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 7−4＝3 です。 答え3 途中式  ①7
+PASS integer_subtraction lv2 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS integer_subtraction lv2 Q2 solution display :: steps=1
+PASS integer_subtraction lv2 no page errors :: none
+PASS integer_subtraction lv2 no 404 :: none
+PASS integer_subtraction lv3 Q1 question text :: 6から4をひくといくつになりますか
+PASS integer_subtraction lv3 Q1 input type :: integer
+PASS integer_subtraction lv3 Q1 expected answer :: 2
+PASS integer_subtraction lv3 Q1 correct feedback :: 🎉 せいかい！ 6−4＝2 です。 答えと解き方をみる つぎの問題へ
+PASS integer_subtraction lv3 Q1 solution display :: steps=1
+PASS integer_subtraction lv3 Q1 solution answer value :: expected=2
+PASS integer_subtraction lv3 Q2 no leftover input :: empty
+PASS integer_subtraction lv3 Q2 question text :: 9から7をひくといくつになりますか
+PASS integer_subtraction lv3 Q2 input type :: integer
+PASS integer_subtraction lv3 Q2 expected answer :: 2
+PASS integer_subtraction lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 9−7＝2 です。 答え2 途中式  ①9
+PASS integer_subtraction lv3 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS integer_subtraction lv3 Q2 solution display :: steps=1
+PASS integer_subtraction lv3 no page errors :: none
+PASS integer_subtraction lv3 no 404 :: none
+PASS integer_subtraction lv4 Q1 question text :: 8から4をひくといくつになりますか
+PASS integer_subtraction lv4 Q1 input type :: integer
+PASS integer_subtraction lv4 Q1 expected answer :: 4
+PASS integer_subtraction lv4 Q1 correct feedback :: 🎉 せいかい！ 8−4＝4 です。 答えと解き方をみる つぎの問題へ
+PASS integer_subtraction lv4 Q1 solution display :: steps=1
+PASS integer_subtraction lv4 Q1 solution answer value :: expected=4
+PASS integer_subtraction lv4 Q2 no leftover input :: empty
+PASS integer_subtraction lv4 Q2 question text :: 4から3をひくといくつになりますか
+PASS integer_subtraction lv4 Q2 input type :: integer
+PASS integer_subtraction lv4 Q2 expected answer :: 1
+PASS integer_subtraction lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です 4−3＝1 です。 答え1 途中式  ①4
+PASS integer_subtraction lv4 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS integer_subtraction lv4 Q2 solution display :: steps=1
+PASS integer_subtraction lv4 no page errors :: none
+PASS integer_subtraction lv4 no 404 :: none
+PASS integer_subtraction lv5 Q1 question text :: 6から4をひくといくつになりますか
+PASS integer_subtraction lv5 Q1 input type :: integer
+PASS integer_subtraction lv5 Q1 expected answer :: 2
+PASS integer_subtraction lv5 Q1 correct feedback :: 🎉 せいかい！ 6−4＝2 です。 答えと解き方をみる つぎの問題へ
+PASS integer_subtraction lv5 Q1 solution display :: steps=1
+PASS integer_subtraction lv5 Q1 solution answer value :: expected=2
+PASS integer_subtraction lv5 Q2 no leftover input :: empty
+PASS integer_subtraction lv5 Q2 question text :: 5から1をひくといくつになりますか
+PASS integer_subtraction lv5 Q2 input type :: integer
+PASS integer_subtraction lv5 Q2 expected answer :: 4
+PASS integer_subtraction lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 4 です 5−1＝4 です。 答え4 途中式  ①5
+PASS integer_subtraction lv5 Q2 correct answer shown :: shown=正解は 4 です expected=4
+PASS integer_subtraction lv5 Q2 solution display :: steps=1
+PASS integer_subtraction lv5 no page errors :: none
+PASS integer_subtraction lv5 no 404 :: none
+PASS integer_multiplication lv1 Q1 question text :: 4に5をかけるといくつになりますか
+PASS integer_multiplication lv1 Q1 input type :: integer
+PASS integer_multiplication lv1 Q1 expected answer :: 20
+PASS integer_multiplication lv1 Q1 correct feedback :: 🎉 せいかい！ 4×5＝20 です。 答えと解き方をみる つぎの問題へ
+PASS integer_multiplication lv1 Q1 solution display :: steps=1
+PASS integer_multiplication lv1 Q1 solution answer value :: expected=20
+PASS integer_multiplication lv1 Q2 no leftover input :: empty
+PASS integer_multiplication lv1 Q2 question text :: 3に9をかけるといくつになりますか
+PASS integer_multiplication lv1 Q2 input type :: integer
+PASS integer_multiplication lv1 Q2 expected answer :: 27
+PASS integer_multiplication lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 27 です 3×9＝27 です。 答え27 途中式 
+PASS integer_multiplication lv1 Q2 correct answer shown :: shown=正解は 27 です expected=27
+PASS integer_multiplication lv1 Q2 solution display :: steps=1
+PASS integer_multiplication lv1 no page errors :: none
+PASS integer_multiplication lv1 no 404 :: none
+PASS integer_multiplication lv2 Q1 question text :: 2に4をかけるといくつになりますか
+PASS integer_multiplication lv2 Q1 input type :: integer
+PASS integer_multiplication lv2 Q1 expected answer :: 8
+PASS integer_multiplication lv2 Q1 correct feedback :: 🎉 せいかい！ 2×4＝8 です。 答えと解き方をみる つぎの問題へ
+PASS integer_multiplication lv2 Q1 solution display :: steps=1
+PASS integer_multiplication lv2 Q1 solution answer value :: expected=8
+PASS integer_multiplication lv2 Q2 no leftover input :: empty
+PASS integer_multiplication lv2 Q2 question text :: 8に8をかけるといくつになりますか
+PASS integer_multiplication lv2 Q2 input type :: integer
+PASS integer_multiplication lv2 Q2 expected answer :: 64
+PASS integer_multiplication lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 64 です 8×8＝64 です。 答え64 途中式 
+PASS integer_multiplication lv2 Q2 correct answer shown :: shown=正解は 64 です expected=64
+PASS integer_multiplication lv2 Q2 solution display :: steps=1
+PASS integer_multiplication lv2 no page errors :: none
+PASS integer_multiplication lv2 no 404 :: none
+PASS integer_multiplication lv3 Q1 question text :: 9に4をかけるといくつになりますか
+PASS integer_multiplication lv3 Q1 input type :: integer
+PASS integer_multiplication lv3 Q1 expected answer :: 36
+PASS integer_multiplication lv3 Q1 correct feedback :: 🎉 せいかい！ 9×4＝36 です。 答えと解き方をみる つぎの問題へ
+PASS integer_multiplication lv3 Q1 solution display :: steps=1
+PASS integer_multiplication lv3 Q1 solution answer value :: expected=36
+PASS integer_multiplication lv3 Q2 no leftover input :: empty
+PASS integer_multiplication lv3 Q2 question text :: 6に9をかけるといくつになりますか
+PASS integer_multiplication lv3 Q2 input type :: integer
+PASS integer_multiplication lv3 Q2 expected answer :: 54
+PASS integer_multiplication lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 54 です 6×9＝54 です。 答え54 途中式 
+PASS integer_multiplication lv3 Q2 correct answer shown :: shown=正解は 54 です expected=54
+PASS integer_multiplication lv3 Q2 solution display :: steps=1
+PASS integer_multiplication lv3 no page errors :: none
+PASS integer_multiplication lv3 no 404 :: none
+PASS integer_multiplication lv4 Q1 question text :: 8に5をかけるといくつになりますか
+PASS integer_multiplication lv4 Q1 input type :: integer
+PASS integer_multiplication lv4 Q1 expected answer :: 40
+PASS integer_multiplication lv4 Q1 correct feedback :: 🎉 せいかい！ 8×5＝40 です。 答えと解き方をみる つぎの問題へ
+PASS integer_multiplication lv4 Q1 solution display :: steps=1
+PASS integer_multiplication lv4 Q1 solution answer value :: expected=40
+PASS integer_multiplication lv4 Q2 no leftover input :: empty
+PASS integer_multiplication lv4 Q2 question text :: 9に3をかけるといくつになりますか
+PASS integer_multiplication lv4 Q2 input type :: integer
+PASS integer_multiplication lv4 Q2 expected answer :: 27
+PASS integer_multiplication lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 27 です 9×3＝27 です。 答え27 途中式 
+PASS integer_multiplication lv4 Q2 correct answer shown :: shown=正解は 27 です expected=27
+PASS integer_multiplication lv4 Q2 solution display :: steps=1
+PASS integer_multiplication lv4 no page errors :: none
+PASS integer_multiplication lv4 no 404 :: none
+PASS integer_multiplication lv5 Q1 question text :: 7に7をかけるといくつになりますか
+PASS integer_multiplication lv5 Q1 input type :: integer
+PASS integer_multiplication lv5 Q1 expected answer :: 49
+PASS integer_multiplication lv5 Q1 correct feedback :: 🎉 せいかい！ 7×7＝49 です。 答えと解き方をみる つぎの問題へ
+PASS integer_multiplication lv5 Q1 solution display :: steps=1
+PASS integer_multiplication lv5 Q1 solution answer value :: expected=49
+PASS integer_multiplication lv5 Q2 no leftover input :: empty
+PASS integer_multiplication lv5 Q2 question text :: 3に8をかけるといくつになりますか
+PASS integer_multiplication lv5 Q2 input type :: integer
+PASS integer_multiplication lv5 Q2 expected answer :: 24
+PASS integer_multiplication lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 24 です 3×8＝24 です。 答え24 途中式 
+PASS integer_multiplication lv5 Q2 correct answer shown :: shown=正解は 24 です expected=24
+PASS integer_multiplication lv5 Q2 solution display :: steps=1
+PASS integer_multiplication lv5 no page errors :: none
+PASS integer_multiplication lv5 no 404 :: none
+PASS integer_division lv1 Q1 question text :: 5を5でわると、商はいくつになりますか
+PASS integer_division lv1 Q1 input type :: integer
+PASS integer_division lv1 Q1 expected answer :: 1
+PASS integer_division lv1 Q1 correct feedback :: 🎉 せいかい！ 5÷5＝1 です。5×1＝5 なので確かめられます。 答えと解
+PASS integer_division lv1 Q1 solution display :: steps=2
+PASS integer_division lv1 Q1 solution answer value :: expected=1
+PASS integer_division lv1 Q2 no leftover input :: empty
+PASS integer_division lv1 Q2 question text :: 7を7でわると、商はいくつになりますか
+PASS integer_division lv1 Q2 input type :: integer
+PASS integer_division lv1 Q2 expected answer :: 1
+PASS integer_division lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です 7÷7＝1 です。7×1＝7 なので確かめ
+PASS integer_division lv1 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS integer_division lv1 Q2 solution display :: steps=2
+PASS integer_division lv1 no page errors :: none
+PASS integer_division lv1 no 404 :: none
+PASS integer_division lv2 Q1 question text :: 9を9でわると、商はいくつになりますか
+PASS integer_division lv2 Q1 input type :: integer
+PASS integer_division lv2 Q1 expected answer :: 1
+PASS integer_division lv2 Q1 correct feedback :: 🎉 せいかい！ 9÷9＝1 です。9×1＝9 なので確かめられます。 答えと解
+PASS integer_division lv2 Q1 solution display :: steps=2
+PASS integer_division lv2 Q1 solution answer value :: expected=1
+PASS integer_division lv2 Q2 no leftover input :: empty
+PASS integer_division lv2 Q2 question text :: 9を3でわると、商はいくつになりますか
+PASS integer_division lv2 Q2 input type :: integer
+PASS integer_division lv2 Q2 expected answer :: 3
+PASS integer_division lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 9÷3＝3 です。3×3＝9 なので確かめ
+PASS integer_division lv2 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS integer_division lv2 Q2 solution display :: steps=2
+PASS integer_division lv2 no page errors :: none
+PASS integer_division lv2 no 404 :: none
+PASS integer_division lv3 Q1 question text :: 9を3でわると、商はいくつになりますか
+PASS integer_division lv3 Q1 input type :: integer
+PASS integer_division lv3 Q1 expected answer :: 3
+PASS integer_division lv3 Q1 correct feedback :: 🎉 せいかい！ 9÷3＝3 です。3×3＝9 なので確かめられます。 答えと解
+PASS integer_division lv3 Q1 solution display :: steps=2
+PASS integer_division lv3 Q1 solution answer value :: expected=3
+PASS integer_division lv3 Q2 no leftover input :: empty
+PASS integer_division lv3 Q2 question text :: 5を5でわると、商はいくつになりますか
+PASS integer_division lv3 Q2 input type :: integer
+PASS integer_division lv3 Q2 expected answer :: 1
+PASS integer_division lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です 5÷5＝1 です。5×1＝5 なので確かめ
+PASS integer_division lv3 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS integer_division lv3 Q2 solution display :: steps=2
+PASS integer_division lv3 no page errors :: none
+PASS integer_division lv3 no 404 :: none
+PASS integer_division lv4 Q1 question text :: 9を9でわると、商はいくつになりますか
+PASS integer_division lv4 Q1 input type :: integer
+PASS integer_division lv4 Q1 expected answer :: 1
+PASS integer_division lv4 Q1 correct feedback :: 🎉 せいかい！ 9÷9＝1 です。9×1＝9 なので確かめられます。 答えと解
+PASS integer_division lv4 Q1 solution display :: steps=2
+PASS integer_division lv4 Q1 solution answer value :: expected=1
+PASS integer_division lv4 Q2 no leftover input :: empty
+PASS integer_division lv4 Q2 question text :: 5を5でわると、商はいくつになりますか
+PASS integer_division lv4 Q2 input type :: integer
+PASS integer_division lv4 Q2 expected answer :: 1
+PASS integer_division lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です 5÷5＝1 です。5×1＝5 なので確かめ
+PASS integer_division lv4 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS integer_division lv4 Q2 solution display :: steps=2
+PASS integer_division lv4 no page errors :: none
+PASS integer_division lv4 no 404 :: none
+PASS integer_division lv5 Q1 question text :: 6を2でわると、商はいくつになりますか
+PASS integer_division lv5 Q1 input type :: integer
+PASS integer_division lv5 Q1 expected answer :: 3
+PASS integer_division lv5 Q1 correct feedback :: 🎉 せいかい！ 6÷2＝3 です。2×3＝6 なので確かめられます。 答えと解
+PASS integer_division lv5 Q1 solution display :: steps=2
+PASS integer_division lv5 Q1 solution answer value :: expected=3
+PASS integer_division lv5 Q2 no leftover input :: empty
+PASS integer_division lv5 Q2 question text :: 5を5でわると、商はいくつになりますか
+PASS integer_division lv5 Q2 input type :: integer
+PASS integer_division lv5 Q2 expected answer :: 1
+PASS integer_division lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です 5÷5＝1 です。5×1＝5 なので確かめ
+PASS integer_division lv5 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS integer_division lv5 Q2 solution display :: steps=2
+PASS integer_division lv5 no page errors :: none
+PASS integer_division lv5 no 404 :: none
+PASS integer_multi_step lv1 Q1 question text :: 3 + 9 - 6 はいくつになりますか
+PASS integer_multi_step lv1 Q1 input type :: integer
+PASS integer_multi_step lv1 Q1 expected answer :: 6
+PASS integer_multi_step lv1 Q1 correct feedback :: 🎉 せいかい！ 3 + 9 - 6＝6 です。かけ算・わり算を先に計算します。
+PASS integer_multi_step lv1 Q1 solution display :: steps=2
+PASS integer_multi_step lv1 Q1 solution answer value :: expected=6
+PASS integer_multi_step lv1 Q2 no leftover input :: empty
+PASS integer_multi_step lv1 Q2 question text :: 5 - 5 + 2 はいくつになりますか
+PASS integer_multi_step lv1 Q2 input type :: integer
+PASS integer_multi_step lv1 Q2 expected answer :: 2
+PASS integer_multi_step lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 5 - 5 + 2＝2 です。かけ算・わり
+PASS integer_multi_step lv1 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS integer_multi_step lv1 Q2 solution display :: steps=2
+PASS integer_multi_step lv1 no page errors :: none
+PASS integer_multi_step lv1 no 404 :: none
+PASS integer_multi_step lv2 Q1 question text :: 9 + 7 - 5 はいくつになりますか
+PASS integer_multi_step lv2 Q1 input type :: integer
+PASS integer_multi_step lv2 Q1 expected answer :: 11
+PASS integer_multi_step lv2 Q1 correct feedback :: 🎉 せいかい！ 9 + 7 - 5＝11 です。かけ算・わり算を先に計算します
+PASS integer_multi_step lv2 Q1 solution display :: steps=2
+PASS integer_multi_step lv2 Q1 solution answer value :: expected=11
+PASS integer_multi_step lv2 Q2 no leftover input :: empty
+PASS integer_multi_step lv2 Q2 question text :: 6 + 5 - 4 はいくつになりますか
+PASS integer_multi_step lv2 Q2 input type :: integer
+PASS integer_multi_step lv2 Q2 expected answer :: 7
+PASS integer_multi_step lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 7 です 6 + 5 - 4＝7 です。かけ算・わり
+PASS integer_multi_step lv2 Q2 correct answer shown :: shown=正解は 7 です expected=7
+PASS integer_multi_step lv2 Q2 solution display :: steps=2
+PASS integer_multi_step lv2 no page errors :: none
+PASS integer_multi_step lv2 no 404 :: none
+PASS integer_multi_step lv3 Q1 question text :: 8 + 5 + 4 はいくつになりますか
+PASS integer_multi_step lv3 Q1 input type :: integer
+PASS integer_multi_step lv3 Q1 expected answer :: 17
+PASS integer_multi_step lv3 Q1 correct feedback :: 🎉 せいかい！ 8 + 5 + 4＝17 です。かけ算・わり算を先に計算します
+PASS integer_multi_step lv3 Q1 solution display :: steps=2
+PASS integer_multi_step lv3 Q1 solution answer value :: expected=17
+PASS integer_multi_step lv3 Q2 no leftover input :: empty
+PASS integer_multi_step lv3 Q2 question text :: 6 + 4 + 9 はいくつになりますか
+PASS integer_multi_step lv3 Q2 input type :: integer
+PASS integer_multi_step lv3 Q2 expected answer :: 19
+PASS integer_multi_step lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 19 です 6 + 4 + 9＝19 です。かけ算・
+PASS integer_multi_step lv3 Q2 correct answer shown :: shown=正解は 19 です expected=19
+PASS integer_multi_step lv3 Q2 solution display :: steps=2
+PASS integer_multi_step lv3 no page errors :: none
+PASS integer_multi_step lv3 no 404 :: none
+PASS integer_multi_step lv4 Q1 question text :: 6 - 6 + 4 はいくつになりますか
+PASS integer_multi_step lv4 Q1 input type :: integer
+PASS integer_multi_step lv4 Q1 expected answer :: 4
+PASS integer_multi_step lv4 Q1 correct feedback :: 🎉 せいかい！ 6 - 6 + 4＝4 です。かけ算・わり算を先に計算します。
+PASS integer_multi_step lv4 Q1 solution display :: steps=2
+PASS integer_multi_step lv4 Q1 solution answer value :: expected=4
+PASS integer_multi_step lv4 Q2 no leftover input :: empty
+PASS integer_multi_step lv4 Q2 question text :: 7 + 8 - 8 はいくつになりますか
+PASS integer_multi_step lv4 Q2 input type :: integer
+PASS integer_multi_step lv4 Q2 expected answer :: 7
+PASS integer_multi_step lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 7 です 7 + 8 - 8＝7 です。かけ算・わり
+PASS integer_multi_step lv4 Q2 correct answer shown :: shown=正解は 7 です expected=7
+PASS integer_multi_step lv4 Q2 solution display :: steps=2
+PASS integer_multi_step lv4 no page errors :: none
+PASS integer_multi_step lv4 no 404 :: none
+PASS integer_multi_step lv5 Q1 question text :: 8 + 7 - 9 はいくつになりますか
+PASS integer_multi_step lv5 Q1 input type :: integer
+PASS integer_multi_step lv5 Q1 expected answer :: 6
+PASS integer_multi_step lv5 Q1 correct feedback :: 🎉 せいかい！ 8 + 7 - 9＝6 です。かけ算・わり算を先に計算します。
+PASS integer_multi_step lv5 Q1 solution display :: steps=2
+PASS integer_multi_step lv5 Q1 solution answer value :: expected=6
+PASS integer_multi_step lv5 Q2 no leftover input :: empty
+PASS integer_multi_step lv5 Q2 question text :: 4 - 4 + 6 はいくつになりますか
+PASS integer_multi_step lv5 Q2 input type :: integer
+PASS integer_multi_step lv5 Q2 expected answer :: 6
+PASS integer_multi_step lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 6 です 4 - 4 + 6＝6 です。かけ算・わり
+PASS integer_multi_step lv5 Q2 correct answer shown :: shown=正解は 6 です expected=6
+PASS integer_multi_step lv5 Q2 solution display :: steps=2
+PASS integer_multi_step lv5 no page errors :: none
+PASS integer_multi_step lv5 no 404 :: none
+PASS integer_fill_blank lv2 Q1 question text :: 110÷□＝10 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv2 Q1 input type :: integer
+PASS integer_fill_blank lv2 Q1 expected answer :: 11
+PASS integer_fill_blank lv2 Q1 correct feedback :: 🎉 せいかい！ 110÷10＝11 です。 答えと解き方をみる つぎの問題へ
+PASS integer_fill_blank lv2 Q1 solution display :: steps=1
+PASS integer_fill_blank lv2 Q1 solution answer value :: expected=11
+PASS integer_fill_blank lv2 Q2 no leftover input :: empty
+PASS integer_fill_blank lv2 Q2 question text :: 1＋□＝10 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv2 Q2 input type :: integer
+PASS integer_fill_blank lv2 Q2 expected answer :: 9
+PASS integer_fill_blank lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 9 です 10−1＝9 です。 答え9 途中式  □
+PASS integer_fill_blank lv2 Q2 correct answer shown :: shown=正解は 9 です expected=9
+PASS integer_fill_blank lv2 Q2 solution display :: steps=1
+PASS integer_fill_blank lv2 no page errors :: none
+PASS integer_fill_blank lv2 no 404 :: none
+PASS integer_fill_blank lv3 Q1 question text :: 13＋□＝25 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv3 Q1 input type :: integer
+PASS integer_fill_blank lv3 Q1 expected answer :: 12
+PASS integer_fill_blank lv3 Q1 correct feedback :: 🎉 せいかい！ 25−13＝12 です。 答えと解き方をみる つぎの問題へ
+PASS integer_fill_blank lv3 Q1 solution display :: steps=1
+PASS integer_fill_blank lv3 Q1 solution answer value :: expected=12
+PASS integer_fill_blank lv3 Q2 no leftover input :: empty
+PASS integer_fill_blank lv3 Q2 question text :: 16−□＝4 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv3 Q2 input type :: integer
+PASS integer_fill_blank lv3 Q2 expected answer :: 12
+PASS integer_fill_blank lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 12 です 16−4＝12 です。 答え12 途中式
+PASS integer_fill_blank lv3 Q2 correct answer shown :: shown=正解は 12 です expected=12
+PASS integer_fill_blank lv3 Q2 solution display :: steps=1
+PASS integer_fill_blank lv3 no page errors :: none
+PASS integer_fill_blank lv3 no 404 :: none
+PASS integer_fill_blank lv4 Q1 question text :: 3×□＝39 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv4 Q1 input type :: integer
+PASS integer_fill_blank lv4 Q1 expected answer :: 13
+PASS integer_fill_blank lv4 Q1 correct feedback :: 🎉 せいかい！ 39÷3＝13 です。 答えと解き方をみる つぎの問題へ
+PASS integer_fill_blank lv4 Q1 solution display :: steps=1
+PASS integer_fill_blank lv4 Q1 solution answer value :: expected=13
+PASS integer_fill_blank lv4 Q2 no leftover input :: empty
+PASS integer_fill_blank lv4 Q2 question text :: 6−□＝5 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv4 Q2 input type :: integer
+PASS integer_fill_blank lv4 Q2 expected answer :: 1
+PASS integer_fill_blank lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です 6−5＝1 です。 答え1 途中式  □に
+PASS integer_fill_blank lv4 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS integer_fill_blank lv4 Q2 solution display :: steps=1
+PASS integer_fill_blank lv4 no page errors :: none
+PASS integer_fill_blank lv4 no 404 :: none
+PASS integer_fill_blank lv5 Q1 question text :: 12×□＝108 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv5 Q1 input type :: integer
+PASS integer_fill_blank lv5 Q1 expected answer :: 9
+PASS integer_fill_blank lv5 Q1 correct feedback :: 🎉 せいかい！ 108÷12＝9 です。 答えと解き方をみる つぎの問題へ
+PASS integer_fill_blank lv5 Q1 solution display :: steps=1
+PASS integer_fill_blank lv5 Q1 solution answer value :: expected=9
+PASS integer_fill_blank lv5 Q2 no leftover input :: empty
+PASS integer_fill_blank lv5 Q2 question text :: 39÷□＝13 の □ にあてはまる数はいくつですか
+PASS integer_fill_blank lv5 Q2 input type :: integer
+PASS integer_fill_blank lv5 Q2 expected answer :: 3
+PASS integer_fill_blank lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 39÷13＝3 です。 答え3 途中式  
+PASS integer_fill_blank lv5 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS integer_fill_blank lv5 Q2 solution display :: steps=1
+PASS integer_fill_blank lv5 no page errors :: none
+PASS integer_fill_blank lv5 no 404 :: none
+PASS estimate_product lv2 Q1 question text :: 47 × 28 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数
+PASS estimate_product lv2 Q1 input type :: integer
+PASS estimate_product lv2 Q1 expected answer :: 1500
+PASS estimate_product lv2 Q1 correct feedback :: 🎉 せいかい！ 求めるのは正確な積ではなく、およその大きさです。大きな数をその
+PASS estimate_product lv2 Q1 solution display :: steps=4
+PASS estimate_product lv2 Q1 solution answer value :: expected=1500
+PASS estimate_product lv2 Q2 no leftover input :: empty
+PASS estimate_product lv2 Q2 question text :: 47 × 41 の積は、およそいくつですか。47 はそのまま使い、41 だけを十
+PASS estimate_product lv2 Q2 input type :: integer
+PASS estimate_product lv2 Q2 expected answer :: 1880
+PASS estimate_product lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1880 です 求めるのは正確な積ではなく、およその
+PASS estimate_product lv2 Q2 correct answer shown :: shown=正解は 1880 です expected=1880
+PASS estimate_product lv2 Q2 solution display :: steps=4
+PASS estimate_product lv2 no page errors :: none
+PASS estimate_product lv2 no 404 :: none
+PASS estimate_product lv3 Q1 question text :: 20 × 48 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数
+PASS estimate_product lv3 Q1 input type :: integer
+PASS estimate_product lv3 Q1 expected answer :: 1000
+PASS estimate_product lv3 Q1 correct feedback :: 🎉 せいかい！ 求めるのは正確な積ではなく、およその大きさです。大きな数をその
+PASS estimate_product lv3 Q1 solution display :: steps=4
+PASS estimate_product lv3 Q1 solution answer value :: expected=1000
+PASS estimate_product lv3 Q2 no leftover input :: empty
+PASS estimate_product lv3 Q2 question text :: 28 × 34 の積は、およそいくつですか。28 はそのまま使い、34 だけを十
+PASS estimate_product lv3 Q2 input type :: integer
+PASS estimate_product lv3 Q2 expected answer :: 840
+PASS estimate_product lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 840 です 求めるのは正確な積ではなく、およその大
+PASS estimate_product lv3 Q2 correct answer shown :: shown=正解は 840 です expected=840
+PASS estimate_product lv3 Q2 solution display :: steps=4
+PASS estimate_product lv3 no page errors :: none
+PASS estimate_product lv3 no 404 :: none
+PASS estimate_product lv4 Q1 question text :: 39 × 24 の積は、およそいくつですか。39 はそのまま使い、24 だけを十
+PASS estimate_product lv4 Q1 input type :: integer
+PASS estimate_product lv4 Q1 expected answer :: 780
+PASS estimate_product lv4 Q1 correct feedback :: 🎉 せいかい！ 求めるのは正確な積ではなく、およその大きさです。大きい数を掛け
+PASS estimate_product lv4 Q1 solution display :: steps=4
+PASS estimate_product lv4 Q1 solution answer value :: expected=780
+PASS estimate_product lv4 Q2 no leftover input :: empty
+PASS estimate_product lv4 Q2 question text :: 20 × 22 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数
+PASS estimate_product lv4 Q2 input type :: integer
+PASS estimate_product lv4 Q2 expected answer :: 400
+PASS estimate_product lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 400 です 求めるのは正確な積ではなく、およその大
+PASS estimate_product lv4 Q2 correct answer shown :: shown=正解は 400 です expected=400
+PASS estimate_product lv4 Q2 solution display :: steps=4
+PASS estimate_product lv4 no page errors :: none
+PASS estimate_product lv4 no 404 :: none
+PASS estimate_product lv5 Q1 question text :: 47 × 44 の積は、およそいくつですか。47 はそのまま使い、44 だけを十
+PASS estimate_product lv5 Q1 input type :: integer
+PASS estimate_product lv5 Q1 expected answer :: 1880
+PASS estimate_product lv5 Q1 correct feedback :: 🎉 せいかい！ 求めるのは正確な積ではなく、およその大きさです。大きい数を掛け
+PASS estimate_product lv5 Q1 solution display :: steps=4
+PASS estimate_product lv5 Q1 solution answer value :: expected=1880
+PASS estimate_product lv5 Q2 no leftover input :: empty
+PASS estimate_product lv5 Q2 question text :: 39 × 36 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数
+PASS estimate_product lv5 Q2 input type :: integer
+PASS estimate_product lv5 Q2 expected answer :: 1600
+PASS estimate_product lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1600 です 求めるのは正確な積ではなく、およその
+PASS estimate_product lv5 Q2 correct answer shown :: shown=正解は 1600 です expected=1600
+PASS estimate_product lv5 Q2 solution display :: steps=4
+PASS estimate_product lv5 no page errors :: none
+PASS estimate_product lv5 no 404 :: none
+PASS integer_word_problem lv1 Q1 question text :: 本が8冊あります。あたらしく6冊かいました。本は全部で何冊になりますか。
+PASS integer_word_problem lv1 Q1 input type :: integer
+PASS integer_word_problem lv1 Q1 expected answer :: 14
+PASS integer_word_problem lv1 Q1 correct feedback :: 🎉 せいかい！ 8＋6＝14 です。 答えと解き方をみる つぎの問題へ
+PASS integer_word_problem lv1 Q1 solution display :: steps=1
+PASS integer_word_problem lv1 Q1 solution answer value :: expected=14
+PASS integer_word_problem lv1 Q2 no leftover input :: empty
+PASS integer_word_problem lv1 Q2 question text :: りんごが3個あります。そこに9個もってきました。りんごは全部で何個になりますか。
+PASS integer_word_problem lv1 Q2 input type :: integer
+PASS integer_word_problem lv1 Q2 expected answer :: 12
+PASS integer_word_problem lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 12 です 3＋9＝12 です。 答え12 途中式 
+PASS integer_word_problem lv1 Q2 correct answer shown :: shown=正解は 12 です expected=12
+PASS integer_word_problem lv1 Q2 solution display :: steps=1
+PASS integer_word_problem lv1 no page errors :: none
+PASS integer_word_problem lv1 no 404 :: none
+PASS integer_word_problem lv2 Q1 question text :: りんごが6個あります。そこに5個もってきました。りんごは全部で何個になりますか。
+PASS integer_word_problem lv2 Q1 input type :: integer
+PASS integer_word_problem lv2 Q1 expected answer :: 11
+PASS integer_word_problem lv2 Q1 correct feedback :: 🎉 せいかい！ 6＋5＝11 です。 答えと解き方をみる つぎの問題へ
+PASS integer_word_problem lv2 Q1 solution display :: steps=1
+PASS integer_word_problem lv2 Q1 solution answer value :: expected=11
+PASS integer_word_problem lv2 Q2 no leftover input :: empty
+PASS integer_word_problem lv2 Q2 question text :: りんごが8個あります。そこに5個もってきました。りんごは全部で何個になりますか。
+PASS integer_word_problem lv2 Q2 input type :: integer
+PASS integer_word_problem lv2 Q2 expected answer :: 13
+PASS integer_word_problem lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 13 です 8＋5＝13 です。 答え13 途中式 
+PASS integer_word_problem lv2 Q2 correct answer shown :: shown=正解は 13 です expected=13
+PASS integer_word_problem lv2 Q2 solution display :: steps=1
+PASS integer_word_problem lv2 no page errors :: none
+PASS integer_word_problem lv2 no 404 :: none
+PASS integer_word_problem lv3 Q1 question text :: 1ふくろに4このあめが入っています。3ふくろあります。あめは全部で何こありますか
+PASS integer_word_problem lv3 Q1 input type :: integer
+PASS integer_word_problem lv3 Q1 expected answer :: 12
+PASS integer_word_problem lv3 Q1 correct feedback :: 🎉 せいかい！ 4×3＝12 です。 答えと解き方をみる つぎの問題へ
+PASS integer_word_problem lv3 Q1 solution display :: steps=1
+PASS integer_word_problem lv3 Q1 solution answer value :: expected=12
+PASS integer_word_problem lv3 Q2 no leftover input :: empty
+PASS integer_word_problem lv3 Q2 question text :: 本が6冊あります。あたらしく2冊かいました。本は全部で何冊になりますか。
+PASS integer_word_problem lv3 Q2 input type :: integer
+PASS integer_word_problem lv3 Q2 expected answer :: 8
+PASS integer_word_problem lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 8 です 6＋2＝8 です。 答え8 途中式  もと
+PASS integer_word_problem lv3 Q2 correct answer shown :: shown=正解は 8 です expected=8
+PASS integer_word_problem lv3 Q2 solution display :: steps=1
+PASS integer_word_problem lv3 no page errors :: none
+PASS integer_word_problem lv3 no 404 :: none
+PASS integer_word_problem lv4 Q1 question text :: えんぴつが3本あります。2本つかいました。のこりは何本ですか。
+PASS integer_word_problem lv4 Q1 input type :: integer
+PASS integer_word_problem lv4 Q1 expected answer :: 1
+PASS integer_word_problem lv4 Q1 correct feedback :: 🎉 せいかい！ 3−2＝1 です。 答えと解き方をみる つぎの問題へ
+PASS integer_word_problem lv4 Q1 solution display :: steps=1
+PASS integer_word_problem lv4 Q1 solution answer value :: expected=1
+PASS integer_word_problem lv4 Q2 no leftover input :: empty
+PASS integer_word_problem lv4 Q2 question text :: クッキーが8個あります。2個たべました。のこりは何個ですか。
+PASS integer_word_problem lv4 Q2 input type :: integer
+PASS integer_word_problem lv4 Q2 expected answer :: 6
+PASS integer_word_problem lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 6 です 8−2＝6 です。 答え6 途中式  全体
+PASS integer_word_problem lv4 Q2 correct answer shown :: shown=正解は 6 です expected=6
+PASS integer_word_problem lv4 Q2 solution display :: steps=1
+PASS integer_word_problem lv4 no page errors :: none
+PASS integer_word_problem lv4 no 404 :: none
+PASS integer_word_problem lv5 Q1 question text :: 6このあめを3人で同じ数ずつ分けます。1人分は何こになりますか。
+PASS integer_word_problem lv5 Q1 input type :: integer
+PASS integer_word_problem lv5 Q1 expected answer :: 2
+PASS integer_word_problem lv5 Q1 correct feedback :: 🎉 せいかい！ 6÷3＝2 です。 答えと解き方をみる つぎの問題へ
+PASS integer_word_problem lv5 Q1 solution display :: steps=1
+PASS integer_word_problem lv5 Q1 solution answer value :: expected=2
+PASS integer_word_problem lv5 Q2 no leftover input :: empty
+PASS integer_word_problem lv5 Q2 question text :: 本が6冊あります。あたらしく6冊かいました。本は全部で何冊になりますか。
+PASS integer_word_problem lv5 Q2 input type :: integer
+PASS integer_word_problem lv5 Q2 expected answer :: 12
+PASS integer_word_problem lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 12 です 6＋6＝12 です。 答え12 途中式 
+PASS integer_word_problem lv5 Q2 correct answer shown :: shown=正解は 12 です expected=12
+PASS integer_word_problem lv5 Q2 solution display :: steps=1
+PASS integer_word_problem lv5 no page errors :: none
+PASS integer_word_problem lv5 no 404 :: none
+PASS divisors_finding lv2 Q1 question text :: 40の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+PASS divisors_finding lv2 Q1 input type :: list
+PASS divisors_finding lv2 Q1 expected answer :: 1, 2, 4, 5, 8, 10, 20, 40
+PASS divisors_finding lv2 Q1 correct feedback :: 🎉 せいかい！ 40の約数は、1, 2, 4, 5, 8, 10, 20, 4
+PASS divisors_finding lv2 Q1 solution display :: steps=2
+PASS divisors_finding lv2 Q1 solution answer value :: expected=1, 2, 4, 5, 8, 10, 20, 40
+PASS divisors_finding lv2 Q2 no leftover input :: empty
+PASS divisors_finding lv2 Q2 question text :: 54の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+PASS divisors_finding lv2 Q2 input type :: list
+PASS divisors_finding lv2 Q2 expected answer :: 1, 2, 3, 6, 9, 18, 27, 54
+PASS divisors_finding lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1, 2, 3, 6, 9, 18, 27, 54 
+PASS divisors_finding lv2 Q2 correct answer shown :: shown=正解は 1, 2, 3, 6, 9, 18, 27, 54 です expected=1, 2, 3, 6, 9, 18, 27, 54
+PASS divisors_finding lv2 Q2 solution display :: steps=2
+PASS divisors_finding lv2 no page errors :: none
+PASS divisors_finding lv2 no 404 :: none
+PASS divisors_finding lv3 Q1 question text :: 78の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+PASS divisors_finding lv3 Q1 input type :: list
+PASS divisors_finding lv3 Q1 expected answer :: 1, 2, 3, 6, 13, 26, 39, 78
+PASS divisors_finding lv3 Q1 correct feedback :: 🎉 せいかい！ 78の約数は、1, 2, 3, 6, 13, 26, 39, 
+PASS divisors_finding lv3 Q1 solution display :: steps=2
+PASS divisors_finding lv3 Q1 solution answer value :: expected=1, 2, 3, 6, 13, 26, 39, 78
+PASS divisors_finding lv3 Q2 no leftover input :: empty
+PASS divisors_finding lv3 Q2 question text :: 42の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+PASS divisors_finding lv3 Q2 input type :: list
+PASS divisors_finding lv3 Q2 expected answer :: 1, 2, 3, 6, 7, 14, 21, 42
+PASS divisors_finding lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1, 2, 3, 6, 7, 14, 21, 42 
+PASS divisors_finding lv3 Q2 correct answer shown :: shown=正解は 1, 2, 3, 6, 7, 14, 21, 42 です expected=1, 2, 3, 6, 7, 14, 21, 42
+PASS divisors_finding lv3 Q2 solution display :: steps=2
+PASS divisors_finding lv3 no page errors :: none
+PASS divisors_finding lv3 no 404 :: none
+PASS divisors_finding lv4 Q1 question text :: 54の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+PASS divisors_finding lv4 Q1 input type :: list
+PASS divisors_finding lv4 Q1 expected answer :: 1, 2, 3, 6, 9, 18, 27, 54
+PASS divisors_finding lv4 Q1 correct feedback :: 🎉 せいかい！ 54の約数は、1, 2, 3, 6, 9, 18, 27, 5
+PASS divisors_finding lv4 Q1 solution display :: steps=2
+PASS divisors_finding lv4 Q1 solution answer value :: expected=1, 2, 3, 6, 9, 18, 27, 54
+PASS divisors_finding lv4 Q2 no leftover input :: empty
+PASS divisors_finding lv4 Q2 question text :: 30の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+PASS divisors_finding lv4 Q2 input type :: list
+PASS divisors_finding lv4 Q2 expected answer :: 1, 2, 3, 5, 6, 10, 15, 30
+PASS divisors_finding lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1, 2, 3, 5, 6, 10, 15, 30 
+PASS divisors_finding lv4 Q2 correct answer shown :: shown=正解は 1, 2, 3, 5, 6, 10, 15, 30 です expected=1, 2, 3, 5, 6, 10, 15, 30
+PASS divisors_finding lv4 Q2 solution display :: steps=2
+PASS divisors_finding lv4 no page errors :: none
+PASS divisors_finding lv4 no 404 :: none
+PASS divisors_finding lv5 Q1 question text :: 70の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+PASS divisors_finding lv5 Q1 input type :: list
+PASS divisors_finding lv5 Q1 expected answer :: 1, 2, 5, 7, 10, 14, 35, 70
+PASS divisors_finding lv5 Q1 correct feedback :: 🎉 せいかい！ 70の約数は、1, 2, 5, 7, 10, 14, 35, 
+PASS divisors_finding lv5 Q1 solution display :: steps=2
+PASS divisors_finding lv5 Q1 solution answer value :: expected=1, 2, 5, 7, 10, 14, 35, 70
+PASS divisors_finding lv5 Q2 no leftover input :: empty
+PASS divisors_finding lv5 Q2 question text :: 42の約数をすべて答えなさい。(小さい順にカンマ区切りで)
+PASS divisors_finding lv5 Q2 input type :: list
+PASS divisors_finding lv5 Q2 expected answer :: 1, 2, 3, 6, 7, 14, 21, 42
+PASS divisors_finding lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1, 2, 3, 6, 7, 14, 21, 42 
+PASS divisors_finding lv5 Q2 correct answer shown :: shown=正解は 1, 2, 3, 6, 7, 14, 21, 42 です expected=1, 2, 3, 6, 7, 14, 21, 42
+PASS divisors_finding lv5 Q2 solution display :: steps=2
+PASS divisors_finding lv5 no page errors :: none
+PASS divisors_finding lv5 no 404 :: none
+PASS divisors_count lv2 Q1 question text :: 60の約数は何個ありますか
+PASS divisors_count lv2 Q1 input type :: integer
+PASS divisors_count lv2 Q1 expected answer :: 12
+PASS divisors_count lv2 Q1 correct feedback :: 🎉 せいかい！ 60の約数は、1, 2, 3, 4, 5, 6, 10, 12
+PASS divisors_count lv2 Q1 solution display :: steps=2
+PASS divisors_count lv2 Q1 solution answer value :: expected=12
+PASS divisors_count lv2 Q2 no leftover input :: empty
+PASS divisors_count lv2 Q2 question text :: 40の約数は何個ありますか
+PASS divisors_count lv2 Q2 input type :: integer
+PASS divisors_count lv2 Q2 expected answer :: 8
+PASS divisors_count lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 8 です 40の約数は、1, 2, 4, 5, 8,
+PASS divisors_count lv2 Q2 correct answer shown :: shown=正解は 8 です expected=8
+PASS divisors_count lv2 Q2 solution display :: steps=2
+PASS divisors_count lv2 no page errors :: none
+PASS divisors_count lv2 no 404 :: none
+PASS divisors_count lv3 Q1 question text :: 56の約数は何個ありますか
+PASS divisors_count lv3 Q1 input type :: integer
+PASS divisors_count lv3 Q1 expected answer :: 8
+PASS divisors_count lv3 Q1 correct feedback :: 🎉 せいかい！ 56の約数は、1, 2, 4, 7, 8, 14, 28, 5
+PASS divisors_count lv3 Q1 solution display :: steps=2
+PASS divisors_count lv3 Q1 solution answer value :: expected=8
+PASS divisors_count lv3 Q2 no leftover input :: empty
+PASS divisors_count lv3 Q2 question text :: 60の約数は何個ありますか
+PASS divisors_count lv3 Q2 input type :: integer
+PASS divisors_count lv3 Q2 expected answer :: 12
+PASS divisors_count lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 12 です 60の約数は、1, 2, 3, 4, 5
+PASS divisors_count lv3 Q2 correct answer shown :: shown=正解は 12 です expected=12
+PASS divisors_count lv3 Q2 solution display :: steps=2
+PASS divisors_count lv3 no page errors :: none
+PASS divisors_count lv3 no 404 :: none
+PASS divisors_count lv4 Q1 question text :: 40の約数は何個ありますか
+PASS divisors_count lv4 Q1 input type :: integer
+PASS divisors_count lv4 Q1 expected answer :: 8
+PASS divisors_count lv4 Q1 correct feedback :: 🎉 せいかい！ 40の約数は、1, 2, 4, 5, 8, 10, 20, 4
+PASS divisors_count lv4 Q1 solution display :: steps=2
+PASS divisors_count lv4 Q1 solution answer value :: expected=8
+PASS divisors_count lv4 Q2 no leftover input :: empty
+PASS divisors_count lv4 Q2 question text :: 48の約数は何個ありますか
+PASS divisors_count lv4 Q2 input type :: integer
+PASS divisors_count lv4 Q2 expected answer :: 10
+PASS divisors_count lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 10 です 48の約数は、1, 2, 3, 4, 6
+PASS divisors_count lv4 Q2 correct answer shown :: shown=正解は 10 です expected=10
+PASS divisors_count lv4 Q2 solution display :: steps=2
+PASS divisors_count lv4 no page errors :: none
+PASS divisors_count lv4 no 404 :: none
+PASS divisors_count lv5 Q1 question text :: 56の約数は何個ありますか
+PASS divisors_count lv5 Q1 input type :: integer
+PASS divisors_count lv5 Q1 expected answer :: 8
+PASS divisors_count lv5 Q1 correct feedback :: 🎉 せいかい！ 56の約数は、1, 2, 4, 7, 8, 14, 28, 5
+PASS divisors_count lv5 Q1 solution display :: steps=2
+PASS divisors_count lv5 Q1 solution answer value :: expected=8
+PASS divisors_count lv5 Q2 no leftover input :: empty
+PASS divisors_count lv5 Q2 question text :: 54の約数は何個ありますか
+PASS divisors_count lv5 Q2 input type :: integer
+PASS divisors_count lv5 Q2 expected answer :: 8
+PASS divisors_count lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 8 です 54の約数は、1, 2, 3, 6, 9,
+PASS divisors_count lv5 Q2 correct answer shown :: shown=正解は 8 です expected=8
+PASS divisors_count lv5 Q2 solution display :: steps=2
+PASS divisors_count lv5 no page errors :: none
+PASS divisors_count lv5 no 404 :: none
+PASS multiples_finding lv1 Q1 question text :: 3の倍数を小さい方から3こ答えなさい
+PASS multiples_finding lv1 Q1 input type :: list
+PASS multiples_finding lv1 Q1 expected answer :: 3, 6, 9
+PASS multiples_finding lv1 Q1 correct feedback :: 🎉 せいかい！ 3の倍数は、3×1、3×2、… なので、3, 6, 9 です。
+PASS multiples_finding lv1 Q1 solution display :: steps=5
+PASS multiples_finding lv1 Q1 solution answer value :: expected=3, 6, 9
+PASS multiples_finding lv1 Q2 no leftover input :: empty
+PASS multiples_finding lv1 Q2 question text :: 6の倍数を小さい方から3こ答えなさい
+PASS multiples_finding lv1 Q2 input type :: list
+PASS multiples_finding lv1 Q2 expected answer :: 6, 12, 18
+PASS multiples_finding lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 6, 12, 18 です 6の倍数は、6×1、6×2
+PASS multiples_finding lv1 Q2 correct answer shown :: shown=正解は 6, 12, 18 です expected=6, 12, 18
+PASS multiples_finding lv1 Q2 solution display :: steps=5
+PASS multiples_finding lv1 no page errors :: none
+PASS multiples_finding lv1 no 404 :: none
+PASS multiples_finding lv2 Q1 question text :: 26以下の6の倍数をすべて答えなさい
+PASS multiples_finding lv2 Q1 input type :: list
+PASS multiples_finding lv2 Q1 expected answer :: 6, 12, 18, 24
+PASS multiples_finding lv2 Q1 correct feedback :: 🎉 せいかい！ 26以下の6の倍数は、6, 12, 18, 24 です。 答え
+PASS multiples_finding lv2 Q1 solution display :: steps=3
+PASS multiples_finding lv2 Q1 solution answer value :: expected=6, 12, 18, 24
+PASS multiples_finding lv2 Q2 no leftover input :: empty
+PASS multiples_finding lv2 Q2 question text :: 25以下の3の倍数をすべて答えなさい
+PASS multiples_finding lv2 Q2 input type :: list
+PASS multiples_finding lv2 Q2 expected answer :: 3, 6, 9, 12, 15, 18, 21, 24
+PASS multiples_finding lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3, 6, 9, 12, 15, 18, 21, 2
+PASS multiples_finding lv2 Q2 correct answer shown :: shown=正解は 3, 6, 9, 12, 15, 18, 21, 24 です expected=3, 6, 9, 12, 15, 18, 21, 24
+PASS multiples_finding lv2 Q2 solution display :: steps=3
+PASS multiples_finding lv2 no page errors :: none
+PASS multiples_finding lv2 no 404 :: none
+PASS multiples_finding lv3 Q1 question text :: 2の倍数を小さい方から4こ答えなさい
+PASS multiples_finding lv3 Q1 input type :: list
+PASS multiples_finding lv3 Q1 expected answer :: 2, 4, 6, 8
+PASS multiples_finding lv3 Q1 correct feedback :: 🎉 せいかい！ 2の倍数は、2×1、2×2、… なので、2, 4, 6, 8 
+PASS multiples_finding lv3 Q1 solution display :: steps=6
+PASS multiples_finding lv3 Q1 solution answer value :: expected=2, 4, 6, 8
+PASS multiples_finding lv3 Q2 no leftover input :: empty
+PASS multiples_finding lv3 Q2 question text :: 5の倍数を小さい方から3こ答えなさい
+PASS multiples_finding lv3 Q2 input type :: list
+PASS multiples_finding lv3 Q2 expected answer :: 5, 10, 15
+PASS multiples_finding lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 5, 10, 15 です 5の倍数は、5×1、5×2
+PASS multiples_finding lv3 Q2 correct answer shown :: shown=正解は 5, 10, 15 です expected=5, 10, 15
+PASS multiples_finding lv3 Q2 solution display :: steps=5
+PASS multiples_finding lv3 no page errors :: none
+PASS multiples_finding lv3 no 404 :: none
+PASS multiples_finding lv4 Q1 question text :: 27以下の4の倍数をすべて答えなさい
+PASS multiples_finding lv4 Q1 input type :: list
+PASS multiples_finding lv4 Q1 expected answer :: 4, 8, 12, 16, 20, 24
+PASS multiples_finding lv4 Q1 correct feedback :: 🎉 せいかい！ 27以下の4の倍数は、4, 8, 12, 16, 20, 24
+PASS multiples_finding lv4 Q1 solution display :: steps=3
+PASS multiples_finding lv4 Q1 solution answer value :: expected=4, 8, 12, 16, 20, 24
+PASS multiples_finding lv4 Q2 no leftover input :: empty
+PASS multiples_finding lv4 Q2 question text :: 9の倍数を小さい方から4こ答えなさい
+PASS multiples_finding lv4 Q2 input type :: list
+PASS multiples_finding lv4 Q2 expected answer :: 9, 18, 27, 36
+PASS multiples_finding lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 9, 18, 27, 36 です 9の倍数は、9×1
+PASS multiples_finding lv4 Q2 correct answer shown :: shown=正解は 9, 18, 27, 36 です expected=9, 18, 27, 36
+PASS multiples_finding lv4 Q2 solution display :: steps=6
+PASS multiples_finding lv4 no page errors :: none
+PASS multiples_finding lv4 no 404 :: none
+PASS multiples_finding lv5 Q1 question text :: 2の倍数を小さい方から3こ答えなさい
+PASS multiples_finding lv5 Q1 input type :: list
+PASS multiples_finding lv5 Q1 expected answer :: 2, 4, 6
+PASS multiples_finding lv5 Q1 correct feedback :: 🎉 せいかい！ 2の倍数は、2×1、2×2、… なので、2, 4, 6 です。
+PASS multiples_finding lv5 Q1 solution display :: steps=5
+PASS multiples_finding lv5 Q1 solution answer value :: expected=2, 4, 6
+PASS multiples_finding lv5 Q2 no leftover input :: empty
+PASS multiples_finding lv5 Q2 question text :: 6の倍数を小さい方から4こ答えなさい
+PASS multiples_finding lv5 Q2 input type :: list
+PASS multiples_finding lv5 Q2 expected answer :: 6, 12, 18, 24
+PASS multiples_finding lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 6, 12, 18, 24 です 6の倍数は、6×1
+PASS multiples_finding lv5 Q2 correct answer shown :: shown=正解は 6, 12, 18, 24 です expected=6, 12, 18, 24
+PASS multiples_finding lv5 Q2 solution display :: steps=6
+PASS multiples_finding lv5 no page errors :: none
+PASS multiples_finding lv5 no 404 :: none
+PASS prime_judgment lv3 Q1 question text :: 24、37、49 の中で素数はどれですか
+PASS prime_judgment lv3 Q1 input type :: string
+PASS prime_judgment lv3 Q1 expected answer :: 37
+PASS prime_judgment lv3 Q1 correct feedback :: 🎉 せいかい！ 37は、約数が1と自分自身だけなので素数です。ほかの数は素数で
+PASS prime_judgment lv3 Q1 solution display :: steps=5
+PASS prime_judgment lv3 Q1 solution answer value :: expected=37
+PASS prime_judgment lv3 Q2 no leftover input :: empty
+PASS prime_judgment lv3 Q2 question text :: 74、83、55 の中で素数はどれですか
+PASS prime_judgment lv3 Q2 input type :: string
+PASS prime_judgment lv3 Q2 expected answer :: 83
+PASS prime_judgment lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 83 です 83は、約数が1と自分自身だけなので素数
+PASS prime_judgment lv3 Q2 correct answer shown :: shown=正解は 83 です expected=83
+PASS prime_judgment lv3 Q2 solution display :: steps=5
+PASS prime_judgment lv3 no page errors :: none
+PASS prime_judgment lv3 no 404 :: none
+PASS prime_judgment lv4 Q1 question text :: 23、58、92 の中で素数はどれですか
+PASS prime_judgment lv4 Q1 input type :: string
+PASS prime_judgment lv4 Q1 expected answer :: 23
+PASS prime_judgment lv4 Q1 correct feedback :: 🎉 せいかい！ 23は、約数が1と自分自身だけなので素数です。ほかの数は素数で
+PASS prime_judgment lv4 Q1 solution display :: steps=5
+PASS prime_judgment lv4 Q1 solution answer value :: expected=23
+PASS prime_judgment lv4 Q2 no leftover input :: empty
+PASS prime_judgment lv4 Q2 question text :: 9、5、60 の中で素数はどれですか
+PASS prime_judgment lv4 Q2 input type :: string
+PASS prime_judgment lv4 Q2 expected answer :: 5
+PASS prime_judgment lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 5 です 5は、約数が1と自分自身だけなので素数です
+PASS prime_judgment lv4 Q2 correct answer shown :: shown=正解は 5 です expected=5
+PASS prime_judgment lv4 Q2 solution display :: steps=5
+PASS prime_judgment lv4 no page errors :: none
+PASS prime_judgment lv4 no 404 :: none
+PASS prime_judgment lv5 Q1 question text :: 57、76、71 の中で素数はどれですか
+PASS prime_judgment lv5 Q1 input type :: string
+PASS prime_judgment lv5 Q1 expected answer :: 71
+PASS prime_judgment lv5 Q1 correct feedback :: 🎉 せいかい！ 71は、約数が1と自分自身だけなので素数です。ほかの数は素数で
+PASS prime_judgment lv5 Q1 solution display :: steps=5
+PASS prime_judgment lv5 Q1 solution answer value :: expected=71
+PASS prime_judgment lv5 Q2 no leftover input :: empty
+PASS prime_judgment lv5 Q2 question text :: 34、41、28 の中で素数はどれですか
+PASS prime_judgment lv5 Q2 input type :: string
+PASS prime_judgment lv5 Q2 expected answer :: 41
+PASS prime_judgment lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 41 です 41は、約数が1と自分自身だけなので素数
+PASS prime_judgment lv5 Q2 correct answer shown :: shown=正解は 41 です expected=41
+PASS prime_judgment lv5 Q2 solution display :: steps=5
+PASS prime_judgment lv5 no page errors :: none
+PASS prime_judgment lv5 no 404 :: none
+PASS prime_range lv1 Q1 question text :: 1から8までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+PASS prime_range lv1 Q1 input type :: list
+PASS prime_range lv1 Q1 expected answer :: 2, 3, 5, 7
+PASS prime_range lv1 Q1 correct feedback :: 🎉 せいかい！ 1から8までの素数は、2, 3, 5, 7 です。全部で4個あ
+PASS prime_range lv1 Q1 solution display :: steps=1
+PASS prime_range lv1 Q1 solution answer value :: expected=2, 3, 5, 7
+PASS prime_range lv1 Q2 no leftover input :: empty
+PASS prime_range lv1 Q2 question text :: 2から8までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+PASS prime_range lv1 Q2 input type :: list
+PASS prime_range lv1 Q2 expected answer :: 2, 3, 5, 7
+PASS prime_range lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2, 3, 5, 7 です 2から8までの素数は、2
+PASS prime_range lv1 Q2 correct answer shown :: shown=正解は 2, 3, 5, 7 です expected=2, 3, 5, 7
+PASS prime_range lv1 Q2 solution display :: steps=1
+PASS prime_range lv1 no page errors :: none
+PASS prime_range lv1 no 404 :: none
+PASS prime_range lv2 Q1 question text :: 1から9までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+PASS prime_range lv2 Q1 input type :: list
+PASS prime_range lv2 Q1 expected answer :: 2, 3, 5, 7
+PASS prime_range lv2 Q1 correct feedback :: 🎉 せいかい！ 1から9までの素数は、2, 3, 5, 7 です。全部で4個あ
+PASS prime_range lv2 Q1 solution display :: steps=1
+PASS prime_range lv2 Q1 solution answer value :: expected=2, 3, 5, 7
+PASS prime_range lv2 Q2 no leftover input :: empty
+PASS prime_range lv2 Q2 question text :: 1から6までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+PASS prime_range lv2 Q2 input type :: list
+PASS prime_range lv2 Q2 expected answer :: 2, 3, 5
+PASS prime_range lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2, 3, 5 です 1から6までの素数は、2, 3
+PASS prime_range lv2 Q2 correct answer shown :: shown=正解は 2, 3, 5 です expected=2, 3, 5
+PASS prime_range lv2 Q2 solution display :: steps=1
+PASS prime_range lv2 no page errors :: none
+PASS prime_range lv2 no 404 :: none
+PASS prime_range lv3 Q1 question text :: 2から9までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+PASS prime_range lv3 Q1 input type :: list
+PASS prime_range lv3 Q1 expected answer :: 2, 3, 5, 7
+PASS prime_range lv3 Q1 correct feedback :: 🎉 せいかい！ 2から9までの素数は、2, 3, 5, 7 です。全部で4個あ
+PASS prime_range lv3 Q1 solution display :: steps=1
+PASS prime_range lv3 Q1 solution answer value :: expected=2, 3, 5, 7
+PASS prime_range lv3 Q2 no leftover input :: empty
+PASS prime_range lv3 Q2 question text :: 2から7までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+PASS prime_range lv3 Q2 input type :: list
+PASS prime_range lv3 Q2 expected answer :: 2, 3, 5, 7
+PASS prime_range lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2, 3, 5, 7 です 2から7までの素数は、2
+PASS prime_range lv3 Q2 correct answer shown :: shown=正解は 2, 3, 5, 7 です expected=2, 3, 5, 7
+PASS prime_range lv3 Q2 solution display :: steps=1
+PASS prime_range lv3 no page errors :: none
+PASS prime_range lv3 no 404 :: none
+PASS prime_range lv4 Q1 question text :: 1から8までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+PASS prime_range lv4 Q1 input type :: list
+PASS prime_range lv4 Q1 expected answer :: 2, 3, 5, 7
+PASS prime_range lv4 Q1 correct feedback :: 🎉 せいかい！ 1から8までの素数は、2, 3, 5, 7 です。全部で4個あ
+PASS prime_range lv4 Q1 solution display :: steps=1
+PASS prime_range lv4 Q1 solution answer value :: expected=2, 3, 5, 7
+PASS prime_range lv4 Q2 no leftover input :: empty
+PASS prime_range lv4 Q2 question text :: 2から8までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+PASS prime_range lv4 Q2 input type :: list
+PASS prime_range lv4 Q2 expected answer :: 2, 3, 5, 7
+PASS prime_range lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2, 3, 5, 7 です 2から8までの素数は、2
+PASS prime_range lv4 Q2 correct answer shown :: shown=正解は 2, 3, 5, 7 です expected=2, 3, 5, 7
+PASS prime_range lv4 Q2 solution display :: steps=1
+PASS prime_range lv4 no page errors :: none
+PASS prime_range lv4 no 404 :: none
+PASS prime_range lv5 Q1 question text :: 1から9までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+PASS prime_range lv5 Q1 input type :: list
+PASS prime_range lv5 Q1 expected answer :: 2, 3, 5, 7
+PASS prime_range lv5 Q1 correct feedback :: 🎉 せいかい！ 1から9までの素数は、2, 3, 5, 7 です。全部で4個あ
+PASS prime_range lv5 Q1 solution display :: steps=1
+PASS prime_range lv5 Q1 solution answer value :: expected=2, 3, 5, 7
+PASS prime_range lv5 Q2 no leftover input :: empty
+PASS prime_range lv5 Q2 question text :: 1から6までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)
+PASS prime_range lv5 Q2 input type :: list
+PASS prime_range lv5 Q2 expected answer :: 2, 3, 5
+PASS prime_range lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2, 3, 5 です 1から6までの素数は、2, 3
+PASS prime_range lv5 Q2 correct answer shown :: shown=正解は 2, 3, 5 です expected=2, 3, 5
+PASS prime_range lv5 Q2 solution display :: steps=1
+PASS prime_range lv5 no page errors :: none
+PASS prime_range lv5 no 404 :: none
+PASS common_divisors lv2 Q1 question text :: 48と32の公約数をすべて答えなさい
+PASS common_divisors lv2 Q1 input type :: list
+PASS common_divisors lv2 Q1 expected answer :: 1, 2, 4, 8, 16
+PASS common_divisors lv2 Q1 correct feedback :: 🎉 せいかい！ 48と32の公約数は、1, 2, 4, 8, 16 です（5こ
+PASS common_divisors lv2 Q1 solution display :: steps=3
+PASS common_divisors lv2 Q1 solution answer value :: expected=1, 2, 4, 8, 16
+PASS common_divisors lv2 Q2 no leftover input :: empty
+PASS common_divisors lv2 Q2 question text :: 32と20の公約数をすべて答えなさい
+PASS common_divisors lv2 Q2 input type :: list
+PASS common_divisors lv2 Q2 expected answer :: 1, 2, 4
+PASS common_divisors lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1, 2, 4 です 32と20の公約数は、1, 2
+PASS common_divisors lv2 Q2 correct answer shown :: shown=正解は 1, 2, 4 です expected=1, 2, 4
+PASS common_divisors lv2 Q2 solution display :: steps=3
+PASS common_divisors lv2 no page errors :: none
+PASS common_divisors lv2 no 404 :: none
+PASS common_divisors lv3 Q1 question text :: 30と45の公約数をすべて答えなさい
+PASS common_divisors lv3 Q1 input type :: list
+PASS common_divisors lv3 Q1 expected answer :: 1, 3, 5, 15
+PASS common_divisors lv3 Q1 correct feedback :: 🎉 せいかい！ 30と45の公約数は、1, 3, 5, 15 です（4こ）。最
+PASS common_divisors lv3 Q1 solution display :: steps=3
+PASS common_divisors lv3 Q1 solution answer value :: expected=1, 3, 5, 15
+PASS common_divisors lv3 Q2 no leftover input :: empty
+PASS common_divisors lv3 Q2 question text :: 24と36の公約数をすべて答えなさい
+PASS common_divisors lv3 Q2 input type :: list
+PASS common_divisors lv3 Q2 expected answer :: 1, 2, 3, 4, 6, 12
+PASS common_divisors lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1, 2, 3, 4, 6, 12 です 24と36
+PASS common_divisors lv3 Q2 correct answer shown :: shown=正解は 1, 2, 3, 4, 6, 12 です expected=1, 2, 3, 4, 6, 12
+PASS common_divisors lv3 Q2 solution display :: steps=3
+PASS common_divisors lv3 no page errors :: none
+PASS common_divisors lv3 no 404 :: none
+PASS common_divisors lv4 Q1 question text :: 16と32の公約数をすべて答えなさい
+PASS common_divisors lv4 Q1 input type :: list
+PASS common_divisors lv4 Q1 expected answer :: 1, 2, 4, 8, 16
+PASS common_divisors lv4 Q1 correct feedback :: 🎉 せいかい！ 16と32の公約数は、1, 2, 4, 8, 16 です（5こ
+PASS common_divisors lv4 Q1 solution display :: steps=3
+PASS common_divisors lv4 Q1 solution answer value :: expected=1, 2, 4, 8, 16
+PASS common_divisors lv4 Q2 no leftover input :: empty
+PASS common_divisors lv4 Q2 question text :: 48と36の公約数をすべて答えなさい
+PASS common_divisors lv4 Q2 input type :: list
+PASS common_divisors lv4 Q2 expected answer :: 1, 2, 3, 4, 6, 12
+PASS common_divisors lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1, 2, 3, 4, 6, 12 です 48と36
+PASS common_divisors lv4 Q2 correct answer shown :: shown=正解は 1, 2, 3, 4, 6, 12 です expected=1, 2, 3, 4, 6, 12
+PASS common_divisors lv4 Q2 solution display :: steps=3
+PASS common_divisors lv4 no page errors :: none
+PASS common_divisors lv4 no 404 :: none
+PASS common_divisors lv5 Q1 question text :: 32と20の公約数をすべて答えなさい
+PASS common_divisors lv5 Q1 input type :: list
+PASS common_divisors lv5 Q1 expected answer :: 1, 2, 4
+PASS common_divisors lv5 Q1 correct feedback :: 🎉 せいかい！ 32と20の公約数は、1, 2, 4 です（3こ）。最大公約数
+PASS common_divisors lv5 Q1 solution display :: steps=3
+PASS common_divisors lv5 Q1 solution answer value :: expected=1, 2, 4
+PASS common_divisors lv5 Q2 no leftover input :: empty
+PASS common_divisors lv5 Q2 question text :: 24と36の公約数をすべて答えなさい
+PASS common_divisors lv5 Q2 input type :: list
+PASS common_divisors lv5 Q2 expected answer :: 1, 2, 3, 4, 6, 12
+PASS common_divisors lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1, 2, 3, 4, 6, 12 です 24と36
+PASS common_divisors lv5 Q2 correct answer shown :: shown=正解は 1, 2, 3, 4, 6, 12 です expected=1, 2, 3, 4, 6, 12
+PASS common_divisors lv5 Q2 solution display :: steps=3
+PASS common_divisors lv5 no page errors :: none
+PASS common_divisors lv5 no 404 :: none
+PASS common_multiples lv2 Q1 question text :: 6と10の公倍数を小さい方から4つ答えなさい
+PASS common_multiples lv2 Q1 input type :: list
+PASS common_multiples lv2 Q1 expected answer :: 30, 60, 90, 120
+PASS common_multiples lv2 Q1 correct feedback :: 🎉 せいかい！ 6と10の最小公倍数は 30 なので、公倍数は 30 の整数倍
+PASS common_multiples lv2 Q1 solution display :: steps=2
+PASS common_multiples lv2 Q1 solution answer value :: expected=30, 60, 90, 120
+PASS common_multiples lv2 Q2 no leftover input :: empty
+PASS common_multiples lv2 Q2 question text :: 4と6の公倍数を小さい方から3つ答えなさい
+PASS common_multiples lv2 Q2 input type :: list
+PASS common_multiples lv2 Q2 expected answer :: 12, 24, 36
+PASS common_multiples lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 12, 24, 36 です 4と6の最小公倍数は 1
+PASS common_multiples lv2 Q2 correct answer shown :: shown=正解は 12, 24, 36 です expected=12, 24, 36
+PASS common_multiples lv2 Q2 solution display :: steps=2
+PASS common_multiples lv2 no page errors :: none
+PASS common_multiples lv2 no 404 :: none
+PASS common_multiples lv3 Q1 question text :: 92以下の3と8の公倍数をすべて答えなさい
+PASS common_multiples lv3 Q1 input type :: list
+PASS common_multiples lv3 Q1 expected answer :: 24, 48, 72
+PASS common_multiples lv3 Q1 correct feedback :: 🎉 せいかい！ 3と8の最小公倍数は 24 です。24 の整数倍のうち 92 
+PASS common_multiples lv3 Q1 solution display :: steps=2
+PASS common_multiples lv3 Q1 solution answer value :: expected=24, 48, 72
+PASS common_multiples lv3 Q2 no leftover input :: empty
+PASS common_multiples lv3 Q2 question text :: 5と6の公倍数を小さい方から4つ答えなさい
+PASS common_multiples lv3 Q2 input type :: list
+PASS common_multiples lv3 Q2 expected answer :: 30, 60, 90, 120
+PASS common_multiples lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 30, 60, 90, 120 です 5と6の最小公
+PASS common_multiples lv3 Q2 correct answer shown :: shown=正解は 30, 60, 90, 120 です expected=30, 60, 90, 120
+PASS common_multiples lv3 Q2 solution display :: steps=2
+PASS common_multiples lv3 no page errors :: none
+PASS common_multiples lv3 no 404 :: none
+PASS common_multiples lv4 Q1 question text :: 32以下の3と5の公倍数をすべて答えなさい
+PASS common_multiples lv4 Q1 input type :: list
+PASS common_multiples lv4 Q1 expected answer :: 15, 30
+PASS common_multiples lv4 Q1 correct feedback :: 🎉 せいかい！ 3と5の最小公倍数は 15 です。15 の整数倍のうち 32 
+PASS common_multiples lv4 Q1 solution display :: steps=2
+PASS common_multiples lv4 Q1 solution answer value :: expected=15, 30
+PASS common_multiples lv4 Q2 no leftover input :: empty
+PASS common_multiples lv4 Q2 question text :: 31以下の3と5の公倍数をすべて答えなさい
+PASS common_multiples lv4 Q2 input type :: list
+PASS common_multiples lv4 Q2 expected answer :: 15, 30
+PASS common_multiples lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 15, 30 です 3と5の最小公倍数は 15 です
+PASS common_multiples lv4 Q2 correct answer shown :: shown=正解は 15, 30 です expected=15, 30
+PASS common_multiples lv4 Q2 solution display :: steps=2
+PASS common_multiples lv4 no page errors :: none
+PASS common_multiples lv4 no 404 :: none
+PASS common_multiples lv5 Q1 question text :: 4と9の公倍数を小さい方から5つ答えなさい
+PASS common_multiples lv5 Q1 input type :: list
+PASS common_multiples lv5 Q1 expected answer :: 36, 72, 108, 144, 180
+PASS common_multiples lv5 Q1 correct feedback :: 🎉 せいかい！ 4と9の最小公倍数は 36 なので、公倍数は 36 の整数倍で
+PASS common_multiples lv5 Q1 solution display :: steps=2
+PASS common_multiples lv5 Q1 solution answer value :: expected=36, 72, 108, 144, 180
+PASS common_multiples lv5 Q2 no leftover input :: empty
+PASS common_multiples lv5 Q2 question text :: 78以下の3と8の公倍数をすべて答えなさい
+PASS common_multiples lv5 Q2 input type :: list
+PASS common_multiples lv5 Q2 expected answer :: 24, 48, 72
+PASS common_multiples lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 24, 48, 72 です 3と8の最小公倍数は 2
+PASS common_multiples lv5 Q2 correct answer shown :: shown=正解は 24, 48, 72 です expected=24, 48, 72
+PASS common_multiples lv5 Q2 solution display :: steps=2
+PASS common_multiples lv5 no page errors :: none
+PASS common_multiples lv5 no 404 :: none
+PASS gcd_calculation lv2 Q1 question text :: 21と28の最大公約数を求めなさい
+PASS gcd_calculation lv2 Q1 input type :: integer
+PASS gcd_calculation lv2 Q1 expected answer :: 7
+PASS gcd_calculation lv2 Q1 correct feedback :: 🎉 せいかい！ 21と28の最大公約数は 7 です。 答えと解き方をみる つぎ
+PASS gcd_calculation lv2 Q1 solution display :: steps=4
+PASS gcd_calculation lv2 Q1 solution answer value :: expected=7
+PASS gcd_calculation lv2 Q2 no leftover input :: empty
+PASS gcd_calculation lv2 Q2 question text :: 40と60の最大公約数を求めなさい
+PASS gcd_calculation lv2 Q2 input type :: integer
+PASS gcd_calculation lv2 Q2 expected answer :: 20
+PASS gcd_calculation lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 20 です 40と60の最大公約数は 20 です。 
+PASS gcd_calculation lv2 Q2 correct answer shown :: shown=正解は 20 です expected=20
+PASS gcd_calculation lv2 Q2 solution display :: steps=4
+PASS gcd_calculation lv2 no page errors :: none
+PASS gcd_calculation lv2 no 404 :: none
+PASS gcd_calculation lv3 Q1 question text :: 15と25の最大公約数を求めなさい
+PASS gcd_calculation lv3 Q1 input type :: integer
+PASS gcd_calculation lv3 Q1 expected answer :: 5
+PASS gcd_calculation lv3 Q1 correct feedback :: 🎉 せいかい！ 15と25の最大公約数は 5 です。 答えと解き方をみる つぎ
+PASS gcd_calculation lv3 Q1 solution display :: steps=4
+PASS gcd_calculation lv3 Q1 solution answer value :: expected=5
+PASS gcd_calculation lv3 Q2 no leftover input :: empty
+PASS gcd_calculation lv3 Q2 question text :: 28と42の最大公約数を求めなさい
+PASS gcd_calculation lv3 Q2 input type :: integer
+PASS gcd_calculation lv3 Q2 expected answer :: 14
+PASS gcd_calculation lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 14 です 28と42の最大公約数は 14 です。 
+PASS gcd_calculation lv3 Q2 correct answer shown :: shown=正解は 14 です expected=14
+PASS gcd_calculation lv3 Q2 solution display :: steps=4
+PASS gcd_calculation lv3 no page errors :: none
+PASS gcd_calculation lv3 no 404 :: none
+PASS gcd_calculation lv4 Q1 question text :: 28と42の最大公約数を求めなさい
+PASS gcd_calculation lv4 Q1 input type :: integer
+PASS gcd_calculation lv4 Q1 expected answer :: 14
+PASS gcd_calculation lv4 Q1 correct feedback :: 🎉 せいかい！ 28と42の最大公約数は 14 です。 答えと解き方をみる つ
+PASS gcd_calculation lv4 Q1 solution display :: steps=4
+PASS gcd_calculation lv4 Q1 solution answer value :: expected=14
+PASS gcd_calculation lv4 Q2 no leftover input :: empty
+PASS gcd_calculation lv4 Q2 question text :: 40と60の最大公約数を求めなさい
+PASS gcd_calculation lv4 Q2 input type :: integer
+PASS gcd_calculation lv4 Q2 expected answer :: 20
+PASS gcd_calculation lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 20 です 40と60の最大公約数は 20 です。 
+PASS gcd_calculation lv4 Q2 correct answer shown :: shown=正解は 20 です expected=20
+PASS gcd_calculation lv4 Q2 solution display :: steps=4
+PASS gcd_calculation lv4 no page errors :: none
+PASS gcd_calculation lv4 no 404 :: none
+PASS gcd_calculation lv5 Q1 question text :: 40と60の最大公約数を求めなさい
+PASS gcd_calculation lv5 Q1 input type :: integer
+PASS gcd_calculation lv5 Q1 expected answer :: 20
+PASS gcd_calculation lv5 Q1 correct feedback :: 🎉 せいかい！ 40と60の最大公約数は 20 です。 答えと解き方をみる つ
+PASS gcd_calculation lv5 Q1 solution display :: steps=4
+PASS gcd_calculation lv5 Q1 solution answer value :: expected=20
+PASS gcd_calculation lv5 Q2 no leftover input :: empty
+PASS gcd_calculation lv5 Q2 question text :: 42と63の最大公約数を求めなさい
+PASS gcd_calculation lv5 Q2 input type :: integer
+PASS gcd_calculation lv5 Q2 expected answer :: 21
+PASS gcd_calculation lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 21 です 42と63の最大公約数は 21 です。 
+PASS gcd_calculation lv5 Q2 correct answer shown :: shown=正解は 21 です expected=21
+PASS gcd_calculation lv5 Q2 solution display :: steps=4
+PASS gcd_calculation lv5 no page errors :: none
+PASS gcd_calculation lv5 no 404 :: none
+PASS lcm_calculation lv2 Q1 question text :: 9と12の最小公倍数を求めなさい
+PASS lcm_calculation lv2 Q1 input type :: integer
+PASS lcm_calculation lv2 Q1 expected answer :: 36
+PASS lcm_calculation lv2 Q1 correct feedback :: 🎉 せいかい！ 9と12の最小公倍数は 36 です。 答えと解き方をみる つぎ
+PASS lcm_calculation lv2 Q1 solution display :: steps=3
+PASS lcm_calculation lv2 Q1 solution answer value :: expected=36
+PASS lcm_calculation lv2 Q2 no leftover input :: empty
+PASS lcm_calculation lv2 Q2 question text :: 4と6の最小公倍数を求めなさい
+PASS lcm_calculation lv2 Q2 input type :: integer
+PASS lcm_calculation lv2 Q2 expected answer :: 12
+PASS lcm_calculation lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 12 です 4と6の最小公倍数は 12 です。 答え
+PASS lcm_calculation lv2 Q2 correct answer shown :: shown=正解は 12 です expected=12
+PASS lcm_calculation lv2 Q2 solution display :: steps=3
+PASS lcm_calculation lv2 no page errors :: none
+PASS lcm_calculation lv2 no 404 :: none
+PASS lcm_calculation lv3 Q1 question text :: 3と4の最小公倍数を求めなさい
+PASS lcm_calculation lv3 Q1 input type :: integer
+PASS lcm_calculation lv3 Q1 expected answer :: 12
+PASS lcm_calculation lv3 Q1 correct feedback :: 🎉 せいかい！ 3と4の最小公倍数は 12 です。 答えと解き方をみる つぎの
+PASS lcm_calculation lv3 Q1 solution display :: steps=3
+PASS lcm_calculation lv3 Q1 solution answer value :: expected=12
+PASS lcm_calculation lv3 Q2 no leftover input :: empty
+PASS lcm_calculation lv3 Q2 question text :: 6と9の最小公倍数を求めなさい
+PASS lcm_calculation lv3 Q2 input type :: integer
+PASS lcm_calculation lv3 Q2 expected answer :: 18
+PASS lcm_calculation lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 18 です 6と9の最小公倍数は 18 です。 答え
+PASS lcm_calculation lv3 Q2 correct answer shown :: shown=正解は 18 です expected=18
+PASS lcm_calculation lv3 Q2 solution display :: steps=3
+PASS lcm_calculation lv3 no page errors :: none
+PASS lcm_calculation lv3 no 404 :: none
+PASS lcm_calculation lv4 Q1 question text :: 5と6の最小公倍数を求めなさい
+PASS lcm_calculation lv4 Q1 input type :: integer
+PASS lcm_calculation lv4 Q1 expected answer :: 30
+PASS lcm_calculation lv4 Q1 correct feedback :: 🎉 せいかい！ 5と6の最小公倍数は 30 です。 答えと解き方をみる つぎの
+PASS lcm_calculation lv4 Q1 solution display :: steps=3
+PASS lcm_calculation lv4 Q1 solution answer value :: expected=30
+PASS lcm_calculation lv4 Q2 no leftover input :: empty
+PASS lcm_calculation lv4 Q2 question text :: 8と12の最小公倍数を求めなさい
+PASS lcm_calculation lv4 Q2 input type :: integer
+PASS lcm_calculation lv4 Q2 expected answer :: 24
+PASS lcm_calculation lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 24 です 8と12の最小公倍数は 24 です。 答
+PASS lcm_calculation lv4 Q2 correct answer shown :: shown=正解は 24 です expected=24
+PASS lcm_calculation lv4 Q2 solution display :: steps=3
+PASS lcm_calculation lv4 no page errors :: none
+PASS lcm_calculation lv4 no 404 :: none
+PASS lcm_calculation lv5 Q1 question text :: 6と9の最小公倍数を求めなさい
+PASS lcm_calculation lv5 Q1 input type :: integer
+PASS lcm_calculation lv5 Q1 expected answer :: 18
+PASS lcm_calculation lv5 Q1 correct feedback :: 🎉 せいかい！ 6と9の最小公倍数は 18 です。 答えと解き方をみる つぎの
+PASS lcm_calculation lv5 Q1 solution display :: steps=3
+PASS lcm_calculation lv5 Q1 solution answer value :: expected=18
+PASS lcm_calculation lv5 Q2 no leftover input :: empty
+PASS lcm_calculation lv5 Q2 question text :: 6と10の最小公倍数を求めなさい
+PASS lcm_calculation lv5 Q2 input type :: integer
+PASS lcm_calculation lv5 Q2 expected answer :: 30
+PASS lcm_calculation lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 30 です 6と10の最小公倍数は 30 です。 答
+PASS lcm_calculation lv5 Q2 correct answer shown :: shown=正解は 30 です expected=30
+PASS lcm_calculation lv5 Q2 solution display :: steps=3
+PASS lcm_calculation lv5 no page errors :: none
+PASS lcm_calculation lv5 no 404 :: none
+PASS gcd_lcm_word lv3 Q1 question text :: ある電車Aは3分ごと、電車Bは4分ごとに発車します。最初に同時に発車したあと、次
+PASS gcd_lcm_word lv3 Q1 input type :: integer
+PASS gcd_lcm_word lv3 Q1 expected answer :: 12
+PASS gcd_lcm_word lv3 Q1 correct feedback :: 🎉 せいかい！ 3と4の最小公倍数を求めます。3と4の最小公倍数は 12 です
+PASS gcd_lcm_word lv3 Q1 solution display :: steps=3
+PASS gcd_lcm_word lv3 Q1 solution answer value :: expected=12
+PASS gcd_lcm_word lv3 Q2 no leftover input :: empty
+PASS gcd_lcm_word lv3 Q2 question text :: 16cmのリボンと24cmのリボンを、同じ長さに切って、あまりがないようにします
+PASS gcd_lcm_word lv3 Q2 input type :: integer
+PASS gcd_lcm_word lv3 Q2 expected answer :: 8
+PASS gcd_lcm_word lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 8 です 16と24の最大公約数を求めます。16と2
+PASS gcd_lcm_word lv3 Q2 correct answer shown :: shown=正解は 8 です expected=8
+PASS gcd_lcm_word lv3 Q2 solution display :: steps=4
+PASS gcd_lcm_word lv3 no page errors :: none
+PASS gcd_lcm_word lv3 no 404 :: none
+PASS gcd_lcm_word lv4 Q1 question text :: 32cmのリボンと48cmのリボンを、同じ長さに切って、あまりがないようにします
+PASS gcd_lcm_word lv4 Q1 input type :: integer
+PASS gcd_lcm_word lv4 Q1 expected answer :: 16
+PASS gcd_lcm_word lv4 Q1 correct feedback :: 🎉 せいかい！ 32と48の最大公約数を求めます。32と48の最大公約数は 1
+PASS gcd_lcm_word lv4 Q1 solution display :: steps=4
+PASS gcd_lcm_word lv4 Q1 solution answer value :: expected=16
+PASS gcd_lcm_word lv4 Q2 no leftover input :: empty
+PASS gcd_lcm_word lv4 Q2 question text :: 12このアメと18このガムを、何人かの子どもに同じ数ずつ分けます。あまりなく分け
+PASS gcd_lcm_word lv4 Q2 input type :: integer
+PASS gcd_lcm_word lv4 Q2 expected answer :: 6
+PASS gcd_lcm_word lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 6 です 12と18の最大公約数を求めます。12と1
+PASS gcd_lcm_word lv4 Q2 correct answer shown :: shown=正解は 6 です expected=6
+PASS gcd_lcm_word lv4 Q2 solution display :: steps=4
+PASS gcd_lcm_word lv4 no page errors :: none
+PASS gcd_lcm_word lv4 no 404 :: none
+PASS gcd_lcm_word lv5 Q1 question text :: 24このアメと36このガムを、何人かの子どもに同じ数ずつ分けます。あまりなく分け
+PASS gcd_lcm_word lv5 Q1 input type :: integer
+PASS gcd_lcm_word lv5 Q1 expected answer :: 12
+PASS gcd_lcm_word lv5 Q1 correct feedback :: 🎉 せいかい！ 24と36の最大公約数を求めます。24と36の最大公約数は 1
+PASS gcd_lcm_word lv5 Q1 solution display :: steps=4
+PASS gcd_lcm_word lv5 Q1 solution answer value :: expected=12
+PASS gcd_lcm_word lv5 Q2 no leftover input :: empty
+PASS gcd_lcm_word lv5 Q2 question text :: 4cmのテープと6cmのテープを、それぞれ同じ長さに折っていきます。折り目が初め
+PASS gcd_lcm_word lv5 Q2 input type :: integer
+PASS gcd_lcm_word lv5 Q2 expected answer :: 12
+PASS gcd_lcm_word lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 12 です 4と6の最小公倍数を求めます。4と6の最
+PASS gcd_lcm_word lv5 Q2 correct answer shown :: shown=正解は 12 です expected=12
+PASS gcd_lcm_word lv5 Q2 solution display :: steps=3
+PASS gcd_lcm_word lv5 no page errors :: none
+PASS gcd_lcm_word lv5 no 404 :: none
+PASS period_repetition lv3 Q1 question text :: 赤、白、青の旗を「赤、白、青」の順にくり返しならべます。30番目は何色ですか
+PASS period_repetition lv3 Q1 input type :: choice
+PASS period_repetition lv3 Q1 expected answer :: 青
+PASS period_repetition lv3 Q1 correct feedback :: 🎉 せいかい！ 周期は3です。30÷3＝10 あまり 0 なので、3番目と同じ
+PASS period_repetition lv3 Q1 solution display :: steps=3
+PASS period_repetition lv3 Q1 solution answer value :: expected=青
+PASS period_repetition lv3 Q2 no leftover input :: empty
+PASS period_repetition lv3 Q2 question text :: 赤、白の旗を「赤、白」の順にくり返しならべます。17番目は何色ですか
+PASS period_repetition lv3 Q2 input type :: choice
+PASS period_repetition lv3 Q2 expected answer :: 赤
+PASS period_repetition lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 赤 です 周期は2です。17÷2＝8 あまり 1 な
+PASS period_repetition lv3 Q2 correct answer shown :: shown=正解は 赤 です expected=赤
+PASS period_repetition lv3 Q2 solution display :: steps=3
+PASS period_repetition lv3 no page errors :: none
+PASS period_repetition lv3 no 404 :: none
+PASS period_repetition lv4 Q1 question text :: A、Bの旗を「A、B」の順にくり返しならべます。19番目は何色ですか
+PASS period_repetition lv4 Q1 input type :: choice
+PASS period_repetition lv4 Q1 expected answer :: A
+PASS period_repetition lv4 Q1 correct feedback :: 🎉 せいかい！ 周期は2です。19÷2＝9 あまり 1 なので、1番目のAにな
+PASS period_repetition lv4 Q1 solution display :: steps=3
+PASS period_repetition lv4 Q1 solution answer value :: expected=A
+PASS period_repetition lv4 Q2 no leftover input :: empty
+PASS period_repetition lv4 Q2 question text :: 赤、白の旗を「赤、白」の順にくり返しならべます。12番目は何色ですか
+PASS period_repetition lv4 Q2 input type :: choice
+PASS period_repetition lv4 Q2 expected answer :: 白
+PASS period_repetition lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 白 です 周期は2です。12÷2＝6 あまり 0 な
+PASS period_repetition lv4 Q2 correct answer shown :: shown=正解は 白 です expected=白
+PASS period_repetition lv4 Q2 solution display :: steps=3
+PASS period_repetition lv4 no page errors :: none
+PASS period_repetition lv4 no 404 :: none
+PASS period_repetition lv5 Q1 question text :: A、Bの旗を「A、B」の順にくり返しならべます。11番目は何色ですか
+PASS period_repetition lv5 Q1 input type :: choice
+PASS period_repetition lv5 Q1 expected answer :: A
+PASS period_repetition lv5 Q1 correct feedback :: 🎉 せいかい！ 周期は2です。11÷2＝5 あまり 1 なので、1番目のAにな
+PASS period_repetition lv5 Q1 solution display :: steps=3
+PASS period_repetition lv5 Q1 solution answer value :: expected=A
+PASS period_repetition lv5 Q2 no leftover input :: empty
+PASS period_repetition lv5 Q2 question text :: 赤、白、青の旗を「赤、白、青」の順にくり返しならべます。15番目は何色ですか
+PASS period_repetition lv5 Q2 input type :: choice
+PASS period_repetition lv5 Q2 expected answer :: 青
+PASS period_repetition lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 青 です 周期は3です。15÷3＝5 あまり 0 な
+PASS period_repetition lv5 Q2 correct answer shown :: shown=正解は 青 です expected=青
+PASS period_repetition lv5 Q2 solution display :: steps=3
+PASS period_repetition lv5 no page errors :: none
+PASS period_repetition lv5 no 404 :: none
+PASS fraction_mul_integer lv1 Q1 question text :: 2分の1に5をかけるといくつになりますか
+PASS fraction_mul_integer lv1 Q1 input type :: mixed
+PASS fraction_mul_integer lv1 Q1 expected answer :: 2と1/2
+PASS fraction_mul_integer lv1 Q1 correct feedback :: 🎉 せいかい！ 2分の1（分子3、分母6）×5＝2分の5＝2と2分の1です。 
+PASS fraction_mul_integer lv1 Q1 solution display :: steps=3
+PASS fraction_mul_integer lv1 Q1 solution answer value :: expected=2と1/2
+PASS fraction_mul_integer lv1 Q2 no leftover input :: empty
+PASS fraction_mul_integer lv1 Q2 question text :: 3分の1に4をかけるといくつになりますか
+PASS fraction_mul_integer lv1 Q2 input type :: mixed
+PASS fraction_mul_integer lv1 Q2 expected answer :: 1と1/3
+PASS fraction_mul_integer lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1と1/3 です 3分の1（分子1、分母3）×4＝3
+PASS fraction_mul_integer lv1 Q2 correct answer shown :: shown=正解は 1と1/3 です expected=1と1/3
+PASS fraction_mul_integer lv1 Q2 solution display :: steps=2
+PASS fraction_mul_integer lv1 no page errors :: none
+PASS fraction_mul_integer lv1 no 404 :: none
+PASS fraction_mul_integer lv2 Q1 question text :: 2分の1に5をかけるといくつになりますか
+PASS fraction_mul_integer lv2 Q1 input type :: mixed
+PASS fraction_mul_integer lv2 Q1 expected answer :: 2と1/2
+PASS fraction_mul_integer lv2 Q1 correct feedback :: 🎉 せいかい！ 2分の1（分子3、分母6）×5＝2分の5＝2と2分の1です。 
+PASS fraction_mul_integer lv2 Q1 solution display :: steps=3
+PASS fraction_mul_integer lv2 Q1 solution answer value :: expected=2と1/2
+PASS fraction_mul_integer lv2 Q2 no leftover input :: empty
+PASS fraction_mul_integer lv2 Q2 question text :: 2分の1に3をかけるといくつになりますか
+PASS fraction_mul_integer lv2 Q2 input type :: mixed
+PASS fraction_mul_integer lv2 Q2 expected answer :: 1と1/2
+PASS fraction_mul_integer lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1と1/2 です 2分の1（分子1、分母2）×3＝2
+PASS fraction_mul_integer lv2 Q2 correct answer shown :: shown=正解は 1と1/2 です expected=1と1/2
+PASS fraction_mul_integer lv2 Q2 solution display :: steps=2
+PASS fraction_mul_integer lv2 no page errors :: none
+PASS fraction_mul_integer lv2 no 404 :: none
+PASS fraction_mul_integer lv3 Q1 question text :: 2分の1に3をかけるといくつになりますか
+PASS fraction_mul_integer lv3 Q1 input type :: mixed
+PASS fraction_mul_integer lv3 Q1 expected answer :: 1と1/2
+PASS fraction_mul_integer lv3 Q1 correct feedback :: 🎉 せいかい！ 2分の1（分子1、分母2）×3＝2分の3＝1と2分の1です。 
+PASS fraction_mul_integer lv3 Q1 solution display :: steps=2
+PASS fraction_mul_integer lv3 Q1 solution answer value :: expected=1と1/2
+PASS fraction_mul_integer lv3 Q2 no leftover input :: empty
+PASS fraction_mul_integer lv3 Q2 question text :: 4分の1に2をかけるといくつになりますか
+PASS fraction_mul_integer lv3 Q2 input type :: fraction
+PASS fraction_mul_integer lv3 Q2 expected answer :: 1/2
+PASS fraction_mul_integer lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1/2 です 4分の1（分子1、分母4）×2＝2分の
+PASS fraction_mul_integer lv3 Q2 correct answer shown :: shown=正解は 1/2 です expected=1/2
+PASS fraction_mul_integer lv3 Q2 solution display :: steps=2
+PASS fraction_mul_integer lv3 no page errors :: none
+PASS fraction_mul_integer lv3 no 404 :: none
+PASS fraction_mul_integer lv4 Q1 question text :: 2分の1に4をかけるといくつになりますか
+PASS fraction_mul_integer lv4 Q1 input type :: integer
+PASS fraction_mul_integer lv4 Q1 expected answer :: 2
+PASS fraction_mul_integer lv4 Q1 correct feedback :: 🎉 せいかい！ 2分の1（分子3、分母6）×4＝2です。 答えと解き方をみる 
+PASS fraction_mul_integer lv4 Q1 solution display :: steps=2
+PASS fraction_mul_integer lv4 Q1 solution answer value :: expected=2
+PASS fraction_mul_integer lv4 Q2 no leftover input :: empty
+PASS fraction_mul_integer lv4 Q2 question text :: 2分の1に4をかけるといくつになりますか
+PASS fraction_mul_integer lv4 Q2 input type :: integer
+PASS fraction_mul_integer lv4 Q2 expected answer :: 2
+PASS fraction_mul_integer lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 2分の1（分子2、分母4）×4＝2です。 
+PASS fraction_mul_integer lv4 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS fraction_mul_integer lv4 Q2 solution display :: steps=2
+PASS fraction_mul_integer lv4 no page errors :: none
+PASS fraction_mul_integer lv4 no 404 :: none
+PASS fraction_mul_integer lv5 Q1 question text :: 3分の2に6をかけるといくつになりますか
+PASS fraction_mul_integer lv5 Q1 input type :: integer
+PASS fraction_mul_integer lv5 Q1 expected answer :: 4
+PASS fraction_mul_integer lv5 Q1 correct feedback :: 🎉 せいかい！ 3分の2（分子4、分母6）×6＝4です。 答えと解き方をみる 
+PASS fraction_mul_integer lv5 Q1 solution display :: steps=2
+PASS fraction_mul_integer lv5 Q1 solution answer value :: expected=4
+PASS fraction_mul_integer lv5 Q2 no leftover input :: empty
+PASS fraction_mul_integer lv5 Q2 question text :: 6分の5に4をかけるといくつになりますか
+PASS fraction_mul_integer lv5 Q2 input type :: mixed
+PASS fraction_mul_integer lv5 Q2 expected answer :: 3と1/3
+PASS fraction_mul_integer lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3と1/3 です 6分の5（分子5、分母6）×4＝3
+PASS fraction_mul_integer lv5 Q2 correct answer shown :: shown=正解は 3と1/3 です expected=3と1/3
+PASS fraction_mul_integer lv5 Q2 solution display :: steps=3
+PASS fraction_mul_integer lv5 no page errors :: none
+PASS fraction_mul_integer lv5 no 404 :: none
+PASS fraction_mul_fraction lv1 Q1 question text :: 3分の1と4分の3をかけるといくつになりますか
+PASS fraction_mul_fraction lv1 Q1 input type :: fraction
+PASS fraction_mul_fraction lv1 Q1 expected answer :: 1/4
+PASS fraction_mul_fraction lv1 Q1 correct feedback :: 🎉 せいかい！ 3分の1（分子2、分母6）×4分の3（分子3、分母4）＝4分の
+PASS fraction_mul_fraction lv1 Q1 solution display :: steps=2
+PASS fraction_mul_fraction lv1 Q1 solution answer value :: expected=1/4
+PASS fraction_mul_fraction lv1 Q2 no leftover input :: empty
+PASS fraction_mul_fraction lv1 Q2 question text :: 5分の1と2分の1をかけるといくつになりますか
+PASS fraction_mul_fraction lv1 Q2 input type :: fraction
+PASS fraction_mul_fraction lv1 Q2 expected answer :: 1/10
+PASS fraction_mul_fraction lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1/10 です 5分の1（分子1、分母5）×2分の1
+PASS fraction_mul_fraction lv1 Q2 correct answer shown :: shown=正解は 1/10 です expected=1/10
+PASS fraction_mul_fraction lv1 Q2 solution display :: steps=2
+PASS fraction_mul_fraction lv1 no page errors :: none
+PASS fraction_mul_fraction lv1 no 404 :: none
+PASS fraction_mul_fraction lv2 Q1 question text :: 5分の4と3分の1をかけるといくつになりますか
+PASS fraction_mul_fraction lv2 Q1 input type :: fraction
+PASS fraction_mul_fraction lv2 Q1 expected answer :: 4/15
+PASS fraction_mul_fraction lv2 Q1 correct feedback :: 🎉 せいかい！ 5分の4（分子4、分母5）×3分の1（分子1、分母3）＝15分
+PASS fraction_mul_fraction lv2 Q1 solution display :: steps=2
+PASS fraction_mul_fraction lv2 Q1 solution answer value :: expected=4/15
+PASS fraction_mul_fraction lv2 Q2 no leftover input :: empty
+PASS fraction_mul_fraction lv2 Q2 question text :: 2分の1と2分の1をかけるといくつになりますか
+PASS fraction_mul_fraction lv2 Q2 input type :: fraction
+PASS fraction_mul_fraction lv2 Q2 expected answer :: 1/4
+PASS fraction_mul_fraction lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1/4 です 2分の1（分子2、分母4）×2分の1（
+PASS fraction_mul_fraction lv2 Q2 correct answer shown :: shown=正解は 1/4 です expected=1/4
+PASS fraction_mul_fraction lv2 Q2 solution display :: steps=2
+PASS fraction_mul_fraction lv2 no page errors :: none
+PASS fraction_mul_fraction lv2 no 404 :: none
+PASS fraction_mul_fraction lv3 Q1 question text :: 2分の1と2分の1をかけるといくつになりますか
+PASS fraction_mul_fraction lv3 Q1 input type :: fraction
+PASS fraction_mul_fraction lv3 Q1 expected answer :: 1/4
+PASS fraction_mul_fraction lv3 Q1 correct feedback :: 🎉 せいかい！ 2分の1（分子3、分母6）×2分の1（分子1、分母2）＝4分の
+PASS fraction_mul_fraction lv3 Q1 solution display :: steps=2
+PASS fraction_mul_fraction lv3 Q1 solution answer value :: expected=1/4
+PASS fraction_mul_fraction lv3 Q2 no leftover input :: empty
+PASS fraction_mul_fraction lv3 Q2 question text :: 3分の2と5分の1をかけるといくつになりますか
+PASS fraction_mul_fraction lv3 Q2 input type :: fraction
+PASS fraction_mul_fraction lv3 Q2 expected answer :: 2/15
+PASS fraction_mul_fraction lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2/15 です 3分の2（分子4、分母6）×5分の1
+PASS fraction_mul_fraction lv3 Q2 correct answer shown :: shown=正解は 2/15 です expected=2/15
+PASS fraction_mul_fraction lv3 Q2 solution display :: steps=2
+PASS fraction_mul_fraction lv3 no page errors :: none
+PASS fraction_mul_fraction lv3 no 404 :: none
+PASS fraction_mul_fraction lv4 Q1 question text :: 4分の3と2分の1をかけるといくつになりますか
+PASS fraction_mul_fraction lv4 Q1 input type :: fraction
+PASS fraction_mul_fraction lv4 Q1 expected answer :: 3/8
+PASS fraction_mul_fraction lv4 Q1 correct feedback :: 🎉 せいかい！ 4分の3（分子3、分母4）×2分の1（分子2、分母4）＝8分の
+PASS fraction_mul_fraction lv4 Q1 solution display :: steps=2
+PASS fraction_mul_fraction lv4 Q1 solution answer value :: expected=3/8
+PASS fraction_mul_fraction lv4 Q2 no leftover input :: empty
+PASS fraction_mul_fraction lv4 Q2 question text :: 4分の3と2分の1をかけるといくつになりますか
+PASS fraction_mul_fraction lv4 Q2 input type :: fraction
+PASS fraction_mul_fraction lv4 Q2 expected answer :: 3/8
+PASS fraction_mul_fraction lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3/8 です 4分の3（分子3、分母4）×2分の1（
+PASS fraction_mul_fraction lv4 Q2 correct answer shown :: shown=正解は 3/8 です expected=3/8
+PASS fraction_mul_fraction lv4 Q2 solution display :: steps=2
+PASS fraction_mul_fraction lv4 no page errors :: none
+PASS fraction_mul_fraction lv4 no 404 :: none
+PASS fraction_mul_fraction lv5 Q1 question text :: 6分の5と2分の1をかけるといくつになりますか
+PASS fraction_mul_fraction lv5 Q1 input type :: fraction
+PASS fraction_mul_fraction lv5 Q1 expected answer :: 5/12
+PASS fraction_mul_fraction lv5 Q1 correct feedback :: 🎉 せいかい！ 6分の5（分子5、分母6）×2分の1（分子2、分母4）＝12分
+PASS fraction_mul_fraction lv5 Q1 solution display :: steps=2
+PASS fraction_mul_fraction lv5 Q1 solution answer value :: expected=5/12
+PASS fraction_mul_fraction lv5 Q2 no leftover input :: empty
+PASS fraction_mul_fraction lv5 Q2 question text :: 6分の1と2分の1をかけるといくつになりますか
+PASS fraction_mul_fraction lv5 Q2 input type :: fraction
+PASS fraction_mul_fraction lv5 Q2 expected answer :: 1/12
+PASS fraction_mul_fraction lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1/12 です 6分の1（分子1、分母6）×2分の1
+PASS fraction_mul_fraction lv5 Q2 correct answer shown :: shown=正解は 1/12 です expected=1/12
+PASS fraction_mul_fraction lv5 Q2 solution display :: steps=2
+PASS fraction_mul_fraction lv5 no page errors :: none
+PASS fraction_mul_fraction lv5 no 404 :: none
+PASS fraction_div_integer lv1 Q1 question text :: 2分の1を4でわると、いくつになりますか
+PASS fraction_div_integer lv1 Q1 input type :: fraction
+PASS fraction_div_integer lv1 Q1 expected answer :: 1/8
+PASS fraction_div_integer lv1 Q1 correct feedback :: 🎉 せいかい！ 2分の1÷4＝8分の1＝8分の1です。 答えと解き方をみる つ
+PASS fraction_div_integer lv1 Q1 solution display :: steps=2
+PASS fraction_div_integer lv1 Q1 solution answer value :: expected=1/8
+PASS fraction_div_integer lv1 Q2 no leftover input :: empty
+PASS fraction_div_integer lv1 Q2 question text :: 5分の1を3でわると、いくつになりますか
+PASS fraction_div_integer lv1 Q2 input type :: fraction
+PASS fraction_div_integer lv1 Q2 expected answer :: 1/15
+PASS fraction_div_integer lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1/15 です 5分の1÷3＝15分の1＝15分の1
+PASS fraction_div_integer lv1 Q2 correct answer shown :: shown=正解は 1/15 です expected=1/15
+PASS fraction_div_integer lv1 Q2 solution display :: steps=2
+PASS fraction_div_integer lv1 no page errors :: none
+PASS fraction_div_integer lv1 no 404 :: none
+PASS fraction_div_integer lv2 Q1 question text :: 5分の1を3でわると、いくつになりますか
+PASS fraction_div_integer lv2 Q1 input type :: fraction
+PASS fraction_div_integer lv2 Q1 expected answer :: 1/15
+PASS fraction_div_integer lv2 Q1 correct feedback :: 🎉 せいかい！ 5分の1÷3＝15分の1＝15分の1です。 答えと解き方をみる
+PASS fraction_div_integer lv2 Q1 solution display :: steps=2
+PASS fraction_div_integer lv2 Q1 solution answer value :: expected=1/15
+PASS fraction_div_integer lv2 Q2 no leftover input :: empty
+PASS fraction_div_integer lv2 Q2 question text :: 4分の1を6でわると、いくつになりますか
+PASS fraction_div_integer lv2 Q2 input type :: fraction
+PASS fraction_div_integer lv2 Q2 expected answer :: 1/24
+PASS fraction_div_integer lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1/24 です 4分の1÷6＝24分の1＝24分の1
+PASS fraction_div_integer lv2 Q2 correct answer shown :: shown=正解は 1/24 です expected=1/24
+PASS fraction_div_integer lv2 Q2 solution display :: steps=2
+PASS fraction_div_integer lv2 no page errors :: none
+PASS fraction_div_integer lv2 no 404 :: none
+PASS fraction_div_integer lv3 Q1 question text :: 5分の4を6でわると、いくつになりますか
+PASS fraction_div_integer lv3 Q1 input type :: fraction
+PASS fraction_div_integer lv3 Q1 expected answer :: 2/15
+PASS fraction_div_integer lv3 Q1 correct feedback :: 🎉 せいかい！ 5分の4÷6＝15分の2＝15分の2です。 答えと解き方をみる
+PASS fraction_div_integer lv3 Q1 solution display :: steps=2
+PASS fraction_div_integer lv3 Q1 solution answer value :: expected=2/15
+PASS fraction_div_integer lv3 Q2 no leftover input :: empty
+PASS fraction_div_integer lv3 Q2 question text :: 2分の1を6でわると、いくつになりますか
+PASS fraction_div_integer lv3 Q2 input type :: fraction
+PASS fraction_div_integer lv3 Q2 expected answer :: 1/12
+PASS fraction_div_integer lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1/12 です 2分の1÷6＝12分の1＝12分の1
+PASS fraction_div_integer lv3 Q2 correct answer shown :: shown=正解は 1/12 です expected=1/12
+PASS fraction_div_integer lv3 Q2 solution display :: steps=2
+PASS fraction_div_integer lv3 no page errors :: none
+PASS fraction_div_integer lv3 no 404 :: none
+PASS fraction_div_integer lv4 Q1 question text :: 6分の1を6でわると、いくつになりますか
+PASS fraction_div_integer lv4 Q1 input type :: fraction
+PASS fraction_div_integer lv4 Q1 expected answer :: 1/36
+PASS fraction_div_integer lv4 Q1 correct feedback :: 🎉 せいかい！ 6分の1÷6＝36分の1＝36分の1です。 答えと解き方をみる
+PASS fraction_div_integer lv4 Q1 solution display :: steps=2
+PASS fraction_div_integer lv4 Q1 solution answer value :: expected=1/36
+PASS fraction_div_integer lv4 Q2 no leftover input :: empty
+PASS fraction_div_integer lv4 Q2 question text :: 3分の2を4でわると、いくつになりますか
+PASS fraction_div_integer lv4 Q2 input type :: fraction
+PASS fraction_div_integer lv4 Q2 expected answer :: 1/6
+PASS fraction_div_integer lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1/6 です 3分の2÷4＝6分の1＝6分の1です。
+PASS fraction_div_integer lv4 Q2 correct answer shown :: shown=正解は 1/6 です expected=1/6
+PASS fraction_div_integer lv4 Q2 solution display :: steps=2
+PASS fraction_div_integer lv4 no page errors :: none
+PASS fraction_div_integer lv4 no 404 :: none
+PASS fraction_div_integer lv5 Q1 question text :: 6分の1を5でわると、いくつになりますか
+PASS fraction_div_integer lv5 Q1 input type :: fraction
+PASS fraction_div_integer lv5 Q1 expected answer :: 1/30
+PASS fraction_div_integer lv5 Q1 correct feedback :: 🎉 せいかい！ 6分の1÷5＝30分の1＝30分の1です。 答えと解き方をみる
+PASS fraction_div_integer lv5 Q1 solution display :: steps=2
+PASS fraction_div_integer lv5 Q1 solution answer value :: expected=1/30
+PASS fraction_div_integer lv5 Q2 no leftover input :: empty
+PASS fraction_div_integer lv5 Q2 question text :: 4分の1を2でわると、いくつになりますか
+PASS fraction_div_integer lv5 Q2 input type :: fraction
+PASS fraction_div_integer lv5 Q2 expected answer :: 1/8
+PASS fraction_div_integer lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1/8 です 4分の1÷2＝8分の1＝8分の1です。
+PASS fraction_div_integer lv5 Q2 correct answer shown :: shown=正解は 1/8 です expected=1/8
+PASS fraction_div_integer lv5 Q2 solution display :: steps=2
+PASS fraction_div_integer lv5 no page errors :: none
+PASS fraction_div_integer lv5 no 404 :: none
+PASS fraction_div_fraction lv2 Q1 question text :: 3分の1を4分の3でわると、商はいくつですか
+PASS fraction_div_fraction lv2 Q1 input type :: fraction
+PASS fraction_div_fraction lv2 Q1 expected answer :: 4/9
+PASS fraction_div_fraction lv2 Q1 correct feedback :: 🎉 せいかい！ ÷4分の3（分子3、分母4） は ×3分の4 と同じです。3分
+PASS fraction_div_fraction lv2 Q1 solution display :: steps=2
+PASS fraction_div_fraction lv2 Q1 solution answer value :: expected=4/9
+PASS fraction_div_fraction lv2 Q2 no leftover input :: empty
+PASS fraction_div_fraction lv2 Q2 question text :: 6分の5を9分の2でわると、商はいくつですか
+PASS fraction_div_fraction lv2 Q2 input type :: mixed
+PASS fraction_div_fraction lv2 Q2 expected answer :: 3と3/4
+PASS fraction_div_fraction lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3と3/4 です ÷9分の2（分子2、分母9） は 
+PASS fraction_div_fraction lv2 Q2 correct answer shown :: shown=正解は 3と3/4 です expected=3と3/4
+PASS fraction_div_fraction lv2 Q2 solution display :: steps=3
+PASS fraction_div_fraction lv2 no page errors :: none
+PASS fraction_div_fraction lv2 no 404 :: none
+PASS fraction_div_fraction lv3 Q1 question text :: 4分の1を6分の1でわると、商はいくつですか
+PASS fraction_div_fraction lv3 Q1 input type :: mixed
+PASS fraction_div_fraction lv3 Q1 expected answer :: 1と1/2
+PASS fraction_div_fraction lv3 Q1 correct feedback :: 🎉 せいかい！ ÷6分の1（分子1、分母6） は ×6 と同じです。4分の1（
+PASS fraction_div_fraction lv3 Q1 solution display :: steps=3
+PASS fraction_div_fraction lv3 Q1 solution answer value :: expected=1と1/2
+PASS fraction_div_fraction lv3 Q2 no leftover input :: empty
+PASS fraction_div_fraction lv3 Q2 question text :: 2分の1を2分の1でわると、商はいくつですか
+PASS fraction_div_fraction lv3 Q2 input type :: integer
+PASS fraction_div_fraction lv3 Q2 expected answer :: 1
+PASS fraction_div_fraction lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1 です ÷2分の1（分子2、分母4） は ×2 と
+PASS fraction_div_fraction lv3 Q2 correct answer shown :: shown=正解は 1 です expected=1
+PASS fraction_div_fraction lv3 Q2 solution display :: steps=2
+PASS fraction_div_fraction lv3 no page errors :: none
+PASS fraction_div_fraction lv3 no 404 :: none
+PASS fraction_div_fraction lv4 Q1 question text :: 2分の1を6分の5でわると、商はいくつですか
+PASS fraction_div_fraction lv4 Q1 input type :: fraction
+PASS fraction_div_fraction lv4 Q1 expected answer :: 3/5
+PASS fraction_div_fraction lv4 Q1 correct feedback :: 🎉 せいかい！ ÷6分の5（分子5、分母6） は ×5分の6 と同じです。2分
+PASS fraction_div_fraction lv4 Q1 solution display :: steps=2
+PASS fraction_div_fraction lv4 Q1 solution answer value :: expected=3/5
+PASS fraction_div_fraction lv4 Q2 no leftover input :: empty
+PASS fraction_div_fraction lv4 Q2 question text :: 7分の1を5分の2でわると、商はいくつですか
+PASS fraction_div_fraction lv4 Q2 input type :: fraction
+PASS fraction_div_fraction lv4 Q2 expected answer :: 5/14
+PASS fraction_div_fraction lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 5/14 です ÷5分の2（分子2、分母5） は ×
+PASS fraction_div_fraction lv4 Q2 correct answer shown :: shown=正解は 5/14 です expected=5/14
+PASS fraction_div_fraction lv4 Q2 solution display :: steps=2
+PASS fraction_div_fraction lv4 no page errors :: none
+PASS fraction_div_fraction lv4 no 404 :: none
+PASS fraction_div_fraction lv5 Q1 question text :: 2分の1を7分の2でわると、商はいくつですか
+PASS fraction_div_fraction lv5 Q1 input type :: mixed
+PASS fraction_div_fraction lv5 Q1 expected answer :: 1と3/4
+PASS fraction_div_fraction lv5 Q1 correct feedback :: 🎉 せいかい！ ÷7分の2（分子2、分母7） は ×2分の7 と同じです。2分
+PASS fraction_div_fraction lv5 Q1 solution display :: steps=3
+PASS fraction_div_fraction lv5 Q1 solution answer value :: expected=1と3/4
+PASS fraction_div_fraction lv5 Q2 no leftover input :: empty
+PASS fraction_div_fraction lv5 Q2 question text :: 8分の5を2分の1でわると、商はいくつですか
+PASS fraction_div_fraction lv5 Q2 input type :: mixed
+PASS fraction_div_fraction lv5 Q2 expected answer :: 1と1/4
+PASS fraction_div_fraction lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1と1/4 です ÷2分の1（分子1、分母2） は 
+PASS fraction_div_fraction lv5 Q2 correct answer shown :: shown=正解は 1と1/4 です expected=1と1/4
+PASS fraction_div_fraction lv5 Q2 solution display :: steps=3
+PASS fraction_div_fraction lv5 no page errors :: none
+PASS fraction_div_fraction lv5 no 404 :: none
+PASS fraction_mul_mixed lv1 Q1 question text :: 1と3分の1と2分の1をかけるといくつになりますか
+PASS fraction_mul_mixed lv1 Q1 input type :: fraction
+PASS fraction_mul_mixed lv1 Q1 expected answer :: 2/3
+PASS fraction_mul_mixed lv1 Q1 correct feedback :: 🎉 せいかい！ 1と3分の1（分子2、分母6）＝8/6 として計算します。3分
+PASS fraction_mul_mixed lv1 Q1 solution display :: steps=3
+PASS fraction_mul_mixed lv1 Q1 solution answer value :: expected=2/3
+PASS fraction_mul_mixed lv1 Q2 no leftover input :: empty
+PASS fraction_mul_mixed lv1 Q2 question text :: 1と3分の2と3分の1をかけるといくつになりますか
+PASS fraction_mul_mixed lv1 Q2 input type :: fraction
+PASS fraction_mul_mixed lv1 Q2 expected answer :: 5/9
+PASS fraction_mul_mixed lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 5/9 です 1と3分の2（分子2、分母3）＝5/3
+PASS fraction_mul_mixed lv1 Q2 correct answer shown :: shown=正解は 5/9 です expected=5/9
+PASS fraction_mul_mixed lv1 Q2 solution display :: steps=3
+PASS fraction_mul_mixed lv1 no page errors :: none
+PASS fraction_mul_mixed lv1 no 404 :: none
+PASS fraction_mul_mixed lv2 Q1 question text :: 1と2分の1と3分の2をかけるといくつになりますか
+PASS fraction_mul_mixed lv2 Q1 input type :: integer
+PASS fraction_mul_mixed lv2 Q1 expected answer :: 1
+PASS fraction_mul_mixed lv2 Q1 correct feedback :: 🎉 せいかい！ 1と2分の1（分子1、分母2）＝3/2 として計算します。2分
+PASS fraction_mul_mixed lv2 Q1 solution display :: steps=3
+PASS fraction_mul_mixed lv2 Q1 solution answer value :: expected=1
+PASS fraction_mul_mixed lv2 Q2 no leftover input :: empty
+PASS fraction_mul_mixed lv2 Q2 question text :: 1と3分の2と2分の1をかけるといくつになりますか
+PASS fraction_mul_mixed lv2 Q2 input type :: fraction
+PASS fraction_mul_mixed lv2 Q2 expected answer :: 5/6
+PASS fraction_mul_mixed lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 5/6 です 1と3分の2（分子2、分母3）＝5/3
+PASS fraction_mul_mixed lv2 Q2 correct answer shown :: shown=正解は 5/6 です expected=5/6
+PASS fraction_mul_mixed lv2 Q2 solution display :: steps=3
+PASS fraction_mul_mixed lv2 no page errors :: none
+PASS fraction_mul_mixed lv2 no 404 :: none
+PASS fraction_mul_mixed lv3 Q1 question text :: 1と4分の1と2分の1をかけるといくつになりますか
+PASS fraction_mul_mixed lv3 Q1 input type :: fraction
+PASS fraction_mul_mixed lv3 Q1 expected answer :: 5/8
+PASS fraction_mul_mixed lv3 Q1 correct feedback :: 🎉 せいかい！ 1と4分の1（分子1、分母4）＝5/4 として計算します。4分
+PASS fraction_mul_mixed lv3 Q1 solution display :: steps=3
+PASS fraction_mul_mixed lv3 Q1 solution answer value :: expected=5/8
+PASS fraction_mul_mixed lv3 Q2 no leftover input :: empty
+PASS fraction_mul_mixed lv3 Q2 question text :: 1と5分の1と2分の1をかけるといくつになりますか
+PASS fraction_mul_mixed lv3 Q2 input type :: fraction
+PASS fraction_mul_mixed lv3 Q2 expected answer :: 3/5
+PASS fraction_mul_mixed lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3/5 です 1と5分の1（分子1、分母5）＝6/5
+PASS fraction_mul_mixed lv3 Q2 correct answer shown :: shown=正解は 3/5 です expected=3/5
+PASS fraction_mul_mixed lv3 Q2 solution display :: steps=3
+PASS fraction_mul_mixed lv3 no page errors :: none
+PASS fraction_mul_mixed lv3 no 404 :: none
+PASS fraction_mul_mixed lv4 Q1 question text :: 1と5分の2と2分の1をかけるといくつになりますか
+PASS fraction_mul_mixed lv4 Q1 input type :: fraction
+PASS fraction_mul_mixed lv4 Q1 expected answer :: 7/10
+PASS fraction_mul_mixed lv4 Q1 correct feedback :: 🎉 せいかい！ 1と5分の2（分子2、分母5）＝7/5 として計算します。5分
+PASS fraction_mul_mixed lv4 Q1 solution display :: steps=3
+PASS fraction_mul_mixed lv4 Q1 solution answer value :: expected=7/10
+PASS fraction_mul_mixed lv4 Q2 no leftover input :: empty
+PASS fraction_mul_mixed lv4 Q2 question text :: 1と4分の3と4分の1をかけるといくつになりますか
+PASS fraction_mul_mixed lv4 Q2 input type :: fraction
+PASS fraction_mul_mixed lv4 Q2 expected answer :: 7/16
+PASS fraction_mul_mixed lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 7/16 です 1と4分の3（分子3、分母4）＝7/
+PASS fraction_mul_mixed lv4 Q2 correct answer shown :: shown=正解は 7/16 です expected=7/16
+PASS fraction_mul_mixed lv4 Q2 solution display :: steps=3
+PASS fraction_mul_mixed lv4 no page errors :: none
+PASS fraction_mul_mixed lv4 no 404 :: none
+PASS fraction_mul_mixed lv5 Q1 question text :: 1と3分の1と6分の5をかけるといくつになりますか
+PASS fraction_mul_mixed lv5 Q1 input type :: mixed
+PASS fraction_mul_mixed lv5 Q1 expected answer :: 1と1/9
+PASS fraction_mul_mixed lv5 Q1 correct feedback :: 🎉 せいかい！ 1と3分の1（分子2、分母6）＝8/6 として計算します。3分
+PASS fraction_mul_mixed lv5 Q1 solution display :: steps=4
+PASS fraction_mul_mixed lv5 Q1 solution answer value :: expected=1と1/9
+PASS fraction_mul_mixed lv5 Q2 no leftover input :: empty
+PASS fraction_mul_mixed lv5 Q2 question text :: 1と5分の3と2分の1をかけるといくつになりますか
+PASS fraction_mul_mixed lv5 Q2 input type :: fraction
+PASS fraction_mul_mixed lv5 Q2 expected answer :: 4/5
+PASS fraction_mul_mixed lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 4/5 です 1と5分の3（分子3、分母5）＝8/5
+PASS fraction_mul_mixed lv5 Q2 correct answer shown :: shown=正解は 4/5 です expected=4/5
+PASS fraction_mul_mixed lv5 Q2 solution display :: steps=3
+PASS fraction_mul_mixed lv5 no page errors :: none
+PASS fraction_mul_mixed lv5 no 404 :: none
+PASS fraction_div_mixed lv1 Q1 question text :: 1と5分の2を4分の1でわると、いくつになりますか
+PASS fraction_div_mixed lv1 Q1 input type :: mixed
+PASS fraction_div_mixed lv1 Q1 expected answer :: 5と3/5
+PASS fraction_div_mixed lv1 Q1 correct feedback :: 🎉 せいかい！ 1と5分の2（分子2、分母5）＝7/5 として計算します。7/
+PASS fraction_div_mixed lv1 Q1 solution display :: steps=3
+PASS fraction_div_mixed lv1 Q1 solution answer value :: expected=5と3/5
+PASS fraction_div_mixed lv1 Q2 no leftover input :: empty
+PASS fraction_div_mixed lv1 Q2 question text :: 1と2分の1を4分の3でわると、いくつになりますか
+PASS fraction_div_mixed lv1 Q2 input type :: integer
+PASS fraction_div_mixed lv1 Q2 expected answer :: 2
+PASS fraction_div_mixed lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 1と2分の1（分子1、分母2）＝3/2 と
+PASS fraction_div_mixed lv1 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS fraction_div_mixed lv1 Q2 solution display :: steps=3
+PASS fraction_div_mixed lv1 no page errors :: none
+PASS fraction_div_mixed lv1 no 404 :: none
+PASS fraction_div_mixed lv2 Q1 question text :: 1と2分の1を3分の2でわると、いくつになりますか
+PASS fraction_div_mixed lv2 Q1 input type :: mixed
+PASS fraction_div_mixed lv2 Q1 expected answer :: 2と1/4
+PASS fraction_div_mixed lv2 Q1 correct feedback :: 🎉 せいかい！ 1と2分の1（分子1、分母2）＝3/2 として計算します。3/
+PASS fraction_div_mixed lv2 Q1 solution display :: steps=3
+PASS fraction_div_mixed lv2 Q1 solution answer value :: expected=2と1/4
+PASS fraction_div_mixed lv2 Q2 no leftover input :: empty
+PASS fraction_div_mixed lv2 Q2 question text :: 1と4分の1を2分の1でわると、いくつになりますか
+PASS fraction_div_mixed lv2 Q2 input type :: mixed
+PASS fraction_div_mixed lv2 Q2 expected answer :: 2と1/2
+PASS fraction_div_mixed lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2と1/2 です 1と4分の1（分子1、分母4）＝5
+PASS fraction_div_mixed lv2 Q2 correct answer shown :: shown=正解は 2と1/2 です expected=2と1/2
+PASS fraction_div_mixed lv2 Q2 solution display :: steps=4
+PASS fraction_div_mixed lv2 no page errors :: none
+PASS fraction_div_mixed lv2 no 404 :: none
+PASS fraction_div_mixed lv3 Q1 question text :: 1と5分の2を2分の1でわると、いくつになりますか
+PASS fraction_div_mixed lv3 Q1 input type :: mixed
+PASS fraction_div_mixed lv3 Q1 expected answer :: 2と4/5
+PASS fraction_div_mixed lv3 Q1 correct feedback :: 🎉 せいかい！ 1と5分の2（分子2、分母5）＝7/5 として計算します。7/
+PASS fraction_div_mixed lv3 Q1 solution display :: steps=4
+PASS fraction_div_mixed lv3 Q1 solution answer value :: expected=2と4/5
+PASS fraction_div_mixed lv3 Q2 no leftover input :: empty
+PASS fraction_div_mixed lv3 Q2 question text :: 1と3分の2を4分の3でわると、いくつになりますか
+PASS fraction_div_mixed lv3 Q2 input type :: mixed
+PASS fraction_div_mixed lv3 Q2 expected answer :: 2と2/9
+PASS fraction_div_mixed lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2と2/9 です 1と3分の2（分子2、分母3）＝5
+PASS fraction_div_mixed lv3 Q2 correct answer shown :: shown=正解は 2と2/9 です expected=2と2/9
+PASS fraction_div_mixed lv3 Q2 solution display :: steps=3
+PASS fraction_div_mixed lv3 no page errors :: none
+PASS fraction_div_mixed lv3 no 404 :: none
+PASS fraction_div_mixed lv4 Q1 question text :: 1と2分の1を2分の1でわると、いくつになりますか
+PASS fraction_div_mixed lv4 Q1 input type :: integer
+PASS fraction_div_mixed lv4 Q1 expected answer :: 3
+PASS fraction_div_mixed lv4 Q1 correct feedback :: 🎉 せいかい！ 1と2分の1（分子2、分母4）＝6/4 として計算します。6/
+PASS fraction_div_mixed lv4 Q1 solution display :: steps=3
+PASS fraction_div_mixed lv4 Q1 solution answer value :: expected=3
+PASS fraction_div_mixed lv4 Q2 no leftover input :: empty
+PASS fraction_div_mixed lv4 Q2 question text :: 1と3分の2を2分の1でわると、いくつになりますか
+PASS fraction_div_mixed lv4 Q2 input type :: mixed
+PASS fraction_div_mixed lv4 Q2 expected answer :: 3と1/3
+PASS fraction_div_mixed lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3と1/3 です 1と3分の2（分子2、分母3）＝5
+PASS fraction_div_mixed lv4 Q2 correct answer shown :: shown=正解は 3と1/3 です expected=3と1/3
+PASS fraction_div_mixed lv4 Q2 solution display :: steps=4
+PASS fraction_div_mixed lv4 no page errors :: none
+PASS fraction_div_mixed lv4 no 404 :: none
+PASS fraction_div_mixed lv5 Q1 question text :: 1と5分の2を2分の1でわると、いくつになりますか
+PASS fraction_div_mixed lv5 Q1 input type :: mixed
+PASS fraction_div_mixed lv5 Q1 expected answer :: 2と4/5
+PASS fraction_div_mixed lv5 Q1 correct feedback :: 🎉 せいかい！ 1と5分の2（分子2、分母5）＝7/5 として計算します。7/
+PASS fraction_div_mixed lv5 Q1 solution display :: steps=3
+PASS fraction_div_mixed lv5 Q1 solution answer value :: expected=2と4/5
+PASS fraction_div_mixed lv5 Q2 no leftover input :: empty
+PASS fraction_div_mixed lv5 Q2 question text :: 1と3分の1を2分の1でわると、いくつになりますか
+PASS fraction_div_mixed lv5 Q2 input type :: mixed
+PASS fraction_div_mixed lv5 Q2 expected answer :: 2と2/3
+PASS fraction_div_mixed lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2と2/3 です 1と3分の1（分子1、分母3）＝4
+PASS fraction_div_mixed lv5 Q2 correct answer shown :: shown=正解は 2と2/3 です expected=2と2/3
+PASS fraction_div_mixed lv5 Q2 solution display :: steps=3
+PASS fraction_div_mixed lv5 no page errors :: none
+PASS fraction_div_mixed lv5 no 404 :: none
+PASS fraction_reduce lv1 Q1 question text :: 6分の3を約分しなさい
+PASS fraction_reduce lv1 Q1 input type :: fraction
+PASS fraction_reduce lv1 Q1 expected answer :: 1/2
+PASS fraction_reduce lv1 Q1 correct feedback :: 🎉 せいかい！ 6分の3 は、分子と分母を3でわると 2分の1 になります。 
+PASS fraction_reduce lv1 Q1 solution display :: steps=1
+PASS fraction_reduce lv1 Q1 solution answer value :: expected=1/2
+PASS fraction_reduce lv1 Q2 no leftover input :: empty
+PASS fraction_reduce lv1 Q2 question text :: 6分の4を約分しなさい
+PASS fraction_reduce lv1 Q2 input type :: fraction
+PASS fraction_reduce lv1 Q2 expected answer :: 2/3
+PASS fraction_reduce lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2/3 です 6分の4 は、分子と分母を2でわると 
+PASS fraction_reduce lv1 Q2 correct answer shown :: shown=正解は 2/3 です expected=2/3
+PASS fraction_reduce lv1 Q2 solution display :: steps=1
+PASS fraction_reduce lv1 no page errors :: none
+PASS fraction_reduce lv1 no 404 :: none
+PASS fraction_reduce lv2 Q1 question text :: 10分の4を約分しなさい
+PASS fraction_reduce lv2 Q1 input type :: fraction
+PASS fraction_reduce lv2 Q1 expected answer :: 2/5
+PASS fraction_reduce lv2 Q1 correct feedback :: 🎉 せいかい！ 10分の4 は、分子と分母を2でわると 5分の2 になります。
+PASS fraction_reduce lv2 Q1 solution display :: steps=1
+PASS fraction_reduce lv2 Q1 solution answer value :: expected=2/5
+PASS fraction_reduce lv2 Q2 no leftover input :: empty
+PASS fraction_reduce lv2 Q2 question text :: 8分の6を約分しなさい
+PASS fraction_reduce lv2 Q2 input type :: fraction
+PASS fraction_reduce lv2 Q2 expected answer :: 3/4
+PASS fraction_reduce lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3/4 です 8分の6 は、分子と分母を2でわると 
+PASS fraction_reduce lv2 Q2 correct answer shown :: shown=正解は 3/4 です expected=3/4
+PASS fraction_reduce lv2 Q2 solution display :: steps=1
+PASS fraction_reduce lv2 no page errors :: none
+PASS fraction_reduce lv2 no 404 :: none
+PASS fraction_reduce lv3 Q1 question text :: 10分の4を約分しなさい
+PASS fraction_reduce lv3 Q1 input type :: fraction
+PASS fraction_reduce lv3 Q1 expected answer :: 2/5
+PASS fraction_reduce lv3 Q1 correct feedback :: 🎉 せいかい！ 10分の4 は、分子と分母を2でわると 5分の2 になります。
+PASS fraction_reduce lv3 Q1 solution display :: steps=1
+PASS fraction_reduce lv3 Q1 solution answer value :: expected=2/5
+PASS fraction_reduce lv3 Q2 no leftover input :: empty
+PASS fraction_reduce lv3 Q2 question text :: 10分の6を約分しなさい
+PASS fraction_reduce lv3 Q2 input type :: fraction
+PASS fraction_reduce lv3 Q2 expected answer :: 3/5
+PASS fraction_reduce lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3/5 です 10分の6 は、分子と分母を2でわると
+PASS fraction_reduce lv3 Q2 correct answer shown :: shown=正解は 3/5 です expected=3/5
+PASS fraction_reduce lv3 Q2 solution display :: steps=1
+PASS fraction_reduce lv3 no page errors :: none
+PASS fraction_reduce lv3 no 404 :: none
+PASS fraction_reduce lv4 Q1 question text :: 10分の6を約分しなさい
+PASS fraction_reduce lv4 Q1 input type :: fraction
+PASS fraction_reduce lv4 Q1 expected answer :: 3/5
+PASS fraction_reduce lv4 Q1 correct feedback :: 🎉 せいかい！ 10分の6 は、分子と分母を2でわると 5分の3 になります。
+PASS fraction_reduce lv4 Q1 solution display :: steps=1
+PASS fraction_reduce lv4 Q1 solution answer value :: expected=3/5
+PASS fraction_reduce lv4 Q2 no leftover input :: empty
+PASS fraction_reduce lv4 Q2 question text :: 6分の4を約分しなさい
+PASS fraction_reduce lv4 Q2 input type :: fraction
+PASS fraction_reduce lv4 Q2 expected answer :: 2/3
+PASS fraction_reduce lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2/3 です 6分の4 は、分子と分母を2でわると 
+PASS fraction_reduce lv4 Q2 correct answer shown :: shown=正解は 2/3 です expected=2/3
+PASS fraction_reduce lv4 Q2 solution display :: steps=1
+PASS fraction_reduce lv4 no page errors :: none
+PASS fraction_reduce lv4 no 404 :: none
+PASS fraction_reduce lv5 Q1 question text :: 9分の3を約分しなさい
+PASS fraction_reduce lv5 Q1 input type :: fraction
+PASS fraction_reduce lv5 Q1 expected answer :: 1/3
+PASS fraction_reduce lv5 Q1 correct feedback :: 🎉 せいかい！ 9分の3 は、分子と分母を3でわると 3分の1 になります。 
+PASS fraction_reduce lv5 Q1 solution display :: steps=1
+PASS fraction_reduce lv5 Q1 solution answer value :: expected=1/3
+PASS fraction_reduce lv5 Q2 no leftover input :: empty
+PASS fraction_reduce lv5 Q2 question text :: 6分の3を約分しなさい
+PASS fraction_reduce lv5 Q2 input type :: fraction
+PASS fraction_reduce lv5 Q2 expected answer :: 1/2
+PASS fraction_reduce lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1/2 です 6分の3 は、分子と分母を3でわると 
+PASS fraction_reduce lv5 Q2 correct answer shown :: shown=正解は 1/2 です expected=1/2
+PASS fraction_reduce lv5 Q2 solution display :: steps=1
+PASS fraction_reduce lv5 no page errors :: none
+PASS fraction_reduce lv5 no 404 :: none
+PASS fraction_common_denominator lv2 Q1 question text :: 4分の1と7分の2を、分母を最小公倍数にそろえて表しなさい
+PASS fraction_common_denominator lv2 Q1 input type :: fraction-list
+PASS fraction_common_denominator lv2 Q1 expected answer :: 7/28 と 8/28
+PASS fraction_common_denominator lv2 Q1 correct feedback :: 🎉 せいかい！ 分母4と7の最小公倍数は28なので、4分の1（分子1、分母4）
+PASS fraction_common_denominator lv2 Q1 solution display :: steps=4
+PASS fraction_common_denominator lv2 Q1 solution answer value :: expected=7/28 と 8/28
+PASS fraction_common_denominator lv2 Q2 no leftover input :: empty
+PASS fraction_common_denominator lv2 Q2 question text :: 2分の1と8分の1を、分母を最小公倍数にそろえて表しなさい
+PASS fraction_common_denominator lv2 Q2 input type :: fraction-list
+PASS fraction_common_denominator lv2 Q2 expected answer :: 4/8 と 1/8
+PASS fraction_common_denominator lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 4/8 と 1/8 です 分母2と8の最小公倍数は8
+PASS fraction_common_denominator lv2 Q2 correct answer shown :: shown=正解は 4/8 と 1/8 です expected=4/8 と 1/8
+PASS fraction_common_denominator lv2 Q2 solution display :: steps=4
+PASS fraction_common_denominator lv2 no page errors :: none
+PASS fraction_common_denominator lv2 no 404 :: none
+PASS fraction_common_denominator lv3 Q1 question text :: 2分の1と5分の3を、分母を最小公倍数にそろえて表しなさい
+PASS fraction_common_denominator lv3 Q1 input type :: fraction-list
+PASS fraction_common_denominator lv3 Q1 expected answer :: 5/10 と 6/10
+PASS fraction_common_denominator lv3 Q1 correct feedback :: 🎉 せいかい！ 分母2と5の最小公倍数は10なので、2分の1（分子1、分母2）
+PASS fraction_common_denominator lv3 Q1 solution display :: steps=4
+PASS fraction_common_denominator lv3 Q1 solution answer value :: expected=5/10 と 6/10
+PASS fraction_common_denominator lv3 Q2 no leftover input :: empty
+PASS fraction_common_denominator lv3 Q2 question text :: 2分の1と8分の5を、分母を最小公倍数にそろえて表しなさい
+PASS fraction_common_denominator lv3 Q2 input type :: fraction-list
+PASS fraction_common_denominator lv3 Q2 expected answer :: 4/8 と 5/8
+PASS fraction_common_denominator lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 4/8 と 5/8 です 分母2と8の最小公倍数は8
+PASS fraction_common_denominator lv3 Q2 correct answer shown :: shown=正解は 4/8 と 5/8 です expected=4/8 と 5/8
+PASS fraction_common_denominator lv3 Q2 solution display :: steps=4
+PASS fraction_common_denominator lv3 no page errors :: none
+PASS fraction_common_denominator lv3 no 404 :: none
+PASS fraction_common_denominator lv4 Q1 question text :: 2分の1と7分の5を、分母を最小公倍数にそろえて表しなさい
+PASS fraction_common_denominator lv4 Q1 input type :: fraction-list
+PASS fraction_common_denominator lv4 Q1 expected answer :: 7/14 と 10/14
+PASS fraction_common_denominator lv4 Q1 correct feedback :: 🎉 せいかい！ 分母2と7の最小公倍数は14なので、2分の1（分子1、分母2）
+PASS fraction_common_denominator lv4 Q1 solution display :: steps=4
+PASS fraction_common_denominator lv4 Q1 solution answer value :: expected=7/14 と 10/14
+PASS fraction_common_denominator lv4 Q2 no leftover input :: empty
+PASS fraction_common_denominator lv4 Q2 question text :: 2分の1と3分の1を、分母を最小公倍数にそろえて表しなさい
+PASS fraction_common_denominator lv4 Q2 input type :: fraction-list
+PASS fraction_common_denominator lv4 Q2 expected answer :: 3/6 と 2/6
+PASS fraction_common_denominator lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3/6 と 2/6 です 分母2と3の最小公倍数は6
+PASS fraction_common_denominator lv4 Q2 correct answer shown :: shown=正解は 3/6 と 2/6 です expected=3/6 と 2/6
+PASS fraction_common_denominator lv4 Q2 solution display :: steps=4
+PASS fraction_common_denominator lv4 no page errors :: none
+PASS fraction_common_denominator lv4 no 404 :: none
+PASS fraction_common_denominator lv5 Q1 question text :: 7分の2と4分の3を、分母を最小公倍数にそろえて表しなさい
+PASS fraction_common_denominator lv5 Q1 input type :: fraction-list
+PASS fraction_common_denominator lv5 Q1 expected answer :: 8/28 と 21/28
+PASS fraction_common_denominator lv5 Q1 correct feedback :: 🎉 せいかい！ 分母7と4の最小公倍数は28なので、7分の2（分子2、分母7）
+PASS fraction_common_denominator lv5 Q1 solution display :: steps=4
+PASS fraction_common_denominator lv5 Q1 solution answer value :: expected=8/28 と 21/28
+PASS fraction_common_denominator lv5 Q2 no leftover input :: empty
+PASS fraction_common_denominator lv5 Q2 question text :: 2分の1と4分の1を、分母を最小公倍数にそろえて表しなさい
+PASS fraction_common_denominator lv5 Q2 input type :: fraction-list
+PASS fraction_common_denominator lv5 Q2 expected answer :: 2/4 と 1/4
+PASS fraction_common_denominator lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2/4 と 1/4 です 分母2と4の最小公倍数は4
+PASS fraction_common_denominator lv5 Q2 correct answer shown :: shown=正解は 2/4 と 1/4 です expected=2/4 と 1/4
+PASS fraction_common_denominator lv5 Q2 solution display :: steps=4
+PASS fraction_common_denominator lv5 no page errors :: none
+PASS fraction_common_denominator lv5 no 404 :: none
+PASS fraction_mixed_convert lv2 Q1 question text :: 25/6 を帯分数で表しなさい
+PASS fraction_mixed_convert lv2 Q1 input type :: mixed
+PASS fraction_mixed_convert lv2 Q1 expected answer :: 4と1/6
+PASS fraction_mixed_convert lv2 Q1 correct feedback :: 🎉 せいかい！ 25÷6＝4 あまり 1 なので、4と6分の1 になります。 
+PASS fraction_mixed_convert lv2 Q1 solution display :: steps=2
+PASS fraction_mixed_convert lv2 Q1 solution answer value :: expected=4と1/6
+PASS fraction_mixed_convert lv2 Q2 no leftover input :: empty
+PASS fraction_mixed_convert lv2 Q2 question text :: 3/2 を帯分数で表しなさい
+PASS fraction_mixed_convert lv2 Q2 input type :: mixed
+PASS fraction_mixed_convert lv2 Q2 expected answer :: 1と1/2
+PASS fraction_mixed_convert lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1と1/2 です 3÷2＝1 あまり 1 なので、1
+PASS fraction_mixed_convert lv2 Q2 correct answer shown :: shown=正解は 1と1/2 です expected=1と1/2
+PASS fraction_mixed_convert lv2 Q2 solution display :: steps=2
+PASS fraction_mixed_convert lv2 no page errors :: none
+PASS fraction_mixed_convert lv2 no 404 :: none
+PASS fraction_mixed_convert lv3 Q1 question text :: 13/4 を帯分数で表しなさい
+PASS fraction_mixed_convert lv3 Q1 input type :: mixed
+PASS fraction_mixed_convert lv3 Q1 expected answer :: 3と1/4
+PASS fraction_mixed_convert lv3 Q1 correct feedback :: 🎉 せいかい！ 13÷4＝3 あまり 1 なので、3と4分の1 になります。 
+PASS fraction_mixed_convert lv3 Q1 solution display :: steps=2
+PASS fraction_mixed_convert lv3 Q1 solution answer value :: expected=3と1/4
+PASS fraction_mixed_convert lv3 Q2 no leftover input :: empty
+PASS fraction_mixed_convert lv3 Q2 question text :: 29/7 を帯分数で表しなさい
+PASS fraction_mixed_convert lv3 Q2 input type :: mixed
+PASS fraction_mixed_convert lv3 Q2 expected answer :: 4と1/7
+PASS fraction_mixed_convert lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 4と1/7 です 29÷7＝4 あまり 1 なので、
+PASS fraction_mixed_convert lv3 Q2 correct answer shown :: shown=正解は 4と1/7 です expected=4と1/7
+PASS fraction_mixed_convert lv3 Q2 solution display :: steps=2
+PASS fraction_mixed_convert lv3 no page errors :: none
+PASS fraction_mixed_convert lv3 no 404 :: none
+PASS fraction_mixed_convert lv4 Q1 question text :: 5と3分の2 を仮分数で表しなさい
+PASS fraction_mixed_convert lv4 Q1 input type :: fraction
+PASS fraction_mixed_convert lv4 Q1 expected answer :: 5と2/3
+PASS fraction_mixed_convert lv4 Q1 correct feedback :: 🎉 せいかい！ 5と2/3 = 5×3＋2 = 17 なので、17/3 です。
+PASS fraction_mixed_convert lv4 Q1 solution display :: steps=3
+PASS fraction_mixed_convert lv4 Q1 solution answer value :: expected=5と2/3
+PASS fraction_mixed_convert lv4 Q2 no leftover input :: empty
+PASS fraction_mixed_convert lv4 Q2 question text :: 1と2分の1 を仮分数で表しなさい
+PASS fraction_mixed_convert lv4 Q2 input type :: fraction
+PASS fraction_mixed_convert lv4 Q2 expected answer :: 1と1/2
+PASS fraction_mixed_convert lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1と1/2 です 1と1/2 = 1×2＋1 = 3
+PASS fraction_mixed_convert lv4 Q2 correct answer shown :: shown=正解は 1と1/2 です expected=1と1/2
+PASS fraction_mixed_convert lv4 Q2 solution display :: steps=3
+PASS fraction_mixed_convert lv4 no page errors :: none
+PASS fraction_mixed_convert lv4 no 404 :: none
+PASS fraction_mixed_convert lv5 Q1 question text :: 6/4 を帯分数で表しなさい
+PASS fraction_mixed_convert lv5 Q1 input type :: mixed
+PASS fraction_mixed_convert lv5 Q1 expected answer :: 1と1/2
+PASS fraction_mixed_convert lv5 Q1 correct feedback :: 🎉 せいかい！ 6÷4＝1 あまり 2 なので、1と2分の1 になります。 答
+PASS fraction_mixed_convert lv5 Q1 solution display :: steps=3
+PASS fraction_mixed_convert lv5 Q1 solution answer value :: expected=1と1/2
+PASS fraction_mixed_convert lv5 Q2 no leftover input :: empty
+PASS fraction_mixed_convert lv5 Q2 question text :: 5と8分の5 を仮分数で表しなさい
+PASS fraction_mixed_convert lv5 Q2 input type :: fraction
+PASS fraction_mixed_convert lv5 Q2 expected answer :: 5と5/8
+PASS fraction_mixed_convert lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 5と5/8 です 5と5/8 = 5×8＋5 = 4
+PASS fraction_mixed_convert lv5 Q2 correct answer shown :: shown=正解は 5と5/8 です expected=5と5/8
+PASS fraction_mixed_convert lv5 Q2 solution display :: steps=3
+PASS fraction_mixed_convert lv5 no page errors :: none
+PASS fraction_mixed_convert lv5 no 404 :: none
+PASS fraction_big_small lv2 Q1 question text :: 2分の1と3分の2 のどちらが大きいか比べなさい
+PASS fraction_big_small lv2 Q1 input type :: choice
+PASS fraction_big_small lv2 Q1 expected answer :: 3分の2
+PASS fraction_big_small lv2 Q1 choices rendered :: rendered=2 expected=2
+PASS fraction_big_small lv2 Q1 correct feedback :: 🎉 せいかい！ 3分の2 の方が大きいです。 (分子2、分母3)もう一方は分子
+PASS fraction_big_small lv2 Q1 solution display :: steps=2
+PASS fraction_big_small lv2 Q1 solution answer value :: expected=3分の2
+PASS fraction_big_small lv2 Q2 no leftover input :: empty
+PASS fraction_big_small lv2 Q2 question text :: 8分の1と8分の5 のどちらが大きいか比べなさい
+PASS fraction_big_small lv2 Q2 input type :: choice
+PASS fraction_big_small lv2 Q2 expected answer :: 8分の5
+PASS fraction_big_small lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 8分の5 です 8分の5 の方が大きいです。 (分子
+PASS fraction_big_small lv2 Q2 correct answer shown :: shown=正解は 8分の5 です expected=8分の5
+PASS fraction_big_small lv2 Q2 solution display :: steps=2
+PASS fraction_big_small lv2 no page errors :: none
+PASS fraction_big_small lv2 no 404 :: none
+PASS fraction_big_small lv3 Q1 question text :: 7分の3と7分の5 のどちらが大きいか比べなさい
+PASS fraction_big_small lv3 Q1 input type :: choice
+PASS fraction_big_small lv3 Q1 expected answer :: 7分の5
+PASS fraction_big_small lv3 Q1 choices rendered :: rendered=2 expected=2
+PASS fraction_big_small lv3 Q1 correct feedback :: 🎉 せいかい！ 7分の5 の方が大きいです。 (分子5、分母7)もう一方は分子
+PASS fraction_big_small lv3 Q1 solution display :: steps=2
+PASS fraction_big_small lv3 Q1 solution answer value :: expected=7分の5
+PASS fraction_big_small lv3 Q2 no leftover input :: empty
+PASS fraction_big_small lv3 Q2 question text :: 8分の5と8分の1 のどちらが大きいか比べなさい
+PASS fraction_big_small lv3 Q2 input type :: choice
+PASS fraction_big_small lv3 Q2 expected answer :: 8分の5
+PASS fraction_big_small lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 8分の5 です 8分の5 の方が大きいです。 (分子
+PASS fraction_big_small lv3 Q2 correct answer shown :: shown=正解は 8分の5 です expected=8分の5
+PASS fraction_big_small lv3 Q2 solution display :: steps=2
+PASS fraction_big_small lv3 no page errors :: none
+PASS fraction_big_small lv3 no 404 :: none
+PASS fraction_big_small lv4 Q1 question text :: 5分の4と5分の2 のどちらが大きいか比べなさい
+PASS fraction_big_small lv4 Q1 input type :: choice
+PASS fraction_big_small lv4 Q1 expected answer :: 5分の4
+PASS fraction_big_small lv4 Q1 choices rendered :: rendered=2 expected=2
+PASS fraction_big_small lv4 Q1 correct feedback :: 🎉 せいかい！ 5分の4 の方が大きいです。 (分子4、分母5)もう一方は分子
+PASS fraction_big_small lv4 Q1 solution display :: steps=2
+PASS fraction_big_small lv4 Q1 solution answer value :: expected=5分の4
+PASS fraction_big_small lv4 Q2 no leftover input :: empty
+PASS fraction_big_small lv4 Q2 question text :: 12分の7と12分の5 のどちらが大きいか比べなさい
+PASS fraction_big_small lv4 Q2 input type :: choice
+PASS fraction_big_small lv4 Q2 expected answer :: 12分の7
+PASS fraction_big_small lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 12分の7 です 12分の7 の方が大きいです。 (
+PASS fraction_big_small lv4 Q2 correct answer shown :: shown=正解は 12分の7 です expected=12分の7
+PASS fraction_big_small lv4 Q2 solution display :: steps=2
+PASS fraction_big_small lv4 no page errors :: none
+PASS fraction_big_small lv4 no 404 :: none
+PASS fraction_big_small lv5 Q1 question text :: 13分の1と13分の9 のどちらが大きいか比べなさい
+PASS fraction_big_small lv5 Q1 input type :: choice
+PASS fraction_big_small lv5 Q1 expected answer :: 13分の9
+PASS fraction_big_small lv5 Q1 choices rendered :: rendered=2 expected=2
+PASS fraction_big_small lv5 Q1 correct feedback :: 🎉 せいかい！ 13分の9 の方が大きいです。 (分子9、分母13)もう一方は
+PASS fraction_big_small lv5 Q1 solution display :: steps=2
+PASS fraction_big_small lv5 Q1 solution answer value :: expected=13分の9
+PASS fraction_big_small lv5 Q2 no leftover input :: empty
+PASS fraction_big_small lv5 Q2 question text :: 5分の1と15分の2 のどちらが大きいか比べなさい
+PASS fraction_big_small lv5 Q2 input type :: choice
+PASS fraction_big_small lv5 Q2 expected answer :: 15分の2
+PASS fraction_big_small lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 15分の2 です 15分の2 の方が大きいです。 (
+PASS fraction_big_small lv5 Q2 correct answer shown :: shown=正解は 15分の2 です expected=15分の2
+PASS fraction_big_small lv5 Q2 solution display :: steps=2
+PASS fraction_big_small lv5 no page errors :: none
+PASS fraction_big_small lv5 no 404 :: none
+PASS speed_calculation lv1 Q1 question text :: 4kmを2時間で進みました。速さは何kmですか（1時間あたり）
+PASS speed_calculation lv1 Q1 input type :: decimal
+PASS speed_calculation lv1 Q1 expected answer :: 2
+PASS speed_calculation lv1 Q1 correct feedback :: 🎉 せいかい！ 速さ＝道のり÷時間 なので、4÷2＝2です。 答えと解き方をみ
+PASS speed_calculation lv1 Q1 solution display :: steps=1
+PASS speed_calculation lv1 Q1 solution answer value :: expected=2
+PASS speed_calculation lv1 Q2 no leftover input :: empty
+PASS speed_calculation lv1 Q2 question text :: 6kmを3時間で進みました。速さは何kmですか（1時間あたり）
+PASS speed_calculation lv1 Q2 input type :: decimal
+PASS speed_calculation lv1 Q2 expected answer :: 2
+PASS speed_calculation lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 速さ＝道のり÷時間 なので、6÷3＝2です
+PASS speed_calculation lv1 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS speed_calculation lv1 Q2 solution display :: steps=1
+PASS speed_calculation lv1 no page errors :: none
+PASS speed_calculation lv1 no 404 :: none
+PASS speed_calculation lv2 Q1 question text :: 9kmを3時間で進みました。速さは何kmですか（1時間あたり）
+PASS speed_calculation lv2 Q1 input type :: decimal
+PASS speed_calculation lv2 Q1 expected answer :: 3
+PASS speed_calculation lv2 Q1 correct feedback :: 🎉 せいかい！ 速さ＝道のり÷時間 なので、9÷3＝3です。 答えと解き方をみ
+PASS speed_calculation lv2 Q1 solution display :: steps=1
+PASS speed_calculation lv2 Q1 solution answer value :: expected=3
+PASS speed_calculation lv2 Q2 no leftover input :: empty
+PASS speed_calculation lv2 Q2 question text :: 6kmを3時間で進みました。速さは何kmですか（1時間あたり）
+PASS speed_calculation lv2 Q2 input type :: decimal
+PASS speed_calculation lv2 Q2 expected answer :: 2
+PASS speed_calculation lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 速さ＝道のり÷時間 なので、6÷3＝2です
+PASS speed_calculation lv2 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS speed_calculation lv2 Q2 solution display :: steps=1
+PASS speed_calculation lv2 no page errors :: none
+PASS speed_calculation lv2 no 404 :: none
+PASS speed_calculation lv3 Q1 question text :: 4kmを2時間で進みました。速さは何kmですか（1時間あたり）
+PASS speed_calculation lv3 Q1 input type :: decimal
+PASS speed_calculation lv3 Q1 expected answer :: 2
+PASS speed_calculation lv3 Q1 correct feedback :: 🎉 せいかい！ 速さ＝道のり÷時間 なので、4÷2＝2です。 答えと解き方をみ
+PASS speed_calculation lv3 Q1 solution display :: steps=1
+PASS speed_calculation lv3 Q1 solution answer value :: expected=2
+PASS speed_calculation lv3 Q2 no leftover input :: empty
+PASS speed_calculation lv3 Q2 question text :: 9kmを3時間で進みました。速さは何kmですか（1時間あたり）
+PASS speed_calculation lv3 Q2 input type :: decimal
+PASS speed_calculation lv3 Q2 expected answer :: 3
+PASS speed_calculation lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 速さ＝道のり÷時間 なので、9÷3＝3です
+PASS speed_calculation lv3 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS speed_calculation lv3 Q2 solution display :: steps=1
+PASS speed_calculation lv3 no page errors :: none
+PASS speed_calculation lv3 no 404 :: none
+PASS speed_calculation lv4 Q1 question text :: 4kmを2時間で進みました。速さは何kmですか（1時間あたり）
+PASS speed_calculation lv4 Q1 input type :: decimal
+PASS speed_calculation lv4 Q1 expected answer :: 2
+PASS speed_calculation lv4 Q1 correct feedback :: 🎉 せいかい！ 速さ＝道のり÷時間 なので、4÷2＝2です。 答えと解き方をみ
+PASS speed_calculation lv4 Q1 solution display :: steps=1
+PASS speed_calculation lv4 Q1 solution answer value :: expected=2
+PASS speed_calculation lv4 Q2 no leftover input :: empty
+PASS speed_calculation lv4 Q2 question text :: 9kmを3時間で進みました。速さは何kmですか（1時間あたり）
+PASS speed_calculation lv4 Q2 input type :: decimal
+PASS speed_calculation lv4 Q2 expected answer :: 3
+PASS speed_calculation lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 速さ＝道のり÷時間 なので、9÷3＝3です
+PASS speed_calculation lv4 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS speed_calculation lv4 Q2 solution display :: steps=1
+PASS speed_calculation lv4 no page errors :: none
+PASS speed_calculation lv4 no 404 :: none
+PASS speed_calculation lv5 Q1 question text :: 4kmを2時間で進みました。速さは何kmですか（1時間あたり）
+PASS speed_calculation lv5 Q1 input type :: decimal
+PASS speed_calculation lv5 Q1 expected answer :: 2
+PASS speed_calculation lv5 Q1 correct feedback :: 🎉 せいかい！ 速さ＝道のり÷時間 なので、4÷2＝2です。 答えと解き方をみ
+PASS speed_calculation lv5 Q1 solution display :: steps=1
+PASS speed_calculation lv5 Q1 solution answer value :: expected=2
+PASS speed_calculation lv5 Q2 no leftover input :: empty
+PASS speed_calculation lv5 Q2 question text :: 6kmを2時間で進みました。速さは何kmですか（1時間あたり）
+PASS speed_calculation lv5 Q2 input type :: decimal
+PASS speed_calculation lv5 Q2 expected answer :: 3
+PASS speed_calculation lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 速さ＝道のり÷時間 なので、6÷2＝3です
+PASS speed_calculation lv5 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS speed_calculation lv5 Q2 solution display :: steps=1
+PASS speed_calculation lv5 no page errors :: none
+PASS speed_calculation lv5 no 404 :: none
+PASS distance_calculation lv2 Q1 question text :: 時速6kmで6時間走ると、何km進みますか
+PASS distance_calculation lv2 Q1 input type :: integer
+PASS distance_calculation lv2 Q1 expected answer :: 36
+PASS distance_calculation lv2 Q1 correct feedback :: 🎉 せいかい！ 道のり＝速さ×時間 なので、6×6＝36です。 答えと解き方を
+PASS distance_calculation lv2 Q1 solution display :: steps=1
+PASS distance_calculation lv2 Q1 solution answer value :: expected=36
+PASS distance_calculation lv2 Q2 no leftover input :: empty
+PASS distance_calculation lv2 Q2 question text :: 時速9kmで3時間走ると、何km進みますか
+PASS distance_calculation lv2 Q2 input type :: integer
+PASS distance_calculation lv2 Q2 expected answer :: 27
+PASS distance_calculation lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 27 です 道のり＝速さ×時間 なので、9×3＝27
+PASS distance_calculation lv2 Q2 correct answer shown :: shown=正解は 27 です expected=27
+PASS distance_calculation lv2 Q2 solution display :: steps=1
+PASS distance_calculation lv2 no page errors :: none
+PASS distance_calculation lv2 no 404 :: none
+PASS distance_calculation lv3 Q1 question text :: 時速5kmで10時間走ると、何km進みますか
+PASS distance_calculation lv3 Q1 input type :: integer
+PASS distance_calculation lv3 Q1 expected answer :: 50
+PASS distance_calculation lv3 Q1 correct feedback :: 🎉 せいかい！ 道のり＝速さ×時間 なので、5×10＝50です。 答えと解き方
+PASS distance_calculation lv3 Q1 solution display :: steps=1
+PASS distance_calculation lv3 Q1 solution answer value :: expected=50
+PASS distance_calculation lv3 Q2 no leftover input :: empty
+PASS distance_calculation lv3 Q2 question text :: 時速15kmで5時間走ると、何km進みますか
+PASS distance_calculation lv3 Q2 input type :: integer
+PASS distance_calculation lv3 Q2 expected answer :: 75
+PASS distance_calculation lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 75 です 道のり＝速さ×時間 なので、15×5＝7
+PASS distance_calculation lv3 Q2 correct answer shown :: shown=正解は 75 です expected=75
+PASS distance_calculation lv3 Q2 solution display :: steps=1
+PASS distance_calculation lv3 no page errors :: none
+PASS distance_calculation lv3 no 404 :: none
+PASS distance_calculation lv4 Q1 question text :: 時速9kmで5時間走ると、何km進みますか
+PASS distance_calculation lv4 Q1 input type :: integer
+PASS distance_calculation lv4 Q1 expected answer :: 45
+PASS distance_calculation lv4 Q1 correct feedback :: 🎉 せいかい！ 道のり＝速さ×時間 なので、9×5＝45です。 答えと解き方を
+PASS distance_calculation lv4 Q1 solution display :: steps=1
+PASS distance_calculation lv4 Q1 solution answer value :: expected=45
+PASS distance_calculation lv4 Q2 no leftover input :: empty
+PASS distance_calculation lv4 Q2 question text :: 時速7kmで5時間走ると、何km進みますか
+PASS distance_calculation lv4 Q2 input type :: integer
+PASS distance_calculation lv4 Q2 expected answer :: 35
+PASS distance_calculation lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 35 です 道のり＝速さ×時間 なので、7×5＝35
+PASS distance_calculation lv4 Q2 correct answer shown :: shown=正解は 35 です expected=35
+PASS distance_calculation lv4 Q2 solution display :: steps=1
+PASS distance_calculation lv4 no page errors :: none
+PASS distance_calculation lv4 no 404 :: none
+PASS distance_calculation lv5 Q1 question text :: 時速6kmで8時間走ると、何km進みますか
+PASS distance_calculation lv5 Q1 input type :: integer
+PASS distance_calculation lv5 Q1 expected answer :: 48
+PASS distance_calculation lv5 Q1 correct feedback :: 🎉 せいかい！ 道のり＝速さ×時間 なので、6×8＝48です。 答えと解き方を
+PASS distance_calculation lv5 Q1 solution display :: steps=1
+PASS distance_calculation lv5 Q1 solution answer value :: expected=48
+PASS distance_calculation lv5 Q2 no leftover input :: empty
+PASS distance_calculation lv5 Q2 question text :: 時速30kmで3時間走ると、何km進みますか
+PASS distance_calculation lv5 Q2 input type :: integer
+PASS distance_calculation lv5 Q2 expected answer :: 90
+PASS distance_calculation lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 90 です 道のり＝速さ×時間 なので、30×3＝9
+PASS distance_calculation lv5 Q2 correct answer shown :: shown=正解は 90 です expected=90
+PASS distance_calculation lv5 Q2 solution display :: steps=1
+PASS distance_calculation lv5 no page errors :: none
+PASS distance_calculation lv5 no 404 :: none
+PASS time_calculation lv2 Q1 question text :: 時速13kmで65km進むと、何時間かかりますか
+PASS time_calculation lv2 Q1 input type :: integer
+PASS time_calculation lv2 Q1 expected answer :: 5
+PASS time_calculation lv2 Q1 correct feedback :: 🎉 せいかい！ 時間＝道のり÷速さ なので、65÷13＝5です。 答えと解き方
+PASS time_calculation lv2 Q1 solution display :: steps=1
+PASS time_calculation lv2 Q1 solution answer value :: expected=5
+PASS time_calculation lv2 Q2 no leftover input :: empty
+PASS time_calculation lv2 Q2 question text :: 時速7kmで28km進むと、何時間かかりますか
+PASS time_calculation lv2 Q2 input type :: integer
+PASS time_calculation lv2 Q2 expected answer :: 4
+PASS time_calculation lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 4 です 時間＝道のり÷速さ なので、28÷7＝4で
+PASS time_calculation lv2 Q2 correct answer shown :: shown=正解は 4 です expected=4
+PASS time_calculation lv2 Q2 solution display :: steps=1
+PASS time_calculation lv2 no page errors :: none
+PASS time_calculation lv2 no 404 :: none
+PASS time_calculation lv3 Q1 question text :: 時速3kmで24km進むと、何時間かかりますか
+PASS time_calculation lv3 Q1 input type :: integer
+PASS time_calculation lv3 Q1 expected answer :: 8
+PASS time_calculation lv3 Q1 correct feedback :: 🎉 せいかい！ 時間＝道のり÷速さ なので、24÷3＝8です。 答えと解き方を
+PASS time_calculation lv3 Q1 solution display :: steps=1
+PASS time_calculation lv3 Q1 solution answer value :: expected=8
+PASS time_calculation lv3 Q2 no leftover input :: empty
+PASS time_calculation lv3 Q2 question text :: 時速4kmで28km進むと、何時間かかりますか
+PASS time_calculation lv3 Q2 input type :: integer
+PASS time_calculation lv3 Q2 expected answer :: 7
+PASS time_calculation lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 7 です 時間＝道のり÷速さ なので、28÷4＝7で
+PASS time_calculation lv3 Q2 correct answer shown :: shown=正解は 7 です expected=7
+PASS time_calculation lv3 Q2 solution display :: steps=1
+PASS time_calculation lv3 no page errors :: none
+PASS time_calculation lv3 no 404 :: none
+PASS time_calculation lv4 Q1 question text :: 時速12kmで96km進むと、何時間かかりますか
+PASS time_calculation lv4 Q1 input type :: integer
+PASS time_calculation lv4 Q1 expected answer :: 8
+PASS time_calculation lv4 Q1 correct feedback :: 🎉 せいかい！ 時間＝道のり÷速さ なので、96÷12＝8です。 答えと解き方
+PASS time_calculation lv4 Q1 solution display :: steps=1
+PASS time_calculation lv4 Q1 solution answer value :: expected=8
+PASS time_calculation lv4 Q2 no leftover input :: empty
+PASS time_calculation lv4 Q2 question text :: 時速20kmで120km進むと、何時間かかりますか
+PASS time_calculation lv4 Q2 input type :: integer
+PASS time_calculation lv4 Q2 expected answer :: 6
+PASS time_calculation lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 6 です 時間＝道のり÷速さ なので、120÷20＝
+PASS time_calculation lv4 Q2 correct answer shown :: shown=正解は 6 です expected=6
+PASS time_calculation lv4 Q2 solution display :: steps=1
+PASS time_calculation lv4 no page errors :: none
+PASS time_calculation lv4 no 404 :: none
+PASS time_calculation lv5 Q1 question text :: 時速14kmで98km進むと、何時間かかりますか
+PASS time_calculation lv5 Q1 input type :: integer
+PASS time_calculation lv5 Q1 expected answer :: 7
+PASS time_calculation lv5 Q1 correct feedback :: 🎉 せいかい！ 時間＝道のり÷速さ なので、98÷14＝7です。 答えと解き方
+PASS time_calculation lv5 Q1 solution display :: steps=1
+PASS time_calculation lv5 Q1 solution answer value :: expected=7
+PASS time_calculation lv5 Q2 no leftover input :: empty
+PASS time_calculation lv5 Q2 question text :: 時速4kmで8km進むと、何時間かかりますか
+PASS time_calculation lv5 Q2 input type :: integer
+PASS time_calculation lv5 Q2 expected answer :: 2
+PASS time_calculation lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 時間＝道のり÷速さ なので、8÷4＝2です
+PASS time_calculation lv5 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS time_calculation lv5 Q2 solution display :: steps=1
+PASS time_calculation lv5 no page errors :: none
+PASS time_calculation lv5 no 404 :: none
+PASS speed_unit_conversion lv2 Q1 question text :: 分速50mは、時速何kmですか
+PASS speed_unit_conversion lv2 Q1 input type :: decimal
+PASS speed_unit_conversion lv2 Q1 expected answer :: 3
+PASS speed_unit_conversion lv2 Q1 correct feedback :: 🎉 せいかい！ 分速50mは、1時間に3000m進みます。1000mが1kmな
+PASS speed_unit_conversion lv2 Q1 solution display :: steps=2
+PASS speed_unit_conversion lv2 Q1 solution answer value :: expected=3
+PASS speed_unit_conversion lv2 Q2 no leftover input :: empty
+PASS speed_unit_conversion lv2 Q2 question text :: 時速60kmは、分速何mですか
+PASS speed_unit_conversion lv2 Q2 input type :: decimal
+PASS speed_unit_conversion lv2 Q2 expected answer :: 1000
+PASS speed_unit_conversion lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1000 です 時速60kmは、1時間に60000m
+PASS speed_unit_conversion lv2 Q2 correct answer shown :: shown=正解は 1000 です expected=1000
+PASS speed_unit_conversion lv2 Q2 solution display :: steps=2
+PASS speed_unit_conversion lv2 no page errors :: none
+PASS speed_unit_conversion lv2 no 404 :: none
+PASS speed_unit_conversion lv3 Q1 question text :: 時速60kmは、分速何mですか
+PASS speed_unit_conversion lv3 Q1 input type :: decimal
+PASS speed_unit_conversion lv3 Q1 expected answer :: 1000
+PASS speed_unit_conversion lv3 Q1 correct feedback :: 🎉 せいかい！ 時速60kmは、1時間に60000m進みます。1時間は60分な
+PASS speed_unit_conversion lv3 Q1 solution display :: steps=2
+PASS speed_unit_conversion lv3 Q1 solution answer value :: expected=1000
+PASS speed_unit_conversion lv3 Q2 no leftover input :: empty
+PASS speed_unit_conversion lv3 Q2 question text :: 分速50mは、時速何kmですか
+PASS speed_unit_conversion lv3 Q2 input type :: decimal
+PASS speed_unit_conversion lv3 Q2 expected answer :: 3
+PASS speed_unit_conversion lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 分速50mは、1時間に3000m進みます。
+PASS speed_unit_conversion lv3 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS speed_unit_conversion lv3 Q2 solution display :: steps=2
+PASS speed_unit_conversion lv3 no page errors :: none
+PASS speed_unit_conversion lv3 no 404 :: none
+PASS speed_unit_conversion lv4 Q1 question text :: 時速60kmは、分速何mですか
+PASS speed_unit_conversion lv4 Q1 input type :: decimal
+PASS speed_unit_conversion lv4 Q1 expected answer :: 1000
+PASS speed_unit_conversion lv4 Q1 correct feedback :: 🎉 せいかい！ 時速60kmは、1時間に60000m進みます。1時間は60分な
+PASS speed_unit_conversion lv4 Q1 solution display :: steps=2
+PASS speed_unit_conversion lv4 Q1 solution answer value :: expected=1000
+PASS speed_unit_conversion lv4 Q2 no leftover input :: empty
+PASS speed_unit_conversion lv4 Q2 question text :: 分速50mは、時速何kmですか
+PASS speed_unit_conversion lv4 Q2 input type :: decimal
+PASS speed_unit_conversion lv4 Q2 expected answer :: 3
+PASS speed_unit_conversion lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 分速50mは、1時間に3000m進みます。
+PASS speed_unit_conversion lv4 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS speed_unit_conversion lv4 Q2 solution display :: steps=2
+PASS speed_unit_conversion lv4 no page errors :: none
+PASS speed_unit_conversion lv4 no 404 :: none
+PASS speed_unit_conversion lv5 Q1 question text :: 分速50mは、時速何kmですか
+PASS speed_unit_conversion lv5 Q1 input type :: decimal
+PASS speed_unit_conversion lv5 Q1 expected answer :: 3
+PASS speed_unit_conversion lv5 Q1 correct feedback :: 🎉 せいかい！ 分速50mは、1時間に3000m進みます。1000mが1kmな
+PASS speed_unit_conversion lv5 Q1 solution display :: steps=2
+PASS speed_unit_conversion lv5 Q1 solution answer value :: expected=3
+PASS speed_unit_conversion lv5 Q2 no leftover input :: empty
+PASS speed_unit_conversion lv5 Q2 question text :: 時速60kmは、分速何mですか
+PASS speed_unit_conversion lv5 Q2 input type :: decimal
+PASS speed_unit_conversion lv5 Q2 expected answer :: 1000
+PASS speed_unit_conversion lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 1000 です 時速60kmは、1時間に60000m
+PASS speed_unit_conversion lv5 Q2 correct answer shown :: shown=正解は 1000 です expected=1000
+PASS speed_unit_conversion lv5 Q2 solution display :: steps=2
+PASS speed_unit_conversion lv5 no page errors :: none
+PASS speed_unit_conversion lv5 no 404 :: none
+PASS speed_comparison lv2 Q1 question text :: たろうさんは時速13km、はなこさんは時速10kmで進みます。どちらが速いですか
+PASS speed_comparison lv2 Q1 input type :: choice
+PASS speed_comparison lv2 Q1 expected answer :: たろうさん
+PASS speed_comparison lv2 Q1 correct feedback :: 🎉 せいかい！ たろうさんの方が速いです。速さは時速13kmです。 答えと解き
+PASS speed_comparison lv2 Q1 solution display :: steps=2
+PASS speed_comparison lv2 Q1 solution answer value :: expected=たろうさん
+PASS speed_comparison lv2 Q2 no leftover input :: empty
+PASS speed_comparison lv2 Q2 question text :: たろうさんは時速19km、はなこさんは時速16kmで進みます。どちらが速いですか
+PASS speed_comparison lv2 Q2 input type :: choice
+PASS speed_comparison lv2 Q2 expected answer :: たろうさん
+PASS speed_comparison lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は たろうさん です たろうさんの方が速いです。速さは時
+PASS speed_comparison lv2 Q2 correct answer shown :: shown=正解は たろうさん です expected=たろうさん
+PASS speed_comparison lv2 Q2 solution display :: steps=2
+PASS speed_comparison lv2 no page errors :: none
+PASS speed_comparison lv2 no 404 :: none
+PASS speed_comparison lv3 Q1 question text :: たろうさんは時速18km、はなこさんは時速6kmで進みます。どちらが速いですか
+PASS speed_comparison lv3 Q1 input type :: choice
+PASS speed_comparison lv3 Q1 expected answer :: たろうさん
+PASS speed_comparison lv3 Q1 correct feedback :: 🎉 せいかい！ たろうさんの方が速いです。速さは時速18kmです。 答えと解き
+PASS speed_comparison lv3 Q1 solution display :: steps=2
+PASS speed_comparison lv3 Q1 solution answer value :: expected=たろうさん
+PASS speed_comparison lv3 Q2 no leftover input :: empty
+PASS speed_comparison lv3 Q2 question text :: たろうさんは時速15km、はなこさんは時速11kmで進みます。どちらが速いですか
+PASS speed_comparison lv3 Q2 input type :: choice
+PASS speed_comparison lv3 Q2 expected answer :: たろうさん
+PASS speed_comparison lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は たろうさん です たろうさんの方が速いです。速さは時
+PASS speed_comparison lv3 Q2 correct answer shown :: shown=正解は たろうさん です expected=たろうさん
+PASS speed_comparison lv3 Q2 solution display :: steps=2
+PASS speed_comparison lv3 no page errors :: none
+PASS speed_comparison lv3 no 404 :: none
+PASS speed_comparison lv4 Q1 question text :: たろうさんは時速15km、はなこさんは時速20kmで進みます。どちらが速いですか
+PASS speed_comparison lv4 Q1 input type :: choice
+PASS speed_comparison lv4 Q1 expected answer :: はなこさん
+PASS speed_comparison lv4 Q1 correct feedback :: 🎉 せいかい！ はなこさんの方が速いです。速さは時速20kmです。 答えと解き
+PASS speed_comparison lv4 Q1 solution display :: steps=2
+PASS speed_comparison lv4 Q1 solution answer value :: expected=はなこさん
+PASS speed_comparison lv4 Q2 no leftover input :: empty
+PASS speed_comparison lv4 Q2 question text :: たろうさんは時速4km、はなこさんは時速11kmで進みます。どちらが速いですか
+PASS speed_comparison lv4 Q2 input type :: choice
+PASS speed_comparison lv4 Q2 expected answer :: はなこさん
+PASS speed_comparison lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は はなこさん です はなこさんの方が速いです。速さは時
+PASS speed_comparison lv4 Q2 correct answer shown :: shown=正解は はなこさん です expected=はなこさん
+PASS speed_comparison lv4 Q2 solution display :: steps=2
+PASS speed_comparison lv4 no page errors :: none
+PASS speed_comparison lv4 no 404 :: none
+PASS speed_comparison lv5 Q1 question text :: たろうさんは時速13km、はなこさんは時速3kmで進みます。どちらが速いですか
+PASS speed_comparison lv5 Q1 input type :: choice
+PASS speed_comparison lv5 Q1 expected answer :: たろうさん
+PASS speed_comparison lv5 Q1 correct feedback :: 🎉 せいかい！ たろうさんの方が速いです。速さは時速13kmです。 答えと解き
+PASS speed_comparison lv5 Q1 solution display :: steps=2
+PASS speed_comparison lv5 Q1 solution answer value :: expected=たろうさん
+PASS speed_comparison lv5 Q2 no leftover input :: empty
+PASS speed_comparison lv5 Q2 question text :: たろうさんは時速15km、はなこさんは時速9kmで進みます。どちらが速いですか
+PASS speed_comparison lv5 Q2 input type :: choice
+PASS speed_comparison lv5 Q2 expected answer :: たろうさん
+PASS speed_comparison lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は たろうさん です たろうさんの方が速いです。速さは時
+PASS speed_comparison lv5 Q2 correct answer shown :: shown=正解は たろうさん です expected=たろうさん
+PASS speed_comparison lv5 Q2 solution display :: steps=2
+PASS speed_comparison lv5 no page errors :: none
+PASS speed_comparison lv5 no 404 :: none
+PASS speed_word lv2 Q1 question text :: おうちから学校まで分速40mで歩くと2分かかります。学校までは何mですか。
+PASS speed_word lv2 Q1 input type :: integer
+PASS speed_word lv2 Q1 expected answer :: 80
+PASS speed_word lv2 Q1 correct feedback :: 🎉 せいかい！ 道のり＝速さ×時間 なので、40×2＝80です。 答えと解き方
+PASS speed_word lv2 Q1 solution display :: steps=1
+PASS speed_word lv2 Q1 solution answer value :: expected=80
+PASS speed_word lv2 Q2 no leftover input :: empty
+PASS speed_word lv2 Q2 question text :: おうちから学校まで分速42mで歩くと2分かかります。学校までは何mですか。
+PASS speed_word lv2 Q2 input type :: integer
+PASS speed_word lv2 Q2 expected answer :: 84
+PASS speed_word lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 84 です 道のり＝速さ×時間 なので、42×2＝8
+PASS speed_word lv2 Q2 correct answer shown :: shown=正解は 84 です expected=84
+PASS speed_word lv2 Q2 solution display :: steps=1
+PASS speed_word lv2 no page errors :: none
+PASS speed_word lv2 no 404 :: none
+PASS speed_word lv3 Q1 question text :: おうちから学校まで分速43mで歩くと2分かかります。学校までは何mですか。
+PASS speed_word lv3 Q1 input type :: integer
+PASS speed_word lv3 Q1 expected answer :: 86
+PASS speed_word lv3 Q1 correct feedback :: 🎉 せいかい！ 道のり＝速さ×時間 なので、43×2＝86です。 答えと解き方
+PASS speed_word lv3 Q1 solution display :: steps=1
+PASS speed_word lv3 Q1 solution answer value :: expected=86
+PASS speed_word lv3 Q2 no leftover input :: empty
+PASS speed_word lv3 Q2 question text :: おうちから学校まで分速42mで歩くと2分かかります。学校までは何mですか。
+PASS speed_word lv3 Q2 input type :: integer
+PASS speed_word lv3 Q2 expected answer :: 84
+PASS speed_word lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 84 です 道のり＝速さ×時間 なので、42×2＝8
+PASS speed_word lv3 Q2 correct answer shown :: shown=正解は 84 です expected=84
+PASS speed_word lv3 Q2 solution display :: steps=1
+PASS speed_word lv3 no page errors :: none
+PASS speed_word lv3 no 404 :: none
+PASS speed_word lv4 Q1 question text :: おうちから学校まで分速44mで歩くと2分かかります。学校までは何mですか。
+PASS speed_word lv4 Q1 input type :: integer
+PASS speed_word lv4 Q1 expected answer :: 88
+PASS speed_word lv4 Q1 correct feedback :: 🎉 せいかい！ 道のり＝速さ×時間 なので、44×2＝88です。 答えと解き方
+PASS speed_word lv4 Q1 solution display :: steps=1
+PASS speed_word lv4 Q1 solution answer value :: expected=88
+PASS speed_word lv4 Q2 no leftover input :: empty
+PASS speed_word lv4 Q2 question text :: おうちから学校まで分速40mで歩くと2分かかります。学校までは何mですか。
+PASS speed_word lv4 Q2 input type :: integer
+PASS speed_word lv4 Q2 expected answer :: 80
+PASS speed_word lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 80 です 道のり＝速さ×時間 なので、40×2＝8
+PASS speed_word lv4 Q2 correct answer shown :: shown=正解は 80 です expected=80
+PASS speed_word lv4 Q2 solution display :: steps=1
+PASS speed_word lv4 no page errors :: none
+PASS speed_word lv4 no 404 :: none
+PASS speed_word lv5 Q1 question text :: おうちから学校まで分速42mで歩くと2分かかります。学校までは何mですか。
+PASS speed_word lv5 Q1 input type :: integer
+PASS speed_word lv5 Q1 expected answer :: 84
+PASS speed_word lv5 Q1 correct feedback :: 🎉 せいかい！ 道のり＝速さ×時間 なので、42×2＝84です。 答えと解き方
+PASS speed_word lv5 Q1 solution display :: steps=1
+PASS speed_word lv5 Q1 solution answer value :: expected=84
+PASS speed_word lv5 Q2 no leftover input :: empty
+PASS speed_word lv5 Q2 question text :: おうちから学校まで分速44mで歩くと2分かかります。学校までは何mですか。
+PASS speed_word lv5 Q2 input type :: integer
+PASS speed_word lv5 Q2 expected answer :: 88
+PASS speed_word lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 88 です 道のり＝速さ×時間 なので、44×2＝8
+PASS speed_word lv5 Q2 correct answer shown :: shown=正解は 88 です expected=88
+PASS speed_word lv5 Q2 solution display :: steps=1
+PASS speed_word lv5 no page errors :: none
+PASS speed_word lv5 no 404 :: none
+PASS speed_multi_step lv3 Q1 question text :: はじめの6時間は時速15kmで走り、つぎの6時間は時速21kmで走りました。走っ
+PASS speed_multi_step lv3 Q1 input type :: decimal
+PASS speed_multi_step lv3 Q1 expected answer :: 18
+PASS speed_multi_step lv3 Q1 correct feedback :: 🎉 せいかい！ 前半：15×6＝90km、後半：21×6＝126km、合計：2
+PASS speed_multi_step lv3 Q1 solution display :: steps=3
+PASS speed_multi_step lv3 Q1 solution answer value :: expected=18
+PASS speed_multi_step lv3 Q2 no leftover input :: empty
+PASS speed_multi_step lv3 Q2 question text :: はじめの6時間は時速3kmで走り、つぎの2時間は時速7kmで走りました。走った距
+PASS speed_multi_step lv3 Q2 input type :: decimal
+PASS speed_multi_step lv3 Q2 expected answer :: 4
+PASS speed_multi_step lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 4 です 前半：3×6＝18km、後半：7×2＝14
+PASS speed_multi_step lv3 Q2 correct answer shown :: shown=正解は 4 です expected=4
+PASS speed_multi_step lv3 Q2 solution display :: steps=3
+PASS speed_multi_step lv3 no page errors :: none
+PASS speed_multi_step lv3 no 404 :: none
+PASS speed_multi_step lv4 Q1 question text :: はじめの4時間は時速20kmで走り、つぎの4時間は時速22kmで走りました。走っ
+PASS speed_multi_step lv4 Q1 input type :: decimal
+PASS speed_multi_step lv4 Q1 expected answer :: 21
+PASS speed_multi_step lv4 Q1 correct feedback :: 🎉 せいかい！ 前半：20×4＝80km、後半：22×4＝88km、合計：16
+PASS speed_multi_step lv4 Q1 solution display :: steps=3
+PASS speed_multi_step lv4 Q1 solution answer value :: expected=21
+PASS speed_multi_step lv4 Q2 no leftover input :: empty
+PASS speed_multi_step lv4 Q2 question text :: はじめの2時間は時速15kmで走り、つぎの3時間は時速20kmで走りました。走っ
+PASS speed_multi_step lv4 Q2 input type :: decimal
+PASS speed_multi_step lv4 Q2 expected answer :: 18
+PASS speed_multi_step lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 18 です 前半：15×2＝30km、後半：20×3
+PASS speed_multi_step lv4 Q2 correct answer shown :: shown=正解は 18 です expected=18
+PASS speed_multi_step lv4 Q2 solution display :: steps=3
+PASS speed_multi_step lv4 no page errors :: none
+PASS speed_multi_step lv4 no 404 :: none
+PASS speed_multi_step lv5 Q1 question text :: はじめの3時間は時速8kmで走り、つぎの3時間は時速10kmで走りました。走った
+PASS speed_multi_step lv5 Q1 input type :: decimal
+PASS speed_multi_step lv5 Q1 expected answer :: 9
+PASS speed_multi_step lv5 Q1 correct feedback :: 🎉 せいかい！ 前半：8×3＝24km、後半：10×3＝30km、合計：54k
+PASS speed_multi_step lv5 Q1 solution display :: steps=3
+PASS speed_multi_step lv5 Q1 solution answer value :: expected=9
+PASS speed_multi_step lv5 Q2 no leftover input :: empty
+PASS speed_multi_step lv5 Q2 question text :: はじめの2時間は時速13kmで走り、つぎの4時間は時速19kmで走りました。走っ
+PASS speed_multi_step lv5 Q2 input type :: decimal
+PASS speed_multi_step lv5 Q2 expected answer :: 17
+PASS speed_multi_step lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 17 です 前半：13×2＝26km、後半：19×4
+PASS speed_multi_step lv5 Q2 correct answer shown :: shown=正解は 17 です expected=17
+PASS speed_multi_step lv5 Q2 solution display :: steps=3
+PASS speed_multi_step lv5 no page errors :: none
+PASS speed_multi_step lv5 no 404 :: none
+PASS circle_area_radius lv2 Q1 question text :: 半径9cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_radius lv2 Q1 input type :: decimal
+PASS circle_area_radius lv2 Q1 expected answer :: 254.34
+PASS circle_area_radius lv2 Q1 correct feedback :: 🎉 せいかい！ 円の面積＝半径×半径×円周率 なので、9×9×3.14＝254
+PASS circle_area_radius lv2 Q1 solution display :: steps=1
+PASS circle_area_radius lv2 Q1 solution answer value :: expected=254.34
+PASS circle_area_radius lv2 Q2 no leftover input :: empty
+PASS circle_area_radius lv2 Q2 question text :: 半径7cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_radius lv2 Q2 input type :: decimal
+PASS circle_area_radius lv2 Q2 expected answer :: 153.86
+PASS circle_area_radius lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 153.86 です 円の面積＝半径×半径×円周率 な
+PASS circle_area_radius lv2 Q2 correct answer shown :: shown=正解は 153.86 です expected=153.86
+PASS circle_area_radius lv2 Q2 solution display :: steps=1
+PASS circle_area_radius lv2 no page errors :: none
+PASS circle_area_radius lv2 no 404 :: none
+PASS circle_area_radius lv3 Q1 question text :: 半径7cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_radius lv3 Q1 input type :: decimal
+PASS circle_area_radius lv3 Q1 expected answer :: 153.86
+PASS circle_area_radius lv3 Q1 correct feedback :: 🎉 せいかい！ 円の面積＝半径×半径×円周率 なので、7×7×3.14＝153
+PASS circle_area_radius lv3 Q1 solution display :: steps=1
+PASS circle_area_radius lv3 Q1 solution answer value :: expected=153.86
+PASS circle_area_radius lv3 Q2 no leftover input :: empty
+PASS circle_area_radius lv3 Q2 question text :: 半径10cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_radius lv3 Q2 input type :: decimal
+PASS circle_area_radius lv3 Q2 expected answer :: 314
+PASS circle_area_radius lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 314 です 円の面積＝半径×半径×円周率 なので、
+PASS circle_area_radius lv3 Q2 correct answer shown :: shown=正解は 314 です expected=314
+PASS circle_area_radius lv3 Q2 solution display :: steps=1
+PASS circle_area_radius lv3 no page errors :: none
+PASS circle_area_radius lv3 no 404 :: none
+PASS circle_area_radius lv4 Q1 question text :: 半径6cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_radius lv4 Q1 input type :: decimal
+PASS circle_area_radius lv4 Q1 expected answer :: 113.04
+PASS circle_area_radius lv4 Q1 correct feedback :: 🎉 せいかい！ 円の面積＝半径×半径×円周率 なので、6×6×3.14＝113
+PASS circle_area_radius lv4 Q1 solution display :: steps=1
+PASS circle_area_radius lv4 Q1 solution answer value :: expected=113.04
+PASS circle_area_radius lv4 Q2 no leftover input :: empty
+PASS circle_area_radius lv4 Q2 question text :: 半径7cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_radius lv4 Q2 input type :: decimal
+PASS circle_area_radius lv4 Q2 expected answer :: 153.86
+PASS circle_area_radius lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 153.86 です 円の面積＝半径×半径×円周率 な
+PASS circle_area_radius lv4 Q2 correct answer shown :: shown=正解は 153.86 です expected=153.86
+PASS circle_area_radius lv4 Q2 solution display :: steps=1
+PASS circle_area_radius lv4 no page errors :: none
+PASS circle_area_radius lv4 no 404 :: none
+PASS circle_area_radius lv5 Q1 question text :: 半径5cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_radius lv5 Q1 input type :: decimal
+PASS circle_area_radius lv5 Q1 expected answer :: 78.5
+PASS circle_area_radius lv5 Q1 correct feedback :: 🎉 せいかい！ 円の面積＝半径×半径×円周率 なので、5×5×3.14＝78.
+PASS circle_area_radius lv5 Q1 solution display :: steps=1
+PASS circle_area_radius lv5 Q1 solution answer value :: expected=78.5
+PASS circle_area_radius lv5 Q2 no leftover input :: empty
+PASS circle_area_radius lv5 Q2 question text :: 半径10cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_radius lv5 Q2 input type :: decimal
+PASS circle_area_radius lv5 Q2 expected answer :: 314
+PASS circle_area_radius lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 314 です 円の面積＝半径×半径×円周率 なので、
+PASS circle_area_radius lv5 Q2 correct answer shown :: shown=正解は 314 です expected=314
+PASS circle_area_radius lv5 Q2 solution display :: steps=1
+PASS circle_area_radius lv5 no page errors :: none
+PASS circle_area_radius lv5 no 404 :: none
+PASS circle_area_diameter lv2 Q1 question text :: 直径10cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_diameter lv2 Q1 input type :: decimal
+PASS circle_area_diameter lv2 Q1 expected answer :: 78.5
+PASS circle_area_diameter lv2 Q1 correct feedback :: 🎉 せいかい！ 半径は10÷2＝5cm。面積＝5×5×3.14＝78.5cm²
+PASS circle_area_diameter lv2 Q1 solution display :: steps=2
+PASS circle_area_diameter lv2 Q1 solution answer value :: expected=78.5
+PASS circle_area_diameter lv2 Q2 no leftover input :: empty
+PASS circle_area_diameter lv2 Q2 question text :: 直径20cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_diameter lv2 Q2 input type :: decimal
+PASS circle_area_diameter lv2 Q2 expected answer :: 314
+PASS circle_area_diameter lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 314 です 半径は20÷2＝10cm。面積＝10×
+PASS circle_area_diameter lv2 Q2 correct answer shown :: shown=正解は 314 です expected=314
+PASS circle_area_diameter lv2 Q2 solution display :: steps=2
+PASS circle_area_diameter lv2 no page errors :: none
+PASS circle_area_diameter lv2 no 404 :: none
+PASS circle_area_diameter lv3 Q1 question text :: 直径19cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_diameter lv3 Q1 input type :: decimal
+PASS circle_area_diameter lv3 Q1 expected answer :: 283.39
+PASS circle_area_diameter lv3 Q1 correct feedback :: 🎉 せいかい！ 半径は19÷2＝9.5cm。面積＝9.5×9.5×3.14＝2
+PASS circle_area_diameter lv3 Q1 solution display :: steps=2
+PASS circle_area_diameter lv3 Q1 solution answer value :: expected=283.39
+PASS circle_area_diameter lv3 Q2 no leftover input :: empty
+PASS circle_area_diameter lv3 Q2 question text :: 直径17cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_diameter lv3 Q2 input type :: decimal
+PASS circle_area_diameter lv3 Q2 expected answer :: 226.87
+PASS circle_area_diameter lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 226.87 です 半径は17÷2＝8.5cm。面積
+PASS circle_area_diameter lv3 Q2 correct answer shown :: shown=正解は 226.87 です expected=226.87
+PASS circle_area_diameter lv3 Q2 solution display :: steps=2
+PASS circle_area_diameter lv3 no page errors :: none
+PASS circle_area_diameter lv3 no 404 :: none
+PASS circle_area_diameter lv4 Q1 question text :: 直径19cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_diameter lv4 Q1 input type :: decimal
+PASS circle_area_diameter lv4 Q1 expected answer :: 283.39
+PASS circle_area_diameter lv4 Q1 correct feedback :: 🎉 せいかい！ 半径は19÷2＝9.5cm。面積＝9.5×9.5×3.14＝2
+PASS circle_area_diameter lv4 Q1 solution display :: steps=2
+PASS circle_area_diameter lv4 Q1 solution answer value :: expected=283.39
+PASS circle_area_diameter lv4 Q2 no leftover input :: empty
+PASS circle_area_diameter lv4 Q2 question text :: 直径12cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_diameter lv4 Q2 input type :: decimal
+PASS circle_area_diameter lv4 Q2 expected answer :: 113.04
+PASS circle_area_diameter lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 113.04 です 半径は12÷2＝6cm。面積＝6
+PASS circle_area_diameter lv4 Q2 correct answer shown :: shown=正解は 113.04 です expected=113.04
+PASS circle_area_diameter lv4 Q2 solution display :: steps=2
+PASS circle_area_diameter lv4 no page errors :: none
+PASS circle_area_diameter lv4 no 404 :: none
+PASS circle_area_diameter lv5 Q1 question text :: 直径19cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_diameter lv5 Q1 input type :: decimal
+PASS circle_area_diameter lv5 Q1 expected answer :: 283.39
+PASS circle_area_diameter lv5 Q1 correct feedback :: 🎉 せいかい！ 半径は19÷2＝9.5cm。面積＝9.5×9.5×3.14＝2
+PASS circle_area_diameter lv5 Q1 solution display :: steps=2
+PASS circle_area_diameter lv5 Q1 solution answer value :: expected=283.39
+PASS circle_area_diameter lv5 Q2 no leftover input :: empty
+PASS circle_area_diameter lv5 Q2 question text :: 直径17cmの円の面積を求めなさい。円周率は3.14とします。
+PASS circle_area_diameter lv5 Q2 input type :: decimal
+PASS circle_area_diameter lv5 Q2 expected answer :: 226.87
+PASS circle_area_diameter lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 226.87 です 半径は17÷2＝8.5cm。面積
+PASS circle_area_diameter lv5 Q2 correct answer shown :: shown=正解は 226.87 です expected=226.87
+PASS circle_area_diameter lv5 Q2 solution display :: steps=2
+PASS circle_area_diameter lv5 no page errors :: none
+PASS circle_area_diameter lv5 no 404 :: none
+PASS circle_radius_from_area lv2 Q1 question text :: 面積が28.26cm²の円があります。この円の半径は何cmですか。円周率は3.1
+PASS circle_radius_from_area lv2 Q1 input type :: integer
+PASS circle_radius_from_area lv2 Q1 expected answer :: 3
+PASS circle_radius_from_area lv2 Q1 correct feedback :: 🎉 せいかい！ 半径×半径×3.14＝28.26 なので、半径×半径＝9。3×
+PASS circle_radius_from_area lv2 Q1 solution display :: steps=2
+PASS circle_radius_from_area lv2 Q1 solution answer value :: expected=3
+PASS circle_radius_from_area lv2 Q2 no leftover input :: empty
+PASS circle_radius_from_area lv2 Q2 question text :: 面積が12.56cm²の円があります。この円の半径は何cmですか。円周率は3.1
+PASS circle_radius_from_area lv2 Q2 input type :: integer
+PASS circle_radius_from_area lv2 Q2 expected answer :: 2
+PASS circle_radius_from_area lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 半径×半径×3.14＝12.56 なので、
+PASS circle_radius_from_area lv2 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS circle_radius_from_area lv2 Q2 solution display :: steps=2
+PASS circle_radius_from_area lv2 no page errors :: none
+PASS circle_radius_from_area lv2 no 404 :: none
+PASS circle_radius_from_area lv3 Q1 question text :: 面積が12.56cm²の円があります。この円の半径は何cmですか。円周率は3.1
+PASS circle_radius_from_area lv3 Q1 input type :: integer
+PASS circle_radius_from_area lv3 Q1 expected answer :: 2
+PASS circle_radius_from_area lv3 Q1 correct feedback :: 🎉 せいかい！ 半径×半径×3.14＝12.56 なので、半径×半径＝4。2×
+PASS circle_radius_from_area lv3 Q1 solution display :: steps=2
+PASS circle_radius_from_area lv3 Q1 solution answer value :: expected=2
+PASS circle_radius_from_area lv3 Q2 no leftover input :: empty
+PASS circle_radius_from_area lv3 Q2 question text :: 面積が78.5cm²の円があります。この円の半径は何cmですか。円周率は3.14
+PASS circle_radius_from_area lv3 Q2 input type :: integer
+PASS circle_radius_from_area lv3 Q2 expected answer :: 5
+PASS circle_radius_from_area lv3 Q2 incorrect feedback :: ❌ ざんねん... 正解は 5 です 半径×半径×3.14＝78.5 なので、半
+PASS circle_radius_from_area lv3 Q2 correct answer shown :: shown=正解は 5 です expected=5
+PASS circle_radius_from_area lv3 Q2 solution display :: steps=2
+PASS circle_radius_from_area lv3 no page errors :: none
+PASS circle_radius_from_area lv3 no 404 :: none
+PASS circle_radius_from_area lv4 Q1 question text :: 面積が78.5cm²の円があります。この円の半径は何cmですか。円周率は3.14
+PASS circle_radius_from_area lv4 Q1 input type :: integer
+PASS circle_radius_from_area lv4 Q1 expected answer :: 5
+PASS circle_radius_from_area lv4 Q1 correct feedback :: 🎉 せいかい！ 半径×半径×3.14＝78.5 なので、半径×半径＝25。5×
+PASS circle_radius_from_area lv4 Q1 solution display :: steps=2
+PASS circle_radius_from_area lv4 Q1 solution answer value :: expected=5
+PASS circle_radius_from_area lv4 Q2 no leftover input :: empty
+PASS circle_radius_from_area lv4 Q2 question text :: 面積が28.26cm²の円があります。この円の半径は何cmですか。円周率は3.1
+PASS circle_radius_from_area lv4 Q2 input type :: integer
+PASS circle_radius_from_area lv4 Q2 expected answer :: 3
+PASS circle_radius_from_area lv4 Q2 incorrect feedback :: ❌ ざんねん... 正解は 3 です 半径×半径×3.14＝28.26 なので、
+PASS circle_radius_from_area lv4 Q2 correct answer shown :: shown=正解は 3 です expected=3
+PASS circle_radius_from_area lv4 Q2 solution display :: steps=2
+PASS circle_radius_from_area lv4 no page errors :: none
+PASS circle_radius_from_area lv4 no 404 :: none
+PASS circle_radius_from_area lv5 Q1 question text :: 面積が78.5cm²の円があります。この円の半径は何cmですか。円周率は3.14
+PASS circle_radius_from_area lv5 Q1 input type :: integer
+PASS circle_radius_from_area lv5 Q1 expected answer :: 5
+PASS circle_radius_from_area lv5 Q1 correct feedback :: 🎉 せいかい！ 半径×半径×3.14＝78.5 なので、半径×半径＝25。5×
+PASS circle_radius_from_area lv5 Q1 solution display :: steps=2
+PASS circle_radius_from_area lv5 Q1 solution answer value :: expected=5
+PASS circle_radius_from_area lv5 Q2 no leftover input :: empty
+PASS circle_radius_from_area lv5 Q2 question text :: 面積が12.56cm²の円があります。この円の半径は何cmですか。円周率は3.1
+PASS circle_radius_from_area lv5 Q2 input type :: integer
+PASS circle_radius_from_area lv5 Q2 expected answer :: 2
+PASS circle_radius_from_area lv5 Q2 incorrect feedback :: ❌ ざんねん... 正解は 2 です 半径×半径×3.14＝12.56 なので、
+PASS circle_radius_from_area lv5 Q2 correct answer shown :: shown=正解は 2 です expected=2
+PASS circle_radius_from_area lv5 Q2 solution display :: steps=2
+PASS circle_radius_from_area lv5 no page errors :: none
+PASS circle_radius_from_area lv5 no 404 :: none
+PASS volume_box lv1 Q1 question text :: 縦2cm、横4cm、高さ5cmの直方体の体積を求めよ。
+PASS volume_box lv1 Q1 input type :: integer
+PASS volume_box lv1 Q1 expected answer :: 40
+PASS volume_box lv1 Q1 correct feedback :: 🎉 せいかい！ 体積＝縦×横×高さ なので、2×4×5＝40cm³です。 答え
+PASS volume_box lv1 Q1 solution display :: steps=1
+PASS volume_box lv1 Q1 solution answer value :: expected=40
+PASS volume_box lv1 Q2 no leftover input :: empty
+PASS volume_box lv1 Q2 question text :: 縦4cm、横3cm、高さ2cmの直方体の体積を求めよ。
+PASS volume_box lv1 Q2 input type :: integer
+PASS volume_box lv1 Q2 expected answer :: 24
+PASS volume_box lv1 Q2 incorrect feedback :: ❌ ざんねん... 正解は 24 です 体積＝縦×横×高さ なので、4×3×2＝
+PASS volume_box lv1 Q2 correct answer shown :: shown=正解は 24 です expected=24
+PASS volume_box lv1 Q2 solution display :: steps=1
+PASS volume_box lv1 no page errors :: none
+PASS volume_box lv1 no 404 :: none
+PASS volume_box lv2 Q1 question text :: 縦4cm、横4cm、高さ2cmの直方体の体積を求めよ。
+PASS volume_box lv2 Q1 input type :: integer
+PASS volume_box lv2 Q1 expected answer :: 32
+PASS volume_box lv2 Q1 correct feedback :: 🎉 せいかい！ 体積＝縦×横×高さ なので、4×4×2＝32cm³です。 答え
+PASS volume_box lv2 Q1 solution display :: steps=1
+PASS volume_box lv2 Q1 solution answer value :: expected=32
+PASS volume_box lv2 Q2 no leftover input :: empty
+PASS volume_box lv2 Q2 question text :: 縦2cm、横4cm、高さ5cmの直方体の体積を求めよ。
+PASS volume_box lv2 Q2 input type :: integer
+PASS volume_box lv2 Q2 expected answer :: 40
+PASS volume_box lv2 Q2 incorrect feedback :: ❌ ざんねん... 正解は 40 です 体積＝縦×横×高さ なので、2×4×5＝
+PASS volume_box lv2 Q2 correct answer shown :: shown=正解は 40 です expected=40
+PASS volume_box lv2 Q2 solution display :: steps=1

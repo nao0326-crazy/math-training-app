@@ -1,0 +1,3986 @@
+[
+ {
+  "type": "integer_addition",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "3に2をたすといくつになりますか",
+    "answer": {
+     "kind": "integer",
+     "value": 5
+    },
+    "params": {
+     "a": 3,
+     "b": 2,
+     "operator": "+",
+     "answer": 5,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel,operator"
+  ]
+ },
+ {
+  "type": "integer_subtraction",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "4から1をひくといくつになりますか",
+    "answer": {
+     "kind": "integer",
+     "value": 3
+    },
+    "params": {
+     "a": 4,
+     "b": 1,
+     "operator": "-",
+     "answer": 3,
+     "difficultyLevel": 1,
+     "borrowCount": 0,
+     "borrowPositions": [],
+     "maxBorrowRun": 0
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,borrowCount,borrowPositions,difficultyLevel,maxBorrowRun,operator"
+  ]
+ },
+ {
+  "type": "integer_multiplication",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "3に2をかけるといくつになりますか",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "a": 3,
+     "b": 2,
+     "operator": "×",
+     "answer": 6,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel,operator"
+  ]
+ },
+ {
+  "type": "integer_division",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "4を4でわると、商はいくつになりますか",
+    "answer": {
+     "kind": "integer",
+     "value": 1
+    },
+    "params": {
+     "dividend": 4,
+     "divisor": 4,
+     "quotient": 1,
+     "operator": "÷",
+     "answer": 1,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,dividend,divisor,operator,quotient"
+  ]
+ },
+ {
+  "type": "integer_multi_step",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "1 + 9 + 1 はいくつになりますか",
+    "answer": {
+     "kind": "integer",
+     "value": 11
+    },
+    "params": {
+     "numbers": [
+      1,
+      9,
+      1
+     ],
+     "operators": [
+      "+",
+      "+"
+     ],
+     "expression": "1 + 9 + 1",
+     "answer": 11,
+     "difficultyLevel": 1,
+     "termCount": 3
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,expression,numbers,operators,termCount"
+  ]
+ },
+ {
+  "type": "integer_fill_blank",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "2−□＝1 の □ にあてはまる数はいくつですか",
+    "answer": {
+     "kind": "integer",
+     "value": 1
+    },
+    "params": {
+     "a": 2,
+     "operator": "-",
+     "answer": 1,
+     "difficultyLevel": 2,
+     "blankPosition": "second"
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,blankPosition,difficultyLevel,operator"
+  ]
+ },
+ {
+  "type": "estimate_product",
+  "error": "",
+  "variants": [
+   {
+    "variant": "estimate_to_tens",
+    "level": 2,
+    "question": "16 × 41 の積は、およそいくつですか。2つの数をどちらも十の位（10の倍数）に四捨五入してから掛け合わせてください。",
+    "answer": {
+     "kind": "integer",
+     "value": 800
+    },
+    "params": {
+     "variant": "estimate_to_tens",
+     "a": 16,
+     "b": 41,
+     "placeA": 10,
+     "placeB": 10,
+     "roundedA": 20,
+     "roundedB": 40,
+     "estimate": 800,
+     "exactProduct": 656,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "estimate_one_exact",
+    "level": 2,
+    "question": "45 × 27 の積は、およそいくつですか。45 はそのまま使い、27 だけを十の位（10の倍数）に四捨五入してから掛け合わせてください。",
+    "answer": {
+     "kind": "integer",
+     "value": 1350
+    },
+    "params": {
+     "variant": "estimate_one_exact",
+     "a": 45,
+     "b": 27,
+     "placeA": 1,
+     "placeB": 10,
+     "roundedA": 45,
+     "roundedB": 30,
+     "estimate": 1350,
+     "exactProduct": 1215,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "estimate_to_hundreds",
+    "level": 3,
+    "question": "340 × 359 の積は、およそいくつですか。2つの数をどちらも百の位（100の倍数）に四捨五入してから掛け合わせてください。",
+    "answer": {
+     "kind": "integer",
+     "value": 120000
+    },
+    "params": {
+     "variant": "estimate_to_hundreds",
+     "a": 340,
+     "b": 359,
+     "placeA": 100,
+     "placeB": 100,
+     "roundedA": 300,
+     "roundedB": 400,
+     "estimate": 120000,
+     "exactProduct": 122060,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "estimate_mixed_places",
+    "level": 3,
+    "question": "36 × 351 の積は、およそいくつですか。36 を十の位（10の倍数）に、351 を百の位（100の倍数）に四捨五入してから掛け合わせてください。",
+    "answer": {
+     "kind": "integer",
+     "value": 16000
+    },
+    "params": {
+     "variant": "estimate_mixed_places",
+     "a": 36,
+     "b": 351,
+     "placeA": 10,
+     "placeB": 100,
+     "roundedA": 40,
+     "roundedB": 400,
+     "estimate": 16000,
+     "exactProduct": 12636,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "estimate_shopping",
+    "level": 5,
+    "question": "1個 180 円のノートを 44 冊買うとき、およそいくらになりますか。1個の値段を百の位（100の倍数）に、個数を十の位（10の倍数）に四捨五入してから掛け合わせてください。",
+    "answer": {
+     "kind": "integer",
+     "value": 8000
+    },
+    "params": {
+     "variant": "estimate_shopping",
+     "a": 180,
+     "b": 44,
+     "placeA": 100,
+     "placeB": 10,
+     "roundedA": 200,
+     "roundedB": 40,
+     "estimate": 8000,
+     "exactProduct": 7920,
+     "difficultyLevel": 5
+    }
+   }
+  ],
+  "keySets": [
+   "a,b,difficultyLevel,estimate,exactProduct,placeA,placeB,roundedA,roundedB,variant"
+  ]
+ },
+ {
+  "type": "integer_word_problem",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "クッキーが3個あります。1個たべました。のこりは何個ですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 2
+    },
+    "params": {
+     "a": 3,
+     "b": 1,
+     "operator": "-",
+     "answer": 2,
+     "difficultyLevel": 1,
+     "templateIndex": 3,
+     "readingLevel": 1,
+     "reasoningLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel,operator,readingLevel,reasoningLevel,templateIndex"
+  ]
+ },
+ {
+  "type": "divisors_finding",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "42の約数をすべて答えなさい。(小さい順にカンマ区切りで)",
+    "answer": {
+     "kind": "string",
+     "value": "1, 2, 3, 6, 7, 14, 21, 42"
+    },
+    "params": {
+     "n": 42,
+     "answer": "1, 2, 3, 6, 7, 14, 21, 42",
+     "difficultyLevel": 2,
+     "divisorCount": 8
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,divisorCount,n"
+  ]
+ },
+ {
+  "type": "divisors_count",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "48の約数は何個ありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 10
+    },
+    "params": {
+     "n": 48,
+     "count": 10,
+     "answer": 10,
+     "divisorCount": 10,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,count,difficultyLevel,divisorCount,n"
+  ]
+ },
+ {
+  "type": "multiples_finding",
+  "error": "",
+  "variants": [
+   {
+    "variant": "list_first_n",
+    "level": 1,
+    "question": "3の倍数を小さい方から3こ答えなさい",
+    "answer": {
+     "kind": "string",
+     "value": "3, 6, 9"
+    },
+    "params": {
+     "n": 3,
+     "variant": "list_first_n",
+     "arg1": 3,
+     "arg2": null,
+     "count": 3,
+     "answer": "3, 6, 9",
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "list_up_to",
+    "level": 1,
+    "question": "37以下の4の倍数をすべて答えなさい",
+    "answer": {
+     "kind": "string",
+     "value": "4, 8, 12, 16, 20, 24, 28, 32, 36"
+    },
+    "params": {
+     "n": 4,
+     "variant": "list_up_to",
+     "arg1": 37,
+     "arg2": null,
+     "count": null,
+     "answer": "4, 8, 12, 16, 20, 24, 28, 32, 36",
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "list_between",
+    "level": 2,
+    "question": "16から28までの間にある5の倍数をすべて答えなさい",
+    "answer": {
+     "kind": "string",
+     "value": "20, 25"
+    },
+    "params": {
+     "n": 5,
+     "variant": "list_between",
+     "arg1": 16,
+     "arg2": 28,
+     "count": null,
+     "answer": "20, 25",
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "nth_multiple",
+    "level": 3,
+    "question": "6の倍数を小さい方から10番目は何ですか",
+    "answer": {
+     "kind": "integer",
+     "value": 60
+    },
+    "params": {
+     "n": 6,
+     "variant": "nth_multiple",
+     "arg1": 10,
+     "arg2": null,
+     "count": null,
+     "answer": "60",
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "count_in_range",
+    "level": 4,
+    "question": "1から51までにある6の倍数はいくつありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 8
+    },
+    "params": {
+     "n": 6,
+     "variant": "count_in_range",
+     "arg1": 51,
+     "arg2": null,
+     "count": null,
+     "answer": "8",
+     "difficultyLevel": 4
+    }
+   }
+  ],
+  "keySets": [
+   "answer,arg1,arg2,count,difficultyLevel,n,variant"
+  ]
+ },
+ {
+  "type": "prime_judgment",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 3,
+    "question": "89、66、49 の中で素数はどれですか",
+    "answer": {
+     "kind": "string",
+     "value": "89"
+    },
+    "params": {
+     "choices": [
+      89,
+      66,
+      49
+     ],
+     "answer": 89,
+     "difficultyLevel": 3
+    }
+   }
+  ],
+  "keySets": [
+   "answer,choices,difficultyLevel"
+  ]
+ },
+ {
+  "type": "prime_range",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "3から9までの間の素数をすべて答えなさい (小さい順にカンマ区切りで)",
+    "answer": {
+     "kind": "string",
+     "value": "3, 5, 7"
+    },
+    "params": {
+     "min": 3,
+     "max": 9,
+     "answer": "3, 5, 7",
+     "primeCount": 3,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,max,min,primeCount"
+  ]
+ },
+ {
+  "type": "common_divisors",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "30と18の公約数をすべて答えなさい",
+    "answer": {
+     "kind": "string",
+     "value": "1, 2, 3, 6"
+    },
+    "params": {
+     "a": 30,
+     "b": 18,
+     "answer": "1, 2, 3, 6",
+     "g": 6,
+     "difficultyLevel": 2,
+     "commonDivisorCount": 4
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,commonDivisorCount,difficultyLevel,g"
+  ]
+ },
+ {
+  "type": "common_multiples",
+  "error": "",
+  "variants": [
+   {
+    "variant": "list_first_n",
+    "level": 2,
+    "question": "2と4の公倍数を小さい方から5つ答えなさい",
+    "answer": {
+     "kind": "string",
+     "value": "4, 8, 12, 16, 20"
+    },
+    "params": {
+     "a": 2,
+     "b": 4,
+     "variant": "list_first_n",
+     "arg1": 5,
+     "arg2": null,
+     "count": 5,
+     "answer": "4, 8, 12, 16, 20",
+     "lcm": 4,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "list_up_to",
+    "level": 2,
+    "question": "39以下の6と9の公倍数をすべて答えなさい",
+    "answer": {
+     "kind": "string",
+     "value": "18, 36"
+    },
+    "params": {
+     "a": 6,
+     "b": 9,
+     "variant": "list_up_to",
+     "arg1": 39,
+     "arg2": null,
+     "count": null,
+     "answer": "18, 36",
+     "lcm": 18,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "list_between",
+    "level": 3,
+    "question": "2から32までの間にある2と5の公倍数をすべて答えなさい",
+    "answer": {
+     "kind": "string",
+     "value": "10, 20, 30"
+    },
+    "params": {
+     "a": 2,
+     "b": 5,
+     "variant": "list_between",
+     "arg1": 2,
+     "arg2": 32,
+     "count": null,
+     "answer": "10, 20, 30",
+     "lcm": 10,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "count_in_range",
+    "level": 4,
+    "question": "1から18までにある3と6の公倍数はいくつありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 3
+    },
+    "params": {
+     "a": 3,
+     "b": 6,
+     "variant": "count_in_range",
+     "arg1": 18,
+     "arg2": null,
+     "count": null,
+     "answer": "3",
+     "lcm": 6,
+     "difficultyLevel": 4
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,arg1,arg2,b,count,difficultyLevel,lcm,variant"
+  ]
+ },
+ {
+  "type": "gcd_calculation",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "30と45の最大公約数を求めなさい",
+    "answer": {
+     "kind": "integer",
+     "value": 15
+    },
+    "params": {
+     "a": 30,
+     "b": 45,
+     "answer": 15,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel",
+   "answer,difficultyLevel,inputType,numbers"
+  ]
+ },
+ {
+  "type": "lcm_calculation",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "5と6の最小公倍数を求めなさい",
+    "answer": {
+     "kind": "integer",
+     "value": 30
+    },
+    "params": {
+     "a": 5,
+     "b": 6,
+     "answer": 30,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel"
+  ]
+ },
+ {
+  "type": "gcd_lcm_word",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 3,
+    "question": "32このアメと48このガムを、何人かの子どもに同じ数ずつ分けます。あまりなく分けるとき、最も多い人数は何人ですか",
+    "answer": {
+     "kind": "integer",
+     "value": 16
+    },
+    "params": {
+     "t": "gcd",
+     "a": 32,
+     "b": 48,
+     "answer": 16,
+     "difficultyLevel": 3
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel,t",
+   "answer,c,d,difficultyLevel,t"
+  ]
+ },
+ {
+  "type": "period_repetition",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 3,
+    "question": "赤、白、青の旗を「赤、白、青」の順にくり返しならべます。29番目は何色ですか",
+    "answer": {
+     "kind": "string",
+     "value": "白"
+    },
+    "params": {
+     "pattern": [
+      "赤",
+      "白",
+      "青"
+     ],
+     "period": 3,
+     "n": 29,
+     "answer": "白",
+     "difficultyLevel": 3,
+     "remainder": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,n,pattern,period,remainder"
+  ]
+ },
+ {
+  "type": "fraction_mul_integer",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "3分の1に2をかけるといくつになりますか",
+    "answer": {
+     "kind": "fraction",
+     "numerator": 2,
+     "denominator": 3
+    },
+    "params": {
+     "numerator": 1,
+     "denominator": 3,
+     "integer": 2,
+     "answerNumerator": 2,
+     "answerDenominator": 3,
+     "difficultyLevel": 1,
+     "requiresReduction": false,
+     "isImproper": false
+    }
+   }
+  ],
+  "keySets": [
+   "answerDenominator,answerNumerator,denominator,difficultyLevel,integer,isImproper,numerator,requiresReduction"
+  ]
+ },
+ {
+  "type": "fraction_mul_fraction",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "3分の1と2分の1をかけるといくつになりますか",
+    "answer": {
+     "kind": "fraction",
+     "numerator": 1,
+     "denominator": 6
+    },
+    "params": {
+     "n1": 1,
+     "d1": 3,
+     "n2": 1,
+     "d2": 2,
+     "answerNumerator": 1,
+     "answerDenominator": 6,
+     "difficultyLevel": 1,
+     "isProperAnswer": true
+    }
+   }
+  ],
+  "keySets": [
+   "answerDenominator,answerNumerator,d1,d2,difficultyLevel,isProperAnswer,n1,n2"
+  ]
+ },
+ {
+  "type": "fraction_div_integer",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "3分の1を2でわると、いくつになりますか",
+    "answer": {
+     "kind": "fraction",
+     "numerator": 1,
+     "denominator": 6
+    },
+    "params": {
+     "numerator": 1,
+     "denominator": 3,
+     "integer": 2,
+     "answerNumerator": 1,
+     "answerDenominator": 6,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answerDenominator,answerNumerator,denominator,difficultyLevel,integer,numerator"
+  ]
+ },
+ {
+  "type": "fraction_div_fraction",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "4分の1を7分の5でわると、商はいくつですか",
+    "answer": {
+     "kind": "fraction",
+     "numerator": 7,
+     "denominator": 20
+    },
+    "params": {
+     "n1": 1,
+     "d1": 4,
+     "n2": 5,
+     "d2": 7,
+     "answerNumerator": 7,
+     "answerDenominator": 20,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answerDenominator,answerNumerator,d1,d2,difficultyLevel,n1,n2"
+  ]
+ },
+ {
+  "type": "fraction_mul_mixed",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "1と2分の1と6分の1をかけるといくつになりますか",
+    "answer": {
+     "kind": "fraction",
+     "numerator": 1,
+     "denominator": 4
+    },
+    "params": {
+     "whole": 1,
+     "numerator": 1,
+     "denominator": 2,
+     "n2": 1,
+     "d2": 6,
+     "mixedNumerator": 3,
+     "mixedDenominator": 2,
+     "answerNumerator": 1,
+     "answerDenominator": 4,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answerDenominator,answerNumerator,d2,denominator,difficultyLevel,mixedDenominator,mixedNumerator,n2,numerator,whole"
+  ]
+ },
+ {
+  "type": "fraction_div_mixed",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "1と2分の1を5分の1でわると、いくつになりますか",
+    "answer": {
+     "kind": "mixed",
+     "whole": 7,
+     "numerator": 1,
+     "denominator": 2
+    },
+    "params": {
+     "whole": 1,
+     "numerator": 1,
+     "denominator": 2,
+     "n2": 1,
+     "d2": 5,
+     "mixedNumerator": 3,
+     "mixedDenominator": 2,
+     "answerNumerator": 15,
+     "answerDenominator": 2,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answerDenominator,answerNumerator,d2,denominator,difficultyLevel,mixedDenominator,mixedNumerator,n2,numerator,whole"
+  ]
+ },
+ {
+  "type": "fraction_reduce",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "6分の2を約分しなさい",
+    "answer": {
+     "kind": "fraction",
+     "numerator": 1,
+     "denominator": 3
+    },
+    "params": {
+     "numerator": 2,
+     "denominator": 6,
+     "answerNumerator": 1,
+     "answerDenominator": 3,
+     "divisor": 2,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answerDenominator,answerNumerator,denominator,difficultyLevel,divisor,numerator"
+  ]
+ },
+ {
+  "type": "fraction_common_denominator",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "4分の3と2分の1を、分母を最小公倍数にそろえて表しなさい",
+    "answer": {
+     "kind": "fractions",
+     "values": [
+      {
+       "numerator": 3,
+       "denominator": 4
+      },
+      {
+       "numerator": 2,
+       "denominator": 4
+      }
+     ]
+    },
+    "params": {
+     "n1": 3,
+     "d1": 4,
+     "n2": 1,
+     "d2": 2,
+     "common": 4,
+     "newN1": 3,
+     "newN2": 2,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "common,d1,d2,difficultyLevel,n1,n2,newN1,newN2"
+  ]
+ },
+ {
+  "type": "fraction_mixed_convert",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "9/2 を帯分数で表しなさい",
+    "answer": {
+     "kind": "mixed",
+     "whole": 4,
+     "numerator": 1,
+     "denominator": 2
+    },
+    "params": {
+     "numerator": 9,
+     "denominator": 2,
+     "whole": 4,
+     "answerNumerator": 1,
+     "answerDenominator": 2,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answerDenominator,answerNumerator,denominator,difficultyLevel,numerator,whole"
+  ]
+ },
+ {
+  "type": "fraction_big_small",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "8分の1と4分の3 のどちらが大きいか比べなさい",
+    "answer": {
+     "kind": "string",
+     "value": "4分の3"
+    },
+    "params": {
+     "numerator": 3,
+     "denominator": 4,
+     "smallerNumerator": 1,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "denominator,difficultyLevel,numerator,smallerNumerator"
+  ]
+ },
+ {
+  "type": "speed_calculation",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "4kmを2時間で進みました。速さは何kmですか（1時間あたり）",
+    "answer": {
+     "kind": "decimal",
+     "value": 2
+    },
+    "params": {
+     "distance": 4,
+     "time": 2,
+     "timeUnit": "時間",
+     "distUnit": "km",
+     "answer": 2,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,distUnit,distance,time,timeUnit"
+  ]
+ },
+ {
+  "type": "distance_calculation",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "時速13kmで2時間走ると、何km進みますか",
+    "answer": {
+     "kind": "integer",
+     "value": 26
+    },
+    "params": {
+     "speed": 13,
+     "time": 2,
+     "answer": 26,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,speed,time"
+  ]
+ },
+ {
+  "type": "time_calculation",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "時速8kmで8km進むと、何時間かかりますか",
+    "answer": {
+     "kind": "integer",
+     "value": 1
+    },
+    "params": {
+     "speed": 8,
+     "distance": 8,
+     "answer": 1,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,distance,speed"
+  ]
+ },
+ {
+  "type": "speed_unit_conversion",
+  "error": "",
+  "variants": [
+   {
+    "variant": "kmh_to_mmin",
+    "level": 2,
+    "question": "時速60kmは、分速何mですか",
+    "answer": {
+     "kind": "decimal",
+     "value": 1000
+    },
+    "params": {
+     "kmPerHour": 60,
+     "givenValue": 60,
+     "variant": "kmh_to_mmin",
+     "conversionType": "kmh_to_mmin",
+     "answer": 1000,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "mmin_to_kmh",
+    "level": 2,
+    "question": "分速300mは、時速何kmですか",
+    "answer": {
+     "kind": "decimal",
+     "value": 18
+    },
+    "params": {
+     "kmPerHour": 0,
+     "givenValue": 300,
+     "variant": "mmin_to_kmh",
+     "conversionType": "mmin_to_kmh",
+     "answer": 18,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "kmh_to_ms",
+    "level": 3,
+    "question": "時速36kmは、秒速何mですか",
+    "answer": {
+     "kind": "decimal",
+     "value": 10
+    },
+    "params": {
+     "kmPerHour": 36,
+     "givenValue": 36,
+     "variant": "kmh_to_ms",
+     "conversionType": "kmh_to_ms",
+     "answer": 10,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "ms_to_kmh",
+    "level": 4,
+    "question": "秒速25mは、時速何kmですか",
+    "answer": {
+     "kind": "decimal",
+     "value": 90
+    },
+    "params": {
+     "kmPerHour": 0,
+     "givenValue": 25,
+     "variant": "ms_to_kmh",
+     "conversionType": "ms_to_kmh",
+     "answer": 90,
+     "difficultyLevel": 4
+    }
+   }
+  ],
+  "keySets": [
+   "answer,conversionType,difficultyLevel,givenValue,kmPerHour,variant"
+  ]
+ },
+ {
+  "type": "speed_comparison",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "たろうさんは時速9km、はなこさんは時速3kmで進みます。どちらが速いですか",
+    "answer": {
+     "kind": "string",
+     "value": "たろうさん"
+    },
+    "params": {
+     "speedA": 9,
+     "speedB": 3,
+     "answer": "たろうさん",
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,speedA,speedB"
+  ]
+ },
+ {
+  "type": "speed_word",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "おうちから学校まで分速57mで歩くと2分かかります。学校までは何mですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 114
+    },
+    "params": {
+     "speed": 57,
+     "time": 2,
+     "answer": 114,
+     "scenario": "2",
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,scenario,speed,time"
+  ]
+ },
+ {
+  "type": "speed_multi_step",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 3,
+    "question": "はじめの4時間は時速14kmで走り、つぎの4時間は時速20kmで走りました。走った距離は全部で何kmですか。また平均の速さは時速何kmですか（2つ目の答えを入力）",
+    "answer": {
+     "kind": "decimal",
+     "value": 17
+    },
+    "params": {
+     "speed1": 14,
+     "time1": 4,
+     "speed2": 20,
+     "time2": 4,
+     "totalDistance": 136,
+     "totalTime": 8,
+     "averageSpeed": 17,
+     "answer": 17,
+     "difficultyLevel": 3
+    }
+   }
+  ],
+  "keySets": [
+   "answer,averageSpeed,difficultyLevel,speed1,speed2,time1,time2,totalDistance,totalTime"
+  ]
+ },
+ {
+  "type": "circle_area_radius",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "半径7cmの円の面積を求めなさい。円周率は3.14とします。",
+    "answer": {
+     "kind": "decimal",
+     "value": 153.86
+    },
+    "params": {
+     "radius": 7,
+     "area": 153.86,
+     "answer": 153.86,
+     "pi": 3.14,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,area,difficultyLevel,pi,radius"
+  ]
+ },
+ {
+  "type": "circle_area_diameter",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "直径13cmの円の面積を求めなさい。円周率は3.14とします。",
+    "answer": {
+     "kind": "decimal",
+     "value": 132.67
+    },
+    "params": {
+     "diameter": 13,
+     "radius": 6.5,
+     "area": 132.67,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "area,diameter,difficultyLevel,radius"
+  ]
+ },
+ {
+  "type": "circle_radius_from_area",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "面積が50.24cm²の円があります。この円の半径は何cmですか。円周率は3.14とします。",
+    "answer": {
+     "kind": "integer",
+     "value": 4
+    },
+    "params": {
+     "radius": 4,
+     "area": 50.24,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "area,difficultyLevel,radius"
+  ]
+ },
+ {
+  "type": "volume_box",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "縦3cm、横2cm、高さ2cmの直方体の体積を求めよ。",
+    "answer": {
+     "kind": "integer",
+     "value": 12
+    },
+    "params": {
+     "length": 3,
+     "width": 2,
+     "height": 2,
+     "volume": 12,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "difficultyLevel,height,length,volume,width"
+  ]
+ },
+ {
+  "type": "volume_cube",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "1辺が3cmの立方体の体積を求めよ。",
+    "answer": {
+     "kind": "integer",
+     "value": 27
+    },
+    "params": {
+     "edge": 3,
+     "volume": 27,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "difficultyLevel,edge,volume"
+  ]
+ },
+ {
+  "type": "volume_prism",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "底面積が6cm²、高さ2cmの角柱の体積を求めよ。",
+    "answer": {
+     "kind": "integer",
+     "value": 12
+    },
+    "params": {
+     "baseArea": 6,
+     "height": 2,
+     "volume": 12,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "baseArea,difficultyLevel,height,volume"
+  ]
+ },
+ {
+  "type": "volume_cylinder",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "半径3cm、高さ2cmの円柱の体積を求めよ。円周率は3.14。",
+    "answer": {
+     "kind": "decimal",
+     "value": 56.52
+    },
+    "params": {
+     "radius": 3,
+     "height": 2,
+     "baseArea": 28.26,
+     "volume": 56.52,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "baseArea,difficultyLevel,height,radius,volume"
+  ]
+ },
+ {
+  "type": "volume_from_height",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "底面積が5cm²の角柱の体積が15cm³のとき、この角柱の高さを求めよ。",
+    "answer": {
+     "kind": "integer",
+     "value": 3
+    },
+    "params": {
+     "baseArea": 5,
+     "volume": 15,
+     "height": 3,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "baseArea,difficultyLevel,height,volume"
+  ]
+ },
+ {
+  "type": "volume_unit",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "1Lは何cm³ですか",
+    "answer": {
+     "kind": "integer",
+     "value": 1000
+    },
+    "params": {
+     "liters": 1,
+     "cm3": 1000,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "cm3,difficultyLevel,liters"
+  ]
+ },
+ {
+  "type": "symmetry_fold",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "正五角形は線対称な図形ですか？（はい/いいえ）",
+    "answer": {
+     "kind": "string",
+     "value": "はい"
+    },
+    "params": {
+     "shape": "正五角形",
+     "isFold": true,
+     "count": 5,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "count,difficultyLevel,isFold,shape"
+  ]
+ },
+ {
+  "type": "symmetry_point",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "正六角形は点対称な図形ですか？（はい/いいえ）",
+    "answer": {
+     "kind": "string",
+     "value": "はい"
+    },
+    "params": {
+     "shape": "正六角形",
+     "isPoint": true,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "difficultyLevel,isPoint,shape"
+  ]
+ },
+ {
+  "type": "scale_length",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "ある図形を3倍に拡大しました。もとの図形の長さが2cmのとき、拡大後の長さは何cmですか？",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "scale": 3,
+     "base": 2,
+     "result": 6,
+     "difficultyLevel": 2,
+     "isEnlarge": true
+    }
+   }
+  ],
+  "keySets": [
+   "base,difficultyLevel,isEnlarge,result,scale"
+  ]
+ },
+ {
+  "type": "angle_basic",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 3,
+    "question": "三角形の2つの角が57°と89°です。残りの角は何度ですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 34
+    },
+    "params": {
+     "angleA": 57,
+     "angleB": 89,
+     "angleC": 34,
+     "difficultyLevel": 3
+    }
+   }
+  ],
+  "keySets": [
+   "angleA,angleB,angleC,difficultyLevel"
+  ]
+ },
+ {
+  "type": "circle_circumference",
+  "error": "",
+  "variants": [
+   {
+    "variant": "from_diameter",
+    "level": 1,
+    "question": "直径3cmの円の円周の長さを求めなさい。円周率は3.14とします。",
+    "answer": {
+     "kind": "decimal",
+     "value": 9.42
+    },
+    "params": {
+     "variant": "from_diameter",
+     "diameter": 3,
+     "circumference": 9.42,
+     "unit": "cm",
+     "pi": 3.14,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "from_circumference",
+    "level": 2,
+    "question": "円周が6.28cmの円の直径は何cmですか。円周率は3.14とします。",
+    "answer": {
+     "kind": "integer",
+     "value": 2
+    },
+    "params": {
+     "variant": "from_circumference",
+     "diameter": 2,
+     "circumference": 6.28,
+     "unit": "cm",
+     "pi": 3.14,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "circumference,diameter,difficultyLevel,pi,unit,variant",
+   "answerUnit,circumference,diameter,difficultyLevel,pi,unit,variant"
+  ]
+ },
+ {
+  "type": "trapezoid_area",
+  "error": "",
+  "variants": [
+   {
+    "variant": "basic",
+    "level": 1,
+    "question": "上底が2cm、下底が8cm、高さが2cmの台形の面積を求めなさい。",
+    "answer": {
+     "kind": "integer",
+     "value": 10
+    },
+    "params": {
+     "variant": "basic",
+     "a": 2,
+     "b": 8,
+     "h": 2,
+     "area": 10,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "reverse_height",
+    "level": 2,
+    "question": "上底が16cm、下底が16cm、面積が96cm²の台形の高さは何cmですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "variant": "reverse_height",
+     "a": 16,
+     "b": 16,
+     "h": 6,
+     "area": 96,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "reverse_base",
+    "level": 3,
+    "question": "下底が13cm、高さが11cm、面積が121cm²の台形の上底は何cmですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 9
+    },
+    "params": {
+     "variant": "reverse_base",
+     "a": 9,
+     "b": 13,
+     "h": 11,
+     "area": 121,
+     "difficultyLevel": 3
+    }
+   }
+  ],
+  "keySets": [
+   "a,area,b,difficultyLevel,h,variant"
+  ]
+ },
+ {
+  "type": "unit_conversion_basic",
+  "error": "",
+  "variants": [
+   {
+    "variant": "length",
+    "level": 1,
+    "question": "7mは何cmですか",
+    "answer": {
+     "kind": "integer",
+     "value": 700
+    },
+    "params": {
+     "variant": "length",
+     "from": "m",
+     "to": "cm",
+     "value": 7,
+     "answer": 700,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "time",
+    "level": 1,
+    "question": "7時は何秒ですか",
+    "answer": {
+     "kind": "integer",
+     "value": 25200
+    },
+    "params": {
+     "variant": "time",
+     "from": "時",
+     "to": "秒",
+     "value": 7,
+     "answer": 25200,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "mass",
+    "level": 2,
+    "question": "4kgは何gですか",
+    "answer": {
+     "kind": "integer",
+     "value": 4000
+    },
+    "params": {
+     "variant": "mass",
+     "from": "kg",
+     "to": "g",
+     "value": 4,
+     "answer": 4000,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "area",
+    "level": 3,
+    "question": "7㎡は何㎠ですか",
+    "answer": {
+     "kind": "integer",
+     "value": 70000
+    },
+    "params": {
+     "variant": "area",
+     "from": "㎡",
+     "to": "㎠",
+     "value": 7,
+     "answer": 70000,
+     "difficultyLevel": 3
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,from,to,value,variant"
+  ]
+ },
+ {
+  "type": "decimal_place_value",
+  "error": "",
+  "variants": [
+   {
+    "variant": "read_digit",
+    "level": 1,
+    "question": "小数 0.9 の10分の1の位の数字は何ですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 9
+    },
+    "params": {
+     "variant": "read_digit",
+     "place": 1,
+     "digits": [
+      9
+     ],
+     "answer": 9,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "place_value",
+    "level": 1,
+    "question": "10分の1の位が3のとき、小数はいくつになりますか。",
+    "answer": {
+     "kind": "decimal",
+     "value": 0.3
+    },
+    "params": {
+     "variant": "place_value",
+     "place": 1,
+     "digit": 3,
+     "answer": 0.3,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "compose",
+    "level": 1,
+    "question": "10分の1の位が2となる小数を作ってください。",
+    "answer": {
+     "kind": "decimal",
+     "value": 0.2
+    },
+    "params": {
+     "variant": "compose",
+     "place": 1,
+     "digits": [
+      2
+     ],
+     "answer": 0.2,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "decompose",
+    "level": 3,
+    "question": "小数 1.3 を、10分の1の位と100分の1の位の和で表してください。",
+    "answer": {
+     "kind": "string",
+     "value": "0.8 + 0.5"
+    },
+    "params": {
+     "variant": "decompose",
+     "place": 1,
+     "low": 5,
+     "high": 8,
+     "bigPart": 0.8,
+     "smallPart": 0.5,
+     "answer": 1.3,
+     "difficultyLevel": 3
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,digits,place,variant",
+   "answer,difficultyLevel,digit,place,variant",
+   "answer,bigPart,difficultyLevel,high,low,place,smallPart,variant"
+  ]
+ },
+ {
+  "type": "fraction_unit_intro",
+  "error": "",
+  "variants": [
+   {
+    "variant": "meaning",
+    "level": 1,
+    "question": "ある量を2等分したときの1つ分は、何分の一ですか。",
+    "answer": {
+     "kind": "string",
+     "value": "1/2"
+    },
+    "params": {
+     "variant": "meaning",
+     "num": 1,
+     "den": 2,
+     "answer": "1/2",
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "how_many_units",
+    "level": 1,
+    "question": "2/4 は、1/4 いくつ分ですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 2
+    },
+    "params": {
+     "variant": "how_many_units",
+     "num": 2,
+     "den": 4,
+     "answer": 2,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "read_fraction",
+    "level": 1,
+    "question": "2/6 の分母は何ですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "variant": "read_fraction",
+     "num": 2,
+     "den": 6,
+     "answer": 6,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "count_units",
+    "level": 3,
+    "question": "1/5 を 4 個集めると、何分の一になりますか。",
+    "answer": {
+     "kind": "string",
+     "value": "4/5"
+    },
+    "params": {
+     "variant": "count_units",
+     "num": 4,
+     "den": 5,
+     "answer": "4/5",
+     "difficultyLevel": 3
+    }
+   }
+  ],
+  "keySets": [
+   "answer,den,difficultyLevel,num,variant"
+  ]
+ },
+ {
+  "type": "fraction_add_sub",
+  "error": "",
+  "variants": [
+   {
+    "variant": "add",
+    "level": 1,
+    "question": "1/2 ＋ 1/3 を計算し、約分した答えを書きなさい。",
+    "answer": {
+     "kind": "fraction",
+     "numerator": 5,
+     "denominator": 6
+    },
+    "params": {
+     "variant": "add",
+     "operation": "add",
+     "n1": 1,
+     "d1": 2,
+     "n2": 1,
+     "d2": 3,
+     "numerator": 5,
+     "denominator": 6,
+     "commonDenominator": 6,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "subtract",
+    "level": 1,
+    "question": "1/2 − 1/4 を計算し、約分した答えを書きなさい。",
+    "answer": {
+     "kind": "fraction",
+     "numerator": 1,
+     "denominator": 4
+    },
+    "params": {
+     "variant": "subtract",
+     "operation": "subtract",
+     "n1": 1,
+     "d1": 2,
+     "n2": 1,
+     "d2": 4,
+     "numerator": 1,
+     "denominator": 4,
+     "commonDenominator": 4,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "add_reduces",
+    "level": 2,
+    "question": "2/4 − 1/5 を計算し、約分した答えを書きなさい。",
+    "answer": {
+     "kind": "fraction",
+     "numerator": 3,
+     "denominator": 10
+    },
+    "params": {
+     "variant": "add_reduces",
+     "operation": "subtract",
+     "n1": 2,
+     "d1": 4,
+     "n2": 1,
+     "d2": 5,
+     "numerator": 3,
+     "denominator": 10,
+     "commonDenominator": 20,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "add_improper",
+    "level": 3,
+    "question": "2/4 ＋ 1/2 を計算し、約分した答えを書きなさい。",
+    "answer": {
+     "kind": "fraction",
+     "numerator": 1,
+     "denominator": 1
+    },
+    "params": {
+     "variant": "add_improper",
+     "operation": "add",
+     "n1": 2,
+     "d1": 4,
+     "n2": 1,
+     "d2": 2,
+     "numerator": 1,
+     "denominator": 1,
+     "commonDenominator": 4,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "fill_blank",
+    "level": 4,
+    "question": "□ ＋ 3/4 = 4/5 のとき、□ に入る分数はいくつですか。",
+    "answer": {
+     "kind": "fraction",
+     "numerator": 31,
+     "denominator": 20
+    },
+    "params": {
+     "variant": "fill_blank",
+     "operation": "add",
+     "n1": 4,
+     "d1": 5,
+     "n2": 3,
+     "d2": 4,
+     "numerator": 31,
+     "denominator": 20,
+     "commonDenominator": 20,
+     "difficultyLevel": 4
+    }
+   }
+  ],
+  "keySets": [
+   "commonDenominator,d1,d2,denominator,difficultyLevel,n1,n2,numerator,operation,variant"
+  ]
+ },
+ {
+  "type": "triangle_classify",
+  "error": "",
+  "variants": [
+   {
+    "variant": "classify",
+    "level": 1,
+    "question": "辺の長さが 8cm、6cm、7cm の三角形は、どんな三角形ですか。",
+    "answer": {
+     "kind": "string",
+     "value": "不等辺三角形"
+    },
+    "params": {
+     "variant": "classify",
+     "a": 8,
+     "b": 6,
+     "c": 7,
+     "kind": "不等辺三角形",
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "which_sides_equal",
+    "level": 1,
+    "question": "辺の長さが 5cm、5cm、2cm の三角形で、長さが等しい辺は何本ありますか。",
+    "answer": {
+     "kind": "integer",
+     "value": 2
+    },
+    "params": {
+     "variant": "which_sides_equal",
+     "a": 5,
+     "b": 5,
+     "c": 2,
+     "kind": "二等辺三角形",
+     "equalCount": 2,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,b,c,difficultyLevel,kind,variant",
+   "a,b,c,difficultyLevel,equalCount,kind,variant"
+  ]
+ },
+ {
+  "type": "parallel_perpendicular",
+  "error": "",
+  "variants": [
+   {
+    "variant": "definition_parallel",
+    "level": 1,
+    "question": "同じ平面上にある2本の直線が、互いに交わらないとき、この2本の直線を何といいますか。",
+    "answer": {
+     "kind": "string",
+     "value": "平行"
+    },
+    "params": {
+     "variant": "definition_parallel",
+     "answerKind": "parallel",
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "definition_perpendicular",
+    "level": 1,
+    "question": "2本の直線が直角に交わるとき、この2本の直線の関係は何といいますか。",
+    "answer": {
+     "kind": "string",
+     "value": "垂直"
+    },
+    "params": {
+     "variant": "definition_perpendicular",
+     "answerKind": "perpendicular",
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "angle_judgment",
+    "level": 1,
+    "question": "2本の直線が交わっています。そのうち1つの角は 90° です。この2本の直線について、説明の正しいものはどれですか。",
+    "answer": {
+     "kind": "string",
+     "value": "垂直"
+    },
+    "params": {
+     "variant": "angle_judgment",
+     "angle": 90,
+     "answerKind": "perpendicular",
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "intersection_judgment",
+    "level": 2,
+    "question": "同じ平面上にある2本の直線 l と m は、交わることを確かめています。l と m の関係として正しいものはどれですか。",
+    "answer": {
+     "kind": "string",
+     "value": "平行ではありません"
+    },
+    "params": {
+     "variant": "intersection_judgment",
+     "intersects": true,
+     "answerKind": "not_parallel",
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "equal_distance",
+    "level": 3,
+    "question": "同じ平面上にある2本の直線の間で、2直線の間の距離は、どの場所でも 13cm 的一样です。この2本の直線は何といいますか。",
+    "answer": {
+     "kind": "string",
+     "value": "平行"
+    },
+    "params": {
+     "variant": "equal_distance",
+     "constantDistance": 13,
+     "answerKind": "parallel",
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "find_pair",
+    "level": 4,
+    "question": "3本の直線 あ、い、う があります。直線あと直線いは平行で、直線あと直線うは垂直です。perpendicularな2本の直線の組はどれですか。",
+    "answer": {
+     "kind": "string",
+     "value": "直線あと直線う"
+    },
+    "params": {
+     "variant": "find_pair",
+     "relation": "perpendicular",
+     "pair": {
+      "a": 0,
+      "b": 2
+     },
+     "answerKind": "perpendicular",
+     "difficultyLevel": 4
+    }
+   }
+  ],
+  "keySets": [
+   "answerKind,difficultyLevel,variant",
+   "angle,answerKind,difficultyLevel,variant",
+   "answerKind,difficultyLevel,intersects,variant",
+   "answerKind,constantDistance,difficultyLevel,variant",
+   "answerKind,difficultyLevel,pair,relation,variant"
+  ]
+ },
+ {
+  "type": "area_unit_conversion",
+  "error": "",
+  "variants": [
+   {
+    "variant": "sqm_to_sqcm",
+    "level": 1,
+    "question": "面積の単位を直します。2㎡ は何㎠ です。",
+    "answer": {
+     "kind": "integer",
+     "value": 20000
+    },
+    "params": {
+     "variant": "sqm_to_sqcm",
+     "from": "㎡",
+     "to": "㎠",
+     "givenValue": 2,
+     "multiplier": 10000,
+     "answer": 20000,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "aresu_to_sqm",
+    "level": 1,
+    "question": "面積の単位を直します。4a は何㎡ です。",
+    "answer": {
+     "kind": "integer",
+     "value": 400
+    },
+    "params": {
+     "variant": "aresu_to_sqm",
+     "from": "a",
+     "to": "㎡",
+     "givenValue": 4,
+     "multiplier": 100,
+     "answer": 400,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "hektaru_to_aresu",
+    "level": 1,
+    "question": "面積の単位を直します。8ha は何a です。",
+    "answer": {
+     "kind": "integer",
+     "value": 800
+    },
+    "params": {
+     "variant": "hektaru_to_aresu",
+     "from": "ha",
+     "to": "a",
+     "givenValue": 8,
+     "multiplier": 100,
+     "answer": 800,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "sqm_to_aresu",
+    "level": 3,
+    "question": "面積の単位を直します。100㎡ は何a です。",
+    "answer": {
+     "kind": "integer",
+     "value": 1
+    },
+    "params": {
+     "variant": "sqm_to_aresu",
+     "from": "㎡",
+     "to": "a",
+     "givenValue": 100,
+     "multiplier": 100,
+     "answer": 1,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "sqkm_to_hektaru",
+    "level": 3,
+    "question": "面積の単位を直します。2㎢ は何ha です。",
+    "answer": {
+     "kind": "integer",
+     "value": 200
+    },
+    "params": {
+     "variant": "sqkm_to_hektaru",
+     "from": "㎢",
+     "to": "ha",
+     "givenValue": 2,
+     "multiplier": 100,
+     "answer": 200,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "hektaru_to_sqkm",
+    "level": 4,
+    "question": "面積の単位を直します。300ha は何㎢ です。",
+    "answer": {
+     "kind": "integer",
+     "value": 3
+    },
+    "params": {
+     "variant": "hektaru_to_sqkm",
+     "from": "ha",
+     "to": "㎢",
+     "givenValue": 300,
+     "multiplier": 100,
+     "answer": 3,
+     "difficultyLevel": 4
+    }
+   },
+   {
+    "variant": "sqm_to_hektaru",
+    "level": 5,
+    "question": "面積の単位を直します。30000㎡ は何ha です。",
+    "answer": {
+     "kind": "integer",
+     "value": 3
+    },
+    "params": {
+     "variant": "sqm_to_hektaru",
+     "from": "㎡",
+     "to": "ha",
+     "givenValue": 30000,
+     "multiplier": 10000,
+     "answer": 3,
+     "difficultyLevel": 5
+    }
+   },
+   {
+    "variant": "hektaru_to_sqm",
+    "level": 5,
+    "question": "面積の単位を直します。1ha は何㎡ です。",
+    "answer": {
+     "kind": "integer",
+     "value": 10000
+    },
+    "params": {
+     "variant": "hektaru_to_sqm",
+     "from": "ha",
+     "to": "㎡",
+     "givenValue": 1,
+     "multiplier": 10000,
+     "answer": 10000,
+     "difficultyLevel": 5
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,from,givenValue,multiplier,to,variant"
+  ]
+ },
+ {
+  "type": "rectangle_area",
+  "error": "",
+  "variants": [
+   {
+    "variant": "square",
+    "level": 1,
+    "question": "1辺が 2 cm の正方形の面積を求めなさい。",
+    "answer": {
+     "kind": "integer",
+     "value": 4
+    },
+    "params": {
+     "variant": "square",
+     "width": 2,
+     "height": 2,
+     "area": 4,
+     "answer": 4,
+     "unit": "cm2",
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "rectangle",
+    "level": 1,
+    "question": "縦 2 cm、横 3 cm の長方形の面積を求めなさい。",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "variant": "rectangle",
+     "width": 3,
+     "height": 2,
+     "area": 6,
+     "answer": 6,
+     "unit": "cm2",
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "find_side",
+    "level": 2,
+    "question": "縦 5 cm、横 8 cm の長方形があります。横の長さが 8 cm のとき、縦の長さはいくつですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 5
+    },
+    "params": {
+     "variant": "find_side",
+     "width": 8,
+     "height": 5,
+     "area": 40,
+     "answer": 5,
+     "unit": "cm",
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "choose_formula",
+    "level": 4,
+    "question": "縦 5 cm、横 6 cm の長方形の面積を求める式はどれですか。(1) 縦 ＋ 横  (2) 横 × 縦  (3) 縦 × 縦",
+    "answer": {
+     "kind": "string",
+     "value": "横 × 縦"
+    },
+    "params": {
+     "variant": "choose_formula",
+     "width": 6,
+     "height": 5,
+     "area": 30,
+     "answer": 30,
+     "unit": "cm2",
+     "difficultyLevel": 4
+    }
+   },
+   {
+    "variant": "unit_convert",
+    "level": 5,
+    "question": "1辺が 3 m の正方形の面積を cm2 で表すと、何 cm2 ですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 90000
+    },
+    "params": {
+     "variant": "unit_convert",
+     "width": 300,
+     "height": 300,
+     "area": 90000,
+     "answer": 90000,
+     "unit": "cm2",
+     "difficultyLevel": 5
+    }
+   }
+  ],
+  "keySets": [
+   "answer,area,difficultyLevel,height,unit,variant,width"
+  ]
+ },
+ {
+  "type": "triangle_area",
+  "error": "",
+  "variants": [
+   {
+    "variant": "find_area",
+    "level": 1,
+    "question": "底辺が 3 cm、高さが 2 cm の三角形の面積を求めなさい。",
+    "answer": {
+     "kind": "integer",
+     "value": 3
+    },
+    "params": {
+     "variant": "find_area",
+     "base": 3,
+     "height": 2,
+     "area": 3,
+     "answer": 3,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "find_area_with_slant",
+    "level": 2,
+    "question": "底辺が 6 cm、斜辺が 18 cm、高さが 16 cm の三角形の面積を求めなさい。",
+    "answer": {
+     "kind": "integer",
+     "value": 48
+    },
+    "params": {
+     "variant": "find_area_with_slant",
+     "base": 6,
+     "height": 16,
+     "slant": 18,
+     "area": 48,
+     "answer": 48,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "find_height",
+    "level": 3,
+    "question": "底辺が 7 cm、面積が 91 cm2 の三角形があります。高さは何cmですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 26
+    },
+    "params": {
+     "variant": "find_height",
+     "base": 7,
+     "height": 26,
+     "area": 91,
+     "answer": 26,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "find_base",
+    "level": 4,
+    "question": "高さが 68 cm、面積が 510 cm2 の三角形があります。底辺は何cmですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 15
+    },
+    "params": {
+     "variant": "find_base",
+     "base": 15,
+     "height": 68,
+     "area": 510,
+     "answer": 15,
+     "difficultyLevel": 4
+    }
+   },
+   {
+    "variant": "compare_with_rectangle",
+    "level": 5,
+    "question": "底辺が 12 cm、高さが 86 cm の長方形と、底辺と高さが同じ三角形の面積のの差は何 cm2 ですか。（三角形の面積は小数になりません。）",
+    "answer": {
+     "kind": "integer",
+     "value": 516
+    },
+    "params": {
+     "variant": "compare_with_rectangle",
+     "base": 12,
+     "height": 86,
+     "area": 516,
+     "rectangleArea": 1032,
+     "answer": 516,
+     "difficultyLevel": 5
+    }
+   }
+  ],
+  "keySets": [
+   "answer,area,base,difficultyLevel,height,variant",
+   "answer,area,base,difficultyLevel,height,slant,variant",
+   "answer,area,base,difficultyLevel,height,rectangleArea,variant"
+  ]
+ },
+ {
+  "type": "parallelogram_area",
+  "error": "",
+  "variants": [
+   {
+    "variant": "find_area",
+    "level": 1,
+    "question": "底辺が 3 cm、高さが 2 cm の平行四辺形の面積を求めなさい。",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "variant": "find_area",
+     "base": 3,
+     "height": 2,
+     "area": 6,
+     "answer": 6,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "find_area_with_slant",
+    "level": 2,
+    "question": "底辺が 6 cm、斜辺が 18 cm、底辺に垂直な辺（高さ）が 16 cm の平行四辺形の面積を求めなさい。",
+    "answer": {
+     "kind": "integer",
+     "value": 96
+    },
+    "params": {
+     "variant": "find_area_with_slant",
+     "base": 6,
+     "height": 16,
+     "slant": 18,
+     "area": 96,
+     "answer": 96,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "find_height",
+    "level": 3,
+    "question": "底辺が 7 cm、面積が 182 cm2 の平行四辺形があります。高さは何cmですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 26
+    },
+    "params": {
+     "variant": "find_height",
+     "base": 7,
+     "height": 26,
+     "area": 182,
+     "answer": 26,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "find_base",
+    "level": 4,
+    "question": "高さが 17 cm、面積が 391 cm2 の平行四辺形があります。底辺は何cmですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 23
+    },
+    "params": {
+     "variant": "find_base",
+     "base": 23,
+     "height": 17,
+     "area": 391,
+     "answer": 23,
+     "difficultyLevel": 4
+    }
+   },
+   {
+    "variant": "two_triangles",
+    "level": 5,
+    "question": "底辺が 12 cm、高さが 86 cm の平行四辺形を、対角線で2つの三角形に分けました。このうち1つの三角形の面積は何 cm2 ですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 516
+    },
+    "params": {
+     "variant": "two_triangles",
+     "base": 12,
+     "height": 86,
+     "area": 1032,
+     "triangleArea": 516,
+     "answer": 516,
+     "difficultyLevel": 5
+    }
+   }
+  ],
+  "keySets": [
+   "answer,area,base,difficultyLevel,height,variant",
+   "answer,area,base,difficultyLevel,height,slant,variant",
+   "answer,area,base,difficultyLevel,height,triangleArea,variant"
+  ]
+ },
+ {
+  "type": "judge_same",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "下の図Aと図Bは合同した図形ですか。（はい/いいえ）",
+    "answer": {
+     "kind": "string",
+     "value": "はい"
+    },
+    "params": {
+     "rotationDeg": 0,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "difficultyLevel,rotationDeg"
+  ]
+ },
+ {
+  "type": "judge_differs",
+  "error": "",
+  "variants": [
+   {
+    "variant": "apex_moved",
+    "level": 2,
+    "question": "図Aは二等辺三角形です。図Aと図Bは、辺の長さと角の大きさがすべて対応して等しいですか。（はい/いいえ）",
+    "answer": {
+     "kind": "string",
+     "value": "いいえ"
+    },
+    "params": {
+     "variant": "apex_moved",
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "base_widened",
+    "level": 2,
+    "question": "図Aは不等辺三角形です。図Aと図Bは、重ねるとぴったり重なりますか。（はい/いいえ）",
+    "answer": {
+     "kind": "string",
+     "value": "いいえ"
+    },
+    "params": {
+     "variant": "base_widened",
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "scaled",
+    "level": 2,
+    "question": "図Aは不等辺三角形です。図Aと図Bは、辺の長さと角の大きさがすべて対応して等しいですか。（はい/いいえ）",
+    "answer": {
+     "kind": "string",
+     "value": "いいえ"
+    },
+    "params": {
+     "variant": "scaled",
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "difficultyLevel,variant"
+  ]
+ },
+ {
+  "type": "ratio_simplify",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "4：16を、できるだけ簡単な比になおしなさい",
+    "answer": {
+     "kind": "string",
+     "value": "1：4"
+    },
+    "params": {
+     "a": 4,
+     "b": 16,
+     "gcd": 4,
+     "answer": "1：4",
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel,gcd"
+  ]
+ },
+ {
+  "type": "ratio_value",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "2：8 の比の値を求めなさい",
+    "answer": {
+     "kind": "decimal",
+     "value": 0.25
+    },
+    "params": {
+     "a": 2,
+     "b": 8,
+     "answer": 0.25,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel"
+  ]
+ },
+ {
+  "type": "ratio_equal",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "2：1 は、4：2 と同じ比ですか？（はい/いいえ）",
+    "answer": {
+     "kind": "string",
+     "value": "はい"
+    },
+    "params": {
+     "a": 2,
+     "b": 1,
+     "x": 4,
+     "y": 2,
+     "factor": 2,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,b,difficultyLevel,factor,x,y"
+  ]
+ },
+ {
+  "type": "ratio_quantity",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "全体が21のとき、2：1に分けると小さいほうはいくつになりますか",
+    "answer": {
+     "kind": "integer",
+     "value": 7
+    },
+    "params": {
+     "a": 2,
+     "b": 1,
+     "unit": 7,
+     "total": 21,
+     "askPart": 1,
+     "answer": 7,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,askPart,b,difficultyLevel,total,unit"
+  ]
+ },
+ {
+  "type": "proportional_expression",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "1個5円のりんごをx個買うときの代金y円です。yをxの式で表しなさい",
+    "answer": {
+     "kind": "string",
+     "value": "y=5x"
+    },
+    "params": {
+     "k": 5,
+     "answer": "y=5x",
+     "constant": 5,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,constant,difficultyLevel,k"
+  ]
+ },
+ {
+  "type": "proportional_word",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "2個買うと8円の品物があります。同じ品物を10個買うと何円ですか",
+    "answer": {
+     "kind": "integer",
+     "value": 40
+    },
+    "params": {
+     "k": 4,
+     "x1": 2,
+     "x2": 10,
+     "y1": 8,
+     "y2": 40,
+     "answer": 40,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,k,x1,x2,y1,y2"
+  ]
+ },
+ {
+  "type": "inverse_expression",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "面積が8㎠の長方形があります。縦の長さをxcm、横の長さをycmとすると、yをxで表しなさい",
+    "answer": {
+     "kind": "string",
+     "value": "y=8÷x"
+    },
+    "params": {
+     "k": 8,
+     "answer": "y=8÷x",
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,k"
+  ]
+ },
+ {
+  "type": "expression_meaning",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "x4円という式があります。どのような意味があるか文章で説明してください",
+    "answer": {
+     "kind": "string",
+     "value": "x4円は、x円の物を1こと4円の品物を買ったときの代金です"
+    },
+    "params": {
+     "b": 4,
+     "answer": "x4円は、x円の物を1こと4円の品物を買ったときの代金です",
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,b,difficultyLevel"
+  ]
+ },
+ {
+  "type": "inverse_word",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 3,
+    "question": "32こを2人で分けると1人16こになります。同じ数を8人で分けると、1人何こになりますか",
+    "answer": {
+     "kind": "integer",
+     "value": 4
+    },
+    "params": {
+     "total": 32,
+     "people1": 2,
+     "people2": 8,
+     "per1": 16,
+     "per2": 4,
+     "answer": 4,
+     "difficultyLevel": 3
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,people1,people2,per1,per2,total"
+  ]
+ },
+ {
+  "type": "percentage",
+  "error": "",
+  "variants": [
+   {
+    "variant": "find_percent",
+    "level": 1,
+    "question": "全体 4 のうち 1 は、何パーセントですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 25
+    },
+    "params": {
+     "variant": "find_percent",
+     "percent": 25,
+     "whole": 4,
+     "part": 1,
+     "answer": 25,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "percent_of",
+    "level": 2,
+    "question": "ある量が 60 です。その 75 パーセントは何ですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 45
+    },
+    "params": {
+     "variant": "percent_of",
+     "percent": 75,
+     "whole": 60,
+     "part": 45,
+     "answer": 45,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "what_percent",
+    "level": 3,
+    "question": "ある量が 125 で、そのうち 25 が占めています。何パーセントですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 20
+    },
+    "params": {
+     "variant": "what_percent",
+     "percent": 20,
+     "whole": 125,
+     "part": 25,
+     "answer": 20,
+     "difficultyLevel": 3
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,part,percent,variant,whole"
+  ]
+ },
+ {
+  "type": "decimal_mul_decimal",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "0.3に0.2をかけるといくつになりますか",
+    "answer": {
+     "kind": "decimal",
+     "value": 0.06
+    },
+    "params": {
+     "a": 0.3,
+     "b": 0.2,
+     "answer": 0.06,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel"
+  ]
+ },
+ {
+  "type": "decimal_addition",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "1.2に0.3をたすといくつになりますか",
+    "answer": {
+     "kind": "decimal",
+     "value": 1.5
+    },
+    "params": {
+     "a": 1.2,
+     "b": 0.3,
+     "answer": 1.5,
+     "carryCount": 0,
+     "carryPositions": [],
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,carryCount,carryPositions,difficultyLevel"
+  ]
+ },
+ {
+  "type": "decimal_subtraction",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "1.9から1.8をひくといくつになりますか",
+    "answer": {
+     "kind": "decimal",
+     "value": 0.1
+    },
+    "params": {
+     "a": 1.9,
+     "b": 1.8,
+     "answer": 0.1,
+     "borrowCount": 0,
+     "borrowPositions": [],
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,borrowCount,borrowPositions,difficultyLevel"
+  ]
+ },
+ {
+  "type": "decimal_div_decimal",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "0.2を0.2でわると、商はいくつですか",
+    "answer": {
+     "kind": "decimal",
+     "value": 1
+    },
+    "params": {
+     "dividend": 0.2,
+     "divisor": 0.2,
+     "quotient": 1,
+     "answer": 1,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,dividend,divisor,quotient"
+  ]
+ },
+ {
+  "type": "decimal_mul_integer",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "0.3×2 はいくつになりますか",
+    "answer": {
+     "kind": "decimal",
+     "value": 0.6
+    },
+    "params": {
+     "a": 0.3,
+     "b": 2,
+     "answer": 0.6,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel"
+  ]
+ },
+ {
+  "type": "decimal_div_integer",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "0.3を3でわると、いくつになりますか",
+    "answer": {
+     "kind": "decimal",
+     "value": 0.1
+    },
+    "params": {
+     "dividend": 0.3,
+     "divisor": 3,
+     "quotient": 0.1,
+     "answer": 0.1,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,dividend,divisor,quotient"
+  ]
+ },
+ {
+  "type": "decimal_round",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "2.95を、小数第1位まで四捨五入しなさい",
+    "answer": {
+     "kind": "decimal",
+     "value": 3
+    },
+    "params": {
+     "value": 2.95,
+     "roundTo": 1,
+     "rounded": 3,
+     "answer": 3,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,roundTo,rounded,value"
+  ]
+ },
+ {
+  "type": "expression_make",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "1本x円のえんぴつを4本買ったときの代金を、xを使った式で表しなさい",
+    "answer": {
+     "kind": "string",
+     "value": "4x"
+    },
+    "params": {
+     "count": 4,
+     "x": "x",
+     "answer": "4x",
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,count,difficultyLevel,x"
+  ]
+ },
+ {
+  "type": "expression_substitution",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "x=1 のとき、1x+1 の値を求めなさい",
+    "answer": {
+     "kind": "integer",
+     "value": 2
+    },
+    "params": {
+     "a": 1,
+     "b": 1,
+     "x": 1,
+     "answer": 2,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel,x"
+  ]
+ },
+ {
+  "type": "expression_word_make",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "1こ4円のチョコレートをxこ買います。代金をxの式で表しなさい",
+    "answer": {
+     "kind": "string",
+     "value": "4×x"
+    },
+    "params": {
+     "price": 4,
+     "answer": "4×x",
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,price"
+  ]
+ },
+ {
+  "type": "expression_blank",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "□×2＝6 のとき、□に書く数はいくつですか",
+    "answer": {
+     "kind": "integer",
+     "value": 3
+    },
+    "params": {
+     "a": 3,
+     "b": 2,
+     "result": 6,
+     "answer": 3,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel,result"
+  ]
+ },
+ {
+  "type": "expression_multi_condition",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 3,
+    "question": "はじめに10個ありました。1分間に5こずつ5分間ふえると、最終的にいくつになりますか。また式 (あれば x+ b の形) で表しなさい",
+    "answer": {
+     "kind": "integer",
+     "value": 35
+    },
+    "params": {
+     "a": 5,
+     "b": 10,
+     "x": 5,
+     "answer": 35,
+     "difficultyLevel": 3
+    }
+   }
+  ],
+  "keySets": [
+   "a,answer,b,difficultyLevel,x"
+  ]
+ },
+ {
+  "type": "arrange_simple",
+  "error": "",
+  "variants": [
+   {
+    "variant": "pick_only",
+    "level": 1,
+    "question": "3人の中から2人を選んで1列に並べます。並べ方は全部で何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "n": 3,
+     "r": 2,
+     "variant": "pick_only",
+     "answer": 6,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "pick_special",
+    "level": 1,
+    "question": "3人の中から2人を選び、そのうち1人を「特別の1人」として決めます。特別の1人以外は並べなくてかまいません。選び方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "n": 3,
+     "r": 2,
+     "variant": "pick_special",
+     "answer": 6,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "pick_include_one",
+    "level": 2,
+    "question": "4人の中から3人を選んで1列に並べます。ただし、Aさんは必ず選ぶことにします。並べ方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "n": 4,
+     "r": 3,
+     "variant": "pick_include_one",
+     "answer": 6,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "pick_first_fixed",
+    "level": 3,
+    "question": "5人の中から4人を選んで1列に並べます。ただし、Aさんは必ず選び、1番め（いちばん左）に置くことにします。並べ方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 24
+    },
+    "params": {
+     "n": 5,
+     "r": 4,
+     "variant": "pick_first_fixed",
+     "answer": 24,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "pick_both_ends",
+    "level": 4,
+    "question": "6人の中から4人を選んで1列に並べます。ただし、BさんとCさんは両方とも選び、左右のはしに入れることにします。並べ方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 24
+    },
+    "params": {
+     "n": 6,
+     "r": 4,
+     "variant": "pick_both_ends",
+     "answer": 24,
+     "difficultyLevel": 4
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,n,r,variant"
+  ]
+ },
+ {
+  "type": "combine_simple",
+  "error": "",
+  "variants": [
+   {
+    "variant": "pick_only",
+    "level": 1,
+    "question": "3人の中から2人を選びます。選び方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 3
+    },
+    "params": {
+     "n": 3,
+     "r": 2,
+     "variant": "pick_only",
+     "answer": 3,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "include_one",
+    "level": 2,
+    "question": "3人の中から2人を選びます。ただし、Aさんは必ず選ぶことにします。選び方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 2
+    },
+    "params": {
+     "n": 3,
+     "r": 2,
+     "variant": "include_one",
+     "answer": 2,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "exclude_one",
+    "level": 2,
+    "question": "5人の中から3人を選びます。ただし、Aさんは選ばないことにします。選び方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 4
+    },
+    "params": {
+     "n": 5,
+     "r": 3,
+     "variant": "exclude_one",
+     "answer": 4,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,n,r,variant"
+  ]
+ },
+ {
+  "type": "arrange_tree",
+  "error": "",
+  "variants": [
+   {
+    "variant": "all",
+    "level": 1,
+    "question": "A、B、Cの3個の文字をすべて1回ずつ使って、左から1列に並べます。並べ方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "n": 3,
+     "letters": [
+      "A",
+      "B",
+      "C"
+     ],
+     "variant": "all",
+     "answer": 6,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "fixed_first",
+    "level": 1,
+    "question": "A、B、Cの3個の文字のうち、Aは1番め（いちばん左）に置くと決まっています。残りの2個を自由に並べて、並べ方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 2
+    },
+    "params": {
+     "n": 3,
+     "letters": [
+      "A",
+      "B",
+      "C"
+     ],
+     "variant": "fixed_first",
+     "answer": 2,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "both_ends",
+    "level": 2,
+    "question": "A、B、C、Dの4個の文字のうち、AとBを左右のはしに入れると決まっています。残りの2個を自由に並べて、並べ方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 4
+    },
+    "params": {
+     "n": 4,
+     "letters": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "variant": "both_ends",
+     "answer": 4,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "adjacent",
+    "level": 3,
+    "question": "A、B、C、D、Eの5個の文字のうち、AとBは必ず隣り合うように並べます。並べ方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 48
+    },
+    "params": {
+     "n": 5,
+     "letters": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+     ],
+     "variant": "adjacent",
+     "answer": 48,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "circle",
+    "level": 4,
+    "question": "A、B、C、D、Eの5個の文字を円卓のまわりに1つずつ並べます。回転させたら重なる並びは同じものとして数えます。並べ方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 24
+    },
+    "params": {
+     "n": 5,
+     "letters": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+     ],
+     "variant": "circle",
+     "answer": 24,
+     "difficultyLevel": 4
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,letters,n,variant"
+  ]
+ },
+ {
+  "type": "combine_table",
+  "error": "",
+  "variants": [
+   {
+    "variant": "round_robin",
+    "level": 1,
+    "question": "4チームのサッカー大会で、どの2チームも1回ずつ試合します。試合の数は全部で何試合になりますか",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "n": 4,
+     "variant": "round_robin",
+     "answer": 6,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "two_rounds",
+    "level": 2,
+    "question": "5チームのサッカー大会で、どの2チームも1回ずつ試合します。さらにホーム側とアウェイ側で入れかわって、もう1回ずつ試合します。試合の数は全部で何試合になりますか",
+    "answer": {
+     "kind": "integer",
+     "value": 20
+    },
+    "params": {
+     "n": 5,
+     "variant": "two_rounds",
+     "answer": 20,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "one_team_games",
+    "level": 3,
+    "question": "6チームのサッカー大会で、どの2チームも1回ずつ試合します。このうち、ある1チームが試合する試合は何試合になりますか",
+    "answer": {
+     "kind": "integer",
+     "value": 5
+    },
+    "params": {
+     "n": 6,
+     "variant": "one_team_games",
+     "answer": 5,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "one_game_pairs",
+    "level": 4,
+    "question": "8チームが総当たりで1回ずつ試合します。1試合の対戦になる2チームの選び方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 28
+    },
+    "params": {
+     "n": 8,
+     "variant": "one_game_pairs",
+     "answer": 28,
+     "difficultyLevel": 4
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,n,variant"
+  ]
+ },
+ {
+  "type": "duplicate_removal",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "A、A、Bの3枚のカードをすべて使って一列に並べます。同じ文字は区別できないとして、並べ方は何通りありますか",
+    "answer": {
+     "kind": "integer",
+     "value": 3
+    },
+    "params": {
+     "letters": [
+      "A",
+      "A",
+      "B"
+     ],
+     "symbolMode": "letter",
+     "answer": 3,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,letters,symbolMode"
+  ]
+ },
+ {
+  "type": "data_average",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "7、15、1、15 の平均を求めなさい",
+    "answer": {
+     "kind": "decimal",
+     "value": 9.5
+    },
+    "params": {
+     "numbers": [
+      7,
+      15,
+      1,
+      15
+     ],
+     "sum": 38,
+     "count": 4,
+     "average": 9.5,
+     "answer": 9.5,
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,average,count,difficultyLevel,numbers,sum"
+  ]
+ },
+ {
+  "type": "data_total_from_average",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "3この平均が1です。この3この合計はいくつですか",
+    "answer": {
+     "kind": "integer",
+     "value": 3
+    },
+    "params": {
+     "count": 3,
+     "average": 1,
+     "total": 3,
+     "answer": 3,
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answer,average,count,difficultyLevel,total"
+  ]
+ },
+ {
+  "type": "data_max_min",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 1,
+    "question": "3、2、1、9、1 の中で、最大の数と最小の数を答えなさい",
+    "answer": {
+     "kind": "string",
+     "value": "9 と 1"
+    },
+    "params": {
+     "numbers": [
+      3,
+      2,
+      1,
+      9,
+      1
+     ],
+     "max": 9,
+     "min": 1,
+     "answer": "9 と 1",
+     "difficultyLevel": 1
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,max,min,numbers"
+  ]
+ },
+ {
+  "type": "data_compare",
+  "error": "",
+  "variants": [
+   {
+    "variant": "(none)",
+    "level": 2,
+    "question": "A組のテストの点は 4、8、4、1、4 で、B組のテストの点は 1、8、8、8、3 です。それぞれ平均を比べると、どちらが高いと言えますか",
+    "answer": {
+     "kind": "string",
+     "value": "B組"
+    },
+    "params": {
+     "groupA": [
+      4,
+      8,
+      4,
+      1,
+      4
+     ],
+     "groupB": [
+      1,
+      8,
+      8,
+      8,
+      3
+     ],
+     "avgA": 4.2,
+     "avgB": 5.6,
+     "answer": "B組",
+     "difficultyLevel": 2
+    }
+   }
+  ],
+  "keySets": [
+   "answer,avgA,avgB,difficultyLevel,groupA,groupB"
+  ]
+ },
+ {
+  "type": "realworld_shopping",
+  "error": "",
+  "variants": [
+   {
+    "variant": "two_sum",
+    "level": 1,
+    "question": "写真の値札を見て、たまご1パックとぎゅうにゅう1本を買います。代金は合計いくらですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 300
+    },
+    "params": {
+     "variant": "two_sum",
+     "productA": "たまご",
+     "productB": "ぎゅうにゅう",
+     "priceA": 120,
+     "priceB": 180,
+     "answer": 300,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "same_item_multiple",
+    "level": 2,
+    "question": "写真の値札を見て、クッキーを2箱買います。代金はいくらですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 180
+    },
+    "params": {
+     "variant": "same_item_multiple",
+     "product": "クッキー",
+     "count": 2,
+     "price": 90,
+     "answer": 180,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "change",
+    "level": 3,
+    "question": "1000円札で、たまご1パックと食パン1袋を買います。おつりはいくらですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 730
+    },
+    "params": {
+     "variant": "change",
+     "productA": "たまご",
+     "productB": "食パン",
+     "budget": 1000,
+     "priceA": 120,
+     "priceB": 150,
+     "answer": 730,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "three_sum",
+    "level": 3,
+    "question": "写真の値札を見て、食パン1袋とぎゅうにゅう1本とクッキー1箱を買います。代金は合計いくらですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 420
+    },
+    "params": {
+     "variant": "three_sum",
+     "productA": "食パン",
+     "productB": "ぎゅうにゅう",
+     "productC": "クッキー",
+     "priceA": 150,
+     "priceB": 180,
+     "priceC": 90,
+     "answer": 420,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "multi_and_sum",
+    "level": 4,
+    "question": "写真の値札を見て、オレンジジュースを2本と、たまご1パックを買います。代金は合計いくらですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 520
+    },
+    "params": {
+     "variant": "multi_and_sum",
+     "productA": "オレンジジュース",
+     "productB": "たまご",
+     "count": 2,
+     "priceA": 200,
+     "priceB": 120,
+     "answer": 520,
+     "difficultyLevel": 4
+    }
+   },
+   {
+    "variant": "max_count",
+    "level": 4,
+    "question": "600円を持っています。写真の値札を見て、オレンジジュースは何本買えますか。",
+    "answer": {
+     "kind": "integer",
+     "value": 3
+    },
+    "params": {
+     "variant": "max_count",
+     "product": "オレンジジュース",
+     "budget": 600,
+     "price": 200,
+     "answer": 3,
+     "difficultyLevel": 4
+    }
+   },
+   {
+    "variant": "split_bill",
+    "level": 4,
+    "question": "食パン1袋とクッキー1箱をみんなで買いました。写真の値札を見て、代金を4人で同じずつ分けると、1人分はいくらですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 60
+    },
+    "params": {
+     "variant": "split_bill",
+     "productA": "食パン",
+     "productB": "クッキー",
+     "people": 4,
+     "priceA": 150,
+     "priceB": 90,
+     "answer": 60,
+     "difficultyLevel": 4
+    }
+   }
+  ],
+  "keySets": [
+   "answer,difficultyLevel,priceA,priceB,productA,productB,variant",
+   "answer,count,difficultyLevel,price,product,variant",
+   "answer,budget,difficultyLevel,priceA,priceB,productA,productB,variant",
+   "answer,difficultyLevel,priceA,priceB,priceC,productA,productB,productC,variant",
+   "answer,count,difficultyLevel,priceA,priceB,productA,productB,variant",
+   "answer,budget,difficultyLevel,price,product,variant",
+   "answer,difficultyLevel,people,priceA,priceB,productA,productB,variant"
+  ]
+ },
+ {
+  "type": "realworld_eggs",
+  "error": "",
+  "variants": [
+   {
+    "variant": "fill_carton",
+    "level": 1,
+    "question": "写真を見て、卵の数を数えます。1つのカートンには卵を6個入れることにします（この6個は問題で設定した数値です）。写真に写っている卵を入れたあと、カートンをいっぱいにするにはあと何個の卵が必要ですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 4
+    },
+    "params": {
+     "variant": "fill_carton",
+     "carton": 6,
+     "totalEggs": 2,
+     "answer": 4,
+     "difficultyLevel": 1
+    }
+   },
+   {
+    "variant": "pair_price",
+    "level": 2,
+    "question": "茶色い卵は1個30円、白い卵は1個25円です（この値段は問題で設定した数値です）。写真のように、茶色い卵を1個と白い卵を1個買います。代金は合計いくらですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 55
+    },
+    "params": {
+     "variant": "pair_price",
+     "priceA": 30,
+     "priceB": 25,
+     "answer": 55,
+     "difficultyLevel": 2
+    }
+   },
+   {
+    "variant": "pairs_total",
+    "level": 3,
+    "question": "写真の茶色い卵1個と白い卵1個を、1組とします。この1組を10組用意します（この10組は問題で設定した数値です）。卵は合わせて何個になりますか。",
+    "answer": {
+     "kind": "integer",
+     "value": 20
+    },
+    "params": {
+     "variant": "pairs_total",
+     "pairs": 10,
+     "eggsPerPair": 2,
+     "answer": 20,
+     "difficultyLevel": 3
+    }
+   },
+   {
+    "variant": "pairs_in_carton",
+    "level": 4,
+    "question": "写真の茶色い卵1個と白い卵1個を、1組とします。1つのカートンには卵を12個入れることにします（この12個は問題で設定した数値です）。茶色い卵と白い卵を1個ずつ組にしてカートンをいっぱいにすると、何組できますか。",
+    "answer": {
+     "kind": "integer",
+     "value": 6
+    },
+    "params": {
+     "variant": "pairs_in_carton",
+     "carton": 12,
+     "eggsPerPair": 2,
+     "answer": 6,
+     "difficultyLevel": 4
+    }
+   },
+   {
+    "variant": "pairs_cost",
+    "level": 4,
+    "question": "茶色い卵は1個30円、白い卵は1個25円です（この値段は問題で設定した数値です）。写真のように、茶色い卵1個と白い卵1個を1組として、この1組を5組買います（この5組は問題で設定した数値です）。代金は合計いくらですか。",
+    "answer": {
+     "kind": "integer",
+     "value": 275
+    },
+    "params": {
+     "variant": "pairs_cost",
+     "pairs": 5,
+     "priceA": 30,
+     "priceB": 25,
+     "pairCost": 55,
+     "answer": 275,
+     "difficultyLevel": 4
+    }
+   }
+  ],
+  "keySets": [
+   "answer,carton,difficultyLevel,totalEggs,variant",
+   "answer,difficultyLevel,priceA,priceB,variant",
+   "answer,difficultyLevel,eggsPerPair,pairs,variant",
+   "answer,carton,difficultyLevel,eggsPerPair,variant",
+   "answer,difficultyLevel,pairCost,pairs,priceA,priceB,variant"
+  ]
+ }
+]

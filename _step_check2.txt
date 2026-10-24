@@ -1,0 +1,16 @@
+circle_area_diameter lv2 seed273: 6.5 × 6.5 × 3.14 = 132.67 => 132.665 != 132.67
+circle_area_diameter lv2 seed16111: 7.5 × 7.5 × 3.14 = 176.63 => 176.625 != 176.63
+circle_area_diameter lv2 seed39868: 8.5 × 8.5 × 3.14 = 226.87 => 226.865 != 226.87
+circle_area_diameter lv2 seed55706: 9.5 × 9.5 × 3.14 = 283.39 => 283.385 != 283.39
+circle_area_diameter lv3 seed404: 8.5 × 8.5 × 3.14 = 226.87 => 226.865 != 226.87
+circle_area_diameter lv3 seed24161: 9.5 × 9.5 × 3.14 = 283.39 => 283.385 != 283.39
+circle_area_diameter lv3 seed39999: 10.5 × 10.5 × 3.14 = 346.19 => 346.185 != 346.19
+circle_area_diameter lv3 seed55837: 11.5 × 11.5 × 3.14 = 415.27 => 415.26500000000004 != 415.27
+circle_area_diameter lv4 seed8454: 11.5 × 11.5 × 3.14 = 415.27 => 415.26500000000004 != 415.27
+circle_area_diameter lv4 seed24292: 12.5 × 12.5 × 3.14 = 490.63 => 490.625 != 490.63
+circle_area_diameter lv4 seed40130: 13.5 × 13.5 × 3.14 = 572.27 => 572.265 != 572.27
+circle_area_diameter lv4 seed55968: 14.5 × 14.5 × 3.14 = 660.19 => 660.1850000000001 != 660.19
+circle_area_diameter lv5 seed8585: 15.5 × 15.5 × 3.14 = 754.39 => 754.385 != 754.39
+circle_area_diameter lv5 seed16504: 16.5 × 16.5 × 3.14 = 854.87 => 854.865 != 854.87
+circle_area_diameter lv5 seed40261: 18.5 × 18.5 × 3.14 = 1074.67 => 1074.665 != 1074.67
+circle_area_diameter lv5 seed48180: 19.5 × 19.5 × 3.14 = 1193.99 => 1193.9850000000001 != 1193.99

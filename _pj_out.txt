@@ -1,0 +1,10 @@
+
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mC:/Users/monty/Desktop/蝠城｡・[39m
+
+ [32m笨・[39m src/quality/prime-judgment-uniqueness.test.ts [2m([22m[2m1 test[22m[2m)[22m[90m 8[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m   Start at [22m 16:40:25
+[2m   Duration [22m 601ms[2m (transform 116ms, setup 0ms, collect 122ms, tests 8ms, environment 0ms, prepare 202ms)[22m
+

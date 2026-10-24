@@ -1,0 +1,4 @@
+export class AdditionGenerator implements ProblemGenerator {
+export class SubtractionGenerator implements ProblemGenerator {
+export class MultiplicationGenerator implements ProblemGenerator {
+export class DivisionGenerator implements ProblemGenerator {

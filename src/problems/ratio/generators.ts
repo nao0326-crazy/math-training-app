@@ -11,6 +11,7 @@ import type {
   ValidationResult,
 } from '../../types/problem';
 import { createRandom, generateProblemId } from '../../utils/random';
+import { buildNumericChoiceOptions } from '../../utils/choiceOptions';
 import {
   createDifficulty,
   numberSizeToComplexity,
@@ -408,6 +409,12 @@ export class ProportionalWordGenerator implements ProblemGenerator {
     const y1 = k * x1;
     const y2 = k * x2;
 
+    // 4 択化: 正答と意味的に異なる誤答を 3 つ組み立てる
+    const distractorCandidates: number[] = [];
+    // 正解 y2 に対する誤答: 正解に近い値と遠い値の組み合わせ
+    distractorCandidates.push(y2 + 1, y2 - 1 > 0 ? y2 - 1 : y2 + 10, y2 + 20);
+    const choices = buildNumericChoiceOptions(rng, y2, distractorCandidates);
+
     return {
       id: generateProblemId(),
       category: this.category,
@@ -418,6 +425,8 @@ export class ProportionalWordGenerator implements ProblemGenerator {
       answer: { kind: 'integer', value: y2 },
       explanation:
         '1個は' + y1 + '÷' + x1 + '＝' + k + '円。' + x2 + '個で' + k + '×' + x2 + '＝' + y2 + '円です。',
+      inputType: 'choice',
+      choices,
       parameters: { k, x1, x2, y1, y2, answer: y2, difficultyLevel: lv },
     };
   }
