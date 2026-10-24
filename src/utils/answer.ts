@@ -119,16 +119,18 @@ export function canonicalizeExpressionString(input: string): string {
 export function formatAnswer(answer: Answer): string {
   switch (answer.kind) {
     case 'integer':
-      return String(answer.value);
+      return String(answer.value ?? 0);
     case 'decimal':
-      return String(answer.value);
+      return String(answer.value ?? 0);
     case 'fraction':
-      return formatFraction(answer.numerator, answer.denominator);
+      return formatFraction(answer.numerator!, answer.denominator!);
     case 'mixed':
       return formatFraction(
-        answer.whole * answer.denominator + answer.numerator,
-        answer.denominator,
+        answer.whole! * answer.denominator! + answer.numerator!,
+        answer.denominator!
       );
+default:
+      return String(answer.value ?? 0);
     case 'string':
       return answer.value;
     case 'fractions':
@@ -145,22 +147,22 @@ export function formatAnswer(answer: Answer): string {
 export function toAnswerKey(answer: Answer): string {
   switch (answer.kind) {
     case 'integer':
-      return String(answer.value);
+      return String(answer.value ?? 0);
     case 'decimal':
-      return String(answer.value);
+      return String(answer.value ?? 0);
     case 'fraction': {
       const r = reduceFraction(answer.numerator, answer.denominator);
       return `${r.numerator}/${r.denominator}`;
     }
     case 'mixed': {
-      const totalNumerator = answer.whole * answer.denominator + answer.numerator;
-      const r = reduceFraction(totalNumerator, answer.denominator);
+      const totalNumerator = answer.whole! * answer.denominator! + answer.numerator!;
+      const r = reduceFraction(totalNumerator, answer.denominator!);
       return `${r.numerator}/${r.denominator}`;
     }
     case 'string':
-      return answer.value;
+      return String(answer.value ?? '')
     case 'fractions':
-      return answer.values.map((v) => toAnswerKey({ kind: 'fraction', ...v })).join('|');
+      return (answer.values ?? []).map((v) => toAnswerKey({ kind: 'fraction', numerator: v.numerator, denominator: v.denominator })).join('|');
   }
 }
 
@@ -171,7 +173,7 @@ export function toAnswerKey(answer: Answer): string {
 export function answersEqual(a: Answer, b: Answer): boolean {
   // 文字列同士
   if (a.kind === 'string' && b.kind === 'string') {
-    return a.value === b.value;
+    return String(a.value ?? '') === String(b.value ?? '');
   }
 
   // 複数分数同士は位置ごとに数学的等価性を比較する
@@ -208,13 +210,13 @@ export function answerToNumber(answer: Answer): number | null {
   switch (answer.kind) {
     case 'integer':
     case 'decimal':
-      return answer.value;
+      return answer.value ?? 0;
     case 'fraction':
       return answer.numerator / answer.denominator;
     case 'mixed':
-      return answer.whole + answer.numerator / answer.denominator;
+      return (answer.whole ?? 0) + (answer.numerator ?? 0) / (answer.denominator ?? 1);
     case 'string': {
-      const n = Number(answer.value);
+      const n = Number(answer.value ?? '');
       return Number.isNaN(n) ? null : n;
     }
     case 'fractions':
@@ -400,15 +402,16 @@ export function judgeUserAnswer(userInput: string, correctAnswer: Answer): Answe
 export function isReasonableAnswer(answer: Answer): boolean {
   // 文字列はそのまま true (数値変換できない文字列も許容)
   if (answer.kind === 'string') {
-    return answer.value.length > 0;
+    return String(answer.value).length > 0;
   }
 
   // 複数分数は各要素を検査する (単一の数値にはならないため先に処理する)
   if (answer.kind === 'fractions') {
-    if (!Array.isArray(answer.values) || answer.values.length === 0) {
+    const values = answer.values;
+    if (!Array.isArray(values) || values.length === 0) {
       return false;
     }
-    for (const v of answer.values) {
+    for (const v of values) {
       if (
         !Number.isInteger(v.numerator) ||
         !Number.isInteger(v.denominator) ||
@@ -434,8 +437,8 @@ export function isReasonableAnswer(answer: Answer): boolean {
     case 'fraction':
       return answer.denominator !== 0 && Number.isInteger(answer.numerator) && Number.isInteger(answer.denominator);
     case 'mixed':
-      return answer.denominator !== 0 && Number.isInteger(answer.whole) &&
-        Number.isInteger(answer.numerator) && Number.isInteger(answer.denominator);
+      return answer.denominator !== 0 && Number.isInteger(answer.whole!) &&
+        Number.isInteger(answer.numerator!) && Number.isInteger(answer.denominator!);
     case 'integer':
     case 'decimal':
       return true;
