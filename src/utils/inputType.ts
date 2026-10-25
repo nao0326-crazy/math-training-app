@@ -297,7 +297,9 @@ export function validateAnswerInput(
         return '分母に0を入力できません。';
       }
       return null;
-    }
+    }  // close case 'mixed' block
+  default:
+    return null;
   }
 }
 
@@ -354,5 +356,7 @@ export function getNormalizedAnswer(
       return params.mixed
         ? mixedInputToString(params.mixed.whole, params.mixed.numerator, params.mixed.denominator)
         : '';
+    default:
+      return '';
   }
 }
