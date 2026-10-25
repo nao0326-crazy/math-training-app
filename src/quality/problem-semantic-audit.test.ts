@@ -6,15 +6,7 @@ import { formatAnswer, checkUserAnswer } from '../utils/answer';
 const PUBLIC_IMAGES = new Set(['supermarket-shelf.svg', 'eggs-brown-white.jpg']);
 import { generateSolutionSteps } from '../engine/solution/solutionGenerator';
 
-const REVIEW_TYPES = new Set([
-  'judge_same',
-  'judge_differs',
-  'ratio_equal',
-  'data_max_min',
-  'symmetry_fold',
-  'symmetry_point',
-  'decimal_place_value',
-]);
+const REVIEW_TYPES = new Set();
 
 function norm(s: string) { return s.replace(/\s+/g, ''); }
 function answerTokens(ans: any): string[] {
