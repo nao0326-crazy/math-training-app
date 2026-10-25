@@ -1,9 +1,5 @@
 // Type definitions for difficulty levels
-export enum DifficultyLevel {
-  Easy,
-  Normal,
-  Hard,
-}
+export type DifficultyLevel = 1 | 2 | 3 | 4 | 5;
 
 /** 難易度範囲 (管理者画面などで使用) */
 export type DifficultyRange = {
@@ -11,94 +7,161 @@ export type DifficultyRange = {
   max: DifficultyLevel;
 };
 
+// Difficulty components
+export interface DifficultyComponents {
+  calculationComplexity: DifficultyLevel;
+  numberComplexity: DifficultyLevel;
+  reasoningComplexity: DifficultyLevel;
+  readingComplexity: DifficultyLevel;
+}
+
 // Difficulty level type
-type Difficulty = {
+export interface Difficulty {
   level: DifficultyLevel;
-  seed?: number;
+  components: DifficultyComponents;
 }
 
 // Category type
-export interface Category {
-  name: string;
-  color: string;
-}
+export type Category =
+  | 'integer'
+  | 'decimal'
+  | 'fraction'
+  | 'ratio'
+  | 'speed'
+  | 'geometry'
+  | 'data'
+  | 'numberTheory'
+  | 'expression'
+  | 'combinatorics'
+  | 'realWorld';
 
 // Answer input type
-export interface AnswerInputType {
-  type: string;
-  value: string | number;
+export type AnswerInputType =
+  | 'integer'
+  | 'decimal'
+  | 'fraction'
+  | 'mixed'
+  | 'fraction-list'
+  | 'ratio'
+  | 'expression'
+  | 'choice'
+  | 'list'
+  | 'yesno'
+  | 'string';
+
+// Figure types
+export interface FigurePoint {
+  x: number;
+  y: number;
+}
+
+export interface FigureSegment {
+  from: FigurePoint;
+  to: FigurePoint;
+  label?: string;
+}
+
+export interface FigureLabel {
+  at: FigurePoint;
+  text: string;
+  anchor?: 'start' | 'middle' | 'end';
+}
+
+export interface FigurePointLabel {
+  at: FigurePoint;
+  label: string;
+}
+
+export interface Figure {
+  kind: string;
+  vertices: FigurePoint[];
+  caption?: string;
+  fill?: string;
+  segments?: FigureSegment[];
+  points?: FigurePointLabel[];
+  labels?: FigureLabel[];
+}
+
+export interface FigureSpec {
+  figures: Figure[];
+  note?: string;
+}
+
+// Image spec
+export interface ImageSpec {
+  src: string;
+  altText: string;
+  caption?: string;
+  credit?: string;
+  photoFacts?: string[];
+  supplementalText?: string[];
 }
 
 // Answer type
-export interface Answer {
-  value: number;
-  correct: boolean;
+export type Answer =
+  | { kind: 'integer'; value: number }
+  | { kind: 'decimal'; value: number; decimalPlaces?: number }
+  | { kind: 'fraction'; numerator: number; denominator: number }
+  | { kind: 'fractions'; values: { numerator: number; denominator: number }[]; value?: number }
+  | { kind: 'mixed'; whole: number; numerator: number; denominator: number }
+  | { kind: 'string'; value: string };
+
+// Solution step
+export interface SolutionStep {
+  expression?: string;
+  explanation?: string;
+  [key: string]: unknown;
 }
 
-// Answer input type
+// Problem type
 export interface Problem {
   id: string;
   category: Category;
   type: string;
-  difficulty: { level: DifficultyLevel; components: { calculationComplexity: number; numberComplexity: number; reasoningComplexity: number; readingComplexity: number } };
+  difficulty: Difficulty;
   question: string;
-  answer: { kind: string; value: number };
-  explanation: string;
-  inputType: string;
-  parameters: {
-    type: string;
-    a: number;
-  };
+  answer: Answer;
+  explanation?: string;
+  parameters: Record<string, unknown>;
+  solutionSteps?: SolutionStep[];
+  inputType?: AnswerInputType;
+  choices?: string[];
+  figure?: FigureSpec;
+  image?: ImageSpec;
 }
 
-// Figure types
-interface FigureType {
-  width: number;
-  height: number;
-  url: string;
-}
-type FigureSizes = 'small' | 'medium' | 'large';
-
-/** 単純計算の問題タイプ */
-export type CalculationType =
-  | "addition_1_1"
-  | "addition_2_1"
-  | "addition_2_2"
-  | "subtraction_1_1"
-  | "subtraction_2_1"
-  | "subtraction_2_2"
-  | "multiplication_1_1"
-  | "multiplication_2_1"
-  | "multiplication_2_2"
-  | "division_2_1";
-
-/** 問題生成の設定 */
+// Generation config
 export interface GenerationConfig {
   category?: Category;
   type?: string;
   difficulty?: DifficultyLevel;
-  /** 問題生成のシード値 (テスト用) */
   seed?: number;
 }
 
-/** 問題生成ルールの定義 */
+// Problem generator
 export interface ProblemGenerator {
-  /** 問題タイプの識別子 */
   readonly type: string;
-  /** カテゴリ */
   readonly category: Category;
-  /** 問題タイプの説明 */
   readonly description: string;
-  /** 問題を生成する */
   generate(config?: GenerationConfig): Problem;
-  /** 生成された問題を検証する */
   validate(problem: Problem): ValidationResult;
 }
 
-/**
- * 検証結果
- */
+// Validation result
 export interface ValidationResult {
   valid: boolean;
   errors: string[];
 }
+
+// Calculation type
+export type CalculationType =
+  | 'addition_1_1'
+  | 'addition_2_1'
+  | 'addition_2_2'
+  | 'subtraction_1_1'
+  | 'subtraction_2_1'
+  | 'subtraction_2_2'
+  | 'multiplication_1_1'
+  | 'multiplication_2_1'
+  | 'multiplication_2_2'
+  | 'division_2_1';

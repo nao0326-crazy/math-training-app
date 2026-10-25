@@ -47,9 +47,11 @@ function safeCorrectAnswer(record: AnswerRecord): string {
 interface HistoryPageProps {
   /** 苦手分野から復習を開始する (カテゴリを渡す。出題レベルは習熟度から自動決定) */
   onStartReview: (category: Category) => void;
+  /** ハイスピード計算ゲート未完了で通常学習を開始できないか */
+  isSpeedGateRequired?: boolean;
 }
 
-export default function HistoryPage({ onStartReview }: HistoryPageProps) {
+export default function HistoryPage({ onStartReview, isSpeedGateRequired = false }: HistoryPageProps) {
   const [records, setRecords] = useState<AnswerRecord[]>([]);
   /** 保存済みの手書き途中式 (復習カードで表示。無くても履歴表示は動作する) */
   const [scratchNotes, setScratchNotes] = useState<ScratchNote[]>([]);
@@ -268,7 +270,11 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
                   <button
                     type="button"
                     className="secondary-button review-button"
-                    onClick={() => setConfirmArea(area)}
+                    disabled={isSpeedGateRequired}
+                    onClick={() => {
+                      if (isSpeedGateRequired) return;
+                      setConfirmArea(area);
+                    }}
                   >
                     {categoryLabel(area.category)}を{REVIEW_QUESTION_COUNT}問復習
                   </button>
@@ -417,7 +423,7 @@ export default function HistoryPage({ onStartReview }: HistoryPageProps) {
               {categoryLabel(confirmArea.category)}を{REVIEW_QUESTION_COUNT}問復習します
             </div>
             <div className="modal-buttons">
-              <button type="button" className="primary-button" onClick={handleConfirmReview}>
+              <button type="button" className="primary-button" disabled={isSpeedGateRequired} onClick={handleConfirmReview}>
                 復習をはじめる
               </button>
               <button

@@ -146,8 +146,8 @@ function ensureStores(upgradedFrom = 0): void {
 }
 
 describe('db migration', () => {
-  it('DB バージョンは 3 以上で開かれる', async () => {
-    expect(h.box.openVersion).toBeGreaterThanOrEqual(3);
+  it('DB バージョンは 4 以上で開かれる', async () => {
+    expect(h.box.openVersion).toBeGreaterThanOrEqual(4);
   });
 
   it('新規作成 (v0) では scratchNotes を含む全ストアが作られる', async () => {
@@ -158,26 +158,29 @@ describe('db migration', () => {
     expect(names).toContain('settings');
     expect(names).toContain('dailySync');
     expect(names).toContain('scratchNotes');
+    expect(names).toContain('speedGateSessions');
     const scratch = h.createdStores.find((c) => c.name === 'scratchNotes');
     expect(scratch?.keyPath).toBe('attemptId');
+    const speedGate = h.createdStores.find((c) => c.name === 'speedGateSessions');
+    expect(speedGate?.keyPath).toBe('dateKey');
   });
 
-  it('v2 からの移行で scratchNotes だけ追加され、既存ストアは消えない', async () => {
-    // v2 相当の既存ストアを用意し、既存の学習記録を入れる
+  it('v3 からの移行で speedGateSessions だけ追加され、既存ストアは消えない', async () => {
+    // v3 相当の既存ストアを用意し、既存の学習記録を入れる
     runUpgrade(0);
     h.createdStores.length = 0;
     h.stores.get('answers')?.set(1, { problemId: 'legacy', isCorrect: true });
 
-    // v2 -> v3 の移行を実行
-    runUpgrade(2);
-    expect(h.createdStores.map((c) => c.name)).toEqual(['scratchNotes']);
+    // v3 -> v4 の移行を実行
+    runUpgrade(3);
+    expect(h.createdStores.map((c) => c.name)).toEqual(['speedGateSessions']);
     expect(h.deletedStores).toHaveLength(0);
     // 既存の学習記録が残っている
     expect(h.stores.get('answers')?.get(1)).toEqual({ problemId: 'legacy', isCorrect: true });
   });
 
-  it('v3 以降では新しいストアは作られない (再移行なし)', async () => {
-    runUpgrade(3);
+  it('v4 以降では新しいストアは作られない (再移行なし)', async () => {
+    runUpgrade(4);
     expect(h.createdStores).toHaveLength(0);
     expect(h.deletedStores).toHaveLength(0);
   });

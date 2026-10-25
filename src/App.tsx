@@ -13,8 +13,11 @@ import VerificationCodePage from './pages/VerificationCodePage';
 import PracticeSetupPage from './pages/PracticeSetupPage';
 import AdminVerificationPage from './pages/AdminVerificationPage';
 import { getAdminPracticeTypes } from './storage/db';
+import SpeedGatePage from './pages/SpeedGatePage';
+import { getSpeedGateDateKey, isSpeedGateRequiredAt } from './utils/speedGateTime';
+import { isSpeedGateCompleted } from './storage/speedGate';
 
-type Page = 'home' | 'quiz' | 'history' | 'verification' | 'practiceSetup' | 'adminVerification';
+type Page = 'home' | 'quiz' | 'history' | 'verification' | 'practiceSetup' | 'adminVerification' | 'speedGate';
 
 function NormalApp() {
   const [page, setPage] = useState<Page>('home');
@@ -31,6 +34,9 @@ function NormalApp() {
   const [savedProblemTypes, setSavedProblemTypes] = useState<string[] | null>(null);
   const [scopeLoadError, setScopeLoadError] = useState<string | null>(null);
   const [startError, setStartError] = useState<string | null>(null);
+  const [speedGateCompleted, setSpeedGateCompleted] = useState(false);
+  const speedGateCompletedRef = useRef(false);
+  speedGateCompletedRef.current = speedGateCompleted;
   const [isStarting, setIsStarting] = useState(false);
   const startLockRef = useRef(false);
   const pageRef = useRef(page);
@@ -100,6 +106,38 @@ function NormalApp() {
     };
   }, [canStartNormalSync, isLearningPage, isAdminQuiz]);
 
+  const refreshSpeedGateStatus = useCallback(async () => {
+    if (!isSpeedGateRequiredAt()) {
+      setSpeedGateCompleted(true);
+      return;
+    }
+    try {
+      const done = await isSpeedGateCompleted(getSpeedGateDateKey());
+      setSpeedGateCompleted(done);
+    } catch {
+      setSpeedGateCompleted(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    void refreshSpeedGateStatus();
+    const interval = window.setInterval(() => void refreshSpeedGateStatus(), 1000);
+    const onVisibility = () => void refreshSpeedGateStatus();
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('focus', onVisibility);
+    return () => {
+      window.clearInterval(interval);
+      document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('focus', onVisibility);
+    };
+  }, [refreshSpeedGateStatus]);
+
+  useEffect(() => {
+    if (isSpeedGateRequiredAt() && !speedGateCompletedRef.current && page === 'quiz') {
+      setPage('speedGate');
+    }
+  }, [page, speedGateCompleted]);
+
   const returnToNormalMode = () => {
     clearAdminMode();
     setPage('home');
@@ -121,6 +159,10 @@ function NormalApp() {
     setIsStarting(true);
     setStartError(null);
     try {
+      if (isSpeedGateRequiredAt() && !(await isSpeedGateCompleted(getSpeedGateDateKey()))) {
+        setPage('speedGate');
+        return;
+      }
       const problemTypes = await getAdminPracticeTypes();
       setSavedProblemTypes(problemTypes);
       setScopeLoadError(null);
@@ -185,6 +227,28 @@ function NormalApp() {
       </header>
 
       <main className="app-main">
+       {page === 'speedGate' && (
+          <SpeedGatePage
+            dateKey={getSpeedGateDateKey()}
+            onExit={() => {
+              void refreshSpeedGateStatus();
+              setPage('home');
+            }}
+            onCompleted={() => {
+              setSpeedGateCompleted(true);
+              void refreshSpeedGateStatus();
+              setPage('home');
+            }}
+          />
+        )}
+        {page === 'home' && isSpeedGateRequiredAt() && !speedGateCompleted && (
+          <div className="speed-gate-gate-notice" role="status">
+            <p>本日の朝のハイスピード計算が未完了です。通常学習を始める前に100問を完了してください。</p>
+            <button className="primary-button" onClick={() => setPage('speedGate')}>
+              朝のハイスピード計算を始める
+            </button>
+          </div>
+        )}
         {page === 'home' && (
           <HomePage
             onShowHistory={() => {
@@ -203,6 +267,7 @@ function NormalApp() {
             scopeLoadError={scopeLoadError}
             startError={startError}
             isStarting={isStarting}
+            isSpeedGateRequired={isSpeedGateRequiredAt() && !speedGateCompleted}
           />
         )}
         {page === 'quiz' && (
@@ -221,6 +286,7 @@ function NormalApp() {
             onStartReview={(category) =>
               void startQuiz(REVIEW_QUESTION_COUNT, category)
             }
+            isSpeedGateRequired={isSpeedGateRequiredAt() && !speedGateCompleted}
           />
         )}
         {page === 'verification' && (

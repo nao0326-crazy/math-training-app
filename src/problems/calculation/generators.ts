@@ -1,4 +1,4 @@
-import type { ProblemGenerator, CalculationType, GenerationConfig, Problem, Category, ValidationResult } from '../../types/problem';
+import type { ProblemGenerator, CalculationType, GenerationConfig, Problem, Category, ValidationResult, DifficultyLevel } from '../../types/problem';
 import { v4 as generateProblemId } from 'uuid';
 
 function createRandom(seed?: number) {
@@ -15,7 +15,7 @@ function createRandom(seed?: number) {
 /** 単純計算の問題ジェネレータ */
 export class CalculationGenerator implements ProblemGenerator {
   readonly type = "calculation" as const;
-  readonly category: Category = { name: "integer", color: "#4A90E2" };
+  readonly category: Category = 'integer';
   readonly description = "単純計算問題";
 
   constructor(
@@ -37,7 +37,7 @@ export class CalculationGenerator implements ProblemGenerator {
   generate(config?: GenerationConfig & { seed?: number }): Problem {
     const rng = createRandom(config?.seed);
 
-    const difficulty: number = (config?.difficulty ?? rng.int(1, 5)) as number;
+    const difficulty: DifficultyLevel = (config?.difficulty ?? rng.int(1, 5)) as DifficultyLevel;
 
     const typesToGenerate = config?.type
       ? [config.type as CalculationType]
@@ -60,11 +60,9 @@ export class CalculationGenerator implements ProblemGenerator {
         let b: number;
         let answer: number;
         let attempts = 0;
-        const maxAttempts = 50;
 
         const typeKey = type.split("_");
         const digitsA = parseInt(typeKey[1]) || 1;
-        const digitsB = parseInt(typeKey[2]) || 1;
 
         // Generate operands based on type
         switch (type) {
@@ -159,22 +157,11 @@ export class CalculationGenerator implements ProblemGenerator {
             break;
           }
           case "division_2_1": {
-            let divAttempts = 0;
-            let resultDividend: number;
-            do {
-              const divisor = rng.int(1, 9);
-              const quotient = rng.int(Math.pow(10, digitsA - 1) || 10, Math.pow(10, digitsA) - 1 || 99);
-              resultDividend = divisor * quotient;
-              answer = Math.round(resultDividend / divisor);
-              divAttempts++;
-              if (divAttempts >= 50) {
-                a = 10;
-                b = 2;
-                answer = 5;
-                break;
-              }
-            } while (true);
-            a = resultDividend;
+            const divisor = rng.int(1, 9);
+            const quotient = rng.int(Math.pow(10, digitsA - 1) || 10, Math.pow(10, digitsA) - 1 || 99);
+            a = divisor * quotient;
+            b = divisor;
+            answer = quotient;
             break;
           }
           default: {
@@ -203,6 +190,7 @@ export class CalculationGenerator implements ProblemGenerator {
           parameters: {
             type: type,
             a: a,
+            b: b,
           },
         };
         problems.push(problem);

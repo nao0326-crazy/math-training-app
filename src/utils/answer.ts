@@ -130,7 +130,7 @@ export function formatAnswer(answer: Answer): string {
         answer.denominator!
       );
 default:
-      return String(answer.value ?? 0);
+      return '';
     case 'string':
       return answer.value;
     case 'fractions':

@@ -30,6 +30,8 @@ interface HomePageProps {
   startError: string | null;
   /** 学習開始処理中かどうか */
   isStarting: boolean;
+  /** ハイスピード計算ゲートが未完了で通常学習を開始できないか */
+  isSpeedGateRequired?: boolean;
 }
 
 export default function HomePage({
@@ -43,6 +45,7 @@ export default function HomePage({
   scopeLoadError,
   startError,
   isStarting,
+  isSpeedGateRequired = false,
 }: HomePageProps) {
   return (
     <div className="home-page">
@@ -75,10 +78,14 @@ export default function HomePage({
       <div className="action-buttons">
         <button
           className="primary-button start-button"
-          disabled={isStarting || savedProblemTypeCount === 0}
+          disabled={isStarting || savedProblemTypeCount === 0 || isSpeedGateRequired}
           onClick={() => onStartQuiz()}
         >
-          {isStarting ? '設定を読み込んでいます...' : '問題を解く'}
+          {isStarting
+            ? '設定を読み込んでいます...'
+            : isSpeedGateRequired
+              ? '朝のハイスピード計算を先に完了してください'
+              : '問題を解く'}
         </button>
         {isAdminAuthenticated ? (
           <>

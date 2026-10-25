@@ -10,6 +10,7 @@ import type {
   StudySettings,
 } from '../types/history';
 import type { ScratchNote } from '../types/scratch';
+import type { SpeedGateSession } from '../types/speedGate';
 import type { DifficultyLevel, DifficultyRange } from '../types/problem';
 import { getAllGenerators } from '../engine/selector/generatorRegistry';
 import { getTypeSupportedLevels } from '../engine/diversity/metadata';
@@ -67,18 +68,23 @@ interface MathAppDB extends DBSchema {
     key: string;
     value: ScratchNote;
   };
+  /** 朝のハイスピード計算ゲートのセッション (日付キーを主キー) */
+  speedGateSessions: {
+    key: string;
+    value: SpeedGateSession;
+  };
 }
 
 const DB_NAME = 'grade6-math-app';
-// v3: 途中式ノート用ストア scratchNotes を追加 (既存ストアは変更しない安全移行)
-const DB_VERSION = 3;
+// v4: 朝のハイスピード計算ゲート用ストア speedGateSessions を追加
+const DB_VERSION = 4;
 
 let dbPromise: Promise<IDBPDatabase<MathAppDB>> | null = null;
 
 /**
  * データベース接続を取得する
  */
-function getDB(): Promise<IDBPDatabase<MathAppDB>> {
+export function getDB(): Promise<IDBPDatabase<MathAppDB>> {
   if (!dbPromise) {
     dbPromise = openDB<MathAppDB>(DB_NAME, DB_VERSION, {
       upgrade(db, oldVersion) {
@@ -112,6 +118,11 @@ function getDB(): Promise<IDBPDatabase<MathAppDB>> {
         // 新しいストアを追加するだけなので既存データは保持される。
         if (oldVersion < 3) {
           db.createObjectStore('scratchNotes', { keyPath: 'attemptId' });
+        }
+
+        // 朝のハイスピード計算ゲート (v4)
+        if (oldVersion < 4) {
+          db.createObjectStore('speedGateSessions', { keyPath: 'dateKey' });
         }
       },
     });
@@ -374,4 +385,44 @@ export async function clearAllData(): Promise<void> {
   await db.clear('settings');
   await db.clear('dailySync');
   await db.clear('scratchNotes');
+  await db.clear('speedGateSessions');
+}
+/**
+ * 朝のハイスピード計算ゲートのセッションを保存する
+ */
+export async function saveSpeedGateSession(session: SpeedGateSession): Promise<void> {
+  const db = await getDB();
+  await db.put('speedGateSessions', session);
+}
+
+/**
+ * 指定日のハイスピード計算セッションを取得する
+ */
+export async function loadSpeedGateSession(dateKey: string): Promise<SpeedGateSession | undefined> {
+  const db = await getDB();
+  return db.get('speedGateSessions', dateKey);
+}
+
+/**
+ * 全ハイスピード計算セッションを取得する
+ */
+export async function listSpeedGateSessions(): Promise<SpeedGateSession[]> {
+  const db = await getDB();
+  return db.getAll('speedGateSessions');
+}
+
+/**
+ * 指定日が完了済みかどうか
+ */
+export async function isSpeedGateCompleted(dateKey: string): Promise<boolean> {
+  const session = await loadSpeedGateSession(dateKey);
+  return session?.status === 'completed';
+}
+
+/**
+ * 指定日のセッションを削除する
+ */
+export async function deleteSpeedGateSession(dateKey: string): Promise<void> {
+  const db = await getDB();
+  await db.delete('speedGateSessions', dateKey);
 }

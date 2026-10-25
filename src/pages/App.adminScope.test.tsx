@@ -28,6 +28,11 @@ const store = vi.hoisted(() => ({
   questions: [] as unknown[],
 }));
 
+vi.mock('../utils/speedGateTime', () => ({
+  isSpeedGateRequiredAt: () => false,
+  getSpeedGateDateKey: () => '2026-01-01',
+}));
+
 vi.mock('idb', () => ({
   openDB: async () => ({
     get: async (dbStore: string, key: string) => store.records.get(`${dbStore}:${key}`),
