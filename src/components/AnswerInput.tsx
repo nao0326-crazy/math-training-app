@@ -67,6 +67,7 @@ function getTextKeypadButtons(): KeypadButton[] {
     { label: '2', value: '2', className: 'number-btn', isNumber: true },
     { label: '3', value: '3', className: 'number-btn', isNumber: true },
     { label: 'x', value: 'x', className: 'symbol-btn' },
+    { label: 'y', value: 'y', className: 'symbol-btn' },
     { label: '4', value: '4', className: 'number-btn', isNumber: true },
     { label: '5', value: '5', className: 'number-btn', isNumber: true },
     { label: '6', value: '6', className: 'number-btn', isNumber: true },

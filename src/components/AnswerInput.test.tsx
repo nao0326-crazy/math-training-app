@@ -257,6 +257,24 @@ describe('AnswerInput (choice / yesno / list / expression / ratio)', () => {
     fireEvent.click(screen.getByRole('button', { name: '決定する' }));
     expect(onSubmit).toHaveBeenCalledWith('5x');
   });
+
+  it('expression: y を含む式をキーで入力', () => {
+    const problem = makeProblem({
+      type: 'expression_make',
+      category: 'expression',
+      answer: { kind: 'string', value: 'y=5x' },
+      inputType: 'expression',
+      question: 'yをxの式で表しましょう。',
+    });
+    const onSubmit = vi.fn();
+    const { container } = render(<AnswerInput problem={problem} onSubmit={onSubmit} />);
+    pressLabel(container, 'y');
+    pressLabel(container, '＝');
+    pressDigits(container, '5');
+    pressLabel(container, 'x');
+    fireEvent.click(screen.getByRole('button', { name: '決定する' }));
+    expect(onSubmit).toHaveBeenCalledWith('y=5x');
+  });
 });
 
 describe('AnswerInput (ratio / disabled)', () => {

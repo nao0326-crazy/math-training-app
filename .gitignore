@@ -5,3 +5,21 @@ dist/
 !.env.example
 *.tsbuildinfo
 coverage/
+
+# Local audit / temporary artifacts (never publish)
+*.log
+*.tmp
+*.bak
+/_*.py
+/_*.txt
+/_*.ts
+/check=
+/build-out*.txt
+/fix_answer.py
+/lint-out*.txt
+/output.txt
+/temp_test_file.txt
+/test*.txt
+/typecheck-*.txt
+/verify-out*.txt
+/public/seed.html

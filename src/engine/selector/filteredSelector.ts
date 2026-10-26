@@ -101,6 +101,9 @@ export class FilteredSelector implements ProblemSelector {
     // 狭い候補空間では直近1問だけを見ると2問前・3問前と同じ問題を
     // 連続で出す可能性があるため、buildRecentContext で直近の
     // フィンガープリント集合を作り、それに一致しない問題を選ぶ。
+    const lastType = questionHistory.length > 0 ? questionHistory[questionHistory.length - 1].problemType : null;
+
+    // セッション内で「すでに出した問題 (同一フィンガープリント)」を避ける。
     const recentFingerprints = buildRecentContext(
       questionHistory,
       DEFAULT_DIVERSITY_CONFIG,
@@ -139,6 +142,12 @@ export class FilteredSelector implements ProblemSelector {
 
       if (!firstPick) firstPick = problem;
 
+      // 直前と同じ問題タイプを連続出題しない (候補に別タイプがある場合)
+      if (lastType && problem.type === lastType) {
+        const hasOtherType = pool.some((e) => e.type !== lastType);
+        if (hasOtherType) continue;
+      }
+
       // セッション内で未出の問題なら採用する。
       if (!recentFingerprints.has(fingerprintProblem(problem))) return problem;
     }
@@ -152,7 +161,8 @@ export class FilteredSelector implements ProblemSelector {
         fingerprintProblem(firstPick) === last.fingerprint &&
         pool.length > 1
       ) {
-        const alternative = pool.find((e) => e.type !== firstPick!.type);
+        const alternative = pool.find((e) => e.type !== firstPick!.type && (lastType ? e.type !== lastType : true))
+          ?? pool.find((e) => e.type !== firstPick!.type);
         if (alternative) {
           try {
             return generateProblem({

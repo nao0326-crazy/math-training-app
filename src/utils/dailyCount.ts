@@ -6,7 +6,7 @@ import type { AnswerRecord } from '../types/history';
 import { isSolvedRecord } from './solvedCount';
 
 /** 1日の目標問題数 */
-export const DAILY_GOAL = 1000;
+export const DAILY_GOAL = 110;
 
 export function getDailyProgress(answerCount: number): {
   goal: number;

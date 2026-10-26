@@ -47,9 +47,9 @@ interface QuizPageProps {
   /** モード切替後の遅延保存が同期を新規開始してよいかを動的に判定する */
   canStartNormalSync: () => boolean;
   onExit: () => void;
+  /** セッション完了時のコールバック (任意) */
+  onCompleted?: () => void;
 }
-
-/** 問題未表示時・初期化前に使う既定の制限時間 (現行ポリシーの既定値) */
 const DEFAULT_LIMIT_SEC = getTimeLimitSeconds(null);
 export default function QuizPage({
   difficulty,
@@ -59,8 +59,14 @@ export default function QuizPage({
   isAdminMode,
   canStartNormalSync,
   onExit,
+  onCompleted,
 }: QuizPageProps) {
   const [problem, setProblem] = useState<Problem | null>(null);
+  useEffect(() => {
+    if (import.meta.env.DEV && problem) {
+      (window as unknown as { __currentProblem?: Problem }).__currentProblem = problem;
+    }
+  }, [problem]);
   /**
    * 現在の問題の制限時間 (秒)。
    * 1 問ごとに loadNextQuestion 内で一度だけ決定し、
@@ -74,6 +80,8 @@ export default function QuizPage({
   const [judgement, setJudgement] = useState<AnswerJudgement | null>(null);
   /** 時間切れで解答受付を打ち切ったか (通常の誤答と区別する) */
   const [timedOut, setTimedOut] = useState(false);
+  /** 制限時間を超過したが、回答入力は継続可能 (時間切れ後解答モード) */
+  const [expired, setExpired] = useState(false);
   /** 問題をスキップして次へ進む遷移中か (二重遷移防止・タイマー停止用) */
   const [isSkipped, setIsSkipped] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
@@ -172,6 +180,7 @@ export default function QuizPage({
     setIsCorrect(false);
     setJudgement(null);
     setTimedOut(false);
+    setExpired(false);
     setShowSolution(false);
     setIsSkipped(false);
     // 次の出題ごとに途中式の保存単位 (attemptId) を新しくする
@@ -201,7 +210,7 @@ export default function QuizPage({
    */
   const handleSubmit = useCallback(
     (rawAnswer: string, options?: { timedOut?: boolean }) => {
-      const timedOutSubmit = options?.timedOut === true;
+      const timedOutSubmit = options?.timedOut === true || expired;
       if (!problem || isAnswered || answerSubmitLockRef.current) return;
 
       // 空回答は判定しない (AnswerInput 側でもバリデーション済み)。
@@ -213,9 +222,11 @@ export default function QuizPage({
       answerSubmitLockRef.current = true;
 
       // 時間切れは通常の誤答と区別し、ユーザー入力を正答として扱わない。
+      // ただし時間切れ後も回答を続けられるため、ユーザーが入力した回答は
+      // 正誤判定する (isTimedOut=true のまま記録)。
       let correct: boolean;
       let nextJudgement: AnswerJudgement | null;
-      if (timedOutSubmit) {
+      if (timedOutSubmit && rawAnswer.trim() === '') {
         correct = false;
         nextJudgement = null;
       } else {
@@ -248,7 +259,7 @@ export default function QuizPage({
           answeredAt: new Date().toISOString(),
           difficultyLevel: problem.difficulty.level,
           question: problem.question,
-          userAnswer: timedOutSubmit ? TIME_OUT_USER_ANSWER : rawAnswer,
+          userAnswer: timedOutSubmit ? (rawAnswer.trim() !== '' ? rawAnswer : TIME_OUT_USER_ANSWER) : rawAnswer,
           correctAnswer: formatAnswer(problem.answer),
           submissionId: createDailyAnswerSubmissionId(),
           // 時間切れの区別用 (任意フィールド。通常回答では undefined のまま)
@@ -271,7 +282,7 @@ export default function QuizPage({
         { timedOut: timedOutSubmit, correct, answerTimeSec },
       );
     },
-    [canStartNormalSync, isAdminMode, problem, isAnswered, questionNumber, attemptId],
+    [canStartNormalSync, isAdminMode, problem, isAnswered, questionNumber, attemptId, expired],
   );
 
   /**
@@ -280,9 +291,10 @@ export default function QuizPage({
    * (時間切れ専用の別ルートを作らない)。
    */
   const handleTimeout = useCallback(() => {
-    // 空文字を渡し、timedOut フラグで「不正解確定 + 時間切れ記録」にする。
-    handleSubmit('', { timedOut: true });
-  }, [handleSubmit]);
+    // 時間切れ表示を行い、回答入力は継続可能にする (自動確定しない)。
+    setExpired(true);
+    setTimedOut(false);
+  }, []);
 
   /**
    * 問題をスキップする。
@@ -327,11 +339,12 @@ export default function QuizPage({
     // ハードコードの10だと復習モードで問題数が画面表示とずれる。
     if (questionNumber >= questionCount) {
       setResult(toSessionCounts(resultRef.current));
+      if (onCompleted) onCompleted();
     } else {
       setQuestionNumber((n) => n + 1);
       loadNextQuestion();
     }
-  }, [questionNumber, questionCount, loadNextQuestion]);
+  }, [questionNumber, questionCount, loadNextQuestion, onCompleted]);
 
   /**
    * もう一度挑戦する
@@ -437,6 +450,12 @@ export default function QuizPage({
         />
       )}
 
+      {expired && !isAnswered && !isSkipped && (
+        <div className="timeout-notice" role="status">
+          ⏰ 時間切れ！続けて解答できます。
+        </div>
+      )}
+
       {/* 問題文・図表（解答中のみ表示。解答後は非表示。
           解説に必要な問題文や図表は SolutionDisplay 側で個別に表示する） */}
       {!isAnswered && !isSkipped && (
@@ -491,7 +510,9 @@ export default function QuizPage({
         <div className={`feedback ${isCorrect ? 'correct' : timedOut ? 'timed-out' : 'incorrect'}`}>
           <div className="feedback-title">
             {isCorrect
-              ? '🎉 せいかい！'
+              ? timedOut
+                ? '🎉 せいかい！（時間切れ後）'
+                : '🎉 せいかい！'
               : timedOut
                 ? '⏰ 時間切れ！'
                 : judgement?.status === 'equivalent-not-canonical'

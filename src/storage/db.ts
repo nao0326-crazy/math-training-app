@@ -11,6 +11,7 @@ import type {
 } from '../types/history';
 import type { ScratchNote } from '../types/scratch';
 import type { SpeedGateSession } from '../types/speedGate';
+import type { DailyLearningState, DailyLearningStateRecord } from '../utils/dailyLearning';
 import type { DifficultyLevel, DifficultyRange } from '../types/problem';
 import { getAllGenerators } from '../engine/selector/generatorRegistry';
 import { getTypeSupportedLevels } from '../engine/diversity/metadata';
@@ -54,7 +55,7 @@ interface MathAppDB extends DBSchema {
   };
   settings: {
     key: string;
-    value: StudySettings | AdminPracticeSettings;
+    value: StudySettings | AdminPracticeSettings | DailyLearningStateRecord;
   };
   dailySync: {
     key: string;
@@ -425,4 +426,17 @@ export async function isSpeedGateCompleted(dateKey: string): Promise<boolean> {
 export async function deleteSpeedGateSession(dateKey: string): Promise<void> {
   const db = await getDB();
   await db.delete('speedGateSessions', dateKey);
+}
+export async function loadDailyLearningState(): Promise<DailyLearningState | null> {
+  const db = await getDB();
+  const record = await db.get('settings', 'daily-learning-state-v1');
+  if (!record || !('dateKey' in record)) return null;
+  const { key, ...rest } = record as DailyLearningStateRecord;
+  void key;
+  return rest;
+}
+
+export async function saveDailyLearningState(state: DailyLearningState): Promise<void> {
+  const db = await getDB();
+  await db.put('settings', { key: 'daily-learning-state-v1', ...state });
 }

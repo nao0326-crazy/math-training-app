@@ -14,10 +14,23 @@ import PracticeSetupPage from './pages/PracticeSetupPage';
 import AdminVerificationPage from './pages/AdminVerificationPage';
 import { getAdminPracticeTypes } from './storage/db';
 import SpeedGatePage from './pages/SpeedGatePage';
+import GrowthPage from './pages/GrowthPage';
 import { getSpeedGateDateKey, isSpeedGateRequiredAt } from './utils/speedGateTime';
+import { DAILY_GOAL } from './utils/dailyCount';
+import { getStudyDateKey, ANSWER_RECORDED_EVENT } from './utils/dailyCount';
+import MistakePracticePage from './pages/MistakePracticePage';
+import type { DailyLearningState } from './utils/dailyLearning';
+import {
+  createEmptyDailyState,
+  rolloverDailyState,
+} from './utils/dailyLearning';
+import {
+  loadDailyLearningState,
+  saveDailyLearningState,
+} from './storage/db';
 import { isSpeedGateCompleted } from './storage/speedGate';
 
-type Page = 'home' | 'quiz' | 'history' | 'verification' | 'practiceSetup' | 'adminVerification' | 'speedGate';
+type Page = 'home' | 'quiz' | 'history' | 'verification' | 'practiceSetup' | 'adminVerification' | 'speedGate' | 'growth' | 'mistakePractice';
 
 function NormalApp() {
   const [page, setPage] = useState<Page>('home');
@@ -37,15 +50,19 @@ function NormalApp() {
   const [speedGateCompleted, setSpeedGateCompleted] = useState(false);
   const speedGateCompletedRef = useRef(false);
   speedGateCompletedRef.current = speedGateCompleted;
+  const [mistakePracticeKind, setMistakePracticeKind] = useState<'prevDay' | 'today'>('prevDay');
+  const [dailyState, setDailyState] = useState<DailyLearningState | null>(null);
+  const dailyStateRef = useRef<DailyLearningState | null>(null);
+  dailyStateRef.current = dailyState;
   const [isStarting, setIsStarting] = useState(false);
   const startLockRef = useRef(false);
   const pageRef = useRef(page);
   pageRef.current = page;
   // 通常学習ページ判定: 同期と通知は通常モードのページ遷移中だけ動かす
-  const isLearningPage = page === 'home' || page === 'history' || page === 'quiz';
+  const isLearningPage = page === 'home' || page === 'history' || page === 'quiz' || page === 'growth';
   // 通常学習同期を新規開始してよいか: 通常学習ページ上にあり、かつ管理者演習ではない
   const canStartNormalSync = useCallback(
-    () => ['home', 'history', 'quiz'].includes(pageRef.current) && !isAdminQuizRef.current,
+    () => ['home', 'history', 'quiz', 'growth'].includes(pageRef.current) && !isAdminQuizRef.current,
     [],
   );
 
@@ -138,10 +155,57 @@ function NormalApp() {
     }
   }, [page, speedGateCompleted]);
 
+  useEffect(() => {
+    if (page !== 'home') return;
+    let cancelled = false;
+    void (async () => {
+      const todayKey = getStudyDateKey();
+      let s = await loadDailyLearningState();
+      if (!s) s = createEmptyDailyState(todayKey);
+      s = rolloverDailyState(s, todayKey);
+      if (cancelled) return;
+      setDailyState(s);
+      await saveDailyLearningState(s);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [page]);
+  useEffect(() => {
+    if (page !== 'quiz' || isAdminQuiz) return;
+    const handler = () => {
+      void (async () => {
+        const todayKey = getStudyDateKey();
+        const base = dailyStateRef.current
+          ? rolloverDailyState(dailyStateRef.current, todayKey)
+          : createEmptyDailyState(todayKey);
+        const nextCount = Math.min(
+          DAILY_GOAL,
+          (base.normalSolvedCount ?? 0) + 1,
+        );
+        const next = { ...base, normalSolvedCount: nextCount };
+        dailyStateRef.current = next;
+        setDailyState(next);
+        await saveDailyLearningState(next);
+      })();
+    };
+    window.addEventListener(ANSWER_RECORDED_EVENT, handler);
+    return () => window.removeEventListener(ANSWER_RECORDED_EVENT, handler);
+  }, [page, isAdminQuiz]);
+
   const returnToNormalMode = () => {
+
+
     clearAdminMode();
     setPage('home');
   };
+
+  const startMistakePractice = (kind: 'prevDay' | 'today') => {
+    clearAdminMode();
+    setMistakePracticeKind(kind);
+    setPage('mistakePractice');
+  };
+
 
   /**
    * 学習を始める (全学習共通): 保存済みの管理者出題範囲を厳密に適用する。
@@ -222,6 +286,15 @@ function NormalApp() {
             >
               学習履歴
             </button>
+            <button
+              className={`nav-button ${page === 'growth' ? 'active' : ''}`}
+              onClick={() => {
+                clearAdminMode();
+                setPage('growth');
+              }}
+            >
+              成長記録
+            </button>
           </nav>
         )}
       </header>
@@ -255,7 +328,7 @@ function NormalApp() {
               clearAdminMode();
               setPage('history');
             }}
-            onStartQuiz={() => void startQuiz()}
+            onStartQuiz={() => void startQuiz(DAILY_GOAL)}
             onOpenVerification={() => setPage('verification')}
             onOpenPracticeSetup={() => setPage('practiceSetup')}
             onCloseAdminSettings={() => {
@@ -268,6 +341,21 @@ function NormalApp() {
             startError={startError}
             isStarting={isStarting}
             isSpeedGateRequired={isSpeedGateRequiredAt() && !speedGateCompleted}
+            speedGateCompleted={speedGateCompleted}
+            speedGateAvailable={isSpeedGateRequiredAt()}
+            onOpenSpeedGate={() => setPage('speedGate')}
+            rewardCount={dailyState?.timeoutRewardsEarned ?? 0}
+            dailyStatus={{
+              prevDay: { remaining: dailyState?.prevDayTypes.length ?? 0, completed: (dailyState?.prevDayTypes.length ?? 0) === 0 },
+              today: { remaining: dailyState?.todayTypes.length ?? 0, completed: (dailyState?.todayTypes.length ?? 0) === 0, locked: !(dailyState?.normalCompletedDateKey === getStudyDateKey()) },
+              normal: { solved: dailyState?.normalCompletedDateKey === getStudyDateKey() ? DAILY_GOAL : Math.min(DAILY_GOAL, dailyState?.normalSolvedCount ?? 0), goal: DAILY_GOAL, completed: dailyState?.normalCompletedDateKey === getStudyDateKey() },
+            }}
+            onSelectDailyTab={(tab) => {
+              if (tab === 'normal') void startQuiz(DAILY_GOAL);
+              else if (tab === 'prevDay') startMistakePractice('prevDay');
+              else if (tab === 'today' && dailyState?.normalCompletedDateKey === getStudyDateKey()) startMistakePractice('today');
+            }}
+
           />
         )}
         {page === 'quiz' && (
@@ -279,6 +367,18 @@ function NormalApp() {
             isAdminMode={isAdminQuiz}
             canStartNormalSync={canStartNormalSync}
             onExit={returnToNormalMode}
+             onCompleted={() => {
+               if (isAdminQuiz) return;
+               void (async () => {
+                 const todayKey = getStudyDateKey();
+                 const s = dailyState ? rolloverDailyState(dailyState, todayKey) : createEmptyDailyState(todayKey);
+                 s.normalCompletedDateKey = todayKey;
+                 s.normalSolvedCount = DAILY_GOAL;
+                 setDailyState(s);
+                 await saveDailyLearningState(s);
+               })();
+             }}
+
           />
         )}
         {page === 'history' && (
@@ -289,6 +389,25 @@ function NormalApp() {
             isSpeedGateRequired={isSpeedGateRequiredAt() && !speedGateCompleted}
           />
         )}
+        {page === 'growth' && <GrowthPage />}
+        {page === 'mistakePractice' && (
+          <MistakePracticePage
+            practiceKind={mistakePracticeKind}
+            onExit={() => {
+              void (async () => {
+                const todayKey = getStudyDateKey();
+                const s = await loadDailyLearningState();
+                if (s) {
+                  const rolled = rolloverDailyState(s, todayKey);
+                  setDailyState(rolled);
+                  await saveDailyLearningState(rolled);
+                }
+              })();
+              setPage('home');
+            }}
+          />
+        )}
+
         {page === 'verification' && (
           <VerificationCodePage
             onVerified={() => {

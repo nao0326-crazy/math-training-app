@@ -329,10 +329,10 @@ describe('QuizPage + 途中式: 回答後の無効化', () => {
       await act(async () => {
         vi.advanceTimersByTime(31_000);
       });
-      expect(screen.getByText('⏰ 時間切れ！')).toBeTruthy();
+      expect(screen.getByText('⏰ 時間切れ！続けて解答できます。')).toBeTruthy();
 
-      // 時間切れ後は ScratchPad が非表示 (canvas が存在しない)
-      expect(document.querySelector('.scratch-canvas')).toBeNull();
+      // 時間切れ後も回答入力は継続可能なので ScratchPad は表示されたまま
+      expect(document.querySelector('.scratch-canvas')).not.toBeNull();
     } finally {
       vi.useRealTimers();
     }

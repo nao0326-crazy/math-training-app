@@ -303,11 +303,18 @@ describe('QuizPage: 時間切れと送信の競合', () => {
       vi.advanceTimersByTime(31_000);
     });
 
+    // 時間切れ後も回答入力は継続可能 (自動確定しない)
+    expect(screen.getByText('⏰ 時間切れ！続けて解答できます。')).toBeTruthy();
+    expect(h.savedAnswers).toHaveLength(0);
+
+    // 時間切れ後に誤答を送信すると時間切れ記録として保存される
+    pressDigits(document.body, '9');
+    fireEvent.click(screen.getByRole('button', { name: '決定する' }));
     expect(screen.getByText('⏰ 時間切れ！')).toBeTruthy();
     expect(h.savedAnswers).toHaveLength(1);
     expect(h.savedAnswers[0].isCorrect).toBe(false);
     expect(h.savedAnswers[0].isTimedOut).toBe(true);
-    expect(h.savedAnswers[0].userAnswer).toBe('（時間切れ）');
+    expect(h.savedAnswers[0].userAnswer).toBe('9');
     expect(h.savedAnswers[0].timeLimitSec).toBe(30);
     expect(h.savedQuestions).toHaveLength(1);
 

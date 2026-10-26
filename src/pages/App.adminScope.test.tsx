@@ -135,8 +135,8 @@ describe('管理者設定 → 出題のデータ経路 (UIフロー全体)', () 
     });
 
     // 「問題を解く」→ 実際の出題が管理者設定どおりになる
-    fireEvent.click(await screen.findByRole('button', { name: '問題を解く' }));
-    expect(await screen.findByText('問題 1 / 10')).toBeTruthy();
+    fireEvent.click(await screen.findByRole('button', { name: /問題を解く/ }));
+    expect(await screen.findByText('問題 1 / 110')).toBeTruthy();
 
     const meta = currentQuizMeta();
     expect(meta.category).toBe('分数'); // 選択した単元のみ
@@ -165,8 +165,8 @@ describe('管理者設定 → 出題のデータ経路 (UIフロー全体)', () 
     ]);
     const seenCategories = new Set<string>();
     for (let cycle = 0; cycle < 8; cycle++) {
-      fireEvent.click(await screen.findByRole('button', { name: '問題を解く' }));
-      expect(await screen.findByText('問題 1 / 10')).toBeTruthy();
+      fireEvent.click(await screen.findByRole('button', { name: /問題を解く/ }));
+      expect(await screen.findByText('問題 1 / 110')).toBeTruthy();
 
       const meta = currentQuizMeta();
       expect(

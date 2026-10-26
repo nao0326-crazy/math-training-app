@@ -91,7 +91,7 @@ describe('countTodayAnswers', () => {
 
   describe('getDailyProgress', () => {
     it('回答数・目標数・残りの問題数を未達時も表示できる値で返す', () => {
-      expect(getDailyProgress(999)).toEqual({
+      expect(getDailyProgress(DAILY_GOAL - 1)).toEqual({
         goal: DAILY_GOAL,
         remaining: 1,
         achieved: false,
@@ -123,17 +123,17 @@ describe('countTodayAnswers', () => {
     expect(countTodayAnswers(records)).toBe(1);
   });
 
-  it('1000問未満では未達', () => {
+  it('110問未満では未達', () => {
     const now = new Date();
-    const records = Array.from({ length: 999 }, () =>
+    const records = Array.from({ length: DAILY_GOAL - 1 }, () =>
       createRecord(now.toISOString()),
     );
 
-    expect(countTodayAnswers(records)).toBe(999);
+    expect(countTodayAnswers(records)).toBe(DAILY_GOAL - 1);
     expect(countTodayAnswers(records) < DAILY_GOAL).toBe(true);
   });
 
-  it('1000問で達成', () => {
+  it('110問で達成', () => {
     const now = new Date();
     const records = Array.from({ length: DAILY_GOAL }, () =>
       createRecord(now.toISOString()),
