@@ -19,11 +19,17 @@ import type {
   PeriodComparison,
 } from '../types/growth';
 import type { SpeedGateSession } from '../types/speedGate';
+import type { UnitStats, MasteryLevel } from '../types/unitHeatmap';
 import { getStudyDateKey } from './dailyCount';
 import { isSolvedRecord } from './solvedCount';
 import { computeSpeedGateResult } from './speedGate';
 import { listSpeedGateSessions, getAllAnswerRecords } from '../storage/db';
 import { CATEGORY_LABELS } from './stats';
+import {
+  MIN_ATTEMPTS_FOR_MASTERY,
+  MASTERED_ACCURACY_THRESHOLD,
+  NEEDS_REVIEW_ACCURACY_THRESHOLD,
+} from '../types/unitHeatmap';
 
 /** 2重集計防止用のキー生成 (submissionId 優先, 無ければ problemId + answeredAt) */
 function recordKey(record: AnswerRecord): string {
@@ -145,7 +151,7 @@ function aggregateSpeedGateDaily(
   return result;
 }
 /** 問題タイプ別正答率を集計する */
-function aggregateByProblemType(records: AnswerRecord[]): ProblemTypeAccuracy[] {
+export function aggregateByProblemType(records: AnswerRecord[]): ProblemTypeAccuracy[] {
   const deduped = deduplicateAnswers(records);
   const byType = new Map<string, AnswerRecord[]>();
   for (const record of deduped) {
@@ -167,6 +173,66 @@ function aggregateByProblemType(records: AnswerRecord[]): ProblemTypeAccuracy[] 
       };
     })
     .sort((a, b) => b.totalCount - a.totalCount || a.label.localeCompare(b.label, 'ja'));
+}
+
+/** 単元別(カテゴリ別)の統計を集計する */
+export function aggregateByCategory(records: AnswerRecord[]): UnitStats[] {
+  const deduped = deduplicateAnswers(records);
+  const byCategory = new Map<string, AnswerRecord[]>();
+  for (const record of deduped) {
+    const category = record.category.trim() || '未分類';
+    const list = byCategory.get(category) ?? [];
+    list.push(record);
+    byCategory.set(category, list);
+  }
+
+  // 11カテゴリすべてを表示対象に含める (回答数0も未学習として表示)
+  const allCategories: string[] = Object.keys(CATEGORY_LABELS);
+  const results: UnitStats[] = [];
+
+  for (const category of allCategories) {
+    const list = byCategory.get(category) ?? [];
+    const correctCount = list.filter((r) => r.isCorrect).length;
+    const totalCount = list.length;
+    const accuracyRate = totalCount > 0 ? (correctCount / totalCount) * 100 : 0;
+    const masteryLevel = classifyMastery(totalCount, accuracyRate);
+    results.push({
+      category,
+      label: CATEGORY_LABELS[category] ?? category,
+      totalCount,
+      correctCount,
+      accuracyRate,
+      masteryLevel,
+    });
+  }
+
+  // 未知カテゴリ(未分類)が存在する場合は別途集計
+  const unknownCategory = byCategory.get('未分類');
+  if (unknownCategory && unknownCategory.length > 0) {
+    const correctCount = unknownCategory.filter((r) => r.isCorrect).length;
+    const totalCount = unknownCategory.length;
+    const accuracyRate = (correctCount / totalCount) * 100;
+    const masteryLevel = classifyMastery(totalCount, accuracyRate);
+    results.push({
+      category: '未分類',
+      label: '分類不明',
+      totalCount,
+      correctCount,
+      accuracyRate,
+      masteryLevel,
+    });
+  }
+
+  return results.sort((a, b) => b.totalCount - a.totalCount || a.label.localeCompare(b.label, 'ja'));
+}
+
+/** 習熟状態を判定する (weakAreas.ts の閾値と整合) */
+function classifyMastery(totalCount: number, accuracyRate: number): MasteryLevel {
+  if (totalCount === 0) return 'untaught';
+  if (totalCount < MIN_ATTEMPTS_FOR_MASTERY) return 'insufficient';
+  if (accuracyRate / 100 < NEEDS_REVIEW_ACCURACY_THRESHOLD) return 'needsReview';
+  if (accuracyRate / 100 < MASTERED_ACCURACY_THRESHOLD) return 'improvable';
+  return 'mastered';
 }
 
 /** レコードのカテゴリを取得 (フォールバック付き) */

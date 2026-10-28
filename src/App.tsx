@@ -389,7 +389,7 @@ function NormalApp() {
             isSpeedGateRequired={isSpeedGateRequiredAt() && !speedGateCompleted}
           />
         )}
-        {page === 'growth' && <GrowthPage />}
+        {page === 'growth' && <GrowthPage onOpenPracticeSetup={() => setPage('practiceSetup')} />}
         {page === 'mistakePractice' && (
           <MistakePracticePage
             practiceKind={mistakePracticeKind}

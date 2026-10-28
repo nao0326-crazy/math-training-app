@@ -3160,3 +3160,169 @@ button.calendar-cell.day.selected {
   }
 }
 
+/* ===== 単元別習熟度ヒートマップ ===== */
+.unit-heatmap-section {
+  margin-top: 2rem;
+}
+
+.unit-heatmap-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.unit-heatmap-description {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.mastery-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+  .mastery-tile-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.mastery-tile {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.mastery-tile:not(.disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mastery-tile.selected {
+  border-color: #4a90d9;
+  box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.2);
+}
+
+.mastery-tile.disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.mastery-tile-header {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.mastery-tile-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.75rem;
+  flex-grow: 1;
+}
+
+.mastery-tile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mastery-tile-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.mastery-tile-label {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.mastery-tile-status {
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.mastery-tile-hint {
+  font-size: 0.75rem;
+  color: #4a90d9;
+  margin-top: auto;
+}
+
+.mastery-legend {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+
+.mastery-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.mastery-legend-color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* ===== 単元詳細パネル ===== */
+.unit-detail-panel {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.unit-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.unit-detail-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.unit-detail-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: #fff;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.unit-detail-stats span {
+  color: #555;
+}
+
+.unit-detail-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 640px) {
+  .unit-detail-panel {
+    padding: 0.75rem;
+  }
+}

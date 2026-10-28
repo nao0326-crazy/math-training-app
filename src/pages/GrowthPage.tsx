@@ -5,6 +5,8 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import {
+  aggregateByCategory,
+  aggregateByProblemType,
   aggregateGrowthData,
   formatAccuracy,
   formatAverageTime,
@@ -12,18 +14,30 @@ import {
 } from '../utils/growthStats';
 import { GROWTH_PERIOD_LABELS } from '../types/growth';
 import type { GrowthData, GrowthPeriod } from '../types/growth';
+import type { UnitStats } from '../types/unitHeatmap';
 import {
   AccuracyLineChart,
   QuestionCountBarChart,
   SpeedGateAccuracyChart,
 } from '../components/GrowthChart';
 import GrowthEmptyState from '../components/GrowthEmptyState';
+import UnitHeatmap from '../components/UnitHeatmap';
+import { getAllAnswerRecords } from '../storage/db';
+import type { AnswerRecord } from '../types/history';
 
 const PERIOD_OPTIONS: GrowthPeriod[] = [7, 30, 90];
 
-export default function GrowthPage() {
+export default function GrowthPage({
+  onOpenPracticeSetup,
+}: {
+  onOpenPracticeSetup?: () => void;
+}) {
   const [period, setPeriod] = useState<GrowthPeriod>(7);
   const [data, setData] = useState<GrowthData | null>(null);
+  const [unitStats, setUnitStats] = useState<UnitStats[] | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [detailRecords, setDetailRecords] = useState<AnswerRecord[] | null>(null);
+  const [detailLoading, setDetailLoading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,12 +47,41 @@ export default function GrowthPage() {
       setError(null);
       const d = await aggregateGrowthData(period);
       setData(d);
+
+      // 単元別統計も併せて取得
+      const allRecords = await getAllAnswerRecords();
+      const units = aggregateByCategory(allRecords);
+      setUnitStats(units);
     } catch {
       setError('学習記録の読み込みに失敗しました。');
     } finally {
       setLoading(false);
     }
   }, [period]);
+
+  const handleUnitSelect = useCallback(
+    async (category: string) => {
+      setSelectedCategory(category);
+      if (!onOpenPracticeSetup) return;
+      setDetailLoading(true);
+      try {
+        const allRecords = await getAllAnswerRecords();
+        const filtered = allRecords.filter(
+          (r) => r.category.trim() === category,
+        );
+        setDetailRecords(filtered);
+      } catch {
+        setDetailRecords([]);
+      } finally {
+        setDetailLoading(false);
+      }
+    },
+    [onOpenPracticeSetup],
+  );
+
+  const handleOpenPracticeSetup = useCallback(() => {
+    if (onOpenPracticeSetup) onOpenPracticeSetup();
+  }, [onOpenPracticeSetup]);
 
   useEffect(() => {
     void refresh();
@@ -202,6 +245,90 @@ export default function GrowthPage() {
           <p className="empty-hint">データがありません</p>
         )}
       </section>
+
+      {/* 単元別習熟度ヒートマップ */}
+      <section className="unit-heatmap-section">
+        <UnitHeatmap
+          units={unitStats ?? []}
+          onUnitSelect={handleUnitSelect}
+          selectedCategory={selectedCategory}
+        />
+      </section>
+
+      {selectedCategory && detailRecords !== null && (
+        <section className="unit-detail-panel">
+          <div className="unit-detail-header">
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={() => setSelectedCategory(null)}
+            >
+              閉じる
+            </button>
+            <h3>{selectedCategory} の詳細</h3>
+          </div>
+          {detailLoading ? (
+            <p>読み込み中...</p>
+          ) : (
+            <>
+              <div className="unit-detail-stats">
+                {unitStats?.find((u) => u.category === selectedCategory) && (
+                  <>
+                    <span>
+                      {unitStats.find((u) => u.category === selectedCategory)!.label}
+                    </span>
+                    <span>
+                      {detailRecords.length} 問
+                    </span>
+                    <span>
+                      {Math.round(
+                        (detailRecords.filter((r) => r.isCorrect).length /
+                          detailRecords.length) *
+                          100,
+                      )}%
+                    </span>
+                  </>
+                )}
+              </div>
+              <h4>問題タイプ別正答率</h4>
+              <table className="type-table">
+                <thead>
+                  <tr>
+                    <th>タイプ</th>
+                    <th>問題数</th>
+                    <th>正解数</th>
+                    <th>正答率</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {aggregateByProblemType(detailRecords).map((item) => (
+                    <tr key={item.problemType}>
+                      <td>{item.label}</td>
+                      <td>{item.totalCount}</td>
+                      <td>{item.correctCount}</td>
+                      <td>{item.accuracyRate}%</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {detailRecords.length === 0 && (
+                <p className="empty-hint">この単元の学習データはありません。</p>
+              )}
+              {onOpenPracticeSetup && detailRecords.length > 0 && (
+                <div className="unit-detail-actions">
+                  <button
+                    type="button"
+                    className="primary-button"
+                    onClick={handleOpenPracticeSetup}
+                  >
+                    この単元で復習を開始
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </section>
+      )}
 
       <section className="growth-comparison">
         <h3>期間比較</h3>

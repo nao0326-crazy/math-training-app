@@ -14,13 +14,22 @@ import type { GrowthData } from '../types/growth';
 // aggregateGrowthData をモック
 vi.mock('../utils/growthStats', () => ({
   aggregateGrowthData: vi.fn(),
+  aggregateByCategory: vi.fn().mockReturnValue([]),
+  aggregateByProblemType: vi.fn().mockReturnValue([]),
   formatAccuracy: (rate: number | null) =>
     rate === null ? '未学習' : `${Math.round(rate)}%`,
   formatAverageTime: (seconds: number | null) =>
     seconds === null ? '未学習' : `${Math.round(seconds)}秒`,
   formatMs: (ms: number) => `${Math.round(ms / 1000)}秒`,
 }));
-
+// storage/db のモック（IndexedDBアクセスを模擬）
+vi.mock('../storage/db', () => ({
+  getAllAnswerRecords: vi.fn().mockResolvedValue([]),
+  getAllGenerators: vi.fn(),
+  getTypeSupportedLevels: vi.fn(),
+  listSpeedGateSessions: vi.fn(),
+  computeSpeedGateResult: vi.fn(),
+}));
 import { aggregateGrowthData } from '../utils/growthStats';
 
 const mockedAggregate = aggregateGrowthData as ReturnType<typeof vi.fn>;
@@ -149,11 +158,11 @@ describe('GrowthPage', () => {
     });
 
     const btn30 = screen.getByText('30日間');
-    await waitFor(() => {
-      btn30.click();
-    });
+    btn30.click();
 
-    expect(mockedAggregate).toHaveBeenCalledWith(30);
+    await waitFor(() => {
+      expect(mockedAggregate).toHaveBeenCalledWith(30);
+    });
   });
 
   it('エラー時はエラーメッセージを表示する', async () => {
